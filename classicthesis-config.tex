@@ -51,8 +51,8 @@
 \newcommand{\myDepartment}{Put data here\xspace}
 \newcommand{\myUni}{Put data here\xspace}
 \newcommand{\myLocation}{Saarbrücken\xspace}
-\newcommand{\myTime}{September 2015\xspace}
-\newcommand{\myVersion}{version 4.2\xspace}
+\newcommand{\myTime}{December 2015\xspace}
+\newcommand{\myVersion}{version 4.3b\xspace}
 
 % ********************************************************************
 % Setup, finetuning, and useful commands
@@ -111,7 +111,10 @@
     \usepackage{acronym} % nice macros for handling all acronyms in the thesis
     %\renewcommand{\bflabel}[1]{{#1}\hfill} % fix the list of acronyms --> no longer working
     %\renewcommand*{\acsfont}[1]{\textsc{#1}} 
-    \renewcommand*{\aclabelfont}[1]{\acsfont{#1}}
+    %\renewcommand*{\aclabelfont}[1]{\acsfont{#1}}
+    %\def\bflabel#1{{#1\hfill}}
+    \def\bflabel#1{{\acsfont{#1}\hfill}}
+    \def\aclabelfont#1{\acsfont{#1}}
 % ****************************************************************************************************
 
 

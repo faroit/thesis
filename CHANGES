@@ -1,3 +1,10 @@
+Changes in version 4.3 (tbd)
+o When redefining the acronym label, check for the 
+  acronym package's version (thanks to Scott Lowe)
+o Several minor fixes (comments, whitespaces removed,
+  .gitignore, .editorconfig, etc. --> thanks to Jörn 
+  Hees) 
+
 Changes in version 4.2 (September 2015)
 o Fixed issue between titlesec and tocloft regarding
   part numbering in the ToC (classicthesis.sty). 
