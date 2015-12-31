@@ -17,3 +17,9 @@ ClassicThesis.run.xml
 *.out
 *.toc
 __FOR_CTAN_UPLOAD.txt
+<<<<<<< HEAD
+=======
+*.fdb_latexmk
+*.fls
+*.synctex.gz
+>>>>>>> 3c7deffa7dd6720070243800614c2340c73c3a76

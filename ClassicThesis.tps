@@ -35,6 +35,7 @@ Class=LaTeXView
 Document=classicthesis-config.tex
 
 [Frame1_View0,0]
+<<<<<<< HEAD
 TopLine=104
 Cursor=6249
 
@@ -54,6 +55,9 @@ Document=ClassicThesis.tex
 
 [Frame2_View0,0]
 TopLine=15
+=======
+TopLine=18
+>>>>>>> 3c7deffa7dd6720070243800614c2340c73c3a76
 Cursor=1765
 
 [Frame3]
@@ -70,9 +74,15 @@ NormalPos.bottom=426
 Class=LaTeXView
 Document=Chapters\Chapter01.tex
 
+<<<<<<< HEAD
 [Frame3_View0,0]
 TopLine=0
 Cursor=181
+=======
+[Frame2_View0,0]
+TopLine=51
+Cursor=3243
+>>>>>>> 3c7deffa7dd6720070243800614c2340c73c3a76
 
 [Frame4]
 Flags=0
