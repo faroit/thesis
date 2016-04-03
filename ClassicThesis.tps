@@ -18,7 +18,7 @@ Document=CHANGES
 
 [Frame0_View0,0]
 TopLine=0
-Cursor=256
+Cursor=0
 
 [Frame1]
 Flags=0
@@ -35,9 +35,8 @@ Class=LaTeXView
 Document=classicthesis-config.tex
 
 [Frame1_View0,0]
-<<<<<<< HEAD
-TopLine=104
-Cursor=6249
+TopLine=12
+Cursor=6320
 
 [Frame2]
 Flags=0
@@ -54,11 +53,8 @@ Class=LaTeXView
 Document=ClassicThesis.tex
 
 [Frame2_View0,0]
-TopLine=15
-=======
-TopLine=18
->>>>>>> 3c7deffa7dd6720070243800614c2340c73c3a76
-Cursor=1765
+TopLine=54
+Cursor=3330
 
 [Frame3]
 Flags=0
@@ -74,15 +70,9 @@ NormalPos.bottom=426
 Class=LaTeXView
 Document=Chapters\Chapter01.tex
 
-<<<<<<< HEAD
 [Frame3_View0,0]
 TopLine=0
-Cursor=181
-=======
-[Frame2_View0,0]
-TopLine=51
-Cursor=3243
->>>>>>> 3c7deffa7dd6720070243800614c2340c73c3a76
+Cursor=0
 
 [Frame4]
 Flags=0
@@ -99,8 +89,8 @@ Class=LaTeXView
 Document=Chapters\Chapter0A.tex
 
 [Frame4_View0,0]
-TopLine=42
-Cursor=2800
+TopLine=0
+Cursor=0
 
 [Frame5]
 Flags=0
@@ -117,8 +107,8 @@ Class=LaTeXView
 Document=Chapters\Chapter02.tex
 
 [Frame5_View0,0]
-TopLine=11
-Cursor=920
+TopLine=0
+Cursor=0
 
 [Frame6]
 Flags=0
@@ -136,7 +126,7 @@ Document=classicthesis.sty
 
 [Frame6_View0,0]
 TopLine=372
-Cursor=17863
+Cursor=18019
 
 [SessionInfo]
 FrameCount=7

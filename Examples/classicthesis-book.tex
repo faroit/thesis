@@ -1,8 +1,11 @@
 % book example for classicthesis.sty
+\RequirePackage{silence} % :-\
+    \WarningFilter{scrbook}{Usage of package `titlesec'}
+    \WarningFilter{titlesec}{Non standard sectioning command detected}
 \documentclass[11pt,paper=a5,footinclude=true,headinclude=true]{scrbook} % KOMA-Script book
 \usepackage[T1]{fontenc}
 \usepackage{lipsum}
-\usepackage[linedheaders,parts,a5paper]{../classicthesis} % ,manychapters
+\usepackage[linedheaders,parts,a5paper]{classicthesis} % ,manychapters
 %\usepackage[osf]{libertine}
 
 \begin{document}

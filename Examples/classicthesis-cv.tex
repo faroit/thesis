@@ -1,9 +1,12 @@
 % cv example for classicthesis.sty
+\RequirePackage{silence} % :-\
+    \WarningFilter{scrartcl}{Usage of package `titlesec'}
+    \WarningFilter{titlesec}{Non standard sectioning command detected}
 \documentclass[10pt,a4paper]{scrartcl}
 \usepackage[LabelsAligned]{currvita} % nice cv style
 \usepackage{url}
 \usepackage[ngerman]{babel}
-\usepackage[nochapters]{../classicthesis}
+\usepackage[nochapters]{classicthesis}
 
 \renewcommand*{\cvheadingfont}{\LARGE\color{Maroon}}
 \renewcommand*{\cvlistheadingfont}{\large}
