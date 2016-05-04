@@ -379,7 +379,11 @@
 % layout of the chapter-, section-, subsection-, subsubsection-,
 % paragraph and description-headings
 % ********************************************************************
-\RequirePackage{titlesec}
+\RequirePackage[newparttoc]{titlesec} % newparttoc to write \part to .toc with \numberline
+\ifthenelse{\boolean{@nochapters}}{\relax}{\titleclass{\chapter}{top}} % thanks to Javier Bezos of titlesec
+\def\ttl@addcontentsline#1#2{% this is from titlesec.sty
+  \addcontentsline{toc}{#1}{\ifttl@toclabel\ttl@a\fi{#2}}% write titles as a group inside {}
+  \nobreak}
 % parts
 \ifthenelse{\boolean{@parts}}%
 {%
@@ -457,10 +461,11 @@
 {%
     \renewcommand{\thepart}{\roman{part}}%
     \renewcommand{\cftpartpresnum}{\scshape}%  \MakeTextLowercase
-    % \renewcommand{\cftpartaftersnum}{\cftchapaftersnum}%
-    % \renewcommand{\cftpartaftersnumb}{\quad}%
-    % \setlength{\cftpartnumwidth}{\cftpartnumwidth}
+     \renewcommand{\cftpartaftersnum}{}%
+     \renewcommand{\cftpartaftersnumb}{\spacedlowsmallcaps}%
+     \setlength{\cftpartnumwidth}{\cftchapnumwidth}
     \renewcommand{\cftpartfont}{\color{Maroon}\normalfont}%
+    \cftpagenumbersoff{part}
     \renewcommand{\cftpartpagefont}{\normalfont}%
     \ifthenelse{\boolean{@dottedtoc}}{\relax}%
     {%
@@ -469,13 +474,14 @@
     }%
     \setlength{\cftbeforepartskip}{1em}%
     \setlength{\cftbeforechapskip}{.1em}%
-    \setlength{\beforebibskip}{\cftbeforepartskip}%
+    \setlength{\beforebibskip}{1.5\cftbeforepartskip}%
 }{\relax}
 % chapters
 \ifthenelse{\boolean{@nochapters}}%
     {\relax}%
     {%
-        \renewcommand{\cftchappresnum}{\scshape\MakeTextLowercase}%
+        \renewcommand{\cftchappresnum}{\spacedlowsmallcaps}%
+        \renewcommand{\cftchapaftersnumb}{\spacedlowsmallcaps}%
         \renewcommand{\cftchapfont}{\normalfont}%
         \renewcommand{\cftchappagefont}{\normalfont}%
         \ifthenelse{\boolean{@dottedtoc}}{\relax}%
@@ -578,71 +584,9 @@
         {\AtBeginDocument{\addtocontents{toc}{\protect\vspace{-\cftbeforechapskip}}}}
 }
 
-% another dirty work-around to get the spaced low small caps into the toc ;-(
-\ifthenelse{\boolean{@nochapters}}%
-    {\relax}%
-    {%
-        %% use modified \chapter (thanks to Hinrich Harms)
-        \let\oldchap=\chapter
-        \renewcommand*{\chapter}{%
-             \secdef{\Chap}{\ChapS}%
-        }
-        \newcommand\ChapS[1]{\oldchap*{#1}}%
-        \newcommand\Chap[2][]{%
-             \ifpdf\oldchap[\texorpdfstring{\spacedlowsmallcaps{#1}}{#1}]{#2}%
-             \else\oldchap[\spacedlowsmallcaps{#1}]{#2}%
-             \fi%
-    }%
-    \ifxetex % thanks to Joerg Weber
-        \renewcommand\Chap[2][]{%
-            \ifxetex\oldchap[\texorpdfstring{\spacedlowsmallcaps{#1}}{#1}]{#2}%
-            \else\oldchap[\spacedlowsmallcaps{#1}]{#2}%
-            \fi%
-        }%
-    \fi%
-    }
 
-% yet another dirty work-around to get the spaced low small caps into the toc ;-(
-\ifthenelse{\boolean{@parts}}%
-{%
-    %% use modified \part (thanks to Hinrich Harms)
-    \let\oldpart=\part%
-    \renewcommand*{\part}{%
-            \secdef{\Part}{\PartS}%
-    }%
-    \newcommand\PartS[1]{\oldpart*{#1}}%
-    \newcommand\Part[2][]{%
-        \ifpdf\pdfstringdefDisableCommands{\let\thepart\@gobbletwo}%
-            \oldpart[\texorpdfstring{\spacedlowsmallcaps{#1}}{#1}]{#2}% spacedallcaps spacedlowsmallcaps
-        \else%
-            \oldpart[\spacedlowsmallcaps{#1}]{#2}%
-        \fi%
-    }%
-    %   Fix titlesec and tocloft issue (thanks to Enrico Gregorio)
-    % http://tex.stackexchange.com/questions/120708/problem-with-classicthesis-and-small-caps
-    \def\ttl@tocpart{%
-    \def\ttl@a{\protect\numberline{\thepart}\@gobble{}}}%
-    % XeLaTeX case
-    \ifxetex% thanks to Joerg Weber
-        \renewcommand\Part[2][]{%
-            \ifxetex\pdfstringdefDisableCommands{\let\thepart=\@gobbletwo}%
-                \oldpart[\texorpdfstring{\spacedlowsmallcaps{#1}}{#1}]{#2}% spacedallcaps spacedlowsmallcaps
-            \else%
-                \oldpart[\spacedlowsmallcaps{#1}]{#2}%
-            \fi%
-        }%
-    \fi%
-}{\relax}
+\newcommand{\tocEntry}[1]{\protect\numberline {}{#1}}%
 
-\newcommand{\tocEntry}[1]{% for bib, etc.
-    \ifpdf\texorpdfstring{\spacedlowsmallcaps{#1}}{#1}%
-    \else{#1}\fi%
-}
-\ifxetex% thanks to Joerg Weber
-    \renewcommand{\tocEntry}[1]{% for bib, etc.
-        \ifxetex\texorpdfstring{\spacedlowsmallcaps{#1}}{#1}%
-        \else{#1}\fi%
-    } \fi
 
 %% remove the vertical space between lof/lot entries of different chapters
 \ifthenelse{\boolean{@listsseparated}}{%
