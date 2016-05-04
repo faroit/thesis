@@ -39,7 +39,7 @@
 %
 % ********************************************************************
 \NeedsTeXFormat{LaTeX2e}%[2015/01/01] % fixed via latexrelease package, see below
-\ProvidesPackage{classicthesis}[2016/04/03 v4.3c Typographic style for a classic-looking thesis]
+\ProvidesPackage{classicthesis}[2016/05/03 v4.3pi Typographic style for a classic-looking thesis]
 %\PassOptionsToPackage{latest}{latexrelease} % replacement for fixltx2e, emulate newer kernel version if older is detected
     %\RequirePackage{latexrelease} % will be put back in once it is available in more distributions
 \RequirePackage{ifthen}
@@ -161,11 +161,18 @@
 % PDF and XeLaTeX Stuff
 % ********************************************************************
 \RequirePackage{ifpdf}
-\ifpdf\RequirePackage{hyperref}\fi % for texorpdfstring command below
-
-% Necessary to rewrite hacks for chapters and parts and toc
 \RequirePackage{ifxetex}
-\ifxetex\RequirePackage{hyperref}\fi % for texorpdfstring command below
+%%%\newboolean{ct@hyperref}
+\ifthenelse{\boolean{pdf}\OR\boolean{xetex}}%
+           {
+           %%%\setboolean{ct@hyperref}{true}
+           \RequirePackage{hyperref}
+           \pdfstringdefDisableCommands{\let\thepart=\@gobble} % no part numbers (i, ii, iii) in PDF outline
+           }
+           {
+           %%%\setboolean{ct@hyperref}{false}
+           \providecommand*{\texorpdfstring}{\expandafter\@firstoftwo} %%%seems we don't need this command any more, but I'd keep it
+           }
 
 % pdfspacing does not work with XeLaTeX
 \ifxetex%
