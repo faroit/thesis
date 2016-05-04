@@ -383,13 +383,13 @@
 % parts
 \ifthenelse{\boolean{@parts}}%
 {%
-    % \newcommand{\ctparttext}{\relax}
-    \newcommand{\ct@parttext}{\relax} % Thanks to Ivo
-    \newcommand{\ctparttext}[1]{\renewcommand{\ct@parttext}{#1 \relax}}
+    \newcommand{\ctparttext}[1]{\renewcommand{\ctparttext@keep}{#1}} 
+    \def\ctparttext@keep{} % Thanks to Ivo
+    \def\ctparttext@print{\ctparttext@keep \gdef\ctparttext@keep{}}
     \titleformat{\part}[display]
     {\normalfont\centering\large}%
     {\thispagestyle{empty}\partname~\MakeTextUppercase{\thepart}}{1em}%
-    {\color{Maroon}\spacedallcaps}[\bigskip\normalfont\normalsize\color{Black}\begin{quote}\ct@parttext\end{quote}]
+    {\color{Maroon}\spacedallcaps}[\bigskip\normalfont\normalsize\color{Black}\begin{quote}\ctparttext@print\end{quote}]
 }{\relax}
 % chapters
 \ifthenelse{\boolean{@linedheaders}}%
@@ -617,8 +617,6 @@
         \else%
             \oldpart[\spacedlowsmallcaps{#1}]{#2}%
         \fi%
-        % \renewcommand{\ct@parttext}{\relax}% Thanks to Ivo!
-        \ctparttext{\relax}%
     }%
     %   Fix titlesec and tocloft issue (thanks to Enrico Gregorio)
     % http://tex.stackexchange.com/questions/120708/problem-with-classicthesis-and-small-caps
@@ -632,7 +630,6 @@
             \else%
                 \oldpart[\spacedlowsmallcaps{#1}]{#2}%
             \fi%
-                \ctparttext{\relax}%
         }%
     \fi%
 }{\relax}
