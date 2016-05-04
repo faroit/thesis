@@ -246,6 +246,7 @@
 %*******************************************************
 \@ifpackageloaded{typearea}%
     {\relax}{%
+	\PassOptionsToPackage{headinclude,footinclude}{typearea}
         \RequirePackage{typearea}%
     }
 \ifthenelse{\boolean{@a5paper}}%
