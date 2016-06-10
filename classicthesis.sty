@@ -42,120 +42,115 @@
 \ProvidesPackage{classicthesis}[2016/05/03 v4.3pi Typographic style for a classic-looking thesis]
 %\PassOptionsToPackage{latest}{latexrelease} % replacement for fixltx2e, emulate newer kernel version if older is detected
     %\RequirePackage{latexrelease} % will be put back in once it is available in more distributions
+
 \RequirePackage{ifthen}
-    \newboolean{@tocaligned} % the left column of the toc will be aligned (no indention)
-    \newboolean{@eulerchapternumbers} % use AMS Euler for chapter font (otherwise Palatino)
-    \newboolean{@drafting} % print version information on pages
-    \newboolean{@linedheaders} % chaper headers will have line above and beneath
-    \newboolean{@listsseparated} % toggles the vertical space between lof/lot entries of different chapters
-    \newboolean{@nochapters} % disable all chapter-specific commands
-    \newboolean{@beramono} % toggle nice monospaced font (w/ bold) + pre-installed
-    \newboolean{@eulermath} % use awesome Euler fonts for math
-    \newboolean{@parts} % use part division for the text
-    \newboolean{@minionpro} % setup for minion pro font
-    \newboolean{@minionprospacing} % use minion pro's textssc for letter spacing
-    \newboolean{@pdfspacing} % use pdftex for letterspacing (via microtype)
-    \newboolean{@subfig} % setup for preloaded @subfig package
-    \newboolean{@a5paper} % use those tiny DIN A5 pages
-    \newboolean{@dottedtoc} % page numbers in ToC flushed right
-    \newboolean{@listings} % load listings package (if not already) and setup LoL
-    \newboolean{@manychapters} % additional space in ToC after chapter number (if two digits are needed)
-    \newboolean{@floatperchapter} % numbering per chapter for all floats (i.e., Figure 1.1)
 
 % ********************************************************************
 % Options
 % ********************************************************************
-\DeclareOption{tocaligned}{\setboolean{@tocaligned}{true}}
-\DeclareOption{eulerchapternumbers}{\setboolean{@eulerchapternumbers}{true}}
-\DeclareOption{drafting}{\setboolean{@drafting}{true}}
-\DeclareOption{linedheaders}{\setboolean{@linedheaders}{true}}
-\DeclareOption{listsseparated}{\setboolean{@listsseparated}{true}}
-\DeclareOption{subfigure}{%
-    \PackageWarningNoLine{classicthesis}{Package "subfigure" and option "subfigure" are deprecated, used "subfig" instead.}
-    \setboolean{@subfig}{true}%
-    }
-\DeclareOption{subfig}{\setboolean{@subfig}{true}}
-\DeclareOption{nochapters}{\setboolean{@nochapters}{true}}
-\DeclareOption{beramono}{\setboolean{@beramono}{true}}
-\DeclareOption{eulermath}{\setboolean{@eulermath}{true}}
-\DeclareOption{parts}{\setboolean{@parts}{true}}
-\DeclareOption{a5paper}{\setboolean{@a5paper}{true}}
-\DeclareOption{minionpro}{\setboolean{@minionpro}{true}}
-\DeclareOption{minionprospacing}{\setboolean{@minionprospacing}{true}}
-\DeclareOption{pdfspacing}{\setboolean{@pdfspacing}{true}}
-\DeclareOption{dottedtoc}{\setboolean{@dottedtoc}{true}}
-\DeclareOption{listings}{\setboolean{@listings}{true}}
-\DeclareOption{manychapters}{\setboolean{@manychapters}{true}}
-\DeclareOption{floatperchapter}{\setboolean{@floatperchapter}{true}}
-\ProcessOptions\relax
+\RequirePackage{kvoptions}
+\SetupKeyvalOptions{family=ct, prefix=ct@}
+
+\DeclareBoolOption{drafting} % print version information on all pages
+
+\DeclareBoolOption{tocaligned} % the left column of the toc will be aligned (no indentation)
+\DeclareBoolOption{dottedtoc} % page numbers in ToC flushed right
+\DeclareBoolOption{listsseparated} % OBSOLETE; toggles the vertical space between lof/lot entries of different chapters
+
+\DeclareBoolOption{parts} % use part division
+
+\DeclareBoolOption{nochapters} % OBSOLETE - automatic check; disable all chapter-specific commands
+\DeclareBoolOption{eulerchapternumbers} % use AMS Euler for chapter font (otherwise Palatino)
+\DeclareBoolOption{linedheaders} % chaper headers will have line above and beneath
+\DeclareBoolOption{floatperchapter} % numbering per chapter for all floats (i.e., Figure 1.1)
+\DeclareBoolOption{manychapters} % additional space in ToC after chapter number (if two digits are needed)
+
+\DeclareBoolOption{listings} % load listings package and setup LoL
+\DeclareBoolOption{subfig} % setup for preloaded @subfig package
+
+\DeclareBoolOption{eulermath} % use awesome Euler fonts for mathematical formulae
+\DeclareBoolOption{beramono} % toggle a nice monospaced font (w/ bold) + pre-installed
+\DeclareBoolOption{minionpro} % setup for minion pro font; use minion pro small caps as well
+
+\DeclareBoolOption{minionprospacing} % OBSOLETE; use minion pro's textssc for letter spacing
+\DeclareBoolOption{pdfspacing} % OBSOLETE; use pdftex for letterspacing (via microtype)
+
+\DeclareBoolOption{a4paper}
+\DeclareBoolOption{a5paper}
+\DeclareBoolOption{letterpaper}
+\DeclareStringOption[a4]{paper} % paper size defaults to A4
+\ProcessKeyvalOptions{ct}
+
+
+
+
+%%% seems that KOMA-Script gives preference to old-style paper options, thus first
+\ifthenelse{\boolean{ct@letterpaper}}{\renewcommand*{\ct@paper}{letter}}{}
+\ifthenelse{\boolean{ct@a5paper}}{\renewcommand*{\ct@paper}{a5}}{}
+\ifthenelse{\boolean{ct@a4paper}}{\renewcommand*{\ct@paper}{a4}}{}
+%%% then
+\ifthenelse{\equal{\ct@paper}{a4}}%
+        {\setboolean{ct@a4paper}{true} \setboolean{ct@a5paper}{false} \setboolean{ct@letterpaper}{false}}%
+        {}
+\ifthenelse{\equal{\ct@paper}{a5}}%
+        {\setboolean{ct@a4paper}{false} \setboolean{ct@a5paper}{true} \setboolean{ct@letterpaper}{false}}%
+        {}
+\ifthenelse{\equal{\ct@paper}{letter}}%
+        {\setboolean{ct@a4paper}{false} \setboolean{ct@a5paper}{false} \setboolean{ct@letterpaper}{true}}%
+        {}
+
+
+
 
 % subfig-related stuff
 \@ifpackageloaded{subfig}%
-    {\setboolean{@subfig}{true}%
+    {\setboolean{ct@subfig}{true}%
     }{\relax}
 \@ifpackageloaded{subfigure}%
-    {\setboolean{@subfig}{true}%
+    {\setboolean{ct@subfig}{true}%
         \PackageWarningNoLine{classicthesis}{Package "subfigure" and option "subfigure" are deprecated, %
                                             use "subfig" instead.}
     }{\relax}
-\ifthenelse{\boolean{@subfig}}%
+\ifthenelse{\boolean{ct@subfig}}%
     {\PassOptionsToPackage{subfigure}{tocloft}%
     }{\relax}%
 
 % listings-related stuff
-\ifthenelse{\boolean{@listings}}%
+\ifthenelse{\boolean{ct@listings}}%
     {\@ifpackageloaded{listings}%
         {\relax}{\RequirePackage{listings}}%
     }{\relax}%
 
 % fine-tuning if we use minionprospacing
-\ifthenelse{\boolean{@minionprospacing}}%
+\ifthenelse{\boolean{ct@minionprospacing}}%
     {%
         \PackageInfo{classicthesis}{Using option "minionprospacing". %
             This activates "minionpro" in general and turns off %
             the option "pdfspacing".}%
         % is the user trying to use pdfspacing at the same time?
-        \ifthenelse{\boolean{@pdfspacing}}%
+        \ifthenelse{\boolean{ct@pdfspacing}}%
             {% both minionprospacing and pdfspacing are active
                 \PackageWarningNoLine{classicthesis}{You cannot use "pdfspacing" at the same time %
                     as "minionprospacing"!}%
             }{\relax}%
-        \setboolean{@minionpro}{true}%
-        \setboolean{@pdfspacing}{false}%
+        \setboolean{ct@minionpro}{true}%
+        \setboolean{ct@pdfspacing}{false}%
     }{\relax}
 
 % fine-tuning if we do not use chapters
-\ifthenelse{\boolean{@nochapters}}%
-    {%
-        % is the user trying to use parts at the same time?
-        \ifthenelse{\boolean{@parts}}%
-            {% both parts and nochapters are active
-                \PackageWarningNoLine{classicthesis}{You cannot use "parts" at the same time %
-                    as "nochapters"!}%
-            }{\relax}%
-        % is the user trying to use manychapters at the same time?
-        \ifthenelse{\boolean{@manychapters}}%
-            {% both manychapters and nochapters are active
-                \PackageWarningNoLine{classicthesis}{You cannot use "manychapters" at the same time %
-                    as "nochapters"!}%
-            }{\relax}%
-         % is the user trying to use floatperchapter at the same time?
-        \ifthenelse{\boolean{@floatperchapter}}%
-            {% both manychapters and nochapters are active
-                \PackageWarningNoLine{classicthesis}{You cannot use "floatperchapter" at the same time %
-                    as "nochapters"!}%
-            }{\relax}%
-        % turn off some things if we do not use chapters
-        \PackageInfo{classicthesis}{Using option "nochapters" (probably for an article). %
-                This turns off the options "linedheaders", "manychapters", "floatperchapter",%
-                "listsseparated", "eulerchapternumbers", and "parts". Please be aware of that.}
-        \setboolean{@linedheaders}{false}%
-        \setboolean{@listsseparated}{false}%
-        \setboolean{@eulerchapternumbers}{false}%
-        \setboolean{@parts}{false}%
-        \setboolean{@manychapters}{false}%
-        \setboolean{@floatperchapter}{false}%
-    }{\relax}%
+
+\ifthenelse{\isundefined{\chapter}\OR\boolean{ct@nochapters}}
+    {
+        \PackageWarningNoLine{classicthesis}{Chapter sectioning command not present in this document class. %
+                Deactivating options floatperchapter, linedheaders, manychapters, listsseparated, eulerchapternumbers and parts}%
+        \setboolean{ct@linedheaders}{false}%
+        \setboolean{ct@listsseparated}{false}%
+        \setboolean{ct@eulerchapternumbers}{false}%
+        \setboolean{ct@parts}{false}% %%%IVO: note that parts exist even when chapters are not defined!
+        \setboolean{ct@manychapters}{false}%
+        \setboolean{ct@floatperchapter}{false}%
+        \setboolean{ct@nochapters}{true}
+    }{\relax}
 
 % ********************************************************************
 % PDF and XeLaTeX Stuff
@@ -176,12 +171,12 @@
 
 % pdfspacing does not work with XeLaTeX
 \ifxetex%
-    \ifthenelse{\boolean{@pdfspacing}}%
+    \ifthenelse{\boolean{ct@pdfspacing}}%
         {% pdfspacing is used with XeLaTeX
             \PackageWarningNoLine{classicthesis}{You cannot use the option %
             "pdfspacing" with XeLaTeX!}%
         }{\relax}%
-    \setboolean{@pdfspacing}{false}%
+    \setboolean{ct@pdfspacing}{false}%
 \fi
 
 % ********************************************************************
@@ -200,10 +195,10 @@
 % Font Stuff
 % ********************************************************************
 % specialists: MinionPro
-\ifthenelse{\boolean{@minionpro}}%
+\ifthenelse{\boolean{ct@minionpro}}%
     {%
             % in order have Euler math fonts work with Minion, special option is needed
-            \ifthenelse{\boolean{@eulermath}}%
+            \ifthenelse{\boolean{ct@eulermath}}%
             {%
             \PassOptionsToPackage{opticals,mathlf,onlytext}{MinionPro}%
             \RequirePackage{MinionPro} %  opticals, fullfamily, osf
@@ -218,7 +213,7 @@
         \linespread{1.05} % a bit more for Palatino
     }
 
-\ifthenelse{\boolean{@beramono}}%
+\ifthenelse{\boolean{ct@beramono}}%
     {\PassOptionsToPackage{scaled=0.85}{beramono}%
      \RequirePackage{beramono}}%
     {%
@@ -226,12 +221,12 @@
         % put your own suitable typewriter font here
         %\renewcommand{\ttdefault}{\rmdefault}
     }
-\ifthenelse{\boolean{@eulermath}}%
+\ifthenelse{\boolean{ct@eulermath}}%
     {\PassOptionsToPackage{euler-digits}{eulervm}%
      \RequirePackage{eulervm}} % Euler math fonts
     {\relax}
 
-\ifthenelse{\boolean{@eulerchapternumbers}}% font for the chapter numbers
+\ifthenelse{\boolean{ct@eulerchapternumbers}}% font for the chapter numbers
     {\newfont{\chapterNumber}{eurb10 scaled 7000}}%
     {\newfont{\chapterNumber}{pplr9d scaled 7000}}
     % Euler eurb10 / Palatino OSF pplr9d / Palatino SC pplrc9d
@@ -246,12 +241,28 @@
 %*******************************************************
 \@ifpackageloaded{typearea}%
     {\relax}{%
-	\PassOptionsToPackage{headinclude,footinclude}{typearea}
+        \PassOptionsToPackage{headinclude,footinclude}{typearea}
         \RequirePackage{typearea}%
     }
-\ifthenelse{\boolean{@a5paper}}%
+
+\ifthenelse{\boolean{ct@letterpaper}}%
+    {% A4
+        \ifthenelse{\boolean{ct@minionpro}}%
+        {% Minion gets some extra sizes
+            \PackageInfo{classicthesis}{letter paper, MinionPro}%
+            \areaset[current]{332pt}{634pt}% guessing from A4 values
+            \setlength{\marginparwidth}{7.5em}%
+            \setlength{\marginparsep}{2em}%
+        }{% Palatino or other
+            \PackageInfo{classicthesis}{letter paper, Palatino or other}
+            \areaset[current]{356pt}{700pt} %  guessing from A4 values
+            \setlength{\marginparwidth}{7em}%
+            \setlength{\marginparsep}{2em}%
+        }%
+    }{\relax}
+\ifthenelse{\boolean{ct@a5paper}}%
     {% A5
-        \ifthenelse{\boolean{@minionpro}}%
+        \ifthenelse{\boolean{ct@minionpro}}%
         {% Minion gets some extra sizes
             \PackageInfo{classicthesis}{A5 paper, MinionPro}%
             \areaset[current]{278pt}{556pt}%
@@ -263,8 +274,10 @@
             \setlength{\marginparwidth}{4em}%
             \setlength{\marginparsep}{1.25em}%
         }%
-    }{% A4
-        \ifthenelse{\boolean{@minionpro}}%
+    }{\relax}
+\ifthenelse{\boolean{ct@a4paper}}%
+    {% A4
+        \ifthenelse{\boolean{ct@minionpro}}%
         {% Minion gets some extra sizes
             \PackageInfo{classicthesis}{A4 paper, MinionPro}%
             \areaset[current]{312pt}{684pt}% 609 + 33 + 42 head \the\footskip
@@ -277,7 +290,8 @@
             \setlength{\marginparwidth}{7em}%
             \setlength{\marginparsep}{2em}%
         }%
-    }
+    }{\relax}
+
 % Here are some suggestions for the text widths and heights:
 % Palatino  10pt: 288--312pt | 609--657pt
 % Palatino  11pt: 312--336pt | 657--705pt
@@ -336,13 +350,13 @@
 \RequirePackage{booktabs} % for better rules in tables
 \RequirePackage{textcase} % for \MakeTextUppercase
 
-\ifthenelse{\boolean{@minionprospacing}}%
+\ifthenelse{\boolean{ct@minionprospacing}}%
     {%
         \PackageInfo{classicthesis}{Using MinionPro's textssc for character spacing.}%
         \DeclareRobustCommand{\spacedallcaps}[1]{\textssc{\MakeTextUppercase{#1}}}%
         \DeclareRobustCommand{\spacedlowsmallcaps}[1]{\textssc{\MakeTextLowercase{#1}}}%
     }{%
-        \ifthenelse{\boolean{@pdfspacing}}%
+        \ifthenelse{\boolean{ct@pdfspacing}}%
         {%
             \PackageInfo{classicthesis}{Using pdftex/microtype for character spacing.%
                                         Make sure your pdftex is version 1.40 or higher.}%
@@ -367,7 +381,7 @@
     \RequirePackage{scrlayer-scrpage} % provides headers and footers (KOMA Script)
     \clearscrheadings
     %\setheadsepline{0pt}
-    \ifthenelse{\boolean{@nochapters}}%
+    \ifthenelse{\boolean{ct@nochapters}}%
         {\relax}%
         {\renewcommand{\chaptermark}[1]{\markboth{\spacedlowsmallcaps{#1}}{\spacedlowsmallcaps{#1}}}}
     \renewcommand{\sectionmark}[1]{\markright{\thesection\enspace\spacedlowsmallcaps{#1}}}
@@ -377,7 +391,7 @@
 %    \DeclareRobustCommand{\fixBothHeadlines}[2]{} % <--- ToDo
     % hack to get the content headlines right (thanks, Lorenzo!)
         \def\toc@heading{%
-            \ifthenelse{\boolean{@nochapters}}%
+            \ifthenelse{\boolean{ct@nochapters}}%
             {\section*{\contentsname}}%nochapters
             {\chapter*{\contentsname}}%chapters
             \@mkboth{\spacedlowsmallcaps{\contentsname}}{\spacedlowsmallcaps{\contentsname}}}
@@ -388,12 +402,12 @@
 % paragraph and description-headings
 % ********************************************************************
 \RequirePackage[newparttoc]{titlesec} % newparttoc to write \part to .toc with \numberline
-\ifthenelse{\boolean{@nochapters}}{\relax}{\titleclass{\chapter}{top}} % thanks to Javier Bezos of titlesec
+\ifthenelse{\boolean{ct@nochapters}}{\relax}{\titleclass{\chapter}{top}} % thanks to Javier Bezos of titlesec
 \def\ttl@addcontentsline#1#2{% this is from titlesec.sty
   \addcontentsline{toc}{#1}{\ifttl@toclabel\ttl@a\fi{#2}}% write titles as a group inside {}
   \nobreak}
 % parts
-\ifthenelse{\boolean{@parts}}%
+\ifthenelse{\boolean{ct@parts}}%
 {%
     \newcommand{\ctparttext}[1]{\renewcommand{\ctparttext@keep}{#1}} 
     \def\ctparttext@keep{} % Thanks to Ivo
@@ -404,7 +418,7 @@
     {\color{Maroon}\spacedallcaps}[\bigskip\normalfont\normalsize\color{Black}\begin{quote}\ctparttext@print\end{quote}]
 }{\relax}
 % chapters
-\ifthenelse{\boolean{@linedheaders}}%
+\ifthenelse{\boolean{ct@linedheaders}}%
 {% lines above and below, number right
     \titleformat{\chapter}[display]%
     {\relax}{\raggedleft{\color{halfgray}\chapterNumber\thechapter} \\ }{0pt}%
@@ -429,7 +443,7 @@
 % descriptionlabels
     \renewcommand{\descriptionlabel}[1]{\hspace*{\labelsep}\spacedlowsmallcaps{#1}}   % spacedlowsmallcaps textit textsc
 % spacing
-\ifthenelse{\boolean{@nochapters}}%
+\ifthenelse{\boolean{ct@nochapters}}%
     {\relax}%
     {\titlespacing*{\chapter}{0pt}{1\baselineskip}{1.2\baselineskip}}
 \titlespacing*{\section}{0pt}{1.25\baselineskip}{1\baselineskip}
@@ -453,7 +467,7 @@
 % space for more than nine chapters
 \newlength{\newchnumberwidth}
 \settowidth{\newchnumberwidth}{.} % <--- tweak here if more space required
-\ifthenelse{\boolean{@manychapters}}% <--- many chapters option
+\ifthenelse{\boolean{ct@manychapters}}% <--- many chapters option
 {%
     \addtolength{\cftchapnumwidth}{\newchnumberwidth}%
     \addtolength{\cftsecnumwidth}{\newchnumberwidth}
@@ -465,42 +479,42 @@
 
 % pagenumbers right after the titles
 % parts
-\ifthenelse{\boolean{@parts}}%
+\ifthenelse{\boolean{ct@parts}}%
 {%
     \renewcommand{\thepart}{\roman{part}}%
     \renewcommand{\cftpartpresnum}{\scshape}%  \MakeTextLowercase
-     \renewcommand{\cftpartaftersnum}{}%
-     \renewcommand{\cftpartaftersnumb}{\spacedlowsmallcaps}%
-     \setlength{\cftpartnumwidth}{\cftchapnumwidth}
+    \renewcommand{\cftpartaftersnum}{}%
+    \renewcommand{\cftpartaftersnumb}{\spacedlowsmallcaps}%
+    \setlength{\cftpartnumwidth}{\cftchapnumwidth}
     \renewcommand{\cftpartfont}{\color{Maroon}\normalfont}%
     \cftpagenumbersoff{part}
     \renewcommand{\cftpartpagefont}{\normalfont}%
-    \ifthenelse{\boolean{@dottedtoc}}{\relax}%
-    {%
+    \ifthenelse{\boolean{ct@dottedtoc}}{\relax}%
+      {%
         \renewcommand{\cftpartleader}{\hspace{1.5em}}%
         \renewcommand{\cftpartafterpnum}{\cftparfillskip}%
-    }%
+      }%
     \setlength{\cftbeforepartskip}{1em}%
     \setlength{\cftbeforechapskip}{.1em}%
     \setlength{\beforebibskip}{1.5\cftbeforepartskip}%
 }{\relax}
 % chapters
-\ifthenelse{\boolean{@nochapters}}%
+\ifthenelse{\boolean{ct@nochapters}}%
     {\relax}%
     {%
         \renewcommand{\cftchappresnum}{\spacedlowsmallcaps}%
         \renewcommand{\cftchapaftersnumb}{\spacedlowsmallcaps}%
         \renewcommand{\cftchapfont}{\normalfont}%
         \renewcommand{\cftchappagefont}{\normalfont}%
-        \ifthenelse{\boolean{@dottedtoc}}{\relax}%
-        {%
+        \ifthenelse{\boolean{ct@dottedtoc}}{\relax}%
+          {%
             \renewcommand{\cftchapleader}{\hspace{1.5em}}%
             \renewcommand{\cftchapafterpnum}{\cftparfillskip}%
-        }
+          }
         %\setlength{\cftbeforechapskip}{.1em}%
     }
 % sections
-\ifthenelse{\boolean{@nochapters}}%
+\ifthenelse{\boolean{ct@nochapters}}%
     {%
         \setlength{\cftbeforesecskip}{.1em}%
         \setlength{\beforebibskip}{1em}%
@@ -509,34 +523,34 @@
 \renewcommand{\cftsecpresnum}{\scshape\MakeTextLowercase}%
 \renewcommand{\cftsecfont}{\normalfont}%
 \renewcommand{\cftsecpagefont}{\normalfont}%
-\ifthenelse{\boolean{@dottedtoc}}{\relax}%
+\ifthenelse{\boolean{ct@dottedtoc}}{\relax}%
     {%
         \renewcommand{\cftsecleader}{\hspace{1.5em}}%
         \renewcommand{\cftsecafterpnum}{\cftparfillskip}%
     }
-    \ifthenelse{\boolean{@tocaligned}}{\renewcommand{\cftsecindent}{0em}}{\relax}
+    \ifthenelse{\boolean{ct@tocaligned}}{\renewcommand{\cftsecindent}{0em}}{\relax}
 % subsections
 \renewcommand{\cftsubsecpresnum}{\scshape\MakeTextLowercase}%
 \renewcommand{\cftsubsecfont}{\normalfont}%
-\ifthenelse{\boolean{@dottedtoc}}{\relax}%
+\ifthenelse{\boolean{ct@dottedtoc}}{\relax}%
 {%
     \renewcommand{\cftsubsecleader}{\hspace{1.5em}}%
     \renewcommand{\cftsubsecafterpnum}{\cftparfillskip}%
 }
-\ifthenelse{\boolean{@tocaligned}}{\renewcommand{\cftsubsecindent}{0em}}{\relax}
+\ifthenelse{\boolean{ct@tocaligned}}{\renewcommand{\cftsubsecindent}{0em}}{\relax}
 % subsubsections
 \renewcommand{\cftsubsubsecpresnum}{\scshape\MakeTextLowercase}%
 \renewcommand{\cftsubsubsecfont}{\normalfont}%
-\ifthenelse{\boolean{@dottedtoc}}{\relax}%
+\ifthenelse{\boolean{ct@dottedtoc}}{\relax}%
 {%
     \renewcommand{\cftsubsubsecleader}{\hspace{1.5em}}%
     \renewcommand{\cftsubsubsecafterpnum}{\cftparfillskip}%
 }
-\ifthenelse{\boolean{@tocaligned}}{\renewcommand{\cftsubsubsecindent}{0em}}{\relax}
+\ifthenelse{\boolean{ct@tocaligned}}{\renewcommand{\cftsubsubsecindent}{0em}}{\relax}
 % figures
 \renewcommand{\cftfigpresnum}{\scshape\MakeTextLowercase}%
 \renewcommand{\cftfigfont}{\normalfont}%
-\ifthenelse{\boolean{@dottedtoc}}{\relax}%
+\ifthenelse{\boolean{ct@dottedtoc}}{\relax}%
 {%
     \renewcommand{\cftfigleader}{\hspace{1.5em}}%
     \renewcommand{\cftfigafterpnum}{\cftparfillskip}%
@@ -549,7 +563,7 @@
 % tables
 \renewcommand{\cfttabpresnum}{\scshape\MakeTextLowercase}%
 \renewcommand{\cfttabfont}{\normalfont}%
-\ifthenelse{\boolean{@dottedtoc}}{\relax}%
+\ifthenelse{\boolean{ct@dottedtoc}}{\relax}%
 {%
     \renewcommand{\cfttableader}{\hspace{1.5em}}%
     \renewcommand{\cfttabafterpnum}{\cftparfillskip}%
@@ -561,14 +575,14 @@
 %\cftsetindents{table}{0em}{\tablelabelwidth}
 \cftsetindents{table}{0em}{\figurelabelwidth}
 % listings
-\ifthenelse{\boolean{@listings}}%
+\ifthenelse{\boolean{ct@listings}}%
 {%
     \newlistof{listings}{lol}{\lstlistlistingname}%
     \renewcommand{\cftlistingspresnum}{\scshape\MakeTextLowercase}%
     \renewcommand{\cftlistingsfont}{\normalfont}%
     \renewcommand{\cftlistingspresnum}{\lstlistingname~}%
     \renewcommand{\cftlistingspagefont}{\normalfont}%
-    \ifthenelse{\boolean{@dottedtoc}}{\relax}%
+    \ifthenelse{\boolean{ct@dottedtoc}}{\relax}%
     {%
         \renewcommand{\cftlistingsleader}{\hspace{1.5em}}%
         \renewcommand{\cftlistingsafterpnum}{\cftparfillskip}%
@@ -583,11 +597,11 @@
 }{\relax}%
 
 % dirty work-around to get the spacing after the toc/lot/lof-titles right
-\ifthenelse{\boolean{@parts}}%
+\ifthenelse{\boolean{ct@parts}}%
 {%
     \AtBeginDocument{\addtocontents{toc}{\protect\vspace{-\cftbeforepartskip}}}
 }{%
-    \ifthenelse{\boolean{@nochapters}}%
+    \ifthenelse{\boolean{ct@nochapters}}%
         {\relax}%
         {\AtBeginDocument{\addtocontents{toc}{\protect\vspace{-\cftbeforechapskip}}}}
 }
@@ -597,14 +611,14 @@
 
 
 %% remove the vertical space between lof/lot entries of different chapters
-\ifthenelse{\boolean{@listsseparated}}{%
+\ifthenelse{\boolean{ct@listsseparated}}{%
     \PackageWarningNoLine{classicthesis}{Option "listsseparated" deprecated as of version 2.9.}%
 }{\relax}
-% \ifthenelse{\boolean{@listsseparated}}{%
+% \ifthenelse{\boolean{ct@listsseparated}}{%
 %     \AtBeginDocument{%
 %         \addtocontents{lof}{\protect\vspace{-\cftbeforechapskip}}%
 %         \addtocontents{lot}{\protect\vspace{-\cftbeforechapskip}}%
-%         \ifthenelse{\boolean{@listings}}%
+%         \ifthenelse{\boolean{ct@listings}}%
 %                {%
 %            \addtocontents{lol}{\protect\vspace{-\cftbeforechapskip}}%
 %         }{\relax}%
@@ -614,7 +628,7 @@
 \AtBeginDocument{%
     \addtocontents{lof}{\deactivateaddvspace}%
     \addtocontents{lot}{\deactivateaddvspace}%
-            \ifthenelse{\boolean{@listings}}%
+            \ifthenelse{\boolean{ct@listings}}%
             {%
                 \addtocontents{lol}{\deactivateaddvspace}%
             }{\relax}%
@@ -642,7 +656,7 @@
 \RequirePackage{scrtime} % time access
 \newcommand{\finalVersionString}{\relax}
 \providecommand{\myVersion}{$\!\!$} % w/o classicthesis-config.tex
-\ifthenelse{\boolean{@drafting}}{%
+\ifthenelse{\boolean{ct@drafting}}{%
 %    \RequirePackage{draftwatermark}%
 %       \SetWatermarkLightness{0.9}
 %           \SetWatermarkScale{.5}
@@ -656,29 +670,29 @@
 % ********************************************************************
 % Caption numbering now w/o chapter number
 % ********************************************************************
-\ifthenelse{\boolean{@floatperchapter}}{%
-    \ifthenelse{\boolean{@listings}}{%
+\ifthenelse{\boolean{ct@floatperchapter}}{%
+    \ifthenelse{\boolean{ct@listings}}{%
         \lstset{numberbychapter=true}}{\relax}% numberbychapter works in listings>=1.4
 }{%
-    \ifthenelse{\boolean{@listings}}{%
+    \ifthenelse{\boolean{ct@listings}}{%
         \lstset{numberbychapter=false}}{\relax}%
     \RequirePackage{remreset}%
     \makeatletter%
-        \ifthenelse{\boolean{@nochapters}}%
+        \ifthenelse{\boolean{ct@nochapters}}%
         {\relax}{%
             \@removefromreset{table}{chapter}  % requires remreset package
         }%
         \renewcommand{\thetable}{\arabic{table}}%
     \makeatother%
     \makeatletter%
-        \ifthenelse{\boolean{@nochapters}}%
+        \ifthenelse{\boolean{ct@nochapters}}%
         {\relax}{%
             \@removefromreset{figure}{chapter}  % requires remreset package
         }%
         \renewcommand{\thefigure}{\arabic{figure}}%
     \makeatother%
     \makeatletter%
-        \ifthenelse{\boolean{@nochapters}}%
+        \ifthenelse{\boolean{ct@nochapters}}%
         {\relax}{%
             \@removefromreset{equation}{chapter}  % requires remreset package
         }%
