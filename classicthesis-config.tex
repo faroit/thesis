@@ -36,8 +36,7 @@
         subfig=true,      % setup for preloaded @subfig package
         eulermath=false,  % use awesome Euler fonts for mathematical formulae
         beramono=true,    % toggle a nice monospaced font (w/ bold) + pre-installed
-        minionpro=false,  % setup for minion pro font; use minion pro small caps as well
-        pdfspacing        % use pdftex for letterspacing (via microtype)
+        minionpro=false   % setup for minion pro font; use minion pro small caps as well
         }{classicthesis}
 
 
@@ -172,11 +171,13 @@
 % ********************************************************************
 % Using PDFLaTeX
 % ********************************************************************
-\PassOptionsToPackage{pdftex,hyperfootnotes=false,pdfpagelabels}{hyperref}
+\PassOptionsToPackage{hyperfootnotes=false,pdfpagelabels}{hyperref}
     \usepackage{hyperref}  % backref linktocpage pagebackref
+\ifpdf
 \pdfcompresslevel=9
 \pdfadjustspacing=1
-\PassOptionsToPackage{pdftex}{graphicx}
+\fi
+%\PassOptionsToPackage{pdftex}{graphicx} %%%IVO driver is chosen automatically
     \usepackage{graphicx}
 
 

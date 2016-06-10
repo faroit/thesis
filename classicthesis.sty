@@ -121,21 +121,6 @@
         {\relax}{\RequirePackage{listings}}%
     }{\relax}%
 
-% fine-tuning if we use minionprospacing
-\ifthenelse{\boolean{ct@minionprospacing}}%
-    {%
-        \PackageInfo{classicthesis}{Using option "minionprospacing". %
-            This activates "minionpro" in general and turns off %
-            the option "pdfspacing".}%
-        % is the user trying to use pdfspacing at the same time?
-        \ifthenelse{\boolean{ct@pdfspacing}}%
-            {% both minionprospacing and pdfspacing are active
-                \PackageWarningNoLine{classicthesis}{You cannot use "pdfspacing" at the same time %
-                    as "minionprospacing"!}%
-            }{\relax}%
-        \setboolean{ct@minionpro}{true}%
-        \setboolean{ct@pdfspacing}{false}%
-    }{\relax}
 
 % fine-tuning if we do not use chapters
 
@@ -157,27 +142,14 @@
 % ********************************************************************
 \RequirePackage{ifpdf}
 \RequirePackage{ifxetex}
-%%%\newboolean{ct@hyperref}
-\ifthenelse{\boolean{pdf}\OR\boolean{xetex}}%
+\RequirePackage{ifluatex}
+\ifthenelse{\boolean{pdf}\OR\boolean{luatex}\OR\boolean{xetex}}%
            {
-           %%%\setboolean{ct@hyperref}{true}
            \RequirePackage{hyperref}
-           \pdfstringdefDisableCommands{\let\thepart=\@gobble} % no part numbers (i, ii, iii) in PDF outline
-           }
-           {
-           %%%\setboolean{ct@hyperref}{false}
-           \providecommand*{\texorpdfstring}{\expandafter\@firstoftwo} %%%seems we don't need this command any more, but I'd keep it
-           }
+           \pdfstringdefDisableCommands{\let\thepart=\relax} % no part numbers (i, ii, iii) in PDF outline   IVO
+           %\pdfstringdefDisableCommands{\renewcommand{\thepart}{\Roman{part}}} %%%IVO bring back Part numbers in PDF outline
+           }{}
 
-% pdfspacing does not work with XeLaTeX
-\ifxetex%
-    \ifthenelse{\boolean{ct@pdfspacing}}%
-        {% pdfspacing is used with XeLaTeX
-            \PackageWarningNoLine{classicthesis}{You cannot use the option %
-            "pdfspacing" with XeLaTeX!}%
-        }{\relax}%
-    \setboolean{ct@pdfspacing}{false}%
-\fi
 
 % ********************************************************************
 % Colors
@@ -194,47 +166,61 @@
 % ********************************************************************
 % Font Stuff
 % ********************************************************************
-% specialists: MinionPro
-\ifthenelse{\boolean{ct@minionpro}}%
-    {%
-            % in order have Euler math fonts work with Minion, special option is needed
-            \ifthenelse{\boolean{ct@eulermath}}%
-            {%
-            \PassOptionsToPackage{opticals,mathlf,onlytext}{MinionPro}%
-            \RequirePackage{MinionPro} %  opticals, fullfamily, osf
-        }{%
-            \PassOptionsToPackage{opticals,mathlf}{MinionPro}%
-            \RequirePackage{MinionPro} %  opticals, fullfamily, osf
-        }%
-    }{%
-        % default: Palatino
-        \PassOptionsToPackage{osf,sc}{mathpazo}%
-        \RequirePackage{mathpazo} % Palatino with real small caps and old style figures
-        \linespread{1.05} % a bit more for Palatino
-    }
+\ifthenelse{\boolean{xetex}\OR\boolean{luatex}}
+   { % use fontspec and OpenType fonts
+     \RequirePackage{fontspec}
+     \setmainfont[Ligatures=TeX,Numbers=OldStyle]{TeX Gyre Pagella} %%%  Palatino clone
+     \setmonofont[Scale=0.9]{Liberation Mono} %%% Scale=MatchLowercase; Liberation Mono; TeX Gyre Cursor
+     \RequirePackage{unicode-math}
+     \setmathfont[Color=990000]{TeX Gyre Pagella Math}
+     \newfontface\chapterNumber[Scale=7,Color=887777]{TeX Gyre Pagella Bold}
+   }
+   { % use T1 fonts
+     \ifthenelse{\boolean{ct@minionpro}}% specialists: MinionPro
+       {%
+         % in order have Euler math fonts work with Minion, special option is needed
+         \ifthenelse{\boolean{ct@eulermath}}%
+           {%
+             \PassOptionsToPackage{opticals,mathlf,onlytext}{MinionPro}%
+             \RequirePackage{MinionPro} %  opticals, fullfamily, osf
+           }{%
+             \PassOptionsToPackage{opticals,mathlf}{MinionPro}%
+             \RequirePackage{MinionPro} %  opticals, fullfamily, osf
+           }
+       }{
+       % default: Palatino
+         \PassOptionsToPackage{osf,sc}{mathpazo}%
+         \RequirePackage{mathpazo} % Palatino with real small caps and old style figures
+         \linespread{1.05} % a bit more for Palatino
+       }
 
-\ifthenelse{\boolean{ct@beramono}}%
-    {\PassOptionsToPackage{scaled=0.85}{beramono}%
-     \RequirePackage{beramono}}%
-    {%
-        \relax%
-        % put your own suitable typewriter font here
-        %\renewcommand{\ttdefault}{\rmdefault}
-    }
-\ifthenelse{\boolean{ct@eulermath}}%
-    {\PassOptionsToPackage{euler-digits}{eulervm}%
-     \RequirePackage{eulervm}} % Euler math fonts
-    {\relax}
+       \ifthenelse{\boolean{ct@beramono}}%
+         {\PassOptionsToPackage{scaled=0.85}{beramono}%
+           \RequirePackage{beramono}%
+         }{%
+         \relax%
+         % put your own suitable typewriter font here
+         %\renewcommand{\ttdefault}{\rmdefault}
+         }
 
-\ifthenelse{\boolean{ct@eulerchapternumbers}}% font for the chapter numbers
-    {\newfont{\chapterNumber}{eurb10 scaled 7000}}%
-    {\newfont{\chapterNumber}{pplr9d scaled 7000}}
-    % Euler eurb10 / Palatino OSF pplr9d / Palatino SC pplrc9d
-    % Latin Modern cork-lmr10 / Minion MinionPro-Regular-osf-t1
-    % (MinionPro-SemiboldCapt-osf-t1 MinionPro-SemiboldDisp-osf-t1)
+       \ifthenelse{\boolean{ct@eulermath}}%
+         {\PassOptionsToPackage{euler-digits}{eulervm}%
+         \RequirePackage{eulervm}} % Euler math fonts
+         {\relax}
+
+       \ifthenelse{\boolean{ct@eulerchapternumbers}}% font for the chapter numbers
+         {\newfont{\chapterNumber}{eurb10 scaled 7000}}%
+         {\newfont{\chapterNumber}{pplr9d scaled 7000}}
+         % Euler eurb10 / Palatino OSF pplr9d / Palatino SC pplrc9d
+         % Latin Modern cork-lmr10 / Minion MinionPro-Regular-osf-t1
+         % (MinionPro-SemiboldCapt-osf-t1 MinionPro-SemiboldDisp-osf-t1)
+   }
+
+
 
 \RequirePackage{microtype} % character protruding and other micro-typography stuff
 % [expansion=false]
+
 
 % ********************************************************************
 % Textblock size
@@ -350,27 +336,35 @@
 \RequirePackage{booktabs} % for better rules in tables
 \RequirePackage{textcase} % for \MakeTextUppercase
 
-\ifthenelse{\boolean{ct@minionprospacing}}%
-    {%
-        \PackageInfo{classicthesis}{Using MinionPro's textssc for character spacing.}%
-        \DeclareRobustCommand{\spacedallcaps}[1]{\textssc{\MakeTextUppercase{#1}}}%
-        \DeclareRobustCommand{\spacedlowsmallcaps}[1]{\textssc{\MakeTextLowercase{#1}}}%
-    }{%
-        \ifthenelse{\boolean{ct@pdfspacing}}%
-        {%
+%%% engine-dependent letterspacing: microtype for pdflatex, fontspec for xelatex and luatex
+\ifthenelse{\boolean{ct@minionpro}}{% MinionPro small caps
+        \PackageInfo{classicthesis}{Using MinionPro's textssc for character spacing.}
+        \DeclareRobustCommand{\spacedallcaps}[1]{\textssc{\MakeTextUppercase{#1}}}
+        \DeclareRobustCommand{\spacedlowsmallcaps}[1]{\textssc{\MakeTextLowercase{#1}}}
+      }{
+        % engine-based spacedallcaps and spacedlowsmallcaps
+        \ifthenelse{\boolean{pdf}\AND\NOT\boolean{luatex}}{ % pdf will soon test true for both pdflatex and luatex
             \PackageInfo{classicthesis}{Using pdftex/microtype for character spacing.%
                                         Make sure your pdftex is version 1.40 or higher.}%
-            \microtypesetup{expansion=false}%
-            \DeclareRobustCommand{\spacedallcaps}[1]{\textls[160]{\MakeTextUppercase{#1}}}%
-            \DeclareRobustCommand{\spacedlowsmallcaps}[1]{\textls[80]{\scshape\MakeTextLowercase{#1}}}%
-        }{%
+            \microtypesetup{expansion=false}
+            \DeclareRobustCommand{\spacedallcaps}[1]{\textls[160]{\MakeTextUppercase{#1}}}
+            \DeclareRobustCommand{\spacedlowsmallcaps}[1]{\textls[80]{\scshape\MakeTextLowercase{#1}}}
+          }{\relax}
+
+        \ifthenelse{\boolean{xetex}\OR\boolean{luatex}}{ % use fontspec features 
+          \DeclareRobustCommand{\spacedallcaps}[1]{{\addfontfeature{LetterSpace=18.0,WordSpace=1.8}\MakeTextUppercase{#1}}}%
+          \DeclareRobustCommand{\spacedlowsmallcaps}[1]{{\addfontfeature{LetterSpace=10.0,WordSpace=1.8}\scshape\MakeTextLowercase{#1}}}%
+          }{\relax}   %%%IVO
+
+        \ifthenelse{\boolean{pdf}\OR\boolean{xetex}\OR\boolean{luatex}}% ever used? only dvi engines remain
+          {\relax}{%
             \RequirePackage{soulutf8} % for letterspacing
                 \sodef\allcapsspacing{\upshape}{0.15em}{0.65em}{0.6em}%
                 \sodef\lowsmallcapsspacing{\scshape}{0.075em}{0.5em}{0.6em}%
                 \DeclareRobustCommand{\spacedallcaps}[1]{\MakeTextUppercase{\allcapsspacing{#1}}}%
                 \DeclareRobustCommand{\spacedlowsmallcaps}[1]{\MakeTextLowercase{\lowsmallcapsspacing{#1}}}%\protect
-        }%
-    }
+          }%
+      }
 
 % ********************************************************************
 % headlines
@@ -624,6 +618,8 @@
 %         }{\relax}%
 %     }%
 % }{%
+
+
 \DeclareRobustCommand*{\deactivateaddvspace}{\let\addvspace\@gobble}%
 \AtBeginDocument{%
     \addtocontents{lof}{\deactivateaddvspace}%
