@@ -106,11 +106,7 @@
 \@ifpackageloaded{subfig}%
     {\setboolean{ct@subfig}{true}%
     }{\relax}
-\@ifpackageloaded{subfigure}%
-    {\setboolean{ct@subfig}{true}%
-        \PackageWarningNoLine{classicthesis}{Package "subfigure" and option "subfigure" are deprecated, %
-                                            use "subfig" instead.}
-    }{\relax}
+
 \ifthenelse{\boolean{ct@subfig}}%
     {\PassOptionsToPackage{subfigure}{tocloft}%
     }{\relax}%
@@ -373,14 +369,15 @@
 \PassOptionsToPackage{automark}{scrlayer-scrpage}
     %\RequirePackage{scrpage2} % provides headers and footers (KOMA Script)
     \RequirePackage{scrlayer-scrpage} % provides headers and footers (KOMA Script)
-    \clearscrheadings
+    \clearpairofpagestyles
     %\setheadsepline{0pt}
+    \let\MakeMarkcase\spacedlowsmallcaps
     \ifthenelse{\boolean{ct@nochapters}}%
         {\relax}%
         {\renewcommand{\chaptermark}[1]{\markboth{\spacedlowsmallcaps{#1}}{\spacedlowsmallcaps{#1}}}}
     \renewcommand{\sectionmark}[1]{\markright{\thesection\enspace\spacedlowsmallcaps{#1}}}
-    \lehead{\mbox{\llap{\small\thepage\kern2em}\headmark\hfil}}
-    \rohead{\mbox{\hfil{\headmark}\rlap{\small\kern2em\thepage}}}
+    \lehead{\mbox{\llap{\small\pagemark\kern2em}\headmark\hfil}}
+    \rohead{\mbox{\hfil{\headmark}\rlap{\small\kern2em\pagemark}}}
     \renewcommand{\headfont}{\small}
 %    \DeclareRobustCommand{\fixBothHeadlines}[2]{} % <--- ToDo
     % hack to get the content headlines right (thanks, Lorenzo!)
@@ -388,7 +385,7 @@
             \ifthenelse{\boolean{ct@nochapters}}%
             {\section*{\contentsname}}%nochapters
             {\chapter*{\contentsname}}%chapters
-            \@mkboth{\spacedlowsmallcaps{\contentsname}}{\spacedlowsmallcaps{\contentsname}}}
+            \@mkboth{\spacedlowsmallcaps{\contentsname}}{\spacedlowsmallcaps{\contentsname}}} %%%IVO what does this do?
 
 
 % ********************************************************************
@@ -673,27 +670,21 @@
     \ifthenelse{\boolean{ct@listings}}{%
         \lstset{numberbychapter=false}}{\relax}%
     \RequirePackage{remreset}%
-    \makeatletter%
         \ifthenelse{\boolean{ct@nochapters}}%
         {\relax}{%
             \@removefromreset{table}{chapter}  % requires remreset package
         }%
         \renewcommand{\thetable}{\arabic{table}}%
-    \makeatother%
-    \makeatletter%
         \ifthenelse{\boolean{ct@nochapters}}%
         {\relax}{%
             \@removefromreset{figure}{chapter}  % requires remreset package
         }%
         \renewcommand{\thefigure}{\arabic{figure}}%
-    \makeatother%
-    \makeatletter%
         \ifthenelse{\boolean{ct@nochapters}}%
         {\relax}{%
             \@removefromreset{equation}{chapter}  % requires remreset package
         }%
         \renewcommand{\theequation}{\arabic{equation}}%
-    \makeatother%
 }
 
 % ********************************************************************
