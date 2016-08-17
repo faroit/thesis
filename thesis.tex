@@ -1,0 +1,145 @@
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Setup title, etc in thesis_config.tex
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\input{config}
+\documentclass[a4paper,11pt]{book}
+
+
+
+\input{packages}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Start of document
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+\fancypagestyle{plain}{\pagestyle{mine}} % remove this if you don't want
+                                         % headings on the first page of a chapter
+\frontmatter
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Title Page
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{titlepage}
+\cleardoublepage
+
+\pagenumbering{roman}
+\pagestyle{mine}
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Eidesstattliche Erklaerung
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapstar{Erkl\"{a}rung}
+\input{declaration}
+
+
+\chapstar{Acknowledgements}
+\input{acknowledgements}
+
+\chapstar{Abstract}
+\input{abstract}
+
+\chapstar{Formula Symbols}
+\input{formulasymbols}
+
+\chapstar{Abbreviations}
+\input{abbreviations}
+
+%\pagestyle{headings}
+%\pagestyle{mine}
+
+
+\mainmatter
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Table of Contents
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\setcounter{tocdepth}{1}
+{\parskip=0mm \tableofcontents}
+\setcounter{page}{1}
+% \thispagestyle{empty}
+
+
+
+\pagestyle{mine}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Chapters
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\cleardoublepage
+\input{introduction}
+\cleardoublepage
+\input{basics}
+\cleardoublepage
+\input{estimation/index}
+\cleardoublepage
+\input{evaluation}
+\cleardoublepage
+\input{results}
+\cleardoublepage
+\input{outlook}
+%% add an extra line in the TOC before the conclusions
+\addtocontents{toc}{\protect\mbox{}\protect\par}
+\addtocontents{toc}{\protect\mbox{}\protect\hrulefill\par}
+\input{conclusion}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Appendix
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\cleardoublepage
+%\appendix
+%\input{thesis_chapter_appendix}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+% Abbildungsverzeichnis %
+%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\cleardoublepage
+\addcontentsline{toc}{chapter}{List of Figures}
+\listoffigures
+
+
+%%%%%%%%%%%%%%%%%%%%%%%
+% Tabellenverzeichnis %
+%%%%%%%%%%%%%%%%%%%%%%%
+
+\cleardoublepage
+\addcontentsline{toc}{chapter}{List of Tables}
+\listoftables
+
+
+
+%%%%%%%%%%%%%%%%%%%
+% Codeverzeichnis %
+%%%%%%%%%%%%%%%%%%%
+
+\cleardoublepage
+\renewcommand*{\lstlistlistingname}{List of Program Code Listings}
+\addcontentsline{toc}{chapter}{List of Program Code Listings}
+\lstlistoflistings
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Bibliography and Index
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\cleardoublepage
+{
+\small
+\addcontentsline{toc}{chapter}{Bibliography}
+\bibliographystyle{siam}
+\bibliography{thesis}
+}
+\cleardoublepage
+{
+\small
+\addcontentsline{toc}{chapter}{Index}
+\printindex
+}
+
+
+\end{document}
