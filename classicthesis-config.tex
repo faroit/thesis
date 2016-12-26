@@ -22,19 +22,22 @@
 % ****************************************************************************************************
 % 1. Configure classicthesis for your needs here, e.g., remove "drafting" below
 % in order to deactivate the time-stamp on the pages
-% ****************************************************************************************************
-\PassOptionsToPackage{eulerchapternumbers,listings,drafting,%
-                     pdfspacing,%floatperchapter,%linedheaders,%
-                     subfig,beramono,eulermath,parts}{classicthesis}
-% ********************************************************************
-% Available options for classicthesis.sty
 % (see ClassicThesis.pdf for more information):
-% drafting
-% parts nochapters linedheaders
-% eulerchapternumbers beramono eulermath pdfspacing minionprospacing
-% tocaligned dottedtoc manychapters
-% listings floatperchapter subfig
-% ********************************************************************
+% ****************************************************************************************************
+\PassOptionsToPackage{
+        drafting=true,    % print version information on pages
+        tocaligned=false, % the left column of the toc will be aligned (no indentation)
+        dottedtoc=false,  % page numbers in ToC flushed right
+        parts=true,       % use part division
+        eulerchapternumbers=true, % use AMS Euler for chapter font (otherwise Palatino)
+        linedheaders=false,       % chaper headers will have line above and beneath
+        floatperchapter=true,     % numbering per chapter for all floats (i.e., Figure 1.1)
+        listings=true,    % load listings package and setup LoL
+        subfig=true,      % setup for preloaded @subfig package
+        eulermath=false,  % use awesome Euler fonts for mathematical formulae
+        beramono=true,    % toggle a nice monospaced font (w/ bold) + pre-installed
+        minionpro=false   % setup for minion pro font; use minion pro small caps as well
+        }{classicthesis}
 
 
 % ****************************************************************************************************
@@ -51,8 +54,8 @@
 \newcommand{\myDepartment}{Put data here\xspace}
 \newcommand{\myUni}{Put data here\xspace}
 \newcommand{\myLocation}{Saarbrücken\xspace}
-\newcommand{\myTime}{April 2016\xspace}
-\newcommand{\myVersion}{version 4.3c\xspace}
+\newcommand{\myTime}{June 2016\xspace}
+\newcommand{\myVersion}{version 4.3pi}
 
 % ********************************************************************
 % Setup, finetuning, and useful commands
@@ -168,11 +171,13 @@
 % ********************************************************************
 % Using PDFLaTeX
 % ********************************************************************
-\PassOptionsToPackage{pdftex,hyperfootnotes=false,pdfpagelabels}{hyperref}
+\PassOptionsToPackage{hyperfootnotes=false,pdfpagelabels}{hyperref}
     \usepackage{hyperref}  % backref linktocpage pagebackref
+\ifpdf
 \pdfcompresslevel=9
 \pdfadjustspacing=1
-\PassOptionsToPackage{pdftex}{graphicx}
+\fi
+%\PassOptionsToPackage{pdftex}{graphicx} %%%IVO driver is chosen automatically
     \usepackage{graphicx}
 
 
