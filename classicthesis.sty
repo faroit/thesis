@@ -1,7 +1,7 @@
 % ********************************************************************
 % classicthesis.sty
 %
-% Copyright (C) 2016 André Miede http://www.miede.de
+% Copyright (C) 2017 André Miede and Ivo Pletikosić
 %
 % If you like the style then I would appreciate a postcard. My address
 % can be found in the file ClassicThesis.pdf. A collection of the
@@ -30,16 +30,9 @@
 % This style can also be used without the thesis template.
 % It works with both LaTeX and PDFLaTeX now. XeLaTeX should also work.
 %
-% * You must not use "u etc. in strings/commands that will be spaced out
-%   (use \"u or real umlauts instead)
-% * There is a problem with the case of math text in part-,
-%   chapter-, and section titles (either the case or the spacing breaks).
-%   => this can be fixed by using pdftex 1.40 or later and enabling the
-%      option pdfspacing of this package
-%
 % ********************************************************************
 \NeedsTeXFormat{LaTeX2e}%[2015/01/01] % fixed via latexrelease package, see below
-\ProvidesPackage{classicthesis}[2016/05/03 v4.3pi Typographic style for a classic-looking thesis]
+\ProvidesPackage{classicthesis}[2016/12/26 v4.3pi Typographic style for a classic-looking thesis]
 %\PassOptionsToPackage{latest}{latexrelease} % replacement for fixltx2e, emulate newer kernel version if older is detected
     %\RequirePackage{latexrelease} % will be put back in once it is available in more distributions
 
@@ -205,8 +198,10 @@
          {\relax}
 
        \ifthenelse{\boolean{ct@eulerchapternumbers}}% font for the chapter numbers
-         {\newfont{\chapterNumber}{eurb10 scaled 7000}}%
-         {\newfont{\chapterNumber}{pplr9d scaled 7000}}
+          {\DeclareFixedFont{\chapterNumber}{U}{eur}{b}{n}{70}}%
+          {\DeclareFixedFont{\chapterNumber}{T1}{pplj}{m}{n}{70}}%  
+         %{\newfont{\chapterNumber}{eurb10 scaled 7000}}%
+         %{\newfont{\chapterNumber}{pplr9d scaled 7000}}
          % Euler eurb10 / Palatino OSF pplr9d / Palatino SC pplrc9d
          % Latin Modern cork-lmr10 / Minion MinionPro-Regular-osf-t1
          % (MinionPro-SemiboldCapt-osf-t1 MinionPro-SemiboldDisp-osf-t1)
@@ -319,7 +314,7 @@
 \fi
 }
 
-              
+
 % Enumeration environment with small caps
 \newenvironment{aenumerate}
     {\def\theenumi{\textsc{\alph{enumi}}}%
@@ -347,7 +342,7 @@
             \DeclareRobustCommand{\spacedlowsmallcaps}[1]{\textls[80]{\scshape\MakeTextLowercase{#1}}}
           }{\relax}
 
-        \ifthenelse{\boolean{xetex}\OR\boolean{luatex}}{ % use fontspec features 
+        \ifthenelse{\boolean{xetex}\OR\boolean{luatex}}{ % use fontspec features
           \DeclareRobustCommand{\spacedallcaps}[1]{{\addfontfeature{LetterSpace=18.0,WordSpace=1.8}\MakeTextUppercase{#1}}}%
           \DeclareRobustCommand{\spacedlowsmallcaps}[1]{{\addfontfeature{LetterSpace=10.0,WordSpace=1.8}\scshape\MakeTextLowercase{#1}}}%
           }{\relax}   %%%IVO
@@ -400,7 +395,7 @@
 % parts
 \ifthenelse{\boolean{ct@parts}}%
 {%
-    \newcommand{\ctparttext}[1]{\renewcommand{\ctparttext@keep}{#1}} 
+    \newcommand{\ctparttext}[1]{\renewcommand{\ctparttext@keep}{#1}}
     \def\ctparttext@keep{} % Thanks to Ivo
     \def\ctparttext@print{\ctparttext@keep \gdef\ctparttext@keep{}}
     \titleformat{\part}[display]

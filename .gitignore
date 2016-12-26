@@ -1,5 +1,6 @@
 *.bat
 *.log
+*.tps
 DOS2UNIX.EXE
 Examples/multiToC.tex
 multiToC.tex
@@ -23,3 +24,4 @@ __FOR_CTAN_UPLOAD.txt
 *.fls
 *.synctex.gz
 >>>>>>> 3c7deffa7dd6720070243800614c2340c73c3a76
+Examples/classicthesis-book.synctex.gz(busy)
