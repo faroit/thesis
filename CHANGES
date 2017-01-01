@@ -1,13 +1,34 @@
-Changes in version 4.3 (tbd)
-o When redefining the acronym label, check for the 
+Changes in version 4.4 (Januar 2017)
+o Fixed redefining \marginpar for two arguments (Ivo)
+o Fixed some spacing definitions and using the
+  soulutf8 package now (Ivo)
+o Reimplementation of \chapter and \part using solely
+  titlesec and tocloft (Ivo)
+o \ctparttext logic fixed (Ivo)
+o Logic for detecting PDF engines, pdftex, xetex,
+  luatex (Ivo)
+o Support for fontspec and OpenType fonts for suitable
+  PDF engines (Ivo)
+o Using kvoptions package so option=value is
+  available in classichtesis.sty (Ivo)
+o Support for more paper sizes, fixes for headinclude
+  and footinclude (Ivo)
+o Fixed use of subfigure (Ivo)
+o Fixed use of scrlayer-scrpage (Ivo)
+o Updated the documentation (Chapter01.tex)
+o Added clarifications regarding use of GPL
+  (ClassicThesis.tex, Chapter01.tex)
+
+Changes in version 4.3 (not released)
+o When redefining the acronym label, check for the
   acronym package's version (thanks to Scott Lowe)
 o Several minor fixes (comments, whitespaces removed,
-  .gitignore, .editorconfig, etc.; thanks to Jörn 
-  Hees) 
-o Updated comments regarding hyperref's draft option 
+  .gitignore, .editorconfig, etc.; thanks to Jörn
+  Hees)
+o Updated comments regarding hyperref's draft option
   (thanks to Claudio Diaspero)
-o Silenced the warnings from KOMA and titlesec about 
-  each other, also in the examples (thanks to Jörg 
+o Silenced the warnings from KOMA and titlesec about
+  each other, also in the examples (thanks to Jörg
   Weber)
 
 Changes in version 4.2 (September 2015)
