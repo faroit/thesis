@@ -28,7 +28,7 @@
 % Important:
 %
 % This style can also be used without the thesis template.
-% It works with both LaTeX and PDFLaTeX now. XeLaTeX should also work.
+% It works with LaTeX, PDFLaTeX, XeLaTeX and LuaLaTeX.
 %
 % ********************************************************************
 \NeedsTeXFormat{LaTeX2e}%[2015/01/01] % fixed via latexrelease package, see below
@@ -61,9 +61,9 @@
 \DeclareBoolOption{listings} % load listings package and setup LoL
 \DeclareBoolOption{subfig} % setup for preloaded @subfig package
 
-\DeclareBoolOption{eulermath} % use awesome Euler fonts for mathematical formulae
+\DeclareBoolOption{eulermath} % use awesome Euler fonts for mathematical formulae; only with pdflatex
 \DeclareBoolOption{beramono} % toggle a nice monospaced font (w/ bold) + pre-installed
-\DeclareBoolOption{minionpro} % setup for minion pro font; use minion pro small caps as well
+\DeclareBoolOption{minionpro} % setup for minion pro font; use minion pro small caps as well; only with pdflatex
 
 \DeclareBoolOption{minionprospacing} % OBSOLETE; use minion pro's textssc for letter spacing
 \DeclareBoolOption{pdfspacing} % OBSOLETE; use pdftex for letterspacing (via microtype)
@@ -156,15 +156,20 @@
 % Font Stuff
 % ********************************************************************
 \ifthenelse{\boolean{xetex}\OR\boolean{luatex}}
-   { % use fontspec and OpenType fonts
+   { % use fontspec and OpenType fonts with utf8 engines
      \RequirePackage{fontspec}
-     \setmainfont[Ligatures=TeX,Numbers=OldStyle]{TeX Gyre Pagella} %%%  Palatino clone
-     \setmonofont[Scale=0.9]{Liberation Mono} %%% Scale=MatchLowercase; Liberation Mono; TeX Gyre Cursor
+     \setmainfont[Ligatures=TeX,Numbers=OldStyle]{TeX Gyre Pagella} % Palatino clone
+     \linespread{1.05} % a bit more for Palatino
+     \ifthenelse{\boolean{ct@beramono}}%
+       {\setmonofont[Scale=0.85]{DejaVu Sans Mono}} % like Bera; Scale=MatchLowercase
+       {\setmonofont[Scale=1]{Latin Modern Mono}}
      \RequirePackage{unicode-math}
-     \setmathfont[Color=990000]{TeX Gyre Pagella Math}
-     \newfontface\chapterNumber[Scale=7,Color=887777]{TeX Gyre Pagella Bold}
+     \setmathfont{TeX Gyre Pagella Math}
+     % font for the chapter numbers will be defined in the old way below
+     % because there is no OpenType Euler font; this is how it should be done:
+     %\newfontface\chapterNumber[Scale=7,Color=000000]{TeX Gyre Pagella Bold}
    }
-   { % use T1 fonts
+   { % use Type 1 fonts with pdflatex
      \ifthenelse{\boolean{ct@minionpro}}% specialists: MinionPro
        {%
          % in order have Euler math fonts work with Minion, special option is needed
@@ -196,16 +201,17 @@
          {\PassOptionsToPackage{euler-digits}{eulervm}%
          \RequirePackage{eulervm}} % Euler math fonts
          {\relax}
+   }
 
        \ifthenelse{\boolean{ct@eulerchapternumbers}}% font for the chapter numbers
           {\DeclareFixedFont{\chapterNumber}{U}{eur}{b}{n}{70}}%
-          {\DeclareFixedFont{\chapterNumber}{T1}{pplj}{m}{n}{70}}%  
+          {\DeclareFixedFont{\chapterNumber}{T1}{pplj}{m}{n}{70}}%
          %{\newfont{\chapterNumber}{eurb10 scaled 7000}}%
          %{\newfont{\chapterNumber}{pplr9d scaled 7000}}
          % Euler eurb10 / Palatino OSF pplr9d / Palatino SC pplrc9d
          % Latin Modern cork-lmr10 / Minion MinionPro-Regular-osf-t1
          % (MinionPro-SemiboldCapt-osf-t1 MinionPro-SemiboldDisp-osf-t1)
-   }
+
 
 
 
@@ -334,7 +340,7 @@
         \DeclareRobustCommand{\spacedlowsmallcaps}[1]{\textssc{\MakeTextLowercase{#1}}}
       }{
         % engine-based spacedallcaps and spacedlowsmallcaps
-        \ifthenelse{\boolean{pdf}\AND\NOT\boolean{luatex}}{ % pdf will soon test true for both pdflatex and luatex
+        \ifthenelse{\boolean{pdf}\OR\boolean{luatex}}{ % pdf will soon test true for both pdflatex and luatex; \AND\NOT\boolean{luatex}
             \PackageInfo{classicthesis}{Using pdftex/microtype for character spacing.%
                                         Make sure your pdftex is version 1.40 or higher.}%
             \microtypesetup{expansion=false}
@@ -342,10 +348,10 @@
             \DeclareRobustCommand{\spacedlowsmallcaps}[1]{\textls[80]{\scshape\MakeTextLowercase{#1}}}
           }{\relax}
 
-        \ifthenelse{\boolean{xetex}\OR\boolean{luatex}}{ % use fontspec features
-          \DeclareRobustCommand{\spacedallcaps}[1]{{\addfontfeature{LetterSpace=18.0,WordSpace=1.8}\MakeTextUppercase{#1}}}%
-          \DeclareRobustCommand{\spacedlowsmallcaps}[1]{{\addfontfeature{LetterSpace=10.0,WordSpace=1.8}\scshape\MakeTextLowercase{#1}}}%
-          }{\relax}   %%%IVO
+        \ifthenelse{\boolean{xetex}}{ % use fontspec features; \OR\boolean{luatex} does not work well
+          \DeclareRobustCommand{\spacedallcaps}[1]{{\addfontfeature{LetterSpace=18.0}\MakeTextUppercase{#1}}}% WordSpace=1.8
+          \DeclareRobustCommand{\spacedlowsmallcaps}[1]{{\addfontfeatures{LetterSpace=14.0}\scshape\MakeTextLowercase{#1}}}% WordSpace=1.8
+          }{\relax}
 
         \ifthenelse{\boolean{pdf}\OR\boolean{xetex}\OR\boolean{luatex}}% ever used? only dvi engines remain
           {\relax}{%
