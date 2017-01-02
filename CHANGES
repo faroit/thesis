@@ -16,6 +16,8 @@ o Support for more paper sizes, fixes for headinclude
 o Fixed use of subfigure (Ivo)
 o Fixed use of scrlayer-scrpage (Ivo)
 o Updated the documentation (Chapter01.tex)
+o Removed fixltx2e from classicthesis-config.tex and
+  inserted latexrelease there and classicthesis.sty
 o Added clarifications regarding use of GPL
   (ClassicThesis.tex, Chapter01.tex)
 
