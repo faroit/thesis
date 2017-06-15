@@ -25,3 +25,5 @@ __FOR_CTAN_UPLOAD.txt
 *.synctex.gz
 >>>>>>> 3c7deffa7dd6720070243800614c2340c73c3a76
 Examples/classicthesis-book.synctex.gz(busy)
+ClassicThesis.bcf
+Bibliography.bib.bak

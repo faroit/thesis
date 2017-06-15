@@ -2,6 +2,7 @@ Changes in version 4.4 (June 2017)
 o Bibliography section headers now correctly using 
   spacedlowsmallcaps with biblatex (thanks to Ivo 
 	and Enrico Gregorio)
+o Added some more books to bibliography for testing
 o Added help for external TikZ/PGF usage in 
   classicthesis-config.tex (thanks to Andreas Nautsch)
 o Fixed redefining \marginpar for two arguments (Ivo)

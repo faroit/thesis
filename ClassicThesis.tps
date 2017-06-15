@@ -11,14 +11,14 @@ MaxPos.x=-1
 MaxPos.y=-1
 NormalPos.left=4
 NormalPos.top=26
-NormalPos.right=1916
-NormalPos.bottom=674
+NormalPos.right=1562
+NormalPos.bottom=539
 Class=LaTeXView
-Document=CHANGES
+Document=Chapters\Chapter02.tex
 
 [Frame0_View0,0]
-TopLine=0
-Cursor=142
+TopLine=21
+Cursor=2195
 
 [Frame1]
 Flags=0
@@ -29,14 +29,14 @@ MaxPos.x=-1
 MaxPos.y=-1
 NormalPos.left=4
 NormalPos.top=26
-NormalPos.right=1916
-NormalPos.bottom=674
+NormalPos.right=1562
+NormalPos.bottom=539
 Class=LaTeXView
-Document=classicthesis-config.tex
+Document=CHANGES
 
 [Frame1_View0,0]
-TopLine=42
-Cursor=3581
+TopLine=0
+Cursor=215
 
 [Frame2]
 Flags=0
@@ -47,14 +47,14 @@ MaxPos.x=-1
 MaxPos.y=-1
 NormalPos.left=4
 NormalPos.top=26
-NormalPos.right=1916
-NormalPos.bottom=674
+NormalPos.right=1562
+NormalPos.bottom=539
 Class=LaTeXView
-Document=ClassicThesis.tex
+Document=classicthesis-config.tex
 
 [Frame2_View0,0]
-TopLine=48
-Cursor=2542
+TopLine=36
+Cursor=3581
 
 [Frame3]
 Flags=0
@@ -65,14 +65,14 @@ MaxPos.x=-1
 MaxPos.y=-1
 NormalPos.left=4
 NormalPos.top=26
-NormalPos.right=1916
-NormalPos.bottom=674
+NormalPos.right=1562
+NormalPos.bottom=539
 Class=LaTeXView
-Document=Chapters\Chapter01.tex
+Document=ClassicThesis.tex
 
 [Frame3_View0,0]
-TopLine=0
-Cursor=0
+TopLine=47
+Cursor=2542
 
 [Frame4]
 Flags=0
@@ -83,10 +83,10 @@ MaxPos.x=-1
 MaxPos.y=-1
 NormalPos.left=4
 NormalPos.top=26
-NormalPos.right=1916
-NormalPos.bottom=674
+NormalPos.right=1562
+NormalPos.bottom=539
 Class=LaTeXView
-Document=Chapters\Chapter0A.tex
+Document=Chapters\Chapter01.tex
 
 [Frame4_View0,0]
 TopLine=0
@@ -101,10 +101,10 @@ MaxPos.x=-1
 MaxPos.y=-1
 NormalPos.left=4
 NormalPos.top=26
-NormalPos.right=1916
-NormalPos.bottom=674
+NormalPos.right=1562
+NormalPos.bottom=539
 Class=LaTeXView
-Document=Chapters\Chapter02.tex
+Document=Chapters\Chapter0A.tex
 
 [Frame5_View0,0]
 TopLine=0
@@ -119,14 +119,14 @@ MaxPos.x=-1
 MaxPos.y=-1
 NormalPos.left=4
 NormalPos.top=26
-NormalPos.right=1916
-NormalPos.bottom=674
+NormalPos.right=1562
+NormalPos.bottom=539
 Class=LaTeXView
 Document=classicthesis.sty
 
 [Frame6_View0,0]
 TopLine=12
-Cursor=54
+Cursor=1132
 
 [Frame7]
 Flags=0
@@ -137,8 +137,8 @@ MaxPos.x=-1
 MaxPos.y=-1
 NormalPos.left=4
 NormalPos.top=26
-NormalPos.right=1916
-NormalPos.bottom=674
+NormalPos.right=1562
+NormalPos.bottom=539
 Class=LaTeXView
 Document=FrontBackmatter\Bibliography.tex
 
@@ -148,5 +148,5 @@ Cursor=591
 
 [SessionInfo]
 FrameCount=8
-ActiveFrame=1
+ActiveFrame=6
 
