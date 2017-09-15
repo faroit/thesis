@@ -1,6 +1,7 @@
 %*******************************************************
 % Table of Contents
 %*******************************************************
+\pagestyle{scrheadings}
 %\phantomsection
 \refstepcounter{dummy}
 \pdfbookmark[1]{\contentsname}{tableofcontents}
@@ -16,7 +17,7 @@
 % List of Figures and of the Tables
 %*******************************************************
 \clearpage
-
+% \pagestyle{empty} % Uncomment this line if your lists should not have any headlines with section name and page number
 \begingroup
     \let\clearpage\relax
     \let\cleardoublepage\relax
@@ -41,7 +42,7 @@
     \listoftables
 
     \vspace{8ex}
-%   \newpage
+    % \newpage
 
     %*******************************************************
     % List of Listings
@@ -67,4 +68,5 @@
         \acro{API}{Application Programming Interface}
         \acro{UML}{Unified Modeling Language}
     \end{acronym}
+
 \endgroup

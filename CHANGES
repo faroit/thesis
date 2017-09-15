@@ -1,4 +1,9 @@
-Changes in version 4.4 (June 2017)
+Changes in version 4.4 (October 2017)
+o Minor clean-up, also of .gitignore 
+ (thanks to Jörn Hees)
+o \marginpar improved (thanks to Jörn Hees)
+o Workaround for removong headlines in "list of *" 
+  environments (Contents.tex and ClassicThesis.tex)
 o Bibliography section headers now correctly using 
   spacedlowsmallcaps with biblatex (thanks to Ivo 
 	and Enrico Gregorio)
