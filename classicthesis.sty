@@ -314,9 +314,9 @@
 \let\oldmarginpar\marginpar
 \renewcommand{\marginpar}[2][]{% always add optional parameter, make it empty by default
    \if\relax\detokenize{#1}\relax% optional parameter empty, in all normal document calls
-      \oldmarginpar[\graffito@setup\raggedleft\hspace{0pt}#2]{\graffito@setup\raggedright\hspace{0pt}#2}%
+      \oldmarginpar[\graffito@setup\raggedleft\hspace{0pt}{#2}]{\graffito@setup\raggedright\hspace{0pt}#2}%
    \else%two parameters, let them use their styling
-      \oldmarginpar[#1]{#2}%
+      \oldmarginpar[{#1}]{#2}%
    \fi%
 }
 
