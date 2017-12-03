@@ -32,7 +32,7 @@
 %
 % ********************************************************************
 \NeedsTeXFormat{LaTeX2e}%[2015/01/01] % fixed via latexrelease package, see below
-\ProvidesPackage{classicthesis}[2017/10/13 v4.4 Typographic style for a classic-looking thesis]
+\ProvidesPackage{classicthesis}[2017/12/04 v4.5 Typographic style for a classic-looking thesis]
 \PassOptionsToPackage{latest}{latexrelease} % replacement for fixltx2e,
   \RequirePackage{latexrelease} % emulate newer kernel version if older is detected
 
@@ -70,6 +70,7 @@
 
 \DeclareBoolOption{a4paper}
 \DeclareBoolOption{a5paper}
+\DeclareBoolOption{b5paper}
 \DeclareBoolOption{letterpaper}
 \DeclareStringOption[a4]{paper} % paper size defaults to A4
 \ProcessKeyvalOptions{ct}
@@ -80,16 +81,20 @@
 %%% seems that KOMA-Script gives preference to old-style paper options, thus first
 \ifthenelse{\boolean{ct@letterpaper}}{\renewcommand*{\ct@paper}{letter}}{}
 \ifthenelse{\boolean{ct@a5paper}}{\renewcommand*{\ct@paper}{a5}}{}
+\ifthenelse{\boolean{ct@a5paper}}{\renewcommand*{\ct@paper}{b5}}{}
 \ifthenelse{\boolean{ct@a4paper}}{\renewcommand*{\ct@paper}{a4}}{}
 %%% then
 \ifthenelse{\equal{\ct@paper}{a4}}%
-        {\setboolean{ct@a4paper}{true} \setboolean{ct@a5paper}{false} \setboolean{ct@letterpaper}{false}}%
+        {\setboolean{ct@a4paper}{true} \setboolean{ct@a5paper}{false} \setboolean{ct@b5paper}{false}\setboolean{ct@letterpaper}{false}}%
         {}
 \ifthenelse{\equal{\ct@paper}{a5}}%
-        {\setboolean{ct@a4paper}{false} \setboolean{ct@a5paper}{true} \setboolean{ct@letterpaper}{false}}%
+        {\setboolean{ct@a4paper}{false} \setboolean{ct@a5paper}{true} \setboolean{ct@b5paper}{false}\setboolean{ct@letterpaper}{false}}%
+        {}
+\ifthenelse{\equal{\ct@paper}{b5}}%
+        {\setboolean{ct@a4paper}{false} \setboolean{ct@a5paper}{false} \setboolean{ct@b5paper}{true}\setboolean{ct@letterpaper}{false}}%
         {}
 \ifthenelse{\equal{\ct@paper}{letter}}%
-        {\setboolean{ct@a4paper}{false} \setboolean{ct@a5paper}{false} \setboolean{ct@letterpaper}{true}}%
+        {\setboolean{ct@a4paper}{false} \setboolean{ct@a5paper}{false} \setboolean{ct@b5paper}{false}\setboolean{ct@letterpaper}{true}}%
         {}
 
 
@@ -243,6 +248,23 @@
             \setlength{\marginparsep}{2em}%
         }%
     }{\relax}
+\ifthenelse{\boolean{ct@b5paper}}%
+        {% B5
+            % \ifthenelse{\boolean{ct@minionpro}}%
+            % {% Minion gets some extra sizes
+             % (NOT YET IMPLEMENTED, SUGGESTIONS WELCOME)
+                % \PackageInfo{classicthesis}{A5 paper, MinionPro}%
+                % \areaset[current]{311pt}{645pt}%
+                % \setlength{\marginparwidth}{5em}%
+                % \setlength{\marginparsep}{1.25em}%
+            % }{% Palatino or other
+                % Thanks to Jos\'e M. Alcaide
+                \PackageInfo{classicthesis}{B5 paper}%, Palatino or other}%
+                \areaset[current]{311pt}{645pt}%
+                \setlength{\marginparwidth}{6em}%
+                \setlength{\marginparsep}{1.5em}%
+            % }%
+        }{\relax}
 \ifthenelse{\boolean{ct@a5paper}}%
     {% A5
         \ifthenelse{\boolean{ct@minionpro}}%
@@ -370,7 +392,7 @@
 \PassOptionsToPackage{automark}{scrlayer-scrpage}
     %\RequirePackage{scrpage2} % provides headers and footers (KOMA Script)
     \RequirePackage{scrlayer-scrpage} % provides headers and footers (KOMA Script)
-    \clearpairofpagestyles
+     \clearmainofpairofpagestyles
     %\setheadsepline{0pt}
     \let\MakeMarkcase\spacedlowsmallcaps
     \ifthenelse{\boolean{ct@nochapters}}%
