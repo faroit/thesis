@@ -81,23 +81,11 @@
 %%% seems that KOMA-Script gives preference to old-style paper options, thus first
 \ifthenelse{\boolean{ct@letterpaper}}{\renewcommand*{\ct@paper}{letter}}{}
 \ifthenelse{\boolean{ct@a5paper}}{\renewcommand*{\ct@paper}{a5}}{}
-\ifthenelse{\boolean{ct@a5paper}}{\renewcommand*{\ct@paper}{b5}}{}
+\ifthenelse{\boolean{ct@b5paper}}{\renewcommand*{\ct@paper}{b5}}{}
 \ifthenelse{\boolean{ct@a4paper}}{\renewcommand*{\ct@paper}{a4}}{}
-%%% then
-\ifthenelse{\equal{\ct@paper}{a4}}%
-        {\setboolean{ct@a4paper}{true} \setboolean{ct@a5paper}{false} \setboolean{ct@b5paper}{false}\setboolean{ct@letterpaper}{false}}%
-        {}
-\ifthenelse{\equal{\ct@paper}{a5}}%
-        {\setboolean{ct@a4paper}{false} \setboolean{ct@a5paper}{true} \setboolean{ct@b5paper}{false}\setboolean{ct@letterpaper}{false}}%
-        {}
-\ifthenelse{\equal{\ct@paper}{b5}}%
-        {\setboolean{ct@a4paper}{false} \setboolean{ct@a5paper}{false} \setboolean{ct@b5paper}{true}\setboolean{ct@letterpaper}{false}}%
-        {}
-\ifthenelse{\equal{\ct@paper}{letter}}%
-        {\setboolean{ct@a4paper}{false} \setboolean{ct@a5paper}{false} \setboolean{ct@b5paper}{false}\setboolean{ct@letterpaper}{true}}%
-        {}
 
-
+\ifthenelse{\equal{\ct@paper}{letter}\OR\equal{\ct@paper}{a5}\OR\equal{\ct@paper}{b5}\OR\equal{\ct@paper}{a4}}{\relax}%
+    {\PackageWarningNoLine{classicthesis}{Text area setup only provided for paper sizes: letter, a5, b5, a4. You are using paper=\ct@paper}}
 
 
 % subfig-related stuff
@@ -110,10 +98,7 @@
     }{\relax}%
 
 % listings-related stuff
-\ifthenelse{\boolean{ct@listings}}%
-    {\@ifpackageloaded{listings}%
-        {\relax}{\RequirePackage{listings}}%
-    }{\relax}%
+\ifthenelse{\boolean{ct@listings}}{\RequirePackage{listings}}{\relax}
 
 
 % fine-tuning if we do not use chapters
@@ -137,12 +122,10 @@
 \RequirePackage{ifpdf}
 \RequirePackage{ifxetex}
 \RequirePackage{ifluatex}
-\ifthenelse{\boolean{pdf}\OR\boolean{luatex}\OR\boolean{xetex}}%
-           {
-           \RequirePackage{hyperref}
-           \pdfstringdefDisableCommands{\let\thepart=\relax} % no part numbers (i, ii, iii) in PDF outline   IVO
-           %\pdfstringdefDisableCommands{\renewcommand{\thepart}{\Roman{part}}} %%%IVO bring back Part numbers in PDF outline
-           }{}
+\RequirePackage{hyperref}
+    \pdfstringdefDisableCommands{\let\thepart=\relax} % no part numbers (i, ii, iii) in PDF outline   IVO
+   %\pdfstringdefDisableCommands{\renewcommand{\thepart}{\Roman{part}}} %%%IVO bring back Part numbers in PDF outline
+    \hypersetup{colorlinks=true,breaklinks=true,urlcolor=webbrown,linkcolor=RoyalBlue,citecolor=webgreen}
 
 
 % ********************************************************************
@@ -227,14 +210,11 @@
 % ********************************************************************
 % Textblock size
 %*******************************************************
-\@ifpackageloaded{typearea}%
-    {\relax}{%
-        \PassOptionsToPackage{headinclude,footinclude}{typearea}
-        \RequirePackage{typearea}%
-    }
+\PassOptionsToPackage{headinclude,footinclude}{typearea} % for classes other than KOMA
+\RequirePackage{typearea}
 
-\ifthenelse{\boolean{ct@letterpaper}}%
-    {% A4
+\ifthenelse{\equal{\ct@paper}{letter}}%
+    {% Letter 216mm x 279mm
         \ifthenelse{\boolean{ct@minionpro}}%
         {% Minion gets some extra sizes
             \PackageInfo{classicthesis}{letter paper, MinionPro}%
@@ -243,30 +223,29 @@
             \setlength{\marginparsep}{2em}%
         }{% Palatino or other
             \PackageInfo{classicthesis}{letter paper, Palatino or other}
-            \areaset[current]{356pt}{700pt} %  guessing from A4 values
+            \areaset[current]{356pt}{700pt}%  guessing from A4 values
             \setlength{\marginparwidth}{7em}%
             \setlength{\marginparsep}{2em}%
         }%
     }{\relax}
-\ifthenelse{\boolean{ct@b5paper}}%
-        {% B5
-            % \ifthenelse{\boolean{ct@minionpro}}%
-            % {% Minion gets some extra sizes
-             % (NOT YET IMPLEMENTED, SUGGESTIONS WELCOME)
-                % \PackageInfo{classicthesis}{A5 paper, MinionPro}%
-                % \areaset[current]{311pt}{645pt}%
-                % \setlength{\marginparwidth}{5em}%
-                % \setlength{\marginparsep}{1.25em}%
-            % }{% Palatino or other
-                % Thanks to Jos\'e M. Alcaide
-                \PackageInfo{classicthesis}{B5 paper}%, Palatino or other}%
-                \areaset[current]{311pt}{645pt}%
-                \setlength{\marginparwidth}{6em}%
-                \setlength{\marginparsep}{1.5em}%
-            % }%
-        }{\relax}
-\ifthenelse{\boolean{ct@a5paper}}%
-    {% A5
+\ifthenelse{\equal{\ct@paper}{b5}}%
+    {% B5 176mm x 250mm
+       \ifthenelse{\boolean{ct@minionpro}}%
+        {% Minion gets some extra sizes
+            \PackageInfo{classicthesis}{B5 paper, MinionPro}%
+            \areaset[current]{295pt}{590pt}%
+            \setlength{\marginparwidth}{5em}%
+            \setlength{\marginparsep}{1.25em}%
+        }{% Palatino or other
+            % Thanks to Jos\'e M. Alcaide
+            \PackageInfo{classicthesis}{B5 paper, Palatino or other}%
+            \areaset[current]{311pt}{645pt}%
+            \setlength{\marginparwidth}{6em}%
+            \setlength{\marginparsep}{1.5em}%
+        }%
+    }{\relax}
+\ifthenelse{\equal{\ct@paper}{a5}}%
+    {% A5 148mm x 210mm
         \ifthenelse{\boolean{ct@minionpro}}%
         {% Minion gets some extra sizes
             \PackageInfo{classicthesis}{A5 paper, MinionPro}%
@@ -280,8 +259,8 @@
             \setlength{\marginparsep}{1.25em}%
         }%
     }{\relax}
-\ifthenelse{\boolean{ct@a4paper}}%
-    {% A4
+\ifthenelse{\equal{\ct@paper}{a4}}%
+    {% A4 210mm x 297mm
         \ifthenelse{\boolean{ct@minionpro}}%
         {% Minion gets some extra sizes
             \PackageInfo{classicthesis}{A4 paper, MinionPro}%
@@ -374,15 +353,6 @@
           \DeclareRobustCommand{\spacedallcaps}[1]{{\addfontfeature{LetterSpace=18.0}\MakeTextUppercase{#1}}}% WordSpace=1.8
           \DeclareRobustCommand{\spacedlowsmallcaps}[1]{{\addfontfeatures{LetterSpace=14.0}\scshape\MakeTextLowercase{#1}}}% WordSpace=1.8
           }{\relax}
-
-        \ifthenelse{\boolean{pdf}\OR\boolean{xetex}\OR\boolean{luatex}}% ever used? only dvi engines remain
-          {\relax}{%
-            \RequirePackage{soulutf8} % for letterspacing
-                \sodef\allcapsspacing{\upshape}{0.15em}{0.65em}{0.6em}%
-                \sodef\lowsmallcapsspacing{\scshape}{0.075em}{0.5em}{0.6em}%
-                \DeclareRobustCommand{\spacedallcaps}[1]{\MakeTextUppercase{\allcapsspacing{#1}}}%
-                \DeclareRobustCommand{\spacedlowsmallcaps}[1]{\MakeTextLowercase{\lowsmallcapsspacing{#1}}}%\protect
-          }%
       }
 
 % ********************************************************************
@@ -392,7 +362,7 @@
 \PassOptionsToPackage{automark}{scrlayer-scrpage}
     %\RequirePackage{scrpage2} % provides headers and footers (KOMA Script)
     \RequirePackage{scrlayer-scrpage} % provides headers and footers (KOMA Script)
-     \clearmainofpairofpagestyles
+     \clearpairofpagestyles
     %\setheadsepline{0pt}
     \let\MakeMarkcase\spacedlowsmallcaps
     \ifthenelse{\boolean{ct@nochapters}}%
@@ -401,6 +371,7 @@
     \renewcommand{\sectionmark}[1]{\markright{\thesection\enspace\spacedlowsmallcaps{#1}}}
     \lehead{\mbox{\llap{\small\pagemark\kern2em}\headmark\hfil}}
     \rohead{\mbox{\hfil{\headmark}\rlap{\small\kern2em\pagemark}}}
+    \ofoot[\small\pagemark]{}% only for plain.scrheadings page style (first page of a chapter)
     \renewcommand{\headfont}{\small}
 %    \DeclareRobustCommand{\fixBothHeadlines}[2]{} % <--- ToDo
     % hack to get the content headlines right (thanks, Lorenzo!)
