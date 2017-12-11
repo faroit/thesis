@@ -32,7 +32,7 @@
 %
 % ********************************************************************
 \NeedsTeXFormat{LaTeX2e}%[2015/01/01] % fixed via latexrelease package, see below
-\ProvidesPackage{classicthesis}[2017/12/04 v4.5 Typographic style for a classic-looking thesis]
+\ProvidesPackage{classicthesis}[2017/12/12 v4.5 Typographic style for a classic-looking thesis]
 \PassOptionsToPackage{latest}{latexrelease} % replacement for fixltx2e,
   \RequirePackage{latexrelease} % emulate newer kernel version if older is detected
 
@@ -58,8 +58,8 @@
 \DeclareBoolOption{floatperchapter} % numbering per chapter for all floats (i.e., Figure 1.1)
 \DeclareBoolOption{manychapters} % additional space in ToC after chapter number (if two digits are needed)
 
-\DeclareBoolOption{listings} % load listings package and setup LoL
-\DeclareBoolOption{subfig} % setup for preloaded @subfig package
+\DeclareBoolOption{listings} % OBSOLETE - automatic check; load listings package and setup LoL
+\DeclareBoolOption{subfig} % OBSOLETE - automatic check; setup for preloaded @subfig package
 
 \DeclareBoolOption{eulermath} % use awesome Euler fonts for mathematical formulae; only with pdflatex
 \DeclareBoolOption[true]{beramono} % toggle a nice monospaced font (w/ bold) + pre-installed
@@ -99,7 +99,14 @@
     }{\relax}%
 
 % listings-related stuff
-\ifthenelse{\boolean{ct@listings}}{\RequirePackage{listings}}{\relax}
+\@ifpackageloaded{listings}%
+    {\setboolean{ct@listings}{true}%
+    }{\relax}
+
+\ifthenelse{\boolean{ct@listings}}%
+    {\RequirePackage{listings}%
+    }{\relax}
+
 
 
 % fine-tuning if we do not use chapters
