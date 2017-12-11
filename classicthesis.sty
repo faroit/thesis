@@ -62,8 +62,9 @@
 \DeclareBoolOption{subfig} % setup for preloaded @subfig package
 
 \DeclareBoolOption{eulermath} % use awesome Euler fonts for mathematical formulae; only with pdflatex
-\DeclareBoolOption{beramono} % toggle a nice monospaced font (w/ bold) + pre-installed
-\DeclareBoolOption{minionpro} % setup for minion pro font; use minion pro small caps as well; only with pdflatex
+\DeclareBoolOption[true]{beramono} % toggle a nice monospaced font (w/ bold) + pre-installed
+\DeclareBoolOption{minionpro} % OBSOLETE - removed; setup for minion pro font; use minion pro small caps as well
+\DeclareBoolOption[true]{palatino} % default is Palatino/Paladio/TeX Gyre Pagella font, use this switch to skip selection
 
 \DeclareBoolOption{minionprospacing} % OBSOLETE; use minion pro's textssc for letter spacing
 \DeclareBoolOption{pdfspacing} % OBSOLETE; use pdftex for letterspacing (via microtype)
@@ -146,35 +147,28 @@
 \ifthenelse{\boolean{xetex}\OR\boolean{luatex}}
    { % use fontspec and OpenType fonts with utf8 engines
      \RequirePackage{fontspec}
-     \setmainfont[Ligatures=TeX,Numbers=OldStyle]{TeX Gyre Pagella} % Palatino clone
-     \linespread{1.05} % a bit more for Palatino
+     \ifthenelse{\boolean{ct@palatino}}% default
+       {
+         \setmainfont[Ligatures=TeX,Numbers=OldStyle]{TeX Gyre Pagella} % Palatino clone
+         \linespread{1.05} % a bit more for Palatino
+         \RequirePackage{unicode-math}
+         \setmathfont{TeX Gyre Pagella Math}
+       }{\relax} % use class' default font
      \ifthenelse{\boolean{ct@beramono}}%
        {\setmonofont[Scale=0.85]{DejaVu Sans Mono}} % like Bera; Scale=MatchLowercase
        {\setmonofont[Scale=1]{Latin Modern Mono}}
-     \RequirePackage{unicode-math}
-     \setmathfont{TeX Gyre Pagella Math}
      % font for the chapter numbers will be defined in the old way below
      % because there is no OpenType Euler font; this is how it should be done:
      %\newfontface\chapterNumber[Scale=7,Color=000000]{TeX Gyre Pagella Bold}
    }
    { % use Type 1 fonts with pdflatex
-     \ifthenelse{\boolean{ct@minionpro}}% specialists: MinionPro
-       {%
-         % in order have Euler math fonts work with Minion, special option is needed
-         \ifthenelse{\boolean{ct@eulermath}}%
-           {%
-             \PassOptionsToPackage{opticals,mathlf,onlytext}{MinionPro}%
-             \RequirePackage{MinionPro} %  opticals, fullfamily, osf
-           }{%
-             \PassOptionsToPackage{opticals,mathlf}{MinionPro}%
-             \RequirePackage{MinionPro} %  opticals, fullfamily, osf
-           }
-       }{
+     \ifthenelse{\boolean{ct@palatino}}% default
+       {
        % default: Palatino
          \PassOptionsToPackage{osf,sc}{mathpazo}%
          \RequirePackage{mathpazo} % Palatino with real small caps and old style figures
          \linespread{1.05} % a bit more for Palatino
-       }
+       }{\relax}
 
        \ifthenelse{\boolean{ct@beramono}}%
          {\PassOptionsToPackage{scaled=0.85}{beramono}%
@@ -215,65 +209,33 @@
 
 \ifthenelse{\equal{\ct@paper}{letter}}%
     {% Letter 216mm x 279mm
-        \ifthenelse{\boolean{ct@minionpro}}%
-        {% Minion gets some extra sizes
-            \PackageInfo{classicthesis}{letter paper, MinionPro}%
-            \areaset[current]{332pt}{634pt}% guessing from A4 values
-            \setlength{\marginparwidth}{7.5em}%
-            \setlength{\marginparsep}{2em}%
-        }{% Palatino or other
             \PackageInfo{classicthesis}{letter paper, Palatino or other}
             \areaset[current]{356pt}{700pt}%  guessing from A4 values
             \setlength{\marginparwidth}{7em}%
             \setlength{\marginparsep}{2em}%
-        }%
     }{\relax}
 \ifthenelse{\equal{\ct@paper}{b5}}%
     {% B5 176mm x 250mm
-       \ifthenelse{\boolean{ct@minionpro}}%
-        {% Minion gets some extra sizes
-            \PackageInfo{classicthesis}{B5 paper, MinionPro}%
-            \areaset[current]{295pt}{590pt}%
-            \setlength{\marginparwidth}{5em}%
-            \setlength{\marginparsep}{1.25em}%
-        }{% Palatino or other
             % Thanks to Jos\'e M. Alcaide
             \PackageInfo{classicthesis}{B5 paper, Palatino or other}%
             \areaset[current]{311pt}{645pt}%
             \setlength{\marginparwidth}{6em}%
             \setlength{\marginparsep}{1.5em}%
-        }%
     }{\relax}
 \ifthenelse{\equal{\ct@paper}{a5}}%
     {% A5 148mm x 210mm
-        \ifthenelse{\boolean{ct@minionpro}}%
-        {% Minion gets some extra sizes
-            \PackageInfo{classicthesis}{A5 paper, MinionPro}%
-            \areaset[current]{278pt}{556pt}%
-            \setlength{\marginparwidth}{5em}%
-            \setlength{\marginparsep}{1.25em}%
-        }{% Palatino or other
             \PackageInfo{classicthesis}{A5 paper, Palatino or other}%
             \areaset[current]{288pt}{555pt}%
             \setlength{\marginparwidth}{4em}%
             \setlength{\marginparsep}{1.25em}%
-        }%
     }{\relax}
 \ifthenelse{\equal{\ct@paper}{a4}}%
     {% A4 210mm x 297mm
-        \ifthenelse{\boolean{ct@minionpro}}%
-        {% Minion gets some extra sizes
-            \PackageInfo{classicthesis}{A4 paper, MinionPro}%
-            \areaset[current]{312pt}{684pt}% 609 + 33 + 42 head \the\footskip
-            \setlength{\marginparwidth}{7.5em}%
-            \setlength{\marginparsep}{2em}%
-        }{% Palatino or other
             \PackageInfo{classicthesis}{A4 paper, Palatino or other}
             \areaset[current]{336pt}{750pt} % ~ 336 * factor 2 + 33 head + 42 \the\footskip
             % \areaset{336pt}{761pt} % 686 (factor 2.2) + 33 head + 42 head \the\footskip 10pt
             \setlength{\marginparwidth}{7em}%
             \setlength{\marginparsep}{2em}%
-        }%
     }{\relax}
 
 % Here are some suggestions for the text widths and heights:
@@ -334,26 +296,21 @@
 \RequirePackage{booktabs} % for better rules in tables
 \RequirePackage{textcase} % for \MakeTextUppercase
 
+%%% define spacedallcaps and spacedlowsmallcaps
 %%% engine-dependent letterspacing: microtype for pdflatex, fontspec for xelatex and luatex
-\ifthenelse{\boolean{ct@minionpro}}{% MinionPro small caps
-        \PackageInfo{classicthesis}{Using MinionPro's textssc for character spacing.}
-        \DeclareRobustCommand{\spacedallcaps}[1]{\textssc{\MakeTextUppercase{#1}}}
-        \DeclareRobustCommand{\spacedlowsmallcaps}[1]{\textssc{\MakeTextLowercase{#1}}}
-      }{
-        % engine-based spacedallcaps and spacedlowsmallcaps
-        \ifthenelse{\boolean{pdf}\OR\boolean{luatex}}{ % pdf will soon test true for both pdflatex and luatex; \AND\NOT\boolean{luatex}
-            \PackageInfo{classicthesis}{Using pdftex/microtype for character spacing.%
-                                        Make sure your pdftex is version 1.40 or higher.}%
-            \microtypesetup{expansion=false}
-            \DeclareRobustCommand{\spacedallcaps}[1]{\textls[160]{\MakeTextUppercase{#1}}}
-            \DeclareRobustCommand{\spacedlowsmallcaps}[1]{\textls[80]{\scshape\MakeTextLowercase{#1}}}
-          }{\relax}
+    \ifthenelse{\boolean{pdf}\OR\boolean{luatex}}{ % pdf will soon test true for both pdflatex and luatex; \AND\NOT\boolean{luatex}
+      \PackageInfo{classicthesis}{Using microtype for character spacing.%
+                                  Make sure your pdflatex is version 1.40 or higher.}%
+      \microtypesetup{expansion=false}
+      \DeclareRobustCommand{\spacedallcaps}[1]{\textls[160]{\MakeTextUppercase{#1}}}
+      \DeclareRobustCommand{\spacedlowsmallcaps}[1]{\textls[80]{\scshape\MakeTextLowercase{#1}}}
+      }{\relax}
 
-        \ifthenelse{\boolean{xetex}}{ % use fontspec features; \OR\boolean{luatex} does not work well
-          \DeclareRobustCommand{\spacedallcaps}[1]{{\addfontfeature{LetterSpace=18.0}\MakeTextUppercase{#1}}}% WordSpace=1.8
-          \DeclareRobustCommand{\spacedlowsmallcaps}[1]{{\addfontfeatures{LetterSpace=14.0}\scshape\MakeTextLowercase{#1}}}% WordSpace=1.8
-          }{\relax}
-      }
+    \ifthenelse{\boolean{xetex}}{ % use fontspec features; \OR\boolean{luatex} does not work well
+      \PackageInfo{classicthesis}{Using fontspec for character spacing.}%
+      \DeclareRobustCommand{\spacedallcaps}[1]{{\addfontfeature{LetterSpace=18.0}\MakeTextUppercase{#1}}}% WordSpace=1.8
+      \DeclareRobustCommand{\spacedlowsmallcaps}[1]{{\addfontfeatures{LetterSpace=14.0}\scshape\MakeTextLowercase{#1}}}% WordSpace=1.8
+      }{\relax}
 
 % ********************************************************************
 % headlines
