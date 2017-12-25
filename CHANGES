@@ -11,6 +11,12 @@ o Moved language selection from
   (\PassOptionsToPackage for babel) #146
 o Added some protection to the optional
   parameter of marginpar (Ivo) #143
+o Removed support for MinionPro (Ivo)
+  (can be manually included, see wiki)
+o Options "subfig" and "listings" now obsolete,
+  as correct treating done automatically (Ivo)
+o Many corrections and some clean-up of
+  the code (Ivo)
 
 Changes in version 4.4 (October 2017)
 o Minor clean-up, also of .gitignore

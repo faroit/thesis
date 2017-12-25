@@ -34,6 +34,7 @@
   floatperchapter=true,     % numbering per chapter for all floats (i.e., Figure 1.1)
   eulermath=false,  % use awesome Euler fonts for mathematical formulae (only with pdfLaTeX)
   beramono=true,    % toggle a nice monospaced font (w/ bold)
+  % palatino=false,   % deactivate standard font for loading another one, see the last section at the end of this file for suggestions
 }{classicthesis}
 
 
@@ -269,7 +270,7 @@
 % Using different fonts
 % ********************************************************************
 %\usepackage[oldstylenums]{kpfonts} % oldstyle notextcomp
-%\usepackage[osf]{libertine}
+% \usepackage[osf]{libertine}
 %\usepackage[light,condensed,math]{iwona}
 %\renewcommand{\sfdefault}{iwona}
 %\usepackage{lmodern} % <-- no osf support :-(
@@ -277,11 +278,12 @@
 %\usepackage[urw-garamond]{mathdesign} <-- no osf support :-(
 %\usepackage[default,osfigures]{opensans} % scale=0.95
 %\usepackage[sfdefault]{FiraSans}
+% \usepackage[opticals,mathlf]{MinionPro} % onlytext
 % ********************************************************************
-% \usepackage[largesc,osf]{newpxtext}
+%\usepackage[largesc,osf]{newpxtext}
+%\linespread{1.05} % a bit more for Palatino
 % Used to fix these:
 % https://bitbucket.org/amiede/classicthesis/issues/139/italics-in-pallatino-capitals-chapter
 % https://bitbucket.org/amiede/classicthesis/issues/45/problema-testatine-su-classicthesis-style
 % ********************************************************************
-%\linespread{1.05} % a bit more for Palatino
 % ****************************************************************************************************

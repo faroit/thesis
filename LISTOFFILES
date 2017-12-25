@@ -19,16 +19,16 @@ inputenc.sty    2015/03/17 v1.2c Input encoding file
    t1enc.dfu    2017/01/28 v1.1t UTF-8 support for inputenc
   ot1enc.dfu    2017/01/28 v1.1t UTF-8 support for inputenc
   omsenc.dfu    2017/01/28 v1.1t UTF-8 support for inputenc
-   babel.sty    2017/10/04 3.14 The Babel package
+   babel.sty    2017/11/03 3.15 The Babel package
  bblopts.cfg    2005/09/08 v0.1 add Arabic and Farsi to "declared" options of b
 abel
  ngerman.ldf    2016/11/02 v2.9 German support for babel (new orthography)
 american.ldf    2017/06/06 v3.3r English support from the babel system
 csquotes.sty    2017/03/11 v5.2b context-sensitive quotations (JAW)
-etoolbox.sty    2017/01/02 v2.4 e-TeX tools for LaTeX (JAW)
+etoolbox.sty    2017/11/22 v2.5 e-TeX tools for LaTeX (JAW)
 csquotes.def    2017/03/11 v5.2b csquotes generic definitions (JAW)
 csquotes.cfg    
-biblatex.sty    2016/12/05 v3.7 programmable bibliographies (PK/JW/AB)
+biblatex.sty    2017/11/21 v3.9 programmable bibliographies (PK/JW/AB)
 pdftexcmds.sty    2017/03/19 v0.25 Utility functions of pdfTeX for LuaTeX (HO)
 infwarerr.sty    2016/05/16 v1.4 Providing info/warning/error messages (HO)
 ifluatex.sty    2016/05/16 v1.4 Provides the ifluatex switch (HO)
@@ -45,14 +45,14 @@ etexcmds.sty    2016/05/16 v1.6 Avoid name clashes with e-TeX commands (HO)
   blx-dm.def
 numeric-comp.dbx
 biblatex-dm.cfg
-blx-compat.def    2016/12/05 v3.7 biblatex compatibility (PK/JW/AB)
-blx-bibtex.def    2016/12/05 v3.7 biblatex compatibility (PK/JW/AB)
-biblatex.def    2016/12/05 v3.7 biblatex compatibility (PK/JW/AB)
-blx-natbib.def    2016/12/05 v3.7 biblatex compatibility (PK/JW/AB)
-standard.bbx    2016/12/05 v3.7 biblatex bibliography style (PK/JW/AB)
- numeric.bbx    2016/12/05 v3.7 biblatex bibliography style (PK/JW/AB)
-numeric-comp.bbx    2016/12/05 v3.7 biblatex bibliography style (PK/JW/AB)
-numeric-comp.cbx    2016/12/05 v3.7 biblatex citation style (PK/JW/AB)
+blx-compat.def    2017/11/21 v3.9 biblatex compatibility (PK/JW/AB)
+blx-bibtex.def    2017/11/21 v3.9 biblatex compatibility (PK/JW/AB)
+biblatex.def    2017/11/21 v3.9 biblatex compatibility (PK/JW/AB)
+blx-natbib.def    2017/11/21 v3.9 biblatex compatibility (PK/JW/AB)
+standard.bbx    2017/11/21 v3.9 biblatex bibliography style (PK/JW/AB)
+ numeric.bbx    2017/11/21 v3.9 biblatex bibliography style (PK/JW/AB)
+numeric-comp.bbx    2017/11/21 v3.9 biblatex bibliography style (PK/JW/AB)
+numeric-comp.cbx    2017/11/21 v3.9 biblatex citation style (PK/JW/AB)
 biblatex.cfg    
  amsmath.sty    2017/09/02 v2.17a AMS math features
  amstext.sty    2000/06/29 v2.01 AMS text
@@ -66,10 +66,10 @@ textcomp.sty    2017/04/05 v2.0i Standard LaTeX package
   ts1enc.dfu    2017/01/28 v1.1t UTF-8 support for inputenc
  scrhack.sty    2017/09/07 v3.24 KOMA-Script package 
   xpatch.sty    2012/10/02 v0.3 Extending etoolbox patching commands
-   expl3.sty    2017/09/18 L3 programming layer (loader) 
-expl3-code.tex    2017/09/18 L3 programming layer 
+   expl3.sty    2017/12/16 L3 programming layer (loader) 
+expl3-code.tex    2017/12/16 L3 programming layer 
 l3pdfmode.def    2017/03/18 v L3 Experimental driver: PDF mode
-  xparse.sty    2017/09/18 L3 Experimental document command parser
+  xparse.sty    2017/12/16 L3 Experimental document command parser
   xspace.sty    2014/10/28 v1.13 Space after command names (DPC,MH)
 mparhack.sty    2005/04/17 v1.4 (T. Sgouros and S. Ulrich)
  acronym.sty    2015/03/21 v1.41 Support for acronyms (Tobias Oetiker)
@@ -123,8 +123,8 @@ graphicx.sty    2017/06/01 v1.1a Enhanced LaTeX Graphics (DPC,SPQR)
 graphics.sty    2017/06/25 v1.2c Standard LaTeX Graphics (DPC,SPQR)
     trig.sty    2016/01/03 v1.10 sin cos tan (DPC)
 graphics.cfg    2016/06/04 v1.11 sample graphics configuration
-  pdftex.def    2017/06/24 v1.0g Graphics/color driver for pdftex
-classicthesis.sty    2017/10/13 v4.4 Typographic style for a classic-looking th
+  pdftex.def    2017/12/07 v1.0i Graphics/color driver for pdftex
+classicthesis.sty    2017/12/12 v4.5 Typographic style for a classic-looking th
 esis
 latexrelease.sty    2016/12/29 v1.0h LaTeX release emulation and tests
   xcolor.sty    2016/05/11 v2.12 LaTeX color extensions (UK)
@@ -147,10 +147,10 @@ titlesec.sty    2016/03/21 v2.10.2 Sectioning titles
  scrtime.sty    2017/09/07 v3.24 KOMA-Script package (time of LaTeX run)
 prelim2e.sty    2009/05/29 v1.3 prelim2e Package (MS)
 everyshi.sty    2001/05/15 v3.00 EveryShipout Package (MS)
- english.lbx    2016/12/05 v3.7 biblatex localization (PK/JW/AB)
-american.lbx    2016/12/05 v3.7 biblatex localization (PK/JW/AB)
-  german.lbx    2016/12/05 v3.7 biblatex localization (PK/JW/AB)
- ngerman.lbx    2016/12/05 v3.7 biblatex localization (PK/JW/AB)
+ english.lbx    2017/11/21 v3.9 biblatex localization (PK/JW/AB)
+american.lbx    2017/11/21 v3.9 biblatex localization (PK/JW/AB)
+  german.lbx    2017/11/21 v3.9 biblatex localization (PK/JW/AB)
+ ngerman.lbx    2017/11/21 v3.9 biblatex localization (PK/JW/AB)
   ts1cmr.fd    2014/09/29 v2.5h Standard LaTeX font definitions
   t1pplj.fd    2004/09/06 font definitions for T1/pplj.
 ClassicThesis.bbl

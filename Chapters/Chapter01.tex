@@ -178,6 +178,8 @@ allow for a bit of freedom concerning the layout:
 
     \item Typography:
         \begin{itemize}
+            \item\texttt{palatino}: Hermann Zapf's classic font is the free standard font for this style. Robert Bringhurst's book uses Adobe's commercial font Minion Pro. However, there are other free alternatives also available. Deactivate this option for loading such alternatives and see \texttt{classicthesis-config.tex} for some suggestions.
+
             \item\texttt{eulerchapternumbers}: use figures from Hermann Zapf's
             Euler math font for the chapter numbers. By default, old style
             figures from the Palatino font are used.
@@ -209,8 +211,7 @@ allow for a bit of freedom concerning the layout:
 
     \item Floats:
         \begin{itemize}
-            \item\texttt{listings}: loads the \texttt{listings} package (if not
-            already done) and configures the List of Listings accordingly.
+            % \item\texttt{listings}: loads the \texttt{listings} package (if not already done) and configures the List of Listings accordingly.
 
             \item\texttt{floatperchapter}: activates numbering per chapter for
             all floats such as figures, tables, and listings (if used).
@@ -218,7 +219,7 @@ allow for a bit of freedom concerning the layout:
 
 \end{itemize}
 
-Furthermore, pre-defined margins for different paper sizes are available, \eg, \texttt{a4paper}, \texttt{a5paper}, and \texttt{letterpaper}. These are based on your chosen option of \verb|\documentclass|.
+Furthermore, pre-defined margins for different paper sizes are available, \eg, \texttt{a4paper}, \texttt{a5paper}, \texttt{b5paper}, and \texttt{letterpaper}. These are based on your chosen option of \verb|\documentclass|.
 
 The best way to figure these options out is to try the different
 possibilities and see what you and your supervisor like best.
@@ -257,20 +258,18 @@ by choosing the options to \texttt{classicthesis.sty}
 (see~\autoref{sec:options}) in a line that looks like this:
 
 \begin{lstlisting}
-  \PassOptionsToPackage{
-    drafting=true,    % print version information on the bottom of the pages
-    tocaligned=false, % the left column of the toc will be aligned (no indentation)
-    dottedtoc=false,  % page numbers in ToC flushed right
-    parts=true,       % use part division
-    eulerchapternumbers=true, % use AMS Euler for chapter font (otherwise Palatino)
-    linedheaders=false,       % chaper headers will have line above and beneath
-    floatperchapter=true,     % numbering per chapter for all floats (i.e., Figure 1.1)
-    listings=true,    % load listings package and setup LoL
-    subfig=true,      % setup for preloaded subfig package
-    eulermath=false,  % use awesome Euler fonts for mathematical formulae (only with pdfLaTeX)
-    beramono=true,    % toggle a nice monospaced font (w/ bold)
-    minionpro=false   % setup for minion pro font; use minion pro small caps as well (only with pdfLaTeX)
-  }{classicthesis}
+\PassOptionsToPackage{
+  drafting=true,    % print version information on the bottom of the pages
+  tocaligned=false, % the left column of the toc will be aligned (no indentation)
+  dottedtoc=false,  % page numbers in ToC flushed right
+  parts=true,       % use part division
+  eulerchapternumbers=true, % use AMS Euler for chapter font (otherwise Palatino)
+  linedheaders=false,       % chaper headers will have line above and beneath
+  floatperchapter=true,     % numbering per chapter for all floats (i.e., Figure 1.1)
+  eulermath=false,  % use awesome Euler fonts for mathematical formulae (only with pdfLaTeX)
+  beramono=true,    % toggle a nice monospaced font (w/ bold)
+  % palatino=false, % deactivate standard font for loading another one, see the last section at the end of this file for suggestions
+}{classicthesis}
 \end{lstlisting}
 
 Many other customizations in \texttt{classicthesis-config.tex} are

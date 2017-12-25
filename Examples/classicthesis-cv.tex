@@ -5,12 +5,13 @@
 \documentclass[fontsize=10pt,paper=a4]{scrartcl}
 \usepackage[LabelsAligned]{currvita} % nice cv style
 \usepackage{url}
+	\urlstyle{rm}
 \usepackage[ngerman]{babel}
 \usepackage[nochapters]{../classicthesis}
 
 \renewcommand*{\cvheadingfont}{\LARGE\color{Maroon}}
 \renewcommand*{\cvlistheadingfont}{\large}
-\renewcommand*{\cvlabelfont}{\qquad}
+\renewcommand*{\cvlabelfont}{\itshape} % \qquad
 
 \areaset[current]{390pt}{730pt} % need some extra space
 %\usepackage[pass,showframe]{geometry}
@@ -23,8 +24,7 @@
             \item   Andr\'e Miede
             \item   Geboren am \dots\ \texttt{(-;} \\
                     Europ\"aer, Deutsche Staatsb\"urgerschaft
-            \item   \url{http://www.miede.de} \\
-                    \url{https://www.xing.com/profile/Andre_Miede}
+            \item   \url{http://www.miede.de} 
         \end{cvlist}
 
        % \clearpage
