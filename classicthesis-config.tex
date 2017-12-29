@@ -32,11 +32,9 @@
   eulerchapternumbers=true, % use AMS Euler for chapter font (otherwise Palatino)
   linedheaders=false,       % chaper headers will have line above and beneath
   floatperchapter=true,     % numbering per chapter for all floats (i.e., Figure 1.1)
-  listings=true,    % load listings package and setup LoL
-  subfig=true,      % setup for preloaded subfig package
   eulermath=false,  % use awesome Euler fonts for mathematical formulae (only with pdfLaTeX)
   beramono=true,    % toggle a nice monospaced font (w/ bold)
-  minionpro=false   % setup for minion pro font; use minion pro small caps as well (only with pdfLaTeX)
+  % palatino=false,   % deactivate standard font for loading another one, see the last section at the end of this file for suggestions
 }{classicthesis}
 
 
@@ -54,8 +52,8 @@
 \newcommand{\myDepartment}{Put data here\xspace}
 \newcommand{\myUni}{Put data here\xspace}
 \newcommand{\myLocation}{Saarbrücken\xspace}
-\newcommand{\myTime}{October 2017\xspace}
-\newcommand{\myVersion}{version 4.4}
+\newcommand{\myTime}{December 2017\xspace}
+\newcommand{\myVersion}{version 4.5}
 
 % ********************************************************************
 % Setup, finetuning, and useful commands
@@ -76,7 +74,7 @@
 % ********************************************************************
 % Packages with options that might require adjustments
 % ********************************************************************
-%\PassOptionsToPackage{ngerman,american}{babel}   % change this to your language(s), main language last
+\PassOptionsToPackage{ngerman,american}{babel} % change this to your language(s), main language last
 % Spanish languages need extra options in order to work with this template
 %\PassOptionsToPackage{spanish,es-lcroman}{babel}
     \usepackage{babel}
@@ -130,7 +128,7 @@
 % ****************************************************************************************************
 \usepackage{tabularx} % better tables
   \setlength{\extrarowheight}{3pt} % increase table row height
-\newcommand{\tableheadline}[1]{\multicolumn{1}{c}{\spacedlowsmallcaps{#1}}}
+\newcommand{\tableheadline}[1]{\multicolumn{1}{l}{\spacedlowsmallcaps{#1}}}
 \newcommand{\myfloatalign}{\centering} % to be used with each float for alignment
 \usepackage{caption}
 % Thanks to cgnieder and Claus Lahiri
@@ -177,11 +175,6 @@
 % ********************************************************************
 \PassOptionsToPackage{hyperfootnotes=false,pdfpagelabels}{hyperref}
   \usepackage{hyperref}  % backref linktocpage pagebackref
-%\ifpdf
-%\pdfcompresslevel=9
-%\pdfadjustspacing=1
-%\fi
-%\PassOptionsToPackage{pdftex}{graphicx} %%%IVO: driver will be chosen automatically
   \usepackage{graphicx}
 
 
@@ -277,7 +270,7 @@
 % Using different fonts
 % ********************************************************************
 %\usepackage[oldstylenums]{kpfonts} % oldstyle notextcomp
-%\usepackage[osf]{libertine}
+% \usepackage[osf]{libertine}
 %\usepackage[light,condensed,math]{iwona}
 %\renewcommand{\sfdefault}{iwona}
 %\usepackage{lmodern} % <-- no osf support :-(
@@ -285,11 +278,12 @@
 %\usepackage[urw-garamond]{mathdesign} <-- no osf support :-(
 %\usepackage[default,osfigures]{opensans} % scale=0.95
 %\usepackage[sfdefault]{FiraSans}
+% \usepackage[opticals,mathlf]{MinionPro} % onlytext
 % ********************************************************************
-% \usepackage[largesc,osf]{newpxtext}
+%\usepackage[largesc,osf]{newpxtext}
+%\linespread{1.05} % a bit more for Palatino
 % Used to fix these:
 % https://bitbucket.org/amiede/classicthesis/issues/139/italics-in-pallatino-capitals-chapter
 % https://bitbucket.org/amiede/classicthesis/issues/45/problema-testatine-su-classicthesis-style
 % ********************************************************************
-%\linespread{1.05} % a bit more for Palatino
 % ****************************************************************************************************

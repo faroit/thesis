@@ -2,14 +2,13 @@
 \RequirePackage{silence} % :-\
     \WarningFilter{scrbook}{Usage of package `titlesec'}
     \WarningFilter{titlesec}{Non standard sectioning command detected}
-\documentclass[11pt,paper=a5,footinclude=true,headinclude=true]{scrbook} % KOMA-Script book
+\documentclass[11pt,paper=b5,footinclude,headinclude]{scrbook} % KOMA-Script book
 \usepackage[T1]{fontenc}
 \usepackage{lipsum}
 \usepackage[  linedheaders=true,%
               parts=true]{../classicthesis} % ,manychapters
 %\usepackage[osf]{libertine}
 
-\usepackage{hyperref}
 
 \begin{document}
 %   \pagestyle{scrheadings}
@@ -24,7 +23,7 @@
 
     % use \cleardoublepage here to avoid problems with pdfbookmark
     \cleardoublepage\part{Test Part}\label{part:testpart}
-    \chapter{Some Math Testing}
+    \chapter{Some Testing}
     We discuss in Part~\ref{part:testpart} the test results.
 		
     We discuss in Part~\textsc{\ref{part:testpart}} the test results.

@@ -1,14 +1,38 @@
+Changes in version 4.5 (December 2017)
+o Fixed vanished page numbers on chapter
+  opening pages (thanks to Ivo and Jos\'e M.
+  Alcaide) #144
+o Added support for B5 paper (thanks to
+  Jos\'e M. Alcaide) #145
+o Removed option "abstractoff" from
+  documentclass
+o Moved language selection from
+  documentclass to classicthesis-config.tex
+  (\PassOptionsToPackage for babel) #146
+o Added some protection to the optional
+  parameter of marginpar (Ivo) #143
+o Removed support for MinionPro (Ivo)
+  (can be manually included, see wiki)
+o Options "subfig" and "listings" now obsolete,
+  as correct treating done automatically (Ivo)
+o Many corrections and some clean-up of
+  the code (Ivo)
+o Changed \tableheadline to be left-aligned (in
+  classicthesis-config.tex)
+o Checked compatibility with arsclassica
+  package (successful)
+
 Changes in version 4.4 (October 2017)
-o Minor clean-up, also of .gitignore 
+o Minor clean-up, also of .gitignore
  (thanks to Jörn Hees)
 o \marginpar improved (thanks to Jörn Hees)
-o Workaround for removong headlines in "list of *" 
+o Workaround for removong headlines in "list of *"
   environments (Contents.tex and ClassicThesis.tex)
-o Bibliography section headers now correctly using 
-  spacedlowsmallcaps with biblatex (thanks to Ivo 
+o Bibliography section headers now correctly using
+  spacedlowsmallcaps with biblatex (thanks to Ivo
 	and Enrico Gregorio)
 o Added some more books to bibliography for testing
-o Added help for external TikZ/PGF usage in 
+o Added help for external TikZ/PGF usage in
   classicthesis-config.tex (thanks to Andreas Nautsch)
 o Fixed redefining \marginpar for two arguments (Ivo)
 o Fixed some spacing definitions and using the
