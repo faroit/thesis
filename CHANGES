@@ -17,6 +17,10 @@ o Options "subfig" and "listings" now obsolete,
   as correct treating done automatically (Ivo)
 o Many corrections and some clean-up of
   the code (Ivo)
+o Changed \tableheadline to be left-aligned (in
+  classicthesis-config.tex)
+o Checked compatibility with arsclassica
+  package (successful)
 
 Changes in version 4.4 (October 2017)
 o Minor clean-up, also of .gitignore
