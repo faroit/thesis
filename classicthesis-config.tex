@@ -35,6 +35,7 @@
   eulermath=false,  % use awesome Euler fonts for mathematical formulae (only with pdfLaTeX)
   beramono=true,    % toggle a nice monospaced font (w/ bold)
   % palatino=false,   % deactivate standard font for loading another one, see the last section at the end of this file for suggestions
+  % arsclassica=true % ...
 }{classicthesis}
 
 
@@ -52,8 +53,8 @@
 \newcommand{\myDepartment}{Put data here\xspace}
 \newcommand{\myUni}{Put data here\xspace}
 \newcommand{\myLocation}{Saarbrücken\xspace}
-\newcommand{\myTime}{December 2017\xspace}
-\newcommand{\myVersion}{version 4.5}
+\newcommand{\myTime}{January 2018\xspace}
+\newcommand{\myVersion}{version 4.6}
 
 % ********************************************************************
 % Setup, finetuning, and useful commands
@@ -136,7 +137,8 @@
 % [REMOVED DUE TO OTHER PROBLEMS, SEE ISSUE #82]
 %\DeclareCaptionLabelFormat{smallcaps}{\bothIfFirst{#1}{~}\MakeTextLowercase{\textsc{#2}}}
 %\captionsetup{font=small,labelformat=smallcaps} % format=hang,
-\captionsetup{font=small} % format=hang,
+\captionsetup{font=small} % ,format=hang
+% for arsclassica: ,labelfont={sf,bf},format=hang
 \usepackage{subfig}
 % ****************************************************************************************************
 
