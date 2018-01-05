@@ -77,8 +77,6 @@
 \ProcessKeyvalOptions{ct}
 
 
-
-
 %%% seems that KOMA-Script gives preference to old-style paper options, thus first
 \ifthenelse{\boolean{ct@letterpaper}}{\renewcommand*{\ct@paper}{letter}}{}
 \ifthenelse{\boolean{ct@a5paper}}{\renewcommand*{\ct@paper}{a5}}{}
@@ -108,9 +106,7 @@
     }{\relax}
 
 
-
 % fine-tuning if we do not use chapters
-
 \ifthenelse{\isundefined{\chapter}\OR\boolean{ct@nochapters}}
     {
         \PackageWarningNoLine{classicthesis}{Chapter sectioning command not present in this document class. %
@@ -303,19 +299,23 @@
 \RequirePackage{booktabs} % for better rules in tables
 \RequirePackage{textcase} % for \MakeTextUppercase
 
+% Provide a hook for font customization, e.g., for arsclassica
+\newcommand{\ct@scfont}{\scshape}
+% \newcommand{\ct@scfont}{\color{red}\sffamily\scshape}
+
 %%% define spacedallcaps and spacedlowsmallcaps
 %%% engine-dependent letterspacing: microtype for pdflatex, fontspec for xelatex and luatex
     \ifthenelse{\boolean{pdf}\OR\boolean{luatex}}{ % pdf will soon test true for both pdflatex and luatex; \AND\NOT\boolean{luatex}
       \PackageInfo{classicthesis}{Using microtype for character spacing.%
                                   Make sure your pdflatex is version 1.40 or higher.}%
       \microtypesetup{expansion=false}
-      \DeclareRobustCommand{\spacedallcaps}[1]{\textls[160]{\MakeTextUppercase{#1}}}
+      \DeclareRobustCommand{\spacedallcaps}[1]{\textls[160]{\ct@scfont\MakeTextUppercase{#1}}}
       \DeclareRobustCommand{\spacedlowsmallcaps}[1]{\textls[80]{\scshape\MakeTextLowercase{#1}}}
       }{\relax}
 
     \ifthenelse{\boolean{xetex}}{ % use fontspec features; \OR\boolean{luatex} does not work well
       \PackageInfo{classicthesis}{Using fontspec for character spacing.}%
-      \DeclareRobustCommand{\spacedallcaps}[1]{{\addfontfeature{LetterSpace=18.0}\MakeTextUppercase{#1}}}% WordSpace=1.8
+      \DeclareRobustCommand{\spacedallcaps}[1]{{\addfontfeature{LetterSpace=18.0}\ct@scfont\MakeTextUppercase{#1}}}% WordSpace=1.8
       \DeclareRobustCommand{\spacedlowsmallcaps}[1]{{\addfontfeatures{LetterSpace=14.0}\scshape\MakeTextLowercase{#1}}}% WordSpace=1.8
       }{\relax}
 
@@ -649,96 +649,11 @@
 % arsclassica integration (experimental, dirty hack currently)
 % ********************************************************************
 \ifthenelse{\boolean{ct@arsclassica}}{%
-% \renewcommand{\sfdefault}{iwona}
-%  most of this probably needs to be addressed via a generic,
-%  re-definable font command in most definitions
-% \sffamily for spacedallcaps and spacedlowsmallcaps
-
-%************************************************************
-% Headlines
-%************************************************************
-% \renewcommand{\sectionmark}[1]{\markright{\textsc%
-% {\MakeTextLowercase{\thesection}} \spacedlowsmallcaps{#1}}}
-% \lehead{\mbox{\llap{\small\thepage\kern1em\color{halfgray}%
-% \vline}%
-% \color{halfgray}\hspace{0.5em}\headmark\hfil}}
-% \rohead{\mbox{\hfil{\color{halfgray}%
-% \headmark\hspace{0.5em}}%
-% \rlap{\small{\color{halfgray}\vline}\kern1em\thepage}}}
-% \renewcommand{\headfont}{\normalfont\sffamily}
-% \renewcommand{\pnumfont}{\small\sffamily}
-%************************************************************
-% Layout of the chapter-, section-, subsection-,
-% subsubsection-, paragraph and description-headings
-% %************************************************************
-% \RequirePackage{titlesec}
-%     % parts
-%     \ifct@parts
-%         \titleformat{\part}[display]
-%         {\normalfont\centering\large}%
-%         {\thispagestyle{empty}\partname~\MakeTextUppercase{\thepart}}{1em}%
-%         {\color{Maroon}\spacedallcaps}
-%     \fi
-%     % chapters
-%     \ifct@linedheaders
-%         \titleformat{\chapter}[display]%
-%         {\relax}{\raggedleft{\color{halfgray}%
-%         \chapterNumber\thechapter} \\ }{0pt}%
-%         {\titlerule\vspace*{.9\baselineskip}\raggedright%
-%         \spacedallcaps}%
-%         [\normalsize\vspace*{.8\baselineskip}\titlerule]%
-%     \else
-%         \titleformat{\chapter}[block]%
-%         {\normalfont\Large\sffamily}%
-%         {{\color{halfgray}\chapterNumber\thechapter%
-%         \hspace{10pt}\vline}  }{10pt}%
-%         {\spacedallcaps}
-%     \fi
-%     % sections
-%     \titleformat{\section}
-%     	  {\normalfont\Large\sffamily}{\textsc%
-% 	  {\MakeTextLowercase{\thesection}}}%
-%          {1em}{\spacedlowsmallcaps}
-%     % subsections
-%     \titleformat{\subsection}
-%     {\normalfont\sffamily\bfseries}{\textsc{\MakeTextLowercase%
-%     {\thesubsection}}}{1em}{\normalsize}
-%     % subsubsections
-%     \titleformat{\subsubsection}
-%     {\normalfont\sffamily\bfseries\itshape}{\textsc%
-%     {\MakeTextLowercase{\thesubsubsection}}}%
-%     {1em}{\normalsize\itshape}
-%     % paragraphs
-%     \titleformat{\paragraph}[runin]
-%     {\normalfont\normalsize\sffamily\bfseries}{\textsc%
-%     {\MakeTextLowercase{\theparagraph}}}%
-%     {0pt}{\spacedlowsmallcaps}
-%     % descriptionlabels
-%     \renewcommand{\descriptionlabel}[1]{\hspace*{\labelsep}%
-%     \bfseries\spacedlowsmallcaps{#1}}
-%     \titlespacing*{\chapter}{0pt}{1\baselineskip}%
-%     {2\baselineskip}
-%     \titlespacing*{\section}{0pt}{2\baselineskip}%
-%     {.8\baselineskip}[\marginparsep]
-%     \titlespacing*{\subsection}{0pt}{1.5\baselineskip}%
-%     {.8\baselineskip}[\marginparsep]
-%     \titlespacing*{\paragraph}{0pt}{1\baselineskip}%
-%     {1\baselineskip}
-%     %
-%     \newcommand\formatchapter[1]{%
-%     \vbox to \ht\strutbox{
-%     \setbox0=\hbox{\chapterNumber\thechapter\hspace{10pt}\vline\ }
-%     \advance\hsize-\wd0 \advance\hsize-10pt\raggedright
-%     \spacedallcaps{#1}\vss}}
-%     \titleformat{\chapter}[block]
-%        {\normalfont\Large\sffamily}
-%        {\textcolor{halfgray}{\chapterNumber\thechapter}
-%        \hspace{10pt}\vline\ }{10pt}
-%     {\formatchapter}
-% 	%
-% 	\clearscrplain
-%     \rofoot[\mbox{\makebox[0pt][l]{\kern1em\thepage}}]{}
-% }{\relax}
+  \setboolean{ct@eulerchapternumbers}{true}%
+  \setboolean{ct@beramono}{true}%
+  \setboolean{ct@nochapters}{false}%
+  \input{arsclassica.ct}%
+}{\relax}
 
 
 % ********************************************************************
