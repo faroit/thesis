@@ -310,13 +310,13 @@
                                   Make sure your pdflatex is version 1.40 or higher.}%
       \microtypesetup{expansion=false}
       \DeclareRobustCommand{\spacedallcaps}[1]{\textls[160]{\ct@scfont\MakeTextUppercase{#1}}}
-      \DeclareRobustCommand{\spacedlowsmallcaps}[1]{\textls[80]{\scshape\MakeTextLowercase{#1}}}
+      \DeclareRobustCommand{\spacedlowsmallcaps}[1]{\textls[80]{\ct@scfont\MakeTextLowercase{#1}}}
       }{\relax}
 
     \ifthenelse{\boolean{xetex}}{ % use fontspec features; \OR\boolean{luatex} does not work well
       \PackageInfo{classicthesis}{Using fontspec for character spacing.}%
       \DeclareRobustCommand{\spacedallcaps}[1]{{\addfontfeature{LetterSpace=18.0}\ct@scfont\MakeTextUppercase{#1}}}% WordSpace=1.8
-      \DeclareRobustCommand{\spacedlowsmallcaps}[1]{{\addfontfeatures{LetterSpace=14.0}\scshape\MakeTextLowercase{#1}}}% WordSpace=1.8
+      \DeclareRobustCommand{\spacedlowsmallcaps}[1]{{\addfontfeatures{LetterSpace=14.0}\ct@scfont\MakeTextLowercase{#1}}}% WordSpace=1.8
       }{\relax}
 
 % ********************************************************************
@@ -555,9 +555,7 @@
         {\AtBeginDocument{\addtocontents{toc}{\protect\vspace{-\cftbeforechapskip}}}}
 }
 
-
 \newcommand{\tocEntry}[1]{\protect\numberline {}{#1}}%
-
 
 %% remove the vertical space between lof/lot entries of different chapters
 \ifthenelse{\boolean{ct@listsseparated}}{%
@@ -574,7 +572,6 @@
 %     }%
 % }{%
 
-
 \DeclareRobustCommand*{\deactivateaddvspace}{\let\addvspace\@gobble}%
 \AtBeginDocument{%
     \addtocontents{lof}{\deactivateaddvspace}%
@@ -587,7 +584,7 @@
 %    }
 
 % ********************************************************************
-% footnotes setup
+% Footnotes setup
 % ********************************************************************
 \ifdefined\deffootnote
     % KOMA-command, footnotemark not superscripted at the bottom
@@ -617,6 +614,17 @@
         \renewcommand{\PrelimWords}{\relax}
         \renewcommand{\PrelimText}{\footnotesize[\,\today\ at \thistime\ -- \texttt{classicthesis}~\myVersion\,]}
 }{\renewcommand{\finalVersionString}{\emph{Final Version} as of \today\ (\texttt{classicthesis}~\myVersion).}}
+
+% ********************************************************************
+% Captions
+% ********************************************************************
+% \PassOptionsToPackage{font=small}{caption} % ,format=hang ,labelformat=smallcaps
+\RequirePackage{caption}
+\captionsetup{font=small}
+% Thanks to cgnieder and Claus Lahiri
+% http://tex.stackexchange.com/questions/69349/spacedlowsmallcaps-in-caption-label
+% [REMOVED DUE TO OTHER PROBLEMS, SEE ISSUE #82]
+%\DeclareCaptionLabelFormat{smallcaps}{\bothIfFirst{#1}{~}\MakeTextLowercase{\textsc{#2}}}
 
 % ********************************************************************
 % Caption numbering now w/o chapter number

@@ -35,7 +35,7 @@
   eulermath=false,  % use awesome Euler fonts for mathematical formulae (only with pdfLaTeX)
   beramono=true,    % toggle a nice monospaced font (w/ bold)
   % palatino=false,   % deactivate standard font for loading another one, see the last section at the end of this file for suggestions
-  arsclassica=true % ...
+  arsclassica=true % activate special arsclassica layout by Lorenzo Pantieri
 }{classicthesis}
 
 
@@ -54,7 +54,7 @@
 \newcommand{\myUni}{Put data here\xspace}
 \newcommand{\myLocation}{Saarbrücken\xspace}
 \newcommand{\myTime}{January 2018\xspace}
-\newcommand{\myVersion}{version 4.6}
+\newcommand{\myVersion}{version 4.6a}
 
 % ********************************************************************
 % Setup, finetuning, and useful commands
@@ -131,13 +131,6 @@
   \setlength{\extrarowheight}{3pt} % increase table row height
 \newcommand{\tableheadline}[1]{\multicolumn{1}{l}{\spacedlowsmallcaps{#1}}}
 \newcommand{\myfloatalign}{\centering} % to be used with each float for alignment
-\usepackage{caption}
-% Thanks to cgnieder and Claus Lahiri
-% http://tex.stackexchange.com/questions/69349/spacedlowsmallcaps-in-caption-label
-% [REMOVED DUE TO OTHER PROBLEMS, SEE ISSUE #82]
-%\DeclareCaptionLabelFormat{smallcaps}{\bothIfFirst{#1}{~}\MakeTextLowercase{\textsc{#2}}}
-%\captionsetup{font=small,labelformat=smallcaps} % format=hang,
-\captionsetup{font=small} % ,format=hang
 \usepackage{subfig}
 % ****************************************************************************************************
 

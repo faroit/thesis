@@ -1,28 +1,27 @@
 %************************************************************
-% arsclassica.sty
-%
-% copyright (C) 2008-2017 Lorenzo Pantieri
+% Adapted from arsclassica.sty
+% Copyright (C) 2008--2017 Lorenzo Pantieri
 % http://www.lorenzopantieri.net/
-%
+% Integrated into classicthesis by André Miede and
+% Ivo Pletikosić with permission
 %************************************************************
-% \NeedsTeXFormat{LaTeX2e}
-% \ProvidesPackage{arsclassica}[2017/10/31]
 
 %************************************************************
-% fonts
+% Fonts
 %************************************************************
-\renewcommand{\sfdefault}{iwona}
+\ifthenelse{\boolean{xetex}\OR\boolean{luatex}}
+    {\setsansfont[Ligatures=TeX,Numbers=OldStyle]{Iwona}}
+    {\renewcommand{\sfdefault}{iwona}}
 \renewcommand{\ct@scfont}{\sffamily\scshape}
 
 %************************************************************
-% caption
+% Caption
 %************************************************************
-\PassOptionsToPackage{font=small,labelfont={sf,bf},format=hang}{caption}
-% \RequirePackage{caption}
-% \captionsetup[table]{skip=\medskipamount}
+\captionsetup{font=small,labelfont={sf,bf},format=hang}
+\captionsetup[table]{skip=\medskipamount}
 
 %************************************************************
-% itemize
+% Itemize
 %************************************************************
 \renewcommand\labelitemi{\color{halfgray}$\bullet$}
 
@@ -30,68 +29,65 @@
 % Headlines
 %************************************************************
 \renewcommand{\sectionmark}[1]{\markright{\textsc%
-{\MakeTextLowercase{\thesection}} \spacedlowsmallcaps{#1}}}
+  {\MakeTextLowercase{\thesection}} \spacedlowsmallcaps{#1}}}
 \lehead{\mbox{\llap{\small\thepage\kern1em\color{halfgray}%
-\vline}%
-\color{halfgray}\hspace{0.5em}\headmark\hfil}}
+  \vline}%
+  \color{halfgray}\hspace{0.5em}\headmark\hfil}}
 \rohead{\mbox{\hfil{\color{halfgray}%
 \headmark\hspace{0.5em}}%
-\rlap{\small{\color{halfgray}\vline}\kern1em\thepage}}}
+  \rlap{\small{\color{halfgray}\vline}\kern1em\thepage}}}
 \renewcommand{\headfont}{\normalfont\sffamily}
 \renewcommand{\pnumfont}{\small\sffamily}
+\clearscrplain
+\rofoot[\mbox{\makebox[0pt][l]{\kern1em\thepage}}]{}
 
 %************************************************************
 % Layout of the chapter-, section-, subsection-,
 % subsubsection-, paragraph and description-headings
-% %************************************************************
+%************************************************************
+\newcommand\formatchapter[1]{%
+  \vbox to \ht\strutbox{%
+  \setbox0=\hbox{\chapterNumber\thechapter\hspace{10pt}\vline\ }%
+  \advance\hsize-\wd0 \advance\hsize-10pt\raggedright%
+  \spacedallcaps{#1}\vss}}
 \titleformat{\chapter}[block]%
-  {\normalfont\Large\sffamily}%
-  {{\color{halfgray}\chapterNumber\thechapter%
-  \hspace{10pt}\vline}  }{10pt}%
-  {\spacedallcaps}
+   {\normalfont\Large\sffamily}%
+   {\textcolor{halfgray}{\chapterNumber\thechapter}%
+   \ \,\hspace{10pt}\vline\ }{10pt}%
+   {\formatchapter}
 % sections
-\titleformat{\section}
-	  {\normalfont\Large\sffamily}{\textsc%
-{\MakeTextLowercase{\thesection}}}%
-     {1em}{\spacedlowsmallcaps}
+\titleformat{\section}%
+	 {\normalfont\Large\sffamily}{\textsc%
+  {\MakeTextLowercase{\thesection}}}%
+  {1em}{\spacedlowsmallcaps}
 % subsections
-\titleformat{\subsection}
-{\normalfont\sffamily\bfseries}{\textsc{\MakeTextLowercase%
-{\thesubsection}}}{1em}{\normalsize}
+\titleformat{\subsection}%
+  {\normalfont\sffamily\bfseries}{\textsc{\MakeTextLowercase%
+  {\thesubsection}}}{1em}{\normalsize}
 % subsubsections
-\titleformat{\subsubsection}
-{\normalfont\sffamily\bfseries\itshape}{\textsc%
-{\MakeTextLowercase{\thesubsubsection}}}%
-{1em}{\normalsize\itshape}
+\titleformat{\subsubsection}%
+  {\normalfont\sffamily\bfseries\itshape}{\textsc%
+  {\MakeTextLowercase{\thesubsubsection}}}%
+  {1em}{\normalsize\itshape}
 % paragraphs
-\titleformat{\paragraph}[runin]
-{\normalfont\normalsize\sffamily\bfseries}{\textsc%
-{\MakeTextLowercase{\theparagraph}}}%
-{0pt}{\spacedlowsmallcaps}
+\titleformat{\paragraph}[runin]%
+  {\normalfont\normalsize\sffamily\bfseries}{\textsc%
+  {\MakeTextLowercase{\theparagraph}}}%
+  {0pt}{\spacedlowsmallcaps}
 % descriptionlabels
 \renewcommand{\descriptionlabel}[1]{\hspace*{\labelsep}%
-\bfseries\spacedlowsmallcaps{#1}}
+  \bfseries\spacedlowsmallcaps{#1}}
+%************************************************************
 \titlespacing*{\chapter}{0pt}{1\baselineskip}%
-{2\baselineskip}
+  {2\baselineskip}
 \titlespacing*{\section}{0pt}{2\baselineskip}%
-{.8\baselineskip}[\marginparsep]
+  {.8\baselineskip}[\marginparsep]
 \titlespacing*{\subsection}{0pt}{1.5\baselineskip}%
-{.8\baselineskip}[\marginparsep]
+  {.8\baselineskip}[\marginparsep]
 \titlespacing*{\paragraph}{0pt}{1\baselineskip}%
-{1\baselineskip}
-%
-\newcommand\formatchapter[1]{%
-\vbox to \ht\strutbox{
-\setbox0=\hbox{\chapterNumber\thechapter\hspace{10pt}\vline\ }
-\advance\hsize-\wd0 \advance\hsize-10pt\raggedright
-\spacedallcaps{#1}\vss}}
-\titleformat{\chapter}[block]
-   {\normalfont\Large\sffamily}
-   {\textcolor{halfgray}{\chapterNumber\thechapter}
-   \hspace{10pt}\vline\ }{10pt}
-{\formatchapter}
-%
-\clearscrplain
-\rofoot[\mbox{\makebox[0pt][l]{\kern1em\thepage}}]{}
+  {1\baselineskip}
+%************************************************************
 
-% ToDo: FORMAT ToC
+%************************************************************
+% Table of Contents fixed indirectly via \ct@scfont above
+%************************************************************

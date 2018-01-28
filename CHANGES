@@ -1,7 +1,11 @@
-Changes in version 4.6 ( 2018)
-o First integration attempt of arsclassica
+Changes in version 4.6 (Month 2018)
+o Integration of arsclassica
   (with permission from Lorenzo Pantieri)
-  --> fix .sty, config, and documentation
+  --> documentation
+o Provision of customization and hooks, e.g.,
+  \ct@scfont, see arsclassica.ct as example
+o Loading caption package in classicthesis.sty
+  (for better arsclassica integration)
 
 Changes in version 4.5 (December 2017)
 o Fixed vanished page numbers on chapter
