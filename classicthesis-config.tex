@@ -19,6 +19,9 @@
 \PassOptionsToPackage{utf8}{inputenc}
   \usepackage{inputenc}
 
+\PassOptionsToPackage{T1}{fontenc} % T2A for cyrillics
+  \usepackage{fontenc}
+
 % ****************************************************************************************************
 % 1. Configure classicthesis for your needs here, e.g., remove "drafting" below
 % in order to deactivate the time-stamp on the pages
@@ -100,14 +103,9 @@
 % ********************************************************************
 % General useful packages
 % ********************************************************************
-\PassOptionsToPackage{T1}{fontenc} % T2A for cyrillics
-  \usepackage{fontenc}
-\usepackage{textcomp} % fix warning with missing font shapes
+\usepackage{graphicx} % 
 \usepackage{scrhack} % fix warnings when using KOMA with listings package
 \usepackage{xspace} % to get the spacing after macros right
-\usepackage{mparhack} % get marginpar right
-%\usepackage{fixltx2e} % fixes some LaTeX stuff --> since 2015 in the LaTeX kernel (see below)
-% \usepackage[latest]{latexrelease} % emulate newer kernel version if older is detected
 \PassOptionsToPackage{printonlyused,smaller}{acronym}
   \usepackage{acronym} % nice macros for handling all acronyms in the thesis
   %\renewcommand{\bflabel}[1]{{#1}\hfill} % fix the list of acronyms --> no longer working
@@ -159,41 +157,8 @@
 }
 % ****************************************************************************************************
 
-
-% ****************************************************************************************************
-% 6. PDFLaTeX, hyperreferences, and citation backreferences
-% ****************************************************************************************************
 % ********************************************************************
-% Using PDFLaTeX
-% ********************************************************************
-\PassOptionsToPackage{hyperfootnotes=false,pdfpagelabels}{hyperref}
-  \usepackage{hyperref}  % backref linktocpage pagebackref
-  \usepackage{graphicx}
-
-
-% ********************************************************************
-% Hyperreferences
-% ********************************************************************
-\hypersetup{%
-  %draft, % hyperref's draft mode, for printing see below
-  colorlinks=true, linktocpage=true, pdfstartpage=3, pdfstartview=FitV,%
-  % uncomment the following line if you want to have black links (e.g., for printing)
-  %colorlinks=false, linktocpage=false, pdfstartpage=3, pdfstartview=FitV, pdfborder={0 0 0},%
-  breaklinks=true, pdfpagemode=UseNone, pageanchor=true, pdfpagemode=UseOutlines,%
-  plainpages=false, bookmarksnumbered, bookmarksopen=true, bookmarksopenlevel=1,%
-  hypertexnames=true, pdfhighlight=/O,%nesting=true,%frenchlinks,%
-  urlcolor=webbrown, linkcolor=RoyalBlue, citecolor=webgreen, %pagecolor=RoyalBlue,%
-  %urlcolor=Black, linkcolor=Black, citecolor=Black, %pagecolor=Black,%
-  pdftitle={\myTitle},%
-  pdfauthor={\textcopyright\ \myName, \myUni, \myFaculty},%
-  pdfsubject={},%
-  pdfkeywords={},%
-  pdfcreator={pdfLaTeX},%
-  pdfproducer={LaTeX with hyperref and classicthesis}%
-}
-
-% ********************************************************************
-% Setup autoreferences
+% 6. Setup autoreferences
 % ********************************************************************
 % There are some issues regarding autorefnames
 % http://www.ureader.de/msg/136221647.aspx
@@ -247,6 +212,30 @@
 % ********************************************************************
 \usepackage{classicthesis}
 % ****************************************************************************************************
+
+
+% ********************************************************************
+% Fine-tune hyperreferences (hyperref should be called last)
+% ********************************************************************
+\hypersetup{%
+  %draft, % hyperref's draft mode, for printing see below
+  colorlinks=true, linktocpage=true, pdfstartpage=3, pdfstartview=FitV,%
+  % uncomment the following line if you want to have black links (e.g., for printing)
+  %colorlinks=false, linktocpage=false, pdfstartpage=3, pdfstartview=FitV, pdfborder={0 0 0},%
+  breaklinks=true, pdfpagemode=UseNone, pageanchor=true, pdfpagemode=UseOutlines,%
+  plainpages=false, bookmarksnumbered, bookmarksopen=true, bookmarksopenlevel=1,%
+  hypertexnames=true, pdfhighlight=/O,%nesting=true,%frenchlinks,%
+  hyperfootnotes=false,
+  urlcolor=CTurl, linkcolor=CTlink, citecolor=CTcitation, %pagecolor=RoyalBlue,%
+  %urlcolor=Black, linkcolor=Black, citecolor=Black, %pagecolor=Black,%
+  pdftitle={\myTitle},%
+  pdfauthor={\textcopyright\ \myName, \myUni, \myFaculty},%
+  pdfsubject={},%
+  pdfkeywords={},%
+  pdfcreator={pdfLaTeX},%
+  pdfproducer={LaTeX with hyperref and classicthesis}%
+}
+
 
 
 % ****************************************************************************************************

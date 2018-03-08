@@ -131,11 +131,6 @@
 \RequirePackage{ifpdf}
 \RequirePackage{ifxetex}
 \RequirePackage{ifluatex}
-\RequirePackage{hyperref}
-    \pdfstringdefDisableCommands{\let\thepart=\relax} % no part numbers (i, ii, iii) in PDF outline   IVO
-   %\pdfstringdefDisableCommands{\renewcommand{\thepart}{\Roman{part}}} %%%IVO bring back Part numbers in PDF outline
-    \hypersetup{colorlinks=true,linktocpage=true,breaklinks=true,urlcolor=webbrown,linkcolor=RoyalBlue,citecolor=webgreen}
-
 
 % ********************************************************************
 % Colors
@@ -281,6 +276,8 @@
 %\DeclareRobustCommand{\graffito}[1]{\marginpar%
 % [\graffito@setup\raggedleft\hspace{0pt}{#1}]%
 % {\graffito@setup\raggedright\hspace{0pt}{#1}}}
+
+\RequirePackage{mparhack} % get marginpar right
 
 \let\oldmarginpar\marginpar
 \renewcommand{\marginpar}[2][]{% always add optional parameter, make it empty by default
@@ -667,6 +664,18 @@
   \setboolean{ct@nochapters}{false}%
   \input{arsclassica.ct}%
 }{\relax}
+
+
+% ********************************************************************
+% hyperreferences, pdf outline
+% ********************************************************************
+\PassOptionsToPackage{hyperfootnotes=false}{hyperref}
+\RequirePackage{hyperref}
+    \pdfstringdefDisableCommands{\let\thepart=\relax} % no part numbers (i, ii, iii) in PDF outline   IVO
+   %\pdfstringdefDisableCommands{\renewcommand{\thepart}{\Roman{part}}} %%%IVO bring back Part numbers in PDF outline
+    \hypersetup{colorlinks=true,linktocpage=true,breaklinks=true,urlcolor=CTurl,linkcolor=CTlink,citecolor=CTcitation}
+
+
 
 
 % ********************************************************************
