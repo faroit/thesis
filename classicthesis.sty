@@ -316,8 +316,8 @@
 \RequirePackage{textcase} % for \MakeTextUppercase
 
 % Provide a hook for font customization, e.g., for arsclassica
-\newcommand{\ct@scfont}{\scshape}
-% \newcommand{\ct@scfont}{\color{red}\sffamily\scshape}
+\newcommand{\ct@altfont}{}% \color{red}\sffamily
+\newcommand{\ct@caps}{\ct@altfont\scshape} % typesetting smallcaps
 
 %%% define spacedallcaps and spacedlowsmallcaps
 %%% engine-dependent letterspacing: microtype for pdflatex, fontspec for xelatex and luatex
@@ -325,14 +325,14 @@
       \PackageInfo{classicthesis}{Using microtype for character spacing.%
                                   Make sure your pdflatex is version 1.40 or higher.}%
       \microtypesetup{expansion=false}
-      \DeclareRobustCommand{\spacedallcaps}[1]{\textls[160]{\ct@scfont\MakeTextUppercase{#1}}}
-      \DeclareRobustCommand{\spacedlowsmallcaps}[1]{\textls[80]{\ct@scfont\MakeTextLowercase{#1}}}
+      \DeclareRobustCommand{\spacedallcaps}[1]{\textls[160]{\ct@caps\MakeTextUppercase{#1}}}
+      \DeclareRobustCommand{\spacedlowsmallcaps}[1]{\textls[80]{\ct@caps\MakeTextLowercase{#1}}}
       }{\relax}
 
     \ifthenelse{\boolean{xetex}}{ % use fontspec features; \OR\boolean{luatex} does not work well
       \PackageInfo{classicthesis}{Using fontspec for character spacing.}%
-      \DeclareRobustCommand{\spacedallcaps}[1]{{\addfontfeature{LetterSpace=18.0}\ct@scfont\MakeTextUppercase{#1}}}% WordSpace=1.8
-      \DeclareRobustCommand{\spacedlowsmallcaps}[1]{{\addfontfeatures{LetterSpace=14.0}\ct@scfont\MakeTextLowercase{#1}}}% WordSpace=1.8
+      \DeclareRobustCommand{\spacedallcaps}[1]{{\addfontfeature{LetterSpace=18.0}\ct@caps\MakeTextUppercase{#1}}}% WordSpace=1.8
+      \DeclareRobustCommand{\spacedlowsmallcaps}[1]{{\addfontfeatures{LetterSpace=14.0}\ct@caps\MakeTextLowercase{#1}}}% WordSpace=1.8
       }{\relax}
 
 % ********************************************************************
@@ -378,7 +378,7 @@
     \def\ctparttext@keep{} % Thanks to Ivo
     \def\ctparttext@print{\ctparttext@keep \gdef\ctparttext@keep{}}
     \titleformat{\part}[display]
-    {\normalfont\centering\large}%
+    {\normalfont\ct@altfont\centering\large}%
     {\thispagestyle{empty}\partname~\MakeTextUppercase{\thepart}}{1em}%
     {\color{Maroon}\spacedallcaps}[\bigskip\normalfont\normalsize\color{Black}\begin{quote}\ctparttext@print\end{quote}]
 }{\relax}

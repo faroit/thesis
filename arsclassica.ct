@@ -12,7 +12,7 @@
 \ifthenelse{\boolean{xetex}\OR\boolean{luatex}}
     {\setsansfont[Ligatures=TeX,Numbers=OldStyle]{Iwona}}
     {\renewcommand{\sfdefault}{iwona}}
-\renewcommand{\ct@scfont}{\sffamily\scshape}
+\renewcommand*{\ct@altfont}{\sffamily}
 
 %************************************************************
 % Caption
