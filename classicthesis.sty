@@ -36,6 +36,8 @@
 \PassOptionsToPackage{latest}{latexrelease} % replacement for fixltx2e,
   \RequirePackage{latexrelease} % emulate newer kernel version if older is detected
 
+\providecommand{\classicthesis}{classicthesis v4.6}
+
 \RequirePackage{ifthen}
 
 % ********************************************************************
@@ -673,7 +675,7 @@
 % arsclassica integration (experimental, dirty hack currently)
 % ********************************************************************
 \ifct@arsclassica
-  \input{arsclassica.ct}
+\RequirePackage{arsclassica}
 \fi
 
 

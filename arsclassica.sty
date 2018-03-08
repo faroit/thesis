@@ -1,10 +1,14 @@
 %************************************************************
-% Adapted from arsclassica.sty
 % Copyright (C) 2008--2017 Lorenzo Pantieri
 % http://www.lorenzopantieri.net/
 % Integrated into classicthesis by André Miede and
 % Ivo Pletikosić with permission
 %************************************************************
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{arsclassica}[2018/03/08]
+
+\ifdefined\classicthesis\else\RequirePackage{classicthesis}\fi
+
 
 %************************************************************
 % Fonts
@@ -79,6 +83,3 @@
 \titlespacing*{\paragraph}{0pt}{1\baselineskip}{1\baselineskip}
 %************************************************************
 
-%************************************************************
-% Table of Contents fixed indirectly via \ct@scfont above
-%************************************************************
