@@ -23,19 +23,14 @@
 %************************************************************
 % Itemize
 %************************************************************
-\renewcommand\labelitemi{\color{halfgray}$\bullet$}
+\renewcommand\labelitemi{\color{CTsemi}$\bullet$}
 
 %************************************************************
 % Headlines
 %************************************************************
-\renewcommand{\sectionmark}[1]{\markright{\textsc%
-  {\MakeTextLowercase{\thesection}} \spacedlowsmallcaps{#1}}}
-\lehead{\mbox{\llap{\small\thepage\kern1em\color{halfgray}%
-  \vline}%
-  \color{halfgray}\hspace{0.5em}\headmark\hfil}}
-\rohead{\mbox{\hfil{\color{halfgray}%
-\headmark\hspace{0.5em}}%
-  \rlap{\small{\color{halfgray}\vline}\kern1em\thepage}}}
+\renewcommand{\sectionmark}[1]{\markright{\textsc{\MakeTextLowercase{\thesection}} \spacedlowsmallcaps{#1}}}
+\lehead{\mbox{\llap{\small\thepage\kern1em\color{CTsemi}\vline}\color{CTsemi}\hspace{0.5em}\headmark\hfil}}
+\rohead{\mbox{\hfil{\color{CTsemi}\headmark\hspace{0.5em}}\rlap{\small{\color{CTsemi}\vline}\kern1em\thepage}}}
 \renewcommand{\headfont}{\normalfont\sffamily}
 \renewcommand{\pnumfont}{\small\sffamily}
 \clearscrplain
@@ -45,6 +40,7 @@
 % Layout of the chapter-, section-, subsection-,
 % subsubsection-, paragraph and description-headings
 %************************************************************
+% chapters
 \newcommand\formatchapter[1]{%
   \vbox to \ht\strutbox{%
   \setbox0=\hbox{\chapterNumber\thechapter\hspace{10pt}\vline\ }%
@@ -52,7 +48,7 @@
   \spacedallcaps{#1}\vss}}
 \titleformat{\chapter}[block]%
    {\normalfont\Large\sffamily}%
-   {\textcolor{halfgray}{\chapterNumber\thechapter}%
+   {\textcolor{CTsemi}{\chapterNumber\thechapter}%
    \ \,\hspace{10pt}\vline\ }{10pt}%
    {\formatchapter}
 % sections
@@ -75,17 +71,12 @@
   {\MakeTextLowercase{\theparagraph}}}%
   {0pt}{\spacedlowsmallcaps}
 % descriptionlabels
-\renewcommand{\descriptionlabel}[1]{\hspace*{\labelsep}%
-  \bfseries\spacedlowsmallcaps{#1}}
-%************************************************************
-\titlespacing*{\chapter}{0pt}{1\baselineskip}%
-  {2\baselineskip}
-\titlespacing*{\section}{0pt}{2\baselineskip}%
-  {.8\baselineskip}[\marginparsep]
-\titlespacing*{\subsection}{0pt}{1.5\baselineskip}%
-  {.8\baselineskip}[\marginparsep]
-\titlespacing*{\paragraph}{0pt}{1\baselineskip}%
-  {1\baselineskip}
+\renewcommand{\descriptionlabel}[1]{\hspace*{\labelsep}\bfseries\spacedlowsmallcaps{#1}}
+
+\titlespacing*{\chapter}{0pt}{1\baselineskip}{2\baselineskip}
+\titlespacing*{\section}{0pt}{2\baselineskip}{.8\baselineskip}[\marginparsep]
+\titlespacing*{\subsection}{0pt}{1.5\baselineskip}{.8\baselineskip}[\marginparsep]
+\titlespacing*{\paragraph}{0pt}{1\baselineskip}{1\baselineskip}
 %************************************************************
 
 %************************************************************
