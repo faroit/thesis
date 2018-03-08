@@ -50,7 +50,7 @@
 \DeclareBoolOption{dottedtoc} % page numbers in ToC flushed right
 \DeclareBoolOption{listsseparated} % OBSOLETE; toggles the vertical space between lof/lot entries of different chapters
 
-\DeclareBoolOption{parts} % use part division
+\DeclareBoolOption[true]{parts} % OBSOLETE - automatic check; use part division
 
 \DeclareBoolOption{nochapters} % OBSOLETE - automatic check; disable all chapter-specific commands
 \DeclareBoolOption{eulerchapternumbers} % use AMS Euler for chapter font (otherwise Palatino)
@@ -110,15 +110,20 @@
 \ifthenelse{\isundefined{\chapter}\OR\boolean{ct@nochapters}}
     {
         \PackageWarningNoLine{classicthesis}{Chapter sectioning command not present in this document class. %
-                Deactivating options floatperchapter, linedheaders, manychapters, listsseparated, eulerchapternumbers and parts}%
-        \setboolean{ct@linedheaders}{false}%
-        \setboolean{ct@listsseparated}{false}%
-        \setboolean{ct@eulerchapternumbers}{false}%
-        \setboolean{ct@parts}{false}% %%%IVO: note that parts exist even when chapters are not defined!
-        \setboolean{ct@manychapters}{false}%
-        \setboolean{ct@floatperchapter}{false}%
+                Deactivating options floatperchapter, linedheaders, manychapters, listsseparated, eulerchapternumbers}%
+        \setboolean{ct@linedheaders}{false}
+        \setboolean{ct@listsseparated}{false}
+        \setboolean{ct@eulerchapternumbers}{false}
+        \setboolean{ct@parts}{false}
+        \setboolean{ct@manychapters}{false}
+        \setboolean{ct@floatperchapter}{false}
         \setboolean{ct@nochapters}{true}
     }{\relax}
+
+% no parts in document class
+\ifthenelse{\NOT\isundefined{\part}\AND\boolean{ct@parts}}
+    {\setboolean{ct@parts}{true}}{\setboolean{ct@parts}{false}}
+
 
 % ********************************************************************
 % PDF and XeLaTeX Stuff
