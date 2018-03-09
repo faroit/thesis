@@ -67,7 +67,6 @@
 \DeclareBoolOption[true]{beramono} % toggle a nice monospaced font (w/ bold) + pre-installed
 \DeclareBoolOption{minionpro} % OBSOLETE - removed; setup for minion pro font; use minion pro small caps as well
 \DeclareBoolOption[true]{palatino} % default is Palatino/Paladio/TeX Gyre Pagella font, use this switch to skip selection
-\DeclareBoolOption{arsclassica} % integrates Lorenzo Pantieri's style
 \DeclareStringOption[classicthesis]{style} % classicthesis or arsclassica
 \DeclareBoolOption{minionprospacing} % OBSOLETE; use minion pro's textssc for letter spacing
 \DeclareBoolOption{pdfspacing} % OBSOLETE; use pdftex for letterspacing (via microtype)
@@ -128,13 +127,14 @@
     {\setboolean{ct@parts}{true}}{\setboolean{ct@parts}{false}}
 
 % use arsclassica style
+\provideboolean{ct@arsclassica}\setboolean{ct@arsclassica}{false}
 \ifthenelse{\equal{\ct@style}{arsclassica}}
     {
         \setboolean{ct@arsclassica}{true}
         \setboolean{ct@eulerchapternumbers}{true}
         \setboolean{ct@beramono}{true}
         %\setboolean{ct@nochapters}{false}
-    }
+    }{}
 
 % ********************************************************************
 % PDF and XeLaTeX Stuff
@@ -151,14 +151,11 @@
 \definecolor{CTsemi}{gray}{0.55} % chapter numbers will be semi transparent .5 .55 .6 .0
 \definecolor{CTcitation}{rgb}{0,0.5,0} % WebGreen
 \definecolor{CTurl}{named}{Maroon} % Maroon
-\definecolor{CTtitle}{named}{Maroon} % Maroon {cmyk}{0, 0.87, 0.68, 0.32} 
+\definecolor{CTtitle}{named}{Maroon} % Maroon {cmyk}{0, 0.87, 0.68, 0.32}
 \definecolor{CTlink}{named}{RoyalBlue} % RoyalBlue {cmyk}{1, 0.50, 0, 0}
 \definecolor{halfgray}{gray}{0.55} % chapter numbers will be semi transparent .5 .55 .6 .0
 \definecolor{webgreen}{rgb}{0,0.5,0}
 \definecolor{webbrown}{rgb}{0.6,0,0}
-%\definecolor{Maroon}{cmyk}{0, 0.87, 0.68, 0.32}
-%\definecolor{RoyalBlue}{cmyk}{1, 0.50, 0, 0}
-%\definecolor{Black}{cmyk}{0, 0, 0, 0}
 
 % ********************************************************************
 % Font Stuff
@@ -264,12 +261,7 @@
 % Minion      10pt: 264--288pt | 561--609pt
 % Minion      11pt: 288--312pt | 609--657pt
 % Minion      12pt: 336pt      | 672pt
-% Libertine 10pt:
-% Libertine 11pt:
-% Libertine 12pt:
-% kpfonts 10pt:
-% kpfonts 11pt:
-% kpfonts 12pt:
+
 
 % ********************************************************************
 % Own Stuff
@@ -382,7 +374,7 @@
     \titleformat{\part}[display]
     {\normalfont\ct@altfont\centering\large}%
     {\thispagestyle{empty}\partname~\MakeTextUppercase{\thepart}}{1em}%
-    {\color{Maroon}\spacedallcaps}[\bigskip\normalfont\normalsize\color{Black}\begin{quote}\ctparttext@print\end{quote}]
+    {\color{CTtitle}\spacedallcaps}[\bigskip\normalfont\normalsize\color{Black}\begin{quote}\ctparttext@print\end{quote}]
 }{\relax}
 % chapters
 \ifthenelse{\boolean{ct@linedheaders}}%
@@ -453,7 +445,7 @@
     \renewcommand{\cftpartaftersnum}{}%
     \renewcommand{\cftpartaftersnumb}{\spacedlowsmallcaps}%
     \setlength{\cftpartnumwidth}{\cftchapnumwidth}
-    \renewcommand{\cftpartfont}{\color{Maroon}\normalfont}%
+    \renewcommand{\cftpartfont}{\color{CTtitle}\normalfont}%
     \cftpagenumbersoff{part}
     \renewcommand{\cftpartpagefont}{\normalfont}%
     \ifthenelse{\boolean{ct@dottedtoc}}{\relax}%

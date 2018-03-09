@@ -18,6 +18,10 @@
     {\renewcommand{\sfdefault}{iwona}}
 \renewcommand*{\ct@altfont}{\sffamily}
 
+\ifthenelse{\boolean{ct@eulerchapternumbers}}% font for the chapter numbers; scale in classicthesis is 7
+    {\DeclareFixedFont{\chapterNumber}{U}{eur}{b}{n}{50}}%
+    {\DeclareFixedFont{\chapterNumber}{T1}{pplj}{m}{n}{50}}%
+
 %************************************************************
 % Caption
 %************************************************************
