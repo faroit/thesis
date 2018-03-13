@@ -22,6 +22,7 @@
 \PassOptionsToPackage{T1}{fontenc} % T2A for cyrillics
   \usepackage{fontenc}
 
+
 % ****************************************************************************************************
 % 1. Configure classicthesis for your needs here, e.g., remove "drafting" below
 % in order to deactivate the time-stamp on the pages
@@ -155,13 +156,46 @@
 }
 % ****************************************************************************************************
 
+
+
+
+% ****************************************************************************************************
+% 6. Last calls before the bar closes
+% ****************************************************************************************************
 % ********************************************************************
-% 6. Setup autoreferences
+% Her Majesty herself
+% ********************************************************************
+\usepackage{classicthesis}
+
+
+% ********************************************************************
+% Fine-tune hyperreferences (hyperref should be called last)
+% ********************************************************************
+\hypersetup{%
+  %draft, % hyperref's draft mode, for printing see below
+  colorlinks=true, linktocpage=true, pdfstartpage=3, pdfstartview=FitV,%
+  % uncomment the following line if you want to have black links (e.g., for printing)
+  %colorlinks=false, linktocpage=false, pdfstartpage=3, pdfstartview=FitV, pdfborder={0 0 0},%
+  breaklinks=true, pdfpagemode=UseNone, pageanchor=true, pdfpagemode=UseOutlines,%
+  plainpages=false, bookmarksnumbered, bookmarksopen=true, bookmarksopenlevel=1,%
+  hypertexnames=true, pdfhighlight=/O,%nesting=true,%frenchlinks,%
+  urlcolor=CTurl, linkcolor=CTlink, citecolor=CTcitation, %pagecolor=RoyalBlue,%
+  %urlcolor=Black, linkcolor=Black, citecolor=Black, %pagecolor=Black,%
+  pdftitle={\myTitle},%
+  pdfauthor={\textcopyright\ \myName, \myUni, \myFaculty},%
+  pdfsubject={},%
+  pdfkeywords={},%
+  pdfcreator={pdfLaTeX},%
+  pdfproducer={LaTeX with hyperref and classicthesis}%
+}
+
+
+% ********************************************************************
+% Setup autoreferences (hyperref and babel)
 % ********************************************************************
 % There are some issues regarding autorefnames
-% http://www.ureader.de/msg/136221647.aspx
 % http://www.tex.ac.uk/cgi-bin/texfaq2html?label=latexwords
-% you have to redefine the makros for the
+% you have to redefine the macros for the
 % language you use, e.g., american, ngerman
 % (as chosen when loading babel/AtBeginDocument)
 % ********************************************************************
@@ -193,9 +227,6 @@
 \makeatother
 
 
-% ****************************************************************************************************
-% 7. Last calls before the bar closes
-% ****************************************************************************************************
 % ********************************************************************
 % Development Stuff
 % ********************************************************************
@@ -205,38 +236,9 @@
 %\PassOptionsToPackage{warning, all}{onlyamsmath}
 %  \usepackage{onlyamsmath}
 
-% ********************************************************************
-% Last, but not least...
-% ********************************************************************
-\usepackage{classicthesis}
-% ****************************************************************************************************
-
-
-% ********************************************************************
-% Fine-tune hyperreferences (hyperref should be called last)
-% ********************************************************************
-\hypersetup{%
-  %draft, % hyperref's draft mode, for printing see below
-  colorlinks=true, linktocpage=true, pdfstartpage=3, pdfstartview=FitV,%
-  % uncomment the following line if you want to have black links (e.g., for printing)
-  %colorlinks=false, linktocpage=false, pdfstartpage=3, pdfstartview=FitV, pdfborder={0 0 0},%
-  breaklinks=true, pdfpagemode=UseNone, pageanchor=true, pdfpagemode=UseOutlines,%
-  plainpages=false, bookmarksnumbered, bookmarksopen=true, bookmarksopenlevel=1,%
-  hypertexnames=true, pdfhighlight=/O,%nesting=true,%frenchlinks,%
-  urlcolor=CTurl, linkcolor=CTlink, citecolor=CTcitation, %pagecolor=RoyalBlue,%
-  %urlcolor=Black, linkcolor=Black, citecolor=Black, %pagecolor=Black,%
-  pdftitle={\myTitle},%
-  pdfauthor={\textcopyright\ \myName, \myUni, \myFaculty},%
-  pdfsubject={},%
-  pdfkeywords={},%
-  pdfcreator={pdfLaTeX},%
-  pdfproducer={LaTeX with hyperref and classicthesis}%
-}
-
-
 
 % ****************************************************************************************************
-% 8. Further adjustments (experimental)
+% 7. Further adjustments (experimental)
 % ****************************************************************************************************
 % ********************************************************************
 % Changing the text area
