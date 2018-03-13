@@ -127,14 +127,9 @@
     {\setboolean{ct@parts}{true}}{\setboolean{ct@parts}{false}}
 
 % use arsclassica style
-\provideboolean{ct@arsclassica}\setboolean{ct@arsclassica}{false}
-\ifthenelse{\equal{\ct@style}{arsclassica}}
-    {
-        \setboolean{ct@arsclassica}{true}
-        \setboolean{ct@eulerchapternumbers}{true}
-        \setboolean{ct@beramono}{true}
-        %\setboolean{ct@nochapters}{false}
-    }{}
+\provideboolean{ct@arsclassica}
+\ifthenelse{\equal{\ct@style}{arsclassica}}%
+    {\setboolean{ct@arsclassica}{true}}{\setboolean{ct@arsclassica}{false}}
 
 % ********************************************************************
 % PDF and XeLaTeX Stuff
