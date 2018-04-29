@@ -1,0 +1,7 @@
+new:
+
+ * testing different items with different instrumentation
+ * easier test setup
+ * designed to be statistically significant 
+ * testing upper limit
+ * comparison to non-expert listeners

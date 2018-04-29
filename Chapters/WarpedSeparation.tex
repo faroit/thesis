@@ -1,0 +1,63 @@
+
+\section{$F0$ informed Source Separation} % (fold)
+\label{sec:method}
+
+\kant[1-4]
+
+\subsection{$F0$ Estimation Methods}
+
+An estimate of the fundamental frequency $F0$ of a signal is required in various applications of audio and speech signal processing. $F0$ is often synonymously referred to as pitch which is a perceptual measure. In the past, a number of algorithms were presented to provide such estimates, with many of them being designed for specific applications. Some scenarios are targeted to extract the fundamental frequency of the predominant source~\cite{salamon2012melody} in a mixture of other sources. In other applications, algorithms are used to extract fundamental frequencies of multiple sources simultaneously present in a signal~\cite{klapuri2003multiple}. However, the most common scenario in many works is to extract the fundamental frequency of a monophonic and harmonic audio signal containing speech or music~\cite{talkin1995robust, boersma2002praat, de2002yin, resch, camacho2007swipe, tidhar2010high, christensen2007joint}.
+%
+The development of novel methods for fundamental frequency estimation, performing as well as earlier methods, such as the popular correlation based \textsc{YIN} algorithm~\cite{de2002yin}, has proven challenging. In a recent study~\cite{babacan2013comparative} it is stated that YIN still clearly performs best in terms of accuracy. Nevertheless, when using YIN or other block based algorithms, a frame length and a hop size have to be selected trading temporal resolution on one side against frequency accuracy and robustness on the other side.
+
+Especially when the signal is polyphonic, the robustness is the most crucial aspect of a pitch estimator. In recent work from Mauch et al.~\cite{mauch2014pyin}, the robustness of the \textsc{YIN} algorithm is improved by probabilistic post-processing. However, besides robustness, there is a variety of use cases requiring high accuracy as well as high temporal resolution. Application in parametric audio coding~\cite{purnhagen2000hiln} requires the parameterization of pitch bends and vibratos. Furthermore, source separation algorithms aiming at the extraction of harmonic sources from the mixture can make use of an instantaneous $F0$ estimate~\cite{virtanen2008combining, stoterunison}. There are already contributions addressing the improvement of accuracy of $F0$ estimates such as~\cite{medan1991super} which introduced a non-integer similarity model or~\cite{christensen2007joint} which belongs to the group of parametric pitch estimators.
+
+We propose to improve the output of already existing algorithms in terms of temporal resolution as well as accuracy by iterative time warping. Two other contributions already make use of time warping in the context of pitch estimation. Resch et al.~\cite{resch} proposed an instantaneous pitch estimation technique which optimizes a warping function that would lead to a constant pitch signal. Their optimization framework minimizes a cost function specifically targeted for speech signals. Azarov et al.\ have introduced an improved version of RAPT (called iRAPT1 and iRAPT2) which also uses time warping to some extent~\cite{azarov2012instantaneous} but misses an additional step as will be shown in Section~?.
+Our main contribution is a time warping based refinement method that is applicable to any F0 estimate. Our method emphasizes the strengths of different estimators and thus can even help to improve their robustness. In the following, we will describe the refinement method (Section~?) and show the experimental evaluation and its results (Section~?).
+
+
+Depending on the algorithm and application, there are several reasons why $F0$ estimators deliver a less than ideal performance. When the signal tested is not tonal --- like in unvoiced parts of speech --- a proper estimation is impossible. If the estimator is optimized on purely harmonic signals, inharmonicity or frequency jitter of the input signal will increase the estimation error. Many of these reasons will lead to errors on the coarse level of the estimate (like octave jumps). The fine level accuracy is mostly influenced by parameters like time and/or frequency resolution of the estimator. A signal containing rapid changes of the frequency or modulations like ``vibrato'' is therefore more affected regarding fine level error. To obtain a more accurate estimate, we propose to time warp the signal by using the coarse level estimate towards a more constant pitch. The underlying assumption here is that pitch estimators generally perform better the more constant the pitch is.
+In this section, we formulate the mathematical background of the time warping and present our proposed method for obtaining a refined $F0$ estimate.
+% \subsection{Initial $F0$ estimate}
+% \label{sub:initial_estimate}
+
+The first step is to calculate an initial $F0$ estimate by using an existing pitch estimator. Note that we later require the estimate to be defined for every input sample, thus $\Pitch[n]$ may require interpolation. In our pipeline, we use linear interpolation for all estimators. $F0$ estimators, like YIN~\cite{de2002yin}, also provide a measure of confidence $c[n]$.
+\subsection{Time warping}
+\label{sub:Refinement}
+
+In this step, we apply \emph{time warping} which refers to a strictly monotonous mapping
+of the natural or linear time scale $t$ to a warped time scale $\tau$ via a
+mapping function $\tau=w(t)$.
+The mapping between the two domains for the continuous time case then is:
+\begin{equation}\label{eq:contWarpedTime}
+\breve{x}(\tau)=x(w^{-1}(\tau)), \quad x(t)=\breve{x}(w(t))
+\end{equation}
+where $x(t)$ is the linear-time signal and $\breve{x}(\tau)$ is the warped-time signal.
+For the discrete time case, the signals in both linear-time and warped-time domains are sampled
+using a constant sample interval $T$. With sample indices $\nu$ and $n$ for the warped-time domain and linear time-domain respectively, the warping is performed by
+
+\begin{align}
+\breve{x}[\nu] &= x(\sigma[\nu]) & \textrm{ with } & \sigma[\nu] = w^{-1}(\nu T), \\
+\intertext{and the inverse warping by}
+x{}[n] &= \breve{x}(s[n]) & \textrm{ with } & s{}[n] = w(nT).
+\end{align}
+
+% \subsubsection{Warp contour}
+% \label{subs:warp_contour}
+
+In our application, the warp map $w(t)$ is constructed in such a way that the instantaneous changes in frequency of the signal in the linear time domain are minimized in the warped time domain. For this, we derive the map from an estimate of the fundamental frequency $F0$.
+
+For processing, the actual information needed is not the absolute instantaneous fundamental frequency but only its change over time. This means that the warping contour can be derived from an algorithm which may differ from the actual $F0$ estimator.
+
+The discrete time warp map $w[n]$ is the scaled sum of the relative
+frequency contour (the \emph{warp contour}) $W[n]$:
+\begin{equation}
+w[n]=N \frac{\sum^n_{l=0}{W[l]}}{\sum^{N-1}_{k=0}{W[k]}}  \qquad 0\leq n<N,
+\end{equation}
+where $N$ being the number of samples of the signal under consideration.
+As stated above the full warp map $w(t)$ is then obtained by linearly interpolating $w[n]$. From the requirements for the mapping function it follows that $W[n]$ has to be greater than zero for all $n$. In the case of a perfect $F0$ estimate, the signal warped with the resulting contour would have a constant $F0$ equal to the average $\bar{W}$.
+
+In the scope of this work, the warping is applied globally over the full length of the signals under consideration. An optional confidence measure $c[n]$ can be incorporated for a processed version of the warping contour. This ensures that the warp contour has no discontinuities that result in additional artifacts after re-sampling. If the estimator does not provide such a measure, a separate voiced/unvoiced detection algorithm can be used. To obtain a warp contour $W[n]$ from an $F0$ estimate we propose the following steps: \textbf{(A)} initialize the warp contour with $F0$ estimate $W = \Pitch$, \textbf{(B)} find contour segments with high confidence, i.e. $c[n]$ exceeds a given threshold, \textbf{(C)} linearly connect the high confidence contour segments and \textbf{(D)} set start and end of warp contour to a constant value if confidence is below threshold. That way warping according to $F0$ is applied in the regions of high confidence without significantly affecting the gaps in-between.
+
+\subsection{Source Extraction}
+\kant[1-12]

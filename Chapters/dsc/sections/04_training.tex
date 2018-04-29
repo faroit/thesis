@@ -1,0 +1,104 @@
+%!TEX root = ../stoeter_sourcecount.tex
+\section{Training}%
+\label{sec:training}
+
+To successfully train and evaluate the proposed DNNs, due to the number of parameters, a large amount of training data is required.
+In this section we introduce relevant speech corpora and describe how the training dataset was assembled.
+
+\subsection{Speech Corpora and Annotations}%
+\label{ssec:corpus}
+% * Libri Speech
+% * Describe the used VAD
+To date many available speech datasets contain recordings where only a single speaker is active.
+Datasets that include overlapped speech segments, either lack accurate annotations because the annotation of speech onsets and offsets in mixtures is cumbersome for humans as shown in Section~\ref{sec:introduction} or lack a controlled auditory environment such as in TV/broadcasting scenarios~\cite{Gravier12}.
+Since a realistic dataset of fully overlapped speakers is not available, we  chose to generate synthetic mixtures.
+We recognize that in a simulated ``cocktail-party'' environment, mixtures lack the conversational aspect of human communication but provide a controlled environment which helps to understand how a DNN solves the count estimation problem.
+As we aim for a speaker independent solution, we selected a speech corpus with a high number of different speakers instead of large number of utterances, yielding to a larger number of unique mixtures.
+For training we selected \emph{LibriSpeech clean-360}\ \cite{panayotov15} which includes 363 hours of clean speech of English utterances from 921 speakers (439 female and 482 male speakers) sampled at 16 kHz.
+% Compared to \emph{LibriSpeech}, \emph{TIMIT} is of lower recording quality and \emph{THCHS} represents mandarin speech.
+% \par
+% As revealed in Equation~\ref{eq:definition_k}, the maximum number of concurrent speakers \(cardinality\) requires annotation of the activity of each individual speaker.
+% Even though many corpora come with word and phonemes annotation, they often are not consistent across different corpora.
+% We therefore generated annotations based on a voice activity detection algorithm (VAD). As we rely on a robust VAD estimate, we found the implementation from the \emph{Chromium Web Browser} as part of the WebRTC Standard~\footnote{WebRTC 1.0: Real-time Communication Between Browsers W3C Editor's Draft 05 June 2017} to yield good results.
+In the further course of this work (see Section~\ref{sec:evaluation}), we also present the results from test sets of two other datasets as listed in Table~\ref{tab:corpora}.
+Furthermore, we included non-speech examples from the TUT Acoustic Scenes dataset~\cite{Mesaros16} in our training data to avoid using zero input samples for \(\cardinality = 0\) to increase the robustness against noise.
+
+% \subsection{Training Data Set}%
+% \label{ssec:train}
+%
+% To generate a single training sample, a tuples of speech mixtures and their ground truth speaker count \(\cardinality \), we draw a unique set of \(\cardinality \) speakers from the corpus.
+% For each of the speakers we then select a random utterance, resampled to 16 kHz sampling rate and apply VAD.\@
+% The VAD method was configured using default parameters using a hop size of 10~ms.
+% Further, the VAD estimate was used to remove silence in the beginning and the end of an utterance recording.
+% In the next step, more utterances from the same speaker are drawn from the corpus until the desired duration is reached.
+% Both, the audio recording and the VAD annotation of each utterance is concatenated.
+% The procedure is repeated for all speaker so that \(\cardinality \) time domain signals are created.
+% Signals are mixed according to Equation~\ref{eq:mixing_model} and peak normalised to avoid clipping.
+% Mixtures are then transformed to a time-frequency matrix \(X \in D \times F\).
+% The VAD matrix \(v_{nl}\) is upsampled in temporal direction using nearest neighbour interpolation to match \(D\).
+% The ground truth output \(\cardinality \) is then computed based on Equation~\ref{eq:definition_k}.
+% \par
+% We follow the proposal of~\cite{wang15} and include non-speech examples in our training data to avoid using zero input samples for \(\cardinality = 0\) and also to increase the robustness against noise.
+% We used the TUT Acoustic Scenes dataset~\cite{Mesaros16} to create training samples using the same procedure as described above.
+% As environmental sounds could include speech, we omitted obvious subsets such as \texttt{cafe/restaurant}, \texttt{grocery store} and \texttt{metro station}.
+% Additionally we used the VAD to verify if any sample contains speech.
+\begin{table}
+  \centering
+  \caption{Overview of speech corpora used in this work.}%
+\label{tab:corpora}
+\begin{tabular}{llrrr}
+  \toprule
+  & & \multicolumn{3}{c}{Number of Speakers} \\
+  \cmidrule(r){3-5}
+  Name & Language &  Train & Valid. & Test\\
+  \midrule
+  LibriSpeech~\cite{panayotov15} & English & 921 & 40 & 40 \\
+  TIMIT~\cite{TIMIT93} & English & 462 & 24 & 168 \\
+  THCHS~\cite{THCHS15} & Mandarin & 30 & 10 & 10 \\
+  \bottomrule
+  \end{tabular}
+\end{table}
+
+\par
+A single training tuple \( \left\{\mathbf{X}, k\right\} \) is generated by a synthetic speech mixture and their ground truth speaker count \(\cardinality \).
+The mixtures are formed from random utterances of different speakers where silence in the beginning and end was removed.
+Signals are mixed according to Equation~\ref{eq:mixing_model}, peak normalized and then transformed to a time-frequency matrix \(X \in D \times F\).
+Based on a voice activity detection algorithm (VAD), we used an implementation based on the WebRTC Standard~\cite{webrtc} where we computed the ground truth output \(\cardinality \) via  Equation~\ref{eq:definition_k}.
+All samples are normalized to the average Euclidean norm of \(duration\) frames to be robust against gain variations as proposed by~\cite{Uhlich15}.
+Furthermore the data was scaled to zero mean and unit standard deviation across the frequency dimension \(F\) over the full training data.
+Scaling parameters were saved for validation and test.
+
+% \subsubsection{Standardization, Normalization}%
+% \label{ssec:norm}
+%
+% As our application more closely relates to source separation we want our trained DNN system to be robust against gain variations.
+% We therefore find it important that the DNN can not leverage the gain factors of the mixture.
+% We found that the averaged energy of one bin across \(duration\) already is a solid indicator for the number of speakers.
+% In fact, in early experiments of the methods described in~\cite{sayoud10, andrei15} we were only able to reproduce their results when no normalization was applied.
+% To accommodate these findings, we normalize \(\mathbf{X}\) to the average Euclidean norm of \(duration\) frames as proposed by~\cite{Uhlich15}.
+% Additionally, as common in machine learning, we scale the normalised input representation so that the feature dimension \(F\) have zero mean and unit variance/standard deviation across the whole training dataset (Standardization).
+
+\subsection{Training Procedure}%
+\label{ssec:parameters}
+% * Optimizer
+% other things
+% To train each network we use Poisson sampling to balance the number of samples \(T_{ \cardinality}\) for each \(\cardinality \).
+For all experiments we chose a medium sized training dataset of \(\cardinality \in \textrm{\{0, \ldots, 10\}}\) forming a total of \(T_{\textrm{train}} = 20.020\) mixtures  (1820 per \(k\)), each containing 10 seconds of audio, resulting in 55.55 hours of training material.
+For each sample fed into the network, we select a random excerpt of duration \(D\) from each mixture.
+That way, for each epoch, the network is seeing slightly different samples, reducing the number of redundant samples and thus helping to speed up the stochastic gradient based training process.
+\footnote{Note that for the validation and testing, excerpts are fixed.}
+A similar training procedure is detailed in~\cite{schluter16, stoeter17}.
+Each architecture is trained using the ADAM optimizer~\cite{kingma14} (learning rate: \(1 \cdot 10^{-3}\), \(\beta_1=0.9\), \(\beta_2=0.999\), \(\epsilon=1 \cdot 10^{-8}\)) using mini-batches of size 32.
+Our training procedure verifies that all samples within a batch are from a different set of speakers.
+In addition to the training dataset, we created a fully separated validation dataset of \(T_{\textrm{valid}} = 5720\) samples using a different set of speakers from \emph{LibriSpeech dev-clean}.
+Early stopping (\(patience = 10\)) is applied by monitoring the validation loss to reduce the effect of overfitting.
+% As we are interested in evaluating different input durations, we need to accommodate this our training procedure where we, instead of using the full duration of one input sample, may select an excerpt of duration \(D\).
+% Now instead iterating with hop size of 1 resulting in many redundant (slightly shifted) samples, we instead randomly select the offset of this excerpt for each sample.
+% This procedure verifies that all samples within a batch are from different speakers.
+% After every epoch the offsets are being reset so that each epoch is seeing slightly different samples (in different order) of the same training dataset.
+% Note that this is not the case for the evaluation and test dataset where the offsets are fixed using an initial seed.
+% We found this procedure (also used in~\cite{schluter16}) help to speed up the stochastic gradient based training process.
+% Additionally it allows us to evaluate on different excerpt durations \(D\), while keeping the training dataset fixed.
+Training never exceeded more than 50 epochs.
+\par
+We used the Keras~\cite{chollet2015keras} framework and trained on multiple instances of Nvidia GTX 1080 architecture.

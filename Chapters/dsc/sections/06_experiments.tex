@@ -1,0 +1,172 @@
+%!TEX root = ../stoeter_sourcecount.tex
+\section{Evaluation Results}%
+\label{sec:evaluation}
+In this section we perform several experiments on the proposed CRNN model that has been selected in the previous section.
+We assess the performance of this model by showing the results of three experiments that augment the test data by
+choosing a different dataset, varying amplitude gain levels and introduce reverberation.
+These results also include several baseline methods.
+Furthermore we present the effect of training sample duration and compare the results from the DNN to human performance gathered in an listening experiment.
+
+\subsection{Baselines}%
+\label{ssec:baselines}
+In order to make a meaningful comparison to the CRNN model we propose several baseline methods.
+Since we are dealing with a novel task description, related speaker count estimation techniques like those introduced in Section~\ref{sec:introduction}, can hardly be used as baselines.
+Specifically,~\cite{xu13} would not work on fully overlapped speech,~\cite{andrei15_interspeech} does not scale to the size of our dataset, since it requires to cross correlate the full database against another.
+Finally,~\cite{sayoud10} proposes a feature but does not employ a fully automated system that can be used in a data-driven context.
+We therefore decided to propose our own baseline methods.
+
+\paragraph*{\textbf{VQ}}
+This method uses a feature proposed by Sayoud~\cite{sayoud10} based on 7th MEL filter coefficient (\(\mbox{MFCC}_7\)) which was shown to encode sufficiently important speaker related information.
+The temporal dimension of \(X\) is squashed down by subtracting the mean and standard deviation as \(X = \overline{\mbox{MFCC}_7} - STD(\mbox{MFCC}_7) \in \mathbb{R}^{1}\).
+In~\cite{sayoud10} the mapping from \(X \Rightarrow \cardinality \) is done by manually thresholding \(X\).
+To translate this into a data-driven approach, we employed a vector quantizer (using k-means) to get an optimal mapping with respect to the sum of squares criterion.
+Further, as preprocessing, we added the same normalization as for our proposed CRNN which in turn decreases the performance of the method significantly as it is highly gain dependent.
+
+\paragraph*{\textbf{SVM, SVR}}
+We found that the information encoded in the 7th \(\mbox{MFCC}\) coefficient as used in the \textbf{VQ} baseline, may not be sufficient enough to  explain the high variability in our dataset.
+This is especially important for larger speaker counts.
+We therefore extended \textsc{VQ} by including all 20 MFCCs but using the same temporal dimensionality reduction, resulting in \(X = \overline{MFCC} - STD(MFCC) \in \mathbb{R}^{20}\).
+To deal with significantly increased dimensionality of \(X\), we used a support vector machine (SVM) with a radial basis function (RBF) kernel.
+Similarly to our proposed DNN based methods, we treat the output as either a classification problem or a regression problem through the use of support vector regression (SVR).
+
+\subsection{Results on Gain Variations}%
+\label{ssec:exp_random_gains}
+% * Pick: STFT, Classification
+% * 0db =1.0 gain randomly varied between 0.5 and 2.0
+% * Performance drops slightly
+%
+% * --> CNN and CRNN, are most robust to gain variation
+\begin{table*}[h]
+\caption{Averaged MAE results of different methods on several datasets for \( k = [0 \ldots 10] \) with $0~\mbox{dB}$ SNR and Random gains (up to $\pm 3~\mbox{dB}$) SNR) as well as reverberation. Bold face indicates the best performing method.}
+\begin{center}
+\begin{tabular}{lcccccccc}
+\toprule
+Trained on & \multicolumn{7}{c}{\emph{LIBRI 0~dB SNR}} & \multicolumn{1}{c}{\emph{LIBRI-Reverb}} \\
+\cmidrule(r){2-8} \cmidrule(r){9-9}
+Test Set & \multicolumn{3}{c}{LIBRI} & \multicolumn{2}{c}{THCS10} & \multicolumn{2}{c}{TIMIT} & \multicolumn{1}{c}{LIBRI-Reverb} \\
+\cmidrule(r){2-4} \cmidrule(r){5-6} \cmidrule(r){7-8} \cmidrule(r){9-9}
+Variation &     – &     $\pm 3~\mbox{dB}$ SNR  & Reverb &  – &     $\pm 3~\mbox{dB}$ SNR  &     – &  $\pm 3~dB$ SNR & Reverb \\
+\midrule
+CRNN    &  $\mathbf{0.27 \pm{0.22}}$ & $\mathbf{0.43 \pm{0.39}}$ & $1.63 \pm{0.22}$ & $\mathbf{0.36 \pm{0.25}}$  & $\mathbf{0.50 \pm{0.46}}$ & $\mathbf{0.31 \pm{0.33}}$ & $\mathbf{0.52 \pm{0.52}}$  &  $\mathbf{0.48 \pm{0.22}}$\\
+SVR     &  $0.58 \pm{0.27}$ & $0.61 \pm{0.31}$ & $\mathbf{0.76 \pm{0.35}}$ & $0.69 \pm{0.28}$ &  $0.73 \pm{0.32}$ & $0.70 \pm{0.45}$ & $0.62 \pm{0.36}$ & $0.71 \pm{0.35}$ \\
+SVC     &  $0.63 \pm{0.39}$ & $0.66 \pm{0.37}$ & $0.85 \pm{0.51}$ & $0.77 \pm{0.37}$ &  $0.77 \pm{0.36}$ & $0.89 \pm{0.75}$ & $0.76 \pm{0.61}$ & $0.78 \pm{0.45}$ \\
+VQ \cite{sayoud10} &  $2.41 \pm{1.08}$ & $2.41 \pm{1.06}$ & $2.41 \pm{1.08}$ & $2.98 \pm{1.62}$ &  $2.98 \pm{1.60}$ & $2.13 \pm{1.06}$ & $2.15 \pm{1.07}$ & $2.41 \pm{1.13}$ \\
+MEAN    &  $2.73 \pm{1.63}$ & $2.73 \pm{1.63}$ & $2.73 \pm{1.63}$ & $2.73 \pm{1.64}$ &  $2.73 \pm{1.63}$ & $2.73 \pm{1.63}$ & $2.73 \pm{1.63}$ & $2.73 \pm{1.63}$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\label{tab:expgainreverb}
+\end{table*}
+In our parameter optimization in Section~\ref{sec:hyperparameters} we evaluated on mixtures of 0~dB SNR, so that all speakers are equalized to the same energy level.
+In a more realistic scenario, speakers often differ in volume between utterances.
+We simulate this by introducing gain factors between 0.5 and 2.0, randomly applied on the 0~dB SNR sources, hence resulting in $[-3~dB \ldots 3~dB]$ SNR.
+We applied this variation only on the test data to evaluate how models generalize to this updated condition.
+The results of this experiment are presented in Table~\ref{tab:expgainreverb}.
+\textbf{MEAN} corresponds to the case when \(\cardinality = 5\) is predicted for all test samples.
+Our results indicate that augmenting the mixture gains does have an impact on performance, for both, our proposed CRNN model as well as the baseline methods.
+E.g.\ for the CRNN model the performance drops by 60\% from 0.27 MAE to 0.43 MAE on the \emph{LIBRI Speech} test set, which is still about 40 \% better than the second best performing method \emph{SVR} which drops from 0.58 MAE to 0.61 MAE.\@
+
+\subsection{Results on Different Datasets}%
+\label{ssec:r_datasets}
+We also present results on two additional datasets.
+Again, we only changed the test data; all networks were trained on \emph{LIBRI Speech}.
+Compared to \emph{LIBRI Speech}, the \emph{TIMIT} database has an overall lower recording quality.
+This is reflected by our results where the performance in MAE drops only slightly between these two datasets.
+Interestingly, even when we look at the results of the Mandarin language \emph{THCS10} dataset, performance drops only slightly.
+More precisely, for our proposed CRNN model, test performance on \emph{THCS10} is even better than on its own \emph{LIBRI} dataset with gain variations.
+These results show that the trained model is speaker and language independent.
+
+% * Pick best: CRNN, STFT, Classification
+% * TIMIT (slight drop)
+% * German Dataset (medium drop)
+% * THCS Chinese (large drop)
+
+\subsection{Effect of Reverberant Signals}%
+\label{ssec:exp_reverb}
+% * Pick best: CRNN, STFT, Classification
+% * Generated simulated using @hab RIR Generator
+% * test room: [3.5, 4.5, 2.5]
+% * receiver position at [1, 1, 1]
+% * generating 350 RIRs for each room: between 100ms and 500ms
+% * generating 10 unique source positions for each room: min distance 0.1 to walls
+% * --> Significant Performance Drop (diff 2.0 MAE)
+% * Retrained using train room: [3, 4, 2] and valid room: [4, 5, 3]
+% * Performance back to (0.6 MAE)
+Different acoustical conditions such as increased reverberation time was shown~\cite{Pasha17_reverb} to have a large effect in speaker counting.
+To analyze this effect, different acoustic conditions were simulated by generating the room impulse responses using the image method~\cite{Allen79, Habets16}.
+For this experiment we set up an acoustical room with dimension ($3.5~\mbox{m} \times 4.5~\mbox{m} \times 2.5~\mbox{m}$)
+The microphone was positioned at (1m, 1m, 1m).
+For the mentioned room, 350 different reverberation times were selected uniformly sampled between 0.1 and 0.5 seconds.
+For each of these reverberation times, we generated unique room impulse responses that correspond to individual source positions which have minimum distance $0.1~\mbox{m}$ to the walls and are otherwise positioned randomly on the (X, Y, 1m) plane.
+Each speaker's signal was convolved with a randomly selected room impulse response before mixing.
+Results, again, are shown in Table~\ref{tab:expgainreverb}.
+For the first time we can see that the CRNN model significantly drops in performance from 0.27 MAE to 1.64 MAE, whereas the SVR and SVM baselines are only affected slightly.
+This is expected as the baselines do not have access to the temporal context that the CRNN has.
+More precisely, the baselines are using a temporal aggregation of all frames, whereas the CRNN is based on smaller (\(3 \times 3\)) convolutional filter operations that are able to capture the room acoustics as well.
+If we assume that our trained deep learning model is fully speaker independent, a mixture of two utterances from the same speaker would get the same count estimate as two different speakers.
+Hence, reverberation then leads to overestimation.
+This effect can be seen in the results of the CRNN which overestimates even for \(k = 1\), hence increasing the MAE significantly.
+\par
+To further investigate whether the overestimation can be reduced via training with reverberant samples, we created a separate set of room impulse responses for the training data set with different room dimensions so that the model does not memorize to learn the acoustical conditions from the training data set.
+From the results shown in the last column of Table~\ref{tab:expgainreverb} we can see that the retrained CRNN is able to outperform the baselines again.
+Therefore, when retrained with reverberant samples, the proposed model is able to better discriminate between reverberant component of the same speaker and contributions from different speakers.
+For robustness against different acoustic conditions, it is essential to include reverberant samples in the training dataset.
+
+\subsection{Effect of Duration}%
+\label{ssec:exp_duration}
+% * Pick best: CRNN, STFT, Classification
+% * (Re) Trained and evaluated on (1s...9s)
+% * Longer context
+% * Shorter context
+In our scenario  the true number of speakers depends on the input duration \(D\), thus for longer segments it is likely that a source is active at least once, whereas for very short segments.
+In our last experiment we therefore want to address the influence of the input duration length \(D\).
+In a real world application this parameter would be chosen as small as a possible, because a longer input duration adds both algorithmic and computational delay to a real time system.
+In a small experiment we took the proposed CRNN and retrained it using a different number of input frames ranging from 100 to 900 frames (corresponding to one to nine seconds of audio).
+For each input duration we trained the CRNN with three different initial seeds.
+Results are shown in Figure~\ref{fig:timesteps}.
+It can be seen that five second duration is a good trade-off between performance and delay.
+If latency is critical, keeping \(D\) above 2s is recommended for sufficient results.
+
+\begin{figure}[h!]
+    \centering
+    \centering
+    \begin{adjustbox}{width=0.8\columnwidth}
+      \input{Chapters/dsc/figures/duration}
+    \end{adjustbox}
+    \caption{Evaluation of trained CRNN networks over different input duration length \(D\). Error bars show 95\% confidence intervals.}%
+    \label{fig:timesteps}
+ \end{figure}
+
+\subsection{Listening Experiment}%
+\label{ssec:listening_experiment}
+% * Reference existing listening tests which report the same thing
+% * Are we really doing it? We can decide on this once the first full draft is ready.
+To compare the results of our trained CRNN on our synthesized dataset to human performance, we chose to reproduce the experiments made in~\cite{kawashima15, kashino96}.
+Kawashima et al.\ found in extensive experiments using Japanese speech samples, that participants were able to correctly estimate up to three simultaneously active speakers without using any spatial cues.
+We conducted our own study using the simulated data from the \emph{LIBRI Speech 0dB SNR} set mentioned earlier in Section~\ref{ssec:corpus}.
+We therefore randomly selected 10 samples for each \(\cardinality \in [0, \ldots, 10]\), resulting in 100 mixtures of 5~seconds duration each.
+The experiment was done using \emph{between-group design}, where one group (blind experiment) did not get any prior information about the maximum number of speakers in the test set (similar to~\cite{kawashima15}).
+However, the maximum number of speakers was revealed to the other group (informed experiment), which is more related to our data-driven, classification based CRNN.
+Further, none of the participants received any feedback about the error made during the trials.
+Similarly to~\cite{kawashima15}, lab based experiments were conducted with ten participants for each group (\(n=20\)) using a custom designed web-based software.\footnote{The experiment is made available through the accompanying website.}
+In all previous experiments, we used the mean absolute error metric which does not reveal over and underestimation errors.
+We therefore decided to report the average response for each group of \(k\).
+The results of our lab based experiments are shown in Figure~\ref{fig:experiment}.
+The results for up to three speakers indicate that humans perform similarly (or better in terms of variance) compared to our proposed CRNN model.
+Results of the blind experiment show that underestimation becomes apparent for \(k > 3\).
+As a reference, we also included the average results from~\cite{kawashima15} (Experiment 1, 5~seconds durations) which shows similar results compared to our blind experiment.
+For larger speaker counts, the gap between humans and algorithm is almost three speakers on average.
+Interestingly, the results of the informed experiment reveal that this gap closes down to an average difference of one speaker.
+Finally, we can report that the machine model reached superhuman performance. However, with extensive training, humans might be able to perform on par.
+When we asked participants about the strategy they pursued, many reported that with more than three speakers it is not possible to identify (and count) the speakers but rather compare the \emph{density} of the speech to that of 1-3 speakers.
+For higher speaker counts, participants reported that the integrated phoneme activity was a relevant cue, supporting our previously mentioned hypothesis.
+
+\begin{figure}[ht!]
+    \centering
+    \begin{adjustbox}{width=0.7\columnwidth}
+      \input{Chapters/dsc/figures/responses}
+    \end{adjustbox}
+    \caption{Average responses from humans (\emph{EXP} and \emph{Kawashima}
+~\cite{kawashima15}) compared to our proposed CRNN. Error bars show 95\% confidence intervals.}%
+    \label{fig:experiment}
+ \end{figure}

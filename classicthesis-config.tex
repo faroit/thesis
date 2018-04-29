@@ -32,28 +32,28 @@
   eulerchapternumbers=true, % use AMS Euler for chapter font (otherwise Palatino)
   linedheaders=false,       % chaper headers will have line above and beneath
   floatperchapter=true,     % numbering per chapter for all floats (i.e., Figure 1.1)
-  eulermath=false,  % use awesome Euler fonts for mathematical formulae (only with pdfLaTeX)
+  eulermath=true,  % use awesome Euler fonts for mathematical formulae (only with pdfLaTeX)
   beramono=true,    % toggle a nice monospaced font (w/ bold)
-  % palatino=false,   % deactivate standard font for loading another one, see the last section at the end of this file for suggestions
+  palatino=false,   % deactivate standard font for loading another one, see the last section at the end of this file for suggestions
 }{classicthesis}
 
 
 % ****************************************************************************************************
 % 2. Personal data and user ad-hoc commands
 % ****************************************************************************************************
-\newcommand{\myTitle}{A Classic Thesis Style\xspace}
-\newcommand{\mySubtitle}{An Homage to The Elements of Typographic Style\xspace}
+\newcommand{\myTitle}{Analysis and Separation of Time and Frequency Overlapped Monoaural Audio Signals\xspace}
+\newcommand{\mySubtitle}{test\xspace}
 \newcommand{\myDegree}{Doktor-Ingenieur (Dr.-Ing.)\xspace}
-\newcommand{\myName}{André Miede\xspace}
-\newcommand{\myProf}{Put name here\xspace}
+\newcommand{\myName}{Fabian-Robert Stöter\xspace}
+\newcommand{\myProf}{Prof. Dr.-Ing. Bernd Edler\xspace}
 \newcommand{\myOtherProf}{Put name here\xspace}
 \newcommand{\mySupervisor}{Put name here\xspace}
-\newcommand{\myFaculty}{Put data here\xspace}
-\newcommand{\myDepartment}{Put data here\xspace}
-\newcommand{\myUni}{Put data here\xspace}
-\newcommand{\myLocation}{Saarbrücken\xspace}
-\newcommand{\myTime}{December 2017\xspace}
-\newcommand{\myVersion}{version 4.5}
+\newcommand{\myFaculty}{International Audio Laboratories Erlangen\xspace}
+\newcommand{\myDepartment}{\xspace}
+\newcommand{\myUni}{Universität Erlangen-Nürnberg\xspace}
+\newcommand{\myLocation}{Montpellier\xspace}
+\newcommand{\myTime}{April 2018\xspace}
+\newcommand{\myVersion}{version 0.1}
 
 % ********************************************************************
 % Setup, finetuning, and useful commands
@@ -97,6 +97,27 @@
 \PassOptionsToPackage{fleqn}{amsmath}       % math environments and more by the AMS
   \usepackage{amsmath}
 
+  \usepackage{float}
+  \usepackage{amsmath,amssymb,amsfonts,amsthm}
+  \usepackage{euscript}
+
+  %----------------------
+  \usepackage{tikz}
+  \usetikzlibrary{positioning,fit, calc}
+  \usepackage{pgfplots}
+
+  \pgfplotsset{mystyle/.style={%
+              ticks=none,
+              width=9.51339838214984in,
+              height=6.74282549817947in,
+              axis on top,
+              scale only axis,
+              xmin=0.5,
+              xmax=1121.5,
+              ymin=0.5,
+              ymax=273.5,
+              scale=0.15,
+              axis lines=middle}}
 % ********************************************************************
 % General useful packages
 % ********************************************************************
@@ -117,9 +138,9 @@
   \def\bflabel#1{{\acsfont{#1}\hfill}}
   \def\aclabelfont#1{\acsfont{#1}}
 % ****************************************************************************************************
-%\usepackage{pgfplots} % External TikZ/PGF support (thanks to Andreas Nautsch)
-%\usetikzlibrary{external}
-%\tikzexternalize[mode=list and make, prefix=ext-tikz/]
+\usepackage{pgfplots} % External TikZ/PGF support (thanks to Andreas Nautsch)
+\usetikzlibrary{external}
+\tikzexternalize[mode=list and make, prefix=ext-tikz/]
 % ****************************************************************************************************
 
 
@@ -139,7 +160,6 @@
 \captionsetup{font=small} % format=hang,
 \usepackage{subfig}
 % ****************************************************************************************************
-
 
 % ****************************************************************************************************
 % 5. Setup code listings
@@ -177,6 +197,8 @@
   \usepackage{hyperref}  % backref linktocpage pagebackref
   \usepackage{graphicx}
 
+% Must use this command BEFORE you begin document!
+\graphicspath{{Chapters/dafx}}
 
 % ********************************************************************
 % Hyperreferences
@@ -185,7 +207,7 @@
   %draft, % hyperref's draft mode, for printing see below
   colorlinks=true, linktocpage=true, pdfstartpage=3, pdfstartview=FitV,%
   % uncomment the following line if you want to have black links (e.g., for printing)
-  %colorlinks=false, linktocpage=false, pdfstartpage=3, pdfstartview=FitV, pdfborder={0 0 0},%
+  %mlinks=false, linktocpage=false, pdfstartpage=3, pdfstartview=FitV, pdfborder={0 0 0},%
   breaklinks=true, pdfpagemode=UseNone, pageanchor=true, pdfpagemode=UseOutlines,%
   plainpages=false, bookmarksnumbered, bookmarksopen=true, bookmarksopenlevel=1,%
   hypertexnames=true, pdfhighlight=/O,%nesting=true,%frenchlinks,%
@@ -253,7 +275,6 @@
 % Last, but not least...
 % ********************************************************************
 \usepackage{classicthesis}
-% ****************************************************************************************************
 
 
 % ****************************************************************************************************
@@ -277,7 +298,7 @@
 %\usepackage{cfr-lm} %
 %\usepackage[urw-garamond]{mathdesign} <-- no osf support :-(
 %\usepackage[default,osfigures]{opensans} % scale=0.95
-%\usepackage[sfdefault]{FiraSans}
+% \usepackage[sfdefault]{FiraSans}
 % \usepackage[opticals,mathlf]{MinionPro} % onlytext
 % ********************************************************************
 %\usepackage[largesc,osf]{newpxtext}
@@ -287,3 +308,26 @@
 % https://bitbucket.org/amiede/classicthesis/issues/45/problema-testatine-su-classicthesis-style
 % ********************************************************************
 % ****************************************************************************************************
+
+\usepackage{siunitx}
+
+\floatstyle{ruled}
+\newfloat{algorithm}{tbp}{loa}
+\providecommand{\algorithmname}{Algorithm}
+\floatname{algorithm}{\protect\algorithmname}
+
+% Example definitions.
+\def\x{{\mathbf{x}}}
+\def\L{{\cal{L}}}
+\def\Pitch{{F}}
+
+
+% Official addiontional AudioLabs colors
+\definecolor{almagenta}{RGB}{210,85,255}
+\definecolor{alturquise}{RGB}{43,174,91}
+\definecolor{algreen}{RGB}{111,217,0}
+\definecolor{alturquisedark}{RGB}{0,151,164}
+
+% Example definitions.
+% --------------------
+\providecommand{\e}[1]{\ensuremath{\times 10^{#1}}}

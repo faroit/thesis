@@ -41,12 +41,13 @@
 % Note: Make all your adjustments in here
 %*******************************************************
 \input{classicthesis-config}
+\input{packages}
 
 %********************************************************************
 % Bibliographies
 %*******************************************************
 \addbibresource{Bibliography.bib}
-\addbibresource[label=ownpubs]{AMiede_Publications.bib}
+% \addbibresource[label=ownpubs]{AMiede_Publications.bib}
 
 %********************************************************************
 % Hyphenation
@@ -71,7 +72,7 @@
 \include{FrontBackmatter/Titlepage}
 \include{FrontBackmatter/Titleback}
 \cleardoublepage\include{FrontBackmatter/Dedication}
-%\cleardoublepage\include{FrontBackmatter/Foreword}
+\cleardoublepage\include{FrontBackmatter/Foreword}
 \cleardoublepage\include{FrontBackmatter/Abstract}
 \cleardoublepage\include{FrontBackmatter/Publications}
 \cleardoublepage\include{FrontBackmatter/Acknowledgments}
@@ -85,19 +86,88 @@
 %\setcounter{page}{90}
 % use \cleardoublepage here to avoid problems with pdfbookmark
 \cleardoublepage
-\part{Some Kind of Manual}\label{pt:manual}
-\include{Chapters/Chapter01}
+% \include{Chapters/DAFx14_StoeterEdler}
 \cleardoublepage
 \ctparttext{You can put some informational part preamble text here.
 Illo principalmente su nos. Non message \emph{occidental} angloromanic
-da. Debitas effortio simplificate sia se, auxiliar summarios da que,
+da. Debitas effortio simplbificate sia se, auxiliar summarios da que,
 se avantiate publicationes via. Pan in terra summarios, capital
 interlingua se que. Al via multo esser specimen, campo responder que
 da. Le usate medical addresses pro, europa origine sanctificate nos se.}
-\part{The Showcase}\label{pt:showcase}
-\include{Chapters/Chapter02}
+
+\include{Chapters/Introduction}
+
+\part{fundamentals}
+
+\section{Fundamentals of Overlapped Signals}
+\kant[1-12]
+\section{Signal Representations}
+\kant[1-8]
+\subsection{Time domain signal representation}
+\kant[1-6]
+\subsection{Time-Frequency Representations}
+\kant[1-6]
+
+\section{Specificies of Real World Overlapped Audio Signals (Music, Speech)}
+\kant[1-6]
+
+\subsection{Harmonicity and Pitch}
+\kant[1-6]
+
+\subsection{Temporal aspects}
+\kant[1-6]
+
+\subsection{Modulational Aspects}
+\kant[1-6]
+
+\subsection{Acoustic aspects}
+\kant[1-6]
+
+\subsection{Subjective aspects}
+\kant[1-6]
+
+
+\section{Scenarios and Applications}
+\kant[1-6]
+
+\subsection{Cocktail Party Environment}
+\kant[1-4]
+
+\subsection{Unison Mixtures}
+\kant[1-4]
+
+\subsection{Professional Produced Music}
+\kant[1-4]
+
+
+\part{Source Separation}\label{pt:showcase}
+
+\chapter{Separation of Unison Sources}
+
+\include{Chapters/dafx/dafx}
+
+\chapter{Vocal/Accompaniment Separation}
+
+\include{Chapters/WarpedSeparation}
+\include{Chapters/MUS}
+
+\section{Conclusion}
+
+\part{Source Count Estimation}\label{pt:showcase}
+
+\chapter{Perceptual Experiments}
+
+\include{Chapters/ica/ica}
+\include{Chapters/ismir/ismir}
+
+\chapter{Methods}
+
+\include{Chapters/dsc/dsc}
+
+
+
 %\addtocontents{toc}{\protect\clearpage} % <--- just debug stuff, ignore
-\include{Chapters/Chapter03}
+% \include{Chapters/Chapter03}
 %\include{multiToC} % <--- just debug stuff, ignore for your documents
 % ********************************************************************
 % Backmatter
@@ -106,7 +176,7 @@ da. Le usate medical addresses pro, europa origine sanctificate nos se.}
 %\renewcommand{\thechapter}{\alph{chapter}}
 \cleardoublepage
 \part{Appendix}
-\include{Chapters/Chapter0A}
+% \include{Chapters/Chapter0A}
 %********************************************************************
 % Other Stuff in the Back
 %*******************************************************

@@ -1,0 +1,38 @@
+% Template for ICASSP-2016 paper; to be used with:
+%          spconf.sty  - ICASSP/ICIP LaTeX style file, and
+%          IEEEbib.bst - IEEE bibliography style file.
+% --------------------------------------------------------------------------
+% \documentclass{article}
+% \usepackage[utf8]{inputenc}
+%
+% \usepackage{spconf,amsmath,graphicx}
+% \usepackage{amstext}
+% \usepackage{amssymb}
+% \usepackage{float}
+% \usepackage{framed}
+% \usepackage{booktabs}
+% \usepackage{cite}
+% \usepackage{enumitem}% http://ctan.org/pkg/enumitem
+
+
+% \usepackage[unicode=true,
+%  bookmarks=true,bookmarksnumbered=false,bookmarksopen=false,
+%  breaklinks=false,backref=false,colorlinks=false]
+%  {hyperref}
+%
+
+% lyx specific stuff
+
+In this paper we present a novel source separation method aiming to overcome the difficulty of modelling non-stationary signals. The method can be applied to mixtures of musical instruments with frequency and/or amplitude modulation, e.g.\ typically caused by vibrato. It is based on a signal representation that divides the complex spectrogram into a grid of patches of arbitrary size. These complex patches are then processed by a two-dimensional discrete Fourier transform, forming a tensor representation which reveals spectral and temporal modulation textures. Our representation can be seen as an alternative to modulation transforms computed on magnitude spectrograms. An adapted factorization model allows to decompose different time-varying harmonic sources based on their particular common modulation profile: hence the name \emph{Common Fate Model}. The method is evaluated on musical instrument mixtures playing the same fundamental frequency (unison), showing improvement over other state-of-the-art methods.
+
+% Introduction (Fabian)
+\input{Chapters/commonfate/1_introduction}
+
+% Model (Antoine)
+\input{Chapters/commonfate/2_model}
+
+% Experiments and Evaluation (Fabian)
+\input{Chapters/commonfate/3_experiments}
+
+% Conclusion (Fabian)
+\input{Chapters/commonfate/4_conclusion}

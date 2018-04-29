@@ -1,0 +1,202 @@
+%!TEX root = ../stoeter_sourcecount.tex
+\section{Model Selection}%
+\label{sec:hyperparameters}
+% Describe popular Input representations and why MFCCs are not used in
+% experiments, MEL  STFT, LOG STFT
+%
+% * All mixtures have the same 0dB SNR to all others
+% * Trained on 20.020 Libri Speech Mixtures
+% * Number Speakers [0, 1, 2, ..., 10]
+% * Temporal Context (5s)
+% * Different Input Representations (STFT 400, MEL40, log(STFT + 1)))
+% * Different Output Objectives (classification, regression, p-regression)
+%
+% * --> Fix Input Representation to STFT because of little influence
+% * --> Fix Output Objective to Classification for best overall performance
+
+In this section we evaluate of three configurations of our proposed architectures, introduced in Section~\ref{sec:supervised_learning}.
+Besides the architecture we investigate different input representations as well as the three proposed output distributions (see Section~\ref{sec:problem_formulation}).
+The goal of this is to determine the effect of these parameters and fix them to select a final trained network (model) based on these parameters.
+\par
+% maybe move this down to "model comparison?"
+To allow for a controlled test environment and at the same time limit the number of training iterations, we fix certain parameters:
+In this experiment all speakers were mixed to 0~dB SNR.\@
+Furthermore, the input duration \(D\) was fixed to five seconds.
+For all experimental parameters we repeated the training three times with different random seeds for each run and report averaged results to minimize random effects caused by early stopping.
+We used the \emph{LibriSpeech} dataset for both training and validation and
+performed evaluation of all models on \(T_{\textrm{test}} = 5720\) unique and unseen speaker mixtures from \emph{LibriSpeech test-clean} set with \(k_{\max} = 10\).
+\par
+% \subsection{Input Representations}
+% Up to date, most discriminative models for speech applications rely on  time-frequency (TF) magnitude representations.
+% This is because, compared to raw time-domain models, TF models allow for faster training due to less data redundancy leading to generally fewer trainable parameters or shorter training duration.
+Several well established input representations were evaluated in~\cite{stoeter17} such as (linear or logarithmically scaled) Short-time Fourier transform (STFT), Mel filter bank outputs (MEL), Mel Frequency Cepstral Coefficients (MFCC) representations, typically chosen for speech applications.
+
+% \begin{table}
+% \caption{Speech related Input representations}
+% \label{tab:inputrep}
+%   \centering
+% \begin{tabular}{rll}
+% \toprule
+% References & Task & Representation \\
+% \midrule
+% \cite{geiger13, hagerer17} & Overlap Detection/VAD & MFCC \\
+% \cite{Graves13, sainath15, marchi17} & ASR & MEL \\
+% \cite{amodei16} & ASR & STFT \\
+% \cite{schluter15, schluter16} & Singing Voice AD & \(\log(1 + \mathbf{X})\) \\
+% \bottomrule
+% \end{tabular}
+% \end{table}
+
+% As for the task of estimating the number of speakers, we assume that a fine frequency resolution is needed to discriminate time frequency bins with overlapped speech segments from those that only belong to a single speaker.
+Even though MFCCs are used in related tasks and are included in our baseline evaluations, they are known to perform poorly when used in CNNs~\cite{Seltzer13}.
+This is why we decided to not to use the MFCCs as an input for the proposed architectures.
+The remaining input representations are identical to those listed in~\cite{stoeter17}:
+
+\noindent\textbf{1) STFT}: magnitude of the Short-time Fourier transform computed using Hann-windows.
+A frame length of 25~ms has been used.
+The resulting input is \(X \in \mathbb{R}^{500 \times 201}\).\\
+\textbf{2) LOGSTFT}: logarithmically scaled magnitudes from STFT representation using \(\log(1 + STFT)\).
+The resulting input is \(X \in \mathbb{R}^{500 \times 201}\).\\
+\textbf{3) MEL}: compute mapping from the STFT output directly onto Mel basis using 40 triangular filters.
+The resulting input is \(X \in \mathbb{R}^{500 \times 40}\).
+\par
+Before feature transformation, all input files were re-sampled to 16 kHz sampling rate. All features are computed using a hop size of 10~ms.
+
+\subsection{Metric}%
+\label{ssec:metrics}
+
+Whereas the intermediate output \(y\) is treated as either a classification or a regression problem (see Section~\ref{sec:problem_formulation}) we evaluate the final output \(\cardinality \) as a discrete regression problem.
+We therefore employ the mean absolute error (MAE) being the most accessible metric, also commonly used for other count related tasks (c.f.~\cite{zhang15, Rezatofigh16}).
+Since the MAE is based on the true count \(\cardinality \), we also present the individual mean absolute count error as:
+
+\begin{equation}
+  \mbox{MAE}(k) = \frac{1}{T_{\textrm{test}}} \sum_{t=1}^{T_\textrm{test}}\left| \hat{k} - k \right|.
+\end{equation}
+
+which is then averaged
+
+\begin{equation}
+  \mbox{MAE} = \frac{1}{k_{\max}} \sum_{k=0}^{k_{\max}} \mbox{MAE}(k).
+\end{equation}
+
+% * Mean Speaker Count Distance
+% * Accuracy
+% * Accuracy +/- 1
+% * Response
+
+\subsection{Model Comparison}%
+\label{ssec:model_comparsion}
+
+% \begin{figure*}[ht!]
+%   \begin{subfigure}[b]{0.30\textwidth}
+%       \centering
+%       \begin{adjustbox}{width=\textwidth}
+%         \input{Chapters/dsc/figures/src-mae-feature}
+%       \end{adjustbox}
+%       \caption{by feature representations.}%
+%       \label{fig:ssec:exp_fixed_gains/A}
+%   \end{subfigure}\hfill%
+%   \begin{subfigure}[b]{0.30\textwidth}
+%       \centering
+%       \begin{adjustbox}{width=\textwidth}
+%         \input{Chapters/dsc/figures/src-mae-objective}
+%       \end{adjustbox}
+%       \caption{by output distribution.}%
+%       \label{fig:ssec:exp_fixed_gains/B}
+%   \end{subfigure}\hfill%
+%   \begin{subfigure}[b]{0.30\textwidth}
+%       \centering
+%       \begin{adjustbox}{width=\textwidth}
+%         \input{Chapters/dsc/figures/src-mae-architecture}
+%       \end{adjustbox}
+%       \caption{by proposed DNN architecture.}%
+%       \label{fig:ssec:exp_fixed_gains/C}
+%   \end{subfigure}
+%   \caption{Figure shows results of average Mean Absolute Error (MAE) on 0~\mbox{dB} SNR mixtures as described in \textsc{Experiment~\ref{ssec:model_comparsion}} per ground truth count \(k=[0\ldots10]\). Error bars show the 95\% confidence intervals. Results in (a) are averaged over factors shown in (b) and (c) and similarly for (b) and (c).}%
+%   \label{fig:fixed-gain-results}
+%  \end{figure*}
+
+To find the best parameters we performed training and evaluation for different input representations and output distributions (c.f. \cite{stoeter17}) as well as all proposed architectures resulting in 135 models.
+On average each model was trained 25 epochs before early stopping was engaged.
+We present the results filtered by the three factors (Architecture, Input and Output) in Figure~\ref{fig:fixed-gain-results}.
+One can see that the overall trend of the count error in MAE is similar regardless of the parametrization: all models are able to reliably distinguish between \(k=0\) and \(k=1\), followed by a nearly linear increase in MAE between \(k=\{1, 2\dots7\}\).
+For \(k > 7\) it can be seen that the classification type models have learned the maximum of \(k\) across the dataset, hence the prediction error decreases when \(k\) reaches its maximum.
+This is because classification based models intrinsically have access to the maximum number of sources determined by the output vector dimensionality.
+Furthermore, one can see that all three factors have only little effect on the overall performance of the model, which is especially the case for small \(k\).
+As indicated by Figure~\ref{fig:ssec:exp_fixed_gains/A}, choosing linear STFT as input representation generally results in a better performance compared to \emph{MEL40} and even \emph{LOGSTFT}.
+Concerning the output distribution, a similar observation can be made about classification which outperforms Poisson regression and Gaussian regression, as indicated by Figure~\ref{fig:ssec:exp_fixed_gains/B}.
+In Figure~\ref{fig:ssec:exp_fixed_gains/C} the performance of our proposed architectures are compared:
+while CNN and CRNN are close, both of them perform better than full frequency band F-CNN and F-CRNN models as well as the recurrent based architecture, proposed in~\cite{stoeter17}.
+However it is interesting that, despite its simplicity, the F-CNN and F-CRNN, perform similar to the Bi-LSTM architecture.
+\par
+The results are supported by a statistical evaluation based on mixed effect linear model (see Table~\ref{tab:mixedmodel1}) where \(k\) is modeled as a random effect (for further details we refer to~\cite{Mcculloch06}).
+For a fair comparison (i.e. reducing the bias towards classification type network) of all models we only consider results for \(k = \{1, 2\dots7\}\).
+These results indicate that CRNN performs statistically significantly better than the CNN.\@
+Concerning the input representation we can report that using \emph{STFT} representation outperforms the log-scaled STFT as well as the \emph{MEL} representation.
+Interestingly, we did not find any significant differences between \emph{MEL} and \emph{STFTLOG} in MAE performance.
+With respect to the output distributions we can report that \emph{Classification} outperforms the other two distributions while Poisson regression performs better than Gaussian regression which confirms the findings made in~\cite{stoeter17} based on the RNN model.
+Therefore, we select the CRNN classification model with \emph{STFT} features for subsequent experiments.
+\par
+Figure~\ref{fig:complexity} gives an indication about the efficiency of each model and the trade-off between performance and complexity in terms of parameters and floating point multiplications.
+It can be seen that the CRNN is not only the one that performs best but also has significantly fewer parameters than the CNN model.
+In contrast, the F-CRNN model does only have a fraction of the number of parameters of the other models, which makes it the most suitable model for mobile applications.
+
+\begin{table}[b]
+\caption{Mixed Effects Linear Model for \(k = \{1, 2\dots7\}\). Model: \(MAE \sim architecture + feature + objective + (1|k)\)}
+\begin{center}
+\begin{tabular}{lcccc}
+\toprule
+Factor                    & Coef.  & Std.Err. &   z    & \(P>|z|\) \\
+\midrule
+Intercept                      &  0.305 &    0.091 &  3.360 &       0.001 \\
+architecture = CRNN            & -0.028 &    0.011 & -2.419 &       0.016 \\
+architecture = F-CNN           &  0.102 &    0.011 &  8.976 &       0.000 \\
+architecture = F-CRNN          &  0.102 &    0.011 &  8.947 &       0.000 \\
+architecture = RNN             &  0.094 &    0.011 &  8.240 &       0.000 \\
+feature = STFT                 & -0.079 &    0.009 & -8.946 &       0.000 \\
+feature = STFTLOG              & -0.001 &    0.009 & -0.117 &       0.907 \\
+objective = P-Regression       &  0.040 &    0.009 &  4.555 &       0.000 \\
+objective = G-Regression       &  0.067 &    0.009 &  7.651 &       0.000 \\
+Random Effect \(k\)            &  0.057 &    0.297 &        &             \\
+\bottomrule
+\end{tabular}
+\end{center}%
+\label{tab:mixedmodel1}
+\end{table}
+
+% wrap things up here, describe the ouput shape dimensions and the temporal resolution.
+
+% \begin{table}
+%   \caption{Proposed CRNN Architecture}%
+%   \label{fig:crnndetail}
+%   \centering
+% \begin{tabular}{llll}
+%   \toprule
+%   Layername (type)              & Configuration    & Output Shape    & \# Param\\
+%   Input                         &                  &  (500, 201, 1)  & 0 \\
+%   Convolution                   & $3\times 3$, 64  &  (498, 199, 64) & 640 \\
+%   Convolution                   & $3\times 3$, 32  &  (496, 197, 32) & 18464 \\
+%   Max Pooling                   & $3\times 3$      &  (165, 65, 32)  & 0 \\
+%   Convolution                   & $3\times 3$, 128 &  (163, 63, 128) & 36992 \\
+%   Convolution                   & $3\times 3$, 64  &  (161, 61, 64)  & 73792 \\
+%   Max Pooling                   & $3\times 3$      &  (53, 20, 64)   & 0 \\
+%   Dropout                       & 0.25             &  (53, 20, 64)   & 0 \\
+%   Reshape                       &                  &  (53, 1280)     & 0 \\
+%   lstm1 (LSTM)                  & 40               &  (53, 40)       & 211360 \\
+%   Temporal Pooling              & $2$              &  (26, 40)       & 0 \\
+%   Reshape                       &                  &  (1040)         & 0 \\
+%   Fully Connected (FC)          &                  &  (11)            & 11451 \\
+%   \midrule
+%   & & Total nb params & 352,699 \\
+%   \bottomrule
+%   \end{tabular}
+% \end{table}
+
+\begin{figure}[t]
+  \centering
+    \begin{adjustbox}{width=0.8\columnwidth}
+      \input{Chapters/dsc/figures/complexity}
+    \end{adjustbox}
+    \caption{Complexity in number of floating point multiplications and number of weight parameters (in brackets) over performance in MAE of our five proposed models.}%
+  \label{fig:complexity}
+ \end{figure}

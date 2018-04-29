@@ -1,0 +1,134 @@
+% This file was created by matplotlib2tikz v0.6.13.
+\begin{tikzpicture}
+
+\definecolor{color1}{rgb}{0.347058823529412,0.458823529411765,0.641176470588235}
+\definecolor{color0}{rgb}{0.917647058823529,0.917647058823529,0.949019607843137}
+\definecolor{color3}{rgb}{0.71078431372549,0.363725490196079,0.375490196078431}
+\definecolor{color2}{rgb}{0.374019607843137,0.618137254901961,0.429901960784314}
+
+\begin{axis}[
+xlabel={Speaking Rate in Syllabels/sec},
+ylabel={Count Estimation Error Type},
+xmin=5.25833333333333, xmax=8.375,
+ymin=-0.5, ymax=2.5,
+ytick={0,1,2},
+yticklabels={overestimation,correct,underestimation},
+tick align=outside,
+tick pos=left,
+x grid style={lightgray!92.026143790849673!black},
+y grid style={lightgray!92.026143790849673!black}
+]
+\path [draw=gray!47.843137254901961!black, fill=color0] (axis cs:6.6,-0.2)
+--(axis cs:6.6,0.2)
+--(axis cs:7.1,0.2)
+--(axis cs:7.1,-0.2)
+--(axis cs:6.6,-0.2)
+--cycle;
+
+\path [draw=gray!47.843137254901961!black, fill=color1] (axis cs:6.44166666666667,0.8)
+--(axis cs:6.44166666666667,1.2)
+--(axis cs:7.06666666666667,1.2)
+--(axis cs:7.06666666666667,0.8)
+--(axis cs:6.44166666666667,0.8)
+--cycle;
+
+\path [draw=gray!47.843137254901961!black, fill=color2] (axis cs:6.2,1.8)
+--(axis cs:6.2,2.2)
+--(axis cs:6.93333333333333,2.2)
+--(axis cs:6.93333333333333,1.8)
+--(axis cs:6.2,1.8)
+--cycle;
+
+\addplot [semithick, gray!47.843137254901961!black, forget plot]
+table {%
+6.6 0
+5.86666666666667 0
+};
+\addplot [semithick, gray!47.843137254901961!black, forget plot]
+table {%
+7.1 0
+7.76666666666667 0
+};
+\addplot [semithick, gray!47.843137254901961!black, forget plot]
+table {%
+5.86666666666667 -0.1
+5.86666666666667 0.1
+};
+\addplot [semithick, gray!47.843137254901961!black, forget plot]
+table {%
+7.76666666666667 -0.1
+7.76666666666667 0.1
+};
+\addplot [black, mark=diamond*, mark size=2, mark options={solid,fill=gray!47.843137254901961!black}, only marks, forget plot]
+table {%
+5.76666666666667 0
+5.7 0
+7.86666666666667 0
+7.86666666666667 0
+8.03333333333333 0
+};
+\addplot [semithick, gray!47.843137254901961!black, forget plot]
+table {%
+6.44166666666667 1
+5.63333333333333 1
+};
+\addplot [semithick, gray!47.843137254901961!black, forget plot]
+table {%
+7.06666666666667 1
+8 1
+};
+\addplot [semithick, gray!47.843137254901961!black, forget plot]
+table {%
+5.63333333333333 0.9
+5.63333333333333 1.1
+};
+\addplot [semithick, gray!47.843137254901961!black, forget plot]
+table {%
+8 0.9
+8 1.1
+};
+\addplot [black, mark=diamond*, mark size=2, mark options={solid,fill=gray!47.843137254901961!black}, only marks, forget plot]
+table {%
+5.4 1
+8.06666666666667 1
+8.23333333333333 1
+};
+\addplot [semithick, gray!47.843137254901961!black, forget plot]
+table {%
+6.2 2
+5.46666666666667 2
+};
+\addplot [semithick, gray!47.843137254901961!black, forget plot]
+table {%
+6.93333333333333 2
+7.36666666666667 2
+};
+\addplot [semithick, gray!47.843137254901961!black, forget plot]
+table {%
+5.46666666666667 1.9
+5.46666666666667 2.1
+};
+\addplot [semithick, gray!47.843137254901961!black, forget plot]
+table {%
+7.36666666666667 1.9
+7.36666666666667 2.1
+};
+\addplot [semithick, gray!47.843137254901961!black, forget plot]
+table {%
+6.83333333333333 -0.2
+6.83333333333333 0.2
+};
+\addplot [semithick, gray!47.843137254901961!black, forget plot]
+table {%
+6.76666666666667 0.8
+6.76666666666667 1.2
+};
+\addplot [semithick, gray!47.843137254901961!black, forget plot]
+table {%
+6.56666666666667 1.8
+6.56666666666667 2.2
+};
+
+\end{axis}
+
+\end{tikzpicture}

@@ -1,0 +1,62 @@
+\documentclass[class=minimal,border=0pt]{standalone}
+\usepackage{amsmath,cite}
+
+\usepackage{graphicx}
+%custom packages
+\usepackage{footnote}
+\usepackage{color}
+\usepackage{multirow}
+\usepackage{xcolor}
+\usepackage{multirow}
+\usepackage{makecell}
+\usepackage{textcomp}
+\usepackage{subfigure}
+\usepackage{amssymb}
+\usepackage{booktabs}
+\usepackage{siunitx}
+\usepackage{colortbl,array} 
+\usepackage{url}
+\makeatletter
+\g@addto@macro{\UrlBreaks}{\UrlOrds}
+\makeatother    
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.8}
+\usepgfplotslibrary{statistics}
+\usetikzlibrary{patterns}
+\usepackage{anyfontsize}  
+
+\begin{document}
+\makeatletter
+\pgfplotstableread{../plotdata/share_very_certain.data}\tableA
+\pgfplotstableread{../plotdata/share_certain.data}\tableB
+\pgfplotstableread{../plotdata/share_uncertain.data}\tableC
+\pgfplotsset{calculate offset/.code={\pgfkeys{/pgf/fpu=true,/pgf/fpu/output format=fixed}\pgfmathsetmacro\testmacro{(\pgfplotspointmeta*10^\pgfplots@data@scale@trafo@EXPONENT@y)/2*\pgfplots@y@veclength)}\pgfkeys{/pgf/fpu=false}},nodes near coords vertically centered/.style={every node near coord/.append style={/pgfplots/calculate offset,yshift=-\testmacro},nodes near coords align=center}}
+
+\makeatother                        
+\begin{tikzpicture}
+\begin{axis}[
+xtick={1,2,3,4,5,6},
+extra x ticks={0.8,1.2,1.8,2.2,2.8,3.2,3.8,4.2,4.8,5.2,5.8,6.2}, extra x tick labels={lab,web,lab,web,lab,web,lab,web,lab,web,lab,web},
+extra x tick style={font=\tiny,xticklabel pos=right,xtick pos=right},
+ymin=0,
+ymax=100,
+ybar stacked,
+xlabel={Number of Instruments},
+ylabel={Cumulative Certainty in Percent},
+point meta=explicit,
+nodes near coords={\pgfmathprintnumber[fixed zerofill,precision=1]{\pgfplotspointmeta}},
+every node near coord/.style={check for zero/.code={\pgfmathfloatifflags{\pgfplotspointmeta}{0}{\pgfkeys{/tikz/coordinate}}{}},check for zero,fill=white,fill opacity=1,text opacity=1,font={\fontsize{4pt}{0}\selectfont},inner ysep=2pt,inner xsep=0pt},
+nodes near coords vertically centered,
+legend style={at={(0.5,-0.2)},legend columns=-1,area legend,anchor=north}
+]
+\addplot+[postaction={pattern=north east lines,pattern color=blue}] table [y=1,meta=1] \tableA;
+\addlegendentry{very certain}
+\addplot+[postaction={pattern=crosshatch dots,pattern color=red}] table [y=1,meta=1] \tableB;
+\addlegendentry{certain}
+\addplot+[postaction={pattern=north west lines,pattern color=brown}] table [y=1,meta=1] \tableC;
+\addlegendentry{uncertain}   
+\end{axis}
+\end{tikzpicture}
+\end{document}
