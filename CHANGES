@@ -6,6 +6,15 @@ o Provision of customization and hooks, e.g.,
   \ct@scfont, see arsclassica.ct as example
 o Loading caption package in classicthesis.sty
   (for better arsclassica integration)
+o Changed footmisc's option from "flushmargin"
+  to "marginal" in order to fix spacing
+  problems in non-KOMA settings (thanks to
+  Hugues de Lassus) #154
+X Removed double occurrence of "pdfpagemode"
+  in classicthesis-config.tex (thanks to
+  Csaba Hajdu)
+X Removed latexrelease (thanks to David
+  Carlisle and Ulrike Fischer)
 
 Changes in version 4.5 (December 2017)
 o Fixed vanished page numbers on chapter

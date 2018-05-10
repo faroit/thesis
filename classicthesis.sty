@@ -32,9 +32,10 @@
 %
 % ********************************************************************
 \NeedsTeXFormat{LaTeX2e}%[2015/01/01] % fixed via latexrelease package, see below
-\ProvidesPackage{classicthesis}[2018/01/04 v4.6 Typographic style for a classic-looking thesis]
-\PassOptionsToPackage{latest}{latexrelease} % replacement for fixltx2e,
-  \RequirePackage{latexrelease} % emulate newer kernel version if older is detected
+\ProvidesPackage{classicthesis}[2018/05/10 v4.6 Typographic style for a classic-looking thesis]
+% Removed due to hint by David Carlisle and Ulrike Fischer
+% \PassOptionsToPackage{latest}{latexrelease} % replacement for fixltx2e,
+%   \RequirePackage{latexrelease} % emulate newer kernel version if older is detected
 
 \RequirePackage{ifthen}
 
@@ -591,11 +592,11 @@
     \deffootnote{0em}{0em}{\thefootnotemark\hspace*{.5em}}%
     \message{Using KOMA-command "deffootnote" for footnote setup}%
 \else
-    \PassOptionsToPackage{flushmargin}{footmisc}%
+    \PassOptionsToPackage{marginal}{footmisc}% marginal flushmargin
     \RequirePackage{footmisc}%
-    \setlength{\footnotemargin}{-.5em}%
+    % \setlength{\footnotemargin}{-.5em}%
     \PackageWarningNoLine{classicthesis}{Using package "footmisc" with option %
-        "flushmargin" for footnote setup (not 100\% the same as with KOMA)}%
+        "marginal" for footnote setup (not 100\% the same as with KOMA)}%
 \fi
 
 % ********************************************************************
