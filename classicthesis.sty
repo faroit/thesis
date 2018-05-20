@@ -31,13 +31,12 @@
 % It works with LaTeX, PDFLaTeX, XeLaTeX and LuaLaTeX.
 %
 % ********************************************************************
-\NeedsTeXFormat{LaTeX2e}%[2015/01/01] % fixed via latexrelease package, see below
-\ProvidesPackage{classicthesis}[2018/05/10 v4.6 Typographic style for a classic-looking thesis]
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{classicthesis}[2018/05/20 v4.6 Typographic style for a classic-looking thesis]
+\providecommand{\classicthesis}{classicthesis v4.6}
 % Removed due to hint by David Carlisle and Ulrike Fischer
 % \PassOptionsToPackage{latest}{latexrelease} % replacement for fixltx2e,
 %   \RequirePackage{latexrelease} % emulate newer kernel version if older is detected
-
-\providecommand{\classicthesis}{classicthesis v4.6}
 
 \RequirePackage{ifthen}
 
@@ -618,8 +617,8 @@
         \PassOptionsToPackage{draft}{prelim2e}
         \RequirePackage{prelim2e}
         \renewcommand{\PrelimWords}{\relax}
-        \renewcommand{\PrelimText}{\footnotesize[\,\today\ at \thistime\ -- \texttt{classicthesis}~\myVersion\,]}
-}{\renewcommand{\finalVersionString}{\emph{Final Version} as of \today\ (\texttt{classicthesis}~\myVersion).}}
+        \renewcommand{\PrelimText}{\footnotesize[\,\today\ at \thistime\ -- \myVersion\,]}
+}{\renewcommand{\finalVersionString}{\emph{Final Version} as of \today\ (\myVersion).}}
 
 % ********************************************************************
 % Captions
@@ -663,7 +662,7 @@
 % arsclassica integration (experimental, dirty hack currently)
 % ********************************************************************
 \ifct@arsclassica
-\RequirePackage{arsclassica}
+\RequirePackage{classicthesis-arsclassica}
 \fi
 
 
@@ -675,8 +674,6 @@
     \pdfstringdefDisableCommands{\let\thepart=\relax} % no part numbers (i, ii, iii) in PDF outline   IVO
    %\pdfstringdefDisableCommands{\renewcommand{\thepart}{\Roman{part}}} %%%IVO bring back Part numbers in PDF outline
     \hypersetup{colorlinks=true,linktocpage=true,breaklinks=true,urlcolor=CTurl,linkcolor=CTlink,citecolor=CTcitation}
-
-
 
 
 % ********************************************************************
