@@ -246,11 +246,11 @@ the data in the following lines of \texttt{classicthesis-config.tex:}%
 }
 
 \begin{lstlisting}
-    % **************************************************
+    % *********************************************
     % 2. Personal data and user ad-hoc commands
-    % **************************************************
-    \newcommand{\myTitle}{A Classic Thesis Style\xspace}
-    \newcommand{\mySubtitle}{An Homage to...\xspace}
+    % *********************************************
+    \newcommand{\myTitle}{A Classic Thesis Style}
+    \newcommand{\mySubtitle}{An Homage to...}
 \end{lstlisting}
 
 Further customization can be made in \texttt{classicthesis-config.tex}
@@ -259,16 +259,16 @@ by choosing the options to \texttt{classicthesis.sty}
 
 \begin{lstlisting}
 \PassOptionsToPackage{
-  drafting=true,    % print version information on the bottom of the pages
-  tocaligned=false, % the left column of the toc will be aligned (no indentation)
-  dottedtoc=false,  % page numbers in ToC flushed right
-  parts=true,       % use part division
-  eulerchapternumbers=true, % use AMS Euler for chapter font (otherwise Palatino)
-  linedheaders=false,       % chaper headers will have line above and beneath
-  floatperchapter=true,     % numbering per chapter for all floats (i.e., Figure 1.1)
-  eulermath=false,  % use awesome Euler fonts for mathematical formulae (only with pdfLaTeX)
-  beramono=true,    % toggle a nice monospaced font (w/ bold)
-  % palatino=false, % deactivate standard font for loading another one, see the last section at the end of this file for suggestions
+  drafting=true,    
+  tocaligned=false, 
+  dottedtoc=false,  
+  eulerchapternumbers=true, 
+  linedheaders=false,
+  floatperchapter=true,
+  eulermath=false,
+  beramono=true,
+  palatino=true,
+  style=classicthesis
 }{classicthesis}
 \end{lstlisting}
 

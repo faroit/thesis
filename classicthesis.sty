@@ -37,6 +37,8 @@
 % \PassOptionsToPackage{latest}{latexrelease} % replacement for fixltx2e,
 %   \RequirePackage{latexrelease} % emulate newer kernel version if older is detected
 
+\providecommand{\classicthesis}{classicthesis v4.6}
+
 \RequirePackage{ifthen}
 
 % ********************************************************************
@@ -51,7 +53,7 @@
 \DeclareBoolOption{dottedtoc} % page numbers in ToC flushed right
 \DeclareBoolOption{listsseparated} % OBSOLETE; toggles the vertical space between lof/lot entries of different chapters
 
-\DeclareBoolOption{parts} % use part division
+\DeclareBoolOption[true]{parts} % OBSOLETE - automatic check; use part division
 
 \DeclareBoolOption{nochapters} % OBSOLETE - automatic check; disable all chapter-specific commands
 \DeclareBoolOption{eulerchapternumbers} % use AMS Euler for chapter font (otherwise Palatino)
@@ -66,7 +68,7 @@
 \DeclareBoolOption[true]{beramono} % toggle a nice monospaced font (w/ bold) + pre-installed
 \DeclareBoolOption{minionpro} % OBSOLETE - removed; setup for minion pro font; use minion pro small caps as well
 \DeclareBoolOption[true]{palatino} % default is Palatino/Paladio/TeX Gyre Pagella font, use this switch to skip selection
-\DeclareBoolOption{arsclassica} % integrates Lorenzo Pantieri's style
+\DeclareStringOption[classicthesis]{style} % classicthesis or arsclassica
 \DeclareBoolOption{minionprospacing} % OBSOLETE; use minion pro's textssc for letter spacing
 \DeclareBoolOption{pdfspacing} % OBSOLETE; use pdftex for letterspacing (via microtype)
 
@@ -111,15 +113,24 @@
 \ifthenelse{\isundefined{\chapter}\OR\boolean{ct@nochapters}}
     {
         \PackageWarningNoLine{classicthesis}{Chapter sectioning command not present in this document class. %
-                Deactivating options floatperchapter, linedheaders, manychapters, listsseparated, eulerchapternumbers and parts}%
-        \setboolean{ct@linedheaders}{false}%
-        \setboolean{ct@listsseparated}{false}%
-        \setboolean{ct@eulerchapternumbers}{false}%
-        \setboolean{ct@parts}{false}% %%%IVO: note that parts exist even when chapters are not defined!
-        \setboolean{ct@manychapters}{false}%
-        \setboolean{ct@floatperchapter}{false}%
+                Deactivating options floatperchapter, linedheaders, manychapters, listsseparated, eulerchapternumbers}%
+        \setboolean{ct@linedheaders}{false}
+        \setboolean{ct@listsseparated}{false}
+        \setboolean{ct@eulerchapternumbers}{false}
+        \setboolean{ct@parts}{false}
+        \setboolean{ct@manychapters}{false}
+        \setboolean{ct@floatperchapter}{false}
         \setboolean{ct@nochapters}{true}
     }{\relax}
+
+% no parts in document class
+\ifthenelse{\NOT\isundefined{\part}\AND\boolean{ct@parts}}
+    {\setboolean{ct@parts}{true}}{\setboolean{ct@parts}{false}}
+
+% use arsclassica style
+\provideboolean{ct@arsclassica}
+\ifthenelse{\equal{\ct@style}{arsclassica}}%
+    {\setboolean{ct@arsclassica}{true}}{\setboolean{ct@arsclassica}{false}}
 
 % ********************************************************************
 % PDF and XeLaTeX Stuff
@@ -127,23 +138,20 @@
 \RequirePackage{ifpdf}
 \RequirePackage{ifxetex}
 \RequirePackage{ifluatex}
-\RequirePackage{hyperref}
-    \pdfstringdefDisableCommands{\let\thepart=\relax} % no part numbers (i, ii, iii) in PDF outline   IVO
-   %\pdfstringdefDisableCommands{\renewcommand{\thepart}{\Roman{part}}} %%%IVO bring back Part numbers in PDF outline
-    \hypersetup{colorlinks=true,linktocpage=true,breaklinks=true,urlcolor=webbrown,linkcolor=RoyalBlue,citecolor=webgreen}
-
 
 % ********************************************************************
 % Colors
 % ********************************************************************
 \PassOptionsToPackage{dvipsnames}{xcolor}
     \RequirePackage{xcolor} % [dvipsnames]
+\definecolor{CTsemi}{gray}{0.55} % chapter numbers will be semi transparent .5 .55 .6 .0
+\definecolor{CTcitation}{rgb}{0,0.5,0} % WebGreen
+\definecolor{CTurl}{named}{Maroon} % Maroon
+\definecolor{CTtitle}{named}{Maroon} % Maroon {cmyk}{0, 0.87, 0.68, 0.32}
+\definecolor{CTlink}{named}{RoyalBlue} % RoyalBlue {cmyk}{1, 0.50, 0, 0}
 \definecolor{halfgray}{gray}{0.55} % chapter numbers will be semi transparent .5 .55 .6 .0
-\definecolor{webgreen}{rgb}{0,.5,0}
-\definecolor{webbrown}{rgb}{.6,0,0}
-%\definecolor{Maroon}{cmyk}{0, 0.87, 0.68, 0.32}
-%\definecolor{RoyalBlue}{cmyk}{1, 0.50, 0, 0}
-%\definecolor{Black}{cmyk}{0, 0, 0, 0}
+\definecolor{webgreen}{rgb}{0,0.5,0}
+\definecolor{webbrown}{rgb}{0.6,0,0}
 
 % ********************************************************************
 % Font Stuff
@@ -249,12 +257,7 @@
 % Minion      10pt: 264--288pt | 561--609pt
 % Minion      11pt: 288--312pt | 609--657pt
 % Minion      12pt: 336pt      | 672pt
-% Libertine 10pt:
-% Libertine 11pt:
-% Libertine 12pt:
-% kpfonts 10pt:
-% kpfonts 11pt:
-% kpfonts 12pt:
+
 
 % ********************************************************************
 % Own Stuff
@@ -277,6 +280,8 @@
 %\DeclareRobustCommand{\graffito}[1]{\marginpar%
 % [\graffito@setup\raggedleft\hspace{0pt}{#1}]%
 % {\graffito@setup\raggedright\hspace{0pt}{#1}}}
+
+\RequirePackage{mparhack} % get marginpar right
 
 \let\oldmarginpar\marginpar
 \renewcommand{\marginpar}[2][]{% always add optional parameter, make it empty by default
@@ -301,8 +306,8 @@
 \RequirePackage{textcase} % for \MakeTextUppercase
 
 % Provide a hook for font customization, e.g., for arsclassica
-\newcommand{\ct@scfont}{\scshape}
-% \newcommand{\ct@scfont}{\color{red}\sffamily\scshape}
+\newcommand{\ct@altfont}{}% \color{red}\sffamily
+\newcommand{\ct@caps}{\ct@altfont\scshape} % typesetting smallcaps
 
 %%% define spacedallcaps and spacedlowsmallcaps
 %%% engine-dependent letterspacing: microtype for pdflatex, fontspec for xelatex and luatex
@@ -310,14 +315,14 @@
       \PackageInfo{classicthesis}{Using microtype for character spacing.%
                                   Make sure your pdflatex is version 1.40 or higher.}%
       \microtypesetup{expansion=false}
-      \DeclareRobustCommand{\spacedallcaps}[1]{\textls[160]{\ct@scfont\MakeTextUppercase{#1}}}
-      \DeclareRobustCommand{\spacedlowsmallcaps}[1]{\textls[80]{\ct@scfont\MakeTextLowercase{#1}}}
+      \DeclareRobustCommand{\spacedallcaps}[1]{\textls[160]{\ct@caps\MakeTextUppercase{#1}}}
+      \DeclareRobustCommand{\spacedlowsmallcaps}[1]{\textls[80]{\ct@caps\MakeTextLowercase{#1}}}
       }{\relax}
 
     \ifthenelse{\boolean{xetex}}{ % use fontspec features; \OR\boolean{luatex} does not work well
       \PackageInfo{classicthesis}{Using fontspec for character spacing.}%
-      \DeclareRobustCommand{\spacedallcaps}[1]{{\addfontfeature{LetterSpace=18.0}\ct@scfont\MakeTextUppercase{#1}}}% WordSpace=1.8
-      \DeclareRobustCommand{\spacedlowsmallcaps}[1]{{\addfontfeatures{LetterSpace=14.0}\ct@scfont\MakeTextLowercase{#1}}}% WordSpace=1.8
+      \DeclareRobustCommand{\spacedallcaps}[1]{{\addfontfeature{LetterSpace=18.0}\ct@caps\MakeTextUppercase{#1}}}% WordSpace=1.8
+      \DeclareRobustCommand{\spacedlowsmallcaps}[1]{{\addfontfeatures{LetterSpace=14.0}\ct@caps\MakeTextLowercase{#1}}}% WordSpace=1.8
       }{\relax}
 
 % ********************************************************************
@@ -333,7 +338,7 @@
     \ifthenelse{\boolean{ct@nochapters}}%
         {\relax}%
         {\renewcommand{\chaptermark}[1]{\markboth{\spacedlowsmallcaps{#1}}{\spacedlowsmallcaps{#1}}}}
-    \renewcommand{\sectionmark}[1]{\markright{\thesection\enspace\spacedlowsmallcaps{#1}}}
+    \renewcommand{\sectionmark}[1]{\markright{\textsc{\thesection}\enspace\spacedlowsmallcaps{#1}}}
     \lehead{\mbox{\llap{\small\pagemark\kern2em}\headmark\hfil}}
     \rohead{\mbox{\hfil{\headmark}\rlap{\small\kern2em\pagemark}}}
     \ofoot[\small\pagemark]{}% only for plain.scrheadings page style (first page of a chapter)
@@ -344,7 +349,7 @@
             \ifthenelse{\boolean{ct@nochapters}}%
             {\section*{\contentsname}}%nochapters
             {\chapter*{\contentsname}}%chapters
-            \@mkboth{\spacedlowsmallcaps{\contentsname}}{\spacedlowsmallcaps{\contentsname}}} %%%IVO what does this do?
+            \@mkboth{\spacedlowsmallcaps{\contentsname}}{\spacedlowsmallcaps{\contentsname}}} %%%IVO: what does this do?
 
 
 % ********************************************************************
@@ -363,19 +368,19 @@
     \def\ctparttext@keep{} % Thanks to Ivo
     \def\ctparttext@print{\ctparttext@keep \gdef\ctparttext@keep{}}
     \titleformat{\part}[display]
-    {\normalfont\centering\large}%
+    {\normalfont\ct@altfont\centering\large}%
     {\thispagestyle{empty}\partname~\MakeTextUppercase{\thepart}}{1em}%
-    {\color{Maroon}\spacedallcaps}[\bigskip\normalfont\normalsize\color{Black}\begin{quote}\ctparttext@print\end{quote}]
+    {\color{CTtitle}\spacedallcaps}[\bigskip\normalfont\normalsize\color{Black}\begin{quote}\ctparttext@print\end{quote}]
 }{\relax}
 % chapters
 \ifthenelse{\boolean{ct@linedheaders}}%
 {% lines above and below, number right
     \titleformat{\chapter}[display]%
-    {\relax}{\raggedleft{\color{halfgray}\chapterNumber\thechapter} \\ }{0pt}%
+    {\relax}{\raggedleft{\color{CTsemi}\chapterNumber\thechapter} \\ }{0pt}%
     {\titlerule\vspace*{.9\baselineskip}\raggedright\spacedallcaps}[\normalsize\vspace*{.8\baselineskip}\titlerule]%
 }{% something like Bringhurst
     \titleformat{\chapter}[display]%
-    {\relax}{\mbox{}\oldmarginpar{\vspace*{-3\baselineskip}\color{halfgray}\chapterNumber\thechapter}}{0pt}%
+    {\relax}{\mbox{}\oldmarginpar{\vspace*{-3\baselineskip}\color{CTsemi}\chapterNumber\thechapter}}{0pt}%
     {\raggedright\spacedallcaps}[\normalsize\vspace*{.8\baselineskip}\titlerule]%
 }
 % sections \FloatBarrier
@@ -436,7 +441,7 @@
     \renewcommand{\cftpartaftersnum}{}%
     \renewcommand{\cftpartaftersnumb}{\spacedlowsmallcaps}%
     \setlength{\cftpartnumwidth}{\cftchapnumwidth}
-    \renewcommand{\cftpartfont}{\color{Maroon}\normalfont}%
+    \renewcommand{\cftpartfont}{\color{CTtitle}\normalfont}%
     \cftpagenumbersoff{part}
     \renewcommand{\cftpartpagefont}{\normalfont}%
     \ifthenelse{\boolean{ct@dottedtoc}}{\relax}%
@@ -657,12 +662,21 @@
 % ********************************************************************
 % arsclassica integration (experimental, dirty hack currently)
 % ********************************************************************
-\ifthenelse{\boolean{ct@arsclassica}}{%
-  \setboolean{ct@eulerchapternumbers}{true}%
-  \setboolean{ct@beramono}{true}%
-  \setboolean{ct@nochapters}{false}%
-  \input{arsclassica.ct}%
-}{\relax}
+\ifct@arsclassica
+\RequirePackage{arsclassica}
+\fi
+
+
+% ********************************************************************
+% hyperreferences, pdf outline
+% ********************************************************************
+\PassOptionsToPackage{hyperfootnotes=false}{hyperref}
+\RequirePackage{hyperref}
+    \pdfstringdefDisableCommands{\let\thepart=\relax} % no part numbers (i, ii, iii) in PDF outline   IVO
+   %\pdfstringdefDisableCommands{\renewcommand{\thepart}{\Roman{part}}} %%%IVO bring back Part numbers in PDF outline
+    \hypersetup{colorlinks=true,linktocpage=true,breaklinks=true,urlcolor=CTurl,linkcolor=CTlink,citecolor=CTcitation}
+
+
 
 
 % ********************************************************************
