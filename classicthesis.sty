@@ -32,7 +32,7 @@
 %
 % ********************************************************************
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{classicthesis}[2018/05/20 v4.6 Typographic style for a classic-looking thesis]
+\ProvidesPackage{classicthesis}[2018/06/03 v4.6 Typographic style for a classic-looking thesis]
 \providecommand{\classicthesis}{classicthesis v4.6}
 % Removed due to hint by David Carlisle and Ulrike Fischer
 % \PassOptionsToPackage{latest}{latexrelease} % replacement for fixltx2e,
@@ -129,7 +129,8 @@
 % use arsclassica style
 \provideboolean{ct@arsclassica}
 \ifthenelse{\equal{\ct@style}{arsclassica}}%
-    {\setboolean{ct@arsclassica}{true}}{\setboolean{ct@arsclassica}{false}}
+    {\setboolean{ct@eulerchapternumbers}{true}%
+    \setboolean{ct@arsclassica}{true}}{\setboolean{ct@arsclassica}{false}}
 
 % ********************************************************************
 % PDF and XeLaTeX Stuff
@@ -313,7 +314,8 @@
     \ifthenelse{\boolean{pdf}\OR\boolean{luatex}}{ % pdf will soon test true for both pdflatex and luatex; \AND\NOT\boolean{luatex}
       \PackageInfo{classicthesis}{Using microtype for character spacing.%
                                   Make sure your pdflatex is version 1.40 or higher.}%
-      \microtypesetup{expansion=false}
+      % \microtypesetup{expansion=false}
+      \microtypesetup{protrusion=true,expansion=true}
       \DeclareRobustCommand{\spacedallcaps}[1]{\textls[160]{\ct@caps\MakeTextUppercase{#1}}}
       \DeclareRobustCommand{\spacedlowsmallcaps}[1]{\textls[80]{\ct@caps\MakeTextLowercase{#1}}}
       }{\relax}

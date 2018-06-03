@@ -1,8 +1,6 @@
 Changes in version 4.6 (Month 2018)
-T parts automatically detected (what if part command defined, but not used? how correct spacing?) --> automatize?
-T Integration of arsclassica
+o Integration of arsclassica
   (with permission from Lorenzo Pantieri)
-  --> update and check documentation
 o Introduced style option for classicthesis,
   allowing for changing style to arsclassica
   (see classicthesis-arsclassica-book.tex as
@@ -27,6 +25,8 @@ o Generalized color names for easier user
   customization (CTsemi, CTtitle)
 o Got rid of \refstepcounter{dummy}
 o Introduced \classicthesis to access version
+o Activating protrusion and expansion for
+  microtype if pdfLaTeX is used (beta-test)
 
 Changes in version 4.5 (December 2017)
 o Fixed vanished page numbers on chapter

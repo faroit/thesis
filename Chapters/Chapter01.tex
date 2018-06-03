@@ -166,9 +166,10 @@ allow for a bit of freedom concerning the layout:
 
     \item Parts and Chapters:
         \begin{itemize}
-            \item\texttt{parts}: if you use Part divisions for your document,
-            you should choose this option. (Cannot be used together with
-            \texttt{nochapters}.)
+            \item\texttt{parts}: use this option if you \emph{use} Part
+             divisions in your document. This is necessary to get the
+             spacing of the Table of Contents right.
+            (Cannot be used together with \texttt{nochapters}.)
 
             \item\texttt{linedheaders}: changes the look of the chapter
             headings a bit by adding a horizontal line above the chapter
@@ -178,6 +179,10 @@ allow for a bit of freedom concerning the layout:
 
     \item Typography:
         \begin{itemize}
+            \item\texttt{style}: this offers a comfortable way of changing the look and feel easily. Default style is \texttt{classicthesis}.
+
+            As a new feature, Lorenzo Pantieri's \texttt{arsclassica} is available as well. As Lorenzo's package is discontinued and with his permission, \texttt{classicthesis-arsclassica.sty} is now part of \texttt{classicthesis} and will be maintained here.
+
             \item\texttt{palatino}: Hermann Zapf's classic font is the free standard font for this style. Robert Bringhurst's book uses Adobe's commercial font Minion Pro. However, there are other free alternatives also available. Deactivate this option for loading such alternatives and see \texttt{classicthesis-config.tex} for some suggestions.
 
             \item\texttt{eulerchapternumbers}: use figures from Hermann Zapf's
@@ -189,6 +194,7 @@ allow for a bit of freedom concerning the layout:
 
             \item\texttt{eulermath}: loads the awesome Euler fonts for math.
             Pala\-tino is used as default font.
+
         \end{itemize}
 
     \marginpar{Options are enabled via \texttt{option=true}}
@@ -259,10 +265,10 @@ by choosing the options to \texttt{classicthesis.sty}
 
 \begin{lstlisting}
 \PassOptionsToPackage{
-  drafting=true,    
-  tocaligned=false, 
-  dottedtoc=false,  
-  eulerchapternumbers=true, 
+  drafting=true,
+  tocaligned=false,
+  dottedtoc=false,
+  eulerchapternumbers=true,
   linedheaders=false,
   floatperchapter=true,
   eulermath=false,
