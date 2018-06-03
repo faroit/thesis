@@ -166,9 +166,10 @@ allow for a bit of freedom concerning the layout:
 
     \item Parts and Chapters:
         \begin{itemize}
-            \item\texttt{parts}: if you use Part divisions for your document,
-            you should choose this option. (Cannot be used together with
-            \texttt{nochapters}.)
+            \item\texttt{parts}: use this option if you \emph{use} Part
+             divisions in your document. This is necessary to get the
+             spacing of the Table of Contents right.
+            (Cannot be used together with \texttt{nochapters}.)
 
             \item\texttt{linedheaders}: changes the look of the chapter
             headings a bit by adding a horizontal line above the chapter
@@ -178,6 +179,10 @@ allow for a bit of freedom concerning the layout:
 
     \item Typography:
         \begin{itemize}
+            \item\texttt{style}: this offers a comfortable way of changing the look and feel easily. Default style is \texttt{classicthesis}.
+
+            As a new feature, Lorenzo Pantieri's \texttt{arsclassica} is available as well. As Lorenzo's package is discontinued and with his permission, \texttt{classicthesis-arsclassica.sty} is now part of \texttt{classicthesis} and will be maintained here.
+
             \item\texttt{palatino}: Hermann Zapf's classic font is the free standard font for this style. Robert Bringhurst's book uses Adobe's commercial font Minion Pro. However, there are other free alternatives also available. Deactivate this option for loading such alternatives and see \texttt{classicthesis-config.tex} for some suggestions.
 
             \item\texttt{eulerchapternumbers}: use figures from Hermann Zapf's
@@ -189,6 +194,7 @@ allow for a bit of freedom concerning the layout:
 
             \item\texttt{eulermath}: loads the awesome Euler fonts for math.
             Pala\-tino is used as default font.
+
         \end{itemize}
 
     \marginpar{Options are enabled via \texttt{option=true}}
@@ -215,6 +221,18 @@ allow for a bit of freedom concerning the layout:
 
             \item\texttt{floatperchapter}: activates numbering per chapter for
             all floats such as figures, tables, and listings (if used).
+        \end{itemize}
+
+    \item Tweaking colors and fonts -- please use this with great care!:
+        \begin{itemize}
+            \item\verb|\ct@altfont|: comfortable hook to alter the basic look and feel of everything that uses spaced caps or spaced small caps. For example, for \texttt{arsclassica} we used \\ \verb|\renewcommand*{\ct@altfont}{\sffamily}|. Coloring is also possible this way.
+
+            % \item\verb|\ct@caps|: spacedallcaps spacedlowsmallcaps
+
+            \item\texttt{CTsemi}: Change the semi gray color used, \eg, for the chapter number. Default is: \verb|\definecolor{CTsemi}{gray}{0.55}|
+
+            \item\texttt{CTtitle}: Change the red color used, \eg, for the title. Default is: \verb|\definecolor{CTtitle}{named}{Maroon}|
+
         \end{itemize}
 
 \end{itemize}
@@ -246,11 +264,11 @@ the data in the following lines of \texttt{classicthesis-config.tex:}%
 }
 
 \begin{lstlisting}
-    % **************************************************
+    % *********************************************
     % 2. Personal data and user ad-hoc commands
-    % **************************************************
-    \newcommand{\myTitle}{A Classic Thesis Style\xspace}
-    \newcommand{\mySubtitle}{An Homage to...\xspace}
+    % *********************************************
+    \newcommand{\myTitle}{A Classic Thesis Style}
+    \newcommand{\mySubtitle}{An Homage to...}
 \end{lstlisting}
 
 Further customization can be made in \texttt{classicthesis-config.tex}
@@ -259,16 +277,16 @@ by choosing the options to \texttt{classicthesis.sty}
 
 \begin{lstlisting}
 \PassOptionsToPackage{
-  drafting=true,    % print version information on the bottom of the pages
-  tocaligned=false, % the left column of the toc will be aligned (no indentation)
-  dottedtoc=false,  % page numbers in ToC flushed right
-  parts=true,       % use part division
-  eulerchapternumbers=true, % use AMS Euler for chapter font (otherwise Palatino)
-  linedheaders=false,       % chaper headers will have line above and beneath
-  floatperchapter=true,     % numbering per chapter for all floats (i.e., Figure 1.1)
-  eulermath=false,  % use awesome Euler fonts for mathematical formulae (only with pdfLaTeX)
-  beramono=true,    % toggle a nice monospaced font (w/ bold)
-  % palatino=false, % deactivate standard font for loading another one, see the last section at the end of this file for suggestions
+  drafting=true,
+  tocaligned=false,
+  dottedtoc=false,
+  eulerchapternumbers=true,
+  linedheaders=false,
+  floatperchapter=true,
+  eulermath=false,
+  beramono=true,
+  palatino=true,
+  style=classicthesis
 }{classicthesis}
 \end{lstlisting}
 
