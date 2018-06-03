@@ -129,7 +129,7 @@
 % use arsclassica style
 \provideboolean{ct@arsclassica}
 \ifthenelse{\equal{\ct@style}{arsclassica}}%
-    {\setboolean{ct@eulerchapternumbers}{true}%
+    {%\setboolean{ct@eulerchapternumbers}{true}% for arsclassica only eulerchapternumbers
     \setboolean{ct@arsclassica}{true}}{\setboolean{ct@arsclassica}{false}}
 
 % ********************************************************************
@@ -322,6 +322,7 @@
 
     \ifthenelse{\boolean{xetex}}{ % use fontspec features; \OR\boolean{luatex} does not work well
       \PackageInfo{classicthesis}{Using fontspec for character spacing.}%
+      \microtypesetup{expansion=false}
       \DeclareRobustCommand{\spacedallcaps}[1]{{\addfontfeature{LetterSpace=18.0}\ct@caps\MakeTextUppercase{#1}}}% WordSpace=1.8
       \DeclareRobustCommand{\spacedlowsmallcaps}[1]{{\addfontfeatures{LetterSpace=14.0}\ct@caps\MakeTextLowercase{#1}}}% WordSpace=1.8
       }{\relax}

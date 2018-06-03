@@ -223,6 +223,18 @@ allow for a bit of freedom concerning the layout:
             all floats such as figures, tables, and listings (if used).
         \end{itemize}
 
+    \item Tweaking colors and fonts -- please use this with great care!:
+        \begin{itemize}
+            \item\verb|\ct@altfont|: comfortable hook to alter the basic look and feel of everything that uses spaced caps or spaced small caps. For example, for \texttt{arsclassica} we used \\ \verb|\renewcommand*{\ct@altfont}{\sffamily}|. Coloring is also possible this way.
+
+            % \item\verb|\ct@caps|: spacedallcaps spacedlowsmallcaps
+
+            \item\texttt{CTsemi}: Change the semi gray color used, \eg, for the chapter number. Default is: \verb|\definecolor{CTsemi}{gray}{0.55}|
+
+            \item\texttt{CTtitle}: Change the red color used, \eg, for the title. Default is: \verb|\definecolor{CTtitle}{named}{Maroon}|
+
+        \end{itemize}
+
 \end{itemize}
 
 Furthermore, pre-defined margins for different paper sizes are available, \eg, \texttt{a4paper}, \texttt{a5paper}, \texttt{b5paper}, and \texttt{letterpaper}. These are based on your chosen option of \verb|\documentclass|.
