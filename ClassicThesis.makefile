@@ -96,7 +96,3 @@ ext-tikz/ClassicThesis-figure20.pdf:
 	pdflatex -shell-escape -halt-on-error -interaction=batchmode -jobname "ext-tikz/ClassicThesis-figure20" "\def\tikzexternalrealjob{ClassicThesis}\input{ClassicThesis}"
 
 ext-tikz/ClassicThesis-figure20.pdf: ext-tikz/ClassicThesis-figure20.md5
-ext-tikz/ClassicThesis-figure21.pdf: 
-	pdflatex -shell-escape -halt-on-error -interaction=batchmode -jobname "ext-tikz/ClassicThesis-figure21" "\def\tikzexternalrealjob{ClassicThesis}\input{ClassicThesis}"
-
-ext-tikz/ClassicThesis-figure21.pdf: ext-tikz/ClassicThesis-figure21.md5

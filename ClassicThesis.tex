@@ -46,7 +46,11 @@
 %********************************************************************
 % Bibliographies
 %*******************************************************
-\addbibresource{Bibliography.bib}
+
+\addbibresource{references.bib}
+\addbibresource{ownref.bib}
+\addbibresource{ownsideref.bib}
+
 % \addbibresource[label=ownpubs]{AMiede_Publications.bib}
 
 %********************************************************************
@@ -96,74 +100,32 @@ interlingua se que. Al via multo esser specimen, campo responder que
 da. Le usate medical addresses pro, europa origine sanctificate nos se.}
 
 \include{Chapters/Introduction}
+\include{Chapters/fundamentals}
+\include{Chapters/objectives}
 
-\part{fundamentals}
-
-\section{Fundamentals of Overlapped Signals}
-\kant[1-12]
-\section{Signal Representations}
-\kant[1-8]
-\subsection{Time domain signal representation}
-\kant[1-6]
-\subsection{Time-Frequency Representations}
-\kant[1-6]
-
-\section{Specificies of Real World Overlapped Audio Signals (Music, Speech)}
-\kant[1-6]
-
-\subsection{Harmonicity and Pitch}
-\kant[1-6]
-
-\subsection{Temporal aspects}
-\kant[1-6]
-
-\subsection{Modulational Aspects}
-\kant[1-6]
-
-\subsection{Acoustic aspects}
-\kant[1-6]
-
-\subsection{Subjective aspects}
-\kant[1-6]
-
-
-\section{Scenarios and Applications}
-\kant[1-6]
-
-\subsection{Cocktail Party Environment}
-\kant[1-4]
-
-\subsection{Unison Mixtures}
-\kant[1-4]
-
-\subsection{Professional Produced Music}
-\kant[1-4]
-
-
-\part{Source Separation}\label{pt:showcase}
-
-\chapter{Separation of Unison Sources}
+\chapter{Separation with known Modulation}
 
 \include{Chapters/dafx/dafx}
-
-\chapter{Vocal/Accompaniment Separation}
-
 \include{Chapters/WarpedSeparation}
+
+\chapter{Separation with unknown modulation}
+
+\include{Chapters/commonfate/commonfate}
+
+\section{Common Fate Representation: a non parametric model for modulation}
+
+\section{A Data-driven model}
+\include{Chapters/DNNseparation}
 \include{Chapters/MUS}
 
-\section{Conclusion}
+\chapter{Human Ability of Estimating the Number of Sources}
 
-\part{Source Count Estimation}\label{pt:showcase}
-
-\chapter{Perceptual Experiments}
-
-\include{Chapters/ica/ica}
+% \include{Chapters/ica/ica}
 \include{Chapters/ismir/ismir}
 
-\chapter{Methods}
+\chapter{Source Count Estimation}
 
 \include{Chapters/dsc/dsc}
-
 
 
 %\addtocontents{toc}{\protect\clearpage} % <--- just debug stuff, ignore

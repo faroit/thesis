@@ -84,7 +84,7 @@
   %backend=biber,bibencoding=utf8, %instead of bibtex
   backend=bibtex8,bibencoding=ascii,%
   language=auto,%
-  style=numeric-comp,%
+  style=numeric,%
   %style=authoryear-comp, % Author 1999, 2010
   %bibstyle=authoryear,dashed=false, % dashed: substitute rep. author with ---
   sorting=nyt, % name, year, title
@@ -165,6 +165,8 @@
 % 5. Setup code listings
 % ****************************************************************************************************
 \usepackage{listings}
+\usepackage{longtable}
+
 %\lstset{emph={trueIndex,root},emphstyle=\color{BlueViolet}}%\underbar} % for special keywords
 \lstset{language=[LaTeX]Tex,%C++,
   morekeywords={PassOptionsToPackage,selectlanguage},
@@ -193,12 +195,13 @@
 % ********************************************************************
 % Using PDFLaTeX
 % ********************************************************************
+% Must use this command BEFORE you begin document!
+\graphicspath{{Chapters/dafx}}
+
 \PassOptionsToPackage{hyperfootnotes=false,pdfpagelabels}{hyperref}
   \usepackage{hyperref}  % backref linktocpage pagebackref
   \usepackage{graphicx}
 
-% Must use this command BEFORE you begin document!
-\graphicspath{{Chapters/dafx}}
 
 % ********************************************************************
 % Hyperreferences
