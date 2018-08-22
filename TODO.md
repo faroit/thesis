@@ -27,7 +27,7 @@ Count by detection is not useful
 SEPARATION OF HARMONIC STRUCTURES BASED ON TIED GAUSSIAN MIXTURE
 MODEL AND INFORMATION CRITERION FOR CONCURRENT SOUNDS
 
- Auditory scene analysis based on time-frequency integration of shared FM and AM
+Auditory scene analysis based on time-frequency integration of shared FM and AM
 
  # counting
 
@@ -44,3 +44,12 @@ fragen-and-bernd
 * https://hal.archives-ouvertes.fr/hal-01316485/document durchgehen nach Referenzen
 * aus ewert: https://qmro.qmul.ac.uk/xmlui/bitstream/handle/123456789/15689/Ewert%20Template-Based%20Vibrato%20Analysis%202016%20Accepted.pdf?sequence=1
 * aus jon barkers PHD thesis
+
+## Gespräch Bernd 13.07
+
+gutes Bild
+
+* Contributions -> Evaluierungs
+
+20.7. - 15.8.
+23.9. - 5.10.

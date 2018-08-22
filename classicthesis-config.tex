@@ -32,7 +32,7 @@
   eulerchapternumbers=true, % use AMS Euler for chapter font (otherwise Palatino)
   linedheaders=false,       % chaper headers will have line above and beneath
   floatperchapter=true,     % numbering per chapter for all floats (i.e., Figure 1.1)
-  eulermath=true,  % use awesome Euler fonts for mathematical formulae (only with pdfLaTeX)
+  eulermath=false,  % use awesome Euler fonts for mathematical formulae (only with pdfLaTeX)
   beramono=true,    % toggle a nice monospaced font (w/ bold)
   palatino=false,   % deactivate standard font for loading another one, see the last section at the end of this file for suggestions
 }{classicthesis}
@@ -81,16 +81,16 @@
 
 \usepackage{csquotes}
 \PassOptionsToPackage{%
-  %backend=biber,bibencoding=utf8, %instead of bibtex
-  backend=bibtex8,bibencoding=ascii,%
+  backend=biber,bibencoding=utf8, %instead of bibtex
+  % backend=bibtex8,bibencoding=ascii,%
   language=auto,%
-  style=numeric,%
+  style=ieee,%
   %style=authoryear-comp, % Author 1999, 2010
   %bibstyle=authoryear,dashed=false, % dashed: substitute rep. author with ---
   sorting=nyt, % name, year, title
   maxbibnames=10, % default: 3, et al.
   %backref=true,%
-  natbib=true % natbib compatibility mode (\citep and \citet still work)
+  natbib=false % natbib compatibility mode (\citep and \citet still work)
 }{biblatex}
     \usepackage{biblatex}
 
@@ -139,8 +139,8 @@
   \def\aclabelfont#1{\acsfont{#1}}
 % ****************************************************************************************************
 \usepackage{pgfplots} % External TikZ/PGF support (thanks to Andreas Nautsch)
-\usetikzlibrary{external}
-\tikzexternalize[mode=list and make, prefix=ext-tikz/]
+% \usetikzlibrary{external}
+% \tikzexternalize[mode=list and make, prefix=ext-tikz/]
 % ****************************************************************************************************
 
 

@@ -1,0 +1,53 @@
+\chapter{Datasets for Separation}
+
+% from dafx
+Audio source separation is a very active research field with a large number of contributions. Applications are dependent on the context of the scenario, ranging from enhancements of speech signals to musically motivated analysis tasks.
+
+As outlined by Bregman~\cite{bregman94}, the human ability to detect and group sound sources is outstanding.
+
+% TODO Listing more application (get from commonfate)
+
+The separation of musical instruments from a single channel mixture is considered as an under-determined case which does not have a single solution. Knowing the way in which source signals are mixed together is crucial to the quality of separation systems. In the context of speech separation even unsupervised methods can lead to good results. This is due to the fact that mixtures of speech signals (like in a cocktail party environment) show a high degree of statistical independence. Mixtures of musical instruments, however, are highly correlated which is a desired aim of musical performances in general.
+
+The Signal Separation Evaluation Campaign (SiSEC) is a solid indicator of the progress in research within the field of source separation \cite{vincent12}. The results from 2013 \cite{sisec13} show that for professionally produced music it is still difficult to achieve a high quality separation.
+One reason is due to the fact that the wide use of non-linear post-processing techniques (e.g. dynamic compression or effects like reverb) break assumptions that often are required to enable good performance of source separation algorithms. Another reason is that non-stationary effects like vibrato introduce additional problems \cite{nakano10}.
+
+In most scenarios for source separation of instrument signals it is common to assume that the spectral harmonics do only partially overlap. This enables algorithms like non-negative matrix factorization (NMF) to approximate the mixture from a lower-rank decomposition in an unsupervised way. Such systems are described in \cite{smaragdis03} and \cite{virtanen07}. Additionally the popularity of the class of NMF algorithms can be explained by the intuitive way in which they work on time-frequency representations of the mixture signal.
+
+In the context of musical instrument source separation, many researchers have focused on including prior information about the sources in their algorithms \cite{ozerov12}. The availability and detail of such a-priori information varies. Often systems learn spectral as well as temporal cues from training data or parts of the mixture where only one instrument is active. One example of such informed source separation systems is described by Ewert and M\"uller \cite{ewert12}. It incorporates the pitch and onset information encoded in a MIDI file to improve the separation result.
+
+Even the number of sources is a simple but very important information for source separation algorithms. One of the main drawbacks of many source separation systems is that they rely on this information. In some scenarios, like popular western music, the sources to separate are grouped into Melody + Bass + Drums and a residual signal. Constraining the system to such a scenario allows the results to be evaluated even if the set of sources being separated is incomplete. Constrained systems like these are also sufficient for real-world applications such as the eminent karaoke scenario. Limiting the number of desired sources helps not only to improve the performance of the algorithms but is also related to the fact that the number of sources humans can perceive is limited, too. Although a threshold has not been systematically addressed so far, a variety of experiments have been carried out. David Huron found \cite{huron89} that the number of voices humans can correctly identify is up to three. When St\"oter and Schoeffler et. al. \cite{stoeter13, schoeffler13} asked participants to identify the number of instruments in a piece of music, the participants were only able to identify up to three, similar to Huron's voice experiments. There is very little chance that listeners are able to detect the presence of more than three sources. However in trials with fewer than three instruments, listeners tended to be very sensitive: One of the stimuli in the \cite{stoeter13, schoeffler13} experiments with 1168 participants consisted of a mixture of Violin and Flute played in unison. The results showed that $76\%$ of the participants correctly identified two instruments. Only $18\%$ of the participants underestimated by one instrument, $6\%$ overestimated by one instrument.
+
+Since humans are able to reliably detect even instruments played in unison, this is a good motivation to expect the same from an algorithm. In this paper we want to address this scenario which has not been brought up so far. We believe creating and evaluating new algorithms for separating sources playing in unison will improve source separation systems in general.
+
+\section{Unison Source Separation Scenario}
+\label{sec:scenario}
+
+Up to date there are very few proposed source separation methods which perform good on a variety of input signals without making general assumptions or constraints. Most of the current state-of-the-art algorithms address specific scenarios like voice or melody extraction, or harmonic percussive separation. Additionally assumptions about the mixture itself are important, too.
+
+Describing a source separation scenario includes the number of sources $N$ and the number of desired sources $D$ which is normally smaller than $N$ when the desired sources contain groups of sources like instrument classes (strings, woodwinds, etc.).
+
+% TODO: unuson source separation scenario, aber wohin mit dem datenset?
+We propose a scenario where instruments play in unison. This means that they share the same fundamental frequency (regardless of the octave) so that the sources can overlap both in time and frequency. In fact unison\footnote{greek: with \emph{one voice}} mixtures are meant to be as much overlapped as possible, hence they are very difficult to separate. However, due to masking effects, a relatively good subjective quality for the separated sources can be obtained, even if the other sources are not perfectly suppressed.
+As far as we know, there is no contribution to the source separation scene that focuses on mixtures of such unison sources. \\
+
+The decomposition of sources with overlapping partials are covered in several other publications like \cite{nakano10} and \cite{smaragdis08} which are based on non-negative matrix factorization. Lin et. al. \cite{lintimbre13} address the problem by defining invariant timbre based features. We propose to address the problem from a different perspective and focus on analyzing the non-stationarities of the source signals. For most musical instruments, the non-stationary features are intentionally created, for instance with vibrato or tremolo effects, which make them valuable to track. These non-stationarities can be modeled or learned from the signals themselves. \\
+
+% TODO: move this to fundamentals?
+In this work we assume that we can separate overlapping partials of the sources based on differences in amplitude and/or frequency modulation, resulting in the following model for a signal with $P$ commonly modulated partials
+\begin{equation}
+  \begin{array}{l}
+   x(n) = \displaystyle \sum_{p=1}^{P} \Big[\big(1 + a(n)\big) \\
+   \hspace{3.5em}\displaystyle \cdot\sin \Big(2\pi f_{p,0}\big(n + \frac{1}{f_{1,0}} \sum_{m=m_0}^{n}{f(m)} \big) + \phi_{p,0} \Big)\Big] ,
+  \end{array}
+\end{equation}
+where effectively the amplitude modulation is $a(n)$ and the frequency modulation of the first partial is $f(n)$.
+
+% TODO: Extend this
+True Unison would be if 2 violins perceived as a single source, and usually there is no need to separate their signals from each other.
+\section{Synthetic Datasets}
+* synthetic Datasets: unison source separation, libri speech, RWC (midified)
+\section{Real Datasets}
+* real world datasets: Cello Dataset, SiSEC16, SiSEC18,
+\section{Chapter Conclusions}
+* throughout the thesis: how to go from synthetic to real world datasets if available.

@@ -1,0 +1,49 @@
+%************************************************
+\chapter{Introduction}\label{ch:introduction}
+%************************************************
+
+Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+
+\section{Motivation}
+Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+
+\clearpage
+\section{Research Contributions}
+
+This thesis comes with five main contributions:
+
+\begin{enumerate}
+\item I discuss mixing scenarios of highly overlapped audio sources.
+I consider known scenarios such as the cocktail party and professionally produced music but also present an new scenario where instruments are playing in unison.
+In this scenario, sources are severely overlapped and I show how tempo-spectral modulations like the one caused by vibratos enable to separate and analyse highly overlapped signals.
+Furthermore I show how these scenarios can stimulate new research directions to \emph{analyse} and \emph{process} such sounds.\\
+
+\item I developed two novel methods to \emph{separate} unison instrument mixtures: one is informed by an estimate of the fundamental frequency variation.
+The other is separating blindly, inspired by the way humans segregate time-varying sources.
+Finally both methods are extended and I investigate how my achievement for these tasks transfer to broader scenarios such as the separation of professional produced music.\\
+
+\item I provide detailed experimental studies to assess how humans perceive highly overlapped mixtures.
+In these studies I analysed the \emph{number of concurrent sources} in scenarios such as a cocktail party as well as polyphonic music recordings.
+I present the results of several experiments that verify the maximum number of sources that humans could hear out.\\
+
+\item For the task of \emph{estimating the maximum number of concurrent} speakers I developed a new method based on deep neural networks that improves state-of-the art results in cocktail party like environments.
+Furthermore, I show that this algorithm can supersede human performance when compared with the results of my subjective listening experiments.\\
+
+\item Last, but not least, I provided service to the research community by co-organising the international source separation evaluation campaign (SiSEC) and helped out to improve sustainability and reproducibility.
+In that vein, I provide open software to assess the quality of separation system using web technologies, which is also used throughout the work presented in this thesis.
+\end{enumerate}
+
+
+\section{Structure of this Thesis}
+
+The thesis and its relevant linked publications are organized into 6 main chapters.
+\begin{description}
+  \item Chapter~1: Introduction
+  \item Chapter~2: Fundamentals explains the fundamental concepts of audio signals, sources and overlapped sounds, relevant for the remainder of this thesis. This includes commonly used transformations and signal representations used for the task of source separation and analysis of mixtures. It also covers basics of fundamental frequency or pitch as an important cue for audio signals.
+  \item Chapter~3: Objectives and Challenges introduces relevant tasks and applications applied on overlapped sounds. Further, in this chapter the relevance of highly overlapped source scenarios are discussed and a new research track of long term slow modulations is proposed~\cite{rafii18}.
+  \item Chapter~4 and 5: Separation of Overlapped Sounds presents separation methods that are developed over the course of this thesis. It covers techniques that were the modulation information is available~\cite{stoeter14, stoeter15acm, stoeter15icassp} as well as blind methods~\cite{stoeter16, liutkus17}.
+  \item Chapter~5 and 6: Analysis of Overlapped Sounds covers the analysis of overlapped sounds, more specifically in the context of identifying and estimating the number of sources on music~\cite{schoeffler13, stoeter13} and the cocktail party scenario~\cite{stoeter19, stoeter18}.
+  \item Chapter~7: Conclusion summarizes and concludes this thesis and gives a and outlook into future research directions.
+\end{description}
