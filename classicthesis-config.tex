@@ -312,6 +312,20 @@
 % ********************************************************************
 % ****************************************************************************************************
 
+\newcommand{\contribs}[1]{
+  \begin{minipage}{.3\linewidth}
+  \end{minipage}
+  \hfill
+  \begin{minipage}{.67\linewidth}
+    %\begin{flushright}
+      \begin{small}
+        \textcolor{gray}{\textsf{#1}}
+      \end{small}
+      \vspace{20pt}\\
+    %\end{flushright}
+  \end{minipage}
+}
+
 \usepackage{siunitx}
 
 \floatstyle{ruled}

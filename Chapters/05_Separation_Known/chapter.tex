@@ -3,15 +3,25 @@
 
 % Vibrato rate around 5 Hertz. Similar to the tremor in parkinson deseases~\cite{fletcher01}.
 
-Frequency modulation caused by vibrato is a very common playing style for string instruments but also for woodwind and brass instruments. Vibrato is an effect that is well studied especially in musicology. Performers tend to perform a vibrato in the same way when repeating a performance. This can be exploited in source separation scenarios. Typically, vibratos have modulation frequencies (rates) which vary between 4 and 8 Hz. Additionally vibrato rates vary across different instruments. In \cite{macleod06} the vibrato width (frequency deviation) was found to be significantly different between violinists and violists performers.
+Frequency modulation caused by vibrato is a very common playing style for string instruments but also for woodwind and brass instruments.
+Vibrato is an effect that is well studied especially in musicology.
+Performers tend to perform a vibrato in the same way when repeating a performance.
+This can be exploited in source separation scenarios.
+Typically, vibratos have modulation frequencies (rates) which vary between 4 and 8 Hz.
+Additionally vibrato rates vary across different instruments.
+In \cite{macleod06} the vibrato width (frequency deviation) was found to be significantly different between violinists and violists performers.
 
+As with the amplitude modulated case NMF lacks the ability to model time varying frequencies since the $\mathbf{W}$ matrix is stationary.
+Several extensions for NMF have been proposed to improve the decomposition quality.
+\cite{hennequin11} proposes frequency dependent activations matrices, \cite{smaragdis08} has developed a system which can be described as shift invariant NMF.
+Another approach is to model the spectral pattern changes by Markov chains \cite{nakano10}. All these approaches attempt to model the non-stationary effects within the decomposition model.
+In this paper we propose a method that increases the stationarity of the signal in preprocessing step and then use the standard NMF for the decomposition. \\
 
-As with the amplitude modulated case NMF lacks the ability to model time varying frequencies since the $\mathbf{W}$ matrix is stationary. Several extensions for NMF have been proposed to improve the decomposition quality. \cite{hennequin11} proposes frequency dependent activations matrices, \cite{smaragdis08} has developed a system which can be described as shift invariant NMF. Another approach is to model the spectral pattern changes by Markov chains \cite{nakano10}. All these approaches attempt to model the non-stationary effects within the decomposition model. In this paper we propose a method that increases the stationarity of the signal in preprocessing step and then use the standard NMF for the decomposition. \\
-
+\subsection{Pitch Variation Informed Source Separation}
 % Content by Stefan Bayer
-We make use of \emph{time-warping} which refers to a mapping of the linear
-time scale $t$ to a warped time scale $\tau$ via a mapping function
-$\tau=w(t)$. To ensure a unique mapping, the mapping function needs to be strictly increasing. For the discrete time case the mapping can be achieved by a time-varying re-sampling of the linear (i.e. regularly sampled) time signal under consideration.
+We make use of \emph{time-warping} which refers to a mapping of the linear time scale $t$ to a warped time scale $\tau$ via a mapping function $\tau=w(t)$.
+To ensure a unique mapping, the mapping function needs to be strictly increasing.
+For the discrete time case the mapping can be achieved by a time-varying re-sampling of the linear (i.e. regularly sampled) time signal under consideration.
 The instantaneous sampling frequency then corresponds to the first derivative of
 the mapping function. Although the mapping can be done from any time-span
 $I$ on the linear time scale to any time span $J$ on the warped time scale, in

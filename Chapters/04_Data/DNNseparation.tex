@@ -1,4 +1,99 @@
-\chapter{Datasets for Separation}
+\chapter{Datasets for Separation and Analysis}
+
+In the previous chapter various applications and problems in the context of highly overlapped signals were discussed.
+Before methods are presented which separate or analyze such signals are presented, it is helpful to study and understand the importance of data with these properties.
+This becomes especially important as many methods nowadays rely on machine learning algorithms.
+One of the objectives in this thesis is to discuss if modulation properties of the signals can be used as a cue for the signal.
+
+Multitrack datasets are helpful to develop and evaluate methods.
+
+Since this is a very specific scenario, it is often a good idea to start with
+State of the art, Auflistung von existierenden datensets für analyse und.
+
+In speech it is very wide spread to mix clean speech and noise~\cite{varga93}or different clean speech signals like~\cite{garofolo93} to generate mixed speech.
+It is known that the conversational aspect is lost here but it may not be that important.
+Now, the benefit of such a dataset is that it can easily get very large.
+In music however, recordings are typically available separated.
+That way only very few datasets exist with separated tracks. This
+
+% zafar
+Compared to speech, musical content usually does share common orchestration and can usually not superimposed in a random way, prohibiting simply summing isolated random notes from instrumental databases to produce mixtures.
+% zafar end
+
+In this thesis methods were developed for both, synthetic datasets as well as realistic datasets.
+Helping the community. Very valuable
+
+\section{Synthetic Datasets}
+
+To create a dataset of synthetic mixtures of high overlap, one would seek for a high quality.
+
+The simplest way to assemble overlapped data is to use individual audio recordings and randomly mix them together.
+% * Am einfachsten durch verwendung existierender Einzelaufnahmen und anschliessender Überlagerung
+However, this often does not maintain the realistic behavior of mixtures.
+
+For example, it is known that a mixture of random speakers does not assemle a realistic cocktail party nor a conversation.
+% @article{KREMS2018,
+% title = "Why are conversations limited to about four people? A theoretical exploration of the conversation size constraint",
+% journal = "Evolution and Human Behavior",
+% year = "2018",
+% issn = "1090-5138",
+% doi = "https://doi.org/10.1016/j.evolhumbehav.2018.09.004",
+% url = "http://www.sciencedirect.com/science/article/pii/S1090513818301491",
+% author = "Jaimie Arona Krems and Jason Wilkes"
+% }
+
+Comparing this to music would mean, mixing individual sigle notes. But transforming this into music would require a composition including notes.
+
+
+Für kleiner Datensets eignet sich
+
+A) synthetisierung von Noten MIDIs (partituren) zu synthetisieren zum die volle Kontrolle zu haben (RWC in Kapitel X)
+B) Remixing von existierenden multitrack Datensets (medleydb). DSD100, MUSDB
+
+Möglichkeit um schnell viele samples zu erstellen: zufällige überlagerung.
+
+Clou: es gibt nur ein einziges musikalisches szenario bei dem zwei zufällige instrumente zusammengemischt werden können.. Unisono.
+
+Zwei Erklärungen:
+
+1. zufällige Überlagerung von verschiedenen Instrumenten ist nur musikalisch "sinnvoll" wenn gleicher Ton.
+2. auch musikalisch verwendung in klassischer Musik zur Erweiteurng des timbre.
+3. zeitlicher onset nicht relevant (unisono funktioniert nicht mit perkussiven Instrumenten)
+
+Nehme man jetzt zwei echte Aufnahmen gleicher Töne unterschiedlicher ergeben sich jedoch folgende Probleme:
+
+A) nicht exakt gleiche Tonhöhe (eventuell auch durch unterschiedliche Stimmung (Kammerton!))
+B) Kein kontrolliertes Vibrato
+C) unterschiedliche akustische umgebungen (Raumakustik etc.)
+
+>> Synthetisch....
+
+Bei Sprache ist die zufällige Zusammenmischung kein so grosses Problem. Ein realistisches Cocktail party effekt tritt bereits mit zufälliger Überlagerung ein. Nachteil: Keine semantischen Dialoge. Effekt nicht untersucht (paper zitieren.)
+
+Fazit
+
++ Controlled Environments
++ Allows to check parameters
++ Reproduzierbarkeit
++ "Handlich"
+- Eventuell Nicht übertragbar
+- Overfitting
+
+* synthetic Datasets: unison source separation~\chapter{X}
+* Dafx paper und commonfate paper
+libri speech, RWC (midified)
+
+\section{Realistic Data}
+
+
+* real world datasets: , SiSEC16, SiSEC18,
+
+* throughout the thesis: how to go from synthetic to real world datasets if available.
+
+% zaffar begin
+Building a good data-driven method for source separation relies heavily on a training dataset to learn the separation model. In our case, this not only means obtaining a set of musical songs, but also their constitutive accompaniment and lead sources, summing up to the mixtures. For professionally-produced or recorded music, the separated sources are often either unavailable or private. Indeed, they are considered amongst the most precious assets of right holders, and it is very difficult to find isolated vocals and accompaniment of professional bands that are freely available for the research community to work on without copyright infringements.
+% zafar end
+
 
 % from dafx
 Audio source separation is a very active research field with a large number of contributions. Applications are dependent on the context of the scenario, ranging from enhancements of speech signals to musically motivated analysis tasks.
@@ -6,7 +101,6 @@ Audio source separation is a very active research field with a large number of c
 As outlined by Bregman~\cite{bregman94}, the human ability to detect and group sound sources is outstanding.
 
 % TODO Listing more application (get from commonfate)
-
 The separation of musical instruments from a single channel mixture is considered as an under-determined case which does not have a single solution. Knowing the way in which source signals are mixed together is crucial to the quality of separation systems. In the context of speech separation even unsupervised methods can lead to good results. This is due to the fact that mixtures of speech signals (like in a cocktail party environment) show a high degree of statistical independence. Mixtures of musical instruments, however, are highly correlated which is a desired aim of musical performances in general.
 
 The Signal Separation Evaluation Campaign (SiSEC) is a solid indicator of the progress in research within the field of source separation \cite{vincent12}. The results from 2013 \cite{sisec13} show that for professionally produced music it is still difficult to achieve a high quality separation.
@@ -45,9 +139,45 @@ where effectively the amplitude modulation is $a(n)$ and the frequency modulatio
 
 % TODO: Extend this
 True Unison would be if 2 violins perceived as a single source, and usually there is no need to separate their signals from each other.
-\section{Synthetic Datasets}
-* synthetic Datasets: unison source separation, libri speech, RWC (midified)
-\section{Real Datasets}
-* real world datasets: Cello Dataset, SiSEC16, SiSEC18,
-\section{Chapter Conclusions}
-* throughout the thesis: how to go from synthetic to real world datasets if available.
+
+In the following years, new datasets were proposed that improved over the MASS dataset in many directions. We briefly describe the most important ones, summarized in Table~\ref{tab:datasets}.
+\begin{itemize}[leftmargin=*]
+	\item The QUASI dataset was proposed to study the impact of different mixing scenarios on the separation quality. It  consists of the same tracks as in the MASS dataset, but kept full length and mixed by professional sound engineers.
+	\item The MIR-1K and iKala datasets were the first attempts to scale vocals separation up. They feature a higher number of samples than the previously available datasets. However, they consist of mono signals of very short and amateur karaoke recordings.
+	\item The ccMixter dataset was proposed as the first dataset to feature many full-length stereo tracks. Each one comes with a vocals and an accompaniment source. Although it is stereo, it often suffers from simplistic mixing of sources, making it unrealistic in some aspects.
+	\item MedleyDB has been developed as a dataset to serve many purposes in music information retrieval. It consists of more than 100 full-length recordings, with all their constitutive sources. It is the first dataset to provide such a large amount of data to be used for audio separation research (more than 7 hours). Among all the material present in that dataset, 63 tracks feature singing voice.
+  \item DSD100 was presented for SiSEC 2016. It features 100 full-length tracks originating from the 'Mixing Secret' Free Multitrack Download Library\footnote{\url{http://www.cambridge-mt.com/ms-mtk.htm}} of the Cambridge Music Technology, which is freely usable for research and educational purposes.
+\end{itemize}
+
+Finally, we present here the MUSDB18 dataset, putting together tracks from MedleyDB, DSD100, and other new musical material. It features 150 full-length tracks, and has been constructed by the authors of this paper so as to address all the limitations we identified above:
+\begin{itemize}[leftmargin=*]
+\item It only features full-length tracks, so that the handling of long-term musical structures, and of silent regions in the lead/vocal signal, can be evaluated.
+\item It only features stereo signals which were mixed using professional digital audio workstations. This results in quality stereo mixes which are representative of real application scenarios.
+\item As with DSD100, a design choice of MUSDB18 was to split the signals into 4 predefined categories: bass, drums, vocals, and other. This contrasts with the enhanced granularity of MedleyDB that offers more types of sources, but it strongly promotes automation of the algorithms.
+\item Many musical genres are represented in MUSDB18, for example, jazz, electro, metal, etc.
+\item It is split into a development (100 tracks, 6.5~h) and a test dataset (50 tracks, 3.5~h), for the design of data-driven separation methods.
+\end{itemize}
+
+All details about this freely available dataset and its accompanying software tools may be found in its dedicated website\footnote{https://sigsep.github.io/musdb}.
+
+In any case, it can be seen that datasets of sufficient duration to build data-driven separation methods were only created recently.
+
+\begin{table*}[htbp]
+	\centering
+	\caption{Summary of datasets available for lead and accompaniment separation. Tracks without vocals were omitted in the statistics.}
+	\label{tab:datasets}
+		\begin{tabular}{|l l l l l l l|}
+			\hline
+			\textbf{Dataset} & \textbf{Year} & \textbf{Reference(s)} & \textbf{URL} & \textbf{Tracks} & \textbf{Track duration (s)} & \textbf{Full/stereo?}\\
+			\hline
+			MASS & 2008 & \cite{MTGMASSdb} & \url{http://www.mtg.upf.edu/download/datasets/mass} & 9 & $16 \pm 7$ & no / yes \\
+			MIR-1K & 2010 & \cite{hsu10} & \url{https://sites.google.com/site/unvoicedsoundseparation/mir-1k} & 1,000 & $8 \pm 8$ & no / no \\
+			QUASI & 2011 & \cite{liutkus11,vincent12} & \url{http://www.tsi.telecom-paristech.fr/aao/en/2012/03/12/quasi/} & 5 & $206 \pm 21$ & yes / yes \\
+			ccMixter & 2014 & \cite{liutkus142} & \url{http://www.loria.fr/~aliutkus/kam/} & 50 & $231 \pm 77 $ & yes / yes \\
+			MedleyDB & 2014 & \cite{bittner14} & \url{http://medleydb.weebly.com/} & 63 & $206 \pm 121$ & yes / yes \\
+			iKala & 2015 & \cite{chan15} & \url{http://mac.citi.sinica.edu.tw/ikala/} & 206 & 30 & no / no \\
+			DSD100 & 2015 & \cite{ono15} & \url{sisec17.audiolabs-erlangen.de} & 100 & $251 \pm 60$ & yes / yes \\
+      MUSDB18 & 2017 & \cite{rafii17} & \url{https://sigsep.github.io/musdb} & 150 & $236 \pm 95$ & yes / yes \\
+			\hline
+		\end{tabular}
+\end{table*}
