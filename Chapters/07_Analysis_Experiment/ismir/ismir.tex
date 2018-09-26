@@ -164,7 +164,7 @@ Followed by the training, the participants had to estimate the number of instrum
 
 \begin{figure}[htb]
 	\centering
-		\fbox{\includegraphics[width=2.8in]{Chapters/ismir/user_interface.png}}
+		\fbox{\includegraphics[width=2.8in]{Chapters/07_Analysis_Experiment/ismir/user_interface.png}}
 	\caption{Experiment User Interface.}
 	\label{figure:user_interface}
 \end{figure}
@@ -305,23 +305,23 @@ legend pos=north east,
 legend cell align=left
 ]
 
-\addplot[color=red,mark=triangle,dash pattern=on 1pt off 1pt] plot file {Chapters/ismir/plotdata/error_prob_iis_musicians.data};
+\addplot[color=red,mark=triangle,dash pattern=on 1pt off 1pt] plot file {Chapters/07_Analysis_Experiment/ismir/plotdata/error_prob_iis_musicians.data};
 \addlegendentry{Musicians [lab]}
 
-\addplot[color=blue,mark=o,dash pattern=on 1pt off 1pt] plot file {Chapters/ismir/plotdata/error_prob_iis_non_musicians.data};
+\addplot[color=blue,mark=o,dash pattern=on 1pt off 1pt] plot file {Chapters/07_Analysis_Experiment/ismir/plotdata/error_prob_iis_non_musicians.data};
 \addlegendentry{Non-Musicians [lab]}
 
-\addplot[color=black,mark=square,dash pattern=on 1pt off 1pt] plot file {Chapters/ismir/plotdata/error_prob_iis_all.data};
+\addplot[color=black,mark=square,dash pattern=on 1pt off 1pt] plot file {Chapters/07_Analysis_Experiment/ismir/plotdata/error_prob_iis_all.data};
 \addlegendentry{All [lab]}
 
 
-\addplot[color=red,mark=triangle] plot file {Chapters/ismir/plotdata/error_prob_web_musicians.data};
+\addplot[color=red,mark=triangle] plot file {Chapters/07_Analysis_Experiment/ismir/plotdata/error_prob_web_musicians.data};
 \addlegendentry{Musicians [web]}
 
-\addplot[color=blue,mark=o] plot file {Chapters/ismir/plotdata/error_prob_web_non_musicians.data};
+\addplot[color=blue,mark=o] plot file {Chapters/07_Analysis_Experiment/ismir/plotdata/error_prob_web_non_musicians.data};
 \addlegendentry{Non-Musicians [web]}
 
-\addplot[color=black,mark=square] plot file {Chapters/ismir/plotdata/error_prob_web_all.data};
+\addplot[color=black,mark=square] plot file {Chapters/07_Analysis_Experiment/ismir/plotdata/error_prob_web_all.data};
 \addlegendentry{All [web]}
 
 
@@ -357,10 +357,10 @@ legend cell align=left
 ]
 
 
-\addplot[color=blue,mark=triangle,dash pattern=on 1pt off 1pt] plot file {Chapters/ismir/plotdata/mean_absolute_deviation_iis.data};
+\addplot[color=blue,mark=triangle,dash pattern=on 1pt off 1pt] plot file {Chapters/07_Analysis_Experiment/ismir/plotdata/mean_absolute_deviation_iis.data};
 \addlegendentry{lab}
 
-\addplot[color=red,mark=triangle] plot file {Chapters/ismir/plotdata/mean_absolute_deviation_web.data};
+\addplot[color=red,mark=triangle] plot file {Chapters/07_Analysis_Experiment/ismir/plotdata/mean_absolute_deviation_web.data};
 \addlegendentry{web}
 
 
@@ -371,9 +371,9 @@ legend cell align=left
 \end{figure}
 
 \makeatletter
-\pgfplotstableread{Chapters/ismir/plotdata/share_very_certain.data}\tableA
-\pgfplotstableread{Chapters/ismir/plotdata/share_certain.data}\tableB
-\pgfplotstableread{Chapters/ismir/plotdata/share_uncertain.data}\tableC
+\pgfplotstableread{Chapters/07_Analysis_Experiment/ismir/plotdata/share_very_certain.data}\tableA
+\pgfplotstableread{Chapters/07_Analysis_Experiment/ismir/plotdata/share_certain.data}\tableB
+\pgfplotstableread{Chapters/07_Analysis_Experiment/ismir/plotdata/share_uncertain.data}\tableC
 \pgfplotsset{calculate offset/.code={\pgfkeys{/pgf/fpu=true,/pgf/fpu/output format=fixed}\pgfmathsetmacro\testmacro{(\pgfplotspointmeta*10^\pgfplots@data@scale@trafo@EXPONENT@y)/2*\pgfplots@y@veclength)}\pgfkeys{/pgf/fpu=false}},nodes near coords vertically centered/.style={every node near coord/.append style={/pgfplots/calculate offset,yshift=-\testmacro},nodes near coords align=center}}
 \makeatother
 
@@ -381,7 +381,7 @@ legend cell align=left
 \centering
 \vspace{2.5pt}
 
-\includegraphics[width=0.45\textwidth]{Chapters/ismir/plotdata/certainty.pdf}
+\includegraphics[width=0.45\textwidth]{Chapters/07_Analysis_Experiment/ismir/plotdata/certainty.pdf}
 \caption{Differences in certainty between the Internet experiment (web) and laboratory experiment (lab).}
 \label{figure:certainty_web_iis}
 \end{figure}

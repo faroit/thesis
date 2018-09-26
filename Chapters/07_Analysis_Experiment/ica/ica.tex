@@ -89,7 +89,7 @@ G028 & 17&5 	& 6&5 &\cellcolor[gray]{0.9} $\times$& &\cellcolor[gray]{0.9} $\tim
 The experiment was attended by 62 participants, where half of them regularly play a musical instrument. They were asked to count how many different instruments they can hear. 12 items from the test set (Table~\ref{tab:items}) were played back in random order. The experiment was presented by a user interface depicted in Figure~\ref{fig:experiment_ui}. Except for the training item, every subject could play back each stimulus up to three times. Additionally they were asked to estimate how certain they were in their decision (ranged from \emph{uncertain} to \emph{very certain}).
 \begin{figure}[h]
 	\centering
-		\fbox{\includegraphics[width=3in]{Chapters/ica/images/userinterface.pdf}}
+		\fbox{\includegraphics[width=3in]{Chapters/07_Analysis_Experiment/ica/images/userinterface.pdf}}
 	\caption{Experiment User Interface}
 	\label{fig:experiment_ui}
 \end{figure}
@@ -111,18 +111,18 @@ The outcome of the experiment is shown in Table~\ref{tab:resultsoverall}. No sub
 
 In general participants tended to perform worse for items with more than two instruments. The probability of correctly counting one instrument was 90.0\% whereas only one person out of 62 gave a correct response for an item with six instruments. In some cases the number of instruments does not correspond to the number of voices for every item. Items where an instrument plays more than one voice and voices which are played by more than one instrument. However most of the chosen instruments are monophonic so in our case this occured only for items where piano or guitar is present. Also we made sure that the number of total voices did not exceed the maximum number of instruments in that item. Voices being played by more than one instrument are called unisono, which is present in G068, that showed surprisingly good results.
 The overall results of the means of $\Delta$ and $E$ are plotted in Figure~\ref{fig:meanerror}.
-\input{Chapters/ica/misc/results_table.tex}
+\input{Chapters/07_Analysis_Experiment/ica/misc/results_table.tex}
 
 \begin{figure}[h]
 \begin{minipage}{0.5\textwidth}
 \begin{tabular}{c}
-	\includegraphics[width=\textwidth]{Chapters/ica/images/error_means.pdf}
+	\includegraphics[width=\textwidth]{Chapters/07_Analysis_Experiment/ica/images/error_means.pdf}
 \end{tabular}
 \end{minipage}
 %\hfill
 \begin{minipage}{0.5\textwidth}
 \begin{tabular}{c}
-	\includegraphics[width=\textwidth]{Chapters/ica/images/error_diff.pdf}
+	\includegraphics[width=\textwidth]{Chapters/07_Analysis_Experiment/ica/images/error_diff.pdf}
 \end{tabular}
 \end{minipage}
 \caption{Error probability (left) and Mean of $\Delta = I-R$ (right) categorized by the number of instruments.}
@@ -141,7 +141,7 @@ Figure~\ref{fig:certainty} shows the results of the subjects certainty grouped b
 
 \begin{figure}[h]
 	\centering
-		\includegraphics[height=2.5in]{Chapters/ica/images/certainty.pdf}
+		\includegraphics[height=2.5in]{Chapters/07_Analysis_Experiment/ica/images/certainty.pdf}
 	\caption{Responses for certainty of subjects by number of instruments}
 	\label{fig:certainty}
 \end{figure}
@@ -153,7 +153,7 @@ As $E$ is dichotomous we focus on $\Delta$ first which can be classified as an i
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=0.6\textwidth]{Chapters/ica/images/diff_medians.pdf}
+	\includegraphics[width=0.6\textwidth]{Chapters/07_Analysis_Experiment/ica/images/diff_medians.pdf}
 \caption{Median of $\Delta$ categorized by the number of instruments}
 \label{fig:median}
 \end{figure}

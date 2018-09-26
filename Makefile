@@ -1,4 +1,4 @@
-thesis.pdf: references.bib ClassicThesis.tex classicthesis-config.tex Chapters/*.tex FrontBackmatter/*.tex
+thesis.pdf: references.bib ClassicThesis.tex classicthesis-config.tex Chapters/**/*.tex FrontBackmatter/*.tex
 	latexmk -recorder -pdf -pdflatex="pdflatex -interactive=batchmode" --synctex=1 -use-make ClassicThesis
 
 clean:

@@ -1,3 +1,5 @@
+\chapter{Separation by Known Modulation}
+
 \section{Separating by Frequency Modulation}
 \label{sub:frequency_modulation}
 
@@ -104,12 +106,12 @@ prior knowledge about the individual modulation functions. Although a pitch vari
 \begin{tikzpicture}
     \node (inputmeta) [inner sep=0pt] {
         \begin{tikzpicture}
-            \node (input) [inner sep=0pt] {\resizebox{0.25\columnwidth}{!}{\input{Chapters/dafx/figures/input}}};
-            \node [inner sep=0pt,below of=input,node distance=1.75cm, label={[yshift=-0.3cm]below:Input}] (pitchvariation) {\resizebox{0.25\columnwidth}{!}{\input{Chapters/dafx/figures/pitchvariation}}};
+            \node (input) [inner sep=0pt] {\resizebox{0.25\columnwidth}{!}{\input{Chapters/05_Separation_Known/figures/input}}};
+            \node [inner sep=0pt,below of=input,node distance=1.75cm, label={[yshift=-0.3cm]below:Input}] (pitchvariation) {\resizebox{0.25\columnwidth}{!}{\input{Chapters/05_Separation_Known/figures/pitchvariation}}};
         \end{tikzpicture}
     };
     \node [right of=input,node distance=0.38\columnwidth,draw,minimum width=0.25\columnwidth,minimum height=0.16\columnwidth,inner sep=0pt] (TW) {TW};
-    \node [right of=TW,node distance=0.33\columnwidth,inner sep=0pt, label={[yshift=-0.76cm]below:Output}] (output) {\resizebox{0.25\columnwidth}{!}{\input{Chapters/dafx/figures/output}}};
+    \node [right of=TW,node distance=0.33\columnwidth,inner sep=0pt, label={[yshift=-0.76cm]below:Output}] (output) {\resizebox{0.25\columnwidth}{!}{\input{Chapters/05_Separation_Known/figures/output}}};
     \path[draw,->, line width=0.4mm] ($(inputmeta.east) + (0.0 ,+0.6)$) -- ($(TW.west) + (-0.08 ,+0.2)$);
     \path[draw,->, line width=0.4mm] ($(inputmeta.east) + (0.0 ,-0.6)$) -- ($(TW.west) + (-0.08 ,-0.2)$);
     \path[draw,->, line width=0.4mm] (TW) -- (output);
@@ -174,11 +176,11 @@ Furthermore we present two methods to decompose those mixtures based on differen
 \begin{figure}[H]
 \begin{center}
 \begin{tabular}{cc}
-    \includegraphics[width=35mm]{Chapters/dafx/figures/PEASSplots/OPS/NMF2.png} & \includegraphics[width=35mm]{Chapters/dafx/figures/PEASSplots/OPS/NMF4.png} \\
+    \includegraphics[width=35mm]{Chapters/05_Separation_Known/figures/PEASSplots/OPS/NMF2.png} & \includegraphics[width=35mm]{Chapters/05_Separation_Known/figures/PEASSplots/OPS/NMF4.png} \\
     (a) NMF $K=2$ & (b) NMF $K=4$ \\[6pt]
-        \includegraphics[width=35mm]{Chapters/dafx/figures/PEASSplots/OPS/NMFWARP2.png} & \includegraphics[width=35mm]{Chapters/dafx/figures/PEASSplots/OPS/NMFWARP4.png} \\
+        \includegraphics[width=35mm]{Chapters/05_Separation_Known/figures/PEASSplots/OPS/NMFWARP2.png} & \includegraphics[width=35mm]{Chapters/05_Separation_Known/figures/PEASSplots/OPS/NMFWARP4.png} \\
     (c) PVI-NMF $K=2$ & (d) PVI-NMF $K=4$ \\[6pt]
-         \includegraphics[width=35mm]{Chapters/dafx/figures/PEASSplots/OPS/NTF2.png} & \includegraphics[width=35mm]{Chapters/dafx/figures/PEASSplots/OPS/NTF4.png} \\
+         \includegraphics[width=35mm]{Chapters/05_Separation_Known/figures/PEASSplots/OPS/NTF2.png} & \includegraphics[width=35mm]{Chapters/05_Separation_Known/figures/PEASSplots/OPS/NTF4.png} \\
     (e) MOD-NTF $K=2$ & (f) MOD-NTF $K=4$ \\[6pt]
 \end{tabular}
 \caption{Results of Overall Perceptual Score. Each matrix represents the mean OPS values for each individual mixture of two sources. The x and y axis represent the instrument IDs in General MIDI notation (See Table~\ref{tab:testset}).}
@@ -193,14 +195,14 @@ Furthermore we present two methods to decompose those mixtures based on differen
     \subfloat[Source 1]{
         \begin{tikzpicture}
             \begin{axis}[mystyle]
-            \addplot [forget plot] graphics [xmin=0.5,xmax=1121.5,ymin=0.5,ymax=273.5] {Chapters/dafx/figures/src1-1.png};
+            \addplot [forget plot] graphics [xmin=0.5,xmax=1121.5,ymin=0.5,ymax=273.5] {Chapters/05_Separation_Known/figures/src1-1.png};
             \end{axis}
         \end{tikzpicture}%
     }\hfill
     \subfloat[Source 2]{
         \begin{tikzpicture}
             \begin{axis}[mystyle]
-            \addplot [forget plot] graphics [xmin=0.5,xmax=1121.5,ymin=0.5,ymax=273.5] {Chapters/dafx/figures/src2-1.png};
+            \addplot [forget plot] graphics [xmin=0.5,xmax=1121.5,ymin=0.5,ymax=273.5] {Chapters/05_Separation_Known/figures/src2-1.png};
             \end{axis}
         \end{tikzpicture}%
     }
@@ -208,7 +210,7 @@ Furthermore we present two methods to decompose those mixtures based on differen
     \subfloat[Mixture]{
         \begin{tikzpicture}
             \begin{axis}[mystyle]
-            \addplot [forget plot] graphics [xmin=0.5,xmax=1121.5,ymin=0.5,ymax=273.5] {Chapters/dafx/figures/mix-1.png};
+            \addplot [forget plot] graphics [xmin=0.5,xmax=1121.5,ymin=0.5,ymax=273.5] {Chapters/05_Separation_Known/figures/mix-1.png};
             \end{axis}
         \end{tikzpicture}%
     }
@@ -216,14 +218,14 @@ Furthermore we present two methods to decompose those mixtures based on differen
     \subfloat[Mix. warped by Pitch 1]{
         \begin{tikzpicture}
             \begin{axis}[mystyle]
-            \addplot [forget plot] graphics [xmin=0.5,xmax=1121.5,ymin=0.5,ymax=273.5] {Chapters/dafx/figures/mixwrpedsrc1-1.png};
+            \addplot [forget plot] graphics [xmin=0.5,xmax=1121.5,ymin=0.5,ymax=273.5] {Chapters/05_Separation_Known/figures/mixwrpedsrc1-1.png};
             \end{axis}
         \end{tikzpicture}%
     }\hfill
     \subfloat[Mix. warped by Pitch 2]{
         \begin{tikzpicture}
             \begin{axis}[mystyle]
-            \addplot [forget plot] graphics [xmin=0.5,xmax=1121.5,ymin=0.5,ymax=273.5] {Chapters/dafx/figures/mixwrpedsrc2-1.png};
+            \addplot [forget plot] graphics [xmin=0.5,xmax=1121.5,ymin=0.5,ymax=273.5] {Chapters/05_Separation_Known/figures/mixwrpedsrc2-1.png};
             \end{axis}
         \end{tikzpicture}%
     }
@@ -231,14 +233,14 @@ Furthermore we present two methods to decompose those mixtures based on differen
     \subfloat[Target 1 warped]{
         \begin{tikzpicture}
             \begin{axis}[mystyle]
-            \addplot [forget plot] graphics [xmin=0.5,xmax=1121.5,ymin=0.5,ymax=273.5] {Chapters/dafx/figures/src1wrped-1.png};
+            \addplot [forget plot] graphics [xmin=0.5,xmax=1121.5,ymin=0.5,ymax=273.5] {Chapters/05_Separation_Known/figures/src1wrped-1.png};
             \end{axis}
         \end{tikzpicture}%
     }\hfill
     \subfloat[Target 2 warped]{
         \begin{tikzpicture}
             \begin{axis}[mystyle]
-            \addplot [forget plot] graphics [xmin=0.5,xmax=1121.5,ymin=0.5,ymax=273.5] {Chapters/dafx/figures/src2wrped-1.png};
+            \addplot [forget plot] graphics [xmin=0.5,xmax=1121.5,ymin=0.5,ymax=273.5] {Chapters/05_Separation_Known/figures/src2wrped-1.png};
             \end{axis}
         \end{tikzpicture}%
     }
@@ -246,14 +248,14 @@ Furthermore we present two methods to decompose those mixtures based on differen
     \subfloat[Target 1 unwarped]{
         \begin{tikzpicture}
             \begin{axis}[mystyle]
-            \addplot [forget plot] graphics [xmin=0.5,xmax=1121.5,ymin=0.5,ymax=273.5] {Chapters/dafx/figures/src1unwarped-1.png};
+            \addplot [forget plot] graphics [xmin=0.5,xmax=1121.5,ymin=0.5,ymax=273.5] {Chapters/05_Separation_Known/figures/src1unwarped-1.png};
             \end{axis}
         \end{tikzpicture}%
     }\hfill
     \subfloat[Target 2 unwarped]{
         \begin{tikzpicture}
             \begin{axis}[mystyle]
-            \addplot [forget plot] graphics [xmin=0.5,xmax=1121.5,ymin=0.5,ymax=273.5] {Chapters/dafx/figures/src2unwarped-1.png};
+            \addplot [forget plot] graphics [xmin=0.5,xmax=1121.5,ymin=0.5,ymax=273.5] {Chapters/05_Separation_Known/figures/src2unwarped-1.png};
             \end{axis}
         \end{tikzpicture}%
     }

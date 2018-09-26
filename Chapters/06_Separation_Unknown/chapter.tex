@@ -1,5 +1,6 @@
-% from common fate
-\section{Modulation Spectrogram based Separation}
+\chapter{Separation by Unknown Modulation}
+
+% \section{Modulation Spectrogram based Separation}
 
 % Intro commonfate START
 % Unknown modulation!
@@ -33,20 +34,20 @@ In this paper, we propose to relax some assumptions of HR-NMF in the interest of
     \centering
     \tiny
     \subfloat[Input]{
-       \includegraphics[width=0.92\columnwidth]{Chapters/dafx/figures/Timepdf-crop.png}	   		  \hspace{-7mm}
+       \includegraphics[width=0.92\columnwidth]{Chapters/05_Separation_Known/figures/Timepdf-crop.png}	   		  \hspace{-7mm}
     }\hfill
     \subfloat[Spectrogram]{
-       \input{Chapters/dafx/figures/AMPlots/STFT.tex}%
+       \input{Chapters/05_Separation_Known/figures/AMPlots/STFT.tex}%
     }%
     \subfloat[Tensor Slice]{
-       \input{Chapters/dafx/figures/AMPlots/Tmod.tex}%
+       \input{Chapters/05_Separation_Known/figures/AMPlots/Tmod.tex}%
     }\hfill
 
     \subfloat[NMF]{
-     	\input{Chapters/dafx/figures/AMPlots/WH.tex}%
+     	\input{Chapters/05_Separation_Known/figures/AMPlots/WH.tex}%
     }\hfill
     \subfloat[Non-Negative Tensor Factorization]{
-       \input{Chapters/dafx/figures/AMPlots/GAS.tex}%
+       \input{Chapters/05_Separation_Known/figures/AMPlots/GAS.tex}%
     }\hfill
     \caption{Example of separating a mixture of two amplitude modulated signals by NMF and Modulation-NTF. \\ \textbf{(a)} Mixture of two sinusoids at $440$ Hz with AM of $4.7$ Hz and $12.6$ Hz (fs=$8$ kHz), \textbf{(b)} STFT (FFT length = 256), \textbf{(c)} Slice of Modulation Tensor (FFT length = 256),  \textbf{(d)} $\mathbf{W} \times \mathbf{H}$ Result of Non-Negative Matrix Factorization ($\beta = 1$) after 100 iterations, \textbf{(e)}  $\mathbf{G} \times \mathbf{A} \times \mathbf{S} $ Result of Non-Negative Tensor Factorization ($\beta = 1$) after 100 iterations,}
     \label{fig:tensor}
@@ -80,7 +81,7 @@ In Figure~\ref{fig:sk_tensor} we show the factorization of a simple amplitude mo
 	 \\
     Spectrogram of two sinusoids with same carrier\\
     frequency but different amplitude modulation frequency.\\[6pt]
-	\input{Chapters/dafx/figures/AMPlots/WH.tex} \\
+	\input{Chapters/05_Separation_Known/figures/AMPlots/WH.tex} \\
     Non-Negative Matrix Factorization \\[6pt]
 	 \\
     Non-Negative Tensor Factorization\\[6pt]
