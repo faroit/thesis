@@ -57,7 +57,7 @@ __FOR_CTAN_UPLOAD.txt
 *.fdb_latexmk
 *.fls
 ClassicThesis.bcf
-Bibliography.bib.bak#### joe made this: http://goel.io/joe
+Bibliography.bib.bak
 
 #####=== OSX ===#####
 .DS_Store

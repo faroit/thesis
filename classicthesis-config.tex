@@ -19,6 +19,10 @@
 \PassOptionsToPackage{utf8}{inputenc}
   \usepackage{inputenc}
 
+\PassOptionsToPackage{T1}{fontenc} % T2A for cyrillics
+  \usepackage{fontenc}
+
+
 % ****************************************************************************************************
 % 1. Configure classicthesis for your needs here, e.g., remove "drafting" below
 % in order to deactivate the time-stamp on the pages
@@ -28,18 +32,18 @@
   drafting=true,    % print version information on the bottom of the pages
   tocaligned=false, % the left column of the toc will be aligned (no indentation)
   dottedtoc=false,  % page numbers in ToC flushed right
-  parts=true,       % use part division
   eulerchapternumbers=true, % use AMS Euler for chapter font (otherwise Palatino)
   linedheaders=false,       % chaper headers will have line above and beneath
   floatperchapter=true,     % numbering per chapter for all floats (i.e., Figure 1.1)
   eulermath=false,  % use awesome Euler fonts for mathematical formulae (only with pdfLaTeX)
   beramono=true,    % toggle a nice monospaced font (w/ bold)
-  palatino=false,   % deactivate standard font for loading another one, see the last section at the end of this file for suggestions
+  palatino=true,    % deactivate standard font for loading another one, see the last section at the end of this file for suggestions
+  style=classicthesis % classicthesis, arsclassica
 }{classicthesis}
 
 
 % ****************************************************************************************************
-% 2. Personal data and user ad-hoc commands
+% 2. Personal data and user ad-hoc commands (insert your own data here)
 % ****************************************************************************************************
 \newcommand{\myTitle}{Analysis and Separation of Time and Frequency Overlapped Monoaural Audio Signals\xspace}
 \newcommand{\mySubtitle}{test\xspace}
@@ -58,8 +62,6 @@
 % ********************************************************************
 % Setup, finetuning, and useful commands
 % ********************************************************************
-\newcounter{dummy} % necessary for correct hyperlinks (to index, bib, etc.)
-\newlength{\abcd} % for ab..z string length calculation
 \providecommand{\mLyX}{L\kern-.1667em\lower.25em\hbox{Y}\kern-.125emX\@}
 \newcommand{\ie}{i.\,e.}
 \newcommand{\Ie}{I.\,e.}
@@ -121,14 +123,9 @@
 % ********************************************************************
 % General useful packages
 % ********************************************************************
-\PassOptionsToPackage{T1}{fontenc} % T2A for cyrillics
-  \usepackage{fontenc}
-\usepackage{textcomp} % fix warning with missing font shapes
+\usepackage{graphicx} %
 \usepackage{scrhack} % fix warnings when using KOMA with listings package
 \usepackage{xspace} % to get the spacing after macros right
-\usepackage{mparhack} % get marginpar right
-%\usepackage{fixltx2e} % fixes some LaTeX stuff --> since 2015 in the LaTeX kernel (see below)
-% \usepackage[latest]{latexrelease} % emulate newer kernel version if older is detected
 \PassOptionsToPackage{printonlyused,smaller}{acronym}
   \usepackage{acronym} % nice macros for handling all acronyms in the thesis
   %\renewcommand{\bflabel}[1]{{#1}\hfill} % fix the list of acronyms --> no longer working
@@ -151,13 +148,6 @@
   \setlength{\extrarowheight}{3pt} % increase table row height
 \newcommand{\tableheadline}[1]{\multicolumn{1}{l}{\spacedlowsmallcaps{#1}}}
 \newcommand{\myfloatalign}{\centering} % to be used with each float for alignment
-\usepackage{caption}
-% Thanks to cgnieder and Claus Lahiri
-% http://tex.stackexchange.com/questions/69349/spacedlowsmallcaps-in-caption-label
-% [REMOVED DUE TO OTHER PROBLEMS, SEE ISSUE #82]
-%\DeclareCaptionLabelFormat{smallcaps}{\bothIfFirst{#1}{~}\MakeTextLowercase{\textsc{#2}}}
-%\captionsetup{font=small,labelformat=smallcaps} % format=hang,
-\captionsetup{font=small} % format=hang,
 \usepackage{subfig}
 % ****************************************************************************************************
 
@@ -189,32 +179,31 @@
 % ****************************************************************************************************
 
 
+
+
 % ****************************************************************************************************
-% 6. PDFLaTeX, hyperreferences, and citation backreferences
+% 6. Last calls before the bar closes
 % ****************************************************************************************************
 % ********************************************************************
-% Using PDFLaTeX
+% Her Majesty herself
 % ********************************************************************
-% Must use this command BEFORE you begin document!
-\graphicspath{{Chapters/dafx}}
-
-\PassOptionsToPackage{hyperfootnotes=false,pdfpagelabels}{hyperref}
-  \usepackage{hyperref}  % backref linktocpage pagebackref
-  \usepackage{graphicx}
+\usepackage{classicthesis}
 
 
 % ********************************************************************
-% Hyperreferences
+% Fine-tune hyperreferences (hyperref should be called last)
 % ********************************************************************
 \hypersetup{%
   %draft, % hyperref's draft mode, for printing see below
   colorlinks=true, linktocpage=true, pdfstartpage=3, pdfstartview=FitV,%
   % uncomment the following line if you want to have black links (e.g., for printing)
-  %mlinks=false, linktocpage=false, pdfstartpage=3, pdfstartview=FitV, pdfborder={0 0 0},%
-  breaklinks=true, pdfpagemode=UseNone, pageanchor=true, pdfpagemode=UseOutlines,%
+  %colorlinks=false, linktocpage=false, pdfstartpage=3, pdfstartview=FitV, pdfborder={0 0 0},%
+  breaklinks=true, pageanchor=true,%
+  pdfpagemode=UseNone, %
+  % pdfpagemode=UseOutlines,%
   plainpages=false, bookmarksnumbered, bookmarksopen=true, bookmarksopenlevel=1,%
   hypertexnames=true, pdfhighlight=/O,%nesting=true,%frenchlinks,%
-  urlcolor=webbrown, linkcolor=RoyalBlue, citecolor=webgreen, %pagecolor=RoyalBlue,%
+  urlcolor=CTurl, linkcolor=CTlink, citecolor=CTcitation, %pagecolor=RoyalBlue,%
   %urlcolor=Black, linkcolor=Black, citecolor=Black, %pagecolor=Black,%
   pdftitle={\myTitle},%
   pdfauthor={\textcopyright\ \myName, \myUni, \myFaculty},%
@@ -224,13 +213,13 @@
   pdfproducer={LaTeX with hyperref and classicthesis}%
 }
 
+
 % ********************************************************************
-% Setup autoreferences
+% Setup autoreferences (hyperref and babel)
 % ********************************************************************
 % There are some issues regarding autorefnames
-% http://www.ureader.de/msg/136221647.aspx
 % http://www.tex.ac.uk/cgi-bin/texfaq2html?label=latexwords
-% you have to redefine the makros for the
+% you have to redefine the macros for the
 % language you use, e.g., american, ngerman
 % (as chosen when loading babel/AtBeginDocument)
 % ********************************************************************
@@ -262,9 +251,6 @@
 \makeatother
 
 
-% ****************************************************************************************************
-% 7. Last calls before the bar closes
-% ****************************************************************************************************
 % ********************************************************************
 % Development Stuff
 % ********************************************************************
@@ -274,14 +260,9 @@
 %\PassOptionsToPackage{warning, all}{onlyamsmath}
 %  \usepackage{onlyamsmath}
 
-% ********************************************************************
-% Last, but not least...
-% ********************************************************************
-\usepackage{classicthesis}
-
 
 % ****************************************************************************************************
-% 8. Further adjustments (experimental)
+% 7. Further adjustments (experimental)
 % ****************************************************************************************************
 % ********************************************************************
 % Changing the text area

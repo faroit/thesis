@@ -1,3 +1,33 @@
+Changes in version 4.6 (June 2018)
+o Integration of arsclassica
+  (with permission from Lorenzo Pantieri)
+o Introduced style option for classicthesis,
+  allowing for changing style to arsclassica
+  (see classicthesis-arsclassica-book.tex as
+  an example)
+o Provision of customization and hooks, e.g.,
+  \ct@altfont and \ct@caps
+o Loading caption package in classicthesis.sty
+  (for better arsclassica integration)
+o Changed footmisc's option from "flushmargin"
+  to "marginal" in order to fix spacing
+  problems in non-KOMA settings (thanks to
+  Hugues de Lassus) #154
+X Removed double occurrence of "pdfpagemode"
+  in classicthesis-config.tex (thanks to
+  Csaba Hajdu)
+X Removed latexrelease (thanks to David
+  Carlisle and Ulrike Fischer)
+X Removed textcomp
+o Re-arranged package loading order, i.e.,
+  hyperref for avoiding problems
+o Generalized color names for easier user
+  customization (CTsemi, CTtitle)
+o Got rid of \refstepcounter{dummy}
+o Introduced \classicthesis to access version
+o Activating protrusion and expansion for
+  microtype if pdfLaTeX is used (beta-test)
+
 Changes in version 4.5 (December 2017)
 o Fixed vanished page numbers on chapter
   opening pages (thanks to Ivo and Jos\'e M.
