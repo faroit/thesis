@@ -1,10 +1,10 @@
+ClassicThesis.pdf
 :q.tex
 makX.tex
 *_bibertool.bib
 test.tex
 tst.tex
 X.tex
-ClassicThesis.pdf
 ext-tikz/
 # by default ignore top-level pdf
 #/*.pdf
