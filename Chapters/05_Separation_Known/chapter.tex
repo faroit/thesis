@@ -16,6 +16,9 @@ One example of such informed source separation systems is described by Ewert and
 It incorporates the pitch and onset information encoded in a MIDI file to improve the separation result.
 % end coverted from dafx
 
+In the case of highly overlapped signals of unison instruments, the score information is not useful.
+Therefore, in this chapter we evaluate the feasibility to increase the prior information to use the fundamental frequency estimate.
+
 \section{Using Fundamental Frequency}
 \label{sub:frequency_modulation}
 
@@ -34,6 +37,8 @@ Several extensions for NMF have been proposed to improve the decomposition quali
 \cite{hennequin11} proposes frequency dependent activations matrices, \cite{smaragdis08} has developed a system which can be described as shift invariant NMF.
 Another approach is to model the spectral pattern changes by Markov chains \cite{nakano10}. All these approaches attempt to model the non-stationary effects within the decomposition model.
 In this paper we propose a method that increases the stationarity of the signal in preprocessing step and then use the standard NMF for the decomposition. \\
+
+
 
 \subsection{Time Warping}
 % Content by Stefan Bayer
@@ -114,9 +119,8 @@ To build a test set we selected 10 instrumental items noted in Table~\ref{tab:te
 
 With the ability to remove the frequency modulation from a signal we can then include this system in a source separation system to address the non-stationarity issues of NMF based approaches. Figure~\ref{fig:warpingdemo} shows how this system works on a harmonic FM signal mixture. Plots (a) and (b) show the two input signals which are linearly mixed (c). For each source the warp contour needs to be calculated. The mixture is then warped with pitch variation estimates of source 1  (d) and source 2 (e). The actual separation/filtering of the sources is then done by using NMF which is not shown here. To separate the components from the warped mixture we used NMF on a spectrogram computed with a very long DFT (about 0.5 s). NMF can work unsupervised by detecting the more tonal $\textbf{W}$ component by using a spectral flatness measure. The separated signals (f) and (g) then need to be warped back into the original time domain resulting in (h) and (i).
 
-It is important to clarify that this approach would not be
-able to separate two modulating instruments playing in unison without having
-prior knowledge about the individual modulation functions. Although a pitch variation estimate might be difficult to achieve in a mixture our approach shows that such a system can make sense.
+It is important to clarify that this approach would not be able to separate two modulating instruments playing in unison without having prior knowledge about the individual modulation functions. Although a pitch variation estimate might be difficult to achieve in a mixture our approach shows that such a system can make sense.
+
 
 \begin{figure}[t]
 \begin{tikzpicture}
@@ -279,9 +283,33 @@ Furthermore we present two methods to decompose those mixtures based on differen
     \label{fig:warpingdemo}
 \end{figure}
 
+\section{Applying Pitch Variation Informed Separation to Music}
+
+In the previous section we showed the effectiveness of a pitch variation informed separation system.
+In this section I now want to explain how such a system can be extended to be used for real world application such as the separation of music into lead/vocals and the accompaniment track.
+
+\subsection{}
+One obvious drawback of our method is that it relies on a robust pitch variation estimator which is usually difficult to obtain from a mixtures where multiple harmonic sources are present at the same time.
+
+\input{Chapters/05_Separation_Known/figures/sisec16}
+
+In a first step, the ``Melodia'' algorithm~\cite{salamon12} is used to obtain an estimate of the predominant melody from the mixture. The mixture is then time warped based on the fundamental frequency of the melody so that it’s predominant solo part is nearly constant in F0. (See~\cite{salamon12} for details). The extraction is then carried out in time domain using efficient comb filtering.
+The algorithm is implemented in Python and has low complexity resulting in approximately 0.33s for 1s of audio on 3,1 GHz Intel Core i5.
+
+* Mention that we want to extend the methods based in~\cite{stoeter14} and take it to SiSEC evaluation challange.
+* Therefore we need a) a robust f0 estimation b) a robust voice activity detector and c) a good filtering paradigm.
+
+\subsection{Results on SiSEC 2015}
+\label{ssec:performance}
+
+\kant[1-16]
+
+\subsection{Source Extraction}
+\kant[1-12]
+
+
 \section{Excursus: Improving $F0$ Estimation using warped method} % (fold)
 \label{sec:method}
-
 
 \subsection{$F0$ Estimation Methods}
 
@@ -338,14 +366,3 @@ As stated above the full warp map $w(t)$ is then obtained by linearly interpolat
 In the scope of this work, the warping is applied globally over the full length of the signals under consideration. An optional confidence measure $c[n]$ can be incorporated for a processed version of the warping contour. This ensures that the warp contour has no discontinuities that result in additional artifacts after re-sampling. If the estimator does not provide such a measure, a separate voiced/unvoiced detection algorithm can be used. To obtain a warp contour $W[n]$ from an $F0$ estimate we propose the following steps: \textbf{(A)} initialize the warp contour with $F0$ estimate $W = \Pitch$, \textbf{(B)} find contour segments with high confidence, i.e. $c[n]$ exceeds a given threshold, \textbf{(C)} linearly connect the high confidence contour segments and \textbf{(D)} set start and end of warp contour to a constant value if confidence is below threshold. That way warping according to $F0$ is applied in the regions of high confidence without significantly affecting the gaps in-between.
 
 \subsection{Evaluation}
-
-\section{Extending $F0$-Contour based Separation}
-
-In a first step, the ``Melodia'' algorithm~\cite{salamon12} is used to obtain an estimate of the predominant melody from the mixture. The mixture is then time warped based on the fundamental frequency of the melody so that it’s predominant solo part is nearly constant in F0. (See~\cite{salamon12} for details). The extraction is then carried out in time domain using efficient comb filtering.
-The algorithm is implemented in Python and has low complexity resulting in approximately 0.33s for 1s of audio on 3,1 GHz Intel Core i5.
-
-* Mention that we want to extend the methods based in~\cite{stoeter14} and take it to SiSEC evaluation challange.
-* Therefore we need a) a robust f0 estimation b) a robust voice activity detector and c) a good filtering paradigm.
-
-\subsection{Source Extraction}
-\kant[1-12]

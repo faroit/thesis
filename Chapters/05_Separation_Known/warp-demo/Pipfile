@@ -1,0 +1,33 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+numpy = "==1.10.4"
+scipy = "*"
+matplotlib = "*"
+librosa = "==0.5.0"
+beta-ntf-fast = {extras = ["fast"], version = "==0.7"}
+stft = "==0.4"
+scikit-learn = "*"
+pandas = "*"
+seaborn = "*"
+pytest = "*"
+pytest-cov = "*"
+"pytest-pep8" = "*"
+pymix = {git = "https://git.audiolabs.uni-erlangen.de/stf/pymix.git"}
+BSSeval = {git = "https://git.audiolabs.uni-erlangen.de/python/BSSeval.git"}
+medleydb = {git = "https://github.com/rabitt/medleydb.git"}
+keras = "==0.3.3"
+"h5py" = "*"
+Cython = "*"
+mir_eval = "*"
+GitPython = "*"
+matlab_wrapper = "*"
+PySoundFile = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.6"
