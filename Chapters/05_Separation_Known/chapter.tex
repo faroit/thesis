@@ -285,8 +285,18 @@ Furthermore we present two methods to decompose those mixtures based on differen
 
 \section{Applying Pitch Variation Informed Separation to Music}
 
-In the previous section we showed the effectiveness of a pitch variation informed separation system.
-In this section I now want to explain how such a system can be extended to be used for real world application such as the separation of music into lead/vocals and the accompaniment track.
+In the previous section we showed the effectiveness of a pitch variation informed separation system on our constrained unison source separation scenario.
+Since the proposed system is designed to model only the lead instrument, I was able to extend this system to polyphonic music under the assumption that only one source is considered as the lead source.
+Usually this assumption is applicable for modern popular music where where such a lead source may be the lead vocals or a solo instrument.
+In this section we now want to explain how the pitch variation informed system can be extended to be used for such a real world task of separation lead/vocals and the accompaniment source.
+
+\subsection{Predominant Melody Estimation}
+
+Research field of Melody estimation.
+
+> Melody extraction is the task of automatically estimating the fundamental frequency corresponding to the pitch of the predominant melodic line of a piece of polyphonic (or homophonic) music
+
+Some scenarios are targeted to extract the fundamental frequency of a predominant source~\cite{salamon12}.
 
 One obvious drawback of our method is that it relies on a robust pitch variation estimator which is usually difficult to obtain from a mixtures where multiple harmonic sources are present at the same time.
 
@@ -316,13 +326,13 @@ The algorithm is implemented in Python and has low complexity resulting in appro
 Normally an informed system could be build by using some informed system that uses an upper bound.
 However the upper bound for a warping based system is hard because we are essentially not just building an F0 system.
 
-\subsection{$F0$ Estimation Methods}
+\subsection{Improving $F0$ Estimation}
 
 An estimate of the fundamental frequency $F0$ of a signal is required in various applications of audio and speech signal processing. $F0$ is often synonymously referred to as pitch which is a perceptual measure. In the past, a number of algorithms were presented to provide such estimates, with many of them being designed for specific applications. Some scenarios are targeted to extract the fundamental frequency of the predominant source~\cite{salamon12} in a mixture of other sources. In other applications, algorithms are used to extract fundamental frequencies of multiple sources simultaneously present in a signal~\cite{klapuri2003multiple}. However, the most common scenario in many works is to extract the fundamental frequency of a monophonic and harmonic audio signal containing speech or music~\cite{talkin1995robust, boersma2002praat, de2002yin, resch, camacho2007swipe, tidhar2010high, christensen2007joint}.
 %
 The development of novel methods for fundamental frequency estimation, performing as well as earlier methods, such as the popular correlation based \textsc{YIN} algorithm~\cite{de2002yin}, has proven challenging. In a recent study~\cite{babacan2013comparative} it is stated that YIN still clearly performs best in terms of accuracy. Nevertheless, when using YIN or other block based algorithms, a frame length and a hop size have to be selected trading temporal resolution on one side against frequency accuracy and robustness on the other side.
 
-Especially when the signal is polyphonic, the robustness is the most crucial aspect of a pitch estimator. In recent work from Mauch et al.~\cite{mauch2014pyin}, the robustness of the \textsc{YIN} algorithm is improved by probabilistic post-processing. However, besides robustness, there is a variety of use cases requiring high accuracy as well as high temporal resolution. Application in parametric audio coding~\cite{purnhagen2000hiln} requires the parameterization of pitch bends and vibratos. Furthermore, source separation algorithms aiming at the extraction of harmonic sources from the mixture can make use of an instantaneous $F0$ estimate~\cite{virtanen2008combining, stoterunison}. There are already contributions addressing the improvement of accuracy of $F0$ estimates such as~\cite{medan1991super} which introduced a non-integer similarity model or~\cite{christensen2007joint} which belongs to the group of parametric pitch estimators.
+Especially when the signal is polyphonic, the robustness is the most crucial aspect of a pitch estimator. In work from Mauch et al.~\cite{mauch2014pyin}, the robustness of the \textsc{YIN} algorithm is improved by probabilistic post-processing. However, besides robustness, there is a variety of use cases requiring high accuracy as well as high temporal resolution. Application in parametric audio coding~\cite{purnhagen2000hiln} requires the parameterization of pitch bends and vibratos. Furthermore, source separation algorithms aiming at the extraction of harmonic sources from the mixture can make use of an instantaneous $F0$ estimate~\cite{virtanen2008combining, stoterunison}. There are already contributions addressing the improvement of accuracy of $F0$ estimates such as~\cite{medan1991super} which introduced a non-integer similarity model or~\cite{christensen2007joint} which belongs to the group of parametric pitch estimators.
 
 We propose to improve the output of already existing algorithms in terms of temporal resolution as well as accuracy by iterative time warping. Two other contributions already make use of time warping in the context of pitch estimation. Resch et al.~\cite{resch} proposed an instantaneous pitch estimation technique which optimizes a warping function that would lead to a constant pitch signal. Their optimization framework minimizes a cost function specifically targeted for speech signals. Azarov et al.\ have introduced an improved version of RAPT (called iRAPT1 and iRAPT2) which also uses time warping to some extent~\cite{azarov2012instantaneous} but misses an additional step as will be shown in Section~?.
 Our main contribution is a time warping based refinement method that is applicable to any F0 estimate. Our method emphasizes the strengths of different estimators and thus can even help to improve their robustness. In the following, we will describe the refinement method (Section~?) and show the experimental evaluation and its results (Section~?).
