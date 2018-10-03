@@ -3,7 +3,7 @@
 \marginpar{This chapter is based on the works that has been submitted in 2014 and 2015 together with my collegues Stefan Bayer and Nils Werner~\cite{stoeter14, stoeter15icassp}. Both publications were based on my original ideas. Furthermore the proposed method were extended and evaluated in SiSEC 2016 as presented in the last part of this chapter.}
 
 % start coverted from dafx
-In most scenarios for source separation, as presented in Chapter~\cite{objectives-and-challenges}, it is common to assume that the spectral harmonics do only partially overlap.
+In most scenarios for source separation, as presented in Chapter~\ref{objectives-and-challenges}, it is common to assume that the spectral harmonics do only partially overlap.
 This enabled unsupervised algorithms like non-negative matrix factorization (NMF) to approximate the mixture from a lower-rank decomposition in an unsupervised way.
 Such systems are described in \cite{smaragdis03} and \cite{virtanen07}.
 Additionally the popularity of the class of NMF algorithms can be explained by the intuitive way in which they work on time-frequency representations of the mixture signal.
@@ -285,20 +285,36 @@ Furthermore we present two methods to decompose those mixtures based on differen
 
 \section{Applying Pitch Variation Informed Separation to Music}
 
-In the previous section we showed the effectiveness of a pitch variation informed separation system on our constrained unison source separation scenario.
-Since the proposed system is designed to model only the lead instrument, I was able to extend this system to polyphonic music under the assumption that only one source is considered as the lead source.
+In the previous section, we showed the effectiveness of a pitch variation informed separation system on our constrained unison source separation scenario.
+Since the proposed system is designed to model only the lead source, I was able to extend this system to polyphonic music under the assumption that only one source is considered as the lead source.
 Usually this assumption is applicable for modern popular music where where such a lead source may be the lead vocals or a solo instrument.
 In this section we now want to explain how the pitch variation informed system can be extended to be used for such a real world task of separation lead/vocals and the accompaniment source.
 
 \subsection{Predominant Melody Estimation}
 
-Research field of Melody estimation.
+\cite{cano14}
 
-> Melody extraction is the task of automatically estimating the fundamental frequency corresponding to the pitch of the predominant melodic line of a piece of polyphonic (or homophonic) music
+Research field of Melody estimation and the only possible way.
+
+Estimating the fundamental frequency of one source from a mixture of several sources is considered very difficult.
+
+Melody extraction is the task of automatically estimating the fundamental frequency corresponding to the pitch of the predominant melodic line of a piece of polyphonic (or homophonic) music
+
+~\cite{poliner07}
+
+\begin{quote}
+  ``...melody is the single (monophonic) pitch sequence that a listener might reproduce if asked to whistle or hum a piece of polyphonic music, and that a listener would recognize as being the `essence` of that music when heard in comparison.''
+\end{quote}
+
+for a more comprehensive overview into melody extraction methods
 
 Some scenarios are targeted to extract the fundamental frequency of a predominant source~\cite{salamon12}.
 
-One obvious drawback of our method is that it relies on a robust pitch variation estimator which is usually difficult to obtain from a mixtures where multiple harmonic sources are present at the same time.
+One obvious drawback of our method is that it relies on a robust pitch variation estimator which is usually difficult to obtain from a mixtures where multiple harmonic sources are present at the same ime.
+
+\noindent\textbf{1) Melody Extraction}: Extracting the main melody using a Melody extraction such as~\cite{salamon12}
+\textbf{2) Vocal activity detection}: in the unison scenario we were able to globally warp the signal using a continuous warp contour. In the case of music signals with parts where no lead signal is active, we have two options to proceed: keeping the warp contour constant to continue linear time sampling would be the simplest way to do. But since the melody is making jumps, we don't want to apply warping to the non-overlapped (accompaniment) parts, so avoid introducing audible artifacts. This is why 
+\textbf{3) Warp Contour}: The warp contour is then computed using equations~\ref{equationx}.
 
 In a first step, the ``Melodia'' algorithm~\cite{salamon12} is used to obtain an estimate of the predominant melody from the mixture. The mixture is then time warped based on the fundamental frequency of the melody so that it’s predominant solo part is nearly constant in F0. (See~\cite{salamon12} for details). The extraction is then carried out in time domain using efficient comb filtering.
 The algorithm is implemented in Python and has low complexity resulting in approximately 0.33s for 1s of audio on 3,1 GHz Intel Core i5.

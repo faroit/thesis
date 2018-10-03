@@ -1,0 +1,31 @@
+\begin{tikzpicture}[>=stealth, auto, node distance=4cm]
+    \tikzstyle{every path}=[line width=0.4mm]
+    % Place nodes
+    % Define the style for the blue dotted boxes
+    \tikzset{blue dotted/.style={draw=blue!80!white, line width=1pt,
+                          dash pattern=on 1pt off 1pt on 1pt off 1pt,
+                           inner sep=4mm, rectangle, rounded corners}};
+    \tikzset{red dotted/.style={draw=red!80!white, line width=1pt,
+                           dash pattern=on 1pt off 1pt on 1pt off 1pt,
+                           rectangle}};
+    \tikzstyle{red text}=[text=red!80]
+    \tikzstyle{blue text}=[text=blue!80]
+    \tikzstyle{block} = [draw, rectangle, inner sep=3pt, minimum width=3cm, minimum height=1cm, align=center]
+    \tikzstyle{pinstyle} = [pin edge={to-,thin,blue!80}]
+    \tikzstyle{pinstyle2} = [pin edge={-to,thin,red!80, dash pattern=on 1pt off 1pt on 1pt off 1pt}]
+
+
+    \node [block] (mel) {Melody Estimation};
+    \node [block, right of=feat, node distance=4cm] (norm) {Normalisation +\\Standardization};
+    \node [block, red dotted, red text, below of=dnn, pin={[pinstyle2, red text, name=k_inf]right:$\hat{k}$}, node distance=2cm] (inference) {q};
+    \coordinate [left of=feat, node distance=2cm] (input) {};
+    \node at ($(k_train.east)+(11mm, 0)$) [blue text, above, inner sep=3mm] {\textbf{Training}};
+    \node at ($(inference.south east)+(0, -3mm)$) [red text, below, inner sep=3mm] {\textbf{Inference}};
+
+    % Connect nodes
+    \draw [->] (input) -- node {$x$} (feat);
+    \draw [->] (feat) -- node {$\mathbf{X}$} (norm);
+    \draw [->] (norm) -- (dnn);
+    \draw [dash pattern=on 1pt off 1pt on 1pt off 1pt, ->] (dnn) -- node {$y$} (inference);
+
+\end{tikzpicture}
