@@ -356,8 +356,8 @@ One obvious drawback of our method is that it relies on a robust pitch variation
 \noindent\textbf{1) Melody Extraction}: Extracting the main melody using a Melody extraction such as~\cite{salamon12}
 \textbf{2) Vocal activity detection}: in the unison scenario we were able to globally warp the signal using a continuous warp contour. In the case of music signals with parts where no lead signal is active, we have two options to proceed: keeping the warp contour constant to continue linear time sampling would be the simplest way to do. But since the melody is making jumps, we don't want to apply warping to the non-overlapped (accompaniment) parts, so avoid introducing audible artifacts. This is why
 \textbf{3) Warp Contour}: The warp contour is then computed using equations~\ref{equationx}.
-\textbf{4} Segmental Warping}:
-\textbf{5} Pitch Contour}:
+\textbf{4) Segmental Warping}:
+\textbf{5) Pitch Contour}:
 
 In a first step, the ``Melodia'' algorithm~\cite{salamon12} is used to obtain an estimate of the predominant melody from the mixture. The mixture is then time warped based on the fundamental frequency of the melody so that it’s predominant solo part is nearly constant in F0. (See~\cite{salamon12} for details). The extraction is then carried out in time domain using efficient comb filtering.
 The algorithm is implemented in Python and has low complexity resulting in approximately 0.33s for 1s of audio on 3,1 GHz Intel Core i5.
