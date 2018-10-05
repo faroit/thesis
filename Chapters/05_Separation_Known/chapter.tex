@@ -19,16 +19,14 @@ It incorporates the pitch and onset information encoded in a MIDI file to improv
 In the case of highly overlapped signals of unison instruments, the score information is not useful.
 Therefore, in this chapter we evaluate the feasibility to increase the prior information to use the fundamental frequency estimate.
 
-\section{Using Fundamental Frequency}
+\section{Pitch variation informed Separation}
 \label{sub:frequency_modulation}
-
-% Vibrato rate around 5 Hertz. Similar to the tremor in parkinson deseases~\cite{fletcher01}.
 
 Frequency modulation caused by vibrato is a very common playing style for string instruments but also for woodwind and brass instruments.
 Vibrato is an effect that is well studied especially in musicology.
 Performers tend to perform a vibrato in the same way when repeating a performance.
 This can be exploited in source separation scenarios.
-Typically, vibratos have modulation frequencies (rates) which vary between 4 and 8 Hz.
+Typically, vibratos have modulation frequencies (rates) which vary between 4 and 8 Hz, similar to the tremor in parkinson deseases~\cite{fletcher01}.
 Additionally vibrato rates vary across different instruments.
 In \cite{macleod06} the vibrato width (frequency deviation) was found to be significantly different between violinists and violists performers.
 
@@ -36,11 +34,10 @@ As with the amplitude modulated case NMF lacks the ability to model time varying
 Several extensions for NMF have been proposed to improve the decomposition quality.
 \cite{hennequin11} proposes frequency dependent activations matrices, \cite{smaragdis08} has developed a system which can be described as shift invariant NMF.
 Another approach is to model the spectral pattern changes by Markov chains \cite{nakano10}. All these approaches attempt to model the non-stationary effects within the decomposition model.
-In this paper we propose a method that increases the stationarity of the signal in preprocessing step and then use the standard NMF for the decomposition. \\
-
-
+In this section we propose a method that increases the stationarity of the signal in preprocessing step and then use the standard NMF for the decomposition. \\
 
 \subsection{Time Warping}
+\label{sub:time_warping}
 % Content by Stefan Bayer
 We make use of \emph{time-warping} which refers to a mapping of the linear time scale $t$ to a warped time scale $\tau$ via a mapping function $\tau=w(t)$.
 To ensure a unique mapping, the mapping function needs to be strictly increasing.
@@ -69,10 +66,9 @@ For the mapping from linear to warped time now the linear domain sample points
 $s[\nu]$ for the regularly spaced samples $x[\nu]$ in the warped domain are
 found by inverting $w[n]$. These sample points are then used to re-sample the linear time
 domain samples $x[n]$ to the warped time domain samples $x[\nu]$, in our case
-by employing an 128 times oversampled FIR low-pass filter. This processing leads to a sampling rate contour which is proportional to the pitch contour. Or in other words, a fixed number of samples are obtained in each period of the signal with the varying fundamental frequency. Mutatis mutandis the sample points $s[\nu]$ can be used for the re-sampling from warped time domain to linear time
-domain. \\
+by employing an 128 times oversampled FIR low-pass filter. This processing leads to a sampling rate contour which is proportional to the pitch contour. Or in other words, a fixed number of samples are obtained in each period of the signal with the varying fundamental frequency. Mutatis mutandis the sample points $s[\nu]$ can be used for the re-sampling from warped time domain to linear time domain. \\
 
-In this paper the time-warping was done globally over the full lengths of the
+In this work, the time-warping was done globally over the full lengths of the
 signals under consideration. The globally time-warped sample sequence
 was then used in the further processing steps. In Figure~\ref{fig:timewarptime} we show the results of the warping process in the time domain. \\
 
@@ -286,22 +282,27 @@ Furthermore we present two methods to decompose those mixtures based on differen
 \section{Extending Pitch Variation Informed Separation}
 
 In the previous section, we showed the effectiveness of a pitch variation informed separation system on our constrained unison source separation scenario.
-In this section I want to show how pitch variation informed can be extended to the scenario of separating the vocals/lead from the accompaniment in professionally produced music.
+In the following section I show how the method can be extended to the scenario of separating the vocals/lead from the accompaniment in professionally produced music.
 
 % from zafar
-Hereby we make use of one particularity of vocals is their production by the vibration of the vocal folds, further filtered by the vocal tract. As a consequence, sung melodies are \textit{mostly} harmonic and therefore have a fundamental frequency. If one can track the pitch of the vocals, one can then estimate the energy at the harmonics of the fundamental frequency and reconstruct the voice.
+Hereby I make use of one particularity of harmonic lead sources like singing voice.
+It is their ability to produce vibration using vocal folds, further filtered by the vocal tract.
+As a consequence, sung melodies are \textit{mostly} harmonic and therefore have a fundamental frequency.
+If one can track the pitch of the vocals, one can then estimate the energy at the harmonics of the fundamental frequency and reconstruct the voice.
 
-Such methods are summarized in Figure~\ref{fig:methods_harmonicity}. In a first step, the objective is to get estimates of the time-varying fundamental frequency for the lead at each time frame.
-A second step in this respect is then to track this fundamental frequency over time, in other words, to find the best sequence of estimates, in order to identify the melody line. This can done either by a suitable pitch detection method.
+Such method is summarized in Figure~\ref{fig:methods_harmonicity}.
+In a first step, the objective is to get estimates of the time-varying fundamental frequency for the lead at each time frame.
+This can done by a suitable pitch detection method like~\cite{de2002yin}.
+A second step then is respect is then to track this fundamental frequency over time, in other words, to find the best sequence of estimates, in order to identify the melody line.
 Such algorithms typically assume that the lead corresponds to the harmonic signal with strongest amplitude.
 
 From this starting point, two kinds of approaches can be distinguished between, depending on how they exploit the pitch information.
-The first option to obtain the separated lead signal is to re-synthesize it using a sinusoidal model, which has been studied in several approaches.
-For a detailed overview of these methods, I refer the reader to Section III A of~\cite{rafii}.
+The first option to obtain the separated lead signal is to re-synthesize it using a sinusoidal model, which has been studied in several approaches which are not detailed in this thesis (for a detailed overview of these methods, I refer the reader to Section III A of~\cite{rafii}).
 
 Due to the problem that sinusoidal synthesis suffers from a typical \textit{metallic} sound quality, which is mostly due to discrepancies between the estimated excitation signals of the lead signal compared to the ground truth, we decided to take an alternative approach which is to exploit harmonicity in another way, by filtering out everything from the mixture that is not located close to the detected harmonics.
 
-Using such a procedure has been a common task in source separation systems.
+In the past many research has been focused on such a procedure as it turned out to be a common task in source separation systems:
+
 E.g. Li and Wang proposed to use a vocal/non-vocal classifier and a predominant pitch detection algorithm \cite{li06,li07}. They first detected the singing voice by using a spectral change detector \cite{duxbury03} to partition the mixture into homogeneous portions, and GMMs on MFCCs to classify the portions as vocal or non-vocal. Then, they used the predominant pitch detection algorithm in~\cite{li05} to detect the pitch contours from the vocal portions, extending the multi-pitch tracking algorithm in~\cite{wu03}. Finally, they extracted the singing voice by decomposing the vocal portions into TF units and labeling them as singing or accompaniment dominant, extending the speech separation algorithm in \cite{hu02}.
 
 Han and Raphael proposed an approach for desoloing a recording of a soloist with an accompaniment given a musical score and its time alignment with the recording \cite{han07}. They derived a mask \cite{roweis01} to remove the solo part after using an EM algorithm to estimate its melody, that exploits the score as side information.
@@ -315,6 +316,7 @@ Cano et al. proposed various approaches for solo and accompaniment separation. I
 Bosch et al. proposed to separate the lead instrument using a musical score \cite{bosch12}. After a preliminary alignment of the score to the mixture, they estimated a score confidence measure to deal with local misalignments and used it to guide the predominant pitch tracking. Finally, they performed low-latency separation based on the method in \cite{marxer12}, by combining harmonic masks derived from the estimated pitch and additionally exploiting stereo information as presented later in Section~\ref{sec:multichannel}.
 
 Vaneph et al. proposed a framework for vocal isolation to help spectral editing \cite{vaneph16}. They first used a voice activity detection process based on a deep learning technique \cite{leglaive15}. Then, they used pitch tracking to detect the melodic line of the vocal and used it to separate the vocal and background, allowing a user to provide manual annotations when necessary.
+\par
 
 \begin{figure}[htbp]
 	\centering
@@ -325,33 +327,41 @@ Vaneph et al. proposed a framework for vocal isolation to help spectral editing 
 
 \subsection{Predominant Melody Estimation}
 
-Estimating the fundamental frequency of one source from a mixture of several sources is considered very difficult.
+The first step to extend the $F0$ variation informed separation system is to obtain a warp contour that follows the predominant source by means of extraction from the mixture (blind) or by human annotation (informed).
+In the following I want to focus how to obtain such a warp contour using a predominant melody algorithm.\par
 
-Research field of Melody estimation and the only possible way.
-
-
-Melody extraction is the task of automatically estimating the fundamental frequency corresponding to the pitch of the predominant melodic line of a piece of polyphonic (or homophonic) music
-
-~\cite{poliner07}
+Estimating the fundamental frequency of one single source from a mixture of several sources is considered very difficult~\cite{klapuri08}.
+However, in the case of vocal/accompaniment separation, we only consider one single source is considered as the lead source - usually the vocals.
+This assumption often is applicable in modern popular music where such a lead source often is mixed louder than the other sources in the mix.
+\par
+Now, extracting the lead pitch contour is actually an ongoing field of research named ``melody estimation''.
+The melody can be defined in~\cite{poliner07} as:
 
 \begin{quote}
   ``...melody is the single (monophonic) pitch sequence that a listener might reproduce if asked to whistle or hum a piece of polyphonic music, and that a listener would recognize as being the `essence` of that music when heard in comparison.''
 \end{quote}
 
-for a more comprehensive overview into melody extraction methods
+For a more comprehensive overview into melody extraction methods the reader is referred to in~\cite{salamon14}.
+In this work (Chapter 1, Section 1.4.5), Salamon also describes some advantages of a melody extraction method without applying a source separation system first as ``Understanding without Separation''.
 
-Some scenarios are targeted to extract the fundamental frequency of a predominant source~\cite{salamon12}.
-
-For a review on the particular topic of melody extraction, the reader is referred to \cite{salamon14}.
-
-
-Since the proposed system is designed to model only the lead source, I was able to extend this system to polyphonic music under the assumption that only one source is considered as the lead source.
-Usually this assumption is applicable for modern popular music where where such a lead source may be the lead vocals or a solo instrument.
-In this section we now want to explain how the pitch variation informed system can be extended to be used for such a real world task of separation lead/vocals and the accompaniment source.
+In this work I used the \emph{Melodia} algorithm publish by Salamon in 2012~\cite{salamon12}.
+\emph{Melodia} consists of four parts:
+\noindent\textbf{1)}: a time-frequency transformation is applied and spectral peaks are extracted.
+\textbf{2)}: the spectral peaks are the basis to generate a saliency spectrogram using weighted harmonic summation. This allows emphasize the predominant/salient frequencies in the signal and is the core part of the \emph{Melodia} algorithm.
+\textbf{3)}: From the saliency map, again, peaks are extracted and connected to a melody line. This is already a good starting point for the melody estimate but usually contains way to many outliers due to the noisiness of the saliency representation.
+\textbf{4)}: The melody line is post-processed using a viterbi decoder.
+This allows to filter the contour by removing outliers, pitch jumps and generally improves the smoothness of the contour using a number of heuristics.
+It is important to note that this step is tracking the melody line of the previous step over time.
+Usually this step is sensitive to the overall length of the processed mixture and often, this step is computed an semantically meaningful segment of the mixture like a full track or a refrain.
+\par
+I applied the algorithm using the implementation in Essentia~\cite{bogdanov13} using the default settings (sample rate 22050 Hz, hop size = 3 ms, window size=46 ms).
 
 \subsection{Source Extraction using Time Warping}
 
-One obvious drawback of our method is that it relies on a robust pitch variation estimator which is usually difficult to obtain from a mixtures where multiple harmonic sources are present at the same ime.
+Once the predominant melody is obtained, the warp contour can be computed in the same way as described in Section~\ref{sub:time_warping}.
+Since the
+
+One obvious drawback of our method is that it relies on a robust pitch variation estimator which is usually difficult to obtain from a mixtures where multiple harmonic sources are present at the same im.
 
 \noindent\textbf{1) Melody Extraction}: Extracting the main melody using a Melody extraction such as~\cite{salamon12}
 \textbf{2) Vocal activity detection}: in the unison scenario we were able to globally warp the signal using a continuous warp contour. In the case of music signals with parts where no lead signal is active, we have two options to proceed: keeping the warp contour constant to continue linear time sampling would be the simplest way to do. But since the melody is making jumps, we don't want to apply warping to the non-overlapped (accompaniment) parts, so avoid introducing audible artifacts. This is why
@@ -360,13 +370,17 @@ One obvious drawback of our method is that it relies on a robust pitch variation
 \textbf{5) Pitch Contour}:
 
 In a first step, the ``Melodia'' algorithm~\cite{salamon12} is used to obtain an estimate of the predominant melody from the mixture. The mixture is then time warped based on the fundamental frequency of the melody so that it’s predominant solo part is nearly constant in F0. (See~\cite{salamon12} for details). The extraction is then carried out in time domain using efficient comb filtering.
-The algorithm is implemented in Python and has low complexity resulting in approximately 0.33s for 1s of audio on 3,1 GHz Intel Core i5.
+The algorithm is implemented in Python and has low complexity resulting in approximately 0.33s for 1s of audio on 3,1 GHz
+
+Instead of a global warping function we apply the warping locally using VAD.
+
 
 * Mention that we want to extend the methods based in~\cite{stoeter14} and take it to SiSEC evaluation challange.
 * Therefore we need a) a robust f0 estimation b) a robust voice activity detector and c) a good filtering paradigm.
 
 \subsection{Results on SiSEC 2015}
 \label{ssec:performance}
+
 
 
 \subsection{Improving Voiced/Unvoiced Detection}
@@ -438,3 +452,5 @@ As stated above the full warp map $w(t)$ is then obtained by linearly interpolat
 In the scope of this work, the warping is applied globally over the full length of the signals under consideration. An optional confidence measure $c[n]$ can be incorporated for a processed version of the warping contour. This ensures that the warp contour has no discontinuities that result in additional artifacts after re-sampling. If the estimator does not provide such a measure, a separate voiced/unvoiced detection algorithm can be used. To obtain a warp contour $W[n]$ from an $F0$ estimate we propose the following steps: \textbf{(A)} initialize the warp contour with $F0$ estimate $W = \Pitch$, \textbf{(B)} find contour segments with high confidence, i.e. $c[n]$ exceeds a given threshold, \textbf{(C)} linearly connect the high confidence contour segments and \textbf{(D)} set start and end of warp contour to a constant value if confidence is below threshold. That way warping according to $F0$ is applied in the regions of high confidence without significantly affecting the gaps in-between.
 
 \subsection{Evaluation}
+
+\section{Chapter Conclusion}
