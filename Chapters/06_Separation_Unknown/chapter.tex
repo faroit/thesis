@@ -1,5 +1,25 @@
 \chapter{Separation by Unknown Modulation}
 
+\marginpar{This chapter is based on the work that has been published at the ICASSP conference in 2016. The work has been done in close collaboration with Antoine Liutkus from INRIA, France and Roland Badeu from ParisTech France.}
+
+
+% Add introduction to matrix factorization based things
+
+The first set of approaches we consider is the identification of redundancy in the accompaniment through the assumption that its spectrogram may be well represented by only a few components. Techniques exploiting this idea then focus on algebraic methods that decompose the mixture spectrogram into the product of a few template spectra activated over time. One way to do so is via non-negative matrix factorization (NMF) \cite{lee99,lee01}, which incorporates non-negative constraints. In Figure~\ref{fig:methods_low_rank}, we picture methods exploiting such techniques. After factorization, we obtain several spectra, along with their activations over time. A subsequent step is the clustering of these spectra (and activations) into the lead or the accompaniment. Separation is finally performed by deriving Wiener filters to estimate the lead and the accompaniment from the mixture. For related applications of NMF in music analysis, the reader is referred to \cite{smaragdis03,virtanen07,fevotte09}.
+
+Vembu and Baumann proposed to use NMF (and also ICA \cite{common94}) to separate vocals from mixtures \cite{vembu05}. They first discriminated between vocal and non-vocal sections in a mixture by using different combinations of features, such as MFCCs \cite{david80}, perceptual linear predictive (PLP) coefficients \cite{hermansky90}, and log frequency power coefficients (LFPC) \cite{nwe04}, and training two classifiers, namely neural networks and support vector machines (SVM). They then applied redundancy reduction techniques on the TF representation of the mixture to separate the sources \cite{casey00}, by using NMF (or ICA). The components were then grouped as vocal and non-vocal by reusing a vocal/non-vocal classifier with MFCC, LFPC, and PLP coefficients.
+
+Chanrungutai and Ratanamahatana proposed to use NMF with automatic component selection\cite{chanrungutai08,chanrungutai082}. They first decomposed the mixture spectrogram using NMF with a fixed number of basis components. They then removed the components with brief rhythmic and long-lasting continuous events, assuming that they correspond to instrumental sounds. They finally used the remaining components to reconstruct the singing voice, after refining them using a high-pass filter.
+
+Marxer and Janer proposed an approach based on a Tikhonov regularization~\cite{tikhonov63} as an alternative to NMF, for singing voice separation~\cite{marxer122}. Their method sacrificed the non-negativity constraints of the NMF in exchange for a computationally less expensive solution for spectrum decomposition, making it more interesting in low-latency scenarios.
+
+Yang et al. proposed a Bayesian NMF approach \cite{yang14,chien15}. Following the approaches in \cite{cemgil09} and \cite{schmidt09}, they used a Poisson distribution for the likelihood function and exponential distributions for the model parameters in the NMF algorithm, and derived a variational Bayesian EM  algorithm \cite{dempster77} to solve the NMF problem. They also adaptively determined the number of bases from the mixture. They finally grouped the bases into singing voice and background music by using a \textit{k}-means clustering algorithm \cite{spiertz09} or an NMF-based clustering algorithm.
+
+In a different manner, Smaragdis and Mysore proposed a user-guided approach for removing sounds from mixtures by humming the target sound to be removed, for example a vocal track \cite{smaragdis09}. They modeled the mixture using probabilistic latent component analysis (PLCA) \cite{smaragdis07}, another equivalent formulation of NMF. One key feature of exploiting user input was to facilitate the grouping of components into vocals and accompaniment, as humming helped to identify some of the parameters for modeling the vocals.
+
+Nakamuray and Kameoka proposed an $L_p$-norm NMF~\cite{nakamuray15}, with $p$ controlling the sparsity of the error. They developed an algorithm for solving this NMF problem based on the auxiliary function principle \cite{ortega70,kameoka06}. Setting an adequate number of bases and $p$ taken as small enough allowed them to estimate the accompaniment as the low-rank decomposition, and the singing voice as the error of the approximation, respectively. Note that, in this case, the singing voice was not explicitly modeled as a sparse component but rather corresponded to the error which happened to be constrained as sparse. The next subsection will actually deal with approaches that explicitly model the vocals as the sparse component.
+% end zafar
+
 % \section{Modulation Spectrogram based Separation}
 
 % Intro commonfate START
@@ -126,3 +146,10 @@ In Figure~\ref{fig:sk_tensor} we show the factorization of a simple amplitude mo
 \label{fig:sk_ntfdemo}
 \end{center}
 \end{figure}
+
+
+\section{Chapter Conclusion and Outlook}
+
+While methods focusing on harmonic models for the lead often fall short in their expressive power for the accompaniment, the methods we reviewed in this section are often observed to suffer exactly from the converse weakness, namely they do not provide an adequate model for the lead signal. Hence, the separated vocals often will feature interference from unpredictable parts from the accompaniment, such as some percussion or effects which occur infrequently.
+
+Furthermore, even if the musical accompaniment will exhibit more redundancy, the vocals part will also be redundant to some extent, which is poorly handled by these methods. When the lead signal is not vocals but played by some lead instrument, its redundancy is even more pronounced, because the notes it plays lie in a reduced set of fundamental frequencies. Consequently, such methods would include the redundant parts of the lead within the accompaniment estimate, for example, a steady humming by a vocalist.
