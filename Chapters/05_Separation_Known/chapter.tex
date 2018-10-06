@@ -1,7 +1,5 @@
 \chapter{Separation by Known Modulation}
 
-\marginpar{This chapter is based on the works that has been submitted in 2014 and 2015 together with my collegues Stefan Bayer and Nils Werner~\cite{stoeter14, stoeter15icassp}. Both publications were based on my original ideas. Furthermore the proposed method were extended and evaluated in SiSEC 2016 as presented in the last part of this chapter.}
-
 % start coverted from dafx
 In most scenarios for source separation, as presented in Chapter~\ref{objectives-and-challenges}, it is common to assume that the spectral harmonics do only partially overlap.
 This enabled unsupervised algorithms like non-negative matrix factorization (NMF) to approximate the mixture from a lower-rank decomposition in an unsupervised way.
@@ -17,10 +15,35 @@ It incorporates the pitch and onset information encoded in a MIDI file to improv
 % end coverted from dafx
 
 In the case of highly overlapped signals of unison instruments, the score information is not useful.
-Therefore, in this chapter we evaluate the feasibility to increase the prior information to use the fundamental frequency estimate.
+Therefore, in this work, we evaluate the feasibility to increase the prior information to use the fundamental frequency estimate of the source to be extracted.
+
+From this starting point, two kinds of approaches can be distinguished between, depending on how they exploit this information.
+The first option to obtain the separated source is to re-synthesize it using a sinusoidal model, which has been studied in several approaches which are not detailed in this thesis (for a detailed overview of these methods, I refer the reader to Section III A of~\cite{rafii}).
+
+Due to the problem that sinusoidal synthesis suffers from a typical \textit{metallic} sound quality, which is mostly due to discrepancies between the estimated excitation signals of the lead signal compared to the ground truth, we decided to take an alternative approach which is to exploit harmonicity in another way, by filtering out everything from the mixture that is not located close to the detected harmonics.
+
+In the past many research has been focused on such a procedure as it turned out to be a common task in source separation systems:
+
+E.g. Li and Wang proposed to use a vocal/non-vocal classifier and a predominant pitch detection algorithm \cite{li06,li07}. They first detected the singing voice by using a spectral change detector \cite{duxbury03} to partition the mixture into homogeneous portions, and GMMs on MFCCs to classify the portions as vocal or non-vocal. Then, they used the predominant pitch detection algorithm in~\cite{li05} to detect the pitch contours from the vocal portions, extending the multi-pitch tracking algorithm in~\cite{wu03}. Finally, they extracted the singing voice by decomposing the vocal portions into TF units and labeling them as singing or accompaniment dominant, extending the speech separation algorithm in \cite{hu02}.
+
+Han and Raphael proposed an approach for desoloing a recording of a soloist with an accompaniment given a musical score and its time alignment with the recording \cite{han07}. They derived a mask \cite{roweis01} to remove the solo part after using an EM algorithm to estimate its melody, that exploits the score as side information.
+
+Hsu et al. proposed an approach which also identifies and separates the unvoiced singing voice \cite{hsu08,hsu10}. Instead of processing in the STFT domain, they use the perceptually motivated gammatone filter-bank as in~\cite{hu02,li07}. They first detected accompaniment, unvoiced, and voiced segments using an HMM and identified voice-dominant TF units in the voiced frames by using the singing voice separation method in \cite{li07}, using the predominant pitch detection algorithm in \cite{dressler062}. Unvoiced-dominant TF units were identified using a GMM classifier with MFCC features learned from training data. Finally, filtering was achieved with spectral subtraction~\cite{scalart96}.
+
+Raphael and Han then proposed a classifier-based approach to separate a soloist from accompanying instruments using a time-aligned symbolic musical score \cite{raphael08}. They built a tree-structured classifier \cite{breiman84} learned from labeled training data to classify TF points in the STFT as belonging to solo or accompaniment. They additionally constrained their classifier to estimate masks having a connected structure.
+
+Cano et al. proposed various approaches for solo and accompaniment separation. In~\cite{cano09}, they separated saxophone melodies from mixtures with piano and/or orchestra by using a melody line detection algorithm, incorporating information about typical saxophone melody lines. In~\cite{grollmisch11,dittmar12,cano12}, they proposed to use the pitch detection algorithm in~\cite{dressler11}. Then, they refined the fundamental frequency and the harmonics, and created a binary mask for the solo and accompaniment. They finally used a post-processing stage to refine the separation. In \cite{cano13}, they included a noise spectrum in the harmonic refinement stage to also capture noise-like sounds in vocals. In \cite{cano14}, they additionally included common amplitude modulation characteristics in the separation scheme.
+
+Bosch et al. proposed to separate the lead instrument using a musical score \cite{bosch12}. After a preliminary alignment of the score to the mixture, they estimated a score confidence measure to deal with local misalignments and used it to guide the predominant pitch tracking. Finally, they performed low-latency separation based on the method in \cite{marxer12}, by combining harmonic masks derived from the estimated pitch and additionally exploiting stereo information as presented later in Section~\ref{sec:multichannel}.
+
+Vaneph et al. proposed a framework for vocal isolation to help spectral editing \cite{vaneph16}. They first used a voice activity detection process based on a deep learning technique \cite{leglaive15}. Then, they used pitch tracking to detect the melodic line of the vocal and used it to separate the vocal and background, allowing a user to provide manual annotations when necessary.
+\par
+In the following, I present my method I devloped in 2014 published in DaFX~\cite{stoeter14}.
 
 \section{Pitch variation informed Separation}
 \label{sub:frequency_modulation}
+
+\marginpar{This section is based on the work that has been submitted in 2014 and together with my collegues Stefan Bayer ~\cite{stoeter14}. Both publications were based on my original ideas}
 
 Frequency modulation caused by vibrato is a very common playing style for string instruments but also for woodwind and brass instruments.
 Vibrato is an effect that is well studied especially in musicology.
@@ -79,8 +102,7 @@ tracking/demodulation approach. The difference to our approach is that first
 the absolute instantaneous frequency for every harmonic line has to be known
 instead of a relative frequency that is common to all harmonic lines of a single
 source. This relative frequency might be obtained easier than its
-absolute value for a mixed signal. Secondly every harmonic line has to be individually
-frequency demodulated while in our approach the full signal is frequency demodulated in one algorithmic step.\\
+absolute value for a mixed signal. Secondly every harmonic line has to be individually frequency demodulated while in our approach the full signal is frequency demodulated in one algorithmic step.\\
 
 \section{Single Note Instruments Dataset} % (fold)
 \label{sub:test_set}
@@ -117,7 +139,6 @@ With the ability to remove the frequency modulation from a signal we can then in
 
 It is important to clarify that this approach would not be able to separate two modulating instruments playing in unison without having prior knowledge about the individual modulation functions. Although a pitch variation estimate might be difficult to achieve in a mixture our approach shows that such a system can make sense.
 
-
 \begin{figure}[t]
 \begin{tikzpicture}
     \node (inputmeta) [inner sep=0pt] {
@@ -144,14 +165,14 @@ We wanted to evaluate the methods proposed in Sections~\ref{sub:am} and \ref{sub
 % \label{sub:algorithms}
 
 % from dafx
-The test set was processed by three algorithms: standard NMF, pitch variation informed NMF (PVI-NMF) (Section~\ref{ssub:pitch_variation_informed_source_separation}) and the non-negative tensor factorization based on modulation spectra (MOD-NTF) as described in Section~\ref{sub:am}). All factorizations for NMF and NTF were computed by minimizing the $\beta = 1$ divergence (Kullback-Leibler divergence). The Pitch Variation Informed-NMF (PVI-NMF) has been set up in the same way as the other algorithms. We choose to calculate results with $K=2$ and $K=4$. The pitch variation estimator is based on a method that was proposed by B\"ackstr\"om in 2009 \cite{backstrom09} with a subsequent post-processing to ensure the smoothness of the mapping. \\
+The test set was processed by three algorithms: standard NMF, pitch variation informed NMF (PVI-NMF) (Section~\ref{ssub:pitch_variation_informed_source_separation}) and the non-negative tensor factorization based on modulation spectra (MOD-NTF) as described in Section~\ref{sub:am}). All factorizations for NMF and NTF were computed by minimizing the $\beta = 1$ divergence (Kullback-Leibler divergence). The Pitch Variation Informed-NMF (PVI-NMF) has been set up in the same way as the other algorithms. We choose to calculate results with $K=2$ and $K=4$. The pitch variation estimator is based on a method that was proposed by B\"ackstr\"om in 2009~\cite{backstrom09} with a subsequent post-processing to ensure the smoothness of the mapping. \\
 
 Each of the algorithms did perform on the same filter bank and with the same sample rate. NMF approach did use a 2048 STFT with 512 samples hop size. For the MOD-NTF a second STFT based filter bank was used with 256 sample DFT size and 64 sample hop size. All methods use soft masking / wiener filtering for the actual synthesis.
 
 \subsection{Evaluation}
-% \label{sec:results}
+\label{sub:results}
 
-The results were evaluated by using commonly used evaluation measures provided by the PEASS Toolbox \cite{emiya11}. The evaluation measure are:
+The results were evaluated by using commonly used evaluation measures provided by the {PEASS} Toolbox~\cite{emiya11}. The evaluation measure are:
 
 \begin{itemize}
   \item Overall Perceptual Score (OPS)
@@ -163,10 +184,10 @@ The results were evaluated by using commonly used evaluation measures provided b
   \item Sources to Artifacts Ratio (SARi) \footnote{The $i$ indicates that these scores have been calculated by decomposition with PEASS \cite{emiya11} instead of \textsc{BSS Eval}.}
 \end{itemize}
 
-The mean values of the PEASS evaluation are provided in Table~\ref{tab:results}. It can be seen that the SDR values give a different tendency than the OPS score, showing that the differences between both measures are substantial. Since unison mixtures are even very challening for humans to segregate we chose to focus on the psycho-acoustically weighted performance measures only. The results show a slightly better overall performance for the PVI-NMF. A more fine grained overview from the OPS results experiment is presented in Figure~\ref{tab:resultsmatrix}. It can be seen that results vary a lot between the mixtures. The modulation tensor factorization (MOD-NTF) performs good on mixtures like Clarinet-Viola (71-41) or Clarinet-Cello (71-42)  where one source has vibrato and the other does not (see plots (e,f)). Although it performs well on average, MOD-NTF shows a high variance in the OPS results. The results have also been evaluated and confirmed subjectively by informal listening. Additionally we provide selected stimuli online on an acompanying webpage \footnote{\url{http://www.audiolabs-erlangen.de/resources/2014-DAFx-Unison/}}. In general the PEASS scores give a good indication of quality. However the artifacts that are introduced by the standard NMF synthesis seem to be not well reflected. One possible reason is that PEASS toolbox has not been tested on artifacts from unison mixtures. \\
-Future work could include a robust multi pitch variation estimator for musical instruments. Salamon and Gomez \cite{salamon12} describe the current state of the art of f0 estimation. Some approaches use source separation to estimate multiple f0 pitch tracks. Therefore our approach shows that a robust multi pitch f0 estimate can also help to improve source separation. In the future an iterative multi-step procedure could lead to better results in both problem domains.
+The mean values of the PEASS evaluation are provided in Table~\ref{tab:results}. It can be seen that the SDR values give a different tendency than the OPS score, showing that the differences between both measures are substantial. Since unison mixtures are even very challenging for humans to segregate we chose to focus on the psycho-acoustically weighted performance measures only. The results show a slightly better overall performance for the PVI-NMF. A more fine grained overview from the OPS results experiment is presented in Figure~\ref{tab:resultsmatrix}. It can be seen that results vary a lot between the mixtures. The modulation tensor factorization (MOD-NTF) performs good on mixtures like Clarinet-Viola (71-41) or Clarinet-Cello (71-42)  where one source has vibrato and the other does not (see plots (e,f)). Although it performs well on average, MOD-NTF shows a high variance in the OPS results. The results have also been evaluated and confirmed subjectively by informal listening. Additionally we provide selected stimuli online on an accompanying webpage \footnote{\url{http://www.audiolabs-erlangen.de/resources/2014-DAFx-Unison/}}. In general the PEASS scores give a good indication of quality. However the artifacts that are introduced by the standard NMF synthesis seem to be not well reflected. One possible reason is that PEASS toolbox has not been tested on artifacts from unison mixtures. \\
+Future work could include a robust multi pitch variation estimator for musical instruments. Salamon and Gomez~\cite{salamon12} describe the current state of the art of f0 estimation. Some approaches use source separation to estimate multiple f0 pitch tracks. Therefore our approach shows that a robust multi pitch f0 estimate can also help to improve source separation. In the future an iterative multi-step procedure could lead to better results in both problem domains.\par
 
-This paper proposes a new source separation scenario for instruments played in unison. It highlights the time-varying aspects of the signal sources like amplitude or frequency modulations. By addressing these aspects, the separation quality for non-unison mixtures can generally be improved, too.
+Our paper proposes a new source separation scenario for instruments played in unison. It highlights the time-varying aspects of the signal sources like amplitude or frequency modulations. By addressing these aspects, the separation quality for non-unison mixtures can generally be improved, too.
 Furthermore we present two methods to decompose those mixtures based on differences in the amplitude or frequency modulation of the sources. One is using a method already published based on a modulation tensor factorization. The other is a novel method that uses an estimate of the pitch variation of the two input sources to warp the mixture. Within the warped domain the frequency modulation of the desired source is removed so that the sources can be separated more easily from the mixture. The results of 45 mixtures have been evaluated by using the PEASS toolbox. The scores indicate an improvement of about 2 OPS points in favor of the pitch variation informed NMF compared to the standard NMF.
 
 \begin{table}
@@ -281,6 +302,8 @@ Furthermore we present two methods to decompose those mixtures based on differen
 
 \section{Extending Pitch Variation Informed Separation}
 
+\marginpar{This results of this extension were submitted and evaluated in SiSEC 2015 and SiSEC 2016.}
+
 In the previous section, we showed the effectiveness of a pitch variation informed separation system on our constrained unison source separation scenario.
 In the following section I show how the method can be extended to the scenario of separating the vocals/lead from the accompaniment in professionally produced music.
 
@@ -295,28 +318,10 @@ In a first step, the objective is to get estimates of the time-varying fundament
 This can done by a suitable pitch detection method like~\cite{de2002yin}.
 A second step then is respect is then to track this fundamental frequency over time, in other words, to find the best sequence of estimates, in order to identify the melody line.
 Such algorithms typically assume that the lead corresponds to the harmonic signal with strongest amplitude.
-
-From this starting point, two kinds of approaches can be distinguished between, depending on how they exploit the pitch information.
-The first option to obtain the separated lead signal is to re-synthesize it using a sinusoidal model, which has been studied in several approaches which are not detailed in this thesis (for a detailed overview of these methods, I refer the reader to Section III A of~\cite{rafii}).
-
-Due to the problem that sinusoidal synthesis suffers from a typical \textit{metallic} sound quality, which is mostly due to discrepancies between the estimated excitation signals of the lead signal compared to the ground truth, we decided to take an alternative approach which is to exploit harmonicity in another way, by filtering out everything from the mixture that is not located close to the detected harmonics.
-
-In the past many research has been focused on such a procedure as it turned out to be a common task in source separation systems:
-
-E.g. Li and Wang proposed to use a vocal/non-vocal classifier and a predominant pitch detection algorithm \cite{li06,li07}. They first detected the singing voice by using a spectral change detector \cite{duxbury03} to partition the mixture into homogeneous portions, and GMMs on MFCCs to classify the portions as vocal or non-vocal. Then, they used the predominant pitch detection algorithm in~\cite{li05} to detect the pitch contours from the vocal portions, extending the multi-pitch tracking algorithm in~\cite{wu03}. Finally, they extracted the singing voice by decomposing the vocal portions into TF units and labeling them as singing or accompaniment dominant, extending the speech separation algorithm in \cite{hu02}.
-
-Han and Raphael proposed an approach for desoloing a recording of a soloist with an accompaniment given a musical score and its time alignment with the recording \cite{han07}. They derived a mask \cite{roweis01} to remove the solo part after using an EM algorithm to estimate its melody, that exploits the score as side information.
-
-Hsu et al. proposed an approach which also identifies and separates the unvoiced singing voice \cite{hsu08,hsu10}. Instead of processing in the STFT domain, they use the perceptually motivated gammatone filter-bank as in~\cite{hu02,li07}. They first detected accompaniment, unvoiced, and voiced segments using an HMM and identified voice-dominant TF units in the voiced frames by using the singing voice separation method in \cite{li07}, using the predominant pitch detection algorithm in \cite{dressler062}. Unvoiced-dominant TF units were identified using a GMM classifier with MFCC features learned from training data. Finally, filtering was achieved with spectral subtraction~\cite{scalart96}.
-
-Raphael and Han then proposed a classifier-based approach to separate a soloist from accompanying instruments using a time-aligned symbolic musical score \cite{raphael08}. They built a tree-structured classifier \cite{breiman84} learned from labeled training data to classify TF points in the STFT as belonging to solo or accompaniment. They additionally constrained their classifier to estimate masks having a connected structure.
-
-Cano et al. proposed various approaches for solo and accompaniment separation. In~\cite{cano09}, they separated saxophone melodies from mixtures with piano and/or orchestra by using a melody line detection algorithm, incorporating information about typical saxophone melody lines. In~\cite{grollmisch11,dittmar12,cano12}, they proposed to use the pitch detection algorithm in~\cite{dressler11}. Then, they refined the fundamental frequency and the harmonics, and created a binary mask for the solo and accompaniment. They finally used a post-processing stage to refine the separation. In \cite{cano13}, they included a noise spectrum in the harmonic refinement stage to also capture noise-like sounds in vocals. In \cite{cano14}, they additionally included common amplitude modulation characteristics in the separation scheme.
-
-Bosch et al. proposed to separate the lead instrument using a musical score \cite{bosch12}. After a preliminary alignment of the score to the mixture, they estimated a score confidence measure to deal with local misalignments and used it to guide the predominant pitch tracking. Finally, they performed low-latency separation based on the method in \cite{marxer12}, by combining harmonic masks derived from the estimated pitch and additionally exploiting stereo information as presented later in Section~\ref{sec:multichannel}.
-
-Vaneph et al. proposed a framework for vocal isolation to help spectral editing \cite{vaneph16}. They first used a voice activity detection process based on a deep learning technique \cite{leglaive15}. Then, they used pitch tracking to detect the melodic line of the vocal and used it to separate the vocal and background, allowing a user to provide manual annotations when necessary.
+In this extension, I want show how the pitch variation informed separation system can be used in combination with a predominant melody estimation algorithm to extract singing voice from music.
 \par
+In a first step, the ``Melodia'' algorithm~\cite{salamon12} is used to obtain an estimate of the predominant melody from the mixture.
+The mixture is then time warped based on the fundamental frequency of the melody so that it’s predominant solo part is nearly constant in F0. (See~\cite{salamon12} for details). The extraction is then carried out in time domain using efficient comb filtering.
 
 \begin{figure}[htbp]
 	\centering
@@ -327,7 +332,7 @@ Vaneph et al. proposed a framework for vocal isolation to help spectral editing 
 
 \subsection{Predominant Melody Estimation}
 
-The first step to extend the $F0$ variation informed separation system is to obtain a warp contour that follows the predominant source by means of extraction from the mixture (blind) or by human annotation (informed).
+The first step to extend the pitch variation informed separation system is to obtain a warp contour that follows the predominant source by means of extraction from the mixture (blind) or by human annotation (informed).
 In the following I want to focus how to obtain such a warp contour using a predominant melody algorithm.\par
 
 Estimating the fundamental frequency of one single source from a mixture of several sources is considered very difficult~\cite{klapuri08}.
@@ -341,49 +346,102 @@ The melody can be defined in~\cite{poliner07} as:
   ``...melody is the single (monophonic) pitch sequence that a listener might reproduce if asked to whistle or hum a piece of polyphonic music, and that a listener would recognize as being the `essence` of that music when heard in comparison.''
 \end{quote}
 
-For a more comprehensive overview into melody extraction methods the reader is referred to in~\cite{salamon14}.
-In this work (Chapter 1, Section 1.4.5), Salamon also describes some advantages of a melody extraction method without applying a source separation system first as ``Understanding without Separation''.
+For a more comprehensive overview of melody extraction methods, the reader is referred to~\cite{salamon14}.
+In this work, I follow the ``Understanding without Separation'' paradigm, which is seen as an advantage of a melody extraction method without applying a source separation system first (also see Chapter 1, Section 1.4.5~\cite{salamon14}).\par
 
-In this work I used the \emph{Melodia} algorithm publish by Salamon in 2012~\cite{salamon12}.
+In turn I used the \emph{Melodia} algorithm, published by Salamon et al. in 2012~\cite{salamon12} as the basis to extract vocals from the mixture.\par
+
 \emph{Melodia} consists of four parts:
 \noindent\textbf{1)}: a time-frequency transformation is applied and spectral peaks are extracted.
-\textbf{2)}: the spectral peaks are the basis to generate a saliency spectrogram using weighted harmonic summation. This allows emphasize the predominant/salient frequencies in the signal and is the core part of the \emph{Melodia} algorithm.
-\textbf{3)}: From the saliency map, again, peaks are extracted and connected to a melody line. This is already a good starting point for the melody estimate but usually contains way to many outliers due to the noisiness of the saliency representation.
+\textbf{2)}: these form the basis of a \emph{saliency} spectrogram that is computed using a weighted sum over all frequencies. This allows emphasize the predominant/salient frequencies in the signal and is the core part of the \emph{Melodia} algorithm.
+\textbf{3)}: From the saliency map, again, peaks are extracted and then connected to a melody line. This would already a good starting point for the melody estimate but usually contains way to many outliers due to the noisiness of the saliency representation.
 \textbf{4)}: The melody line is post-processed using a viterbi decoder.
-This allows to filter the contour by removing outliers, pitch jumps and generally improves the smoothness of the contour using a number of heuristics.
+The purpose of it is to filter the contour by removing outliers, octave jumps and generally improves the smoothness of the contour using a number of heuristics.
 It is important to note that this step is tracking the melody line of the previous step over time.
-Usually this step is sensitive to the overall length of the processed mixture and often, this step is computed an semantically meaningful segment of the mixture like a full track or a refrain.
+Usually this step is sensitive to the overall length of the processed mixture and often, this step is computed in a semantically meaningful segment of the mixture like a full track or a refrain.
 \par
-I applied the algorithm using the implementation in Essentia~\cite{bogdanov13} using the default settings (sample rate 22050 Hz, hop size = 3 ms, window size=46 ms).
+I applied the \emph{Melodia} using the implementation in Essentia~\cite{bogdanov13} with the default parameters (sample rate 22050 Hz, hop size = 3 ms, window size=46 ms).
 
 \subsection{Source Extraction using Time Warping}
 
-Once the predominant melody is obtained, the warp contour can be computed in the same way as described in Section~\ref{sub:time_warping}.
-Since the
+Once the predominant melody is obtained, the warp contour can be computed in the same way as described in Section~\ref{sub:time_warping} above.
+In the unison scenario, however, we were globally warping the signal using a continuous warp contour.
+In the case of full length tracks many parts are unvoiced and apply time warping on these segments would degrade the separation quality.
+Therefore I only applied the warping on voiced parts and leave the non-vocal parts unaltered.
+In order to do this, I used the built-in voice activity detection from \emph{Melodia}.
+For all continuously voiced segments, I compute the warp contour from the  melody segments.
+To reduce the complexity of the extraction, compared to the NMF mentioned in Section~\ref{sub:frequency_modulation}, I designed a comb filter that can extract the voice in the warped time domain.
+Therefore I used a simple IIR Filter with the frequency response
 
-One obvious drawback of our method is that it relies on a robust pitch variation estimator which is usually difficult to obtain from a mixtures where multiple harmonic sources are present at the same im.
+\begin{equation}
+  H(z) = \frac{1}{1 - 0.75^z{-P}},
+\end{equation}
 
-\noindent\textbf{1) Melody Extraction}: Extracting the main melody using a Melody extraction such as~\cite{salamon12}
-\textbf{2) Vocal activity detection}: in the unison scenario we were able to globally warp the signal using a continuous warp contour. In the case of music signals with parts where no lead signal is active, we have two options to proceed: keeping the warp contour constant to continue linear time sampling would be the simplest way to do. But since the melody is making jumps, we don't want to apply warping to the non-overlapped (accompaniment) parts, so avoid introducing audible artifacts. This is why
-\textbf{3) Warp Contour}: The warp contour is then computed using equations~\ref{equationx}.
-\textbf{4) Segmental Warping}:
-\textbf{5) Pitch Contour}:
+where \(P\) is the pitch period in samples.
+In order to extract the vocals, I applied zero-phase filtering.
+The extracted vocals were unwarped to time domain and the accompaniment signal is created by subtracting the estimated vocals from the mixture signals.
+Each excerpt is then linearly crossfaded into the unaltered, accompaniment/mixture using a 10ms window.
+To further reduce the complexity of the separation system, instead one comb filter for each excerpts, I modified the warping algorithm so that a user defined target pitch \(p\), rounded to integer, is used.
+That way, the full signal is unwarped and resampled to the same pitch, which then only requires a singe comb filter to extract the signal.
+A stereo signal is produced by using a signal filtering both channels individually.
 
-In a first step, the ``Melodia'' algorithm~\cite{salamon12} is used to obtain an estimate of the predominant melody from the mixture. The mixture is then time warped based on the fundamental frequency of the melody so that it’s predominant solo part is nearly constant in F0. (See~\cite{salamon12} for details). The extraction is then carried out in time domain using efficient comb filtering.
-The algorithm is implemented in Python and has low complexity resulting in approximately 0.33s for 1s of audio on 3,1 GHz
+The full procedure is depcited in Figure~\ref{fig:warp_demo}.
 
-Instead of a global warping function we apply the warping locally using VAD.
-
-
-* Mention that we want to extend the methods based in~\cite{stoeter14} and take it to SiSEC evaluation challange.
-* Therefore we need a) a robust f0 estimation b) a robust voice activity detector and c) a good filtering paradigm.
+\begin{figure}
+\begin{tabular}{cc}
+  \includegraphics[width=65mm]{Chapters/05_Separation_Known/warp-demo/Mixture.pdf} & \includegraphics[width=65mm]{Chapters/05_Separation_Known/warp-demo/reference.pdf} \\
+(a) Mixture Spectrogram & (b) Ground Truth Vocals \\[6pt]
+\includegraphics[width=65mm]{Chapters/05_Separation_Known/warp-demo/Melodia.pdf} & \includegraphics[width=65mm]{Chapters/05_Separation_Known/warp-demo/Contour.pdf} \\
+(c) Melody Estimate & (d) Warp Contour \\[6pt]
+\includegraphics[width=65mm]{Chapters/05_Separation_Known/warp-demo/warped.pdf} & \includegraphics[width=65mm]{Chapters/05_Separation_Known/warp-demo/warped_filtered.pdf} \\
+(e) Warped Mixture & (f) Filtered Mixture \\[6pt]
+\multicolumn{2}{c}{\includegraphics[width=65mm]{Chapters/05_Separation_Known/warp-demo/Estimate.pdf} }\\
+\multicolumn{2}{c}{(g) Vocals Estimate}
+\end{tabular}
+\caption{Examples of a pitch variation informed separation of the audio track \emph{Tamy - Que Pena Tanto Fa}.}%
+\label{fig:warp_demo}
+\end{figure}
 
 \subsection{Results on SiSEC 2015}
 \label{ssec:performance}
 
+The algorithm has been applied on the Mixing Secret Dataset 100 (MSD100) consists of a total of 100 songs of different styles.
+The separation results were evaluated using BSS_eval~\cite{} and submitted to the SiSEC 2015 evaluation challenge~\cite{ono15}.
+The system was ranked in the last third of the participants and scored only slightly better than RPCA based methods~\cite{huang12}.
+The reason for this is that our proposed system highly depends on the melody estimation algorithm which in turns is based on the assumption that there exist a predominant melody in the mixture.
+Unfortunately, the newly created MSD100 dataset was not mixed using professional mastering, resulting in vocals that are below average in loudness.
+Hence, they were not detected by the \emph{Melodia} voice activity detection.
+On the positive side, the proposed method is of very low complexity and generally implemented in Python and has low complexity resulting in quick computations.
+
+\subsection{Improving Voiced/Unvoiced Detection using Deep Neural Networks}
+
+As mentioned before, I identified that the voice activity detection method takes an important part in the proposed separation system.
+Therefore I decided to improve the robustness of the system by improving the voice activity detection algorithm.
+
+Jamendo Singing Voice Detection Dataset~\cite{ramona08}.
+
+\cite{Ramona} Accuracy 82.2, F-Measure 84.3
+\cite{Leglaive15} Acc 91.5, F-Measure 91.
+ich Acc 83.9, 83.6
+
+30, 20, 40 layer, but unidirectional.
+sequency of frames being singing voice or not.
+
+\cite{LSTM}
+
+batch_size=16
+sequence length 256
+HPSS80
 
 
-\subsection{Improving Voiced/Unvoiced Detection}
+LSTM (lstm)                   (None, None, 30)              13320
+LSTM (lstm)                   (None, None, 20)              4080
+LSTM (lstm)                   (None, None, 40)              9760
+TimeDistributedDense (timedist(None, None, 1)               41
+
+Linear activation instead of Dense
+
+I adopted~\cite{leglaive15} and
 
 \begin{figure}
   \input{Chapters/05_Separation_Known/figures/sisec16}
@@ -393,6 +451,8 @@ Instead of a global warping function we apply the warping locally using VAD.
 
 \section{Excursus: Improving $F0$ Estimation using warped method} % (fold)
 \label{sec:method}
+
+\marginpar{This section is based on the work that has been submitted in 2015 together with my colleague Nils Werner~\cite{stoeter15icassp}.}
 
 Normally an informed system could be build by using some informed system that uses an upper bound.
 However the upper bound for a warping based system is hard because we are essentially not just building an F0 system.
