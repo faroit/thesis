@@ -410,13 +410,14 @@ The separation results were evaluated using BSS_eval~\cite{} and submitted to th
 The system was ranked in the last third of the participants and scored only slightly better than RPCA based methods~\cite{huang12}.
 The reason for this is that our proposed system highly depends on the melody estimation algorithm which in turns is based on the assumption that there exist a predominant melody in the mixture.
 Unfortunately, the newly created MSD100 dataset was not mixed using professional mastering, resulting in vocals that are below average in loudness.
-Hence, they were not detected by the \emph{Melodia} voice activity detection.
+Due to the small energy, they were not detected as voiced by \emph{Melodia}, hence the warping was either not applied. Even worse, sometimes the pitch estimates were one octave off producing severe artifacts due to extreme warping.\par
 On the positive side, the proposed method is of very low complexity and generally implemented in Python and has low complexity resulting in quick computations.
 
 \subsection{Improving Voiced/Unvoiced Detection using Deep Neural Networks}
 
-As mentioned before, I identified that the voice activity detection method takes an important part in the proposed separation system.
-Therefore I decided to improve the robustness of the system by improving the voice activity detection algorithm.
+As mentioned in the previous section, the voice activity detection part is of paramount importance for the proposed music separation system.
+Therefore, I decided to evaluate if the robustness of the system can be improved by using a more advanced voice activity detection system as a separate preprocessing step.
+\par
 
 Jamendo Singing Voice Detection Dataset~\cite{ramona08}.
 
@@ -427,7 +428,7 @@ ich Acc 83.9, 83.6
 30, 20, 40 layer, but unidirectional.
 sequency of frames being singing voice or not.
 
-\cite{LSTM}
+\cite{Hochreiter97}
 
 batch_size=16
 sequence length 256
