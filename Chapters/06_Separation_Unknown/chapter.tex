@@ -1,9 +1,13 @@
 \chapter{Separation by Unknown Modulation}
+\label{cha:unknown}
 
 \marginpar{This chapter is based on the work that has been published at the ICASSP conference in 2016. The work has been done in close collaboration with Antoine Liutkus from INRIA, France and Roland Badeu from ParisTech France.}
 
+% \section{Modulation Spectrogram based Separation}
 
-% Add introduction to matrix factorization based things
+% Intro commonfate START
+% Unknown modulation!
+Sound source separation continues to be a very active field of research~\cite{vincent14} with a variety of applications. In the past, many contributions were based on the popular non-negative matrix factorization (NMF).
 
 The first set of approaches we consider is the identification of redundancy in the accompaniment through the assumption that its spectrogram may be well represented by only a few components. Techniques exploiting this idea then focus on algebraic methods that decompose the mixture spectrogram into the product of a few template spectra activated over time. One way to do so is via non-negative matrix factorization (NMF) \cite{lee99,lee01}, which incorporates non-negative constraints. In Figure~\ref{fig:methods_low_rank}, we picture methods exploiting such techniques. After factorization, we obtain several spectra, along with their activations over time. A subsequent step is the clustering of these spectra (and activations) into the lead or the accompaniment. Separation is finally performed by deriving Wiener filters to estimate the lead and the accompaniment from the mixture. For related applications of NMF in music analysis, the reader is referred to \cite{smaragdis03,virtanen07,fevotte09}.
 
@@ -19,12 +23,7 @@ In a different manner, Smaragdis and Mysore proposed a user-guided approach for 
 
 Nakamuray and Kameoka proposed an $L_p$-norm NMF~\cite{nakamuray15}, with $p$ controlling the sparsity of the error. They developed an algorithm for solving this NMF problem based on the auxiliary function principle \cite{ortega70,kameoka06}. Setting an adequate number of bases and $p$ taken as small enough allowed them to estimate the accompaniment as the low-rank decomposition, and the singing voice as the error of the approximation, respectively. Note that, in this case, the singing voice was not explicitly modeled as a sparse component but rather corresponded to the error which happened to be constrained as sparse. The next subsection will actually deal with approaches that explicitly model the vocals as the sparse component.
 % end zafar
-
-% \section{Modulation Spectrogram based Separation}
-
-% Intro commonfate START
-% Unknown modulation!
-Sound source separation continues to be a very active field of research~\cite{vincent14} with a variety of applications. Many recent contributions are based on the popular non-negative matrix factorization (NMF). The way NMF factorizes a spectrogram matrix into frequency and activation templates makes it possible to easily design algorithms in an intuitive way. At the same time, it provides a rank reduction, needed to decompose mixtures into their source components.
+The way NMF factorizes a spectrogram matrix into frequency and activation templates makes it possible to easily design algorithms in an intuitive way. At the same time, it provides a rank reduction, needed to decompose mixtures into their source components.
 In the past, many NMF-based source separation methods have been developed~\cite{smaragdis03, smaragdis04, virtanen07}. Expanding the NMF to tensors allows to incorporate more complex models, useful in many applications like multi-channel separation. Extensions to NMF such as shift-invariance or convolutions were carried over to non-negative tensor (NTF) based algorithms~\cite{fitzgerald05, fitzgerald08, fitzgerald06, fevotte10, ozerov11}. These approaches, relying on decomposing mixtures of musical instruments, work well when certain assumptions hold to be true.
 One is that spectral harmonics only partially overlap. However, when two sources share the same fundamental frequency, almost all partials do overlap, making it difficult for NMF-based algorithms to learn unique templates. Another assumption is that all spectral and temporal templates semantically correspond to musical notes, forming a dictionary of musically meaningful atoms.
 This does not hold for instruments with time-varying fluctuations. These effects can typically be found in musical instruments like strings and brass, when played with vibrato. In a setting where two musical instruments with vibrato play in unison, both assumptions could break, which makes it a challenging scenario~\cite{stoeter14}.

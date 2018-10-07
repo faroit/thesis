@@ -46,7 +46,7 @@ For stereo signals, the TF representation yields a three-dimensional tensor: ${t
 Using a time-frequency representation for audio signals is generally done to improve computational efficiency and at the same time model more closely
 the human hearing~\cite{bregman90}.
 
-\subsection{Pitch, Harmony and Timbre}
+\subsection{Pitch and Harmony}
 
 % FROM ZAFAR, do a full rewrite!
 A particularity of both, speech and music signals is that they typically have pitched content.
@@ -54,6 +54,14 @@ A sound gives the perception of having a pitch if the majority of the energy in 
 These integer multiples are called \textit{harmonics}~\cite{schenker54}.
 When the fundamental frequency changes, the frequencies of these harmonics also change, yielding the typical comb spectrograms of harmonic signals.
 Another noteworthy feature of sung melodies over simple speech is that their fundamental frequencies are, in general, located at precise frequency values corresponding to the musical key of the song.
+% begin eusipco
+An estimate of the fundamental frequency $F0$ of a signal is required in various applications of audio and speech signal processing.
+$F0$ is often synonymously referred to as pitch which is a perceptual measure. In the past, a number of algorithms were presented to provide such estimates, with many of them being designed for specific applications.
+Some scenarios are targeted to extract the fundamental frequency of the predominant source~\cite{salamon12} in a mixture of other sources.
+In other applications, algorithms are used to extract fundamental frequencies of multiple sources simultaneously present in a signal~\cite{klapuri2003multiple}.
+However, the most common scenario in many works is to extract the fundamental frequency of a monophonic and harmonic audio signal containing speech or music~\cite{talkin1995robust, boersma2002praat, de2002yin, resch, camacho2007swipe, tidhar2010high, christensen2007joint}.
+% end eusipco
+
 These very peculiar features are often exploited in separation methods.
 For simplicity reasons, I use the terms \textit{pitch} and \textit{fundamental frequency} interchangeably throughout the thesis.
 
@@ -247,7 +255,6 @@ An extensive overview of music separation methods can be found in~\cite{rafii18}
 Even though the overview is focused on vocal accompaniment separation, most approaches can be generalised to other sources.
 
 \subsection{Source Count Estimation}
-
 % copy from icassp paper maybe
 In separation, the number of sources is an important information for many separation systems is to identify the number of sources to separated.
 % copied from my icassp 2018 paper
