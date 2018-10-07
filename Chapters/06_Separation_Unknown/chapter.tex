@@ -3,13 +3,17 @@
 
 \marginpar{This chapter is based on the work that has been published at the ICASSP conference in 2016. The work has been done in close collaboration with Antoine Liutkus from INRIA, France and Roland Badeu from ParisTech France.}
 
+In the last chapter, I proposed methods to separate highly overlapped signals based informed by the fundamental frequency estimate of the source to be separated.
+Even though, I showed that pitch variation can be estimated from the mixture, in many cases, this might not be easy to obtain in practice.
+Therefore, in this chapter, I will study blind separation methods and present work that I have done to tackle this more difficult scenario.
+
 % \section{Modulation Spectrogram based Separation}
 
 % Intro commonfate START
 % Unknown modulation!
-Sound source separation continues to be a very active field of research~\cite{vincent14} with a variety of applications. In the past, many contributions were based on the popular non-negative matrix factorization (NMF).
-
-The first set of approaches we consider is the identification of redundancy in the accompaniment through the assumption that its spectrogram may be well represented by only a few components. Techniques exploiting this idea then focus on algebraic methods that decompose the mixture spectrogram into the product of a few template spectra activated over time. One way to do so is via non-negative matrix factorization (NMF) \cite{lee99,lee01}, which incorporates non-negative constraints. In Figure~\ref{fig:methods_low_rank}, we picture methods exploiting such techniques. After factorization, we obtain several spectra, along with their activations over time. A subsequent step is the clustering of these spectra (and activations) into the lead or the accompaniment. Separation is finally performed by deriving Wiener filters to estimate the lead and the accompaniment from the mixture. For related applications of NMF in music analysis, the reader is referred to \cite{smaragdis03,virtanen07,fevotte09}.
+In sound source separation research~\cite{vincent14}, many contributions in the past were based on the popular non-negative matrix factorization (NMF)~\cite{lee99,lee01}.
+Treating the magnitude of audio mixture spectrograms as the input representation, NMF incorporates non-negative constraints to perform the separation in multiple compponents.
+In Figure~\ref{fig:methods_low_rank}, we picture methods exploiting such techniques. After factorization, we obtain several spectra, along with their activations over time. A subsequent step is the clustering of these spectra (and activations) into the lead or the accompaniment. Separation is finally performed by deriving Wiener filters to estimate the lead and the accompaniment from the mixture. For related applications of NMF in music analysis, the reader is referred to \cite{smaragdis03,virtanen07,fevotte09}.
 
 Vembu and Baumann proposed to use NMF (and also ICA \cite{common94}) to separate vocals from mixtures \cite{vembu05}. They first discriminated between vocal and non-vocal sections in a mixture by using different combinations of features, such as MFCCs \cite{david80}, perceptual linear predictive (PLP) coefficients \cite{hermansky90}, and log frequency power coefficients (LFPC) \cite{nwe04}, and training two classifiers, namely neural networks and support vector machines (SVM). They then applied redundancy reduction techniques on the TF representation of the mixture to separate the sources \cite{casey00}, by using NMF (or ICA). The components were then grouped as vocal and non-vocal by reusing a vocal/non-vocal classifier with MFCC, LFPC, and PLP coefficients.
 
@@ -23,31 +27,25 @@ In a different manner, Smaragdis and Mysore proposed a user-guided approach for 
 
 Nakamuray and Kameoka proposed an $L_p$-norm NMF~\cite{nakamuray15}, with $p$ controlling the sparsity of the error. They developed an algorithm for solving this NMF problem based on the auxiliary function principle \cite{ortega70,kameoka06}. Setting an adequate number of bases and $p$ taken as small enough allowed them to estimate the accompaniment as the low-rank decomposition, and the singing voice as the error of the approximation, respectively. Note that, in this case, the singing voice was not explicitly modeled as a sparse component but rather corresponded to the error which happened to be constrained as sparse. The next subsection will actually deal with approaches that explicitly model the vocals as the sparse component.
 % end zafar
+\par
 The way NMF factorizes a spectrogram matrix into frequency and activation templates makes it possible to easily design algorithms in an intuitive way. At the same time, it provides a rank reduction, needed to decompose mixtures into their source components.
-In the past, many NMF-based source separation methods have been developed~\cite{smaragdis03, smaragdis04, virtanen07}. Expanding the NMF to tensors allows to incorporate more complex models, useful in many applications like multi-channel separation. Extensions to NMF such as shift-invariance or convolutions were carried over to non-negative tensor (NTF) based algorithms~\cite{fitzgerald05, fitzgerald08, fitzgerald06, fevotte10, ozerov11}. These approaches, relying on decomposing mixtures of musical instruments, work well when certain assumptions hold to be true.
-One is that spectral harmonics only partially overlap. However, when two sources share the same fundamental frequency, almost all partials do overlap, making it difficult for NMF-based algorithms to learn unique templates. Another assumption is that all spectral and temporal templates semantically correspond to musical notes, forming a dictionary of musically meaningful atoms.
-This does not hold for instruments with time-varying fluctuations. These effects can typically be found in musical instruments like strings and brass, when played with vibrato. In a setting where two musical instruments with vibrato play in unison, both assumptions could break, which makes it a challenging scenario~\cite{stoeter14}.
-% Intro commonfate START
+\par
+Expanding NMF to tensors allows to incorporate more complex models, useful in many applications like multi-channel separation.
+Extensions to NMF such as shift-invariance or convolutions were carried over to non-negative tensor (NTF) based algorithms~\cite{fitzgerald05, fitzgerald08, fitzgerald06, fevotte10, ozerov11}. These approaches, relying on decomposing mixtures of musical instruments, work well when certain assumptions hold to be true.
 
+Howerver, this does not hold for instruments with time-varying fluctuations. These effects can typically be found in musical instruments like strings and brass, when played with vibrato. In a setting where two musical instruments with vibrato play in unison, both assumptions could break, which makes it a challenging scenario~\cite{stoeter14}.\\
+% Intro commonfate START
 When processing such mixtures with a representation based on a standard NMF and the magnitude spectrogram, it is hard to model the sources with only a few spectral templates. Instead of increasing the number of templates per source, Hennequin proposes~\cite{hennequin11} frequency-dependent activation matrices by using a source/filter-based model.
 Since the vibrato does not only cause frequency modulation (FM) but also amplitude modulation (AM), so-called modulation spectra can be used to identify the modulation pattern. This is often calculated by taking the Fourier transform of a magnitude spectrum. Thus, the \emph{modulation spectrogram} has already gathered much attention in speech recognition~\cite{greenberg97,kingsbury98} and classification~\cite{kinnunen08, markaki09}.
-Barker and Virtanen~\cite{barker13} were the first to propose a modulation tensor representation for single channel source separation. This allows to elegantly apply factorization on the tensor by using the well known PARAFAC/CANDECOMP (CP) decomposition.
-
-In this work we introduce a novel tensor signal representation which additionally exploits similarities in the frequency direction. We can therefore make use of dependencies between modulations of neighbouring bins. This is similar to the recently proposed High-Resolution Nonnegative Matrix Factorization
-model that accounts for dependencies in the time-frequency plane (HR-NMF
-~\cite{badeau11}). In short, HR-NMF models each complex entry of a time-frequency transform of an audio signal as a linear combination of its neighbours, enabling the modelling of damped sinusoids, along with an independent
-innovation. This model was generalized to multichannel mixtures in~\cite{badeau13a,badeau14}
-and was shown to provide considerably better oracle performance for source separation than alternative models in~\cite{magron15a}.
-Indeed, even though some variational approximations were introduced
-in~\cite{badeau13} to strongly reduce their complexity,
-those algorithms are often demanding for practical applications.
-In this paper, we propose to relax some assumptions of HR-NMF in the interest of simplifying the estimation procedure. The core idea is to divide the complex spectrogram into modulation patches in order to group common modulation in time and frequency direction. We call this the \emph{Common Fate Model} (CFM), borrowing from the Gestalt theory, which describes how human perception merges objects that move together over time. Bregman~\cite{bregman94} described the Common Fate theory for auditory scene analysis as the ability to group sound objects based on their common motion over time, as occurs with frequency modulations of harmonic partials. As outlined by Bregman, the human ability to detect and group sound sources by small differences in FM and AM is outstanding. Also, it turns out that humans are especially sensitive to modulation frequencies around 5~Hz, which is the typical vibrato frequency that many musicians produce naturally.
-% Intro commonfate END
+Barker and Virtanen~\cite{barker13} were the first to propose a modulation tensor representation for single channel source separation. This allows to elegantly apply factorization on the tensor by using the well known PARAFAC/CANDECOMP (CP) decomposition~\cite{myfavoritenmfbook}.\\
+In the following subsection I will introduce the work of Barker.
 
 %\from dafx
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Separating by Amplitude Modulation}
 \label{sub:am}
+
+\marginpar{Parts of this subsection is also based on the work~\cite{stoeter14}.}
 
 \begin{figure}[H]
     \centering
@@ -73,7 +71,6 @@ In this paper, we propose to relax some assumptions of HR-NMF in the interest of
 \end{figure}
 
 Amplitude modulation is normally not present, isolated in acoustical instruments. However electric pianos like Rhodes or Wurlitzers can generate a tremolo effect. Using the amplitude modulation to separate mixtures has already been done in \cite{li09} which makes use of the concept of \emph{Common Amplitude Modulation}.
-
 \textsc{CAM} is effectively the property of harmonics that share the same amplitude modulation across the bins.
 One way of analyzing it is a modulation spectrogram which is a frequency-frequency representation of a time domain input signal.
 There are also other ways to generate a modulation spectrum.
@@ -83,11 +80,11 @@ A complete signal representation can be archived by a modulation tensor which ho
 % the key point is that after the TF transform the magnitude has to be taken to compute the amplitude modulation. Computing the frequency modulation spectrogram is not possble in a simple way. WHY?
 
 % Known modulation
-Barker and Virtanen \cite{barker13} found a way to utilize the modulation tensor for single channel source separation. Standard NMF models the spectrogram by the sum of $K$ components which are each factored into frequency/basis and time/activations components:
+Barker and Virtanen~\cite{barker13} found a way to utilize the modulation tensor for single channel source separation. Standard NMF models the spectrogram by the sum of $K$ components which are each factored into frequency/basis and time/activations components:
 \begin{equation}
    \mathbf{X}_{n,m} \approx \sum_{k=1}^{K}\mathbf{W_{n,k}}\times \mathbf{H_{k,m}}.
 \end{equation}
-Non-negative Tensor factorization approximates a modulation tensor by a product of three matrices containing the frequency/basis, time/activation signals, and the modulation gain for each component. Compared to \cite{barker13} we choose to generate the modulation tensor in way that is simpler and easier to invert. Barker and Virtanen use a Gammatone filter bank and  rectification to model the characteristics of the human auditory system. We used a two-stage DFT filter bank where the modulation domain is based on  magnitude spectrograms. Although this can give perceptually less optimal results, each step can be directly inverted by using the complex representation. Barker already showed that the NTF based approach gives better results on speech signals. We found that this approach can be used to separate two instrument mixtures by their amplitude modulation characteristics and is therefore ideal for the unison scenario.
+Non-negative Tensor factorization approximates a modulation tensor by a product of three matrices containing the frequency/basis, time/activation signals, and the modulation gain for each component. Compared to~\cite{barker13} we choose to generate the modulation tensor in way that is simpler and easier to invert. Barker and Virtanen use a Gammatone filter bank and  rectification to model the characteristics of the human auditory system. We used a two-stage DFT filter bank where the modulation domain is based on  magnitude spectrograms. Although this can give perceptually less optimal results, each step can be directly inverted by using the complex representation. Barker already showed that the NTF based approach gives better results on speech signals. We found that this approach can be used to separate two instrument mixtures by their amplitude modulation characteristics and is therefore ideal for the unison scenario.
 
 In Figure~\ref{fig:sk_tensor} we show the factorization of a simple amplitude modulated input signal for comparison. The signal consists of two sinusoids which are linearly mixed. Both share the same carrier frequency but have different amplitude modulation frequencies. We choose a factorization into $K=2$ components. From the activation components one can see that NMF is not able to separate the two signals sufficiently. NTF gives a smoother activation matrix and is able to generate the output with the separated amplitude modulations on each sinusoid. The modulation frequency gain matrix shows the two modulation frequency templates and the DC-component.
 
@@ -146,11 +143,324 @@ In Figure~\ref{fig:sk_tensor} we show the factorization of a simple amplitude mo
 \end{center}
 \end{figure}
 
+\section{Separation by Modulation Texture}
+
+In this work we introduce a novel tensor signal representation which additionally exploits similarities in the frequency direction. We can therefore make use of dependencies between modulations of neighbouring bins. This is similar to the recently proposed High-Resolution Nonnegative Matrix Factorization
+model that accounts for dependencies in the time-frequency plane (HR-NMF
+~\cite{badeau11}). In short, HR-NMF models each complex entry of a time-frequency transform of an audio signal as a linear combination of its neighbours, enabling the modelling of damped sinusoids, along with an independent
+innovation. This model was generalized to multichannel mixtures in~\cite{badeau13a,badeau14}
+and was shown to provide considerably better oracle performance for source separation than alternative models in~\cite{magron15a}.
+Indeed, even though some variational approximations were introduced
+in~\cite{badeau13} to strongly reduce their complexity,
+those algorithms are often demanding for practical applications.
+In this paper, we propose to relax some assumptions of HR-NMF in the interest of simplifying the estimation procedure. The core idea is to divide the complex spectrogram into modulation patches in order to group common modulation in time and frequency direction. We call this the \emph{Common Fate Model} (CFM), borrowing from the Gestalt theory, which describes how human perception merges objects that move together over time. Bregman~\cite{bregman94} described the Common Fate theory for auditory scene analysis as the ability to group sound objects based on their common motion over time, as occurs with frequency modulations of harmonic partials. As outlined by Bregman, the human ability to detect and group sound sources by small differences in FM and AM is outstanding. Also, it turns out that humans are especially sensitive to modulation frequencies around 5~Hz, which is the typical vibrato frequency that many musicians produce naturally.
+% Intro commonfate END
+
+\subsection{The Common Fate Transform}
+\label{sub:CFT}
+
+Let $\tilde{x}$ denote a single channel audio signal.
+Its Short-Term Fourier Transform (STFT) is computed by splitting it
+into overlapping frames, and then taking the discrete Fourier transform (DFT)
+of each one\footnote{Since the waveform~$\tilde{x}$ is real, the Fourier transform of
+each frame is Hermitian. In the following, we assume that the redundant
+information has been discarded to yield the STFT.}. The resulting information is gathered into an $N_{\omega}\times N_{\tau}$
+matrix written~$X$, where~$N_{\omega}$ is the number of frequency
+bands and $N_{\tau}$ the total number of frames.
+%
+In this study, we will consider the properties of another object,
+built from $X$, which we call the Common Fate Transform (CFT). It
+is constructed as illustrated in Figure~\ref{fig:CFT}.
+We split the STFT~$X$ into overlapping rectangular $N_{a}\times N_{b}$
+patches, regularly spaced over both time and frequency. Then, the
+2D-DFT of each patch is computed\footnote{Note that since each patch is complex, its 2D-DFT is not Hermitian,
+thus all its entries are kept.}. This yields an $N_{a}\times N_{b}\times N_{f}\times N_{t}$ tensor we write~$x$,
+where~$N_{f}$ and~$N_{t}$ are the vertical and horizontal
+positions for the patches, respectively.
+
+As can be seen, the CFT is basically a further short-term 2D-DFT taken over
+the standard STFT~$X$. One of the main differences compared to modulation spectrograms
+is that the CFT is computed using the complex STFT~$X$, and not a magnitude representation such as $\left|X\right|$. As we will
+show, this simple difference has many interesting consequences, notably
+that the CFT is invertible: the original waveform~$\tilde{x}$ can
+be exactly recovered by cascading two classical overlap-add procedures. Another difference
+is that the patches span several frequency bins, \emph{i.e.} we may have~$N_{a}>1$.
+This contrasts with the conventional modulation spectrogram, that
+is usually defined using one frequency band only.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.6\textwidth]{Chapters/06_Separation_Unknown/figures/CFT}
+
+\caption{Common Fate Transform. For convenience, the splitting of the STFT
+into patches has been depicted without overlap, but overlapping patches
+are used in practice\label{fig:CFT}.}
+\end{figure}
+
+\subsubsection{A Probabilistic Model for the CFT}
+
+\label{ssub:separation}
+
+When processing an audio signal~$\tilde{x}$ for source separation,
+it is very common to assume that all time-frequency (TF) bins
+of its STFT are independent~\cite{fevotte09,duong10,ozerov12,liutkus11t}.
+This is often the consequence of two different assumptions.
+The first one is to consider that all frames are independent, thus
+leading to the independence of all entries of the STFT that do not belong to the
+same column. The second one is related to the notion of stationarity:
+roughly speaking, the Fourier transform is known to decompose stationary
+signals into independent components, whether these signals be Gaussian
+(see, e.g.~\cite{liutkus11t}) or, more generally, harmonisable $\alpha$-stable~\cite{liutkus15}.
+As a consequence, when the signals are assumed to be \emph{locally stationary},
+it is theoretically sound to assume that all the entries of
+their STFT are independent.
+
+Still, both assumptions can only be considered as approximations.
+First, adjacent frames are obviously not independent, notably because
+of the overlap between them. Second, the stationarity assumption is
+only approximate in practice, especially when impulsive elements are
+found in the audio, leading to strong dependencies among the different
+frequency bins. Let $\{ X_{ft}\} _{f,t}$
+denote all the $N_{a}\times N_{b}$ patches taken on the STFT to compute
+the CFT, as depicted in Figure~\ref{fig:CFT}. The probabilistic
+model we choose is the combination of \emph{four} different assumptions
+made on the distribution of these patches.
+
+\begin{enumerate}[leftmargin=0cm,itemindent=.5cm,labelwidth=\itemindent,labelsep=0cm,align=left]
+\item All patches are independent. Just as the classical locally stationary
+model~\cite{liutkus11t} assumes independence of overlapping frames,
+we assume here independence of overlapping patches. Due to the
+overlap between them, this assumption is an approximation,
+and one may wonder what the advantage is of dropping independent frames
+for independent patches. The answer lies in the fact that the latter
+permits us to model phase dependencies between neighbouring STFT entries,
+and also to model much longer-term dependencies, as required for instance
+by deterministic damped or frequency-modulated sinusoidal signals.\label{enu:assumption_independent_patches}
+\item Each patch is \emph{stationary}: its distribution
+is assumed invariant under translations in the TF plane. This is where we do not assume independence, but on the contrary expect dependencies among neighbouring STFT entries. Our approach assumes this happens in a way that only depends on the relative positions in
+the TF plane. It can easily be shown that mixtures of
+damped sinusoids have this property. Assuming stationarity not only over time but over both time and frequency
+also permits us to naturally account for mixtures of frequency-modulated
+sounds. In short, we assume that throughout each patch, we observe
+one coherent STFT ``texture''. The difference with the HR-NMF model is that we have independent and identically
+distributed (i.i.d.) innovations for one given patch, whereas HR-NMF model has more variability and permits heteroscedastic innovations. However, taking overlapping patches somehow compensates for
+this limitation.\label{enu:assumption_stationary}
+\item The joint distribution of all entries of each patch is $\alpha$-stable~\cite{samoradnitsky1994stable}.
+$\alpha$-stable distributions are the only ones that are stable under additions, \emph{i.e.} such that
+sums of $\alpha$-stable random variables (r.v.) remain $\alpha$-stable.
+They notably comprise the Gaussian and Cauchy distributions as special
+cases when $\alpha=2$ and $\alpha=1$, respectively.\label{enu:assumption_alpha_stable}
+\item Each patch is harmonisable, \emph{i.e.} is the inverse Fourier
+transform of a complex random measure with independent increments.
+In other words, all entries of the Fourier transform of each patch
+are assumed to be asymptotically independent, as the size of the patch
+gets larger. This rather technical condition, often tacitly made in
+signal processing studies, permits efficient processing in the frequency
+domain.\label{enu:assumption_harmonisable}
+\end{enumerate}
+
+Under those four assumptions, all entries of the CFT~$x$ are independent
+(assumptions~\ref{enu:assumption_independent_patches} and~\ref{enu:assumption_stationary}),
+and each one is distributed with respect to a complex isotropic $\text{\ensuremath{\alpha}}$-stable
+distribution, noted $S\alpha S_{c}$ (assumptions~\ref{enu:assumption_alpha_stable}
+and~\ref{enu:assumption_harmonisable}\footnote{This result is the direct generalization
+of~\cite[th. 6.5.1]{samoradnitsky1994stable} to multi-dimensional stationary processes.}):
+\begin{equation}
+x\left(a,b,f,t\right)\sim S\alpha S_{c}\left(P^{\alpha}\left(a,b,f,t\right)\right),\label{eq:SaS_model}
+\end{equation}
+where $P^{\alpha}$ is a nonnegative $N_{a}\times N_{b}\times N_{f}\times N_{t}$
+tensor that we call the \emph{modulation density}. When $\alpha=2$,~\eqref{eq:SaS_model}
+corresponds to the classical isotropic complex Gaussian distribution
+and the entries of $P^{\alpha}$ are homogeneous to variances. In
+the general case, it can basically be understood as the energy found at $\left(a,b\right)$ for patch
+$\left(f,t\right)$, just like more classical (fractional) power spectral
+densities describe the spectro-temporal energy content of the STFT
+of a locally stationary signal.
+
+\subsubsection{Another interpretation of the CFT}
+
+\label{sub:interpretation}
+
+An alternative interpretation of the CFT can be obtained by regarding the 2D-DFT
+as two subsequent 1D-DFTs. If the transform in frequency direction (DFT-F) is
+applied first, it is equivalent to a partial inverse DFT plus time reversal. If
+the time reversal would be undone and an overlap-add would be applied, the
+output would correspond to a subband representation with a frequency resolution
+of $N_\omega / N_a$. Each of the $N_a$ final transformations (DFT-T) in one
+patch takes output values from $N_b$ DFT-Ts with equal indices. This corresponds
+to a splitting into poly-phase components with downsampling factor $N_a$ of the
+time signal obtained by placing the output frames from the DFT-Ts in a row.
+Thus, the outputs of the DFT-Fs have a very high frequency resolution of
+$N_\omega N_b$ but contain aliasing components from the downsampling.
+
+This interpretation of the CFT gives some indications for its benefits in the
+separation of modulated sources. Due to the poly-phase representation it has a
+relatively high temporal resolution. The periodicities in the spectra caused
+by downsampling make the CFT relatively independent of frequency shifts, so
+that, for example, the output patch of a single sinusoidal sweep is mainly
+influenced by the sweep rate.
+
+% todo add complexity analaysis
+
+\subsection{Signal Separation}
+Now, let us assume that the observed waveform is actually the sum
+of~$J$ underlying sources~$\{ \tilde{s}_{j}\} _{j=1,\dots,J}$.
+Due to the linearity of the CFT, this can be
+expressed in the CFT domain as:
+$$
+\forall\left(a,b,f,t\right),x\left(a,b,f,t\right)=\sum\nolimits_{j}s_{j}\left(a,b,f,t\right).
+$$
+If we adopt the $\alpha$-stable model presented above for each source
+and use the stability property, we have:
+$$
+x\left(a,b,f,t\right)\sim S\alpha S_{c}\left(\sum\nolimits_{j}P_{j}^{\alpha}\left(a,b,f,t\right)\right),
+$$
+where $P_{j}^{\alpha}$ is the modulation density for source~$j$.
+If these objects are known, it can be shown that each source can be
+estimated in a maximum a posteriori sense from the mixture as:
+\begin{equation}
+\mathbb{E}\left[s_{j}\left(a,b,f,t\right)\mid \{ P_{j}^{\alpha}\} _{j},x\right]=\tfrac{P_{j}^{\alpha}\left(a,b,f,t\right)}{\sum_{j'}P_{j'}^{\alpha}\left(a,b,f,t\right)} \, x\left(a,b,f,t\right)\label{eq:alpha_wiener}
+\end{equation}
+which we call the fractional $\alpha$-Wiener filter in~\cite{liutkus15}.
+The resulting waveforms are readily obtained by inverting the CFT.\@
+As can be seen, we now need to estimate the modulation
+densities~$\{ P_{j}^{\alpha}\} _{j}$ based on the observation
+of the mixture CFT~$x$, similarly to the estimation of
+ the sources' (fractional) Power Spectral Densities ($\alpha$-PSD)
+in source separation studies.
+
+\subsubsection{Factorization Model and Parameter Estimation}
+\label{sub:NTF}
+
+In order to estimate the sources' modulation densities, we first impose
+a factorization model over them, so as to reduce the number of parameters
+to be estimated. In this study, we set:
+\begin{equation}
+P_{j}^{\alpha}\left(a,b,f,t\right)=A_{j}\left(a,b,f\right)H_{j}\left(t\right),\label{eq:NTF_model}
+\end{equation}
+where $A_{j}$ and $H_{j}$ are $N_{a}\times N_{b}\times N_{f}$ and~$N_{t}\times1$
+nonnegative tensors, respectively. We call this a \emph{Common Fate
+Model}. Intuitively, $A_{j}$ is a modulation density template that
+is different for each frequency band~$f$, and that captures the
+long term modulation profile of source~$j$ around that frequency.
+Then, $H_{j}$ is an activation vector that indicates the strength
+of source~$j$ on the patches located at temporal position~$t$.
+Learning those parameters can be achieved using the conventional Nonnegative
+Matrix Factorization methodology (NMF, see e.g.~\cite{cichoki09,ozerov12,smaragdis14}
+for an overview and~\cite{liutkus15b} for the fitting of $S\alpha S_{c}$
+parameters), except that it is applied to the CFT instead of the STFT,
+and that the particular factorization to be used is~\eqref{eq:NTF_model}.
+
+Due to space constraints, we cannot detail the derivations of the
+fitting strategy. In essence, it amounts to estimating the parameters~$\{ A_{j},H_{j}\} $
+so that the modulus of the CFT, raised to the power $\alpha$, is
+as close as possible to~$\sum_{j}P_{j}^{\alpha}$, with some particular
+cost function as a data-fit criterion, called a $\beta$-divergence
+and which includes Euclidean, Kullback-Leibler and Itakura-Saito as
+special cases~\cite{fitzgerald08a}. As usual in such nonnegative models,
+each parameter is updated in turn, while the others are kept fixed.
+We provide the multiplicative updates in Algorithm~\ref{alg:Fitting-NTF}.
+After a few iterations, the parameters can be used in~\eqref{eq:alpha_wiener} to separate
+the sources.
+
+\begin{algorithm}
+With $v^{\alpha}=\left|x\right|^{\alpha}$ and always using the latest
+parameters available for computing
+ $\hat{P}^{\alpha}\left(a,b,f,t\right)=\sum\limits_{j=1}^{J}A_{j}\left(a,b,f\right)H_{j}\left(t\right)$,
+iterate:
+\[
+A_{j}\left(a,b,f\right)\leftarrow A_{j}\left(a,b,f\right)\tfrac{\sum_{t}v^{\alpha}\left(a,b,f,t\right)\hat{P}^{\alpha}\left(a,b,f,t\right)^{\cdot\left(\beta-2\right)}H_{j}\left(t\right)}{\sum_{t}\hat{P}^{\alpha}\left(a,b,f,t\right)^{\cdot\left(\beta-1\right)}H_{j}\left(t\right)}
+\]
+\[
+H_{j}\left(t\right)\leftarrow H_{j}\left(t\right)\tfrac{\sum_{a,b,f}v^{\alpha}\left(a,b,f,t\right)\hat{P}^{\alpha}\left(a,b,f,t\right)^{\cdot\left(\beta-2\right)}A_{j}\left(a,b,f\right)}{\sum_{a,b,f}\hat{P}^{\alpha}\left(a,b,f,t\right)^{\cdot\left(\beta-1\right)}A_{j}\left(a,b,f\right)}.
+\]
+
+
+\caption{Fitting NMF parameters of the nonnegative CFM~\eqref{eq:NTF_model}.\label{alg:Fitting-NTF}}
+\end{algorithm}
+
+%!TEX root = ../icassp2016.tex
+\subsection{Experiments}
+\label{sec:experiment}
+
+\begin{table*}[ht!]
+  \centering
+\begin{tabular}{ llll }
+    \toprule
+    Method & Description & Signal Representation & Factorization Model \\
+    \midrule
+    CFM & Common Fate Model & STFT $\rightarrow$ Grid Slicing $\rightarrow$ 2D-DFT & $V(a,b,f,t) = P(a,b,f)\times H(t)$ \\
+    NMF &\cite{virtanen2007monaural} w/o add.\ constraints & STFT & $V(f,t) = W(f)\times H(t)$ \\
+    HR-NMF & High Resolution NMF model~\cite{magron15a} & Output of any filterbank (STFT, MDCT, \ldots)  & Subband AR filtering of NMF excitation \\
+    MOD &\cite{barker13} using DFT filterbank& STFT $\rightarrow$ $|\ldots|$ $\rightarrow$ STFT along each bin & $V(f,m,t) = W(f)\times A(m)\times H(t)$ \\
+    CFMM & Common Fate Magnitude Model & STFT $\rightarrow$ $|\ldots|$ $\rightarrow$ Grid Slicing $\rightarrow$ 2D-DFT & $V(a,b,f,t) = P(a,b,f)\cdot H(t)$ \\
+    CFMMOD & CFMM with $a=1$ & STFT $\rightarrow$ $|\ldots|$ $\rightarrow$ Grid Slicing $\rightarrow$ 2D-DFT & $V(a,b,f,t) = P(a,b,f)\cdot H(t)$ \\
+    \bottomrule
+\end{tabular}
+\caption{Overview of the evaluated algorithms}
+\label{tab:methods}
+\end{table*}
+
+In this section, we present separation experiments utilizing CFM and we compare it with other methods.
+
+\subsubsection{Synthetic Example}
+\label{sub:Synthentic_Examples}
+
+To illustrate the CFT representation we processed a mixture consisting of two sinusoidal sources. One source is a pure sine wave of fundamental frequency 440~Hz whereas the other is frequency modulated by a sinusoid of 6.3~Hz. In the first step an STFT with a DFT-length of 1024 samples and a hop-size of 256 samples was processed at a sample rate of 22.05~kHz. Patches of size $(N_a, N_b) = (32, 48)$ (not respecting overlaps) were then taken from the STFT output. Figure~\ref{fig:CFT} in Section~\ref{sub:CFT} then shows the Common Fate Transform for the mixture as described in Section~\ref{sec:model}. One can see that the CFT representation shows distinct patterns across time, suggesting that the factorization is able to separate the sources.
+
+\begin{figure}[b]
+\centering
+		\includegraphics[width=0.95\columnwidth]{Chapters/06_Separation_Unknown/figures/gridplot.pdf}
+\caption{Examples of patches of size $(N_a, N_b) = (32, 48)$. The upper row shows magnitude values from the STFT output, the lower row the corresponding Common Fate Transform (CFT).}
+\label{fig:gridplot}
+\end{figure}
+
+\subsubsection{Objective Evaluation on Unison Instrument Mixtures}
+
+For an evaluation of the method, we selected five musical instruments' samples, all featuring vibrato: violin, cello, tenor sax, English horn, and flute. It is important to note that vibrato techniques differ between instruments: whereas the English horn and the flute only produce a very subtle modulation, the violin and tenor sax have powerful frequency modulations with a higher modulation frequency as well as a higher modulation index. The signals have each been generated by rendering C4 (261.63~Hz) notes in a state-of-the-art software sampler\footnote{\textsc{Vienna Symphonic Library} (\url{https://vsl.co.at})}. All samples last about three seconds. We then generated a combination of ten mixtures of two instruments each, each one generated with a simple SourceA --- SourceB --- (SourceA + SourceB) scheme. Data were encoded in 44.1 kHz / 16 bit.
+For evaluation, we compared separation performance of six different methods, summarized in Table~\ref{tab:methods}:
+\begin{description}[style=unboxed,leftmargin=0cm]
+\item[CFM] For the CFM model, we took an STFT with frames of 1024 samples and a hop-size of 512 samples. The resulting complex spectrogram was then split into a grid of patches of size $(N_a, N_b) = (4, 64)$, each having a half-window overlap in both dimensions. For all experiments $\alpha$ and $\beta$ were set to 1.
+\item[MOD] We implemented a modified version of~\cite{barker13} where for the sake of comparability, we used a STFT instead of a gammatone filterbank. A DFT length of 1024 and a hop-size of 512 samples were chosen. After taking the magnitude value, a second STFT of size 32 and hop-size 16 samples was computed for each frequency.
+\item[CFMMOD] We selected patch sizes of $(N_a, N_b) = (1, 64)$ and modified the representation so that the magnitude spectrogram was used before computing the 2D-DFT.\@ This permits to compare the advantage of our proposed factorization model~(\ref{eq:NTF_model}) over MOD, when using the same kind of energy-modulation representation in both cases.
+\item[CFMM] For comparing the influence of computing modulations over complex STFT or magnitude spectrograms, we tried our factorization model when the magnitude of the STFT is taken before 2D-DFT, with patches of the same size as for the CFM method.
+\item[NMF] We took a standard NMF based method~\cite{virtanen2007monaural}. We highlight that taking a spectrogram with frames of length 1024 would not make a fair comparison, because the CFM model actually results in a larger frequency resolution. Therefore a comparable NMF is based on an STFT of DFT-length 32768.
+\item[HR-NMF] See description in~\cite{magron15a}.
+\end{description}
+All factorizations ran for 100 iterations and were repeated five times. We chose $j=(2\ldots6)$ components for each factorization. For $j > 2$ we used oracle clustering to show the upper limit of SDR which can be achieved.
+
+We ran the performance evaluation by using BSSeval~\cite{Vincentbsseval06}. The results of Signal to Distortion
+Ratio (SDR), Signal to Interference Ratio (SIR), and Signal to Artifacts Ration (SAR) are depicted in Figure~\ref{fig:boxplot_overall}. Results indicate that the CFM model performs well in all measures. However, in terms of SIR the results of HR-NMF are better than CFM method. The results for CFMMOD indicate the positive influence of the CFM factorization compared to~\cite{barker13}.
+The results of CFMM indicate that the complex CFT lead to better results. NMF did perform surprisingly well, which may only hold for our test set, where each source is active for a long period. This results in a cyclic stationary vibrato, revealing spectral side lobes at such a high resolution. With more than one component per source, the results of CFM do improve, but it can be seen that more than two components ($j=4$) will not increase the SDR values. The separation results and a full Python implementation of the CFM algorithm can be found on the companion website for this paper\footnote{\url{github.com/aliutkus/commonfate}}.
+
+% To understand the influence of the underlying matrix or tensor representation we additionally computed a normalized tensor correlation for each of the methods before before applying the factorization. Therefore for each source we compute the sum of the Hadamard product and normalize the output to the it's energy. The mean results of this correlation are shown in table~\ref{tab:correlation}.
+
+\begin{figure}[ht!]
+\centering
+		\includegraphics[width=0.8\textwidth]{Chapters/06_Separation_Unknown/figures/boxplot.pdf}
+\caption{Boxplots of BSS-Eval results of the unison dataset. Solid/dotted lines represent medians/means.}
+\label{fig:boxplot_overall}
+\end{figure}
+
+\begin{figure}[ht!]
+\centering
+		\includegraphics[width=0.8\textwidth]{Chapters/06_Separation_Unknown/figures/iterations.pdf}
+\caption{Boxplots of SDR values of the unison dataset over the number of components $j$. For $j>2$ oracle clustering was applied.}
+\label{fig:iterations}
+\end{figure}
+
+In this work we presented a method to exploit common modulation textures for source separation. A transformation based on a complex tensor representation computed from patches of the STFT has been introduced. We then showed how these patches are factorized by the proposed \emph{Common Fate Model}, which is derived from the idea of humans perceiving common modulation over time as one source. Our results on unisonous musical instruments indicate that this method can perform well for this scenario. The CFM model could also be successfully used in other scenarios, such as speech separation.
+
+\section{Data-Driven Common Fate Model}
+
+\kant[1-2]
+\subsection{Architectures}
+\kant[1-16]
+\subsection{Inputs and Outputs}
+\kant[1-16]
+\subsection{Dataset}
+\kant[1-16]
+\subsection{Training}
+\kant[1-16]
 
 \section{Chapter Conclusion and Outlook}
-
-% start zafar
-While methods focusing on harmonic models for the lead often fall short in their expressive power for the accompaniment, the methods we reviewed in this section are often observed to suffer exactly from the converse weakness, namely they do not provide an adequate model for the lead signal. Hence, the separated vocals often will feature interference from unpredictable parts from the accompaniment, such as some percussion or effects which occur infrequently.
-
-Furthermore, even if the musical accompaniment will exhibit more redundancy, the vocals part will also be redundant to some extent, which is poorly handled by these methods. When the lead signal is not vocals but played by some lead instrument, its redundancy is even more pronounced, because the notes it plays lie in a reduced set of fundamental frequencies. Consequently, such methods would include the redundant parts of the lead within the accompaniment estimate, for example, a steady humming by a vocalist.
-% end zafar
