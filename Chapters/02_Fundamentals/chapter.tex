@@ -4,6 +4,11 @@
 The main focus of this thesis is the \emph{analysis} and \emph{processing} of sound recordings of music or speech, commonly referred to as \emph{audio signals}.
 In this chapter, I introduce basic concepts of digital audio signals which are relevant to follow the remaining chapters.
 
+\section{Notations}
+
+\subsection{Signal Processing Notation}
+\subsection{Machine Learning Notations}
+
 \hypertarget{Fundamentals of Overlapped Sounds}{%
 \section{Fundamentals of Overlapped Sounds}\label{specifics-of-audio-signals}}
 
@@ -83,6 +88,7 @@ However electric pianos like Rhodes or Wurlitzers can generate a tremolo effect 
 Frequency  modulation  caused  by  vibrato  is  a  very  common
 playing  style  for  string  instruments  but  also  for  woodwind  and
 brass instruments.
+
 
 \hypertarget{sources-and-mixtures}{%
 \section{Sources and Mixtures}\label{sources-and-mixtures}}
@@ -222,8 +228,8 @@ In practice it is known that the general blind source separation problem is ill-
 This why many proposed methods rely on additional information such as in~\cite{liutkus13, ewert14}.
 In this thesis I will study and present methods for both, blind and the supervised case.
 
-\subsubsection{Music Separation}
-Music separation has specific issues and assumptions when compared to other separation scenarios like speech.
+\subsubsection{Vocal Accompaniment Separation}
+Vocal Accompaniment separation has specific issues and assumptions when compared to other separation scenarios like speech.
 Many music separation methods often rely on knowledge about the mixing process as made in Table~\ref{tab:mixing_models}.
 While there exist many source separation methods that aim to extract the actual raw audio recording (Step 1 in  Table~\ref{tab:mixing_models}), often it is sufficient to extract the source images from the raw mixture.
 In live recording this would result inverting the process of convolution as well.

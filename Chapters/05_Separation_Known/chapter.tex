@@ -18,10 +18,10 @@ In the case of highly overlapped signals of unison instruments, the score inform
 Therefore, in this work, we evaluate the feasibility to increase the prior information to use the fundamental frequency estimate of the source to be extracted.
 
 From this starting point, two kinds of approaches can be distinguished between, depending on how they exploit this information.
-The first option to obtain the separated source is to re-synthesize it using a sinusoidal model, which has been studied in several approaches which are not detailed in this thesis (for a detailed overview of these methods, I refer the reader to Section III A of~\cite{rafii}).
+The first option to obtain the separated source is to re-synthesize it using a sinusoidal model, which has been studied in several methods which are not detailed in this thesis (for a detailed overview, I refer the reader to Section III A of~\cite{rafii}).
 
 Due to the problem that sinusoidal synthesis suffers from a typical \textit{metallic} sound quality, which is mostly due to discrepancies between the estimated excitation signals of the lead signal compared to the ground truth, we decided to take an alternative approach which is to exploit harmonicity in another way, by filtering out everything from the mixture that is not located close to the detected harmonics.
-
+\par
 In the past many research has been focused on such a procedure as it turned out to be a common task in source separation systems:
 
 E.g. Li and Wang proposed to use a vocal/non-vocal classifier and a predominant pitch detection algorithm \cite{li06,li07}. They first detected the singing voice by using a spectral change detector \cite{duxbury03} to partition the mixture into homogeneous portions, and GMMs on MFCCs to classify the portions as vocal or non-vocal. Then, they used the predominant pitch detection algorithm in~\cite{li05} to detect the pitch contours from the vocal portions, extending the multi-pitch tracking algorithm in~\cite{wu03}. Finally, they extracted the singing voice by decomposing the vocal portions into TF units and labeling them as singing or accompaniment dominant, extending the speech separation algorithm in \cite{hu02}.
@@ -326,7 +326,7 @@ The mixture is then time warped based on the fundamental frequency of the melody
 \begin{figure}[htbp]
 	\centering
   \includegraphics[width=\columnwidth]{Chapters/05_Separation_Known/figures/comb_filter.pdf}
-	\caption{The approaches based on a \textit{harmonic assumption} for vocals. In a first analysis step, the fundamental frequency of the lead signal is extracted. From it, a separation is obtained by filtering the mixture.}
+	\caption{Block scheme diagram of a \textit{harmonic assumption} for vocals. In a first analysis step, the fundamental frequency of the lead signal is extracted. From it, a separation is obtained by filtering the mixture.}
 	\label{fig:methods_harmonicity}
 \end{figure}
 
@@ -340,7 +340,8 @@ However, in the case of vocal/accompaniment separation, we only consider one sin
 This assumption often is applicable in modern popular music where such a lead source often is mixed louder than the other sources in the mix.
 \par
 Now, extracting the lead pitch contour is actually an ongoing field of research named ``melody estimation''.
-The melody can be defined in~\cite{poliner07} as:
+However, compared to pitch or fundamental frequency, the term ``melody'' line  is only loosely defined.
+A widely used defintion is the one from~\cite{poliner07}:
 
 \begin{quote}
   ``...melody is the single (monophonic) pitch sequence that a listener might reproduce if asked to whistle or hum a piece of polyphonic music, and that a listener would recognize as being the `essence` of that music when heard in comparison.''
@@ -381,7 +382,7 @@ where \(P\) is the pitch period in samples.
 In order to extract the vocals, I applied zero-phase filtering.
 The extracted vocals were unwarped to time domain and the accompaniment signal is created by subtracting the estimated vocals from the mixture signals.
 Each excerpt is then linearly crossfaded into the unaltered, accompaniment/mixture using a 10ms window.
-To further reduce the complexity of the separation system, instead one comb filter for each excerpts, I modified the warping algorithm so that a user defined target pitch \(p\), rounded to integer, is used.
+To further reduce the complexity of the separation system, instead one comb filter for each excerpts, I modified the warping algorithm so that a user defined target pitch \(P\), rounded to integer, is used.
 That way, the full signal is unwarped and resampled to the same pitch, which then only requires a singe comb filter to extract the signal.
 A stereo signal is produced by using a signal filtering both channels individually.
 
@@ -406,7 +407,7 @@ The full procedure is depcited in Figure~\ref{fig:warp_demo}.
 \label{ssec:performance}
 
 The algorithm has been applied on the Mixing Secret Dataset 100 (MSD100) consists of a total of 100 songs of different styles.
-The separation results were evaluated using BSS_eval~\cite{} and submitted to the SiSEC 2015 evaluation challenge~\cite{ono15}.
+The separation results were evaluated using BSSeval~\cite{todo} and submitted to the SiSEC 2015 evaluation challenge~\cite{ono15}.
 The system was ranked in the last third of the participants and scored only slightly better than RPCA based methods~\cite{huang12}.
 The reason for this is that our proposed system highly depends on the melody estimation algorithm which in turns is based on the assumption that there exist a predominant melody in the mixture.
 Unfortunately, the newly created MSD100 dataset was not mixed using professional mastering, resulting in vocals that are below average in loudness.
@@ -415,40 +416,48 @@ On the positive side, the proposed method is of very low complexity and generall
 
 \subsection{Improving Voiced/Unvoiced Detection using Deep Neural Networks}
 
-As mentioned in the previous section, the voice activity detection part is of paramount importance for the proposed music separation system.
-Therefore, I decided to evaluate if the robustness of the system can be improved by using a more advanced voice activity detection system as a separate preprocessing step.
+As mentioned in the previous section, voice activity detection is of paramount importance in the proposed music separation system.
+Therefore, I decided to evaluate if the performance of the system can be improved by using a more robust voice activity detection system as a separate preprocessing step.
 \par
-
-Jamendo Singing Voice Detection Dataset~\cite{ramona08}.
-
-\cite{Ramona} Accuracy 82.2, F-Measure 84.3
-\cite{Leglaive15} Acc 91.5, F-Measure 91.
-ich Acc 83.9, 83.6
-
-30, 20, 40 layer, but unidirectional.
-sequency of frames being singing voice or not.
-
-\cite{Hochreiter97}
-
-batch_size=16
-sequence length 256
-HPSS80
-
-
-LSTM (lstm)                   (None, None, 30)              13320
-LSTM (lstm)                   (None, None, 20)              4080
-LSTM (lstm)                   (None, None, 40)              9760
-TimeDistributedDense (timedist(None, None, 1)               41
-
-Linear activation instead of Dense
-
-I adopted~\cite{leglaive15} and
+Shortly after I submitted the separation results to the SiSEC 2015 evaluation campaign, the whole audio community was shaken up by the recent success of deep learning throughout several audio related tasks that go beyond automatic speech recognition.
+Among them are several task related to music information retrieval (MIR) such as singing voice detection which received major breakthroughs in 2014 and 2015~\cite{Lehner14, Lehner15, Leglaive15, schlueter15}.
+\par
+Locking back, at that time, I did gather enough knowledge to unerstand how and why deep learning method are so successful~\footnote{It turns out that even in 2018, now, very few people would argue that the deep learning community made significant progress regarding the understanding of DNNs.}.
+Therefore, I considered a state-of-the-art singing voice detection system to proces
+I chose to reimplement the system by Leglaive~\cite{Leglaive15}, since it was a good compromise between complexity (its uses hand-crafted features instead of large STFT frames) and performance.
+In fact, the system reached accuracy of 91.5\% (F-measure of 91.5) for classifying frames of singing voice for the annotated \emph{Jamendo} singing voice detection dataset~\cite{ramona08}, which is an improvement of more than 10\% compared to the best performing non-DNN system.
+I want to briefly describe the system published in in~\cite{Leglaive15}, for more details, the reader is referred to the original authors publications.
+\par
+The method is based on a recurrent neural network (RNN) layer is very similar to a classical fully connected neural network, except that RNN applies the same set of weights recursively over an input sequence.
+RNNs excelt at detecting structure in sequential data of arbitrary length.
+This makes it ideal to model time series, however, in practice, the temporal context learnt is limited to only a few time instances, because of the vanishing gradient problem~\cite{Hochreiter98}.
+To alleviate this problem, forgetting factors (also called gating) were proposed.
+One of the most popular gated recurrent cells is the Long Short-Term Memory (LSTM)~\cite{Hochreiter97} cell.
+Its effectiveness has been proven in various applications and LSTMs are the state-of-the-art approach for speech recognition~\cite{Graves13}.
+The basic structue of such a sequential network is depicted in Figure~\ref{fig:lstm_2}.
+\begin{figure}
+  \includegraphics{Chapters/05_Separation_Known/figures/lstm_2.pdf}
+  \caption{Simpliefied Block diagram of a Long Short-Term Memory Network.}
+  \label{fig:lstm_2}
+\end{figure}
+The input of the network is a 80 dimensional feature vector consisting of harmonically and percussively enhanced mixture spectrograms frames (See~\cite{ono08}).
+The output of the network is a sigmoid activated output of dimension 1 indicating `1.0` for singing voice and `0.0` for \emph{unvoiced} frames.
+I trained the network using a fixed number of frames from the DSD100 training dataset.
+The (binary) vocal activity labels were obtained from the dataset by analysing the true vocals.
+The network was created and trained using the Keras python framework~\cite{chollet17}.
+I stacked up to three layers using the parameters as mentioned in~\cite{Leglaive15} but used unidirectional LSTMs instead of birectional to save computation time.
+The trained network achives an accuracy of 85\% on the separate test set (using different audio tracks) which I found sufficient for a preprocessing method.\par
+* describe that we are using linear output instead of sigmoid and multiply the output estimated, interpolated to sample level to the mixture. This will then be the input of the melodia algoruth,
+THat way some parts of the signal is attenuated when no .. is detected. This greatly helps MELODIA to improve its decisision.
 
 \begin{figure}
   \input{Chapters/05_Separation_Known/figures/sisec16}
   \caption{BSS Eval scores for the vocals and accompaniment estimates on the DSD100 dataset as used in~\cite{liutkus17}. Results are shown on the \emph{test} set only. Results indicate the improvements of the DNN based vocal activity detection system.}
   \label{fig:05_comparison_sto_stodnn}
 \end{figure}
+
+The DNN-optimized have been compared to the new on on the SiSEC 2016 dataset which was released in the meantime~\cite{stoter..}.
+One can see that the proposed method at least improved by x db,
 
 \section{Excursus: Improving $F0$ Estimation using warped method} % (fold)
 \label{sec:method}
