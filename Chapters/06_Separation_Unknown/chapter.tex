@@ -91,7 +91,7 @@ In Figure~\ref{fig:am_tensor} we show the factorization of a simple amplitude mo
     \centering
     \tiny
     \subfloat[Input]{
-       \includegraphics[width=0.92\columnwidth]{Chapters/05_Separation_Known/figures/Timepdf-crop.png}	   		  \hspace{-7mm}
+       \includegraphics[width=0.8\columnwidth]{Chapters/05_Separation_Known/figures/Timepdf-crop.png}\hspace{-7mm}
     }\hfill
     \subfloat[Spectrogram]{
        \input{Chapters/05_Separation_Known/figures/AMPlots/STFT.tex}%
@@ -163,7 +163,7 @@ is usually defined using one frequency band only.
 
 \begin{figure}[t]
 \centering
-\includegraphics[width=0.6\textwidth]{Chapters/06_Separation_Unknown/figures/CFT}
+\includegraphics[width=0.8\textwidth]{Chapters/06_Separation_Unknown/figures/CFT}
 
 \caption{Common Fate Transform. For convenience, the splitting of the STFT
 into patches has been depicted without overlap, but overlapping patches
@@ -327,7 +327,7 @@ The factorization model is depicted in Figure~\ref{fig:cfm}
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=0.6\textwidth]{Chapters/06_Separation_Unknown/figures/cfm.pdf}
+\includegraphics[width=0.8\textwidth]{Chapters/06_Separation_Unknown/figures/cfm.pdf}
 
 \caption{Common Fate Model.}
 \label{fig:cfm}
@@ -366,12 +366,13 @@ H_{j}\left(t\right)\leftarrow H_{j}\left(t\right)\tfrac{\sum_{a,b,f}v^{\alpha}\l
 
 \begin{table*}[ht!]
   \centering
+  \tiny
 \begin{tabular}{ llll }
     \toprule
     Method & Description & Signal Representation & Factorization Model \\
     \midrule
     CFM & Common Fate Model & STFT $\rightarrow$ Grid Slicing $\rightarrow$ 2D-DFT & $V(a,b,f,t) = P(a,b,f)\times H(t)$ \\
-    NMF &\cite{virtanen2007monaural} w/o add.\ constraints & STFT & $V(f,t) = W(f)\times H(t)$ \\
+    NMF &\cite{virtanen07} w/o add.\ constraints & STFT & $V(f,t) = W(f)\times H(t)$ \\
     HR-NMF & High Resolution NMF model~\cite{magron15a} & Output of any filterbank (STFT, MDCT, \ldots)  & Subband AR filtering of NMF excitation \\
     MOD &\cite{barker13} using DFT filterbank& STFT $\rightarrow$ $|\ldots|$ $\rightarrow$ STFT along each bin & $V(f,m,t) = W(f)\times A(m)\times H(t)$ \\
     CFMM & Common Fate Magnitude Model & STFT $\rightarrow$ $|\ldots|$ $\rightarrow$ Grid Slicing $\rightarrow$ 2D-DFT & $V(a,b,f,t) = P(a,b,f)\cdot H(t)$ \\
@@ -382,19 +383,19 @@ H_{j}\left(t\right)\leftarrow H_{j}\left(t\right)\tfrac{\sum_{a,b,f}v^{\alpha}\l
 \label{tab:methods}
 \end{table*}
 
-In this section, we present separation experiments utilizing CFM and we compare it with other methods.
+In this section, we present separation experiments utilizing CFM and compare it with other methods.
 
 \subsubsection{Synthetic Example}
 \label{sub:Synthentic_Examples}
 
 To illustrate the CFT representation we processed a mixture consisting of two sinusoidal sources. One source is a pure sine wave of fundamental frequency 440~Hz whereas the other is frequency modulated by a sinusoid of 6.3~Hz. In the first step an STFT with a DFT-length of 1024 samples and a hop-size of 256 samples was processed at a sample rate of 22.05~kHz. Patches of size $(N_a, N_b) = (32, 48)$ (not respecting overlaps) were then taken from the STFT output. Figure~\ref{fig:CFT} in Section~\ref{sub:CFT} then shows the Common Fate Transform for the mixture as described in Section~\ref{sec:model}. One can see that the CFT representation shows distinct patterns across time, suggesting that the factorization is able to separate the sources.
 
-\begin{figure}[b]
-\centering
-		\includegraphics[width=0.95\columnwidth]{Chapters/06_Separation_Unknown/figures/gridplot.pdf}
-\caption{Examples of patches of size $(N_a, N_b) = (32, 48)$. The upper row shows magnitude values from the STFT output, the lower row the corresponding Common Fate Transform (CFT).}
-\label{fig:gridplot}
-\end{figure}
+% \begin{figure}[b]
+% \centering
+% 		\includegraphics[width=0.8\textwidth]{Chapters/06_Separation_Unknown/figures/gridplot.pdf}
+% \caption{Examples of patches of size $(N_a, N_b) = (32, 48)$. The upper row shows magnitude values from the STFT output, the lower row the corresponding Common Fate Transform (CFT).}
+% \label{fig:gridplot}
+% \end{figure}
 
 \subsubsection{Objective Evaluation on Unison Instrument Mixtures}
 
@@ -414,11 +415,11 @@ We ran the performance evaluation by using BSSeval~\cite{Vincentbsseval06}. The 
 Ratio (SDR), Signal to Interference Ratio (SIR), and Signal to Artifacts Ration (SAR) are depicted in Figure~\ref{fig:boxplot_overall}. Results indicate that the CFM model performs well in all measures. However, in terms of SIR the results of HR-NMF are better than CFM method. The results for CFMMOD indicate the positive influence of the CFM factorization compared to~\cite{barker13}.
 The results of CFMM indicate that the complex CFT lead to better results. NMF did perform surprisingly well, which may only hold for our test set, where each source is active for a long period. This results in a cyclic stationary vibrato, revealing spectral side lobes at such a high resolution. With more than one component per source, the results of CFM do improve, but it can be seen that more than two components ($j=4$) will not increase the SDR values. The separation results and a full Python implementation of the CFM algorithm can be found on the companion website for this paper\footnote{\url{github.com/aliutkus/commonfate}}.
 
-% To understand the influence of the underlying matrix or tensor representation we additionally computed a normalized tensor correlation for each of the methods before before applying the factorization. Therefore for each source we compute the sum of the Hadamard product and normalize the output to the it's energy. The mean results of this correlation are shown in table~\ref{tab:correlation}.
+To understand the influence of the underlying matrix or tensor representation we additionally computed a normalized tensor correlation for each of the methods before before applying the factorization. Therefore for each source we compute the sum of the Hadamard product and normalize the output to the it's energy. The mean results of this correlation are shown in table~\ref{tab:correlation}.
 
 \begin{figure}[ht!]
 \centering
-		\includegraphics[width=0.8\textwidth]{Chapters/06_Separation_Unknown/figures/boxplot.pdf}
+		\includegraphics[width=0.8\textwidth]{Chapters/06_Separation_Unknown/figures/cfm_boxplot.pdf}
 \caption{Boxplots of BSS-Eval results of the unison dataset. Solid/dotted lines represent medians/means.}
 \label{fig:boxplot_overall}
 \end{figure}
@@ -432,16 +433,120 @@ The results of CFMM indicate that the complex CFT lead to better results. NMF di
 
 In this work we presented a method to exploit common modulation textures for source separation. A transformation based on a complex tensor representation computed from patches of the STFT has been introduced. We then showed how these patches are factorized by the proposed \emph{Common Fate Model}, which is derived from the idea of humans perceiving common modulation over time as one source. Our results on unisonous musical instruments indicate that this method can perform well for this scenario. The CFM model could also be successfully used in other scenarios, such as speech separation.
 
-\section{Data-Driven Common Fate Model}
+\section{Towards a Data-Driven Common Fate Model}
 
-\kant[1-2]
-\subsection{Architectures}
-\kant[1-16]
+\begin{figure}[ht!]
+\centering
+		\includegraphics[width=\textwidth]{Chapters/06_Separation_Unknown/figures/uhlich_dnn.pdf}
+\caption{}
+\label{fig:cft_dnn}
+\end{figure}
+
+The idea of the common fate representation.
+
+I represent a preliminary study of combining the DNN source separation model by Uhlich with our Common Fate representation.
+
 \subsection{Inputs and Outputs}
-\kant[1-16]
+
+I compared the following combinations of Input and Outputs
+
+\begin{description}[style=unboxed,leftmargin=0cm]
+\item[STFT-STFT] This setting reflects the setting in~\cite{Uhlich15}.
+\end{description}
+
 \subsection{Dataset}
-\kant[1-16]
+
+We used the DSD100 training dataset 
 \subsection{Training}
-\kant[1-16]
+
+\subsection{Results}
+
+\begin{figure}[ht!]
+\centering
+		\includegraphics[width=\textwidth]{Chapters/06_Separation_Unknown/figures/uhlich_dnn.pdf}
+\caption{}
+\label{fig:cft_dnn}
+\end{figure}
+
+\subsection{Submission to SiSEC 2016}
+\label{ssec:performance}
+
+I submitted the result to the 2016 SiSEC source separation challenges.
+In this section, I will discuss the performance of $23$ source separation methods evaluated on the DSD100, as part of the task for separating professionally-produced music recordings at SiSEC 2016.
+
+\begin{table}[htbp]
+	\centering
+	\caption{Methods evaluated during SiSEC 2016.}
+	\label{tab:systems}
+	\begin{tabular}{|lll@{}l@{}|}
+		\hline
+		\textbf{Acronym} & \textbf{Ref.} & \textbf{Summary} & \textbf{Section}\\
+		\hline
+		HUA & \cite{huang12} & RPCA standard version & \ref{ssec:RPCA}\\
+		\hline
+		RAF1 & \cite{rafii13} & REPET standard version & \ref{ssec:methods_repet}\\
+		RAF2 & \cite{liutkus12} & REPET with time-varying period & \\
+		RAF3 & \cite{rafii12} & REPET with similarity matrix & \\
+		KAM1-2 & \cite{liutkus15} & KAM with different configurations &\\
+		\hline
+		CHA & \cite{chan15} & RPCA with vocal activation information &\ref{ssec:methods_structureinformed}\\
+		JEO1-2 & \cite{jeong17} &  $l_1$-RPCA with vocal activation information &\\
+		\hline
+		DUR & \cite{durrieu11} & Source-filter NMF &\ref{ssec:methods_sourcefilter}\\
+		\hline
+		OZE & \cite{salaun14} & Structured NMF with learned dictionaries & \ref{ssec:methods_datadriven_nmf}\\
+		\hline
+		KON & \cite{huang15} & RNN & \ref{ssec:methods_dnn} \\
+		GRA2-3 & \cite{grais16} & DNN ensemble &\\
+		STO1-2 & \cite{stoter16} & FNN on \textit{common fate} TF representation&\\
+		UHL1 & \cite{Uhlich15} & FNN with context&\\
+		\hline
+		NUG1-4 & \cite{nugraha16} & FNN with multichannel information &\ref{sec:multichannel}\\
+		UHL2-3 & \cite{uhlich17} & LSTM with multichannel information &\\
+		\hline
+		IBM & & ideal binary mask &  \\
+		\hline
+	\end{tabular}
+\end{table}
+
+%announcing the results and the webpage
+The objective scores for these methods were obtained using BSS Eval and are given in Figure~\ref{fig:eval}. For more details about the results and for listening to the estimates, we refer the reader to the dedicated interactive website\footnote{\url{http://www.sisec17.audiolabs-erlangen.de}}.
+
+\begin{figure*}[htbp]
+	\includegraphics[width=\textwidth]{gfx/vocalsSDR.pdf}
+	\caption{BSS Eval scores for the vocals and accompaniment estimates for SiSEC 2016 on the DSD100 dataset. Results are  shown for the \emph{test} set only. Scores are grouped as in Table~\ref{tab:systems} according to the section they are described in the text, indicated below each group.}
+	\label{fig:eval}
+\end{figure*}
+
+%RPCA suffers from full-length recordings
+As we first notice in Figure~\ref{fig:eval}, the HUA method, corresponding to the standard RPCA as discussed in Section~\ref{ssec:RPCA}, showed rather disappointing performance in this evaluation. After inspection of the results, it appears that processing full-length tracks is the issue there: at such scales, vocals also exhibit redundancy, which is captured by the low-rank model associated with the accompaniment. On the other hand, the RAF1-3 and KAM1-3 methods that exploit redundancy through repetitions, as presented in Section~\ref{ssec:methods_repet}, behave much better for full-length tracks: even if somewhat redundant, vocals are rarely as repetitive as the accompaniment. When those methods are evaluated on datasets with very short excerpts (e.g., MIR-1K), such severe practical drawbacks are not apparent.
+
+%DUR also+non harmonic lead
+Likewise, the DUR method that jointly models the vocals as harmonic and the accompaniment as redundant, as discussed in Section~\ref{ssec:methods_sourcefilter}, does show rather disappointing performance, considering that it was long the state-of-the-art in earlier SiSECs \cite{vincent12}. After inspection, we may propose two reasons for this performance drop. First, using full-length excerpts also clearly revealed a shortcoming of the approach: it poorly handles silences in the lead, which were rare in the short-length excerpts tested so far. Second, using a much larger evaluation set revealed that vocals are not necessarily well modeled by a harmonic source-filter model; breathy or saturated voices appear to greatly challenge such a model.
+
+%RPCA informed by lead presence behaves well
+While processing full-length tracks comes as a challenge, it can also be an opportunity. It is indeed worth noticing that whenever RPCA is helped through vocal activity detection, its performance is significantly boosted, as highlighted by the relatively good results obtained by CHAN and JEO.
+
+%OZE could benefit from the new learning data
+As discussed in Section~\ref{sec:datadriven-approaches}, the availability of learning data made it possible to build data-driven approaches, like the NMF-based OZE method which is available through the Flexible Audio Source Separation Toolbox (FASST) \cite{salaun14,ozerov12}. Although it was long state-of-the-art, it has been strongly outperformed recently by other data-driven approaches, namely DNNs. One first reason clearly appears as the superior expressive power of DNNs over NMF, but one second reason could very simply be that OZE should be trained anew with the same large amount of data.
+
+%DNN are definitely performing awesomely
+As mentioned above, a striking fact we see in Figure~\ref{fig:eval} is that the overall performance of data-driven DNN methods is the highest. This shows that exploiting learning data does help separation greatly compared to only relying on \textit{a priori} assumptions such as the harmonicity or redundancy. Additionally, dynamic models such as CNN or LSTM appear more adapted to music than FNN. These good performances in audio source separation go in line with the recent success of DNNs in fields as varied as computer vision, speech recognition, and natural language processing \cite{lecun15}.
+
+%but it's clear that they benefit from smart ideas
+However, the picture may be seen to be more subtle than simply black-box DNN systems beating all other approaches. For instance, exploiting multichannel probabilistic models, as discussed in Section~\ref{sec:multichannel}, leads to the NUG and UHL2-3 methods, that significantly outperform the DNN methods ignoring stereo information. In the same vein, we expect other specific assumptions and musicological ideas to be exploited for further improving the quality of the separation.
+
+%weakness of metrics
+One particular feature of this evaluation is that it also shows obvious weaknesses in the objective metrics. For instance, the GRA method behaves significantly worse than any other methods. However, when listening to the separated signals, this does not seem deserved. All in all, designing new and convenient metrics that better match perception and that are specifically built for music on large datasets clearly appears as a desirable milestone.
+
+%IBM much better: room for improvement
+In any case, the performance achieved by a totally informed filtering method such as IBM is significantly higher than that of any submitted method in this evaluation. This means that lead and accompaniment separation has room for much improvement, and that the topic is bound to witness many breakthroughs still. This is even more true considering that IBM is not the best upper bound for separation performance: other filtering methods such as \textit{ideal ratio mask}~\cite{liutkus15c} or multichannel Wiener filter~\cite{duong10} may be considered as references.
+
+%importance of implementations and details, links to online ressources
+Regardless of the above, we would also like to highlight that good algorithms and models can suffer from slight errors in their low-level audio processing routines. Such routines may include the STFT representation, the overlap-add procedure, energy normalization, and so on. Considerable improvements may also be obtained by using simple tricks and, depending on the method, large impacts can occur in the results by only changing low-level parameters. These include
+%the length of each window, S: I think that this is not a trick. Various window sizes lead to different representations (sparser/disjoint) and they are a part of modelling the data. I believe we should keep it out.
+the overlap ratio for the STFT, specific ways to regularize matrix inverses in multichannel models, etc. Further tricks such as the exponentiation of the TF mask by some positive value can often boost performance significantly more than using more sophisticated models. However, such tricks are often lost when publishing research focused on the higher-level algorithms. We believe this is an important reason why sharing source code is highly desirable in this particular application. Some online repositories containing implementations of lead and accompaniment separation methods should be mentioned, such as \textbf{nussl}\footnote{\url{https://github.com/interactiveaudiolab/nussl}} and \textbf{untwist} \cite{roma16}. In the companion webpage of this paper\footnote{\url{https://sigsep.github.io}}, we list many different online resources such as datasets, implementations, and tools that we hope will be useful to the practitioner and provide some useful pointers to the interested reader.
+
+% TODO add stoter 16
 
 \section{Conclusion and Scope}
