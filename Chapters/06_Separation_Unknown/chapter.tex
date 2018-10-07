@@ -47,28 +47,6 @@ In the following subsection I will introduce the work of Barker.
 
 \marginpar{Parts of this subsection is also based on the work~\cite{stoeter14}.}
 
-\begin{figure}[H]
-    \centering
-    \tiny
-    \subfloat[Input]{
-       \includegraphics[width=0.92\columnwidth]{Chapters/05_Separation_Known/figures/Timepdf-crop.png}	   		  \hspace{-7mm}
-    }\hfill
-    \subfloat[Spectrogram]{
-       \input{Chapters/05_Separation_Known/figures/AMPlots/STFT.tex}%
-    }%
-    \subfloat[Tensor Slice]{
-       \input{Chapters/05_Separation_Known/figures/AMPlots/Tmod.tex}%
-    }\hfill
-
-    \subfloat[NMF]{
-     	\input{Chapters/05_Separation_Known/figures/AMPlots/WH.tex}%
-    }\hfill
-    \subfloat[Non-Negative Tensor Factorization]{
-       \input{Chapters/05_Separation_Known/figures/AMPlots/GAS.tex}%
-    }\hfill
-    \caption{Example of separating a mixture of two amplitude modulated signals by NMF and Modulation-NTF. \\ \textbf{(a)} Mixture of two sinusoids at $440$ Hz with AM of $4.7$ Hz and $12.6$ Hz (fs=$8$ kHz), \textbf{(b)} STFT (FFT length = 256), \textbf{(c)} Slice of Modulation Tensor (FFT length = 256),  \textbf{(d)} $\mathbf{W} \times \mathbf{H}$ Result of Non-Negative Matrix Factorization ($\beta = 1$) after 100 iterations, \textbf{(e)}  $\mathbf{G} \times \mathbf{A} \times \mathbf{S} $ Result of Non-Negative Tensor Factorization ($\beta = 1$) after 100 iterations,}
-    \label{fig:tensor}
-\end{figure}
 
 % TODO: rewrite this paragraph
 Even though amplitude modulation is normally not present isolated in acoustical instruments.
@@ -107,61 +85,29 @@ The CP product is depicted in figure
 \par
 Compared to~\cite{barker13} we choose to generate the modulation tensor in way that is simpler and easier to invert. Barker and Virtanen use a Gammatone filter bank and  rectification to model the characteristics of the human auditory system. We used a two-stage DFT filter bank where the modulation domain is based on  magnitude spectrograms. Although this can give perceptually less optimal results, each step can be directly inverted by using the complex representation. Barker already showed that the NTF based approach gives better results on speech signals. We found that this approach can be used to separate two instrument mixtures by their amplitude modulation characteristics and is therefore ideal for the unison scenario.
 
-In Figure~\ref{fig:sk_tensor} we show the factorization of a simple amplitude modulated input signal for comparison. The signal consists of two sinusoids which are linearly mixed. Both share the same carrier frequency but have different amplitude modulation frequencies. We choose a factorization into $K=2$ components. From the activation components one can see that NMF is not able to separate the two signals sufficiently. NTF gives a smoother activation matrix and is able to generate the output with the separated amplitude modulations on each sinusoid. The modulation frequency gain matrix shows the two modulation frequency templates and the DC-component.
+In Figure~\ref{fig:am_tensor} we show the factorization of a simple amplitude modulated input signal for comparison. The signal consists of two sinusoids which are linearly mixed. Both share the same carrier frequency but have different amplitude modulation frequencies. We choose a factorization into $K=2$ components. From the activation components one can see that NMF is not able to separate the two signals sufficiently. NTF gives a smoother activation matrix and is able to generate the output with the separated amplitude modulations on each sinusoid. The modulation frequency gain matrix shows the two modulation frequency templates and the DC-component.
 
 \begin{figure}[H]
-\begin{center}
-\begin{tabular}{c}
-	\\
-   Spectrogram of two sinusoids with same carrier\\
-   frequency but different amplitude modulation frequency.\\[6pt]
-	 \\
-    Spectrogram of two sinusoids with same carrier\\
-    frequency but different amplitude modulation frequency.\\[6pt]
-	\input{Chapters/05_Separation_Known/figures/AMPlots/WH.tex} \\
-    Non-Negative Matrix Factorization \\[6pt]
-	 \\
-    Non-Negative Tensor Factorization\\[6pt]
-\end{tabular}
-\caption{Example of processing a non-stationary amplitude modulated signal with NMF and Modulation-NTF}
-\label{fig:sk_tensor}
-\end{center}
-\end{figure}
+    \centering
+    \tiny
+    \subfloat[Input]{
+       \includegraphics[width=0.92\columnwidth]{Chapters/05_Separation_Known/figures/Timepdf-crop.png}	   		  \hspace{-7mm}
+    }\hfill
+    \subfloat[Spectrogram]{
+       \input{Chapters/05_Separation_Known/figures/AMPlots/STFT.tex}%
+    }%
+    \subfloat[Tensor Slice]{
+       \input{Chapters/05_Separation_Known/figures/AMPlots/Tmod.tex}%
+    }\hfill
 
-\begin{figure}[H]
-\begin{center}
-\begin{tikzpicture}[block/.style={draw, minimum width=40pt, outer sep=0pt}]
-  % small STFTs
-  \node(A)[block, minimum height=30pt]             {STFT};
-  \node(B)[block, below=of A, minimum height=30pt] {STFT};
-
-   % huge STFT
-  \node(STFT)[block, fit=(A)(B),left=of A.north west,anchor=north east, inner sep=0] {STFT};
-
-  % arrow for input signal x
-  \draw[-latex] ($(STFT.west) - (1, 0)$) |- (STFT.west) node [pos=0.75, above] (TextNode) {$x(n)$};
-
-  % arrows to connect huge STFT with small STFTs plus labeling
-  \draw[-latex] (STFT.east) |- (A.west) node [pos=0.75, above, font=\small] (TextNode) {$|x_c(n)|$};
-  \draw[-latex] (STFT.east) |- (B.west) node [pos=0.75, above, font=\small] (TextNode) {$|x_c(n)|$};
-
-  % arrows from node A to right side
-  \draw[-latex] ($(A.east) + (0,0.3)$) -- ($(A.east) + (1,0.3)$);
-  \draw[-latex] ($(A.east)$) -- ($(A.east) + (1,0)$);
-  \draw[-latex] ($(A.east) + (0,-0.3)$) -- ($(A.east) + (1,-0.3)$);
-
-  % arrows from node B to right side
-  \draw[-latex] ($(B.east) + (0,0.3)$) -- ($(B.east) + (1,0.3)$);
-  \draw[-latex] ($(B.east)$) -- ($(B.east) + (1,0)$);
-  \draw[-latex] ($(B.east) + (0,-0.3)$) -- ($(B.east) + (1,-0.3)$);
-
-
-  % dotted lines between small STFTs
-  \draw[dotted] ($(A.south) + (0, -0.3)$) |- ($(B.north) + (0, 0.3)$);
-\end{tikzpicture}
-\caption{Demonstration of signal separation based on NTF}
-\label{fig:sk_ntfdemo}
-\end{center}
+    \subfloat[NMF]{
+     	\input{Chapters/05_Separation_Known/figures/AMPlots/WH.tex}%
+    }\hfill
+    \subfloat[Non-Negative Tensor Factorization]{
+       \input{Chapters/05_Separation_Known/figures/AMPlots/GAS.tex}%
+    }\hfill
+    \caption{Example of separating a mixture of two amplitude modulated signals by NMF and Modulation-NTF. \\ \textbf{(a)} Mixture of two sinusoids at $440$ Hz with AM of $4.7$ Hz and $12.6$ Hz (fs=$8$ kHz), \textbf{(b)} STFT (FFT length = 256), \textbf{(c)} Slice of Modulation Tensor (FFT length = 256),  \textbf{(d)} $\mathbf{W} \times \mathbf{H}$ Result of Non-Negative Matrix Factorization ($\beta = 1$) after 100 iterations, \textbf{(e)}  $\mathbf{G} \times \mathbf{A} \times \mathbf{S} $ Result of Non-Negative Tensor Factorization ($\beta = 1$) after 100 iterations,}
+    \label{fig:am_tensor}
 \end{figure}
 
 A comparison of modulation tensor approach in the context of unison separation has been carried out in our work published in~\cite{stoeter14}.
