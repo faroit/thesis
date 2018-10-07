@@ -1,4 +1,5 @@
 ClassicThesis.pdf
+ClassicThesis.synctex(busy)
 :q.tex
 makX.tex
 *_bibertool.bib

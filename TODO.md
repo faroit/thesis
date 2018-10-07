@@ -1,12 +1,20 @@
+# Bernd Deadline
+
+* [ ] Write Common Fate DNN Section
+* [ ] Merge Counting Papers
+* [ ] Redo Dataset Chapter
+* [ ] Fix bibliography of chapter 05 and 06
+* [ ] NMF Example
+* [ ] Add CountNet
+
+* add pescador training to count net paper.
+
 # Tasks for Highly Overlapped sources
 
 Source Separation Literature and basic techniques
 Source Counting literature
 
 Aber wie soll das funktionieren für counting. Es gibt keine basic techniques die funktionieren. Daher passt da snicht so gut rein.
-
-Verschiebe ich die Literatur doch in das Separierungskapitel?
-
 
 # Aspects of Concurrency
 
@@ -33,23 +41,8 @@ Auditory scene analysis based on time-frequency integration of shared FM and AM
 
  discuss that music signals lack a proper source definition. Therefore counting on music signals in ill defined. However, it may work on some specific cases. We tried on ... but it didn't work.
 
-fragen-and-bernd
-
-* Literatur in den jeweiligen Kapiteln, statt generelle Literatur
-* Ich form in der ganzen Arbeit oder nur in den Contributions
-* Seperability in Unison separation packen?
-
 # Literatur zu Anwendung von Modulationen für Audio Anwendungen
 
 * https://hal.archives-ouvertes.fr/hal-01316485/document durchgehen nach Referenzen
 * aus ewert: https://qmro.qmul.ac.uk/xmlui/bitstream/handle/123456789/15689/Ewert%20Template-Based%20Vibrato%20Analysis%202016%20Accepted.pdf?sequence=1
 * aus jon barkers PHD thesis
-
-## Gespräch Bernd 13.07
-
-gutes Bild
-
-* Contributions -> Evaluierungs
-
-20.7. - 15.8.
-23.9. - 5.10.
