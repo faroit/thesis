@@ -364,60 +364,61 @@ legend cell align=left
 \label{figure:certainty_web_iis}
 \end{figure}
 
-To confirm the marginal differences between the Internet experiment and laboratory experiment for $\textit{Dev}_{\mathrm{Abs}}$, a linear regression model was calculated (see Table~\ref{table:lm_absolute_deviation}). Compared to the predictor variable $\textit{Num}_{\mathrm{Inst}}$, the coefficient of $\textit{Environment}$ is very low.
-\begin{table}[h]
-\center
-\scriptsize
-\begin{tabular*}{0.45\textwidth}{p{1.5cm}ccccp{0.8cm}}
-\toprule[1.5pt]
-Coefficient & Estimate & Std. Error & z-value & p-value\\
-\midrule
-(Intercept) & 0.08535 & 0.02706 & 3.154 & 0.00161\\
-$\textit{Num}_{\mathrm{Inst}} = 2$ & 0.17683 & 0.01881 & 9.401  & \textless~2e-16\\
-$\textit{Num}_{\mathrm{Inst}} = 3$ & 0.30122 & 0.01881 & 16.014  & \textless~2e-16\\
-$\textit{Num}_{\mathrm{Inst}} = 4$ & 1.02154 & 0.01881 & 54.309  & \textless~2e-16\\
-$\textit{Num}_{\mathrm{Inst}} = 5$ & 1.67967 & 0.01881 & 89.297  & \textless~2e-16\\
-$\textit{Num}_{\mathrm{Inst}} = 6$ & 2.56667 & 0.01881 & 136.453  & \textless~2e-16\\
-$\textit{Environment} = \textrm{`}web\textrm{'}$ & 0.05481 & 0.02482 & 2.208  & 0.02724\\
-\midrule
-\multicolumn{5}{l}{Residual standard error: 0.6597 on 14753 degrees of freedom}\\
-\multicolumn{5}{l}{Multiple R-squared: 0.6603,	Adjusted R-squared: 0.6602}\\
-\multicolumn{5}{l}{F-statistic:  4779 on 6 and 14753 DF,  p-value: \textless~2.2e-16}\\
-\bottomrule[1.5pt]
-\end{tabular*}
-\caption{Linear regression model for $\textit{Dev}_{\mathrm{Abs}}$ calculated from the data obtained by the Internet experiment and the laboratory experiment.}
-\label{table:lm_absolute_deviation}
-\end{table}
+To confirm the marginal differences between the Internet experiment and laboratory experiment for $\textit{Dev}_{\mathrm{Abs}}$, a linear regression model was calculated.
+The result tables can be found in~\cite{schoeffler13}.
+% \begin{table}[h]
+% \center
+% \scriptsize
+% \begin{tabular*}{0.45\textwidth}{p{1.5cm}ccccp{0.8cm}}
+% \toprule[1.5pt]
+% Coefficient & Estimate & Std. Error & z-value & p-value\\
+% \midrule
+% (Intercept) & 0.08535 & 0.02706 & 3.154 & 0.00161\\
+% $\textit{Num}_{\mathrm{Inst}} = 2$ & 0.17683 & 0.01881 & 9.401  & \textless~2e-16\\
+% $\textit{Num}_{\mathrm{Inst}} = 3$ & 0.30122 & 0.01881 & 16.014  & \textless~2e-16\\
+% $\textit{Num}_{\mathrm{Inst}} = 4$ & 1.02154 & 0.01881 & 54.309  & \textless~2e-16\\
+% $\textit{Num}_{\mathrm{Inst}} = 5$ & 1.67967 & 0.01881 & 89.297  & \textless~2e-16\\
+% $\textit{Num}_{\mathrm{Inst}} = 6$ & 2.56667 & 0.01881 & 136.453  & \textless~2e-16\\
+% $\textit{Environment} = \textrm{`}web\textrm{'}$ & 0.05481 & 0.02482 & 2.208  & 0.02724\\
+% \midrule
+% \multicolumn{5}{l}{Residual standard error: 0.6597 on 14753 degrees of freedom}\\
+% \multicolumn{5}{l}{Multiple R-squared: 0.6603,	Adjusted R-squared: 0.6602}\\
+% \multicolumn{5}{l}{F-statistic:  4779 on 6 and 14753 DF,  p-value: \textless~2.2e-16}\\
+% \bottomrule[1.5pt]
+% \end{tabular*}
+% \caption{Linear regression model for $\textit{Dev}_{\mathrm{Abs}}$ calculated from the data obtained by the Internet experiment and the laboratory experiment.}
+% \label{table:lm_absolute_deviation}
+% \end{table}
 
 Another response variable that was obtained from the participants was the certainty of their estimation. Figure~\ref{figure:certainty_web_iis} depicts the certainty values for the Internet experiment and the laboratory experiment.
 
+For testing whether the environment has a significant influence on the certainty of the participants ($\textit{Certainty}$), a cumulative link model (also called ordered regression model) was calculated\cite{Christensen2012}. The cumulative link model is used since $\textit{Certainty}$ is an ordered dependent variable with the possible values `uncertain', `certain' and `very certain'. The predictor variables for the ordered regression model are $\textit{Num}_{\mathrm{Inst}}$ and $\textit{Environment}$. Again, the details of the cumulative link model for $\textit{Certainty}$ can be found in~\cite{schoeffler13}.
 
-For testing whether the environment has a significant influence on the certainty of the participants ($\textit{Certainty}$), a cumulative link model (also called ordered regression model) was calculated\cite{Christensen2012}. The cumulative link model is used since $\textit{Certainty}$ is an ordered dependent variable with the possible values `uncertain', `certain' and `very certain'. The predictor variables for the ordered regression model are $\textit{Num}_{\mathrm{Inst}}$ and $\textit{Environment}$. In Table~\ref{table:olr_both} is the cumulative link model for $\textit{Certainty}$ described.
-\begin{table}[t]
-\center
-\scriptsize
-\begin{tabular*}{0.45\textwidth}{cccccc}
-\toprule[1.5pt]
-Coefficient & Estimate & Std. Error & z-value & p-value\\
-\midrule
-$\textit{Num}_{\mathrm{Inst}} = 2$ & -1.61273 & 0.05744 & -28.078  & \textless~2e-16\\
-$\textit{Num}_{\mathrm{Inst}} = 3$ & -1.43164 & 0.05701 & -25.114  & \textless~2e-16\\
-$\textit{Num}_{\mathrm{Inst}} = 4$ & -2.02315 & 0.05804 & -34.858  & \textless~2e-16\\
-$\textit{Num}_{\mathrm{Inst}} = 5$ & -2.47933 & 0.05901 & -42.013  & \textless~2e-16\\
-$\textit{Num}_{\mathrm{Inst}} = 6$ & -2.43573 & 0.05900 & -41.283  & \textless~2e-16\\
-$\textit{Environment} = \textrm{`}web\textrm{'}$ & -0.01008 & 0.07355 & -0.137  & 0.891\\
-\midrule
-\multicolumn{5}{l}{Threshold coefficients:}\\
-& Estimate & Std. Error & z-value &\\
-$uncertain|certain$ & -2.90465 & 0.08434 & -34.441  &\\
-$certain|very certain$ & -0.41072 & 0.08090 & -5.077  &\\
-\multicolumn{5}{l}{AIC: 28242.52}\\
-\bottomrule[1.5pt]
-\end{tabular*}
-\caption{Logit cumulative link model of certainty that was calculated from the data obtained by the Internet experiment and the laboratory experiment.}
-\label{table:olr_both}
-\end{table}
-Same as $\textit{Resp}_{\mathrm{Correct}}$, the environment of the experiment has no significant influence on the dependent variable $\textit{Certainty}$. Considering the number of participants and the comparable low coefficient, the environment had a very low influence on $\textit{Certainty}$.
+% \begin{table}[t]
+% \center
+% \scriptsize
+% \begin{tabular*}{0.45\textwidth}{cccccc}
+% \toprule[1.5pt]
+% Coefficient & Estimate & Std. Error & z-value & p-value\\
+% \midrule
+% $\textit{Num}_{\mathrm{Inst}} = 2$ & -1.61273 & 0.05744 & -28.078  & \textless~2e-16\\
+% $\textit{Num}_{\mathrm{Inst}} = 3$ & -1.43164 & 0.05701 & -25.114  & \textless~2e-16\\
+% $\textit{Num}_{\mathrm{Inst}} = 4$ & -2.02315 & 0.05804 & -34.858  & \textless~2e-16\\
+% $\textit{Num}_{\mathrm{Inst}} = 5$ & -2.47933 & 0.05901 & -42.013  & \textless~2e-16\\
+% $\textit{Num}_{\mathrm{Inst}} = 6$ & -2.43573 & 0.05900 & -41.283  & \textless~2e-16\\
+% $\textit{Environment} = \textrm{`}web\textrm{'}$ & -0.01008 & 0.07355 & -0.137  & 0.891\\
+% \midrule
+% \multicolumn{5}{l}{Threshold coefficients:}\\
+% & Estimate & Std. Error & z-value &\\
+% $uncertain|certain$ & -2.90465 & 0.08434 & -34.441  &\\
+% $certain|very certain$ & -0.41072 & 0.08090 & -5.077  &\\
+% \multicolumn{5}{l}{AIC: 28242.52}\\
+% \bottomrule[1.5pt]
+% \end{tabular*}
+% \caption{Logit cumulative link model of certainty that was calculated from the data obtained by the Internet experiment and the laboratory experiment.}
+% \label{table:olr_both}
+% \end{table}
+% Same as $\textit{Resp}_{\mathrm{Correct}}$, the environment of the experiment has no significant influence on the dependent variable $\textit{Certainty}$. Considering the number of participants and the comparable low coefficient, the environment had a very low influence on $\textit{Certainty}$.
 
 \vspace{-0.1in}
 \section{Discussion}\label{sec:discussion}
@@ -428,13 +429,21 @@ In our previous result analysis of the laboratory experiment\cite{Stoter2013} we
 
 When examining the responses for items with the same number of instruments being played back, noticeable differences between the genres were found. For the stimuli with $\textit{Num}_{\mathrm{Inst}} \le 4$ the mean of $\textit{Resp}_{\mathrm{Correct}}$ was $53.0\%$ and for non-classical items $62.5\%$. Since the experiment was not designed for testing classical versus non-classical items, we cannot make definitive statements about whether humans are better in estimating instruments for a specific music genre. Moreover, we did not address this issue in our result analysis.
 
-One of the main reasons for conducting the experiment was to find out which influence the Internet environment has on the results. All three regression models which included data of both experiments (Table \ref{table:data_both_lm}, \ref{table:lm_absolute_deviation} and \ref{table:olr_both}) revealed that the Internet environment had only very minor effects on the results. Moreover, despite the large number of participants in both experiments, the predictor variable $\textit{Environment}$ was even not significant in two out of three regression models.
+One of the main reasons for conducting the experiment was to find out which influence the Internet environment has on the results. All three regression models which included data of both experiments revealed that the Internet environment had only very minor effects on the results. Moreover, despite the large number of participants in both experiments, the predictor variable $\textit{Environment}$ was even not significant in two out of three regression models.
 
 It is often recommended to use headphones instead of loudspeakers for Internet experiments. From the relative low average marginal effect of $\textit{Setup}$ (Table~\ref{table:data_web_lm}), it can be derived that the type of the setup had only minor effects on the results of the Internet experiment.
 
 Surprising was the small number of participants who had to be screened. We excluded 27 participants since they gave at least one non-serious response which is about 2.3\% (1195 participants remained after excluding all trials which were not the first ones). Most of these excluded participants responded with either very high numbers (e.~g. 99) or responded with zeros for their estimated number of instruments being played. We assume that especially participants who responded with zero only wanted to get an impression of the experiment.
 
 \section{Exeriments of Speaker Count Estimation}
+
+\begin{figure}[htb]
+	\centering
+		\fbox{\includegraphics[width=0.8\textwidth]{Chapters/07_Analysis_Experiment/figures/experiment_ui.png}}
+	\caption{Experiment User Interface.}
+	\label{fig:user_interface}
+\end{figure}
+
 In a ``cocktail-party'' scenario, one or more microphones capture the signal from many concurrent speakers. In this setting, different applications may be envisioned such as localization, crowd monitoring, surveillance, speech recognition, speaker separation, etc.
 When devising a system for such a task, it is typically assumed that the actual number of concurrent speakers is known.
 This assumption turns out to be of paramount importance for the effectiveness of subsequent processing.
@@ -455,10 +464,10 @@ We refer to this strategy as ``direct count estimation''.
 
 % * Reference existing listening tests which report the same thing
 % * Are we really doing it? We can decide on this once the first full draft is ready.
-To compare the results of our trained CRNN on our synthesized dataset to human performance, we chose to reproduce the experiments made in~\cite{kawashima15, kashino96}.
+To compare the results of our trained CRNN o                                                                                                                                                       n our synthesized dataset to human performance, we chose to reproduce the experiments made in~\cite{kawashima15, kashino96}.
 Kawashima et al.\ found in extensive experiments using Japanese speech samples, that participants were able to correctly estimate up to three simultaneously active speakers without using any spatial cues.
 We conducted our own study using the simulated data from the \emph{LIBRI Speech} (power normalized) set mentioned earlier in Section~\ref{ssec:corpus}.
-We therefore randomly selected 10 samples for each \(\cardinality \in [0, \ldots, 10]\), resulting in 100 mixtures of 5~seconds duration each.
+We therefore randomly selected 10 samples for each \(k \in [0, \ldots, 10]\), resulting in 100 mixtures of 5~seconds duration each.
 The experiment was done using \emph{between-group design}, where one group (blind experiment) did not get any prior information about the maximum number of speakers in the test set (similar to~\cite{kawashima15}).
 However, the maximum number of speakers was revealed to the other group (informed experiment), which is more related to our data-driven, classification based CRNN.
 Further, none of the participants received any feedback about the error made during the trials.
