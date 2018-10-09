@@ -37,8 +37,9 @@ Howerver, this does not hold for instruments with time-varying fluctuations. The
 % Intro commonfate START
 When processing such mixtures with a representation based on a standard NMF and the magnitude spectrogram, it is hard to model the sources with only a few spectral templates. Instead of increasing the number of templates per source, Hennequin proposes~\cite{hennequin11} frequency-dependent activation matrices by using a source/filter-based model.
 Since the vibrato does not only cause frequency modulation (FM) but also amplitude modulation (AM), so-called modulation spectra can be used to identify the modulation pattern. This is often calculated by taking the Fourier transform of a magnitude spectrum. Thus, the \emph{modulation spectrogram} has already gathered much attention in speech recognition~\cite{greenberg97,kingsbury98} and classification~\cite{kinnunen08, markaki09}.
-Barker and Virtanen~\cite{barker13} were the first to propose a modulation tensor representation for single channel source separation. This allows to elegantly apply factorization on the tensor by using the well known PARAFAC/CANDECOMP (CP) decomposition~\cite{myfavoritenmfbook}.\\
-In the following subsection I will introduce the work of Barker.
+Barker and Virtanen~\cite{barker13} were the first to propose a modulation tensor representation for single channel source separation. This allows to elegantly apply factorization on the tensor by using the well known PARAFAC/CANDECOMP (CP) decomposition~\cite{cichocki09}.\\
+
+In the following subsection I will introduce the work of Barker and how it can be applied to the unison source separation problem.
 
 %\from dafx
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -73,8 +74,7 @@ A very popular factorization model for such a tensor is the PARAFAC decompositio
    \mathbf{w} \approx \sum\limits_{j=1}^{J} \mathbf{w}_{j}(f) \circ \mathbf{m}_{j}(b) \circ \mathbf{h}_{j}(t).
 \end{equation}
 
-where the \(\circ\) operator is usually called the CP product.
-The CP product is depicted in figure
+where the \(\circ\) operator is usually called the CP product and is depicted in Figure~\ref{fig:cpd}.
 
 \begin{figure}
   \centering
@@ -433,7 +433,43 @@ To understand the influence of the underlying matrix or tensor representation we
 
 In this work we presented a method to exploit common modulation textures for source separation. A transformation based on a complex tensor representation computed from patches of the STFT has been introduced. We then showed how these patches are factorized by the proposed \emph{Common Fate Model}, which is derived from the idea of humans perceiving common modulation over time as one source. Our results on unisonous musical instruments indicate that this method can perform well for this scenario. The CFM model could also be successfully used in other scenarios, such as speech separation.
 
-\section{Towards a Data-Driven Common Fate Model}
+\section{Common Fate Model for Lead Accompaniment Separation}
+
+In the previous section, we showed, that the common fate representation is suitable for models to separate highly overlapped signals based on their spatial-temporal modulation texture.
+In this section I show how to extend the work for the application for Lead Accompaniment Separation.
+This scenario is significanlty more complex than the separation of single instrument notes.
+Thus, we need a separation model that is flexible enough to handle many of the critical edges cases that make music challenging to separate.
+Hereby it became apperent, that an unsupervised model such as NTF or CFM is not flexible enough as it requires significant amount of domain knowledge to improve performance.
+
+% from zafar
+Taking advantage of the recent availability of sufficiently large databases of isolated vocals along with their accompaniment, several researchers investigated the use of machine learning methods to directly estimate a mapping between the mixture and the sources.
+Most systems today use classical TF representations and building TF masks.
+Although end-to-end systems will inevitably be used near future, the common structure of deep learning methods for lead and accompaniment separation usually corresponds for now to the one depicted in Figure~\ref{fig:methods_dnn}. From a general perspective, we may say that most current methods mainly differ in the structure picked for the network, as well as in the way it is learned.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=\columnwidth]{Chapters/06_Separation_Unknown/figures/methods_dnn.pdf}
+  % [Deep learning methods.
+  %   the mixture is fed into a pre-processing step, that outputs the spectrogram. That spectrogram is input to a DNN block, which has an optional split in two parts (lead/accompaniment separate or joint). Then, we have two options for the output: either we output the mask directly, or the spectrograms to be used for building a ratio mask.
+  % ]
+  \caption{General architecture for methods exploiting deep learning. The network inputs the mixture and outputs either the sources spectrograms or a TF mask. Methods usually differ in their choice for a network architecture and the way it is learned using the training data.}
+  \label{fig:methods_dnn}
+\end{figure}
+
+Providing a thorough introduction to deep neural networks is out of the scope of this thesis. For our purpose, it suffices to mention that they consist of a cascade of several possibly non-linear transformations of the input, which are learned during a training stage. They were shown to effectively learn representations and mappings, provided enough data is available for estimating their parameters \cite{deng14,lecun15,goodfellow16}.
+Different architectures for neural networks may be combined/cascaded together, and many architectures were proposed in the past, such as feedforward fully-connected neural networks (FNN), convolutional neural networks (CNN), or RNN and variants such as the long short-term memory (LSTM) and the gated-recurrent units (GRU). Training of such functions is achieved by stochastic gradient descent \cite{robbins51} and associated algorithms, such as backpropagation \cite{rumelhart862} or backpropagation through time \cite{rumelhart86} for the case of RNNs.
+\par
+%The first one: Huang
+To the best of our knowledge, Huang et al. were the first to propose deep neural networks, RNNs here \cite{hermans13,pascanu14}, for singing voice separation in \cite{huang14,huang15}. They adapted their framework from \cite{huang142} to model all sources simultaneously through masking. Input and target functions were the mixture magnitude and a joint representation of the individual sources. The objective was to estimate jointly either singing voice and accompaniment music, or speech and background noise from the corresponding mixtures.
+\par
+%Exploiting context: FNN with context, LSTM
+Modeling the temporal structures of both the lead and the accompaniment is a considerable challenge, even when using DNN methods. As an alternative to the RNN approach proposed by Huang et al. in \cite{huang14}, Uhlich et al. proposed the usage of the simpler FNNs \cite{uhlich15} whose input consists of \textit{supervectors} of a few consecutive frames from the mixture.
+
+I decided to use the network architecture of~\cite{uhlich15} to assess the separation quality when used togeter with the common fate representation.
+Therefore, I developed a simplified implementation of~\cite{uhlich15} using the Keras deep learning framework.
+
+
+
 
 \begin{figure}[ht!]
 \centering
@@ -442,9 +478,6 @@ In this work we presented a method to exploit common modulation textures for sou
 \label{fig:cft_dnn}
 \end{figure}
 
-The idea of the common fate representation.
-
-I represent a preliminary study of combining the DNN source separation model by Uhlich with our Common Fate representation.
 
 \subsection{Inputs and Outputs}
 
@@ -456,7 +489,7 @@ I compared the following combinations of Input and Outputs
 
 \subsection{Dataset}
 
-We used the DSD100 training dataset 
+We used the DSD100 training dataset
 \subsection{Training}
 
 \subsection{Results}
@@ -468,11 +501,15 @@ We used the DSD100 training dataset
 \label{fig:cft_dnn}
 \end{figure}
 
+\begin{itemize}
+  \item Better generalization than NUG
+\end{itemize}
+
 \subsection{Submission to SiSEC 2016}
 \label{ssec:performance}
 
 I submitted the result to the 2016 SiSEC source separation challenges.
-In this section, I will discuss the performance of $23$ source separation methods evaluated on the DSD100, as part of the task for separating professionally-produced music recordings at SiSEC 2016.
+Therefore I am able to relate my work in comparison to $22$ other source separation methods, all evaluated on the DSD100, as part of the task for separating professionally-produced music recordings at SiSEC 2016.
 
 \begin{table}[htbp]
 	\centering
@@ -510,7 +547,7 @@ In this section, I will discuss the performance of $23$ source separation method
 \end{table}
 
 %announcing the results and the webpage
-The objective scores for these methods were obtained using BSS Eval and are given in Figure~\ref{fig:eval}. For more details about the results and for listening to the estimates, we refer the reader to the dedicated interactive website\footnote{\url{http://www.sisec17.audiolabs-erlangen.de}}.
+The objective scores for these methods were obtained using BSS Eval and are given in Figure~\ref{fig:eval}.
 
 \begin{figure*}[htbp]
 	\includegraphics[width=\textwidth]{gfx/vocalsSDR.pdf}
@@ -549,4 +586,46 @@ the overlap ratio for the STFT, specific ways to regularize matrix inverses in m
 
 % TODO add stoter 16
 
+For more details about the results and for listening to the estimates, we refer the reader to the dedicated interactive website\footnote{\url{http://www.sisec17.audiolabs-erlangen.de}}
+
+\begin{itemize}
+  \item for the first time source separation results are assessible
+  \item
+\end{itemize}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.9\textwidth]{Chapters/06_Separation_Unknown/figures/sisec_website.png}
+
+\caption{Screenshot of the SiSEC 2016 Website~\url{http://sisec17.audiolabs-erlangen.de}}
+
+\end{figure}
+
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.9\textwidth]{Chapters/06_Separation_Unknown/figures/boxplot.pdf}
+
+\caption{Comparison of the results of the DSD100 Separation task for vocals and accompaniment sources. Several combinations of `input-output` were tested, as indicated by the x-axis. The y-axis show the bssEval scores.}
+
+\end{figure}
+
+gft:
+
+framelength=1024,
+hopsize=512,
+W=(10, 5),
+mhop=(10, 2)
+
+30 epochs
+3 layers
+Adam
+
+26219520 vs 263682 params per layer
+
 \section{Conclusion and Scope}
+
+\begin{itemize}
+  \item DNNs: Super-Frames are not relevant anymore
+  \item DNNs: Modern Architechtures are more powerful: SiSEC 2018
+\end{itemize}
