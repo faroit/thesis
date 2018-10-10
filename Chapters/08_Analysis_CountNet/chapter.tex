@@ -556,7 +556,7 @@ In fact, our method to generate synthetic samples results in an average overlap 
 This procedure is similar to~\cite{mesaros17} used to label the data.
 Signals are mixed according to Equation~\ref{eq:mixing_model}, peak normalized and then transformed to a time-frequency matrix \(X \in D \times F\).
 Based on a voice activity detection algorithm (VAD), we used an implementation based on the WebRTC Standard~\cite{webrtc} where we computed the ground truth output \(\cardinality \) via Equation~\ref{eq:definition_k}.
-All samples are normalized to the average Euclidean norm of \(duration\) frames to be robust against gain variations as proposed by~\cite{Uhlich15}.
+All samples are normalized to the average Euclidean norm of \(duration\) frames to be robust against gain variations as proposed by~\cite{uhlich15}.
 Furthermore, the data was scaled to zero mean and unit standard deviation across the frequency dimension \(F\) over the full training data.
 Scaling parameters were saved for validation and test.
 For a more detailed description of the data set, the reader is referred to~\cite{stoeter17}.
@@ -984,20 +984,22 @@ Random Effect \(k\)            &  0.057 &    0.297 &        &             \\
  \label{ssec:listening_experiment}
  % * Reference existing listening tests which report the same thing
  % * Are we really doing it? We can decide on this once the first full draft is ready.
- To compare the results of our trained CRNN on our synthesized dataset to human performance, we chose to reproduce the experiments made in~\cite{kawashima15, kashino96}.
- Kawashima et al.\ found in extensive experiments using Japanese speech samples, that participants were able to correctly estimate up to three simultaneously active speakers without using any spatial cues.
- We conducted our own study using the simulated data from the \emph{LIBRI Speech} (power normalized) set mentioned earlier in Section~\ref{ssec:corpus}.
- We therefore randomly selected 10 samples for each \(\cardinality \in [0, \ldots, 10]\), resulting in 100 mixtures of 5~seconds duration each.
- The experiment was done using \emph{between-group design}, where one group (blind experiment) did not get any prior information about the maximum number of speakers in the test set (similar to~\cite{kawashima15}).
- However, the maximum number of speakers was revealed to the other group (informed experiment), which is more related to our data-driven, classification based CRNN.
- Further, none of the participants received any feedback about the error made during the trials.
- Similarly to~\cite{kawashima15}, lab-based experiments were conducted with ten participants for each group (\(n=20\)) using a custom designed web-based software.\footnote{The experiment is made available through the accompanying website.}
- In all previous experiments, we used the mean absolute error metric which does not reveal over and underestimation errors.
- We therefore decided to report the average response for each group of \(k\).
- The results of our lab-based experiments are shown in Figure~\ref{fig:experiment}.
+To compare the results of our trained CRNN on our synthesized dataset to human performance, we chose to compare the machine model against the experiments made in~\cite{kawashima15, kashino96} and our own as described in Section~TODO.
+% The results of our lab-based experiments are shown in Figure~\ref{fig:experiment}.
+
+ % Kawashima et al.\ found in extensive experiments using Japanese speech samples, that participants were able to correctly estimate up to three simultaneously active speakers without using any spatial cues.
+ % We conducted our own study using the simulated data from the \emph{LIBRI Speech} (power normalized) set mentioned earlier in Section~\ref{ssec:corpus}.
+ % We therefore randomly selected 10 samples for each \(\cardinality \in [0, \ldots, 10]\), resulting in 100 mixtures of 5~seconds duration each.
+ % The experiment was done using \emph{between-group design}, where one group (blind experiment) did not get any prior information about the maximum number of speakers in the test set (similar to~\cite{kawashima15}).
+ % However, the maximum number of speakers was revealed to the other group (informed experiment), which is more related to our data-driven, classification based CRNN.
+ % Further, none of the participants received any feedback about the error made during the trials.
+ % Similarly to~\cite{kawashima15}, lab-based experiments were conducted with ten participants for each group (\(n=20\)) using a custom designed web-based software.\footnote{The experiment is made available through the accompanying website.}
+ % In all previous experiments, we used the mean absolute error metric which does not reveal over and underestimation errors.
+ % We therefore decided to report the average response for each group of \(k\).
+ % The results of our lab-based experiments are shown in Figure~\ref{fig:experiment}.
  The results for up to three speakers indicate that humans perform similarly (or better in terms of variance) compared to our proposed CRNN model.
- Results of the blind experiment show that underestimation becomes apparent for \(k > 3\).
- As a reference, we also included the average results from~\cite{kawashima15} (Experiment 1, 5~seconds durations) which shows similar results compared to our blind experiment.
+ % Results of the blind experiment show that underestimation becomes apparent for \(k > 3\).
+ % As a reference, we also included the average results from~\cite{kawashima15} (Experiment 1, 5~seconds durations) which shows similar results compared to our blind experiment.
  For larger speaker counts, the gap between humans and algorithm is almost three speakers on average.
  Interestingly, the results of the informed experiment reveal that this gap closes down to an average difference of one speaker.
  Finally, we can report that the machine model reached superhuman performance.
