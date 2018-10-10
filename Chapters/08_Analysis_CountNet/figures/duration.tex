@@ -1,0 +1,113 @@
+% This file was created by matplotlib2tikz v0.6.13.
+\begin{tikzpicture}
+
+\definecolor{color1}{rgb}{0.298039215686275,0.447058823529412,0.690196078431373}
+\definecolor{color0}{rgb}{0.917647058823529,0.917647058823529,0.949019607843137}
+
+\begin{axis}[
+xlabel={Duration \(D\) in Seconds},
+ylabel={MAE},
+xmin=-0.5, xmax=8.5,
+ymin=0.135857456148673, ymax=0.786816272987562,
+xtick={0,1,2,3,4,5,6,7,8},
+xticklabels={1,2,3,4,5,6,7,8,9},
+ytick={0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8},
+yticklabels={0.0,0.2,0.3,0.4,0.5,0.6,0.7,},
+tick align=outside,
+tick pos=left,
+xmajorgrids,
+ymajorgrids,
+width=\columnwidth,
+height=0.6\columnwidth,
+axis line style={black},
+grid style={line width=.1pt, draw=gray!25},
+major grid style={line width=.2pt,draw=gray!25},
+]
+\addplot [only marks, draw=color1, fill=color1, colormap/blackwhite]
+table{%
+x                      y
++0.000000000000000e+00 +6.385012990646495e-01
++1.000000000000000e+00 +4.156636288682126e-01
++2.000000000000000e+00 +3.866786050449682e-01
++3.000000000000000e+00 +3.366750172732503e-01
++4.000000000000000e+00 +2.637021331951673e-01
++5.000000000000000e+00 +2.624647418728959e-01
++6.000000000000000e+00 +2.581671791258833e-01
++7.000000000000000e+00 +2.647957418016120e-01
++8.000000000000000e+00 +2.645404355185759e-01
+};
+% \addplot[mark=*, fill=black, mark options={mark size=0.20pt}]
+% coordinates {
+%   (5, 0.26} node[pin={1, pin edge={thick}}:{Selected Duration}]{};
+\addplot [line width=2.00pt, color1, forget plot]
+table {%
+0 0.638501299064649
+1 0.415663628868213
+2 0.386678605044968
+3 0.33667501727325
+4 0.263702133195167
+5 0.262464741872896
+6 0.258167179125883
+7 0.264795741801612
+8 0.264540435518576
+};
+\addplot [line width=2.00pt, color1, forget plot]
+table {%
+0 0.529501745070873
+0 0.757227235858521
+};
+\addplot [line width=2.00pt, color1, forget plot]
+table {%
+1 0.331229177698919
+1 0.50777318536896
+};
+\addplot [line width=2.00pt, color1, forget plot]
+table {%
+2 0.302866441412883
+2 0.470527138303221
+};
+\addplot [line width=2.00pt, color1, forget plot]
+table {%
+3 0.256214672080081
+3 0.416434186077932
+};
+\addplot [line width=2.00pt, color1, forget plot]
+table {%
+4 0.205581195002823
+4 0.323809986137185
+};
+\addplot [line width=2.00pt, color1, forget plot]
+table {%
+5 0.190651073067454
+5 0.334762156170043
+};
+\addplot [line width=2.00pt, color1, forget plot]
+table {%
+6 0.181574955025837
+6 0.352612918248687
+};
+\addplot [line width=2.00pt, color1, forget plot]
+table {%
+7 0.165446493277713
+7 0.367320912424733
+};
+\addplot [line width=2.00pt, color1, forget plot]
+table {%
+8 0.18797697232341
+8 0.343365533924186
+};
+% \path [draw=black, fill opacity=0] (axis cs:500,0.135857456148673)
+% --(axis cs:500,0.786816272987562);
+%
+% \path [draw=white, fill opacity=0] (axis cs:1,0.135857456148673)
+% --(axis cs:1,0.786816272987562);
+%
+% \path [draw=white, fill opacity=0] (axis cs:-0.5,0)
+% --(axis cs:8.5,0);
+%
+% \path [draw=white, fill opacity=0] (axis cs:-0.5,1)
+% --(axis cs:8.5,1);
+
+\end{axis}
+
+\end{tikzpicture}

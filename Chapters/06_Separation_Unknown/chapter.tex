@@ -1,7 +1,7 @@
 \chapter{Separation by Unknown Modulation}
 \label{cha:unknown}
 
-\marginpar{This chapter is based on the work that has been published in 2016. The work has been done in close collaboration with Antoine Liutkus from INRIA, France and Roland Badeau from ParisTech France.}
+\marginpar{This section is based on the work that has been published in 2016~\cite{stoeter16icassp}. The work has been done in close collaboration with Antoine Liutkus (INRIA, France) and Roland Badeau (ParisTech, France).}
 
 In the last chapter, I proposed methods to separate highly overlapped signals based informed by the fundamental frequency estimate of the source to be separated.
 Even though, I showed that pitch variation can be estimated from the mixture, in many cases, this might not be easy to obtain in practice.
@@ -135,9 +135,11 @@ In this paper, we propose to relax some assumptions of HR-NMF in the interest of
 Let $\tilde{x}$ denote a single channel audio signal.
 Its Short-Term Fourier Transform (STFT) is computed by splitting it
 into overlapping frames, and then taking the discrete Fourier transform (DFT)
-of each one\footnote{Since the waveform~$\tilde{x}$ is real, the Fourier transform of
+of each one.
+Since the waveform~$\tilde{x}$ is real, the Fourier transform of
 each frame is Hermitian. In the following, we assume that the redundant
-information has been discarded to yield the STFT.}. The resulting information is gathered into an $N_{\omega}\times N_{\tau}$
+information has been discarded to yield the STFT.
+The resulting information is gathered into an $N_{\omega}\times N_{\tau}$
 matrix written~$X$, where~$N_{\omega}$ is the number of frequency
 bands and $N_{\tau}$ the total number of frames.
 %
@@ -145,8 +147,9 @@ In this study, we will consider the properties of another object,
 built from $X$, which we call the Common Fate Transform (CFT). It
 is constructed as illustrated in Figure~\ref{fig:CFT}.
 We split the STFT~$X$ into overlapping rectangular $N_{a}\times N_{b}$
-patches, regularly spaced over both time and frequency. Then, the
-2D-DFT of each patch is computed\footnote{Note that since each patch is complex, its 2D-DFT is not Hermitian,
+patches, regularly spaced over both time and frequency.
+For reference later in this thesis, we will call this representation the \emph{Grid STFT} (GFT).
+Then, the 2D-DFT of each patch is computed\footnote{Note that since each patch is complex, its 2D-DFT is not Hermitian,
 thus all its entries are kept.}. This yields an $N_{a}\times N_{b}\times N_{f}\times N_{t}$ tensor we write~$x$,
 where~$N_{f}$ and~$N_{t}$ are the vertical and horizontal
 positions for the patches, respectively.
@@ -328,7 +331,6 @@ The factorization model is depicted in Figure~\ref{fig:cfm}
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.8\textwidth]{Chapters/06_Separation_Unknown/figures/cfm.pdf}
-
 \caption{Common Fate Model.}
 \label{fig:cfm}
 \end{figure}
@@ -406,12 +408,12 @@ For evaluation, we compared separation performance of six different methods, sum
 \item[MOD] We implemented a modified version of~\cite{barker13} where for the sake of comparability, we used a STFT instead of a gammatone filterbank. A DFT length of 1024 and a hop-size of 512 samples were chosen. After taking the magnitude value, a second STFT of size 32 and hop-size 16 samples was computed for each frequency.
 \item[CFMMOD] We selected patch sizes of $(N_a, N_b) = (1, 64)$ and modified the representation so that the magnitude spectrogram was used before computing the 2D-DFT.\@ This permits to compare the advantage of our proposed factorization model~(\ref{eq:NTF_model}) over MOD, when using the same kind of energy-modulation representation in both cases.
 \item[CFMM] For comparing the influence of computing modulations over complex STFT or magnitude spectrograms, we tried our factorization model when the magnitude of the STFT is taken before 2D-DFT, with patches of the same size as for the CFM method.
-\item[NMF] We took a standard NMF based method~\cite{virtanen2007monaural}. We highlight that taking a spectrogram with frames of length 1024 would not make a fair comparison, because the CFM model actually results in a larger frequency resolution. Therefore a comparable NMF is based on an STFT of DFT-length 32768.
+\item[NMF] We took a standard NMF based method~\cite{virtanen07}. We highlight that taking a spectrogram with frames of length 1024 would not make a fair comparison, because the CFM model actually results in a larger frequency resolution. Therefore a comparable NMF is based on an STFT of DFT-length 32768.
 \item[HR-NMF] See description in~\cite{magron15a}.
 \end{description}
 All factorizations ran for 100 iterations and were repeated five times. We chose $j=(2\ldots6)$ components for each factorization. For $j > 2$ we used oracle clustering to show the upper limit of SDR which can be achieved.
 
-We ran the performance evaluation by using BSSeval~\cite{Vincentbsseval06}. The results of Signal to Distortion
+We ran the performance evaluation by using BSSeval~\cite{vincent06}. The results of Signal to Distortion
 Ratio (SDR), Signal to Interference Ratio (SIR), and Signal to Artifacts Ration (SAR) are depicted in Figure~\ref{fig:boxplot_overall}. Results indicate that the CFM model performs well in all measures. However, in terms of SIR the results of HR-NMF are better than CFM method. The results for CFMMOD indicate the positive influence of the CFM factorization compared to~\cite{barker13}.
 The results of CFMM indicate that the complex CFT lead to better results. NMF did perform surprisingly well, which may only hold for our test set, where each source is active for a long period. This results in a cyclic stationary vibrato, revealing spectral side lobes at such a high resolution. With more than one component per source, the results of CFM do improve, but it can be seen that more than two components ($j=4$) will not increase the SDR values. The separation results and a full Python implementation of the CFM algorithm can be found on the companion website for this paper\footnote{\url{github.com/aliutkus/commonfate}}.
 
@@ -433,7 +435,9 @@ To understand the influence of the underlying matrix or tensor representation we
 
 In this work we presented a method to exploit common modulation textures for source separation. A transformation based on a complex tensor representation computed from patches of the STFT has been introduced. We then showed how these patches are factorized by the proposed \emph{Common Fate Model}, which is derived from the idea of humans perceiving common modulation over time as one source. Our results on unisonous musical instruments indicate that this method can perform well for this scenario. The CFM model could also be successfully used in other scenarios, such as speech separation.
 
-\section{Common Fate Model for Lead Accompaniment Separation}
+\section{Common Fate Model for Lead Accompaniment Separation using Deep Neural Network}
+
+\marginpar{This section is original work being done as part of the \emph{STO1} and \emph{STO2} submission for the SiSEC 2016~\cite{sisec16}.}
 
 In the previous section, we showed, that the common fate representation is suitable for models to separate highly overlapped signals based on their spatial-temporal modulation texture.
 In this section I show how to extend the work for the application for Lead Accompaniment Separation.
@@ -443,12 +447,13 @@ Hereby it became apperent, that an unsupervised model such as NTF or CFM is not 
 
 % from zafar
 Taking advantage of the recent availability of sufficiently large databases of isolated vocals along with their accompaniment, several researchers investigated the use of machine learning methods to directly estimate a mapping between the mixture and the sources.
-Most systems today use classical TF representations and building TF masks.
-Although end-to-end systems will inevitably be used near future, the common structure of deep learning methods for lead and accompaniment separation usually corresponds for now to the one depicted in Figure~\ref{fig:methods_dnn}. From a general perspective, we may say that most current methods mainly differ in the structure picked for the network, as well as in the way it is learned.
+As of 2018, there are already works on end-to-end separation methods that process the raw waveform~\cite{venkataramani17}.
+However, most of these systems today still use classical time-frequecny representations and building time-frequency masks.
+The common structure of a deep learning methods for lead and accompaniment separation usually corresponds for now to the one depicted in Figure~\ref{fig:methods_dnn}. From a general perspective, we may say that most current methods mainly differ in the structure picked for the network, as well as in the way it is learned.
 
 \begin{figure}
   \centering
-  \includegraphics[width=\columnwidth]{Chapters/06_Separation_Unknown/figures/methods_dnn.pdf}
+  \includegraphics[width=0.6\textwidth]{Chapters/06_Separation_Unknown/figures/methods_dnn.pdf}
   % [Deep learning methods.
   %   the mixture is fed into a pre-processing step, that outputs the spectrogram. That spectrogram is input to a DNN block, which has an optional split in two parts (lead/accompaniment separate or joint). Then, we have two options for the output: either we output the mask directly, or the spectrograms to be used for building a ratio mask.
   % ]
@@ -456,7 +461,9 @@ Although end-to-end systems will inevitably be used near future, the common stru
   \label{fig:methods_dnn}
 \end{figure}
 
-Providing a thorough introduction to deep neural networks is out of the scope of this thesis. For our purpose, it suffices to mention that they consist of a cascade of several possibly non-linear transformations of the input, which are learned during a training stage. They were shown to effectively learn representations and mappings, provided enough data is available for estimating their parameters \cite{deng14,lecun15,goodfellow16}.
+Providing a thorough introduction to deep neural networks (DNN) is out of the scope of this thesis.
+For the understanding of this section, it is sufficient to mention that DNNs consist of a cascade of several, possibly non-linear transformations of the input, which are learned during a training stage.
+They were shown to effectively learn representations and mappings, provided enough data is available for estimating their parameters \cite{deng14, lecun15, goodfellow16}.
 Different architectures for neural networks may be combined/cascaded together, and many architectures were proposed in the past, such as feedforward fully-connected neural networks (FNN), convolutional neural networks (CNN), or RNN and variants such as the long short-term memory (LSTM) and the gated-recurrent units (GRU). Training of such functions is achieved by stochastic gradient descent \cite{robbins51} and associated algorithms, such as backpropagation \cite{rumelhart862} or backpropagation through time \cite{rumelhart86} for the case of RNNs.
 \par
 %The first one: Huang
@@ -464,12 +471,15 @@ To the best of our knowledge, Huang et al. were the first to propose deep neural
 \par
 %Exploiting context: FNN with context, LSTM
 Modeling the temporal structures of both the lead and the accompaniment is a considerable challenge, even when using DNN methods. As an alternative to the RNN approach proposed by Huang et al. in \cite{huang14}, Uhlich et al. proposed the usage of the simpler FNNs \cite{uhlich15} whose input consists of \textit{supervectors} of a few consecutive frames from the mixture.
+This method can be described as a variant of a stacked denoining autoencoder~\cite{pvincent08}, where the noisy input is mapped to a clean output of the same dimensionality.
+The input representation are an excerpt of the
+\par
+In this work, I decided to deploy model of Uhlich~\cite{uhlich15} to evaluate the separation quality in combination used together with our proposed common fate representation.
+Therefore, I reimplemeted~\cite{uhlich15} using the Keras deep learning framework to systematically assess the input-and output representation of the system.
 
-I decided to use the network architecture of~\cite{uhlich15} to assess the separation quality when used togeter with the common fate representation.
-Therefore, I developed a simplified implementation of~\cite{uhlich15} using the Keras deep learning framework.
+Now, the system we propose is actually not inputting the signal vector $\mathbf{x}$, but rather a Time-Frequency (TF) representation as the absolute value of the short-term Fourier transform of~$\mathbf{x}$ that is denoted by $\mathbf{X}$.
 
-
-
+For the purpose of learning a mapping between~$\mathbf{X}$ and~$k$, we adopt a probabilistic viewpoint and introduce a flexible generative model that explains how a particular source count~$k$ corresponds to some given input ~$\mathbf{X}$.
 
 \begin{figure}[ht!]
 \centering
@@ -478,32 +488,70 @@ Therefore, I developed a simplified implementation of~\cite{uhlich15} using the 
 \label{fig:cft_dnn}
 \end{figure}
 
-
 \subsection{Inputs and Outputs}
 
 I compared the following combinations of Input and Outputs
 
+For each sample fed into the network, we randomly select mixture tracks from the DSD100 dataset.
+We then form input and output samples from these tracks, depending on the chosen input and output representation.
+
 \begin{description}[style=unboxed,leftmargin=0cm]
-\item[STFT-STFT] This setting reflects the setting in~\cite{Uhlich15}.
+\item[STFT-STFT]: for the \emph{input}, we compute the STFT (\(N=1024, Hop=512\) of each the audio track and select excerpts of size, \(\mathbf{X} \in \mathcal{R}^{2C + 1}_{+} \), where \(C\) is the number of preceding and succeeding frames around the central frame \(\mathbf{X}_{i+C}\). For the \emph{output}, only a single central frame \(\mathbf{Y}_{i+C}\) is selected.
+I use \(C=2\), reflecting the setting in~\cite{uhlich15}. This results in an input sample size of \(\mathbf{X} \in \mathcal{R}_{+}^{5, 513}\) and  \(\mathbf{Y} \in \mathcal{R}_{+}^{1, 513}\).
+
+\item[GFT-GFT/GFT-STFT]: instead of taking excerpts from the STFT, like in \emph{STFT-STFT}, we compute overlapping patches, as described from in Section~\ref{sub:CFT}. Each patch is of size \((5, 8)\), which means that the same number of time frames are used compared to \emph{STFT-STFT} but additionaly redundancy has been added because of the overlap between neighbouring patches.
+For the \emph{output}, I chose the GFT of \(Y\).
+This results in an input sample size of \(\mathbf{X} \in \mathcal{R}_{+}^{128, 5, 8}\) and  \(\mathbf{Y} \in \mathcal{R}_{+}^{128, 5, 8)}\).
+Furthermore, to reduce the number of parameters, I also evaluated a setting where just the \emph{output} is the central frame of the STFT.
+
+\item[CFT-CFT/CFT-STFT]: here, in the first step a processing as in \emph{GFT-GFT} was applied and then the 2D-DFT transform was applied (see Section~\ref{sub:CFT}).
+The results in an identical shapes as in the \emph{GFT-GFT} but with added benefits of this representation can model neighbouring phase.
 \end{description}
+
 
 \subsection{Dataset}
 
 We used the DSD100 training dataset
 \subsection{Training}
 
+That way, for each epoch, the network is seeing slightly different samples, reducing the number of redundant samples and thus helping to speed up the stochastic gradient based training process.
+\footnote{Note that for the validation and testing, excerpts are fixed.}
+A similar training procedure is detailed in~\cite{schluter16, stoeter17}.
+Each architecture is trained using the ADAM optimizer~\cite{kingma14} (learning rate: \(1 \cdot 10^{-3}\), \(\beta_1=0.9\), \(\beta_2=0.999\), \(\epsilon=1 \cdot 10^{-8}\)) using mini-batches of size 32.
+Our training procedure verifies that all samples within a batch are from a different set of speakers.
+In addition to the training dataset, we created a fully separated validation dataset of \(T_{\textrm{valid}} = 5720\) samples using a different set of speakers from \emph{LibriSpeech dev-clean}.
+Early stopping (\(patience = 10\)) is applied by monitoring the validation loss to reduce the effect of overfitting.
+% As we are interested in evaluating different input durations, we need to accommodate this our training procedure where we, instead of using the full duration of one input sample, may select an excerpt of duration \(D\).
+% Now instead iterating with hop size of 1 resulting in many redundant (slightly shifted) samples, we instead randomly select the offset of this excerpt for each sample.
+% This procedure verifies that all samples within a batch are from different speakers.
+% After every epoch the offsets are being reset so that each epoch is seeing slightly different samples (in different order) of the same training dataset.
+% Note that this is not the case for the evaluation and test dataset where the offsets are fixed using an initial seed.
+% We found this procedure (also used in~\cite{schluter16}) help to speed up the stochastic gradient based training process.
+% Additionally it allows us to evaluate on different excerpt durations \(D\), while keeping the training dataset fixed.
 \subsection{Results}
 
-\begin{figure}[ht!]
+\begin{figure}[t]
 \centering
-		\includegraphics[width=\textwidth]{Chapters/06_Separation_Unknown/figures/uhlich_dnn.pdf}
-\caption{}
-\label{fig:cft_dnn}
+\includegraphics[width=0.9\textwidth]{Chapters/06_Separation_Unknown/figures/boxplot.pdf}
+
+\caption{Comparison of the results of the DSD100 Separation task for vocals and accompaniment sources. Several combinations of `input-output` were tested, as indicated by the x-axis. The y-axis show the bssEval scores.}
+
 \end{figure}
 
-\begin{itemize}
-  \item Better generalization than NUG
-\end{itemize}
+gft:
+
+framelength=1024,
+hopsize=512,
+W=(10, 5),
+mhop=(10, 2)
+
+30 epochs
+3 layers
+Adam~\cite{kingma14}
+
+indicating a difference of 0.4 dB for CFT-CFT and 0.5dB for GFT-GFT. Hence indicating that the increased redundancy in the representation together with the significanlty increased number of parameters per network.
+26219520 vs 263682 params per layer
+
 
 \subsection{Submission to SiSEC 2016}
 \label{ssec:performance}
@@ -511,40 +559,32 @@ We used the DSD100 training dataset
 I submitted the result to the 2016 SiSEC source separation challenges.
 Therefore I am able to relate my work in comparison to $22$ other source separation methods, all evaluated on the DSD100, as part of the task for separating professionally-produced music recordings at SiSEC 2016.
 
-\begin{table}[htbp]
+\begin{table*}[htbp]
 	\centering
 	\caption{Methods evaluated during SiSEC 2016.}
 	\label{tab:systems}
-	\begin{tabular}{|lll@{}l@{}|}
+	\begin{tabular}{lll@{}}
 		\hline
-		\textbf{Acronym} & \textbf{Ref.} & \textbf{Summary} & \textbf{Section}\\
+		\textbf{Acronym} & \textbf{Ref.} & \textbf{Summary}\\
 		\hline
-		HUA & \cite{huang12} & RPCA standard version & \ref{ssec:RPCA}\\
-		\hline
-		RAF1 & \cite{rafii13} & REPET standard version & \ref{ssec:methods_repet}\\
-		RAF2 & \cite{liutkus12} & REPET with time-varying period & \\
-		RAF3 & \cite{rafii12} & REPET with similarity matrix & \\
-		KAM1-2 & \cite{liutkus15} & KAM with different configurations &\\
-		\hline
-		CHA & \cite{chan15} & RPCA with vocal activation information &\ref{ssec:methods_structureinformed}\\
-		JEO1-2 & \cite{jeong17} &  $l_1$-RPCA with vocal activation information &\\
-		\hline
-		DUR & \cite{durrieu11} & Source-filter NMF &\ref{ssec:methods_sourcefilter}\\
-		\hline
-		OZE & \cite{salaun14} & Structured NMF with learned dictionaries & \ref{ssec:methods_datadriven_nmf}\\
-		\hline
-		KON & \cite{huang15} & RNN & \ref{ssec:methods_dnn} \\
-		GRA2-3 & \cite{grais16} & DNN ensemble &\\
-		STO1-2 & \cite{stoter16} & FNN on \textit{common fate} TF representation&\\
-		UHL1 & \cite{Uhlich15} & FNN with context&\\
-		\hline
-		NUG1-4 & \cite{nugraha16} & FNN with multichannel information &\ref{sec:multichannel}\\
-		UHL2-3 & \cite{uhlich17} & LSTM with multichannel information &\\
-		\hline
-		IBM & & ideal binary mask &  \\
-		\hline
+    STO1-2 & Proposed & FNN on \textit{common fate} TF representation \\
+		HUA & \cite{huang12} & RPCA standard version \\
+		RAF1 & \cite{rafii13} & REPET standard version \\
+		RAF2 & \cite{liutkus12} & REPET with time-varying period \\
+		RAF3 & \cite{rafii12} & REPET with similarity matrix \\
+		KAM1-2 & \cite{liutkus15} & KAM with different configurations \\
+		CHA & \cite{chan15} & RPCA with vocal activation information \\
+		JEO1-2 & \cite{jeong17} &  $l_1$-RPCA with vocal activation information \\
+		DUR & \cite{durrieu11} & Source-filter NMF \\
+		OZE & \cite{salaun14} & Structured NMF with learned dictionaries \\
+		KON & \cite{huang15} & RNN \\
+		GRA2-3 & \cite{grais16} & DNN ensemble \\
+		UHL1 & \cite{uhlich15} & FNN with context \\
+		NUG1-4 & \cite{nugraha16} & FNN with multichannel information \\
+		UHL2-3 & \cite{uhlich17} & LSTM with multichannel information \\
+		IBM & & ideal binary mask \\
 	\end{tabular}
-\end{table}
+\end{table*}
 
 %announcing the results and the webpage
 The objective scores for these methods were obtained using BSS Eval and are given in Figure~\ref{fig:eval}.
@@ -585,8 +625,27 @@ Regardless of the above, we would also like to highlight that good algorithms an
 the overlap ratio for the STFT, specific ways to regularize matrix inverses in multichannel models, etc. Further tricks such as the exponentiation of the TF mask by some positive value can often boost performance significantly more than using more sophisticated models. However, such tricks are often lost when publishing research focused on the higher-level algorithms. We believe this is an important reason why sharing source code is highly desirable in this particular application. Some online repositories containing implementations of lead and accompaniment separation methods should be mentioned, such as \textbf{nussl}\footnote{\url{https://github.com/interactiveaudiolab/nussl}} and \textbf{untwist} \cite{roma16}. In the companion webpage of this paper\footnote{\url{https://sigsep.github.io}}, we list many different online resources such as datasets, implementations, and tools that we hope will be useful to the practitioner and provide some useful pointers to the interested reader.
 
 % TODO add stoter 16
+For more details about the results and for listening to the estimates, we refer the reader to the dedicated interactive website\footnote{\url{http://www.sisec17.audiolabs-erlangen.de}}.
 
-For more details about the results and for listening to the estimates, we refer the reader to the dedicated interactive website\footnote{\url{http://www.sisec17.audiolabs-erlangen.de}}
+Modern JavaScript technologies like the Web Audio API make it possible to interactively assess source separation results in the browser.
+For the first time, interested researchers are able to listen to over 10000 stimuli from all particiapting systems.
+For track, we provide the separation results as well as the objective BSSeval scores.
+Figure~\ref{fig:sisec_website} depicts a screenshot of the website.
+The objective scores are depicted as interactive matrix where users are able to sort the results for each track an each system interactactively by the the source of interest.
+Clicking on one ... an interactive player is opened that allows to
+
+
+\begin{figure}[ht!]
+\centering
+		\includegraphics[width=\textwidth]{Chapters/06_Separation_Unknown/figures/uhlich_dnn.pdf}
+\caption{}
+\label{fig:cft_dnn}
+\end{figure}
+
+\begin{itemize}
+  \item Better generalization than NUG
+\end{itemize}
+
 
 \begin{itemize}
   \item for the first time source separation results are assessible
@@ -596,36 +655,16 @@ For more details about the results and for listening to the estimates, we refer 
 \begin{figure}[t]
 \centering
 \includegraphics[width=0.9\textwidth]{Chapters/06_Separation_Unknown/figures/sisec_website.png}
-
 \caption{Screenshot of the SiSEC 2016 Website~\url{http://sisec17.audiolabs-erlangen.de}}
+\label{fig:sisec_website}
 
 \end{figure}
-
-
-\begin{figure}[t]
-\centering
-\includegraphics[width=0.9\textwidth]{Chapters/06_Separation_Unknown/figures/boxplot.pdf}
-
-\caption{Comparison of the results of the DSD100 Separation task for vocals and accompaniment sources. Several combinations of `input-output` were tested, as indicated by the x-axis. The y-axis show the bssEval scores.}
-
-\end{figure}
-
-gft:
-
-framelength=1024,
-hopsize=512,
-W=(10, 5),
-mhop=(10, 2)
-
-30 epochs
-3 layers
-Adam
-
-26219520 vs 263682 params per layer
 
 \section{Conclusion and Scope}
 
 \begin{itemize}
-  \item DNNs: Super-Frames are not relevant anymore
-  \item DNNs: Modern Architechtures are more powerful: SiSEC 2018
+  \item DNNs: Super-Frames are computationaly too complex and a the same time not flexible enough regarding processing of variable length input. This can be solved by recurrent models.
+  \item I evaluated the common transform in the context of deep neural network based separation.
+  Todays phase aware DNNs (cite complex dnn, phasenet), are a line of research.
+  \item DNNs: Modern Architechtures, like CNNs and DNNs are more powerful but often do not significanlty improve the results: SiSEC 2018. This is why domain knowledge can still be applied.
 \end{itemize}

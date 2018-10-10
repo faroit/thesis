@@ -46,6 +46,11 @@ In the following, I present parts of work that has been published in 2014~\cite{
 
 \marginpar{This section is based on the work that has been submitted in 2014 and together with my collegues Stefan Bayer ~\cite{stoeter14}. Both publications were based on my original ideas}
 
+% TODO add signal model here 
+% \begin{equation}
+%   \mathbf{x}=\sum_{j=1}^{J}a_j\mathbf{s}_j
+% \end{equation}
+
 Frequency modulation caused by vibrato is a very common playing style for string instruments but also for woodwind and brass instruments.
 Vibrato is an effect that is well studied especially in musicology.
 Performers tend to perform a vibrato in the same way when repeating a performance.
@@ -623,5 +628,5 @@ While methods focusing on harmonic models for the lead often fall short in their
 
 Furthermore, even if the musical accompaniment will exhibit more redundancy, the vocals part will also be redundant to some extent, which is poorly handled by these methods. When the lead signal is not vocals but played by some lead instrument, its redundancy is even more pronounced, because the notes it plays lie in a reduced set of fundamental frequencies. Consequently, such methods would include the redundant parts of the lead within the accompaniment estimate, for example, a steady humming by a vocalist.
 % end zafar
-  
+
 Future work could include a robust multi pitch variation estimator for musical instruments. Salamon and Gomez~\cite{salamon12} describe the current state of the art of f0 estimation. Some approaches use source separation to estimate multiple f0 pitch tracks. Therefore our approach shows that a robust multi pitch f0 estimate can also help to improve source separation. In the future an iterative multi-step procedure could lead to better results in both problem domains.\par

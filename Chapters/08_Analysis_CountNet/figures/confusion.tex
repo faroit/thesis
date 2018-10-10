@@ -1,0 +1,44 @@
+% This file was created by matplotlib2tikz v0.6.14.
+\begin{tikzpicture}
+
+\definecolor{color0}{rgb}{0.927647058823529,0.927647058823529,0.949019607843137}
+
+\begin{axis}[
+xlabel={$k$},
+ylabel={$\hat{k}$},
+xmin=0, xmax=11,
+ymin=0, ymax=11,
+xtick={0.5,1.5,2.5,3.5,4.5,5.5,6.5,7.5,8.5,9.5,10.5},
+xticklabels={0,1,2,3,4,5,6,7,8,9,10},
+ytick={0.5,1.5,2.5,3.5,4.5,5.5,6.5,7.5,8.5,9.5,10.5},
+yticklabels={0,1,2,3,4,5,6,7,8,9,10},
+tick align=outside,
+tick pos=left,
+width=1\textwidth,
+height=1\textwidth,
+font=\fontsize{11}{12}\selectfont,
+x grid style={white},
+y grid style={white},
+axis line style={white},
+axis background/.style={fill=color0},
+colorbar,
+colormap={mymap}{[1pt]
+  rgb(0pt)=(0.968627450980392,0.988235294117647,0.992156862745098);
+  rgb(1pt)=(0.898039215686275,0.96078431372549,0.976470588235294);
+  rgb(2pt)=(0.8,0.925490196078431,0.901960784313726);
+  rgb(3pt)=(0.6,0.847058823529412,0.788235294117647);
+  rgb(4pt)=(0.4,0.76078431372549,0.643137254901961);
+  rgb(5pt)=(0.254901960784314,0.682352941176471,0.462745098039216);
+  rgb(6pt)=(0.137254901960784,0.545098039215686,0.270588235294118);
+  rgb(7pt)=(0,0.427450980392157,0.172549019607843);
+  rgb(8pt)=(0,0.266666666666667,0.105882352941176)
+},
+point meta min=0,
+point meta max=1,
+colorbar style={width=4pt, axis line style={draw=none}, ytick={0,0.2,0.4,0.6,0.8,1},yticklabels={0.0,0.2,0.4,0.6,0.8,1.0},ylabel={}}
+]
+\addplot graphics [includegraphics cmd=\pgfimage,xmin=0, xmax=11, ymin=0, ymax=11] {figures/confusion_matrix.png};
+
+\end{axis}
+
+\end{tikzpicture}

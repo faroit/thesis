@@ -1,0 +1,76 @@
+% ## CNN 1
+%
+% * 0-10: 0.2745
+% * 1-7: 0.2212
+% * total_params: 8666987
+% * total_ops: 17332746
+%
+% ### CRNN 2
+%
+% * 0-10: 0.2672
+% * 1-7: 0.2056
+% * total_params: 352699
+% * total_ops: 691690
+%
+% ### F-CRNN 3
+%
+% * 0-10: 0.3926
+% * 1-7: 0.3613
+% * total_params: 67459
+% * total_ops: 121465
+%
+% ### F-CNN 4
+%
+% * 0-10: 0.3807
+% * 1-7: 0.3342
+% * total_params: 282315
+% * total_ops: 563945
+%
+% ### RNN 5
+%
+% * 0-10: 0.3777
+% * 1-7: 0.3294
+% * total_params: 314571
+% * total_ops: 581305
+
+\begin{tikzpicture}
+\begin{axis}[
+    xmode=log,
+    xlabel={Nb of Floating Point Operations},
+    ylabel={MAE},
+    xmin=20000,
+    xmax=40000000,
+    ymajorgrids,
+    yminorgrids,
+    xmajorgrids,
+    xminorgrids,
+    minor y tick num=4,
+    enlarge x limits={0.01},
+    grid style={line width=.1pt, draw=gray!25},
+    major grid style={line width=.2pt,draw=gray!25}
+]
+\addplot[
+    scatter,
+    only marks,
+    scatter src=explicit,
+    mark=*, draw=white, fill=white, black!20,
+    visualization depends on={10 * log10(\thisrow{w1}/100000) \as\wone},
+    scatter/classes={
+        1={fill=CNN},
+        2={fill=CRNN},
+        3={fill=FCRNN},
+        4={fill=FCNN},
+        5={fill=RNN}
+    },
+    scatter/@pre marker code/.append style={
+        /tikz/mark size=\wone
+    }
+]
+table[x=x,y=y,meta=w2]{Chapters/08_Analysis_CountNet/figures/complexity.dat};
+\addplot[mark=*, fill=white, mark options={draw=white, mark size=0.5pt}] coordinates {(17332746, 0.2212)} node[pin={150, pin edge={thick}}:{CNN (8.66M)}]{};
+\addplot[mark=*, fill=white, mark options={draw=white, mark size=0.5pt}] coordinates {(691690, 0.2056)} node[pin={150, pin edge={thick}}:{CRNN (0.45M)}]{};
+\addplot[mark=*, fill=white, mark options={draw=white, mark size=0.5pt}] coordinates {(121465, 0.3613)} node[pin={-90, pin edge={thick}}:{F-CRNN (67K)}]{};
+\addplot[mark=*, fill=white, mark options={draw=white, mark size=0.5pt}] coordinates {(563945, 0.3342)} node[pin={30, pin edge={thick}}:{F-CNN (0.28M)}]{};
+\addplot[mark=*, fill=white, mark options={draw=white, mark size=0.5pt}] coordinates {(581305, 0.3294)} node[pin={-30, pin edge={thick}}:{RNN~\cite{stoeter17} (0.31M)}]{};
+\end{axis}
+\end{tikzpicture}
