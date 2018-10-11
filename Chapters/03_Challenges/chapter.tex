@@ -65,37 +65,36 @@ This is similar to music where the overlap can range from two instruments with v
 
 
 
-\begin{figure}[H]
-    \centering
-    \tiny
-    \subfloat[Speech]{
-       \includegraphics[width=0.8\textwidth]{gfx/dominance_map_speakers.pdf}%
-    }\hfill
-    \subfloat[Vocal/Accompaniment]{
-       \includegraphics[width=0.8\textwidth]{gfx/dominance_map_vocacc.pdf}%
-    }\hfill
-    \subfloat[Unison Instruments]{
-     	\includegraphics[width=0.8\textwidth]{gfx/dominance_map_unison.pdf}%
-    }\hfill
-    \caption{Predominant source activity, showing the predominant source for each time frequency entry. Computed using binary masks of each source entry.}
-    \label{fig:dominance}
-\end{figure}
+\begin{figure*}
+\centering
+\subcaptionbox{Speech}
+\includegraphics[width=0.8\textwidth]{gfx/dominance_map_speakers.pdf}%
+\hspace{0.2\textwidth} % seperation
+\subcaptionbox{Vocal/Accompaniment}
+\includegraphics[width=0.8\textwidth]{gfx/dominance_map_vocacc.pdf}%
+\hspace{0.2\textwidth} % seperation
+\subcaptionbox{Vocal/Accompaniment}
+\includegraphics[width=0.8\textwidth]{gfx/dominance_map_unison.pdf}%
+\caption{Predominant source activity, showing the predominant source for each time frequency entry. Computed using binary masks of each source entry.}
+\label{fig:dominance}
+\end{figure*}
 
-\begin{figure}[H]
-    \centering
-    \tiny
-    \subfloat[Speech]{
-       \includegraphics[width=0.8\textwidth]{gfx/count_map_speakers.pdf}%
-    }\hfill
-    \subfloat[Vocal/Accompaniment]{
-       \includegraphics[width=0.8\textwidth]{gfx/count_map_vocacc.pdf}%
-    }\hfill
-    \subfloat[Unison Instruments]{
-     	\includegraphics[width=0.8\textwidth]{gfx/count_map_unison.pdf}%
-    }\hfill
-    \caption{Source Count Activity showing the number of sources $k$ for each time frequency entry. Computed using binary masks of each source entry.}
-    \label{fig:count}
-\end{figure}
+% TODO
+% \begin{figure}[H]
+%     \centering
+%     \tiny
+%     \subfloat[Speech]{
+%        \includegraphics[width=0.8\textwidth]{gfx/count_map_speakers.pdf}%
+%     }\hfill
+%     \subfloat[Vocal/Accompaniment]{
+%        \includegraphics[width=0.8\textwidth]{gfx/count_map_vocacc.pdf}%
+%     }\hfill
+%     \subfloat[Unison Instruments]{
+%      	\includegraphics[width=0.8\textwidth]{gfx/count_map_unison.pdf}%
+%     }\hfill
+%     \caption{Source Count Activity showing the number of sources $k$ for each time frequency entry. Computed using binary masks of each source entry.}
+%     \label{fig:count}
+% \end{figure}
 
 I depict spectrogram examples these scenarios in Figures~\ref{fig:dominance} and~\ref{fig:count}.
 The figure shows the the number of TF entries that predominantly belong to either one of the two source classes.

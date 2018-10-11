@@ -17,7 +17,7 @@ In Figure~\ref{fig:methods_low_rank}, we picture methods exploiting such techniq
 
 Vembu and Baumann proposed to use NMF (and also ICA \cite{common94}) to separate vocals from mixtures \cite{vembu05}. They first discriminated between vocal and non-vocal sections in a mixture by using different combinations of features, such as MFCCs \cite{david80}, perceptual linear predictive (PLP) coefficients \cite{hermansky90}, and log frequency power coefficients (LFPC) \cite{nwe04}, and training two classifiers, namely neural networks and support vector machines (SVM). They then applied redundancy reduction techniques on the TF representation of the mixture to separate the sources \cite{casey00}, by using NMF (or ICA). The components were then grouped as vocal and non-vocal by reusing a vocal/non-vocal classifier with MFCC, LFPC, and PLP coefficients.
 
-Chanrungutai and Ratanamahatana proposed to use NMF with automatic component selection\cite{chanrungutai08,chanrungutai082}. They first decomposed the mixture spectrogram using NMF with a fixed number of basis components. They then removed the components with brief rhythmic and long-lasting continuous events, assuming that they correspond to instrumental sounds. They finally used the remaining components to reconstruct the singing voice, after refining them using a high-pass filter.
+Chanrungutai and Ratanamahatana proposed to use NMF with automatic component selection\cite{chanrungutai08}. They first decomposed the mixture spectrogram using NMF with a fixed number of basis components. They then removed the components with brief rhythmic and long-lasting continuous events, assuming that they correspond to instrumental sounds. They finally used the remaining components to reconstruct the singing voice, after refining them using a high-pass filter.
 
 Marxer and Janer proposed an approach based on a Tikhonov regularization~\cite{tikhonov63} as an alternative to NMF, for singing voice separation~\cite{marxer122}. Their method sacrificed the non-negativity constraints of the NMF in exchange for a computationally less expensive solution for spectrum decomposition, making it more interesting in low-latency scenarios.
 
@@ -79,7 +79,7 @@ where the \(\circ\) operator is usually called the CP product and is depicted in
 \begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{Chapters/06_Separation_Unknown/figures/cpd.pdf}
-  \caption{CPD Product. TODO: Caption}
+  \caption{PARAFAC Decomposition in an example for a three-dimensional tensor \(mathbf{V}\) into three rank 1 vectors.}
   \label{fig:cpd}
 \end{figure}
 \par
@@ -87,28 +87,29 @@ Compared to~\cite{barker13} we choose to generate the modulation tensor in way t
 
 In Figure~\ref{fig:am_tensor} we show the factorization of a simple amplitude modulated input signal for comparison. The signal consists of two sinusoids which are linearly mixed. Both share the same carrier frequency but have different amplitude modulation frequencies. We choose a factorization into $K=2$ components. From the activation components one can see that NMF is not able to separate the two signals sufficiently. NTF gives a smoother activation matrix and is able to generate the output with the separated amplitude modulations on each sinusoid. The modulation frequency gain matrix shows the two modulation frequency templates and the DC-component.
 
-\begin{figure}[H]
-    \centering
-    \tiny
-    \subfloat[Input]{
-       \includegraphics[width=0.8\columnwidth]{Chapters/05_Separation_Known/figures/Timepdf-crop.png}\hspace{-7mm}
-    }\hfill
-    \subfloat[Spectrogram]{
-       \input{Chapters/05_Separation_Known/figures/AMPlots/STFT.tex}%
-    }%
-    \subfloat[Tensor Slice]{
-       \input{Chapters/05_Separation_Known/figures/AMPlots/Tmod.tex}%
-    }\hfill
-
-    \subfloat[NMF]{
-     	\input{Chapters/05_Separation_Known/figures/AMPlots/WH.tex}%
-    }\hfill
-    \subfloat[Non-Negative Tensor Factorization]{
-       \input{Chapters/05_Separation_Known/figures/AMPlots/GAS.tex}%
-    }\hfill
-    \caption{Example of separating a mixture of two amplitude modulated signals by NMF and Modulation-NTF. \\ \textbf{(a)} Mixture of two sinusoids at $440$ Hz with AM of $4.7$ Hz and $12.6$ Hz (fs=$8$ kHz), \textbf{(b)} STFT (FFT length = 256), \textbf{(c)} Slice of Modulation Tensor (FFT length = 256),  \textbf{(d)} $\mathbf{W} \times \mathbf{H}$ Result of Non-Negative Matrix Factorization ($\beta = 1$) after 100 iterations, \textbf{(e)}  $\mathbf{G} \times \mathbf{A} \times \mathbf{S} $ Result of Non-Negative Tensor Factorization ($\beta = 1$) after 100 iterations,}
-    \label{fig:am_tensor}
-\end{figure}
+% TODO
+% \begin{figure}[H]
+%     \centering
+%     \tiny
+%     \subfloat[Input]{
+%        \includegraphics[width=0.8\columnwidth]{Chapters/05_Separation_Known/figures/Timepdf-crop.png}\hspace{-7mm}
+%     }\hfill
+%     \subfloat[Spectrogram]{
+%        \input{Chapters/05_Separation_Known/figures/AMPlots/STFT.tex}%
+%     }%
+%     \subfloat[Tensor Slice]{
+%        \input{Chapters/05_Separation_Known/figures/AMPlots/Tmod.tex}%
+%     }\hfill
+%
+%     \subfloat[NMF]{
+%      	\input{Chapters/05_Separation_Known/figures/AMPlots/WH.tex}%
+%     }\hfill
+%     \subfloat[Non-Negative Tensor Factorization]{
+%        \input{Chapters/05_Separation_Known/figures/AMPlots/GAS.tex}%
+%     }\hfill
+%     \caption{Example of separating a mixture of two amplitude modulated signals by NMF and Modulation-NTF. \\ \textbf{(a)} Mixture of two sinusoids at $440$ Hz with AM of $4.7$ Hz and $12.6$ Hz (fs=$8$ kHz), \textbf{(b)} STFT (FFT length = 256), \textbf{(c)} Slice of Modulation Tensor (FFT length = 256),  \textbf{(d)} $\mathbf{W} \times \mathbf{H}$ Result of Non-Negative Matrix Factorization ($\beta = 1$) after 100 iterations, \textbf{(e)}  $\mathbf{G} \times \mathbf{A} \times \mathbf{S} $ Result of Non-Negative Tensor Factorization ($\beta = 1$) after 100 iterations,}
+%     \label{fig:am_tensor}
+% \end{figure}
 
 A comparison of modulation tensor approach in the context of unison separation has been carried out in our work published in~\cite{stoeter14}.
 Furthermore in that work, we also compared with the pitch variation informed method, presented in the previous chapter.
@@ -462,7 +463,7 @@ The common structure of a deep learning methods for lead and accompaniment separ
 \end{figure}
 
 Providing a thorough introduction to deep neural networks (DNN) is out of the scope of this thesis.
-For the understanding of this section, it is sufficient to mention that DNNs consist of a cascade of several, possibly non-linear transformations of the input, which are learned during a training stage.
+However, for the understanding of this section, it is sufficient to mention that DNNs consist of a cascade of several, possibly non-linear transformations of the input, which are learned during a training stage.
 They were shown to effectively learn representations and mappings, provided enough data is available for estimating their parameters \cite{deng14, lecun15, goodfellow16}.
 Different architectures for neural networks may be combined/cascaded together, and many architectures were proposed in the past, such as feedforward fully-connected neural networks (FNN), convolutional neural networks (CNN), or RNN and variants such as the long short-term memory (LSTM) and the gated-recurrent units (GRU). Training of such functions is achieved by stochastic gradient descent \cite{robbins51} and associated algorithms, such as backpropagation \cite{rumelhart862} or backpropagation through time \cite{rumelhart86} for the case of RNNs.
 \par
@@ -474,12 +475,8 @@ Modeling the temporal structures of both the lead and the accompaniment is a con
 This method can be described as a variant of a stacked denoining autoencoder~\cite{pvincent08}, where the noisy input is mapped to a clean output of the same dimensionality.
 The input representation are an excerpt of the
 \par
-In this work, I decided to deploy model of Uhlich~\cite{uhlich15} to evaluate the separation quality in combination used together with our proposed common fate representation.
-Therefore, I reimplemeted~\cite{uhlich15} using the Keras deep learning framework to systematically assess the input-and output representation of the system.
-
-Now, the system we propose is actually not inputting the signal vector $\mathbf{x}$, but rather a Time-Frequency (TF) representation as the absolute value of the short-term Fourier transform of~$\mathbf{x}$ that is denoted by $\mathbf{X}$.
-
-For the purpose of learning a mapping between~$\mathbf{X}$ and~$k$, we adopt a probabilistic viewpoint and introduce a flexible generative model that explains how a particular source count~$k$ corresponds to some given input ~$\mathbf{X}$.
+I decided to deploy model of Uhlich~\cite{uhlich15} to evaluate the separation quality in combination used together with our proposed common fate representation.
+I reimplemeted~\cite{uhlich15} using the Keras deep learning framework to systematically assess the input-and output representation of the system.
 
 \begin{figure}[ht!]
 \centering
@@ -537,13 +534,6 @@ Early stopping (\(patience = 10\)) is applied by monitoring the validation loss 
 \caption{Comparison of the results of the DSD100 Separation task for vocals and accompaniment sources. Several combinations of `input-output` were tested, as indicated by the x-axis. The y-axis show the bssEval scores.}
 
 \end{figure}
-
-gft:
-
-framelength=1024,
-hopsize=512,
-W=(10, 5),
-mhop=(10, 2)
 
 30 epochs
 3 layers

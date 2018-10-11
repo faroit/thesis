@@ -46,7 +46,7 @@ In the following, I present parts of work that has been published in 2014~\cite{
 
 \marginpar{This section is based on the work that has been submitted in 2014 and together with my collegues Stefan Bayer ~\cite{stoeter14}. Both publications were based on my original ideas}
 
-% TODO add signal model here 
+% TODO add signal model here
 % \begin{equation}
 %   \mathbf{x}=\sum_{j=1}^{J}a_j\mathbf{s}_j
 % \end{equation}
@@ -233,79 +233,80 @@ Furthermore we present two methods to decompose those mixtures based on differen
 
 % \end{figure}
 
-\begin{figure}[H]
-    \centering
-    \tiny
-    \subfloat[Source 1]{
-        \begin{tikzpicture}
-            \begin{axis}[mystyle]
-            \addplot [forget plot] graphics [xmin=0.5,xmax=1121.5,ymin=0.5,ymax=273.5] {Chapters/05_Separation_Known/figures/src1-1.png};
-            \end{axis}
-        \end{tikzpicture}%
-    }\hfill
-    \subfloat[Source 2]{
-        \begin{tikzpicture}
-            \begin{axis}[mystyle]
-            \addplot [forget plot] graphics [xmin=0.5,xmax=1121.5,ymin=0.5,ymax=273.5] {Chapters/05_Separation_Known/figures/src2-1.png};
-            \end{axis}
-        \end{tikzpicture}%
-    }
-
-    \subfloat[Mixture]{
-        \begin{tikzpicture}
-            \begin{axis}[mystyle]
-            \addplot [forget plot] graphics [xmin=0.5,xmax=1121.5,ymin=0.5,ymax=273.5] {Chapters/05_Separation_Known/figures/mix-1.png};
-            \end{axis}
-        \end{tikzpicture}%
-    }
-
-    \subfloat[Mix. warped by Pitch 1]{
-        \begin{tikzpicture}
-            \begin{axis}[mystyle]
-            \addplot [forget plot] graphics [xmin=0.5,xmax=1121.5,ymin=0.5,ymax=273.5] {Chapters/05_Separation_Known/figures/mixwrpedsrc1-1.png};
-            \end{axis}
-        \end{tikzpicture}%
-    }\hfill
-    \subfloat[Mix. warped by Pitch 2]{
-        \begin{tikzpicture}
-            \begin{axis}[mystyle]
-            \addplot [forget plot] graphics [xmin=0.5,xmax=1121.5,ymin=0.5,ymax=273.5] {Chapters/05_Separation_Known/figures/mixwrpedsrc2-1.png};
-            \end{axis}
-        \end{tikzpicture}%
-    }
-
-    \subfloat[Target 1 warped]{
-        \begin{tikzpicture}
-            \begin{axis}[mystyle]
-            \addplot [forget plot] graphics [xmin=0.5,xmax=1121.5,ymin=0.5,ymax=273.5] {Chapters/05_Separation_Known/figures/src1wrped-1.png};
-            \end{axis}
-        \end{tikzpicture}%
-    }\hfill
-    \subfloat[Target 2 warped]{
-        \begin{tikzpicture}
-            \begin{axis}[mystyle]
-            \addplot [forget plot] graphics [xmin=0.5,xmax=1121.5,ymin=0.5,ymax=273.5] {Chapters/05_Separation_Known/figures/src2wrped-1.png};
-            \end{axis}
-        \end{tikzpicture}%
-    }
-
-    \subfloat[Target 1 unwarped]{
-        \begin{tikzpicture}
-            \begin{axis}[mystyle]
-            \addplot [forget plot] graphics [xmin=0.5,xmax=1121.5,ymin=0.5,ymax=273.5] {Chapters/05_Separation_Known/figures/src1unwarped-1.png};
-            \end{axis}
-        \end{tikzpicture}%
-    }\hfill
-    \subfloat[Target 2 unwarped]{
-        \begin{tikzpicture}
-            \begin{axis}[mystyle]
-            \addplot [forget plot] graphics [xmin=0.5,xmax=1121.5,ymin=0.5,ymax=273.5] {Chapters/05_Separation_Known/figures/src2unwarped-1.png};
-            \end{axis}
-        \end{tikzpicture}%
-    }
-    \caption{Example of pitch variation informed NMF in the warped domain. \textit{Time} is shown on horizontal axes. \textit{Frequency} is shown on vertical axes.}
-    \label{fig:warpingdemo}
-\end{figure}
+% TODO
+% \begin{figure}[H]
+%     \centering
+%     \tiny
+%     \subfloat[Source 1]{
+%         \begin{tikzpicture}
+%             \begin{axis}[mystyle]
+%             \addplot [forget plot] graphics [xmin=0.5,xmax=1121.5,ymin=0.5,ymax=273.5] {Chapters/05_Separation_Known/figures/src1-1.png};
+%             \end{axis}
+%         \end{tikzpicture}%
+%     }\hfill
+%     \subfloat[Source 2]{
+%         \begin{tikzpicture}
+%             \begin{axis}[mystyle]
+%             \addplot [forget plot] graphics [xmin=0.5,xmax=1121.5,ymin=0.5,ymax=273.5] {Chapters/05_Separation_Known/figures/src2-1.png};
+%             \end{axis}
+%         \end{tikzpicture}%
+%     }
+%
+%     \subfloat[Mixture]{
+%         \begin{tikzpicture}
+%             \begin{axis}[mystyle]
+%             \addplot [forget plot] graphics [xmin=0.5,xmax=1121.5,ymin=0.5,ymax=273.5] {Chapters/05_Separation_Known/figures/mix-1.png};
+%             \end{axis}
+%         \end{tikzpicture}%
+%     }
+%
+%     \subfloat[Mix. warped by Pitch 1]{
+%         \begin{tikzpicture}
+%             \begin{axis}[mystyle]
+%             \addplot [forget plot] graphics [xmin=0.5,xmax=1121.5,ymin=0.5,ymax=273.5] {Chapters/05_Separation_Known/figures/mixwrpedsrc1-1.png};
+%             \end{axis}
+%         \end{tikzpicture}%
+%     }\hfill
+%     \subfloat[Mix. warped by Pitch 2]{
+%         \begin{tikzpicture}
+%             \begin{axis}[mystyle]
+%             \addplot [forget plot] graphics [xmin=0.5,xmax=1121.5,ymin=0.5,ymax=273.5] {Chapters/05_Separation_Known/figures/mixwrpedsrc2-1.png};
+%             \end{axis}
+%         \end{tikzpicture}%
+%     }
+%
+%     \subfloat[Target 1 warped]{
+%         \begin{tikzpicture}
+%             \begin{axis}[mystyle]
+%             \addplot [forget plot] graphics [xmin=0.5,xmax=1121.5,ymin=0.5,ymax=273.5] {Chapters/05_Separation_Known/figures/src1wrped-1.png};
+%             \end{axis}
+%         \end{tikzpicture}%
+%     }\hfill
+%     \subfloat[Target 2 warped]{
+%         \begin{tikzpicture}
+%             \begin{axis}[mystyle]
+%             \addplot [forget plot] graphics [xmin=0.5,xmax=1121.5,ymin=0.5,ymax=273.5] {Chapters/05_Separation_Known/figures/src2wrped-1.png};
+%             \end{axis}
+%         \end{tikzpicture}%
+%     }
+%
+%     \subfloat[Target 1 unwarped]{
+%         \begin{tikzpicture}
+%             \begin{axis}[mystyle]
+%             \addplot [forget plot] graphics [xmin=0.5,xmax=1121.5,ymin=0.5,ymax=273.5] {Chapters/05_Separation_Known/figures/src1unwarped-1.png};
+%             \end{axis}
+%         \end{tikzpicture}%
+%     }\hfill
+%     \subfloat[Target 2 unwarped]{
+%         \begin{tikzpicture}
+%             \begin{axis}[mystyle]
+%             \addplot [forget plot] graphics [xmin=0.5,xmax=1121.5,ymin=0.5,ymax=273.5] {Chapters/05_Separation_Known/figures/src2unwarped-1.png};
+%             \end{axis}
+%         \end{tikzpicture}%
+%     }
+%     \caption{Example of pitch variation informed NMF in the warped domain. \textit{Time} is shown on horizontal axes. \textit{Frequency} is shown on vertical axes.}
+%     \label{fig:warpingdemo}
+% \end{figure}
 
 \section{Extending Pitch Variation Informed Separation}
 

@@ -557,19 +557,18 @@ This procedure is similar to~\cite{mesaros17} used to label the data.
 Signals are mixed according to Equation~\ref{eq:mixing_model}, peak normalized and then transformed to a time-frequency matrix \(X \in D \times F\).
 Based on a voice activity detection algorithm (VAD), we used an implementation based on the WebRTC Standard~\cite{webrtc} where we computed the ground truth output \(\cardinality \) via Equation~\ref{eq:definition_k}.
 All samples are normalized to the average Euclidean norm of \(duration\) frames to be robust against gain variations as proposed by~\cite{uhlich15}.
-Furthermore, the data was scaled to zero mean and unit standard deviation across the frequency dimension \(F\) over the full training data.
-Scaling parameters were saved for validation and test.
-For a more detailed description of the data set, the reader is referred to~\cite{stoeter17}.
+% Furthermore, the data was scaled to zero mean and unit standard deviation across the frequency dimension \(F\) over the full training data.
+% Scaling parameters were saved for validation and test.
+% For a more detailed description of the data set, the reader is referred to~\cite{stoeter17}.
+\subsubsection{Standardization, Normalization}%
+\label{ssec:norm}
 
-% \subsubsection{Standardization, Normalization}%
-% \label{ssec:norm}
-%
-% As our application more closely relates to source separation we want our trained DNN system to be robust against gain variations.
-% We therefore find it important that the DNN can not leverage the gain factors of the mixture.
-% We found that the averaged energy of one bin across \(duration\) already is a solid indicator for the number of speakers.
-% In fact, in early experiments of the methods described in~\cite{sayoud10, andrei15} we were only able to reproduce their results when no normalization was applied.
-% To accommodate these findings, we normalize \(\mathbf{X}\) to the average Euclidean norm of \(duration\) frames as proposed by~\cite{Uhlich15}.
-% Additionally, as common in machine learning, we scale the normalised input representation so that the feature dimension \(F\) have zero mean and unit variance/standard deviation across the whole training dataset (Standardization).
+As our application more closely relates to source separation we want our trained DNN system to be robust against gain variations.
+We therefore find it important that the DNN can not leverage the gain factors of the mixture.
+We found that the averaged energy of one bin across \(duration\) already is a solid indicator for the number of speakers.
+In fact, in early experiments of the methods described in~\cite{sayoud10, andrei15} we were only able to reproduce their results when no normalization was applied.
+To accommodate these findings, we normalize \(\mathbf{X}\) to the average Euclidean norm of \(duration\) frames as proposed by~\cite{Uhlich15}.
+Additionally, as common in machine learning, we scale the normalised input representation so that the feature dimension \(F\) have zero mean and unit variance/standard deviation across the whole training dataset (Standardization).
 
 \subsection{Training Procedure}%
 \label{ssec:parameters}
@@ -692,34 +691,19 @@ which is then averaged
     by feature representations.%
     \label{fig:ssec:exp_fixed_gains/A}%
 }
-[%
-    \textwidth % width of caption
-]%
-{%
-  \input{Chapters/08_Analysis_CountNet/figures/src-mae-feature}
-}%
+[\textwidth]{\input{Chapters/08_Analysis_CountNet/figures/src-mae-feature}}%
 \hspace{0.2\textwidth} % seperation
 \subcaptionbox[by output distribution.]{%
     by output distribution.%
     \label{fig:ssec:exp_fixed_gains/A}%
 }
-[%
-    \textwidth % width of caption
-]%
-{%
-  \input{Chapters/08_Analysis_CountNet/figures/src-mae-objective}
-}%
+[\textwidth]{\input{Chapters/08_Analysis_CountNet/figures/src-mae-objective}}%
 \hspace{0.2\textwidth} % seperation
 \subcaptionbox[by feature representations.]{%
     by feature representations.%
     \label{fig:ssec:exp_fixed_gains/A}%
 }
-[%
-    \textwidth % width of caption
-]%
-{%
-  \input{Chapters/08_Analysis_CountNet/figures/src-mae-architecture}
-}%
+[\textwidth]{\input{Chapters/08_Analysis_CountNet/figures/src-mae-architecture}}%
 \caption[Short Caption]{Figure shows results of average mean absolute error (MAE) on mixtures of speakers with equal power as described in \textsc{Section~\ref{ssec:model_comparsion}} per ground truth count \(k=[0\ldots10]\). Error bars show the 95\% confidence intervals. Results in (a) are averaged over factors shown in (b) and (c) and similarly for (b) and (c).}
 \label{fig:fixed-gain-results}
 \end{figure*}
@@ -803,31 +787,31 @@ Random Effect \(k\)            &  0.057 &    0.297 &        &             \\
 
 % wrap things up here, describe the ouput shape dimensions and the temporal resolution.
 
-% \begin{table}
-%   \caption{Proposed CRNN Architecture}%
-%   \label{fig:crnndetail}
-%   \centering
-% \begin{tabular}{llll}
-%   \toprule
-%   Layername (type)              & Configuration    & Output Shape    & \# Param\\
-%   Input                         &                  &  (500, 201, 1)  & 0 \\
-%   Convolution                   & $3\times 3$, 64  &  (498, 199, 64) & 640 \\
-%   Convolution                   & $3\times 3$, 32  &  (496, 197, 32) & 18464 \\
-%   Max Pooling                   & $3\times 3$      &  (165, 65, 32)  & 0 \\
-%   Convolution                   & $3\times 3$, 128 &  (163, 63, 128) & 36992 \\
-%   Convolution                   & $3\times 3$, 64  &  (161, 61, 64)  & 73792 \\
-%   Max Pooling                   & $3\times 3$      &  (53, 20, 64)   & 0 \\
-%   Dropout                       & 0.25             &  (53, 20, 64)   & 0 \\
-%   Reshape                       &                  &  (53, 1280)     & 0 \\
-%   lstm1 (LSTM)                  & 40               &  (53, 40)       & 211360 \\
-%   Temporal Pooling              & $2$              &  (26, 40)       & 0 \\
-%   Reshape                       &                  &  (1040)         & 0 \\
-%   Fully Connected (FC)          &                  &  (11)            & 11451 \\
-%   \midrule
-%   & & Total nb params & 352,699 \\
-%   \bottomrule
-%   \end{tabular}
-% \end{table}
+\begin{table}
+  \caption{Proposed CRNN Architecture}%
+  \label{fig:crnndetail}
+  \centering
+\begin{tabular}{llll}
+  \toprule
+  Layername (type)              & Configuration    & Output Shape    & \# Param\\
+  Input                         &                  &  (500, 201, 1)  & 0 \\
+  Convolution                   & $3\times 3$, 64  &  (498, 199, 64) & 640 \\
+  Convolution                   & $3\times 3$, 32  &  (496, 197, 32) & 18464 \\
+  Max Pooling                   & $3\times 3$      &  (165, 65, 32)  & 0 \\
+  Convolution                   & $3\times 3$, 128 &  (163, 63, 128) & 36992 \\
+  Convolution                   & $3\times 3$, 64  &  (161, 61, 64)  & 73792 \\
+  Max Pooling                   & $3\times 3$      &  (53, 20, 64)   & 0 \\
+  Dropout                       & 0.25             &  (53, 20, 64)   & 0 \\
+  Reshape                       &                  &  (53, 1280)     & 0 \\
+  lstm1 (LSTM)                  & 40               &  (53, 40)       & 211360 \\
+  Temporal Pooling              & $2$              &  (26, 40)       & 0 \\
+  Reshape                       &                  &  (1040)         & 0 \\
+  Fully Connected (FC)          &                  &  (11)            & 11451 \\
+  \midrule
+  & & Total nb params & 352,699 \\
+  \bottomrule
+  \end{tabular}
+\end{table}
 
 \begin{figure}[t]
   \centering
