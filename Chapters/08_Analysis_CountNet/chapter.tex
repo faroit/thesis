@@ -331,10 +331,10 @@ All architectures under investigation are summarized in Figure~\ref{fig:networko
 \subsubsection{Convolutional Neural Network (CNN)}%
 Convolutional Neural Networks (CNNs) are a variant of standard fully-connected neural networks, where the architecture generally consists of one or more ``convolution layers'' followed by fully-connected layers leading to the output.
 
-% A convolution layer generally consists of a convolution operation, followed by feature pooling.
-% The convolution operation applies a set of filters to local regions of the input, and the application of each such filter outputs a \emph{feature map}.
-% It should be noted that the convolution operation, generally, also constitutes the application of a point-wise non-linear activation function on each feature map.
-% This is followed by feature pooling, that aims to reduce the feature space dimensions by combining the filter activations over a specified region.
+A convolution layer generally consists of a convolution operation, followed by feature pooling.
+The convolution operation applies a set of filters to local regions of the input, and the application of each such filter outputs a \emph{feature map}.
+It should be noted that the convolution operation, generally, also constitutes the application of a point-wise non-linear activation function on each feature map.
+This is followed by feature pooling, that aims to reduce the feature space dimensions by combining the filter activations over a specified region.
 Since the individual elements of the filters (weights) are learned during the training stage, convolutional layers can also be interpreted as feature extractors.
 By stacking up additional layers, CNNs can extract more abstract features in higher level layers~\cite{Simonyan15}.
 \par
@@ -357,26 +357,26 @@ To alleviate this problem, forgetting factors (also called gating) were proposed
 One of the most popular variants of RNNs with forgetting factors is the Long Short-Term Memory (LSTM)~\cite{Hochreiter97} cell.
 In~\cite{stoeter17} such an architecture based on three bi-directional LSTM cells, was proposed. The architecture is similar to the one employed in~\cite{Leglaive15}.
 
-% \begin{figure}[t]
-% \centering
-% \includegraphics[width=\columnwidth]{Chapters/08_Analysis_CountNet/figures/conv.pdf}
-% \caption{Illustrative diagram to show the convolution operation in
-% convolution layers of CNN.\@ We consider N different local filters each
-% of size \(J\times I\)}%
-% \label{fig:conv}
-% \end{figure}
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{Chapters/08_Analysis_CountNet/figures/conv.pdf}
+\caption{Illustrative diagram to show the convolution operation in
+convolution layers of CNN.\@ We consider N different local filters each
+of size \(J\times I\)}%
+\label{fig:conv}
+\end{figure}
 
 % * good for temporal dependencies.
 % * State-of-the-art speech recognition, NLP, diarization
-% A recurrent neural network (RNN) layer is very similar to a fully connected network, except that RNN applies the same set of weights \(\mathbf{A}\) recursively over an input sequence.
-% While convolutional layers excel in capturing local structures, RNNs can detect structure in sequential data of arbitrary length. %have an internal memory of infinite length of the past input sequence history.
-% This makes it ideal to model time series, however, in practice, the temporal context learnt is limited to only a few time instances, because of the vanishing gradient problem~\cite{Hochreiter98}.
-%
-% To alleviate this problem, forgetting factors (also called gating) were proposed.
-% One of the most popular gated recurrent cells is the Long Short-Term Memory (LSTM)~\cite{Hochreiter97} cell.
-% Its effectiveness has been proven in various applications and LSTMs are the state-of-the-art approach for speech recognition~\cite{Graves13} and singing voice detection~\cite{Leglaive15}~\footnote{For a deeper mathematical background of LSTMs, due to space constraints, the reader is referred to the aforementioned papers.}.
-% For a given input of dimensions \(D \times F \times C\), the output of a recurrent layer is either only the last step of dimension \(1 \times A\) or the full sequence \(D \times A\).
-% The latter is useful to stack multiple LSTMs or to apply temporal max pooling of the sequence.
+A recurrent neural network (RNN) layer is very similar to a fully connected network, except that RNN applies the same set of weights \(\mathbf{A}\) recursively over an input sequence.
+While convolutional layers excel in capturing local structures, RNNs can detect structure in sequential data of arbitrary length. %have an internal memory of infinite length of the past input sequence history.
+This makes it ideal to model time series, however, in practice, the temporal context learnt is limited to only a few time instances, because of the vanishing gradient problem~\cite{Hochreiter98}.
+
+To alleviate this problem, forgetting factors (also called gating) were proposed.
+One of the most popular gated recurrent cells is the Long Short-Term Memory (LSTM)~\cite{Hochreiter97} cell.
+Its effectiveness has been proven in various applications and LSTMs are the state-of-the-art approach for speech recognition~\cite{Graves13} and singing voice detection~\cite{Leglaive15}~\footnote{For a deeper mathematical background of LSTMs, due to space constraints, the reader is referred to the aforementioned papers.}.
+For a given input of dimensions \(D \times F \times C\), the output of a recurrent layer is either only the last step of dimension \(1 \times A\) or the full sequence \(D \times A\).
+The latter is useful to stack multiple LSTMs or to apply temporal max pooling of the sequence.
 
 \subsubsection{Convolutional Recurrent Neural Network (CRNN)}%
 % * Combination of CNN and Recurrent
@@ -387,12 +387,13 @@ The main motivation to stack these layers is to combine the benefits of convolut
 There are different ways to stack CNNs and RNNs to form a CRNN architecture.
 In our application the motivation is to aggregate local time-frequency features coming from the output convolutional neural network and use the LSTM layer to model long temporal structures.
 As the output of a CNN layer is a 3D volume \(D \times F \times C\) and the input of a recurrent layer only takes a 2D sequence, the dimension would need to be reduced. Naturally, the time dimension would need to be kept, therefore the channel dimension \(C\) is stacked with the frequency dimension \(F\) resulting in a \(D \times F \cdot C\) output.
-% \begin{figure}[t]
-% \centering
-% \includegraphics[width=\columnwidth]{Chapters/08_Analysis_CountNet/figures/crnn.pdf}
-% \caption{Illustrative diagram to show the stacking of the output of a convolution layer into a recurrent layer with \(A\) hidden nodes per memory cell.}%
-% \label{fig:crnn}
-% \end{figure}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{Chapters/08_Analysis_CountNet/figures/crnn.pdf}
+\caption{Illustrative diagram to show the stacking of the output of a convolution layer into a recurrent layer with \(A\) hidden nodes per memory cell.}%
+\label{fig:crnn}
+\end{figure}
 
 \subsubsection{Full-band Convolutional Neural Networks (F-CNN)}%
 % * using full frequency band filters.
@@ -505,33 +506,34 @@ Since a realistic dataset of fully overlapped speakers is not available, we chos
 We recognize that in a simulated ``cocktail-party'' environment, mixtures lack the conversational aspect of human communication but provide a controlled environment which helps to understand how a DNN solves the count estimation problem.
 As we aim for a speaker independent solution, we selected a speech corpus with preference to a high number of different speakers instead of the number of utterances, thus increasing the number of unique mixtures.
 We selected \emph{LibriSpeech clean-360}\ \cite{panayotov15} which includes 363 hours of clean speech of English utterances from 921 speakers (439 female and 482 male speakers) sampled at 16 kHz.
-% Compared to \emph{LibriSpeech}, \emph{TIMIT} is of lower recording quality and \emph{THCHS} represents mandarin speech.
-% \par
-% As revealed in Equation~\ref{eq:definition_k}, the maximum number of concurrent speakers \(cardinality\) requires annotation of the activity of each individual speaker.
-% Even though many corpora come with word and phonemes annotation, they often are not consistent across different corpora.
-% We therefore generated annotations based on a voice activity detection algorithm (VAD). As we rely on a robust VAD estimate, we found the implementation from the \emph{Chromium Web Browser} as part of the WebRTC Standard~\footnote{WebRTC 1.0: Real-time Communication Between Browsers W3C Editor's Draft 05 June 2017} to yield good results.
+Compared to \emph{LibriSpeech}, \emph{TIMIT} is of lower recording quality and \emph{THCHS} represents mandarin speech.
+\par
+As revealed in Equation~\ref{eq:definition_k}, the maximum number of concurrent speakers \(cardinality\) requires annotation of the activity of each individual speaker.
+Even though many corpora come with word and phonemes annotation, they often are not consistent across different corpora.
+We therefore generated annotations based on a voice activity detection algorithm (VAD). As we rely on a robust VAD estimate, we found the implementation from the \emph{Chromium Web Browser} as part of the WebRTC Standard~\footnote{WebRTC 1.0: Real-time Communication Between Browsers W3C Editor's Draft 05 June 2017} to yield good results.
 In the further course of this work (see Section~\ref{sec:evaluation}), we also present the results from test sets of two other datasets as listed in Table~\ref{tab:corpora}.
 Furthermore, we included non-speech examples from the TUT Acoustic Scenes dataset~\cite{Mesaros16} in our training data to avoid using zero input samples for \(\cardinality = 0\) to increase the robustness against noise.
 
-% \subsection{Training Dataset}%
-% \label{ssec:train}
-%
-% To generate a single training sample, a tuples of speech mixtures and their ground truth speaker count \(\cardinality \), we draw a unique set of \(\cardinality \) speakers from the corpus.
-% For each of the speakers we then select a random utterance, resampled to 16 kHz sampling rate and apply VAD.\@
-% The VAD method was configured using default parameters using a hop size of 10~ms.
-% Further, the VAD estimate was used to remove silence in the beginning and the end of an utterance recording.
-% In the next step, more utterances from the same speaker are drawn from the corpus until the desired duration is reached.
-% Both, the audio recording and the VAD annotation of each utterance is concatenated.
-% The procedure is repeated for all speaker so that \(\cardinality \) time domain signals are created.
-% Signals are mixed according to Equation~\ref{eq:mixing_model} and peak normalised to avoid clipping.
-% Mixtures are then transformed to a time-frequency matrix \(X \in D \times F\).
-% The VAD matrix \(v_{nl}\) is upsampled in temporal direction using nearest neighbour interpolation to match \(D\).
-% The ground truth output \(\cardinality \) is then computed based on Equation~\ref{eq:definition_k}.
-% \par
-% We follow the proposal of~\cite{wang15} and include non-speech examples in our training data to avoid using zero input samples for \(\cardinality = 0\) and also to increase the robustness against noise.
-% We used the TUT Acoustic Scenes dataset~\cite{Mesaros16} to create training samples using the same procedure as described above.
-% As environmental sounds could include speech, we omitted obvious subsets such as \texttt{cafe/restaurant}, \texttt{grocery store} and \texttt{metro station}.
-% Additionally we used the VAD to verify if any sample contains speech.
+\subsection{Training Dataset}%
+\label{ssec:train}
+
+To generate a single training sample, a tuples of speech mixtures and their ground truth speaker count \(\cardinality \), we draw a unique set of \(\cardinality \) speakers from the corpus.
+For each of the speakers we then select a random utterance, resampled to 16 kHz sampling rate and apply VAD.\@
+The VAD method was configured using default parameters using a hop size of 10~ms.
+Further, the VAD estimate was used to remove silence in the beginning and the end of an utterance recording.
+In the next step, more utterances from the same speaker are drawn from the corpus until the desired duration is reached.
+Both, the audio recording and the VAD annotation of each utterance is concatenated.
+The procedure is repeated for all speaker so that \(\cardinality \) time domain signals are created.
+Signals are mixed according to Equation~\ref{eq:mixing_model} and peak normalised to avoid clipping.
+Mixtures are then transformed to a time-frequency matrix \(X \in D \times F\).
+The VAD matrix \(v_{nl}\) is upsampled in temporal direction using nearest neighbour interpolation to match \(D\).
+The ground truth output \(\cardinality \) is then computed based on Equation~\ref{eq:definition_k}.
+\par
+We follow the proposal of~\cite{wang15} and include non-speech examples in our training data to avoid using zero input samples for \(\cardinality = 0\) and also to increase the robustness against noise.
+We used the TUT Acoustic Scenes dataset~\cite{Mesaros16} to create training samples using the same procedure as described above.
+As environmental sounds could include speech, we omitted obvious subsets such as \texttt{cafe/restaurant}, \texttt{grocery store} and \texttt{metro station}.
+Additionally we used the VAD to verify if any sample contains speech.
+
 \begin{table}
   \centering
   \caption{Overview of speech corpora used in this work.}%
@@ -628,21 +630,21 @@ performed evaluation of all models on \(T_{\textrm{test}} = 5720\) unique and un
 % This is because, compared to raw time-domain models, TF models allow for faster training due to less data redundancy leading to generally fewer trainable parameters or shorter training duration.
 Several well-established input representations were evaluated in~\cite{stoeter17} such as (linear or logarithmically scaled) short-time Fourier transform (STFT), Mel filter bank outputs (MEL), Mel Frequency Cepstral Coefficients (MFCC) representations, typically chosen for speech applications.
 
-% \begin{table}
-% \caption{Speech related Input representations}
-% \label{tab:inputrep}
-%   \centering
-% \begin{tabular}{rll}
-% \toprule
-% References & Task & Representation \\
-% \midrule
-% \cite{geiger13, hagerer17} & Overlap Detection/VAD & MFCC \\
-% \cite{Graves13, sainath15, marchi17} & ASR & MEL \\
-% \cite{amodei16} & ASR & STFT \\
-% \cite{schluter15, schluter16} & Singing Voice AD & \(\log(1 + \mathbf{X})\) \\
-% \bottomrule
-% \end{tabular}
-% \end{table}
+\begin{table}
+\caption{Speech related Input representations}
+\label{tab:inputrep}
+  \centering
+\begin{tabular}{rll}
+\toprule
+References & Task & Representation \\
+\midrule
+\cite{geiger13, hagerer17} & Overlap Detection/VAD & MFCC \\
+\cite{Graves13, sainath15, marchi17} & ASR & MEL \\
+\cite{amodei16} & ASR & STFT \\
+\cite{schluter15, schluter16} & Singing Voice AD & \(\log(1 + \mathbf{X})\) \\
+\bottomrule
+\end{tabular}
+\end{table}
 
 % As for the task of estimating the number of speakers, we assume that a fine frequency resolution is needed to discriminate time-frequency bins with overlapped speech segments from those that only belong to a single speaker.
 Even though MFCCs are used in related tasks and are included in our baseline evaluations, they are known to perform poorly when used in CNNs~\cite{Seltzer13}.
@@ -1035,20 +1037,22 @@ While filter outputs of layer 3 and 4 also show more low-frequency content such 
 The conducted analysis suggests that the network is doing count estimation based on the detection of phonemes. To assess the validity of this interpretation, we directly verified the performance of the method as a function of the phoneme activity. In the following, we verify whether count estimates are affected by the pronunciation speed.\par
 
 We assume that the CRNN model learned the aggregated phoneme or syllable activity of all speakers in a fixed, given excerpt.
-% \captionof{table}{Binary Logit Regression}\label{Binary Logit Regression}\begin{center}
-% \begin{tabular}{lclc}
-% \toprule
-% \textbf{Dep. Variable:} &      error         & \textbf{  No. Observations:  } &     2000   \\
-% \textbf{Model:}         &      Logit       & \textbf{  Df Residuals:      } &     1998   \\
-% \textbf{Method:}        &       MLE        & \textbf{  Df Model:          } &        1   \\
-% \textbf{Date:}          & Mon, 29 Jan 2018 & \textbf{  Pseudo R-squ.:     } &  0.01108   \\
-% \textbf{Time:}          &     16:38:38     & \textbf{  Log-Likelihood:    } &   -1370.9  \\
-% \textbf{converged:}     &       True       & \textbf{  LL-Null:           } &   -1386.3  \\
-% \textbf{ }              &                  & \textbf{  LLR p-value:       } & 2.980e-08  \\
-% \bottomrule
-% \end{tabular}
-% %\caption{Logit Regression Results}
-% \end{center}
+
+\captionof{table}{Binary Logit Regression}\label{Binary Logit Regression}\begin{center}
+\begin{tabular}{lclc}
+\toprule
+\textbf{Dep. Variable:} &      error         & \textbf{  No. Observations:  } &     2000   \\
+\textbf{Model:}         &      Logit       & \textbf{  Df Residuals:      } &     1998   \\
+\textbf{Method:}        &       MLE        & \textbf{  Df Model:          } &        1   \\
+\textbf{Date:}          & Mon, 29 Jan 2018 & \textbf{  Pseudo R-squ.:     } &  0.01108   \\
+\textbf{Time:}          &     16:38:38     & \textbf{  Log-Likelihood:    } &   -1370.9  \\
+\textbf{converged:}     &       True       & \textbf{  LL-Null:           } &   -1386.3  \\
+\textbf{ }              &                  & \textbf{  LLR p-value:       } & 2.980e-08  \\
+\bottomrule
+\end{tabular}
+\caption{Logit Regression Results}
+\end{center}
+
 If that is the case, it would mean that the speaker count estimate would be affected if the speakers would speak slower or faster in relation to the fixed input window (speaking rate).
 We therefore want to see if very slow or very fast speakers significantly increase the error of our proposed CRNN model.
 In turn we define a null hypothesis that there is no association between the speaker count error probability and the value of the \emph{speaking rate}.\par

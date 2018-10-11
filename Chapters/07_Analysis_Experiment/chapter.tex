@@ -1,10 +1,13 @@
 \chapter{Human Ability of Counting Concurrent Sources}
 
+TODO... Write a proper chapter introduction.
+
 \begin{itemize}
   \item why is counting interesting
+  \item are we calling it count estimation and not counting?
+  \item why can't humans count for a high number of sources?
+  \item counting on music signals in ill defined music signals lack a proper source definition.
 \end{itemize}
-
-discuss that music signals lack a proper source definition. Therefore counting on music signals in ill defined. However, it may work on some specific cases. We tried on ... but it didn't work.
 
 \section{Experiments on Instrument Count Estimation}
 
@@ -435,7 +438,7 @@ It is often recommended to use headphones instead of loudspeakers for Internet e
 
 Surprising was the small number of participants who had to be screened. We excluded 27 participants since they gave at least one non-serious response which is about 2.3\% (1195 participants remained after excluding all trials which were not the first ones). Most of these excluded participants responded with either very high numbers (e.~g. 99) or responded with zeros for their estimated number of instruments being played. We assume that especially participants who responded with zero only wanted to get an impression of the experiment.
 
-\section{Exeriments of Speaker Count Estimation}
+\section{Exeriment on Speaker Count Estimation}
 
 \begin{figure}[htb]
 	\centering
@@ -464,9 +467,9 @@ We refer to this strategy as ``direct count estimation''.
 
 % * Reference existing listening tests which report the same thing
 % * Are we really doing it? We can decide on this once the first full draft is ready.
-To compare the results of our trained CRNN o                                                                                                                                                       n our synthesized dataset to human performance, we chose to reproduce the experiments made in~\cite{kawashima15, kashino96}.
+In a first step, we chose to reproduce the experiments made in~\cite{kawashima15, kashino96}.
 Kawashima et al.\ found in extensive experiments using Japanese speech samples, that participants were able to correctly estimate up to three simultaneously active speakers without using any spatial cues.
-We conducted our own study using the simulated data from the \emph{LIBRI Speech} (power normalized) set mentioned earlier in Section~\ref{ssec:corpus}.
+We conducted our own study using the simulated data from the \emph{LIBRI Speech} (power normalized) data set.
 We therefore randomly selected 10 samples for each \(k \in [0, \ldots, 10]\), resulting in 100 mixtures of 5~seconds duration each.
 The experiment was done using \emph{between-group design}, where one group (blind experiment) did not get any prior information about the maximum number of speakers in the test set (similar to~\cite{kawashima15}).
 However, the maximum number of speakers was revealed to the other group (informed experiment), which is more related to our data-driven, classification based CRNN.
@@ -496,7 +499,11 @@ For higher speaker counts, participants reported that the integrated phoneme act
 ~\cite{kawashima15}) compared to our proposed CRNN. Error bars show 95\% confidence intervals.}%
     \label{fig:experiment}
  \end{figure}
+ % TODO add mean absolute error
 
  \section{Discussion and Scope}
 
- Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+\begin{itemize}
+  \item More stimulus instead of more participants to train a dnn to match human performance.
+  \item good task for a web based experiment.
+\end{itemize}
