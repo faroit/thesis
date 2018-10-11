@@ -176,9 +176,6 @@ The pitch variation estimator is based on a method that was proposed by B\"ackst
 Both algorithms did perform on the same filter bank output and with the same sample rate. The NMF approach did use a 2048 STFT with 512 samples hop size.
 All methods use soft masking / wiener filtering for the actual synthesis.
 
-\subsection{Evaluation}
-\label{sub:results}
-
 The results were evaluated by using commonly used evaluation measures provided by the {PEASS} Toolbox~\cite{emiya11}. The evaluation measure are:
 
 \begin{itemize}
@@ -486,7 +483,7 @@ While we developed the framework for a pitch variation informed separation, we f
 In turn, we proposed a method which iteratively improves the estimates of such algorithms by applying in each step a time warp on the input signal based on the previously estimated fundamental frequency.
 This time warp is designed to lead to a nearly constant $F0$. A refinement is then calculated through inverse time warping of the result of an $F0$ estimation applied to the warped signal. The proposed refinement algorithm is not limited to specific estimators or optimized for specific input signal characteristics. The method is evaluated on synthetic audio signals as well as speech recordings and polyphonic music recordings. Results indicate a significant improvement on accuracy when using the proposed refinement in combination with several well-known $F0$ estimators
 
-\subsection{Improving $F0$ Estimation}
+\paragraph{Proposed System}
 %
 The development of novel methods for fundamental frequency estimation, performing as well as earlier methods, such as the popular correlation based \textsc{YIN} algorithm~\cite{de2002yin}, has proven challenging.
 In a study~\cite{babacan2013comparative} it is stated that YIN still performs best in terms of accuracy.
@@ -561,25 +558,19 @@ Note that compared to~\cite{resch}, our method does not use a complex optimisati
 \end{figure}
 
 \vspace{-0.6em}
-\section{Experiments and Evaluation} % (fold)
+\subsection{Experiments and Evaluation} % (fold)
 \label{sec:experiments}
 
-\subsection{Estimators} % (fold)
-\label{sub:estimators}
 For the evaluation of the proposed $F0$ refinement, we test the refinement algorithm with the following $F0$ estimators:\\
 \textbf{YIN}~\cite{de2002yin} is used as an FFT based implementation~\cite{bogdanov2013essentia}. The confidence measure is thresholded for values lower than 0.6 on the speech recordings. \textbf{iRAPT1,2}~\cite{azarov2012instantaneous} are improved versions of the RAPT framework. We use the author's MATLAB implementation of the iRAPT1 and iRAPT2 algorithms.\ iRAPT2 is a refinement method that is comparable to our proposed method. To evaluate the results, we apply our refinement to iRAPT1 and compare it with the refinement produced by iRAPT2. $c[n] < 0.7$ is used for thresholding speech recordings. \textbf{MELODIA}~\cite{salamon2012melody} is not designed to be an $F0$ estimator but is able to extract the \emph{predominant} melody in a polyphonic mixture. We increase the bin resolution to 0.5 semitones, to increase the accuracy. We used the \textsc{Essentia} implementation. For thresholding we use the built-in voiced/unvoiced detection.
 For YIN and MELODIA, we evaluate on a frame length of 64~ms and a hop size of 16~ms. For iRAPT1 and iRAPT2  we use the fixed frame length parameters of the author's implementation.
-
-\vspace{-0.6em}
-\subsection{Evaluation} % (fold)
-\label{sub:evaluation}
-
+\par
 We use the established evaluation measures \textsc{Gross Pitch Error} (GPE) and \textsc{Mean Fine Pitch Error} (MFPE)~\cite{azarov2012instantaneous}. We focus on MFPE in our results, measuring the absolute deviation of $F0_{\mathrm{true}}$ and the $F0$ estimate per sample.
 As mentioned in~\cite{resch}, evaluating the accuracy of $F0$ estimates is challenging because of the lack of ground truth datasets annotated on a time scale with such a high resolution. Most of the available audio test data sets are not suitable because the $F0$ annotation is only available with low time resolutions. By using such a dataset there is a risk that the refined $F0$ estimate is higher in MFPE. This is because the refined estimates show more of the fine structure deviating from the coarse annotation which then is considered as piecewise constant. To address this issue, we first present the evaluation results on synthetic data. To verify our synthetic results, we present the results of speech data annotated on 10~ms frames derived from laryngograph signals. We did only evaluate and process the voiced parts of the signals as indicated in the provided annotation labels. Also note that since we focus on the MFPE, all segments where one of the estimators results in a GPE $> 0$ are excluded from the results, hence the GPE for all of our results is 0. The proposed refinement has been processed with one iteration ($k=1$). Experiments showed that more iterations only marginally improve the results.
 
-\vspace{-0.6em}
-\subsubsection{Oracle Refinement}
-
+% \vspace{-0.6em}
+% \subsubsection{Oracle Refinement}
+%
 Since the proposed refinement algorithm repeatedly applies pitch estimation, the performance of these estimators on the time warped (nearly constant) signal is of interest. Therefore we included the results of an oracle refinement where the first estimate is set to a ground truth pitch. Additionally this also does reveal information about the quality of the ground truth annotation itself.
 
 \vspace{-0.6em}

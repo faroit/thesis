@@ -68,13 +68,14 @@ Barker and Virtanen~\cite{barker13} found a way to utilize the modulation tensor
 \end{equation}
 
 Non-negative Tensor factorization approximates a modulation tensor \(V\) by a product of three matrices containing the frequency/basis, time/activation signals, and the modulation gain for each component.
-A very popular factorization model for such a tensor is the PARAFAC decomposition~\cite{nmfbook}:
+A very popular factorization model is called is the PARAFAC decomposition:
 
 \begin{equation}
    \mathbf{w} \approx \sum\limits_{j=1}^{J} \mathbf{w}_{j}(f) \circ \mathbf{m}_{j}(b) \circ \mathbf{h}_{j}(t).
 \end{equation}
 
 where the \(\circ\) operator is usually called the CP product and is depicted in Figure~\ref{fig:cpd}.
+For an introduction on matrix and tensor factorizations, the reader is refered to~\cite{cichocki09}.
 
 \begin{figure}
   \centering
@@ -222,7 +223,7 @@ sounds. In short, we assume that throughout each patch, we observe
 one coherent STFT ``texture''. The difference with the HR-NMF model is that we have independent and identically
 distributed (i.i.d.) innovations for one given patch, whereas HR-NMF model has more variability and permits heteroscedastic innovations. However, taking overlapping patches somehow compensates for
 this limitation.\label{enu:assumption_stationary}
-\item The joint distribution of all entries of each patch is $\alpha$-stable~\cite{samoradnitsky1994stable}.
+\item The joint distribution of all entries of each patch is $\alpha$-stable~\cite{samoradnitsky94}.
 $\alpha$-stable distributions are the only ones that are stable under additions, \emph{i.e.} such that
 sums of $\alpha$-stable random variables (r.v.) remain $\alpha$-stable.
 They notably comprise the Gaussian and Cauchy distributions as special
@@ -241,7 +242,7 @@ Under those four assumptions, all entries of the CFT~$x$ are independent
 and each one is distributed with respect to a complex isotropic $\text{\ensuremath{\alpha}}$-stable
 distribution, noted $S\alpha S_{c}$ (assumptions~\ref{enu:assumption_alpha_stable}
 and~\ref{enu:assumption_harmonisable}\footnote{This result is the direct generalization
-of~\cite[th. 6.5.1]{samoradnitsky1994stable} to multi-dimensional stationary processes.}):
+of~\cite[th. 6.5.1]{samoradnitsky94} to multi-dimensional stationary processes.}):
 \begin{equation}
 x\left(a,b,f,t\right)\sim S\alpha S_{c}\left(P^{\alpha}\left(a,b,f,t\right)\right),\label{eq:SaS_model}
 \end{equation}

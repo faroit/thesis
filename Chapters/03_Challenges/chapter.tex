@@ -63,38 +63,34 @@ For music signals, the type of instrument is important for the amount of overlap
 Furthermore, both scenarios depend on the number of sources, e.g. imagine a cocktail party of ten concurrent speakers speaking with same amplitude level.
 This is similar to music where the overlap can range from two instruments with very different characteristics like guitar and drums, to two instruments playing the same note (unison).\\
 
-
-
-\begin{figure*}
+\begin{figure*}[h]
 \centering
-\subcaptionbox{Speech}
-\includegraphics[width=0.8\textwidth]{gfx/dominance_map_speakers.pdf}%
+\subcaptionbox[Speech]{Speech}%
+[1\textwidth]{\includegraphics[width=0.8\textwidth]{gfx/dominance_map_speakers.pdf}}%
 \hspace{0.2\textwidth} % seperation
-\subcaptionbox{Vocal/Accompaniment}
-\includegraphics[width=0.8\textwidth]{gfx/dominance_map_vocacc.pdf}%
+\subcaptionbox[Vocal/Accompaniment]{Vocal/Accompaniment}
+[1\textwidth]{\includegraphics[width=0.8\textwidth]{gfx/dominance_map_vocacc.pdf}}%
 \hspace{0.2\textwidth} % seperation
-\subcaptionbox{Vocal/Accompaniment}
-\includegraphics[width=0.8\textwidth]{gfx/dominance_map_unison.pdf}%
+\subcaptionbox[Speech]{Unsison}
+[1\textwidth]{\includegraphics[width=0.8\textwidth]{gfx/dominance_map_unison.pdf}}%
 \caption{Predominant source activity, showing the predominant source for each time frequency entry. Computed using binary masks of each source entry.}
 \label{fig:dominance}
 \end{figure*}
 
-% TODO
-% \begin{figure}[H]
-%     \centering
-%     \tiny
-%     \subfloat[Speech]{
-%        \includegraphics[width=0.8\textwidth]{gfx/count_map_speakers.pdf}%
-%     }\hfill
-%     \subfloat[Vocal/Accompaniment]{
-%        \includegraphics[width=0.8\textwidth]{gfx/count_map_vocacc.pdf}%
-%     }\hfill
-%     \subfloat[Unison Instruments]{
-%      	\includegraphics[width=0.8\textwidth]{gfx/count_map_unison.pdf}%
-%     }\hfill
-%     \caption{Source Count Activity showing the number of sources $k$ for each time frequency entry. Computed using binary masks of each source entry.}
-%     \label{fig:count}
-% \end{figure}
+\begin{figure*}[h]
+\centering
+\subcaptionbox[Speech]{Speech}%
+[1\textwidth]{\includegraphics[width=0.8\textwidth]{gfx/count_map_speakers.pdf}}%
+\hspace{0.2\textwidth} % seperation
+\subcaptionbox[Vocal/Accompaniment]{Vocal/Accompaniment}
+[1\textwidth]{\includegraphics[width=0.8\textwidth]{gfx/count_map_vocacc.pdf}}%
+\hspace{0.2\textwidth} % seperation
+\subcaptionbox[Unison]{Unison Instruments}
+[1\textwidth]{\includegraphics[width=0.8\textwidth]{gfx/count_map_unison.pdf}}%
+\caption{Source Count Activity showing the number of sources $k$ for each time frequency entry. Computed using binary masks of each source entry.}
+\label{fig:count}
+\end{figure*}
+
 
 I depict spectrogram examples these scenarios in Figures~\ref{fig:dominance} and~\ref{fig:count}.
 The figure shows the the number of TF entries that predominantly belong to either one of the two source classes.
