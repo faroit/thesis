@@ -44,7 +44,6 @@ For example, it is known that a mixture of random speakers does not assemle a re
 
 Comparing this to music would mean, mixing individual sigle notes. But transforming this into music would require a composition including notes.
 
-
 Für kleiner Datensets eignet sich
 
 A) synthetisierung von Noten MIDIs (partituren) zu synthetisieren zum die volle Kontrolle zu haben (RWC in Kapitel X)
@@ -85,7 +84,6 @@ libri speech, RWC (midified)
 
 \section{Realistic Data}
 
-
 * real world datasets: , SiSEC16, SiSEC18,
 
 * throughout the thesis: how to go from synthetic to real world datasets if available.
@@ -93,7 +91,6 @@ libri speech, RWC (midified)
 % zaffar begin
 Building a good data-driven method for source separation relies heavily on a training dataset to learn the separation model. In our case, this not only means obtaining a set of musical songs, but also their constitutive accompaniment and lead sources, summing up to the mixtures. For professionally-produced or recorded music, the separated sources are often either unavailable or private. Indeed, they are considered amongst the most precious assets of right holders, and it is very difficult to find isolated vocals and accompaniment of professional bands that are freely available for the research community to work on without copyright infringements.
 % zafar end
-
 
 % from dafx
 Audio source separation is a very active research field with a large number of contributions. Applications are dependent on the context of the scenario, ranging from enhancements of speech signals to musically motivated analysis tasks.
@@ -148,17 +145,6 @@ In the following years, new datasets were proposed that improved over the MASS d
 	\item MedleyDB has been developed as a dataset to serve many purposes in music information retrieval. It consists of more than 100 full-length recordings, with all their constitutive sources. It is the first dataset to provide such a large amount of data to be used for audio separation research (more than 7 hours). Among all the material present in that dataset, 63 tracks feature singing voice.
   \item DSD100 was presented for SiSEC 2016. It features 100 full-length tracks originating from the 'Mixing Secret' Free Multitrack Download Library\footnote{\url{http://www.cambridge-mt.com/ms-mtk.htm}} of the Cambridge Music Technology, which is freely usable for research and educational purposes.
 \end{itemize}
-
-Finally, we present here the MUSDB18 dataset, putting together tracks from MedleyDB, DSD100, and other new musical material. It features 150 full-length tracks, and has been constructed by the authors of this paper so as to address all the limitations we identified above:
-\begin{itemize}[leftmargin=*]
-  \item It only features full-length tracks, so that the handling of long-term musical structures, and of silent regions in the lead/vocal signal, can be evaluated.
-  \item It only features stereo signals which were mixed using professional digital audio workstations. This results in quality stereo mixes which are representative of real application scenarios.
-  \item As with DSD100, a design choice of MUSDB18 was to split the signals into 4 predefined categories: bass, drums, vocals, and other. This contrasts with the enhanced granularity of MedleyDB that offers more types of sources, but it strongly promotes automation of the algorithms.
-  \item Many musical genres are represented in MUSDB18, for example, jazz, electro, metal, etc.
-  \item It is split into a development (100 tracks, 6.5~h) and a test dataset (50 tracks, 3.5~h), for the design of data-driven separation methods.
-\end{itemize}
-
-All details about this freely available dataset and its accompanying software tools may be found in its dedicated website\footnote{https://sigsep.github.io/musdb}.
 
 In any case, it can be seen that datasets of sufficient duration to build data-driven separation methods were only created recently.
 
