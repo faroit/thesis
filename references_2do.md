@@ -8,6 +8,8 @@
 - [ ] pandas comparison CFT/GFT heraussuchen
 - [ ] True Unison would be if 2 violins perceived as a single source, and usually there is no need to separate their signals from each other.
 
+- [ ] paper from fatimah nach referencen durchforsten
+
 # binary mask:
 
 # ON THE DISJOINTESS OF SOURCES IN MUSIC USING DIFFERENT TIME-FREQUENCY

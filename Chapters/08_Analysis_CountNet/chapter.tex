@@ -1,9 +1,6 @@
 \chapter{CountNet}
 
-\section{Introduction}%
-\label{sec:introduction}
-
-\begin{figure}[t]
+\begin{figure}[h]
   \centering
   \includegraphics[width=0.8\columnwidth]{Chapters/08_Analysis_CountNet/figures/teaser.pdf}
   \caption{Illustration of our application scenario of three concurrent speakers (A, B, C) and their respective speech activity. Bottom plot shows the mixture (input), the number of concurrently active speakers and its maximum \(k\) which is our targeted output.}%
@@ -1088,7 +1085,7 @@ This indicates that a decrease in speaking rate of 1 syllable per second will in
 Even though this is considered as a small effect size, it gives an interesting hint for the strategy taken of our proposed model and also suggests that for improved robustness, training would benefit from a large variety of speaking rates.
 Furthermore, it still remains unclear the model would suffer from languages with a speaking rate which is naturally higher or lower than English or Chinese (see~\cite{Osser64}).
 
-\section{Conclusion}%
+\section{Discussion and Scope}%
 \label{sec:conclusion}
 We introduced the task of estimating the maximum number of concurrent speakers in a simulated ``cocktail-party'' environment using a data-driven approach, discussing how to frame this task in a deep learning context.
 Building upon earlier work, we investigated what method is best to output integer source count estimates and also defined suitable cost functions for optimization.
