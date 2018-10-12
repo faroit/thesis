@@ -1,29 +1,29 @@
 \chapter{Datasets for Separation and Analysis}
 
 In the previous chapter various applications and problems in the context of highly overlapped signals were discussed.
-Before methods are presented which separate or analyze such signals are presented, it is helpful to study and understand the importance of data with these properties.
+Before methods are presented that separate or analyze such signals are presented, it is helpful to study and understand the importance of data with these properties.
 This becomes especially important as many methods nowadays rely on machine learning algorithms.
-One of the objectives in this thesis is to discuss if modulation properties of the signals can be used as a cue for the signal.
-
-Multitrack datasets are helpful to develop and evaluate methods.
-
-Since this is a very specific scenario, it is often a good idea to start with
-State of the art, Auflistung von existierenden datensets für analyse und.
-
-In speech it is very wide spread to mix clean speech and noise~\cite{varga93}or different clean speech signals like~\cite{garofolo93} to generate mixed speech.
+One of the objectives in this thesis is to discuss its modulation properties of the signals can be used as a cue for the signal.
+Even though modulation is an apparent property of many audio recordings such as speech and music, very vew dataset are available to actually study influence of the modulation into various tasks such as source separation.
+\par
+In speech, it is very wide spread to mix clean speech and noise~\cite{varga93}or different clean speech signals like~\cite{garofolo93} to generate mixed speech.
 It is known that the conversational aspect is lost here but it may not be that important.
 Now, the benefit of such a dataset is that it can easily get very large.
 In music however, recordings are typically available separated.
 That way only very few datasets exist with separated tracks. This
-
 % zafar
 Compared to speech, musical content usually does share common orchestration and can usually not superimposed in a random way, prohibiting simply summing isolated random notes from instrumental databases to produce mixtures.
 % zafar end
 
-In this thesis methods were developed for both, synthetic datasets as well as realistic datasets.
-Helping the community. Very valuable
+\begin{itemize}
+  \item Monophonic vs. Polyphonic
+  \item Live Recordings vs. Studio Recordings
+  \item Real instruments vs. synthetic instruments
+\end{itemize}
 
 \section{Synthetic Datasets}
+
+\emph{TODO!}
 
 To create a dataset of synthetic mixtures of high overlap, one would seek for a high quality.
 
@@ -32,15 +32,6 @@ The simplest way to assemble overlapped data is to use individual audio recordin
 However, this often does not maintain the realistic behavior of mixtures.
 
 For example, it is known that a mixture of random speakers does not assemle a realistic cocktail party nor a conversation.
-% @article{KREMS2018,
-% title = "Why are conversations limited to about four people? A theoretical exploration of the conversation size constraint",
-% journal = "Evolution and Human Behavior",
-% year = "2018",
-% issn = "1090-5138",
-% doi = "https://doi.org/10.1016/j.evolhumbehav.2018.09.004",
-% url = "http://www.sciencedirect.com/science/article/pii/S1090513818301491",
-% author = "Jaimie Arona Krems and Jason Wilkes"
-% }
 
 Comparing this to music would mean, mixing individual sigle notes. But transforming this into music would require a composition including notes.
 
@@ -82,43 +73,15 @@ Fazit
 * Dafx paper und commonfate paper
 libri speech, RWC (midified)
 
-\section{Realistic Data}
+\subsection{Unison Instrument Scenario}
+\label{sec:scenario}
 
-* real world datasets: , SiSEC16, SiSEC18,
-
-* throughout the thesis: how to go from synthetic to real world datasets if available.
-
-% zaffar begin
-Building a good data-driven method for source separation relies heavily on a training dataset to learn the separation model. In our case, this not only means obtaining a set of musical songs, but also their constitutive accompaniment and lead sources, summing up to the mixtures. For professionally-produced or recorded music, the separated sources are often either unavailable or private. Indeed, they are considered amongst the most precious assets of right holders, and it is very difficult to find isolated vocals and accompaniment of professional bands that are freely available for the research community to work on without copyright infringements.
-% zafar end
-
-% from dafx
-Audio source separation is a very active research field with a large number of contributions. Applications are dependent on the context of the scenario, ranging from enhancements of speech signals to musically motivated analysis tasks.
-
-As outlined by Bregman~\cite{bregman94}, the human ability to detect and group sound sources is outstanding.
-
-% TODO Listing more application (get from commonfate)
-The separation of musical instruments from a single channel mixture is considered as an under-determined case which does not have a single solution. Knowing the way in which source signals are mixed together is crucial to the quality of separation systems. In the context of speech separation even unsupervised methods can lead to good results. This is due to the fact that mixtures of speech signals (like in a cocktail party environment) show a high degree of statistical independence. Mixtures of musical instruments, however, are highly correlated which is a desired aim of musical performances in general.
-
-The Signal Separation Evaluation Campaign (SiSEC) is a solid indicator of the progress in research within the field of source separation \cite{vincent12}. The results from 2013 \cite{sisec13} show that for professionally produced music it is still difficult to achieve a high quality separation.
-One reason is due to the fact that the wide use of non-linear post-processing techniques (e.g. dynamic compression or effects like reverb) break assumptions that often are required to enable good performance of source separation algorithms. Another reason is that non-stationary effects like vibrato introduce additional problems \cite{nakano10}.
-
-In most scenarios for source separation of instrument signals it is common to assume that the spectral harmonics do only partially overlap. This enables algorithms like non-negative matrix factorization (NMF) to approximate the mixture from a lower-rank decomposition in an unsupervised way. Such systems are described in \cite{smaragdis03} and \cite{virtanen07}. Additionally the popularity of the class of NMF algorithms can be explained by the intuitive way in which they work on time-frequency representations of the mixture signal.
-
-In the context of musical instrument source separation, many researchers have focused on including prior information about the sources in their algorithms \cite{ozerov12}. The availability and detail of such a-priori information varies. Often systems learn spectral as well as temporal cues from training data or parts of the mixture where only one instrument is active. One example of such informed source separation systems is described by Ewert and M\"uller \cite{ewert12}. It incorporates the pitch and onset information encoded in a MIDI file to improve the separation result.
-
-Even the number of sources is a simple but very important information for source separation algorithms. One of the main drawbacks of many source separation systems is that they rely on this information. In some scenarios, like popular western music, the sources to separate are grouped into Melody + Bass + Drums and a residual signal. Constraining the system to such a scenario allows the results to be evaluated even if the set of sources being separated is incomplete. Constrained systems like these are also sufficient for real-world applications such as the eminent karaoke scenario. Limiting the number of desired sources helps not only to improve the performance of the algorithms but is also related to the fact that the number of sources humans can perceive is limited, too. Although a threshold has not been systematically addressed so far, a variety of experiments have been carried out. David Huron found \cite{huron89} that the number of voices humans can correctly identify is up to three. When St\"oter and Schoeffler et. al. \cite{stoeter13, schoeffler13} asked participants to identify the number of instruments in a piece of music, the participants were only able to identify up to three, similar to Huron's voice experiments. There is very little chance that listeners are able to detect the presence of more than three sources. However in trials with fewer than three instruments, listeners tended to be very sensitive: One of the stimuli in the \cite{stoeter13, schoeffler13} experiments with 1168 participants consisted of a mixture of Violin and Flute played in unison. The results showed that $76\%$ of the participants correctly identified two instruments. Only $18\%$ of the participants underestimated by one instrument, $6\%$ overestimated by one instrument.
+% from common fate introduction
+When St\"oter and Schoeffler et. al. \cite{stoeter13, schoeffler13} asked participants to identify the number of instruments in a piece of music, the participants were only able to identify up to three, similar to Huron's voice experiments. There is very little chance that listeners are able to detect the presence of more than three sources. However in trials with fewer than three instruments, listeners tended to be very sensitive: One of the stimuli in the \cite{stoeter13, schoeffler13} experiments with 1168 participants consisted of a mixture of Violin and Flute played in unison. The results showed that $76\%$ of the participants correctly identified two instruments. Only $18\%$ of the participants underestimated by one instrument, $6\%$ overestimated by one instrument.
 
 Since humans are able to reliably detect even instruments played in unison, this is a good motivation to expect the same from an algorithm. In this paper we want to address this scenario which has not been brought up so far. We believe creating and evaluating new algorithms for separating sources playing in unison will improve source separation systems in general.
 
-\section{Unison Source Separation Scenario}
-\label{sec:scenario}
-
-Up to date there are very few proposed source separation methods which perform good on a variety of input signals without making general assumptions or constraints. Most of the current state-of-the-art algorithms address specific scenarios like voice or melody extraction, or harmonic percussive separation. Additionally assumptions about the mixture itself are important, too.
-
-Describing a source separation scenario includes the number of sources $N$ and the number of desired sources $D$ which is normally smaller than $N$ when the desired sources contain groups of sources like instrument classes (strings, woodwinds, etc.).
-
-% TODO: unuson source separation scenario, aber wohin mit dem datenset?
+% TODO: unison source separation scenario, aber wohin mit dem datenset?
 We propose a scenario where instruments play in unison. This means that they share the same fundamental frequency (regardless of the octave) so that the sources can overlap both in time and frequency. In fact unison\footnote{greek: with \emph{one voice}} mixtures are meant to be as much overlapped as possible, hence they are very difficult to separate. However, due to masking effects, a relatively good subjective quality for the separated sources can be obtained, even if the other sources are not perfectly suppressed.
 As far as we know, there is no contribution to the source separation scene that focuses on mixtures of such unison sources. \\
 
@@ -137,6 +100,72 @@ where effectively the amplitude modulation is $a(n)$ and the frequency modulatio
 % TODO: Extend this
 True Unison would be if 2 violins perceived as a single source, and usually there is no need to separate their signals from each other.
 
+The items have each been generated by rendering C4 notes in a state of the art software sampler. All test have a duration of about three seconds. Items were equalized in loudness by using an iterative calculation of the loudness algorithm of the time varying Zwicker model. The implementation \cite{genesis12} was used. The 10 instrument items then generated 45 unique mixtures of two instruments each. The processing was done in 44.1~kHz / 16 bit.
+
+\begin{table}
+\begin{center}
+\footnotesize
+\begin{tabular}{ l l l}
+  Instrument & Vibrato &  General MIDI \# \\
+  \hline
+  Violin & yes & 40 \\
+  Viola & yes & 41 \\
+  Violon Cello & yes & 42 \\
+  Trumpet & no & 56 \\
+  Trombone & no & 57\\
+  Horn & no & 60  \\
+  Bariton Sax & yes & 67 \\ % TODO
+  Oboe & no & 68\\
+  Clarinet & no & 71\\
+  Flute & yes & 73\\
+\end{tabular}
+\end{center}
+\caption{Instrument item test set}
+\label{tab:testset}
+\end{table}
+
+\section{Realistic Data}
+
+\subsection{Single Note Data}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=\textwidth]{Chapters/04_Data/figures/teaser.pdf}
+  \caption{Overview of the multi-modal data recorded for the proposed dataset.}
+\label{fig:teaser}
+\end{figure}
+
+% from
+Estimating the fundamental frequency ($F0$) of a signal is a well studied task in audio signal processing with many applications. If the $F0$ varies over time, the complexity increases, and it is also more difficult to provide ground truth data for evaluation.
+Besides audio data, we include sensor recordings capturing the finger position on the fingerboard which is converted into an instantaneous frequency estimate. In speech processing, the electroglottograph (EGG) is able to capture the excitation signal of the vocal tract, which is then used to generate a reference instantaneous $F0$.
+Inspired by this approach, we included high speed video camera recordings to extract the excitation signal originating from the moving string.
+In the proposed test set we chose the violin cello for the following reasons: (1) vibrato is used as a common style for expression, (2) there is an observable physical relationship between frequency modulation and vibrato, and (3) the instrument is large enough to embed sensors to capture the vibrato. The properties of the cello are studied by research in acoustics~\cite{woodhouse2004bowed, woodhouse1999torsional}.
+The aim of the multi-sensor recordings is to capture the major aspects of the cello while being played by a musician. We identify three main components: (1) The excitation caused by the moving bow; (2) the vibrating string, and (3) the finger, controlling the string length by rolling it on the fingerboard.
+The main focus of the recordings is set to analyze vibrato playing style. Since it is common that vibrato characteristics differ from musician to musician, all recordings were performed by two musicians. One is a professional cellist with 30 years of experience in a symphonic orchestra. The other musician is an amateur with less than 1 hour per week of practice. The recordings took place on a single day and were conducted on a mid-quality full-size cello equipped with sensors as described below. Due to the width of fingerboard sensors and the attached cables we were able to equip two strings (G and A) allowing to record pitches ${G2, D3, D^\sharp3, E3, A3, B3, C4, C^\sharp4}$ from both musicians. The resulting test set yields in $148$ recorded notes after removal of some notes due to errors in the sensor recordings. The process for cleaning up the data is documented\footnote{\url{https://github.com/audiolabs/muserc}}. The dataset is released under a Creative Commons license.
+
+\subsection{Multitrack Data}
+
+The Signal Separation Evaluation Campaign (SiSEC) is a solid indicator of the progress in research within the field of source separation \cite{vincent12}. The results from 2013 \cite{sisec13} show that for professionally produced music it is still difficult to achieve a high quality separation.
+One reason is due to the fact that the wide use of non-linear post-processing techniques (e.g. dynamic compression or effects like reverb) break assumptions that often are required to enable good performance of source separation algorithms. Another reason is that non-stationary effects like vibrato introduce additional problems \cite{nakano10}.
+
+Multitrack datasets are helpful to develop and evaluate methods.
+
+* real world datasets: , SiSEC16, SiSEC18,
+
+* throughout the thesis: how to go from synthetic to real world datasets if available.
+
+% zaffar begin
+Building a good data-driven method for source separation relies heavily on a training dataset to learn the separation model. In our case, this not only means obtaining a set of musical songs, but also their constitutive accompaniment and lead sources, summing up to the mixtures. For professionally-produced or recorded music, the separated sources are often either unavailable or private. Indeed, they are considered amongst the most precious assets of right holders, and it is very difficult to find isolated vocals and accompaniment of professional bands that are freely available for the research community to work on without copyright infringements.
+% zafar end
+
+% from dafx
+Audio source separation is a very active research field with a large number of contributions. Applications are dependent on the context of the scenario, ranging from enhancements of speech signals to musically motivated analysis tasks.
+
+As outlined by Bregman~\cite{bregman94}, the human ability to detect and group sound sources is outstanding.
+
+% TODO Listing more application (get from commonfate)
+The separation of musical instruments from a single channel mixture is considered as an under-determined case which does not have a single solution. Knowing the way in which source signals are mixed together is crucial to the quality of separation systems. In the context of speech separation even unsupervised methods can lead to good results. This is due to the fact that mixtures of speech signals (like in a cocktail party environment) show a high degree of statistical independence. Mixtures of musical instruments, however, are highly correlated which is a desired aim of musical performances in general.
+
 In the following years, new datasets were proposed that improved over the MASS dataset in many directions. We briefly describe the most important ones, summarized in Table~\ref{tab:datasets}.
 \begin{itemize}[leftmargin=*]
 	\item The QUASI dataset was proposed to study the impact of different mixing scenarios on the separation quality. It  consists of the same tracks as in the MASS dataset, but kept full length and mixed by professional sound engineers.
@@ -152,18 +181,18 @@ In any case, it can be seen that datasets of sufficient duration to build data-d
 	\centering
 	\caption{Summary of datasets available for lead and accompaniment separation. Tracks without vocals were omitted in the statistics.}
 	\label{tab:datasets}
-		\begin{tabular}{|l l l l l l l|}
+		\begin{tabular}{l l l l l l}
 			\hline
-			\textbf{Dataset} & \textbf{Year} & \textbf{Reference(s)} & \textbf{URL} & \textbf{Tracks} & \textbf{Track duration (s)} & \textbf{Full/stereo?}\\
+			\textbf{Dataset} & \textbf{Year} & \textbf{Reference(s)} & \textbf{Tracks} & \textbf{Track duration (s)} & \textbf{Full/stereo?}\\
 			\hline
-			MASS & 2008 & \cite{MTGMASSdb} & \url{http://www.mtg.upf.edu/download/datasets/mass} & 9 & $16 \pm 7$ & no / yes \\
-			MIR-1K & 2010 & \cite{hsu10} & \url{https://sites.google.com/site/unvoicedsoundseparation/mir-1k} & 1,000 & $8 \pm 8$ & no / no \\
-			QUASI & 2011 & \cite{liutkus11,vincent12} & \url{http://www.tsi.telecom-paristech.fr/aao/en/2012/03/12/quasi/} & 5 & $206 \pm 21$ & yes / yes \\
-			ccMixter & 2014 & \cite{liutkus142} & \url{http://www.loria.fr/~aliutkus/kam/} & 50 & $231 \pm 77 $ & yes / yes \\
-			MedleyDB & 2014 & \cite{bittner14} & \url{http://medleydb.weebly.com/} & 63 & $206 \pm 121$ & yes / yes \\
-			iKala & 2015 & \cite{chan15} & \url{http://mac.citi.sinica.edu.tw/ikala/} & 206 & 30 & no / no \\
-			DSD100 & 2015 & \cite{ono15} & \url{sisec17.audiolabs-erlangen.de} & 100 & $251 \pm 60$ & yes / yes \\
-      MUSDB18 & 2017 & \cite{rafii17} & \url{https://sigsep.github.io/musdb} & 150 & $236 \pm 95$ & yes / yes \\
+			MASS & 2008 & \cite{MTGMASSdb} & 9 & $16 \pm 7$ & no / yes \\
+			MIR-1K & 2010 & \cite{hsu10} & 1,000 & $8 \pm 8$ & no / no \\
+			QUASI & 2011 & \cite{liutkus11,vincent12} & 5 & $206 \pm 21$ & yes / yes \\
+			ccMixter & 2014 & \cite{liutkus142} & 50 & $231 \pm 77 $ & yes / yes \\
+			MedleyDB & 2014 & \cite{bittner14} & 63 & $206 \pm 121$ & yes / yes \\
+			iKala & 2015 & \cite{chan15} & 206 & 30 & no / no \\
+			DSD100 & 2015 & \cite{ono15} & 100 & $251 \pm 60$ & yes / yes \\
+      MUSDB18 & 2017 & \cite{rafii17} & 150 & $236 \pm 95$ & yes / yes \\
 			\hline
 		\end{tabular}
 \end{table*}

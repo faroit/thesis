@@ -256,7 +256,7 @@ Even though the overview is focused on vocal accompaniment separation, most appr
 
 \subsection{Source Count Estimation}
 % copy from icassp paper maybe
-In separation, the number of sources is an important information for many separation systems is to identify the number of sources to separated.
+Even the number of sources is a simple but very important information for source separation algorithms. One of the main drawbacks of many source separation systems is that they rely on this information. In some scenarios, like popular western music, the sources to separate are grouped into Melody + Bass + Drums and a residual signal. Constraining the system to such a scenario allows the results to be evaluated even if the set of sources being separated is incomplete. Constrained systems like these are also sufficient for real-world applications such as the eminent karaoke scenario. Limiting the number of desired sources helps not only to improve the performance of the algorithms but is also related to the fact that the number of sources humans can perceive is limited, too. Although a threshold has not been systematically addressed so far, a variety of experiments have been carried out. David Huron found \cite{huron89} that the number of voices humans can correctly identify is up to three.
 % copied from my icassp 2018 paper
 In a “cocktail-party” scenario with many concurrent speakers, a typical assumption is that the number of concurrent speakers is known.
 In practice, almost all system assume the number of sources to be known even when they are aiming for a blind separation system.

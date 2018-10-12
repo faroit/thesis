@@ -1,5 +1,7 @@
 \chapter{Human Ability of Counting Concurrent Sources}
 
+\marginpar{This chapter is based on the work that has been published in 2018~\cite{stoeter19} together with my collegues Soumitro Chakrabarty and Emanuël Habets}
+
 TODO... Write a proper chapter introduction.
 
 \begin{itemize}
@@ -152,7 +154,7 @@ Followed by the training, the participants had to estimate the number of instrum
 
 After the participants estimated the number of instruments for all twelve stimuli, they were given a score based on their performance. Besides their personal score, a percentile rank showed how each participant performed compared to all the other participants.
 
-\section{Results}\label{sec:results}
+\subsection{Results}\label{sec:results}
 
 The independent variables are the number of instruments being played back ($\textit{Num}_{\mathrm{Inst}}$), whether a participant is musical ($\textit{Musical}$), professional in audio ($\textit{Professional}$) and which setup was used ($\textit{Setup}$). A participant is defined as musical ($\textit{Musical} = true$) when he or she is regularly playing an instrument (including singing). The same applies to being professional ($\textit{Professional} = true$) which is set when the participant responded that he or she is a professional in audio. The responses for the setup used can either be headphones ($\textit{Setup} = \textrm{`}headphones\textrm{'}$) or loudspeaker ($\textit{Setup} = \textrm{`}loudspeaker\textrm{'}$). The dependent variable is the participant's estimation of the number of instruments being played back ($\textit{Resp}$). A correct estimation is defined as
 \begin{equation}
@@ -423,9 +425,9 @@ For testing whether the environment has a significant influence on the certainty
 % \end{table}
 % Same as $\textit{Resp}_{\mathrm{Correct}}$, the environment of the experiment has no significant influence on the dependent variable $\textit{Certainty}$. Considering the number of participants and the comparable low coefficient, the environment had a very low influence on $\textit{Certainty}$.
 
-\vspace{-0.1in}
-\section{Discussion}\label{sec:discussion}
-
+% \vspace{-0.1in}
+% \subsection{Discussion}\label{sec:discussion}
+\par
 Regarding the ability of estimating the number of instruments, the web experiment confirmed the results of the laboratory experiment\cite{Stoter2013}. Both experiments share the same outcome: The probability to correctly estimate up to about three instruments is higher than 50\%.
 
 In our previous result analysis of the laboratory experiment\cite{Stoter2013} we set the focus on the differences between musicians and non-musicians. Between the Internet experiment and the laboratory experiment, slightly different results were obtained when looking into how musicians and non-musicians performed (Figure~\ref{figure:error_probability_iis_vs_web}). In the laboratory experiment musicians performed much better compared to non-musicians than in the Internet Experiment. One reason seems to be that in the laboratory experiment 74.2\% of the musicians had also a professional background in audio. In the Internet experiment only 27.5\% of the musicians had a professional background in audio. Since audio professionals more often have to detect hardly audible differences in audio files they are more trained in this field. As mentioned before, being a musician in our context does just mean that the participant plays an instrument without any information about his expert level or the time he or she spends on practicing.
@@ -465,6 +467,7 @@ This phenomenon is known as \textit{subitizing} and has been inspiring research 
 Since there are indications that the auditory system is also capable of subitizing sources~\cite{hoopen79}, we transfer this fact to the audio domain and directly attempt in this study to estimate the number of audio sources instead of counting them after identification.
 We refer to this strategy as ``direct count estimation''.
 
+\subsection{Experimental Setup}
 % * Reference existing listening tests which report the same thing
 % * Are we really doing it? We can decide on this once the first full draft is ready.
 In a first step, we chose to reproduce the experiments made in~\cite{kawashima15, kashino96}.
@@ -480,6 +483,7 @@ We therefore decided to report the average response for each group of \(k\).
 The results of our lab-based experiments are shown in Figure~\ref{fig:experiment}.
 The results for up to three speakers indicate that humans perform similarly (or better in terms of variance) compared to our proposed CRNN model.
 Results of the blind experiment show that underestimation becomes apparent for \(k > 3\).
+\subsection{Results}
 As a reference, we also included the average results from~\cite{kawashima15} (Experiment 1, 5~seconds durations) which shows similar results compared to our blind experiment.
 For larger speaker counts, the gap between humans and algorithm is almost three speakers on average.
 Interestingly, the results of the informed experiment reveal that this gap closes down to an average difference of one speaker.

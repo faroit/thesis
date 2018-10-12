@@ -101,6 +101,16 @@ durchsehen (aus Wang separation):
 
 # Counting
 
+% @article{KREMS2018,
+% title = "Why are conversations limited to about four people? A theoretical exploration of the conversation size constraint",
+% journal = "Evolution and Human Behavior",
+% year = "2018",
+% issn = "1090-5138",
+% doi = "https://doi.org/10.1016/j.evolhumbehav.2018.09.004",
+% url = "http://www.sciencedirect.com/science/article/pii/S1090513818301491",
+% author = "Jaimie Arona Krems and Jason Wilkes"
+% }
+
 HURON, D. (1989a). Characterizing musical textures. In T. Wells
 & D. Butler (Eds.), Proceedings of the 1989 international computer music conference (pp. 131–134). San Francisco, CA:
 Computer Music Association.
