@@ -1,5 +1,7 @@
 \chapter{CountNet}
+\label{cha:countnet}
 
+% TODO: add confusion matrix and chapter scatter plot
 
 \begin{figure}[h]
   \centering
@@ -80,7 +82,7 @@ In a more recent work,
 Xu et.al.~\cite{xu13} estimate the number of speakers by applying hierarchical clustering to fixed-length audio segments using mel frequency cepstral coefficients (MFCCs) and additional pitch features.
 The method assumes the presence of at least some non-overlapped speech and was evaluated on real-world data of 20 hours duration.
 An average count estimation error of one speaker is reported using excerpts of eight-minutes duration and featuring up to eight speakers.
-In another vein, Andrei et.al.~\cite{andrei15_interspeech} proposed an algorithm which correlates single frames of multi-speaker mixtures with a set of single-speaker utterances.
+In another vein, Andrei et.al.~\cite{andrei15} proposed an algorithm which correlates single frames of multi-speaker mixtures with a set of single-speaker utterances.
 The resulting score was then used to estimate the number of speakers using thresholds.
 
 \par
@@ -835,7 +837,7 @@ Furthermore, we present the effect of training sample duration and compare the r
 \label{ssec:baselines}
 In order to make a meaningful comparison to the CRNN model we propose several baseline methods.
 Since we are dealing with a novel task description, related speaker count estimation techniques can hardly be used as baselines.
-Specifically,~\cite{xu13} would not work on fully overlapped speech,~\cite{andrei15_interspeech} does not scale to the size of our dataset, since it requires to cross-correlate the full database against another.
+Specifically,~\cite{xu13} would not work on fully overlapped speech,~\cite{andrei15} does not scale to the size of our dataset, since it requires to cross-correlate the full database against another.
 Finally,~\cite{sayoud10} proposes a feature but does not employ a fully automated system that can be used in a data-driven context.
 We, therefore, decided to propose our own baseline methods.
 

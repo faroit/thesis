@@ -7,16 +7,72 @@ This might come in handy for PhD theses: some ideas and figures have appeared pr
 
 %\noindent Put your publications from the thesis here. The packages \texttt{multibib} or \texttt{bibtopic} etc. can be used to handle multiple different bibliographies in your document.
 
-\begin{refsection}[ownref.bib]
-\section{Main Publications}
-Chapters??? of this thesis is mainly build on the following publications that I published or submitted during my time as a doctoral student:
+% \boldnames: etoolbox-list of names to typeset bold in \printbibiliography
+\newcommand*{\boldnames}{}
+
+\newbibmacro*{name:bold}[2]{%
+  \def\do##1{\ifstrequal{#1, #2}{##1}{\bfseries\listbreak}{}}%
+  \dolistloop{\boldnames}}
+
+
+\xpretobibmacro{name:last}{\begingroup\usebibmacro{name:bold}{#1}{#2}}{}{}
+\xpretobibmacro{name:first-last}{\begingroup\usebibmacro{name:bold}{#1}{#2}}{}{}
+\xpretobibmacro{name:last-first}{\begingroup\usebibmacro{name:bold}{#1}{#2}}{}{}
+\xpretobibmacro{name:delim}{\begingroup\normalfont}{}{}
+\xapptobibmacro{name:last}{\endgroup}{}{}
+\xapptobibmacro{name:first-last}{\endgroup}{}{}
+\xapptobibmacro{name:last-first}{\endgroup}{}{}
+\xapptobibmacro{name:delim}{\endgroup}{}{}
+
+\DeclareNameAlias{default}{last-first/first-last}
+
+\DeclareFieldFormat{labelnumberwidth}{#1\adddot}
+\newlength{\periodwidth}
+\settowidth{\periodwidth}{.}
+
+\defbibenvironment{numbered+bold}
+  {\list
+     {\printtext[labelnumberwidth]{%
+        \printfield{prefixnumber}%
+        \printfield{labelnumber}%
+        }%
+     }%
+  {
+   \setlength{\labelwidth}{\labelnumberwidth}%
+   \setlength{\leftmargin}{\labelwidth}%
+   \setlength{\labelsep}{\biblabelsep}%
+   \addtolength{\labelsep}{1em}
+   \addtolength{\leftmargin}{\labelsep}%
+   \setlength{\itemsep}{\bibitemsep}%
+   \setlength{\parsep}{\bibparsep}}%
+   \renewcommand*{\makelabel}[1]{\hss##1}%
+  }
+  {\endlist}
+  {\item\hskip-\periodwidth}
+
+
+
+\newrefcontext[sorting=ynt]
+\section*{Main Publications}
+Chapters~\cref{cha:datasets, cha:known, cha:unknown, cha:countanalysis, cha:countnet} of this thesis is mainly build on the following publications that I published or submitted during my time as a doctoral student:
+\begin{refsection}[ownref.bib]%
 \nocite{*}
-\printbibliography[heading=none]
+\forcsvlist{\listadd\boldnames}{{Stöter, Fabian-Robert}, {Stöter, F.R.}, {F.-R. St{\"o}ter}, {F.-R. Stöter}, {St{\"o}ter, F.-R.}}
+\printbibliography[env=numbered+bold, heading=none, sorting=ynt, resetnumbers=true]
 \end{refsection}
 
-\begin{refsection}[ownsideref.bib]
-\section{Additional Publications}
+\section*{Additional Publications}
 The following publications were not directly used for building this thesis but are nonetheless related to audio based processing methods:
+\begin{refsection}[ownsideref.bib]
 \nocite{*}
-\printbibliography[heading=none]
+\printbibliography[env=numbered+bold, heading=none,resetnumbers=true, sorting=ynt]
+\newrefcontext[sorting=nyt]
+\end{refsection}
+
+\section*{Open Datasets and Software}
+To foster reproducible research, the following datasets and code were contributed under open licenses:
+\begin{refsection}[owndata.bib]
+\nocite{*}
+\printbibliography[env=numbered+bold, heading=none,resetnumbers=true, sorting=ynt]
+\newrefcontext[sorting=nyt]
 \end{refsection}

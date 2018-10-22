@@ -1,8 +1,10 @@
 \chapter{Human Ability of Counting Concurrent Sources}
+\label{cha:countanalysis}
 
 \marginpar{This chapter is based on the work that has been published in 2018~\cite{stoeter19} together with my collegues Soumitro Chakrabarty and Emanuël Habets}
 
-TODO... Write a proper chapter introduction.
+% TODO: Write a proper chapter introduction.
+% TODO: Globally use the term "Proportion of Correct Responses"
 
 \begin{itemize}
   \item why is counting interesting
@@ -503,7 +505,19 @@ For higher speaker counts, participants reported that the integrated phoneme act
 ~\cite{kawashima15}) compared to our proposed CRNN. Error bars show 95\% confidence intervals.}%
     \label{fig:experiment}
  \end{figure}
- % TODO add mean absolute error
+
+\begin{figure}[t!]
+   \centering
+   \begin{adjustbox}{width=0.7\columnwidth}
+     \input{Chapters/07_Analysis_Experiment/figures/success}
+   \end{adjustbox}
+   \caption{Average responses from humans (\
+   {EXP} and \emph{Kawashima}
+~\cite{kawashima15}) compared to our proposed CRNN. Error bars show 95\% confidence intervals.}%
+   \label{fig:experiment}
+\end{figure}
+
+% TODO while it looks slighlty better, it actually is not better. because the participants that where informed by the instructor did randomly guess high numbers, thus reducing there success rate, hence a risky strategy that doesn't improve the error.
 
  \section{Discussion and Scope}
 

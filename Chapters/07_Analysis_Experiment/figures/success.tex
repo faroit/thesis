@@ -1,4 +1,4 @@
-% This file was created by matplotlib2tikz v0.6.13.
+% This file was created by matplotlib2tikz v0.6.14.
 \begin{tikzpicture}
 
 \definecolor{color1}{rgb}{0.298039215686275,0.447058823529412,0.690196078431373}
@@ -9,128 +9,128 @@
 \definecolor{color3}{rgb}{0.505882352941176,0.447058823529412,0.698039215686274}
 
 \begin{axis}[
-xlabel={True \(k\)},
-ylabel={Estimate \(\hat{k}\)},
+xlabel={true},
+ylabel={success},
 xmin=-1, xmax=10,
-ymin=0, ymax=11,
-ytick={1,2,3,4,5,6,7,8,9,10},
-xtick={0,1,2,3,4,5,6,7,8,9},
-xticklabels={1,2,3,4,5,6,7,8,9,10},
-tick align=outside,
-tick pos=left,
+ymin=0, ymax=1.1,
 ymajorgrids,
 xmajorgrids,
+xtick={0,1,2,3,4,5,6,7,8,9},
+xticklabels={1,2,3,4,5,6,7,8,9,10},
+ytick={0,0.2,0.4,0.6,0.8,1},
+yticklabels={0.0,0.2,0.4,0.6,0.8,1.0},
+tick align=outside,
+tick pos=left,
 grid style={line width=.1pt, draw=gray!20},
 major grid style={line width=.2pt,draw=gray!20},
 axis line style={black},
-legend style={at={(0.03,0.97)}, anchor=north west, draw=none, fill=color0!20},
+legend entries={{EXP (blind)},{EXP (informed)},{Kawashima~\cite{kawashima15}},{Ground Truth}},
 legend cell align={left},
-legend entries={{EXP (blind)}, {EXP (informed)}, {Kawashima~\cite{kawashima15}}, {Ground Truth}}
+legend style={at={(0.97,0.46)}, anchor=south east, draw=none, fill=color0!20}
 ]
-
 \addplot [only marks, mark size=2.0, mark=triangle*, draw=color3, fill=color3, colormap/blackwhite]
 table{%
 x                      y
-+0.000000000000000e+00 +1.010000000000000e+00
-+1.000000000000000e+00 +2.030000000000000e+00
-+2.000000000000000e+00 +2.920000000000000e+00
-+3.000000000000000e+00 +3.380000000000000e+00
-+4.000000000000000e+00 +3.980000000000000e+00
-+5.000000000000000e+00 +4.220000000000000e+00
-+6.000000000000000e+00 +4.840000000000000e+00
-+7.000000000000000e+00 +5.220000000000000e+00
-+8.000000000000000e+00 +5.390000000000000e+00
-+9.000000000000000e+00 +5.970000000000000e+00
++0.000000000000000e+00 +9.900000000000000e-01
++1.000000000000000e+00 +9.700000000000000e-01
++2.000000000000000e+00 +6.300000000000000e-01
++3.000000000000000e+00 +3.000000000000000e-01
++4.000000000000000e+00 +1.900000000000000e-01
++5.000000000000000e+00 +6.000000000000000e-02
++6.000000000000000e+00 +4.000000000000000e-02
++7.000000000000000e+00 +4.000000000000000e-02
++8.000000000000000e+00 +1.000000000000000e-02
++9.000000000000000e+00 +2.000000000000000e-02
 };
 \addplot [line width=1.66pt, color3, forget plot]
 table {%
-0 1.01
-1 2.03
-2 2.92
-3 3.38
-4 3.98
-5 4.22
-6 4.84
-7 5.22
-8 5.39
-9 5.97
+0 0.99
+1 0.97
+2 0.63
+3 0.3
+4 0.19
+5 0.06
+6 0.04
+7 0.04
+8 0.01
+9 0.02
 };
 \addplot [line width=1.66pt, color3, forget plot]
 table {%
+0 0.97
 0 1
-0 1.03
 };
 \addplot [line width=1.66pt, color3, forget plot]
 table {%
-1 2
-1 2.07
+1 0.93
+1 1
 };
 \addplot [line width=1.66pt, color3, forget plot]
 table {%
-2 2.78975
-2 3.05
+2 0.53
+2 0.72
 };
 \addplot [line width=1.66pt, color3, forget plot]
 table {%
-3 3.27
-3 3.5
+3 0.21
+3 0.39025
 };
 \addplot [line width=1.66pt, color3, forget plot]
 table {%
-4 3.80975
-4 4.16025
+4 0.12
+4 0.27
 };
 \addplot [line width=1.66pt, color3, forget plot]
 table {%
-5 4.06
-5 4.4
+5 0.02
+5 0.11
 };
 \addplot [line width=1.66pt, color3, forget plot]
 table {%
-6 4.58
-6 5.11
+6 0.01
+6 0.09
 };
 \addplot [line width=1.66pt, color3, forget plot]
 table {%
-7 4.97
-7 5.53
+7 0.01
+7 0.08
 };
 \addplot [line width=1.66pt, color3, forget plot]
 table {%
-8 5.13
-8 5.66
+8 0
+8 0.03
 };
 \addplot [line width=1.66pt, color3, forget plot]
 table {%
-9 5.64
-9 6.29
+9 0
+9 0.05
 };
 \addplot [only marks, mark size=2.0, mark=diamond*, draw=color4, fill=color4, colormap/blackwhite]
 table{%
 x                      y
 +0.000000000000000e+00 +1.000000000000000e+00
-+1.000000000000000e+00 +2.030000000000000e+00
-+2.000000000000000e+00 +3.100000000000000e+00
-+3.000000000000000e+00 +3.830000000000000e+00
-+4.000000000000000e+00 +4.590000000000000e+00
-+5.000000000000000e+00 +5.400000000000000e+00
-+6.000000000000000e+00 +5.950000000000000e+00
-+7.000000000000000e+00 +6.200000000000000e+00
-+8.000000000000000e+00 +6.630000000000000e+00
-+9.000000000000000e+00 +7.460000000000000e+00
++1.000000000000000e+00 +9.200000000000000e-01
++2.000000000000000e+00 +7.300000000000000e-01
++3.000000000000000e+00 +4.000000000000000e-01
++4.000000000000000e+00 +2.800000000000000e-01
++5.000000000000000e+00 +2.000000000000000e-01
++6.000000000000000e+00 +2.100000000000000e-01
++7.000000000000000e+00 +1.300000000000000e-01
++8.000000000000000e+00 +5.000000000000000e-02
++9.000000000000000e+00 +9.000000000000000e-02
 };
 \addplot [line width=1.66pt, color4, forget plot]
 table {%
 0 1
-1 2.03
-2 3.1
-3 3.83
-4 4.59
-5 5.4
-6 5.95
-7 6.2
-8 6.63
-9 7.46
+1 0.92
+2 0.73
+3 0.4
+4 0.28
+5 0.2
+6 0.21
+7 0.13
+8 0.05
+9 0.09
 };
 \addplot [line width=1.66pt, color4, forget plot]
 table {%
@@ -139,68 +139,68 @@ table {%
 };
 \addplot [line width=1.66pt, color4, forget plot]
 table {%
-1 1.97
-1 2.1
+1 0.86
+1 0.97
 };
 \addplot [line width=1.66pt, color4, forget plot]
 table {%
-2 3
-2 3.21
+2 0.64
+2 0.81
 };
 \addplot [line width=1.66pt, color4, forget plot]
 table {%
-3 3.67
-3 3.98
+3 0.3
+3 0.5
 };
 \addplot [line width=1.66pt, color4, forget plot]
 table {%
-4 4.39
-4 4.8
+4 0.19
+4 0.37
 };
 \addplot [line width=1.66pt, color4, forget plot]
 table {%
-5 5.16
-5 5.64
+5 0.12
+5 0.28
 };
 \addplot [line width=1.66pt, color4, forget plot]
 table {%
-6 5.69
-6 6.23
+6 0.14
+6 0.29
 };
 \addplot [line width=1.66pt, color4, forget plot]
 table {%
-7 5.91975
-7 6.48
+7 0.07
+7 0.2
 };
 \addplot [line width=1.66pt, color4, forget plot]
 table {%
-8 6.34
-8 6.92
+8 0.01
+8 0.1
 };
 \addplot [line width=1.66pt, color4, forget plot]
 table {%
-9 7.14
-9 7.76025
+9 0.04
+9 0.15
 };
 
 \addplot [only marks, mark size=2.0, mark=square*, draw=color2, fill=color2, colormap/blackwhite]
 table{%
 x                      y
-+0.000000000000000e+00 +1.000000000000000e+00
-+1.000000000000000e+00 +2.000000000000000e+00
-+2.000000000000000e+00 +2.987442378071903e+00
-+3.000000000000000e+00 +3.821715111593599e+00
-+4.000000000000000e+00 +4.163430371330779e+00
-+5.000000000000000e+00 +4.438511376242037e+00
++0.000000000000000e+00 +9.822222212577160e-01
++1.000000000000000e+00 +9.837037209040648e-01
++2.000000000000000e+00 +9.422222190875770e-01
++3.000000000000000e+00 +6.977777613811720e-01
++4.000000000000000e+00 +2.785184612911492e-01
++5.000000000000000e+00 +8.296289512602513e-02
 };
 \addplot [line width=1.66pt, color2, forget plot]
 table {%
-0 1
-1 2
-2 2.9874423780719
-3 3.8217151115936
-4 4.16343037133078
-5 4.43851137624204
+0 0.982222221257716
+1 0.983703720904065
+2 0.942222219087577
+3 0.697777761381172
+4 0.278518461291149
+5 0.0829628951260251
 6 nan
 7 nan
 8 nan
@@ -256,80 +256,79 @@ table {%
 9 nan
 9 nan
 };
-
 \addplot [only marks, mark size=2.0, draw=color5, mark=x, fill=color5, colormap/blackwhite]
 table{%
 x                      y
 +0.000000000000000e+00 +1.000000000000000e+00
-+1.000000000000000e+00 +2.000000000000000e+00
-+2.000000000000000e+00 +3.000000000000000e+00
-+3.000000000000000e+00 +4.000000000000000e+00
-+4.000000000000000e+00 +5.000000000000000e+00
-+5.000000000000000e+00 +6.000000000000000e+00
-+6.000000000000000e+00 +7.000000000000000e+00
-+7.000000000000000e+00 +8.000000000000000e+00
-+8.000000000000000e+00 +9.000000000000000e+00
-+9.000000000000000e+00 +1.000000000000000e+01
++1.000000000000000e+00 +1.000000000000000e+00
++2.000000000000000e+00 +1.000000000000000e+00
++3.000000000000000e+00 +1.000000000000000e+00
++4.000000000000000e+00 +1.000000000000000e+00
++5.000000000000000e+00 +1.000000000000000e+00
++6.000000000000000e+00 +1.000000000000000e+00
++7.000000000000000e+00 +1.000000000000000e+00
++8.000000000000000e+00 +1.000000000000000e+00
++9.000000000000000e+00 +1.000000000000000e+00
 };
 \addplot [line width=1.66pt, color5, dotted, forget plot]
 table {%
 0 1
-1 2
-2 3
-3 4
-4 5
-5 6
-6 7
-7 8
-8 9
-9 10
+1 1
+2 1
+3 1
+4 1
+5 1
+6 1
+7 1
+8 1
+9 1
 };
-\addplot [line width=1.66pt, color5, forget plot]
+\addplot [line width=1.66pt, color5, dotted, forget plot]
 table {%
 0 nan
 0 nan
 };
-\addplot [line width=1.66pt, color5, forget plot]
+\addplot [line width=1.66pt, color5, dotted, forget plot]
 table {%
 1 nan
 1 nan
 };
-\addplot [line width=1.66pt, color5, forget plot]
+\addplot [line width=1.66pt, color5, dotted, forget plot]
 table {%
 2 nan
 2 nan
 };
-\addplot [line width=1.66pt, color5, forget plot]
+\addplot [line width=1.66pt, color5, dotted, forget plot]
 table {%
 3 nan
 3 nan
 };
-\addplot [line width=1.66pt, color5, forget plot]
+\addplot [line width=1.66pt, color5, dotted, forget plot]
 table {%
 4 nan
 4 nan
 };
-\addplot [line width=1.66pt, color5, forget plot]
+\addplot [line width=1.66pt, color5, dotted, forget plot]
 table {%
 5 nan
 5 nan
 };
-\addplot [line width=1.66pt, color5, forget plot]
+\addplot [line width=1.66pt, color5, dotted, forget plot]
 table {%
 6 nan
 6 nan
 };
-\addplot [line width=1.66pt, color5, forget plot]
+\addplot [line width=1.66pt, color5, dotted, forget plot]
 table {%
 7 nan
 7 nan
 };
-\addplot [line width=1.66pt, color5, forget plot]
+\addplot [line width=1.66pt, color5, dotted, forget plot]
 table {%
 8 nan
 8 nan
 };
-\addplot [line width=1.66pt, color5, forget plot]
+\addplot [line width=1.66pt, color5, dotted, forget plot]
 table {%
 9 nan
 9 nan

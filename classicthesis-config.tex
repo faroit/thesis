@@ -89,6 +89,8 @@
   % backend=bibtex8,bibencoding=ascii,%
   language=auto,%
   style=ieee,%
+  dashed=false,
+  defernumbers,
   %style=authoryear-comp, % Author 1999, 2010
   %bibstyle=authoryear,dashed=false, % dashed: substitute rep. author with ---
   sorting=nyt, % name, year, title
@@ -96,7 +98,16 @@
   %backref=true,%
   natbib=false % natbib compatibility mode (\citep and \citet still work)
 }{biblatex}
-    \usepackage{biblatex}
+
+\usepackage{biblatex}
+
+\ExecuteBibliographyOptions{%
+  sorting=nty, % Sort by name, title, year.
+  maxbibnames=15,%
+}%
+
+% Emphasize own name in References with boldface
+\usepackage{xpatch}
 
 \PassOptionsToPackage{fleqn}{amsmath}       % math environments and more by the AMS
   \usepackage{amsmath}

@@ -1,13 +1,37 @@
+# Bernd 19.10.2018
+
+- analyse nach synthese
+
+* [ ] Common Fate interpretation
+* [ ] NMF
+
+Daniel D. Lee and H. Sebastian Seung. Algorithms for non-negative matrix factorization. In Proceedings of the Neural Information Processing Systems (NIPS), pages 556–562, Denver, CO, USA, 2000.
+
+
+Dittmar:
+
+> When using NMF for ADT, it is essential to choose a suitable rank R ∈ N of the approximation (i.e., number of components) and to provide a good initialization for W. One popular choice (see for example [7, 37, 158, 160]) is to set R to the number of distinct drum instruments and to initialize individual columns W (:, r) with averaged spectra of isolated drum sound events. The rationale is to let the NMF component updates start from a point in the parameter space that is already close to a meaningful local optimum.
+
+# TODO
+
+Release WICE dataset
+
 # Bernd Deadline
 
-* [ ] Write Common Fate DNN Section
-* [ ] Merge Counting Papers
+* [X] Write Common Fate DNN Section
+* [X] Merge Counting Papers
 * [ ] Redo Dataset Chapter
-* [ ] Fix bibliography of chapter 05 and 06
+* [X] Fix bibliography of chapter 05 and 06
 * [ ] NMF Example
 * [ ] Add CountNet
-
+* [ ] add negative log likelihood
 * add pescador training to count net paper.
+
+# Zenodos
+
+* [ ] Countit Responses: 10.5281/zenodo.1467968
+* [ ] Unison Dataset
+
 
 # Tasks for Highly Overlapped sources
 
