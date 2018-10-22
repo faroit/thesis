@@ -71,6 +71,117 @@ G028 & 17&5 & 6&5 & Electric~Bass, Electric~Guitar, Flute, Piano, Trombone and T
 \label{tab:items}
 \end{table}
 
+The overall results of the means of $\Delta$ and $E$ are plotted in Figure~\ref{fig:meanerror}.
+
+\begin{figure}[h]
+\begin{minipage}{0.5\textwidth}
+\begin{tabular}{c}
+	\includegraphics[width=\textwidth]{Chapters/07_Analysis_Experiment/images/error_means.pdf}
+\end{tabular}
+\end{minipage}
+%\hfill
+\begin{minipage}{0.5\textwidth}
+\begin{tabular}{c}
+	\includegraphics[width=\textwidth]{Chapters/07_Analysis_Experiment/images/error_diff.pdf}
+\end{tabular}
+\end{minipage}
+\caption{Error probability (left) and Mean of $\Delta = I-R$ (right) categorized by the number of instruments.}
+\label{fig:meanerror}
+\end{figure}
+\vspace{-1.0em}
+
+
+\subsection{A gap of one instrument between musicians and non-musicians}
+To investigate the difference in performance between musicians and non-musicians a pairwise comparison between those two groups was run. Overall musicians perform about 20\% better throughout the test (mean difference = $0.18$, std. error = $ 0.0044$, $df = 1$, $p=0.000$). We do not know what caused these differences as the level of professionalism had not been surveyed. Also 37 \% of the musicians additionally had experience in audio engineering due to their profession. Further to look at possible interaction effects between the number of instruments and the groups of musicians and non-musicians we adapted our logit equation to
+\begin{equation}
+	logit(E) =  \text{Intercept} + x_1 \text{I} + x_2 \text{M} + x_3 \text{M}\times\text{I} .
+	\label{eq:logit_interactions}
+\end{equation}
+We then reran the GLM analysis selecting only items of three and four instruments. This avoids quasi-complete separation in the logit regression model which is caused by low variances in the error probability for items of $I \in \{1,2,5,6\}$. The model effects of the subset of items are shown in Table~\ref{tab:glm_logit_34}.
+\begin{table}
+\center
+\scriptsize
+\begin{minipage}[b]{0.45\textwidth}\centering
+	\begin{tabular}{rccc}
+	\toprule[1.5pt]
+	Source    & Wald $\chi^2$ & df & p \\
+	\midrule
+	Intercept & 22.643 & 1 & 0.000 \\
+	I & 185.359	& 5 & 0.000 \\
+	M & 17.977 & 1 & 0.000 \\
+	& & & \\
+	\bottomrule[1.5pt]
+	\end{tabular}
+	\caption{Tests of Model Effects of dependent variable $E$ }
+    \label{tab:glm_logit}
+\end{minipage}
+\hfill
+\begin{minipage}[b]{0.45\textwidth}
+	\begin{tabular}{rccc}
+	\toprule[1.5pt]
+	Source    & Wald $\chi^2$ & df & p \\
+	\midrule
+	Intercept & 12.434 & 1 & 0.000 \\
+	I & 22.742	& 1 & 0.000 \\
+	M & 22.742 & 1 & 0.000 \\
+	M$\times$I	& 0.184 & 1 & 0.668 \\
+	\bottomrule[1.5pt]
+	\end{tabular}
+	\caption{Tests of Model Effects of dependent variable $E$ for a subset of items with $I \in \{3,4\}$}
+    \label{tab:glm_logit_34}
+\end{minipage}
+\end{table}
+
+\begin{figure}[h]
+	\centering
+	\scriptsize
+	\begin{tikzpicture}[node distance=2cm]
+		\draw [-,thick] (0,5*1.25) node (yaxis) [left] {$ $}
+	        |- (7,0.75) node (xaxis) {$ $};
+
+		\draw (-1.1, 5) node[left,rotate=90] {Error~Probability};
+
+		\draw (1,-0.2+0.75) -- (1,0+0.75) node[below=4pt] {musician};
+		\draw (5.5,-0.2+0.75) -- (5.5,0+0.75) node[below=4pt] {non-musician};
+
+	%	\draw (-0.1, 0) -- (0.1, 0) node[left=4pt] {$0\%$};
+		\draw (-0.1, 1.3710*1.25) -- (0.1, 1.3710*1.25) node[left=4pt] {$0.27$};
+		\draw (-0.1, 3.2258*1.25) -- (0.1, 3.2258*1.25) node[left=4pt] {$0.65$};
+		\draw (-0.1, 4.3548*1.25) -- (0.1, 4.3548*1.25) node[left=4pt] {$0.87$};
+	%	\draw (-0.1, 5*1.25) -- (0.1, 5*1.25) node[left=4pt] {$100\%$};
+
+		\draw[dashed,style={color=black!35}] (0, 1.3710*1.25) -- (1.5, 1.3710*1.25) node[left=4pt] {};
+		\draw[dashed,style={color=black!35}] (0, 3.2258*1.25) -- (1.5, 3.2258*1.25) node[left=4pt] {};
+		\draw[dashed,style={color=black!35}] (0, 4.3548*1.25) -- (5.5, 4.3548*1.25) node[left=4pt] {};
+
+		\GraphInit[vstyle=Normal]
+		\tikzset{EdgeStyle/.style={}}
+		\tikzset{colorstyle/.style={
+			shape= circle,
+			line width = 1pt,
+			draw = black,
+			fill = #1!30}
+		}
+
+		\Vertex[L=3,x=1,y=1.3710*1.25,style={colorstyle=red,line width = 4pt}] {3M}
+		\Vertex[L=4,x=1,y=3.2258*1.25,style={colorstyle=blue,line width = 2pt}] {4M}
+		\Vertex[L=3,x=5.5,y= 3.2258*1.25,style={line width = 4pt}] {3N}
+		\Vertex[L=4,x=5.5,y=4.3548*1.25,style={colorstyle=green, draw = black!0,line width = 0}] {4N}
+
+		\Edge[label=$0.23$,style={color=black!50}](3N)(4N)
+		\Edge[label=$0.37$,style={color=black!50}](3N)(3M)
+
+		\Edge[label=$0.23$,style={color=black!50}](4N)(4M)
+		\Edge[label=$0.37$,style={color=black!50}](4M)(3M)
+		\Edge[label=$0.60$,style={color=black!50}](3M)(4N)
+		\Edge[label=$0.00$,style={color=red, line width = 2pt}](3N)(4M)
+
+		\end{tikzpicture}
+		\caption{Pairwise comparison between interaction of Musician/Non-Musician and the number of instruments (labeled in nodes). The costs between nodes indicates the mean differences between groups. The red/bold line indicates that is there is no significant difference at the $p=0.005$ level}
+		\label{fig:graph}
+\end{figure}
+The interaction of Musician$\times$Instruments is not significant on a $p=0.05$ level in general and a pairwise comparison test reveals two groups of equal probability. The pairwise comparisons are depicted in Figure~\ref{fig:graph}. The red vertex indicates there is no significant difference in the error probability for the group of musicians in items with four instruments compared to non-musicians in items of three instruments. Therefore a gap in the error probability of one instrument between those two groups becomes apparent.
+
 \subsection{Large Scale Study}
 
 For many types of music perception experiments such as estimating the number of instruments, it is essential that the selected participants represent a large population. As recent research in cross-cultural music perception and cognition reveals: The perception of music is dependent on the origin of people\cite{Stevens2012}. Besides the cultural background, other aspects like their profession might have an influence when estimating the number of instruments being played back, e.~g. musicians might recognize instruments much more easily since they are in touch with instruments in their everyday life. One of the advantages of Internet experiments (also called web-based experiments or web experiments) is that it is easier to gather participants with different backgrounds and from different regions than in laboratory experiments. For a summary of benefits and disadvantages of Internet experiments see \cite{Reips2002}. In music perception a major argument against Internet experiments is that there is no control about the environment. With the spreading of mobile devices with Internet connections this argument becomes more apparent, since the environment of the participants can range from a quiet place at home to a noisy place outside.
@@ -524,4 +635,9 @@ For higher speaker counts, participants reported that the integrated phoneme act
 \begin{itemize}
   \item More stimulus instead of more participants to train a dnn to match human performance.
   \item good task for a web based experiment.
+  \item Underestimation
 \end{itemize}
+
+% from ICA paper
+We confirm \cite{huron89} that the most common error is the underestimation of one instrument, although this accounts only for 43 \% of the responses in our experiment. Only in one case $\Delta$ is negative (overestimation) which is item C016, a ``Clarinet Quintet in A major by Wolfgang Amadeus Mozart (K.581. 1st mvmt)'' where we have excluded the solo clarinet part and two strings. Still, the remaining sound seems to be so similar to that of a quartet that musicians tended to hear ``phantom'' instruments.
+\vspace{-1.0em}
