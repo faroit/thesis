@@ -4,42 +4,38 @@
 The main focus of this thesis is the \emph{analysis} and \emph{processing} of sound recordings of music or speech, commonly referred to as \emph{audio signals}.
 In this chapter, I introduce basic concepts of digital audio signals which are relevant to follow the remaining chapters.
 
-\section{Notations}
-
-\subsection{Signal Processing Notation}
-\subsection{Machine Learning Notations}
-
 \hypertarget{Fundamentals of Overlapped Sounds}{%
 \section{Fundamentals of Overlapped Sounds}\label{specifics-of-audio-signals}}
 
 When a sound wave travels through a medium like air it can be captured using a microphone by measuring the local pressure deviation (Pa) over time.
-We define such a signal as a one-dimensional time-series \(x(t)\), continuous in both, time and amplitude (see Figure 1).
-There are many other real world signals with similar characteristics to audio signal such as from finance, geophysics and meteorology.
-An \emph{audio} signal can simply be introduced as a signal that is meant to be perceived by the human auditory system through our ears.
-That means the signals usually have some properties that match the limitations of human hearing system, for example in dynamics/loudness as well as a limited signal bandwidth.
+Such a signal ca be written as a function \(x(t)\) continuous in both, time \(t \in \sR\) and the amplitude \(x(t) \in \sR\).
+An \emph{audio signal} can simply be introduced as a signal that is meant to be perceived by the human auditory system --- through our ears.
+Therefore, one could observe specifics properties of audio signals, consistent to the limitations of the human hearing system, for example in dynamics/loudness as well as a limited signal bandwidth.
+In fact, many other signals exist with similar characteristics such as signals from finance, geophysics, meteorology or medical data.
+The result is that often audio research is inspired by applications of other fields of signal processing and vice versa.
 
 \hypertarget{digital-representations-of-audio-signals}{%
 \subsection{Digital Representations of Audio
 Signals}\label{digital-representations-of-audio-signals}}
 
-As of today digital representations of audio signals are primarily used.
-To digitally store, analyse or process \(x(t)\), time and amplitudes are sampled and discretized resulting in \(x \in \mathbf{Z}\).
-The discretization is done using an analog-to-digital converter (ADC) which can be found in many every-day devices such as laptops and smart-phones.
-An important parameter in the process of digitisation is the sample rate.
-It sets the quality of audio signals so that the reproduction of the digital waveform over headphones or loudspeakers does not introduce a loss in quality. Due to the Nyquist-Shannon sampling theorem the sample rate needs to be at least twice the band width of the analogue signal.
-The process of sampling is depicted in Figure 2.\\
-
+To store, analyse or process audio signals, as of today, digital representations are used to leverage the processing capabilities of modern computing devices.
+A digital audio signal can be obtained from an analog signal using analog-to-digital/digital-to-analog converters (ADC/DAC) which can be found in almost any every-day device such as laptops and smart-phones.
+In short, this includes to steps, First, the continuous time signal \(x(t)\) is converted to a discrete time series, where one sample~\footnote{Please note, that the use of the word \emph{sample} will have different meanings in the context of machine learning, where a sample is usually a instance of a signal instead of a single time step.} \(x(n)\) using equidistant steps \(T\) using \emph{sampling} and Second, the amplitude values are \emph{quantized} resulting in vector \(\vx \in \sZ\), represented as a one dimensional time series of amplitudes.
+An important parameter in the process of digitization is the sample rate \(F_s = 1/T\) where \(T\) is the sampling period.
+Often, \(F_s\) has a significant effect on the quality of audio signals.
+And, it is the objective of a real world audio system to not introduce perceptible degradation in audio quality when a digital signal is reproduced over headphones or loudspeakers.
+Due to the Nyquist-Shannon sampling theorem the sample rate needs to be at least twice the band width of the analogue signal.
+\par
 Since the hearing range of normal listening humans is 20 Hz - 20 kHz \cite{fastl90, moore89}, typically for audio signals, sample rates of 44100 Hz are chosen to facilitate the full human hearing range.
-However, for many applications, a lower sampling rate is sufficient, as commonly used for speech communication where intelligibility is more important than quality.
-For further details we refer the reader to signal processing basics such as \cite{proakis96, oppenheim97}.
+However, for many applications, a lower sampling rate is sufficient, e.g. in speech communication where intelligibility often is more important than quality.
+For further details we refer the reader to audio signal processing basics such as~\cite{proakis96, oppenheim97, Mueller15}.\\
 
 \hypertarget{time-frequency-representation}{%
 \subsection{Time-Frequency
 Representation}\label{time-frequency-representation}}
 
 % <!-- Taken from Zafar --!>
-
-A time-frequency (TF) representation of sound is a matrix that encodes the time-varying \textit{spectrum} of the waveform. Its entries are called TF~\textit{bins} and encode the varying spectrum of the waveform for all time frames and frequency channels. In thesis we will use the notation of \(\mathbf{X}(n, k)\) with frequency bin denoted with \(k\) and time frame with \(n\).
+A time-frequency (TF) representation of sound is a matrix that encodes the time-varying \textit{spectrum} of the waveform. Its entries are called TF~\textit{bins} and encode the varying spectrum of the waveform for all time frames and frequency channels. In thesis we will use the notation of \(\mX(n, k)\) with frequency bin denoted with \(k\) and time frame with \(n\).
 The most commonly-used TF representation is the short time Fourier transform (STFT)~\cite{mcaulay86}, which has complex entries: the angle accounts for the phase, i.e., the actual shift of the corresponding sinusoid at that time bin and frequency bin, and the magnitude accounts for the amplitude of that sinusoid in the signal.
 The magnitude (or power) of the STFT is called \textit{spectrogram}.
 For stereo signals, the TF representation yields a three-dimensional tensor: ${time} \times frequency \times channel$.
