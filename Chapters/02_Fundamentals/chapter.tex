@@ -7,7 +7,7 @@ In this chapter, I introduce basic concepts of digital audio signals which are r
 \hypertarget{Fundamentals of Overlapped Sounds}{%
 \section{Fundamentals of Overlapped Sounds}\label{specifics-of-audio-signals}}
 
-When a sound wave travels through a medium like air it can be captured using a microphone by measuring the local pressure deviation (Pa) over time.
+When a sound wave travels through a medium like air it can be captured using a microphone by measuring the local pressure deviation over time.
 Such a signal ca be written as a function \(x(t)\) continuous in both, time \(t \in \sR\) and the amplitude \(x(t) \in \sR\).
 An \emph{audio signal} can simply be introduced as a signal that is meant to be perceived by the human auditory system --- through our ears.
 Therefore, one could observe specifics properties of audio signals, consistent to the limitations of the human hearing system, for example in dynamics/loudness as well as a limited signal bandwidth.
@@ -18,31 +18,39 @@ The result is that often audio research is inspired by applications of other fie
 \subsection{Digital Representations of Audio
 Signals}\label{digital-representations-of-audio-signals}}
 
-To store, analyse or process audio signals, as of today, digital representations are used to leverage the processing capabilities of modern computing devices.
+To store, analyze or process audio signals, as of today, digital representations are used to leverage the processing capabilities of modern computing devices.
 A digital audio signal can be obtained from an analog signal using analog-to-digital/digital-to-analog converters (ADC/DAC) which can be found in almost any every-day device such as laptops and smart-phones.
-In short, this includes to steps, First, the continuous time signal \(x(t)\) is converted to a discrete time series, where one sample~\footnote{Please note, that the use of the word \emph{sample} will have different meanings in the context of machine learning, where a sample is usually a instance of a signal instead of a single time step.} \(x(n)\) using equidistant steps \(T\) using \emph{sampling} and Second, the amplitude values are \emph{quantized} resulting in vector \(\vx \in \sZ\), represented as a one dimensional time series of amplitudes.
+In short, this includes to steps, First, the continuous time signal \(x(t)\) is converted to a discrete time series, where one sample\footnote{Please note, that the use of the word \emph{sample} will have different meanings in the context of machine learning, where a sample is usually a instance of a signal instead of a single time step.} \(x(n)\) using equidistant steps \(T\) using \emph{sampling} and Second, the amplitude values are \emph{quantized} resulting in vector \(\vx \in \sZ\), represented as a one dimensional time series of amplitudes.
 An important parameter in the process of digitization is the sample rate \(F_s = 1/T\) where \(T\) is the sampling period.
 Often, \(F_s\) has a significant effect on the quality of audio signals.
 And, it is the objective of a real world audio system to not introduce perceptible degradation in audio quality when a digital signal is reproduced over headphones or loudspeakers.
 Due to the Nyquist-Shannon sampling theorem the sample rate needs to be at least twice the band width of the analogue signal.
-\par
-Since the hearing range of normal listening humans is 20 Hz - 20 kHz \cite{fastl90, moore89}, typically for audio signals, sample rates of 44100 Hz are chosen to facilitate the full human hearing range.
+Since the hearing range of normal listening humans is
+20~\si{\hertz} - 20~\si{\kilo\hertz}~\cite{fastl90, moore89}, typically for audio signals, 
+sample rates of 44100~\si{\hertz} are chosen to facilitate the full human hearing range.
 However, for many applications, a lower sampling rate is sufficient, e.g. in speech communication where intelligibility often is more important than quality.
-For further details we refer the reader to audio signal processing basics such as~\cite{proakis96, oppenheim97, Mueller15}.\\
+For further details we refer the reader to audio signal processing basics such as~Chapter 1 in~\cite{proakis96} or Chapter 2 in~\cite{Mueller15}.
 
 \hypertarget{time-frequency-representation}{%
-\subsection{Time-Frequency
-Representation}\label{time-frequency-representation}}
+\subsection{Time-Frequency Representation}\label{time-frequency-representation}}
 
-% <!-- Taken from Zafar --!>
-A time-frequency (TF) representation of sound is a matrix that encodes the time-varying \textit{spectrum} of the waveform. Its entries are called TF~\textit{bins} and encode the varying spectrum of the waveform for all time frames and frequency channels. In thesis we will use the notation of \(\mX(n, k)\) with frequency bin denoted with \(k\) and time frame with \(n\).
-The most commonly-used TF representation is the short time Fourier transform (STFT)~\cite{mcaulay86}, which has complex entries: the angle accounts for the phase, i.e., the actual shift of the corresponding sinusoid at that time bin and frequency bin, and the magnitude accounts for the amplitude of that sinusoid in the signal.
-The magnitude (or power) of the STFT is called \textit{spectrogram}.
-For stereo signals, the TF representation yields a three-dimensional tensor: ${time} \times frequency \times channel$.
-Using a time-frequency representation for audio signals is generally done to improve computational efficiency and at the same time model more closely
-the human hearing~\cite{bregman90}.
+Real world sounds such as speech and music include periodicity.
+Therefore, sounds are often analyzed in the frequency domain as a \emph{spectrum} to reduce redundancy and improve the computational efficiency of the signal processing.
+This is commonly achieved trough the use of discrete Fourier transform (DFT). 
+For details, the reader is referred to~Chapter 4 of~\cite{proakis96}.
+At the same time, spectral representations relates to our human auditory system~\cite{zwicker13, moore89, bregman90} allowing us to process sounds the way we perceive them.
+\par
+The periodicity of real world sounds, as mentioned above, usually only holds for short time scales of several milliseconds, often referred to as ``quasi-stationarity''.
+Instead, sounds are non-stationary over the course of several seconds and it therefore is useful to analyze and process short-time spectra, computed in an overlapped fashion, resulting in a \emph{time-frequency} (TF) representation.
+Simply put, a TF representation encodes the time-varying \textit{spectra} into a matrix \(\mX(n, k)\) with frequencies \(k\) and time frames \(n\).
+For signals with more than one channel, the representation is extended to yield a three-dimensional tensor \(\mX(n, k, c)\), where \(c\) includes the channel.
+When sounds are processed in the time-frequency domain the transformation needs to be inverted, hence many researchers chose a representation that allows to easily reconstruct the signal.
+The short-time Fourier transform (STFT) is the most commonly used TF representation~\cite{mcaulay86}.
+STFT matrices are complex meaning that they include the phase information along with and the magnitude which represents the amplitude of that signal.
+Often the magnitude of the STFT is referred to as the~\emph{spectrogram}.
 
-\subsection{Pitch and Harmony}
+\subsection{Fundamental Frequency, Pitch and Harmony}
+% TODO: Add STFT plot from Cello Dataset, showing f0, overtones vibrato extend etc.
 
 % FROM ZAFAR, do a full rewrite!
 A particularity of both, speech and music signals is that they typically have pitched content.
@@ -239,7 +247,7 @@ While there exist many source separation methods that aim to extract the actual 
 In live recording this would result inverting the process of convolution as well.
 In fact, separation of convoluted mixtures is very active field in source separation described in~\cite{pedersen07}.
 In the context of music a separation, however, this becomes less relevant as today's recording and studio mixing environment is mostly digital.
-This means that the last step in creating music mixtures, as described earlier in Subsection~\ref{sub:specifics_of_musical_mixtures}, results in a linear mixture.
+This means that the last step in creating music mixtures, as described earlier, results in a linear mixture.
 While the source images can yield from a mixing process undergoing the various assumptions, for the case of a mixture of source images, we consider usually only consider linear mixing in this thesis.
 For a more detailed description of this scenario and applications of source image extraction, see~\cite{sturmel12}.\\
 
@@ -248,7 +256,7 @@ These restrictions are typically made because not for all kind of music separati
 In music separation, by far the most popular task is to extract the vocals and the background of the music.
 This allows for example automatic karaoke recordings.
 An extensive overview of music separation methods can be found in~\cite{rafii18}.
-Even though the overview is focused on vocal accompaniment separation, most approaches can be generalised to other sources.
+Even though the overview is focused on vocal accompaniment separation, most approaches can be generalized to other sources.
 
 \subsection{Source Count Estimation}
 % copy from icassp paper maybe
