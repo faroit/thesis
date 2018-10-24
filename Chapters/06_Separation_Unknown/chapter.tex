@@ -18,6 +18,8 @@ In a standard NMF model, the spectrogram is factorized into the sum of $K$ compo
    \label{eq:vanilla_nmf}
 \end{equation}
 
+% TODO: NMF With only one channel of sound, we can take the magnitude spectrogram, which is a non-negative matrix !  NMF takes this matrix and iteratively approximates it with two simpler matrices that multiply together to produce the original matrix !  The approximation is driven by a cost function !  Rows and columns have special meanings that allow recovery of a mask that can be applied to the spectrogram to recover the sources
+
 In Figure~\ref{fig:methods_low_rank}, I depict such an example where this technique is exploited.
 After factorization, several spectra are obtained, along with their activations over time.
 A subsequent step is the clustering of these spectra (and activations) into the two examplary sources.
@@ -456,6 +458,18 @@ To understand the influence of the underlying matrix or tensor representation we
 
 % TODO move conclusion somewhere else
 In this work we presented a method to exploit common modulation textures for source separation. A transformation based on a complex tensor representation computed from patches of the STFT has been introduced. We then showed how these patches are factorized by the proposed \emph{Common Fate Model}, which is derived from the idea of humans perceiving common modulation over time as one source. Our results on unisonous musical instruments indicate that this method can perform well for this scenario. The CFM model could also be successfully used in other scenarios, such as speech separation.
+
+\subsection{Optimizing Tensor factorizations}
+
+% TODO
+% we implemented a custom C++ version of the PARAFAC product.
+% we included  Parallelisation, SIMD Vectorized and it is Cache Optimized
+%
+% Depending on the data size, between 20 and 40 times faster than a Python implementation of the same operation !  Also found that in the original algorithm, it is not necessary to perform
+%
+% this product for every factor, but only for each iteration !  This implementation can be used not only for Beta-NTF but also for
+%
+% many other algorithms using PARAFAC or CANDECOMP
 
 \section{Common Fate Model for Lead Accompaniment Separation using Deep Neural Network}
 

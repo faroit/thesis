@@ -88,10 +88,10 @@
   backend=biber,bibencoding=utf8, %instead of bibtex
   % backend=bibtex8,bibencoding=ascii,%
   language=auto,%
-  style=ieee,%
-  dashed=false,
+  % style=ieee,%
+  % dashed=false,
   defernumbers,
-  %style=authoryear-comp, % Author 1999, 2010
+  style=alphabetic, % Author 1999, 2010
   %bibstyle=authoryear,dashed=false, % dashed: substitute rep. author with ---
   sorting=nyt, % name, year, title
   maxbibnames=10, % default: 3, et al.
@@ -120,6 +120,8 @@
   \usepackage{tikz}
   \usetikzlibrary{positioning,fit, calc}
   \usepackage{pgfplots}
+
+\usepackage{bm}
 
 % ********************************************************************
 % General useful packages
@@ -307,6 +309,8 @@
     %\end{flushright}
   \end{minipage}
 }
+
+\input{mathcommands.tex}
 
 \usepackage{siunitx}
 
