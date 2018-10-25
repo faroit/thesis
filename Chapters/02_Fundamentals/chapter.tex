@@ -42,18 +42,17 @@ At the same time, spectral representations relates to our human auditory system~
 \par
 The periodicity of real world sounds, as mentioned above, usually only holds for short time scales of several milliseconds, often referred to as ``quasi-stationarity''.
 Instead, sounds are non-stationary over the course of several seconds and it therefore is useful to analyze and process short-time spectra, computed in an overlapped fashion, resulting in a \emph{time-frequency} (TF) representation.
-Simply put, a TF representation encodes the time-varying \textit{spectra} into a matrix \(\mX(n, k)\) with frequencies \(k\) and time frames \(n\).
-For signals with more than one channel, the representation is extended to yield a three-dimensional tensor \(\mX(n, k, c)\), where \(c\) includes the channel.
+Simply put, a TF representation encodes the time-varying \textit{spectra} into a matrix \(\mX\) with frequencies \(k\) and time frames \(n\).
+For signals with more than one channel, the representation is extended to yield a three-dimensional tensor, where \(c\) includes the channel.
+\par
 When sounds are processed in the time-frequency domain the transformation needs to be inverted, hence many researchers chose a representation that allows to easily reconstruct the signal.
 The short-time Fourier transform (STFT) is the most commonly used TF representation~\cite{mcaulay86}.
-STFT matrices are complex meaning that they include the phase information along with and the magnitude which represents the amplitude of that signal.
+STFT matrices \(\mX \in \sC^{n \times k \times c}\) are complex meaning that they include the phase information along with and the magnitude which represents the amplitude of that signal.
 Often the magnitude of the STFT is referred to as the~\emph{spectrogram}.
 
-\subsection{Fundamental Frequency, Pitch and Harmony}
+\subsection{Fundamental Frequency, Pitch and Harmonicity}
 % TODO: Add STFT plot from Cello Dataset, showing f0, overtones vibrato extend etc.
-
-% FROM ZAFAR, do a full rewrite!
-A particularity of both, speech and music signals is that they typically have pitched content.
+Speech and music signals is that they typically have pitched content.
 A sound gives the perception of having a pitch if the majority of the energy in the audio signal is at frequencies located at integer multiples of some fundamental frequency.
 These integer multiples are called \textit{harmonics}~\cite{schenker54}.
 When the fundamental frequency changes, the frequencies of these harmonics also change, yielding the typical comb spectrograms of harmonic signals.
