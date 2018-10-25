@@ -1,3 +1,51 @@
+# Motivation
+
+## why monoaural
+
+Everything fits together:
+
+Speech ~4Hz
+Violon Vibraot ~5Hz
+
+> from Greenberg97
+It has been previously suggested that the broad peak at 4 Hz in the modulation spectrum corresponds to the average syllable rate [8].
+
+@article{houtgast85,
+  title={A review of the MTF concept in room acoustics and its use for estimating speech intelligibility in auditoria},
+  author={Tammo Houtgast and Herman JM Steeneken},
+  journal={The Journal of the Acoustical Society of America},
+  volume={77},
+  number={3},
+  pages={1069--1077},
+  year={1985},
+  publisher={ASA}
+}
+
+Modulations spectrogram for speech are usually calibrated to 4 Hz modulation rate.
+
+also from 
+
+@inproceedings{greenberg96,
+  title={Insights into spoken language gleaned from phonetic transcription of the Switchboard corpus},
+  author={Greenberg, Steven and Hollenback, Joy and Ellis, Dan},
+  booktitle={Proc. ICSLP},
+  year={1996},
+}
+
+> The modulation spectrum for an octave-wide channel, arithmetically centered at 1.5 kHz, computed from a single speaker's discourse over a two-minute interval is shown and compared with that of the distribution of syllable durations (transformed into equivalent modulation frequencies). The similarity between the two measurements suggests that much of the energy in the modulation spectrum may be derived from syllabic segmentation. This association is of interest in light of recent demonstrations that speech intelligibility is crucially dependent on the preservation of the portion of the modulation spectrum between 2 and 10 Hz.
+
+* Because it allows to fucus 
+## why isn't there more research on on modulation based processing
+
+* tracking modulations is hard, because f0 estimation doesn't easily work on mixtures. Reason is that crossing partials is a big problem for sinusoidal modeling~\cite{viste03}
+* modulations are not present in all signal types. so you need to be lucky 
+* * Papers with detecting vibrato?
+* Representations are now easily invertible
+
+## Gute Methode um Paper einzubetten... siehe \dau99
+
+> Modied version of the paper \Modeling auditory processing of amplitude modulation: I. Detection and masking with narrowband carriers", written together with Birger Kollmeier and Armin Kohlrausch, submitted to J. Acoust. Soc. Am.
+
 # Bernd 19.10.2018
 
 - [ ] Begründung warum analyse nach synthese
@@ -75,6 +123,113 @@ Auditory scene analysis based on time-frequency integration of shared FM and AM
 
 * add sampling reference paper from ismir 2018 tutorial slides
 
+Aus Justin Salamon und Sundberg 95
+
+```
+Vibrato rate V r : the frequency of pitch modulation, indicated by the location of the prominent peak of |P(k)| within the expected vibrato range (in Hz).
+
+• Vibrato extent V e : the magnitude of said peak (in cents).
+
+• Vibrato coverage V c : the ratio of samples with vibrato to the total number of samples in the contour (ranges between 0–1).
+```
+
+### Greenberg 97
+
+2-12Hz: -> Smith93
+<20Hz> -> Schreiner86
+
+### Schreiner86
+
+Christoph Schreiner and John V. Urbas. Representation of amplitude modulation in the auditory cortex 
+
+### Smith93
+
+
+### Sturm2012~\cite{sturm12}
+
+```
+Sturm, B. L. (2012). On automatic music genre recognition by sparse representation classiﬁcation using auditory temporal modulations. In 9th Int. Symp. on Computer Music Modeling and Retrieval, pp. 379–394. London, UK. 157
+```
+
+> Modulation representations of acoustic signals describe the variation of spectral power in scale, rate, time and frequency. This approach has been motivated by the human auditory and visual systems [44, 15, 36, 40, 24].
+
+Diverse Literatur aus Sturm:
+
+[44] Wang, K., Shamma, S.A.: Spectral shape analysis in the central auditory system.
+IEEE Trans. Speech Audio Process. 3(5), 382–395 (Sep 1995)
+
+[15] Greenberg, S., Kingsbury, B.E.D.: The modulation spectrogram: in pursuit of an invariant representation of speech. In: Proc. IEEE Int. Conf. Acoust., Speech, Signal Process. pp. 1647–1650. Munich, Germany (Apr 1997)
+
+[40] 40. Sukittanon, S., Atlas, L.E., Pitton, J.W.: Modulation-scale analysis for content identiﬁcation. IEEE Trans. Signal Process. 52(10), 3023–3035 (Oct 2004)
+
+[28] Panagakis, Y., Benetos, E., Kotropoulos, C.: Music genre classiﬁcation: A multilinear approach. In: Proc. ISMIR. pp. 583–588. Philadelphia, PA (Sep 2008)
+-> the first work where modulation characteristics where used 
+
+
+### Scheirer99
+
+Scheirer, E. D. (1999). Towards music understanding without separation: Segmenting music with correlogram comodulation. In IEEE Worksh. on Apps. of Signal Processing to Audio and Acoustics (WASPAA), pp. 99102. New Paltz, New York, USA. 18
+
+### Sundberg 95
+
+Sundberg, J. (1995). Acoustic and psychoacoustic aspects of vocal vibrato.
+In P. Dejonckere, M. Hirano, & J. Sundberg (Eds.) Vibrato, pp. 35–62. San Diego: Singular Publishing Group. 84, 159
+
+Very extensive study on vocal vibrato. of all different fazentten
+
+### Betser
+
+@ARTICLE{4432770,
+author={M. Betser and P. Collen and G. Richard and B. David},
+journal={IEEE Transactions on Signal Processing},
+title={Estimation of Frequency for AM/FM Models Using the Phase Vocoder Framework},
+year={2008},
+volume={56},
+number={2},
+pages={505-517},
+doi={10.1109/TSP.2007.906768},
+ISSN={1053-587X},
+month={Feb},}
+
+### Viste
+
+> harmonic relation, the common onset, offset, amplitude modulation (AM), and frequency modulation (FM).These are all important cues for grouping.
+
+@inproceedings{viste03,
+    author={H. Viste and G. Evangelista},
+    booktitle={2003 IEEE Workshop on Applications of Signal Processing to Audio and Acoustics (IEEE Cat. No.03TH8684)},
+    title={Separation of harmonic instruments with overlapping partials in multi-channel mixtures},
+    year={2003},
+    pages={25-28},
+    doi={10.1109/ASPAA.2003.1285800},
+    month=oct
+}
+
+### Li Wang alias ~\cite{li09}
+
+# DAU ~\cite{dau99} Dissertation
+
+Humans use amplitude modulation for their common grouping procedure.
+
+> It appears that the auditory system is very sensitive to slow modulations. Slow modulations are associated with the perception of rhythm. Samples of running speech, for example, show distributions of modulation frequencies with peaks around 3-4 Hz, approximately corresponding to the sequence rate of syllables (Plomp, 1983). Results from physiological studies have shown that, at least in mammals, the auditory cortex seems to be limited in its ability to follow fast temporal changes
+
+model is for modulation > 10 hz.
+in the input signal but, on the other hand, the cortex is capable of processing rhythm-like envelope uctuations.
+
+Modeling auditory processing of amplitude modulation. 
+
+
+
+### Summary
+Modulation based filterbanks are used for different purposes than vibrato. \cite{barker13} was tuned to medium rate modulations of speech
+
+## Joris
+
+Joris, P. X., Schreiner, C. E., and Rees, A., “Neural processing of amplitude-modulated sounds,” Physiological Reviews, vol. 84, no. 2, pp. 541–577, 2004. [Online]. Available: http://physrev.physiology.org /content/84/2/541
+
+## Virtanen Sinuoisdal modeling
+
+~\cite{virtanen00}
 
 # binary mask:
 
@@ -162,3 +317,7 @@ Broze, Y., Paul, B., Allen, E., & Guarna, K. (2014). Polyphonic Voice Multiplici
 
 > The excerpts’ short length could create further problems, as stream segregation appears to be cumulative (see Bregman, 1978):
 listeners tend to hear one stream at first before subsequently resolving more. In all, because our stimuli are both short and isotextural, counting would not be expected to be a successful strategy in the present denumeration task.
+
+# Random shit
+
+* [x] example that works quite nice... http://sisec17.audiolabs-erlangen.de/#/listen/20/STO1?mode=embed
