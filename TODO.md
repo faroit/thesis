@@ -7,34 +7,19 @@ Everything fits together:
 Speech ~4Hz
 Violon Vibraot ~5Hz
 
-> from Greenberg97
-It has been previously suggested that the broad peak at 4 Hz in the modulation spectrum corresponds to the average syllable rate [8].
+from Greenberg97
+> It has been previously suggested that the broad peak at 4 Hz in the modulation spectrum corresponds to the average syllable rate [8].
 
-@article{houtgast85,
-  title={A review of the MTF concept in room acoustics and its use for estimating speech intelligibility in auditoria},
-  author={Tammo Houtgast and Herman JM Steeneken},
-  journal={The Journal of the Acoustical Society of America},
-  volume={77},
-  number={3},
-  pages={1069--1077},
-  year={1985},
-  publisher={ASA}
-}
+[8] => ~\cite{Houtgast85}
 
 Modulations spectrogram for speech are usually calibrated to 4 Hz modulation rate.
 
-also from 
-
-@inproceedings{greenberg96,
-  title={Insights into spoken language gleaned from phonetic transcription of the Switchboard corpus},
-  author={Greenberg, Steven and Hollenback, Joy and Ellis, Dan},
-  booktitle={Proc. ICSLP},
-  year={1996},
-}
+also from ~\cite{greenberg96}
 
 > The modulation spectrum for an octave-wide channel, arithmetically centered at 1.5 kHz, computed from a single speaker's discourse over a two-minute interval is shown and compared with that of the distribution of syllable durations (transformed into equivalent modulation frequencies). The similarity between the two measurements suggests that much of the energy in the modulation spectrum may be derived from syllabic segmentation. This association is of interest in light of recent demonstrations that speech intelligibility is crucially dependent on the preservation of the portion of the modulation spectrum between 2 and 10 Hz.
 
-* Because it allows to fucus 
+* Because it allows to...
+
 ## why isn't there more research on on modulation based processing
 
 * tracking modulations is hard, because f0 estimation doesn't easily work on mixtures. Reason is that crossing partials is a big problem for sinusoidal modeling~\cite{viste03}
@@ -138,12 +123,17 @@ Vibrato rate V r : the frequency of pitch modulation, indicated by the location 
 2-12Hz: -> Smith93
 <20Hz> -> Schreiner86
 
-### Schreiner86
+#### Schreiner86
 
 Christoph Schreiner and John V. Urbas. Representation of amplitude modulation in the auditory cortex 
 
-### Smith93
+#### Smith93
 
+kein plan
+
+### Lagrange10
+
+Instrument discriminitation
 
 ### Sturm2012~\cite{sturm12}
 
@@ -179,31 +169,11 @@ Very extensive study on vocal vibrato. of all different fazentten
 
 ### Betser
 
-@ARTICLE{4432770,
-author={M. Betser and P. Collen and G. Richard and B. David},
-journal={IEEE Transactions on Signal Processing},
-title={Estimation of Frequency for AM/FM Models Using the Phase Vocoder Framework},
-year={2008},
-volume={56},
-number={2},
-pages={505-517},
-doi={10.1109/TSP.2007.906768},
-ISSN={1053-587X},
-month={Feb},}
+~\cite{betser08}
 
-### Viste
+### \cite{viste03}
 
 > harmonic relation, the common onset, offset, amplitude modulation (AM), and frequency modulation (FM).These are all important cues for grouping.
-
-@inproceedings{viste03,
-    author={H. Viste and G. Evangelista},
-    booktitle={2003 IEEE Workshop on Applications of Signal Processing to Audio and Acoustics (IEEE Cat. No.03TH8684)},
-    title={Separation of harmonic instruments with overlapping partials in multi-channel mixtures},
-    year={2003},
-    pages={25-28},
-    doi={10.1109/ASPAA.2003.1285800},
-    month=oct
-}
 
 ### Li Wang alias ~\cite{li09}
 
@@ -278,6 +248,30 @@ Daniel D. Lee and H. Sebastian Seung. Algorithms for non-negative matrix factori
 
 # Warping based Warped Separation
 
+\cite{wang95} is using frequency warping to
+
+> Frequency-warped signal processing is useful for the analysis of sinusoidal signals with varying frequency.
+
+> Frequency warping a signal p(t) is nothing more than multiplying it by a unit amplitudee phase factor p(t). To invert the frequency warping we simply multiply the result.
+
+```
+...as discussed in Section 2.1, the Fourier transform is ill-suited for analyzing signals with rapidly varying parameters. By frequency warping a signal, i.e., selectively frequency modulating it, it may be possible to transform it so that the resulting signal is stationary and has a simplied spectrum which is more amenable to analysis. Frequency warping may be thought of as attempting to \straighten out" nonstationarities due to continuous variations in the instantaneous frequency of a signal.
+```
+
+FM nach wang:
+
+$ z ( t ) = A \exp \left\{ j 2 \pi f _ { 0 } t + j m \sin \left( 2 \pi f _ { m } t \right) \right\} $
+
+where A is the amplitude, f_0 is the carrier frequency, f_m is the modulation frequency, and m is the modulation index dened as
+
+$ m = \frac { d } { f _ { m } } $
+
+It is well known that the Fourier spectrum of z(t) may be quite complex. The FM-synthesis algorithm by Chowning [32] takes advantage of this fact, providing a computationally ecient way of producing musical sounds. In particular, z(t) may be represented as a Fourier series expansion
+
+$ \begin{aligned} z ( t ) & = A \exp \left( j 2 \pi f _ { 0 } t \right) \exp \left\{ j m \sin \left( 2 \pi f _ { m } t \right) \right\} \\ & = A \exp \left( j 2 \pi f _ { 0 } t \right) \sum _ { k = - \infty } ^ { \infty } J _ { k } ( m ) \exp \left( j 2 \pi k f _ { m } t \right) \end{aligned} $
+
+taking the idea from \cite{wulich92} which make use of time warping to analyze FM signals using variable rate sampling.
+
 durchsehen (aus Wang phd thesis, chapter separation):
 
 [42] A. de Cheveigne, \Strategies for voice separation based on harmonicity." To be presented at ICSLP, Yokohama.
@@ -318,6 +312,6 @@ Broze, Y., Paul, B., Allen, E., & Guarna, K. (2014). Polyphonic Voice Multiplici
 > The excerpts’ short length could create further problems, as stream segregation appears to be cumulative (see Bregman, 1978):
 listeners tend to hear one stream at first before subsequently resolving more. In all, because our stimuli are both short and isotextural, counting would not be expected to be a successful strategy in the present denumeration task.
 
-# Random shit
+# Random s*** for my presentation
 
 * [x] example that works quite nice... http://sisec17.audiolabs-erlangen.de/#/listen/20/STO1?mode=embed

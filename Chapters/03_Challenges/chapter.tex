@@ -1,6 +1,11 @@
 \hypertarget{objectives-and-challenges}{%
 \chapter{Objectives and Challenges}\label{objectives-and-challenges}}
 
+\begin{itemize}
+  \item What is the likeliness for two target signals being overlapped for different scenarios
+  \item Unison
+\end{itemize}
+
 In the previous chapter, I introduced the basic signal processing fundamentals in the context of audio mixtures.
 In this chapter I want to point out open research questions and objectives for this thesis.
 Specifically I outline two objectives that I am going to present in this thesis as well as possible future research that this work might have enabled.
@@ -13,11 +18,11 @@ A TF representation is typically used as a first step in processing the audio be
 E.g. a STFT can be used as it can allows for easy reconstruction of the original waveform and provides a good trade-off between computational complexity and overlap.
 The TF representation makes it easier to filter the mixture that correspond to only a single source.
 % todo check where this is from
-The focus of many source separation methods is to extract individual by modelling their respective target in the non-negative
+The focus of many source separation methods is to extract individual by modeling their respective target in the non-negative
 time-frequency domain.
 %check
 For many separation scenarios this is a reasonable approach as it is usually assumed that the time-frequency-domain (STFT) provides sufficient level of separability (e.g.~by given a perfect mask).
-The actual extraction or filtering is then done by synthesising the estimate of the model and applying the originals mixture phase.
+The actual extraction or filtering is then done by synthesizing the estimate of the model and applying the originals mixture phase.
 Often the assumption here is that the mixture representation allows to apply filtering in a way that sufficiently extracts all targets from the mixture.
 \\
 

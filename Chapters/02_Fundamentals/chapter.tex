@@ -42,7 +42,7 @@ At the same time, spectral representations relates to our human auditory system~
 \par
 The periodicity of real world sounds, as mentioned above, usually only holds for short time scales of several milliseconds, often referred to as ``quasi-stationarity''.
 Instead, sounds are non-stationary over the course of several seconds and it therefore is useful to analyze and process short-time spectra, computed in an overlapped fashion, resulting in a \emph{time-frequency} (TF) representation.
-Simply put, a TF representation encodes the time-varying \textit{spectra} into a matrix \(\mX\) with frequencies \(k\) and time frames \(n\).
+Simply put, a TF representation encodes the time-varying \textit{spectra} into a matrix \(\mX(k\) with frequencies \(k\) and time frames \(n\).
 For signals with more than one channel, the representation is extended to yield a three-dimensional tensor, where \(c\) includes the channel.
 \par
 When sounds are processed in the time-frequency domain the transformation needs to be inverted, hence many researchers chose a representation that allows to easily reconstruct the signal.
@@ -52,23 +52,35 @@ Often the magnitude of the STFT is referred to as the~\emph{spectrogram}.
 
 \subsection{Fundamental Frequency, Pitch and Harmonicity}
 % TODO: Add STFT plot from Cello Dataset, showing f0, overtones vibrato extend etc.
-Speech and music signals is that they typically have pitched content.
-A sound gives the perception of having a pitch if the majority of the energy in the audio signal is at frequencies located at integer multiples of some fundamental frequency.
-These integer multiples are called \textit{harmonics}~\cite{schenker54}.
-When the fundamental frequency changes, the frequencies of these harmonics also change, yielding the typical comb spectrograms of harmonic signals.
-Another noteworthy feature of sung melodies over simple speech is that their fundamental frequencies are, in general, located at precise frequency values corresponding to the musical key of the song.
-% begin eusipco
-An estimate of the fundamental frequency $F0$ of a signal is required in various applications of audio and speech signal processing.
-$F0$ is often synonymously referred to as pitch which is a perceptual measure. In the past, a number of algorithms were presented to provide such estimates, with many of them being designed for specific applications.
+% \cite{stoeter15acm}, to be downloaded in \cite{oss}
+% from zafar
+Speech and music signals contain is characterized by its periodicity.
+And it is this property that humans perceive as \emph{pitched}.
+\emph{Pitch} is defined by Klapuri~\cite{klapuri06book} as ``a perceptual attribute which allows the ordering of sounds on a frequency-related scale extending from high to low''.
+It is important to note that the term \emph{pitch} is a subjective measure.
+The objective equivalent is referred to as the fundamental frequency (\(F_0\)) of a signal\footnote{Pitch and $F_{0}$ are often used synonymously in audio research. Even though this is incorrect I will sometimes refer other work where pitch is instead of $F_{0}$.}.
+\(F_{0}\) is can be defined as the lowest frequency/partial of an harmonic signal.
+All frequencies together formed by the integer multiples of the fundamental frequency are named  \textit{harmonics}~\cite{schenker54}.
+When the fundamental frequency changes, the frequencies of these harmonics changes accordingly.
+This results in the typical comb-like spectrograms of harmonic signals.
+For a a detailed overview into the research field of pitch and \(F_{0}\), the reader is refered to~\cite{decheveigne05, klapuri06book, salamon13}.
+\par
+An estimate of the fundamental frequency $F_{0}$ of a signal is required in various applications of audio and speech signal processing.
 Some scenarios are targeted to extract the fundamental frequency of the predominant source~\cite{salamon12} in a mixture of other sources.
 In other applications, algorithms are used to extract fundamental frequencies of multiple sources simultaneously present in a signal~\cite{klapuri03}.
-However, the most common scenario in many works is to extract the fundamental frequency of a monophonic and harmonic audio signal containing speech or music~\cite{talkin95, boersma02, decheveigne02, resch07, camacho07, tidhar10, christensen07}.
-% end eusipco
-
-These very peculiar features are often exploited in separation methods.
-For simplicity reasons, I use the terms \textit{pitch} and \textit{fundamental frequency} interchangeably throughout the thesis.
+However, the most common scenario in many works is to extract the fundamental frequency of a monophonic and harmonic audio signal containing speech or music~\cite{talkin95, boersma02, decheveigne02, resch07, camacho07, tidhar10, christensen07, stoeter15icassp}.
 
 \subsection{Modulations}
+
+\begin{itemize}
+    \item Purpose of modulation
+    \item type of mudulation
+    \item extend of modulation
+    \item speed
+    \item shape
+\end{itemize}
+from telecommunication where the modulator is a signal that modifies a carrier function for the purpose of carrying information. 
+amplitude modulation, frequency modulation, phase modulation...
 
 % TODO: Vibrato extend
 General introduction into modulations.
@@ -100,6 +112,10 @@ Frequency  modulation  caused  by  vibrato  is  a  very  common
 playing  style  for  string  instruments  but  also  for  woodwind  and
 brass instruments.
 
+
+\subsubsection{Modulation Speed}
+
+Vibrato (FM), Tremolo AM 
 
 \hypertarget{sources-and-mixtures}{%
 \section{Sources and Mixtures}\label{sources-and-mixtures}}
