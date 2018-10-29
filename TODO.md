@@ -2,35 +2,6 @@
 
 ## why monoaural
 
-Everything fits together:
-
-Speech ~4Hz
-Violon Vibraot ~5Hz
-
-from Greenberg97
-> It has been previously suggested that the broad peak at 4 Hz in the modulation spectrum corresponds to the average syllable rate [8].
-
-[8] => ~\cite{Houtgast85}
-
-Modulations spectrogram for speech are usually calibrated to 4 Hz modulation rate.
-
-also from ~\cite{greenberg96}
-
-> The modulation spectrum for an octave-wide channel, arithmetically centered at 1.5 kHz, computed from a single speaker's discourse over a two-minute interval is shown and compared with that of the distribution of syllable durations (transformed into equivalent modulation frequencies). The similarity between the two measurements suggests that much of the energy in the modulation spectrum may be derived from syllabic segmentation. This association is of interest in light of recent demonstrations that speech intelligibility is crucially dependent on the preservation of the portion of the modulation spectrum between 2 and 10 Hz.
-
-* Because it allows to...
-
-## why isn't there more research on on modulation based processing
-
-* tracking modulations is hard, because f0 estimation doesn't easily work on mixtures. Reason is that crossing partials is a big problem for sinusoidal modeling~\cite{viste03}
-* modulations are not present in all signal types. so you need to be lucky 
-* * Papers with detecting vibrato?
-* Representations are now easily invertible
-
-## Gute Methode um Paper einzubetten... siehe \dau99
-
-> Modied version of the paper \Modeling auditory processing of amplitude modulation: I. Detection and masking with narrowband carriers", written together with Birger Kollmeier and Armin Kohlrausch, submitted to J. Acoust. Soc. Am.
-
 # Bernd 19.10.2018
 
 - [ ] Begründung warum analyse nach synthese
@@ -52,7 +23,7 @@ also from ~\cite{greenberg96}
 
 # Bernd Fragen
 
-* [ ] Parafac veröffentlichen
+* [ ] Parafac/fast veröffentlichen
 * [ ] Release common fate?
 
 # General status
@@ -100,112 +71,11 @@ Auditory scene analysis based on time-frequency integration of shared FM and AM
 
  discuss that music signals lack a proper source definition. Therefore counting on music signals in ill defined. However, it may work on some specific cases. We tried on ... but it didn't work.
 
-# Literatur zu Anwendung von Modulationen für Audio Anwendungen
-
-* https://hal.archives-ouvertes.fr/hal-01316485/document durchgehen nach Referenzen
-* aus ewert: https://qmro.qmul.ac.uk/xmlui/bitstream/handle/123456789/15689/Ewert%20Template-Based%20Vibrato%20Analysis%202016%20Accepted.pdf?sequence=1
-* aus jon barkers PHD thesis
-
-* add sampling reference paper from ismir 2018 tutorial slides
-
-Aus Justin Salamon und Sundberg 95
-
-```
-Vibrato rate V r : the frequency of pitch modulation, indicated by the location of the prominent peak of |P(k)| within the expected vibrato range (in Hz).
-
-• Vibrato extent V e : the magnitude of said peak (in cents).
-
-• Vibrato coverage V c : the ratio of samples with vibrato to the total number of samples in the contour (ranges between 0–1).
-```
-
-### Greenberg 97
-
-2-12Hz: -> Smith93
-<20Hz> -> Schreiner86
-
-#### Schreiner86
-
-Christoph Schreiner and John V. Urbas. Representation of amplitude modulation in the auditory cortex 
-
-#### Smith93
-
-kein plan
-
-### Lagrange10
-
-Instrument discriminitation
-
-### Sturm2012~\cite{sturm12}
-
-```
-Sturm, B. L. (2012). On automatic music genre recognition by sparse representation classiﬁcation using auditory temporal modulations. In 9th Int. Symp. on Computer Music Modeling and Retrieval, pp. 379–394. London, UK. 157
-```
-
-> Modulation representations of acoustic signals describe the variation of spectral power in scale, rate, time and frequency. This approach has been motivated by the human auditory and visual systems [44, 15, 36, 40, 24].
-
-Diverse Literatur aus Sturm:
-
-[44] Wang, K., Shamma, S.A.: Spectral shape analysis in the central auditory system.
-IEEE Trans. Speech Audio Process. 3(5), 382–395 (Sep 1995)
-
-[15] Greenberg, S., Kingsbury, B.E.D.: The modulation spectrogram: in pursuit of an invariant representation of speech. In: Proc. IEEE Int. Conf. Acoust., Speech, Signal Process. pp. 1647–1650. Munich, Germany (Apr 1997)
-
-[40] 40. Sukittanon, S., Atlas, L.E., Pitton, J.W.: Modulation-scale analysis for content identiﬁcation. IEEE Trans. Signal Process. 52(10), 3023–3035 (Oct 2004)
-
-[28] Panagakis, Y., Benetos, E., Kotropoulos, C.: Music genre classiﬁcation: A multilinear approach. In: Proc. ISMIR. pp. 583–588. Philadelphia, PA (Sep 2008)
--> the first work where modulation characteristics where used 
-
-
-### Scheirer99
-
-Scheirer, E. D. (1999). Towards music understanding without separation: Segmenting music with correlogram comodulation. In IEEE Worksh. on Apps. of Signal Processing to Audio and Acoustics (WASPAA), pp. 99102. New Paltz, New York, USA. 18
-
-### Sundberg 95
-
-Sundberg, J. (1995). Acoustic and psychoacoustic aspects of vocal vibrato.
-In P. Dejonckere, M. Hirano, & J. Sundberg (Eds.) Vibrato, pp. 35–62. San Diego: Singular Publishing Group. 84, 159
-
-Very extensive study on vocal vibrato. of all different fazentten
-
-### Betser
-
-~\cite{betser08}
-
-### \cite{viste03}
-
-> harmonic relation, the common onset, offset, amplitude modulation (AM), and frequency modulation (FM).These are all important cues for grouping.
-
-### Li Wang alias ~\cite{li09}
-
-# DAU ~\cite{dau99} Dissertation
-
-Humans use amplitude modulation for their common grouping procedure.
-
-> It appears that the auditory system is very sensitive to slow modulations. Slow modulations are associated with the perception of rhythm. Samples of running speech, for example, show distributions of modulation frequencies with peaks around 3-4 Hz, approximately corresponding to the sequence rate of syllables (Plomp, 1983). Results from physiological studies have shown that, at least in mammals, the auditory cortex seems to be limited in its ability to follow fast temporal changes
-
-model is for modulation > 10 hz.
-in the input signal but, on the other hand, the cortex is capable of processing rhythm-like envelope uctuations.
-
-Modeling auditory processing of amplitude modulation. 
-
-
-
-### Summary
-Modulation based filterbanks are used for different purposes than vibrato. \cite{barker13} was tuned to medium rate modulations of speech
-
-## Joris
-
-Joris, P. X., Schreiner, C. E., and Rees, A., “Neural processing of amplitude-modulated sounds,” Physiological Reviews, vol. 84, no. 2, pp. 541–577, 2004. [Online]. Available: http://physrev.physiology.org /content/84/2/541
-
-## Virtanen Sinuoisdal modeling
-
-~\cite{virtanen00}
-
 # binary mask:
 
 # ON THE DISJOINTESS OF SOURCES IN MUSIC USING DIFFERENT TIME-FREQUENCY
 REPRESENTATIONS
-Dimitrios Giannoulis, Daniele Barchiesi, Anssi Klapuri and Mark D. Plumbley
+Dimitrios Giannoulis, Daniele Barchiesi, Anssi Kliapuri and Mark D. Plumbley
 
 # Cocktail Party Separation stuff
 
@@ -243,8 +113,6 @@ Goto, M. (2007). Active music listening interfaces based on signal processing. I
 
 # NMF Literature
 Daniel D. Lee and H. Sebastian Seung. Algorithms for non-negative matrix factorization. In Proceedings of the Neural Information Processing Systems (NIPS), pages 556–562, Denver, CO, USA, 2000.
-
-# Modulation
 
 # Warping based Warped Separation
 
@@ -312,6 +180,14 @@ Broze, Y., Paul, B., Allen, E., & Guarna, K. (2014). Polyphonic Voice Multiplici
 > The excerpts’ short length could create further problems, as stream segregation appears to be cumulative (see Bregman, 1978):
 listeners tend to hear one stream at first before subsequently resolving more. In all, because our stimuli are both short and isotextural, counting would not be expected to be a successful strategy in the present denumeration task.
 
+
+# Is deep learning a black box? 
+
+No, but From Chollet
+> The same is true of backprop in deep learning -- knowing how to code up backprop by hand gives you no useful knowledge wrt deep learning, and inversely, developing powerful mental models for deep learning does not in any way require knowing the algorithmic details of backprop
+
 # Random s*** for my presentation
 
 * [x] example that works quite nice... http://sisec17.audiolabs-erlangen.de/#/listen/20/STO1?mode=embed
+
+# * add sampling reference paper from ismir 2018 tutorial slides

@@ -53,43 +53,25 @@ Often the magnitude of the STFT is referred to as the~\emph{spectrogram}.
 \subsection{Fundamental Frequency, Pitch and Harmonicity}
 % TODO: Add STFT plot from Cello Dataset, showing f0, overtones vibrato extend etc.
 % \cite{stoeter15acm}, to be downloaded in \cite{oss}
+
 % from zafar
 Speech and music signals contain is characterized by its periodicity.
 And it is this property that humans perceive as \emph{pitched}.
 \emph{Pitch} is defined by Klapuri~\cite{klapuri06book} as ``a perceptual attribute which allows the ordering of sounds on a frequency-related scale extending from high to low''.
 It is important to note that the term \emph{pitch} is a subjective measure.
-The objective equivalent is referred to as the fundamental frequency (\(F_0\)) of a signal\footnote{Pitch and $F_{0}$ are often used synonymously in audio research. Even though this is incorrect I will sometimes refer other work where pitch is instead of $F_{0}$.}.
+The objective equivalent is referred to as the fundamental frequency (\(F_0\))\footnote{Pitch and $F_{0}$ are often used synonymously in audio research. Even though this is incorrect I will sometimes refer other work where pitch is instead of $F_{0}$.}.
 \(F_{0}\) is can be defined as the lowest frequency/partial of an harmonic signal.
 All frequencies together formed by the integer multiples of the fundamental frequency are named  \textit{harmonics}~\cite{schenker54}.
 When the fundamental frequency changes, the frequencies of these harmonics changes accordingly.
 This results in the typical comb-like spectrograms of harmonic signals.
-For a a detailed overview into the research field of pitch and \(F_{0}\), the reader is refered to~\cite{decheveigne05, klapuri06book, salamon13}.
+For a a detailed overview into the research field of pitch and \(F_{0}\), the reader is referred to~\cite{decheveigne05, klapuri06book, salamon13}.
 \par
-An estimate of the fundamental frequency $F_{0}$ of a signal is required in various applications of audio and speech signal processing.
+An estimate of the fundamental frequency of a signal is required in various applications of audio and speech signal processing.
 Some scenarios are targeted to extract the fundamental frequency of the predominant source~\cite{salamon12} in a mixture of other sources.
 In other applications, algorithms are used to extract fundamental frequencies of multiple sources simultaneously present in a signal~\cite{klapuri03}.
-However, the most common scenario in many works is to extract the fundamental frequency of a monophonic and harmonic audio signal containing speech or music~\cite{talkin95, boersma02, decheveigne02, resch07, camacho07, tidhar10, christensen07, stoeter15icassp}.
+However, the most common scenario in many works is to extract the fundamental frequency of a monophonic and harmonic audio signal containing speech or music~\cite{talkin95, boersma02, decheveigne02, resch07, tidhar10, christensen07, stoeter15icassp}.
 
 \subsection{Modulations}
-
-\begin{itemize}
-    \item Purpose of modulation
-    \item type of mudulation
-    \item extend of modulation
-    \item speed
-    \item shape
-\end{itemize}
-from telecommunication where the modulator is a signal that modifies a carrier function for the purpose of carrying information. 
-amplitude modulation, frequency modulation, phase modulation...
-
-% TODO: Vibrato extend
-General introduction into modulations.
-\cite{abe98}
-
-Fletcher defiens vibrato as ``...an oscillation of pitch, loudness or timbre of a musical tone...''~\cite{fletcher01}.
-
-* often modulations are combined.
-* there are two ways to get a modulation index.
 
 \subsubsection{Amplitude Modulation}
 
@@ -100,8 +82,8 @@ Amplitude modulation (AM) describes the modulation of a carrier signal, for exam
 \end{align}
 
 It is assumed that the modulation function is periodic and of slower frequency than the carrier signal.
-While AM is very widely used in many signal processing applications like Radio transmission, it is only very rarely seen isolated in music or speech signals.
-However electric pianos like Rhodes or Wurlitzers can generate a tremolo effect which is just a different name for sinusoidal amplitude modulation.
+AM is very widely used in many signal processing applications like radio transmission.
+
 
 \subsubsection{Frequency Modulation}
 \begin{align}
@@ -131,7 +113,7 @@ Sets can include other sets, thus representing acoustical scenes of hierarchical
 When multiple sources are active at the same time the sound that reaches our ears or is recorded using a microphone is superimposed or \emph{mixed} into a single sound.
 The \emph{mixture} is a mapping from a set of sources
 \(\mathbf{s_j}\) to a target \(\mathbf{x}\).
-There exist a variety of different mixing models that are utilised in literature and throughout this thesis.
+There exist a variety of different mixing models that are utilized in literature and throughout this thesis.
 Usually they are build upon several assumptions to constrain the scenario and model specific aspects of real world signals.
 The most important assumption is that the mixing is linear so that the sum of all sources result to the mixture.
 The non-linear case would be relevant for professionally produced music where audio effects are applied in post-processing.
@@ -143,7 +125,7 @@ In \emph{convolutive} mixtures, each source \(\mathbf{s_j}\) is convolved with a
 This scenario approximates a real world acoustic environment like a cocktail party where each speaker is then convoluted with a room impulse response.
 Usually, the mixing process is assumed to be time-invariant but for a variety of signals such as EEG data or music live recording with moving sources it can also be time-variant.
 In the remainder of this thesis, however, I will only consider the time-variant case.
-I summarise the mathematical notation of different mixing models in Table~\ref{tab:mixing_models}.
+I summarize the mathematical notation of different mixing models in Table~\ref{tab:mixing_models}.
 
 \begin{table}[]
     \centering
@@ -187,12 +169,12 @@ However, since we are normally dealing with the non-negative magnitude represent
 \label{par:specifics_of_music_mixtures}
 
 In music it is important to understand that the process of mixing is of paramount importance to successfully model music.
-This is because mixing sources is often considered as a creative task that involves recording engineers and Tonmeisters.
+This is because mixing sources is often considered as a creative task that involves recording engineers and tonmeisters.
 In today's recording processes which involve digital mastering, professionally produced music consists of several intermediate mixing steps before the final mixture is produced:
 
 \begin{description}
   \item[1) Microphone Recording:] in this step the analog sources are captured and D/A converted. Vocals and other acoustic instruments are recorded using one or multiple microphones.
-  Electric instruments such as keyboards or synthesizers may be amplified and then directly digitised.
+  Electric instruments such as keyboards or synthesizers may be amplified and then directly digitized.
   \item[2) Raw Source Image:] the digital raw source signals are then grouped and mixed together into what is called a \emph{source image\footnote{Sometimes this is referred to as ``stem''.}}.
   This grouping is involves a creative process, hence it is usually done by a recording engineer.
   The source image is usually mixed to a specific number of output channels (often: stereo) even though the recording is done by a mono microphone (e.g. vocals) or multiple microphones (e.g. drums).
@@ -205,9 +187,9 @@ In today's recording processes which involve digital mastering, professionally p
   Often this step involves non-linear processing such as dynamic range compression.
 \end{description}
 
-In each of these steps, one of the mixing models described in Table~\ref{tab:mixing_models} can be assumed which is why modelling music mixtures is considered to be a very challenging problem.
-In fact, this emphasises that the definition of a musical audio source cannot clearly be given as it is subjective and depends on the application and its context.
-This is problematic for various applications that deal with modelling mixtures and their underlying sources.
+In each of these steps, one of the mixing models described in Table~\ref{tab:mixing_models} can be assumed which is why modeling music mixtures is considered to be a very challenging problem.
+In fact, this emphasizes that the definition of a musical audio source cannot clearly be given as it is subjective and depends on the application and its context.
+This is problematic for various applications that deal with modeling mixtures and their underlying sources.
 
 \hypertarget{processing-and-analysis-of-mixtures}{%
 \section{Processing and Analysis of Mixtures}\label{processing-and-analysis-of-mixtures}}
