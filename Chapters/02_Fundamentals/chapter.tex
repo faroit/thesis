@@ -36,7 +36,7 @@ For further details we refer the reader to audio signal processing basics such a
 
 Real world sounds such as speech and music include periodicity.
 Therefore, sounds are often analyzed in the frequency domain as a \emph{spectrum} to reduce redundancy and improve the computational efficiency of the signal processing.
-This is commonly achieved trough the use of discrete Fourier transform (DFT). 
+This is commonly achieved trough the use of discrete Fourier transform (DFT) and its fast FFT implementation~\cite{cooley65}. 
 For details, the reader is referred to~Chapter 4 of~\cite{proakis96}.
 At the same time, spectral representations relates to our human auditory system~\cite{zwicker13, moore89, bregman90} allowing us to process sounds the way we perceive them.
 \par
@@ -71,33 +71,164 @@ Some scenarios are targeted to extract the fundamental frequency of the predomin
 In other applications, algorithms are used to extract fundamental frequencies of multiple sources simultaneously present in a signal~\cite{klapuri03}.
 However, the most common scenario in many works is to extract the fundamental frequency of a monophonic and harmonic audio signal containing speech or music~\cite{talkin95, boersma02, decheveigne02, resch07, tidhar10, christensen07, stoeter15icassp}.
 
-\subsection{Modulations}
+\subsection{Time-Variant Audio Signals}
 
-\subsubsection{Amplitude Modulation}
+Audio signals are considered to be stationary or time-invariant when certain properties such as the amplitude or the fundamental frequency of the signal do not change over time.
+A stationary sound can be modified to turn it into time-invariant sound. 
+In signal processing this is referred to as modulations and is, in fact, of paramount importance as it has enabled technologies such as radio transmission~\cite{shannon48}.
+Modulations can be defined as time-variant functions that modulate a target parameter of signal over time.
+In the case of audio signals, often both, the modulating function (modulator) and the signal being modulated are are periodic.
+Signal modulations are often created intentionally but also occur naturally in many real-world audio signals such as speech.
+In the following, I will present a typical audio modulation categories and their cause, underlining the importance of them.
 
-Amplitude modulation (AM) describes the modulation of a carrier signal, for example \(x(t) = \cos \omega_c t\) by a modulation function \(a(t)\):
+\paragraph{Audio Signal Communication}
 
-\begin{align}
-    s_{AM}(t) &= a(t) \cos \left( \omega_{c} t\right)
-\end{align}
+The transmission of an audio signal using a modulator/demodulator (modem) system may be one of the most important applications for audio modulations. 
+The principle is used the broadcasting of radio using a high frequency carrier signal that is modulated by an audio signal to be transmitted, which is assumed to be of slower frequency than the carrier signal.
+The modulator is targeted to vary the amplitude or the frequency of the carrier signal.
+If we imagine a sinusoidal carrier signal $x(t) = \cos \omega_c t$, \emph{amplitude modulation} (AM) is applying by a modulation function $a(t)$ so that:
 
-It is assumed that the modulation function is periodic and of slower frequency than the carrier signal.
-AM is very widely used in many signal processing applications like radio transmission.
+\begin{equation*}
+    s_{AM}(t) = a(t) \cos \left( \omega_{c} t\right).    
+\end{equation*}
+
+In comparison to AM, Frequency modulation (FM) varies the frequency of the carrier, so that:
+
+\begin{equation*}
+    s_{FM}(t) = A \exp \left\{ \omega_ { 0 } t + j m \sin \left( \omega_ { m } t \right) \right\}
+\end{equation*}
+
+where A is the amplitude, $\omega_0$ is the carrier frequency, $\omega_m(\theta)$ is the instantaneous modulation frequency, and $m$ is the modulation index $m = \frac{\Delta \omega_0} { \omega_{m} }$.
+
+It is well known that the Fourier spectrum of $z_{FM}(t)$ is quite difficult due to its non-linearity and involves computations using the Bessel function.
+For applications where the modulation frequencies that are a lot smaller than the carrier frequency, the spectrum that is caused by frequency modulations can be similar to those of amplitude modulations.
+The total bandwidth in this scenario is approximately $2\Delta \omega_0$, as found by Carson in~\cite{carson22}.
+
+\paragraph{Modulations in Music}
+
+Both, frequency and amplitude modulations are a recurrent phenomenon in music.
+Here, the modulations are created by a conscious physical manipulation of a musician to make a sound more pleasant to the listener.
+In traditional instruments, modulations are often referred to as \emph{vibrato}, which is defined by~\cite{seashore31} as
+
+\begin{quote}
+...a periodic pulsation, generally involving pitch, intensity, and timbre, which produces a pleasing flexibility, mellowness and richness of tone.
+\end{quote}
+
+Vibrato is an essential playing style for string instruments like a violin. 
+For these instruments, that are usually plucked or bowed, the strings are the primary source of excitation that is modulated in frequency by the players finger on a fretboard (See~\cite{macleod06}).
+Modulations can also be realized with woodwind and brass instruments, however, instead of the excitation signal, the resonator is modulated which allows for periodic modulations of the timbre.
+Many musicians use similar modulation frequencies (also called \emph{rate}) to perform a vibrato.
+It varies between musicians and is usually in the range of 4-8\si{\hertz}.
+A detailed overview of the different musical instruments and their modulation characteristics can be found in~\cite{fletcher01}.
+\par
+Real instruments are not capable of purely amplitude modulated sounds (\emph{tremolo}). 
+Today, many instruments are electric or are attached to electronic effects where such modulations can be applied using digital oder analog signal processing.
+For example, popular electric pianos like the ``Fender Rhodes'' can generate include an optional tremolo effect\footnote{Even though it was labeled as \emph{vibrato}.}.
+In its most pure form, synthesizers like~\cite{pinch09, buchla05} allow to modulate almost any parameters of a sound using low frequency oscillators (LFOs) or envelopes that produce sinusoidal, square or triangle functions of any rate.
+In fact, one of the most important sound synthesis methods --- FM Synthesis --- became popular in the early days of digital signal processing. 
+Chowning~\cite{chowning73} found that the modulation of sinusoids using audio rate modulators, provides a computationally efficient way of producing very complex sounds that allow to mimic piano sounds with just four sinusoidal modulators.
+
+% ## Singing Voice
+% rate, extend
+
+% vocal system is a pulsation of subglottal pressure. Itself some kind of AM
+% Vocal tract shape rhythmically moving
+
+% \cite{desain99}
+
+% \cite{sundberg94} Very extensive study on vocal vibrato. of all different fazentten
+
+% from \cite{sundberg94}
+% > The main perceptual effect of the vibrato is dependent upon the frequency modulation and it is generally quite hard to focus one's attention on the amplitude fluctuations.
+
+% ~\cite{sundberg}
+% ```
+% Vibrato rate, which is the frequency of modulation in Hz).
+% Vibrato extent, the magnitude of said peak (in cents).
+% ```
+
+% General psychoacoustic theory: \cite{bregman}
+
+% Fletcher defiens vibrato as ``...an oscillation of pitch, loudness or timbre of a musical tone...''~\cite{fletcher01}.
+
+% * often modulations are combined.
+% * there are two ways to get a modulation index.
+
+% > sundberg: The vibrato tones were characterized by a fundamental frequency undulation at a rate of 5 to 7 undulations per second and an extent of about *1 semitone.
+
+% - rate: 5-7 Hz
+% - source: sinusoidal, triangular, trapezoidal
+% - target: frequency, amplitude
+
+% ## Modulations in Speech
+
+% Speech 4 and 16 Hz 
+% from Greenberg97
+
+% \cite{fuellgrabe09}
+% > It has been previously suggested that the broad peak at 4 Hz in the modulation spectrum corresponds to the average syllable rate [8].
+
+% [8] => ~\cite{plomp83, Houtgast85}
 
 
-\subsubsection{Frequency Modulation}
-\begin{align}
-    s_{FM}(t) = A \cos(\phi(t))
-\end{align}
+% roughness and residue pitch can usually not considered as slow modulations but rather medium to fast modulations up to a few hundred Herz.
 
-Frequency  modulation  caused  by  vibrato  is  a  very  common
-playing  style  for  string  instruments  but  also  for  woodwind  and
-brass instruments.
+% - rate: 2-10 Hz
+% - source: syllable durations, glottal pulse, 
+% - target: vocal folds
+
+% ## physiological
+
+% \cite{zwicker52, plomp93, fastl90}
+% Deep neural study to analyse what is the reason why the human auditory system can detect amplitude modulations so well~\cite{joris04}.
+
+% The upper limit of modulation detection extends to 2.2 kHz
+
+% <20Hz -> ~\cite{schreiner88}
+
+% ~\cite{plomp93} showed that the cortex is capable of processing rhythm-like envelope fluctuations.
+
+% ## Pathological
+
+% * vocal tremor \cite{ramig87}
+% * Parkinson shaking~\cite{botzel14}
+% * Because it allows to...
 
 
-\subsubsection{Modulation Speed}
 
-Vibrato (FM), Tremolo AM 
+% TODO: move this to fundamentals?
+In this work we assume that we can separate overlapping partials of the sources based on differences in amplitude and/or frequency modulation, resulting in the following model for a signal with $P$ commonly modulated partials
+\begin{equation}
+  \begin{array}{l}
+   x(n) = \displaystyle \sum_{p=1}^{P} \Big[\big(1 + a(n)\big) \\
+   \hspace{3.5em}\displaystyle \cdot\sin \Big(2\pi f_{p,0}\big(n + \frac{1}{f_{1,0}} \sum_{m=m_0}^{n}{f(m)} \big) + \phi_{p,0} \Big)\Big] ,
+  \end{array}
+\end{equation}
+where effectively the amplitude modulation is $a(n)$ and the frequency modulation of the first partial is $f(n)$.
+
+\begin{table}[]
+\scriptsize
+\centering
+\begin{adjustbox}{angle=90}
+\begin{tabular}{@{}lllp{3.5cm}ll@{}}
+\toprule
+                          & Carrier Signal    & Modulation Function & Modulated Parameters        & Modulation rate & References\\ 
+\midrule
+AM/FM/PM                  & HF Sinusoid       & any audio signal    & amplitude, frequency, phase & up to 20~\si{\kilo\hertz}     & \cite{shannon48}        \\
+String Vibrato & String Excitation & sinusoidal-like     & string length   & 5-7~\si{\hertz}          & \cite{fletcher01, macleod06}\\
+Woodwind and Brass Vibrato & Resonator & sinusoidal-like & amplitude, timbre               & 4-8~\si{\hertz}          & \cite{fletcher01, gilbert05}\\
+Modular Synthesizer       & any audio signal  & LFO                 & any parameter               & not limited     & \cite{buchla05, pinch09}\\ 
+Electronic Organ with Tremolo  & instrument sound & doppler effect      & amplitude and frequency & 1~\si{\hertz}/7~\si{\hertz} & \cite{leslie49} \\
+Singing Voice  & vocal &  sinusoidal/triangular &  amplitude and frequency & 5-8~\si{\hertz} & \cite{sundberg94} \\
+Speech  & glottal pulse, language & not defined & amplitude, frequency, \newline phoneme duration, timbre& 4-10~\si{\hertz} & \cite{plomp83, fuellgrabe09}\\
+Parkinsonian tremor  & muscle activity &  sinusoidal-like & amplitude & 5~\si{\hertz} & \cite{botzel14}\\
+Auditory cortex  & nerve activity &  sinusoidal-like & amplitude & up to 20~\si{\hertz} & \cite{schreiner88}\\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\caption{Overview of modulations in audio signals and a selection of their respective properties.}%
+\label{tab:modulations}
+\end{table}
 
 \hypertarget{sources-and-mixtures}{%
 \section{Sources and Mixtures}\label{sources-and-mixtures}}
@@ -192,7 +323,7 @@ In fact, this emphasizes that the definition of a musical audio source cannot cl
 This is problematic for various applications that deal with modeling mixtures and their underlying sources.
 
 \hypertarget{processing-and-analysis-of-mixtures}{%
-\section{Processing and Analysis of Mixtures}\label{processing-and-analysis-of-mixtures}}
+\section{Tasks for processing and Analysis of Mixtures}\label{processing-and-analysis-of-mixtures}}
 
 Speech is one of the most important signal types as it is fundamental for humans to enable communication.
 When humans talk to each other, we are often not aware of the fact that we are listening to a mixture of several sources (e.g. from multiple talkers) or noise.
@@ -267,3 +398,4 @@ Surprisingly, very few methods have been proposed to address the task of
 counting the number of speakers.
 %from source counting paper
 For music signals, this task is especially challenging because the definition of a musical source can not clearly be given.
+

@@ -1,137 +1,13 @@
-# Modulations
 
+## Chapter 4 (challenges)
 
-AM is mostly analyed by the envelope
-FM causes AM
-
-rate, extend
-
-# Aspects of modulations for audio signals
-
-## Communications Engineering
-
-textbook. Radio transmission...
-transmission of a signal using a modulator/demodulator (modem) system
-
-- rate: audio rate (up to 0-20 kHz or higher (example))
-- source: any function, or audio signal
-- target: amplitude, frequency, phase
-
-### AM
-
-### FM
-
-In telecommunication, the modulator is a signal that modifies a carrier function for the purpose of carrying information. 
-amplitude modulation, frequency modulation, phase modulation...
-
-## Modulations in Music
-
-modulations are a core part of mastering and instrument.
-
-> a good vibrato in music is a periodic pulsation, generally involving pitch, intensity, and timbre, which produces a pleasing flexibility, mellowness and richness of tone. \cite{seashore31} 
-
-### Traditional Instruments
-
-~\cite{fletcher01}… “Vibrato is an oscillation in pitch, loudness or timbre of a musical performance” and it is produced by “conscious physical manipulation”.
-5-8 Herz.
-Usually a combination of AM and FM, depending on the instrument.
-
-1st class: plucked, bowed strings and vocal folds, where the primary excitation oscillator is modulated in frequency.
-
-2nd class: woodwind and brass sounds, where the resonator is modulated.
-
-Carson bandwidth.
-
-- rate: 5-8 Hz
-- source: sinusoidal function
-- target: amplitude, frequency, phase
-
-## Electronic Instruments
-
-LFO Synthesizers, FM Synthesis (~\cite{chowning73}), and also FM synthesis
-
-However electric pianos like Rhodes or Wurlitzer can generate a tremolo effect which is just a different name for sinusoidal amplitude modulation.
-
-often tremolo is used for AM vibrato, but for real instruments very rarely this is the case. Instead real instruments do use.
-
-- rate: 0-20 kHz
-- source: any periodic function
-- target: oscillator frequency
-
-## Singing Voice
-
-vocal system is a pulsation of subglottal pressure. Itself some kind of AM
-Vocal tract shape rhythmically moving
-
-\cite{desain99}
-
-\cite{sundberg94} Very extensive study on vocal vibrato. of all different fazentten
-
-from \cite{sundberg94}
-> The main perceptual effect of the vibrato is dependent upon the frequency modulation and it is generally quite hard to focus one's attention on the amplitude fluctuations.
-
-~\cite{sundberg}
-```
-Vibrato rate, which is the frequency of modulation in Hz).
-Vibrato extent, the magnitude of said peak (in cents).
-```
-
-General psychoacoustic theory: \cite{bregman}
-
-Fletcher defiens vibrato as ``...an oscillation of pitch, loudness or timbre of a musical tone...''~\cite{fletcher01}.
-
-* often modulations are combined.
-* there are two ways to get a modulation index.
-
-> sundberg: The vibrato tones were characterized by a fundamental frequency undulation at a rate of 5 to 7 undulations per second and an extent of about *1 semitone.
-
-- rate: 5-7 Hz
-- source: sinusoidal, triangular, trapezoidal
-- target: frequency, amplitude
-
-## Modulations in Speech
-
-Speech ~4Hz
-
-from Greenberg97
-
-> It has been previously suggested that the broad peak at 4 Hz in the modulation spectrum corresponds to the average syllable rate [8].
-
-[8] => ~\cite{plomp83, Houtgast85}
+## why isn't there more research on on modulation based processing
 
 Humans use amplitude modulation for their common grouping procedure.
 
 > ~\cite{dau99}: It appears that the auditory system is very sensitive to slow modulations. Slow modulations are associated with the perception of rhythm. Samples of running speech, for example, show distributions of modulation frequencies with peaks around 3-4 Hz, approximately corresponding to the sequence rate of syllables (Plomp, 1983). Results from physiological studies have shown that, at least in mammals, the auditory cortex seems to be limited in its ability to follow fast temporal changes.
 
 depending on the carrier frequency and the modulation frequency, humans describe modulations differently as fluctuation, roughness, or residue pitch (See Figure 2 in~\cite{joris04}).
-
-roughness and residue pitch can usually not considered as slow modulations but rather medium to fast modulations up to a few hundred Herz.
-
-- rate: 2-10 Hz
-- source: syllable durations, glottal pulse, 
-- target: vocal folds
-
-## physiological
-
-\cite{zwicker52, plomp93, fastl90}
-Deep neural study to analyse what is the reason why the human auditory system can detect amplitude modulations so well~\cite{joris04}.
-
-The upper limit of modulation detection extends to 2.2 kHz
-
-<20Hz -> ~\cite{schreiner88}
-
-~\cite{plomp93} showed that the cortex is capable of processing rhythm-like envelope fluctuations.
-
-## Pathological
-
-* vocal tremor \cite{ramig87}
-* Parkinson shaking~\cite{botzel14}
-* Because it allows to...
-
-
-## Chapter 4 (challenges)
-
-## why isn't there more research on on modulation based processing
 
 ~\cite{bacon89, dau99} showed that human perceptual limits of amplitude modulations can be modeled...
 

@@ -87,18 +87,6 @@ Since humans are able to reliably detect even instruments played in unison, this
 We propose a scenario where instruments play in unison. This means that they share the same fundamental frequency (regardless of the octave) so that the sources can overlap both in time and frequency. In fact unison\footnote{greek: with \emph{one voice}} mixtures are meant to be as much overlapped as possible, hence they are very difficult to separate. However, due to masking effects, a relatively good subjective quality for the separated sources can be obtained, even if the other sources are not perfectly suppressed.
 As far as we know, there is no contribution to the source separation scene that focuses on mixtures of such unison sources. \\
 
-The decomposition of sources with overlapping partials are covered in several other publications like \cite{nakano10} and \cite{smaragdis08} which are based on non-negative matrix factorization. Lin et. al. \cite{lintimbre13} address the problem by defining invariant timbre based features. We propose to address the problem from a different perspective and focus on analyzing the non-stationarities of the source signals. For most musical instruments, the non-stationary features are intentionally created, for instance with vibrato or tremolo effects, which make them valuable to track. These non-stationarities can be modeled or learned from the signals themselves. \\
-
-% TODO: move this to fundamentals?
-In this work we assume that we can separate overlapping partials of the sources based on differences in amplitude and/or frequency modulation, resulting in the following model for a signal with $P$ commonly modulated partials
-\begin{equation}
-  \begin{array}{l}
-   x(n) = \displaystyle \sum_{p=1}^{P} \Big[\big(1 + a(n)\big) \\
-   \hspace{3.5em}\displaystyle \cdot\sin \Big(2\pi f_{p,0}\big(n + \frac{1}{f_{1,0}} \sum_{m=m_0}^{n}{f(m)} \big) + \phi_{p,0} \Big)\Big] ,
-  \end{array}
-\end{equation}
-where effectively the amplitude modulation is $a(n)$ and the frequency modulation of the first partial is $f(n)$.
-
 % TODO: Extend this
 True Unison would be if 2 violins perceived as a single source, and usually there is no need to separate their signals from each other.
 

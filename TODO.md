@@ -2,6 +2,8 @@
 
 ## why monoaural
 
+Make sure that modulation are also used to analyse time frequency
+
 # Bernd 19.10.2018
 
 - [ ] Begründung warum analyse nach synthese
@@ -9,22 +11,18 @@
 * [ ] Common Fate interpretation
 * [ ] NMF
 
-- [ ] paper from fatimah nach referencen durchforsten
+- [x] paper from fatimeh nach referencen durchforsten
 
 
 # introducing NMF like Dittmar:
 
 > When using NMF for ADT, it is essential to choose a suitable rank R ∈ N of the approximation (i.e., number of components) and to provide a good initialization for W. One popular choice (see for example [7, 37, 158, 160]) is to set R to the number of distinct drum instruments and to initialize individual columns W (:, r) with averaged spectra of isolated drum sound events. The rationale is to let the NMF component updates start from a point in the parameter space that is already close to a meaningful local optimum.
 
-# Software releases
+# Software releases/ Bernd Fragen
+
 
 * [ ] Release WICE dataset
-* [ ] Commonfate: parafac2 release
-
-# Bernd Fragen
-
-* [ ] Parafac/fast veröffentlichen
-* [ ] Release common fate?
+* [ ] Commonfate: parafac2 fast release
 
 # General status
 
@@ -38,6 +36,7 @@
 * [ ] add pescador training to count net paper.
 * [ ] Unison Dataset
 
+* [ ] appendix, filter plots from countnet
 
 # Tasks for Highly Overlapped sources
 
@@ -90,26 +89,17 @@ Dimitrios Giannoulis, Daniele Barchiesi, Anssi Kliapuri and Mark D. Plumbley
 
 # Signal Processing Basics
 
-@book{Klapuri2006,
- author = {Klapuri, Anssi and Davy, Manuel},
- title = {Signal Processing Methods for Music Transcription},
- year = {2006},
- isbn = {0387306676},
- publisher = {Springer-Verlag},
- address = {Berlin, Heidelberg},
-}
-
-## DSP GURUS
-A. V. Oppenheim and R. W. Schafer. Discrete-Time Signal Processing. Pearson, 3rd edition, 2009. ISBN 0131988425.
-
-% TODO: Voran, S., “Exploration of the additivity approximation for spectral magnitudes,” in 2015 IEEE Workshop on Applications of Signal Processing to Audio and Acoustics (WASPAA), Oct 2015, pp. 1–5.
-
-## FFT:
-J. W. Cooley and J. W. Tukey. An algorithm for the machine calculation of complex fourier series. Mathematics of Computation, 19(90):297–301, 1965.
-
 ## separation
 
 Goto, M. (2007). Active music listening interfaces based on signal processing. In Acoustics, Speech and Signal Processing, 2007. ICASSP 2007. IEEE International Conference on, vol. 4, pp. IV–1441. IEEE. [Cited on pages 3 and 12.]
+
+[42] A. de Cheveigne, \Strategies for voice separation based on harmonicity." To be presented at ICSLP, Yokohama.
+
+[43] A. de Cheveigne, \Separation of concurrent harmonic sounds: Fundamental frequency estimation and a time-domain cancellation model of auditory processing," J. Acoust. Soc. Am., vol. 93, pp. 3271{3290, June 1993.
+
+[44] A. de Cheveigne, \Time-domain comb filtering for speech separation," Technical Report TRH-016, ATR Human Information Processing Research Laboratories, 2-2, Hikaridai, Seika-cho, Soraku-gun, Kyoto 619-02 Japan, July 1993.
+
+[45] A. de Cheveigne, H. Kawahara, K. Aikawa, and A. Lea, \Speech separation for speech recognition," Journal de Physique IV, vol. 4, pp. C5{545{C5{548, May 1994.
 
 # NMF Literature
 Daniel D. Lee and H. Sebastian Seung. Algorithms for non-negative matrix factorization. In Proceedings of the Neural Information Processing Systems (NIPS), pages 556–562, Denver, CO, USA, 2000.
@@ -126,31 +116,8 @@ Daniel D. Lee and H. Sebastian Seung. Algorithms for non-negative matrix factori
 ...as discussed in Section 2.1, the Fourier transform is ill-suited for analyzing signals with rapidly varying parameters. By frequency warping a signal, i.e., selectively frequency modulating it, it may be possible to transform it so that the resulting signal is stationary and has a simplied spectrum which is more amenable to analysis. Frequency warping may be thought of as attempting to \straighten out" nonstationarities due to continuous variations in the instantaneous frequency of a signal.
 ```
 
-FM nach wang:
-
-$ z ( t ) = A \exp \left\{ j 2 \pi f _ { 0 } t + j m \sin \left( 2 \pi f _ { m } t \right) \right\} $
-
-where A is the amplitude, f_0 is the carrier frequency, f_m is the modulation frequency, and m is the modulation index dened as
-
-$ m = \frac { d } { f _ { m } } $
-
-It is well known that the Fourier spectrum of z(t) may be quite complex. The FM-synthesis algorithm by Chowning [32] takes advantage of this fact, providing a computationally ecient way of producing musical sounds. In particular, z(t) may be represented as a Fourier series expansion
-
-$ \begin{aligned} z ( t ) & = A \exp \left( j 2 \pi f _ { 0 } t \right) \exp \left\{ j m \sin \left( 2 \pi f _ { m } t \right) \right\} \\ & = A \exp \left( j 2 \pi f _ { 0 } t \right) \sum _ { k = - \infty } ^ { \infty } J _ { k } ( m ) \exp \left( j 2 \pi k f _ { m } t \right) \end{aligned} $
-
 taking the idea from \cite{wulich92} which make use of time warping to analyze FM signals using variable rate sampling.
 
-durchsehen (aus Wang phd thesis, chapter separation):
-
-[42] A. de Cheveigne, \Strategies for voice separation based on harmonicity." To be presented at ICSLP, Yokohama.
-
-[43] A. de Cheveigne, \Separation of concurrent harmonic sounds: Fundamental frequency estimation and a time-domain cancellation model of auditory processing," J. Acoust. Soc. Am., vol. 93, pp. 3271{3290, June 1993.
-
-[44] A. de Cheveigne, \Time-domain combltering for speech separation," Technical Report TRH-016, ATR Human Information Processing Research Laboratories, 2-2, Hikaridai, Seika-cho, Soraku-gun, Kyoto 619-02 Japan, July 1993.
-
-[45] A. de Cheveigne, H. Kawahara, K. Aikawa, and A. Lea, \Speech separation for speech recognition," Journal de Physique IV, vol. 4, pp. C5{545{C5{548, May 1994.
-
-[46] A. de Cheveigne, S. McAdams, J. Laroche, and M. Rosenberg, \Identication de voyelles simultanees harmoniques et inharmoniques," Journal de Physique IV, vol. 4, pp. C5{553{C5{ 556, May 1994.
 
 ## time warping by applying non-linear resampling
 
