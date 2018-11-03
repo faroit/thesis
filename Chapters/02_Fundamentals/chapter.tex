@@ -1,11 +1,11 @@
-\hypertarget{fundamentals}{%
-\chapter{Fundamentals}\label{fundamentals}}
-
-The main focus of this thesis is the \emph{analysis} and \emph{processing} of sound recordings of music or speech, commonly referred to as \emph{audio signals}.
-In this chapter, I introduce basic concepts of digital audio signals which are relevant to follow the remaining chapters.
-
 \hypertarget{Fundamentals of Overlapped Sounds}{%
-\section{Fundamentals of Overlapped Sounds}\label{specifics-of-audio-signals}}
+\chapter{Fundamentals of Overlapped Sounds}\label{cha:fundamentals}}
+
+In this thesis the core part in focussed on \emph{analysis} and \emph{processing} of sound recordings of music and speech, commonly referred to as \emph{audio signals}.
+In this chapter, I therefore introduce basic concepts of digital audio signals which are relevant to apprehend the remaining chapters.
+
+\hypertarget{Audio Signals}{%
+\section{Audio Signals}\label{sec:specifics-of-audio-signals}}
 
 When a sound wave travels through a medium like air it can be captured using a microphone by measuring the local pressure deviation over time.
 Such a signal ca be written as a function \(x(t)\) continuous in both, time \(t \in \sR\) and the amplitude \(x(t) \in \sR\).
@@ -18,9 +18,9 @@ The result is that often audio research is inspired by applications of other fie
 \subsection{Digital Representations of Audio
 Signals}\label{digital-representations-of-audio-signals}}
 
-To store, analyze or process audio signals, as of today, digital representations are used to leverage the processing capabilities of modern computing devices.
-A digital audio signal can be obtained from an analog signal using analog-to-digital/digital-to-analog converters (ADC/DAC) which can be found in almost any every-day device such as laptops and smart-phones.
-In short, this includes to steps, First, the continuous time signal \(x(t)\) is converted to a discrete time series, where one sample\footnote{Please note, that the use of the word \emph{sample} will have different meanings in the context of machine learning, where a sample is usually a instance of a signal instead of a single time step.} \(x(n)\) using equidistant steps \(T\) using \emph{sampling} and Second, the amplitude values are \emph{quantized} resulting in vector \(\vx \in \sZ\), represented as a one dimensional time series of amplitudes.
+To conveniently store, analyze or process audio signals, as of today, digital representations are used to leverage the processing capabilities of modern computing devices.
+A digital audio signal can be obtained from an analog signal using analog-to-digital/digital-to-analog converters (ADC/DAC) which can be found in almost any every-day device such as laptops and smartphones.
+In short, this process includes two steps, First, the continuous time signal \(x(t)\) is converted to a discrete time series, so that one sample\footnote{Please note, that the use of the word \emph{sample} will have different meanings in the context of machine learning, where a sample is an instance of a full signal instead of a single time step.} \(x_n\) is \emph{sampled} with equidistant steps \(T\) and Second, the amplitude values are \emph{quantized} resulting in vector \(\vx \in \sZ\), represented as a one dimensional time series of amplitudes.
 An important parameter in the process of digitization is the sample rate \(F_s = 1/T\) where \(T\) is the sampling period.
 Often, \(F_s\) has a significant effect on the quality of audio signals.
 And, it is the objective of a real world audio system to not introduce perceptible degradation in audio quality when a digital signal is reproduced over headphones or loudspeakers.
@@ -43,7 +43,7 @@ At the same time, spectral representations relates to our human auditory system~
 The periodicity of real world sounds, as mentioned above, usually only holds for short time scales of several milliseconds, often referred to as ``quasi-stationarity''.
 Instead, sounds are non-stationary over the course of several seconds and it therefore is useful to analyze and process short-time spectra, computed in an overlapped fashion, resulting in a \emph{time-frequency} (TF) representation.
 Simply put, a TF representation encodes the time-varying \textit{spectra} into a matrix \(\mX(k\) with frequencies \(k\) and time frames \(n\).
-For signals with more than one channel, the representation is extended to yield a three-dimensional tensor, where \(c\) includes the channel.
+For signals with more than one channel, the representation is extended to yield a three-dimensional tensor, where \(c\) represents the channel.
 \par
 When sounds are processed in the time-frequency domain the transformation needs to be inverted, hence many researchers chose a representation that allows to easily reconstruct the signal.
 The short-time Fourier transform (STFT) is the most commonly used TF representation~\cite{mcaulay86}.
@@ -54,22 +54,28 @@ Often the magnitude of the STFT is referred to as the~\emph{spectrogram}.
 % TODO: Add STFT plot from Cello Dataset, showing f0, overtones vibrato extend etc.
 % \cite{stoeter15acm}, to be downloaded in \cite{oss}
 
-% from zafar
-Speech and music signals contain is characterized by its periodicity.
-And it is this property that humans perceive as \emph{pitched}.
-\emph{Pitch} is defined by Klapuri~\cite{klapuri06book} as ``a perceptual attribute which allows the ordering of sounds on a frequency-related scale extending from high to low''.
-It is important to note that the term \emph{pitch} is a subjective measure.
-The objective equivalent is referred to as the fundamental frequency (\(F_0\))\footnote{Pitch and $F_{0}$ are often used synonymously in audio research. Even though this is incorrect I will sometimes refer other work where pitch is instead of $F_{0}$.}.
+Speech and music signals are often characterized by its periodicity.
+And it is this property we perceive as \emph{pitched}.
+\emph{Pitch} is defined by Klapuri~\cite{klapuri06book} as 
+
+\begin{quote}
+a perceptual attribute which allows the ordering of sounds on a frequency-related scale extending from high to low.
+\end{quote}
+
+It is important to note that \emph{pitch} is a subjective measure.
+The objective equivalent is referred to as the \emph{fundamental frequency} (\(F_0\))\footnote{Pitch and $F_{0}$ are often used synonymously in audio research. Even though this is incorrect, I sometimes may refer to other work where pitch instead of $F_{0}$ is used.}.
 \(F_{0}\) is can be defined as the lowest frequency/partial of an harmonic signal.
-All frequencies together formed by the integer multiples of the fundamental frequency are named  \textit{harmonics}~\cite{schenker54}.
+All frequencies together formed by the integer multiples of the fundamental frequency are named \textit{harmonics}~\cite{schenker54}.
 When the fundamental frequency changes, the frequencies of these harmonics changes accordingly.
 This results in the typical comb-like spectrograms of harmonic signals.
-For a a detailed overview into the research field of pitch and \(F_{0}\), the reader is referred to~\cite{decheveigne05, klapuri06book, salamon13}.
+% TODO:
+% An example of a harmonic signal can be seen in Figure~\ref{fig:cello} that depicts a single played note from a violoncello.
 \par
 An estimate of the fundamental frequency of a signal is required in various applications of audio and speech signal processing.
 Some scenarios are targeted to extract the fundamental frequency of the predominant source~\cite{salamon12} in a mixture of other sources.
 In other applications, algorithms are used to extract fundamental frequencies of multiple sources simultaneously present in a signal~\cite{klapuri03}.
-However, the most common scenario in many works is to extract the fundamental frequency of a monophonic and harmonic audio signal containing speech or music~\cite{talkin95, boersma02, decheveigne02, resch07, tidhar10, christensen07, stoeter15icassp}.
+However, the most common scenario in many works is to extract the fundamental frequency of a monophonic and harmonic audio signal containing speech or music~\cite{talkin95, boersma02, decheveigne02, resch07, tidhar10, christensen07}.
+For a a detailed overview into the research field of pitch and \(F_{0}\), the reader is referred to~\cite{klapuri06book}.
 
 \subsection{Time-Variant Audio Signals}
 
@@ -144,12 +150,13 @@ Modulations in speech --- produced by the glottal pulse excitation ---  also inc
 In fact, it was shown in studies like~\cite{joris04} that speech modulations are probably the reason why our human auditory system can detect amplitude modulations so well.
 It was even shown on the cortex level that humans are capable of processing rhythm-like envelope fluctuations~\cite{schreiner88, plomp83}.
 
-\subsubsection*{The importance of low frequency modulations}
+\subsubsection*{The importance of Low Frequency Modulations}
 
-Summarizing, many of modulations audio signals are rather at low frequency, as summarized in Table~\ref{tab:modulations}.
-Interestingly one can observe that many of these modulations have a rate of about 5~\si{\hertz}. 
-While~\cite{zwicker52} found that our threshold for detecting amplitude modulations is very small at low modulation frequencies, low rates of about 5~\si{\hertz} appear and feel to be somewhat natural for humans.
-This observation can be confirmed when looking at physical modulations that occur when humans have desease like vocal tremor~\cite{ramig87} or Parkinson~\cite{botzel14}: in both cases muscle contractions of the same frequency are actuated. 
+Summarizing, many common types of modulations in audio signals are targeted at a low rate, as summarized in Table~\ref{tab:modulations}.
+Interestingly, one could observe thate these modulations have a rate of around 5~\si{\hertz}. 
+Zwicker found in~\cite{zwicker52} that humans are very sensitive at detecting amplitude modulations at such a low modulation frequencies.
+Thus, low rates of about 5~\si{\hertz} appear and feel to be somewhat natural for humans.
+This observation can be confirmed when looking at physical modulations that occur when humans suffer from vocal tremor~\cite{ramig87} or Parkinson~\cite{botzel14}: in both cases muscle contractions are actuated with the same frequency.
 
 \begin{table}[]
 \scriptsize
@@ -178,34 +185,31 @@ Auditory cortex  & nerve activity &  sinusoidal-like & amplitude & up to 20~\si{
 \hypertarget{sources-and-mixtures}{%
 \section{Sources and Mixtures}\label{sources-and-mixtures}}
 
-The definition of a sound source builds upon the underlying physical
+In the real world, single isolated audio signals are rare.
+Instead, we are faced with sets of multiple signals that make up an \emph{acoustical sound scene}.
+In turn, these signals become \emph{sound sources}.
+And the definition of a sound source builds upon physical
 phenomenon of the actual \emph{acoustical} emission of a sound and its
 spatial position.
-In the real world, however, single isolated sound sources are rare.
-Instead, we are faced with multiple sources that render an \emph{acoustical sound scene}.
-In this setting, a scene could described as a \emph{set of sources} of arbitrary size.
 \par
-When multiple sources are active at the same time, the sound that reaches our ears or is recorded using a microphone is superimposed or \emph{mixed} to a single sound.
-This \emph{mixture} represents a mapping from a set of sources
-\(\mathbf{s_j}\) to a target \(\mathbf{x}\).
+When multiple sources in a scene are active at the same time, the sound that reaches our ears or is recorded using a microphone is superimposed or \emph{mixed} to a single sound.
+A \emph{mixture} represents a mapping from a set of sources \(\mathbf{s_j}\) to an output signal \(\mathbf{x}\).
 There exist a variety of different mixing models that are utilized in literature.
 \par
 Usually these are build upon several assumptions to constrain the scenario and model specific aspects of real world signals.
 The most important assumption is that the mixing is linear so that the sum of all sources result to the mixture.
 While this might not represent all real world mixtures, it is usually a good approximation.
+Also, in the linear mixing case can be be conveniently transferred to the frequency domain as the Fourier transform is a linear operator.
+\par
 Another differentiation is made between instantaneous or convolutive mixtures.
 For instantaneous mixtures, all sources are mixed using fixed mixing parameters \(a_j\).
 This is the typical scenario when sources are mixed using a mixing console (pan-pot mix).
 In \emph{convolutive} mixtures, each source \(\mathbf{s_j}\) is convolved with a filter response \(r_j\).
 This scenario approximates a real world acoustic environment like a cocktail party where each speaker is then convoluted with a room impulse response.
 \par
-Usually, the mixing process is assumed to be time-invariant but for a variety of signals such as a live recording with moving sources it can also be time-variant.
-In the remainder of this thesis, however, I will only consider the time-variant case.
+Usually, the mixing process is assumed to be time-invariant but for a variety of signals, such as live recordings with moving sources, it can also be time-variant.
 I summarize the mathematical notation of different mixing models in Table~\ref{tab:mixing_models}.
-\par
-% from zafar >> rewrite
-For the linear mixing case, the process can be transferred to the frequency domain as the Fourier transform is a linear operator.
-% However, since we are normally dealing with the non-negative magnitude representation this is only an approximation~\cite{klapuri06book}.
+In the remainder of this thesis, however, I will only consider the linear case of  time-invariant mixing, but many of the methods could be transferred to other cases.
 
 \begin{table}[]
     \centering
@@ -243,46 +247,48 @@ Time-Variant\strut
 \subsubsection*{Specifics of Music Mixtures}
 \label{par:specifics_of_music_mixtures}
 
-In music it is important to understand that the process of mixing is of paramount importance to successfully model music.
-This is because mixing sources is often considered as a creative task that involves recording engineers and tonmeisters.
-In today's recording processes which involve digital mastering, professionally produced music consists of several intermediate mixing steps before the final mixture is produced:
+In music it is important to understand that the process of mixing is of paramount importance to the process of music creation.
+This is because mixing sources is as a creative task that involves recording engineers and tonmeisters, and often the artists itself.
+In today's digital mastering processes, professionally produced music consists of several intermediate mixing steps before the final mixture is produced:
 
 \begin{description}
-  \item[1) Microphone Recording:] in this step the analog sources are captured and D/A converted. Vocals and other acoustic instruments are recorded using one or multiple microphones.
+  \item[1) Microphone Recording:] in this step the analog sources are captured and D/A converted. 
+  Vocals and other acoustic instruments are recorded using one or multiple microphones.
   Electric instruments such as keyboards or synthesizers may be amplified and then directly digitized.
-  \item[2) Raw Source Image:] the digital raw source signals are then grouped and mixed together into what is called a \emph{source image\footnote{Sometimes this is referred to as ``stem''.}}.
-  This grouping is involves a creative process, hence it is usually done by a recording engineer.
-  The source image is mixed to a specific number of output channels (e.g. stereo) even though the recording is done by a mono microphone (e.g. vocals) or multiple microphones (e.g. drums).
-  In this stage a panning is added to spatially position either the sources or the image.
-  \item[3) Mastered Source Image:] for each of the images an additional mastering step could be applied that may involves additional processing.
-  At this stage, often artificial reverberation is added.
-  \item[4) Raw Mix:] all source images are mixed for the intended target such as a stereo.
+  \item[2) Raw Source Image:] the digital raw source signals are grouped and mixed together into what is called a \emph{source image\footnote{Sometimes this is referred to as ``stem''.}}.
+  This grouping involves a creative process, hence it is usually done by a recording engineer.
+  The source image is mixed to a specific number of output channels (e.g. stereo) even though the recording may have used less (e.g. vocals) or more than two microphones (e.g. drums).
+  In this stage a panning is added to spatially position the source images.
+  \item[3) Mastered Source Image:] for each of the images, an additional mastering step can be applied that may involves additional processing.
+  At this stage, effects such as artificial reverberation are added.
+  \item[4) Raw Mix:] all source images are mixed for the final number of target channels (often two).
   This step is usually a linear sum of all images.
   \item[5: Mastered Mix:] again, an additional mastering is applied.
   Often this step involves non-linear processing such as dynamic range compression.
 \end{description}
 
-In each of these steps, one of the mixing models described in Table~\ref{tab:mixing_models} can be assumed which is why modeling music mixtures is considered to be a very challenging problem.
+In each of these steps, one of the mixing models described in Table~\ref{tab:mixing_models} can be applied which is the reason why modeling music mixtures is considered to be a very challenging problem.
 In fact, this emphasizes that the definition of a musical audio source cannot clearly be given as it is subjective and depends on the application and its context.
 This is problematic for various applications that deal with modeling mixtures and their underlying sources.
 
 \hypertarget{processing-and-analysis-of-mixtures}{%
 \section{Processing and Analyzing Mixtures}\label{sec:processing-and-analzing-of-mixtures}}
 
-Speech maybe the most important type of signal as it is the basis for human communication.
-When humans talk to each other, we are often not aware of the fact that we are listening to a mixture of several sources (e.g. from multiple talkers) or noise.
-However, not all sources require our attention.
-Often, a specific talker is considered to be ``desired'', carrying information, whereas noise or other speakers interfere with this signal.
-The attenuation of undesired speakers, when multiple concurrent speakers are active, is well known as the ``cocktail party problem''~\cite{cherry53, haykin05}.
-For almost 70 years now, research is fascinated by the idea to create a machine to inverse the process of mixing and to extract or separate the desired sources from a mixture.
-This problem is called \emph{source separation}.
-Surprisingly, it has been shown that humans are able to do such a task, segregating a  source, even without eye contact and when no spatial cues are used~\cite{bregman90}.
-% It is similar to when we make a photograph of an object with many other objects visible in the same scene, sometimes occluding the object of interest.\\
+% add speech
 
 \subsection{Source Separation}
 
+Speech maybe the most important type of signal as it is the basis for human communication.
+When humans talk to each other, we are often not aware of that we are listening to a mixture of several sources (e.g. from multiple talkers) or noise.
+However, not all sources require our attention.
+Often, a specific talker is considered to be ``desired'', carrying information, whereas noise or other speakers interfere with this signal.
+The attenuation of undesired speakers, when multiple concurrent speakers are present, is well known as the ``cocktail party problem''~\cite{cherry53, haykin05}.
+For almost 70 years now, research is fascinated by the idea to create a machine to inverse the process of mixing and to extract or separate the desired sources from a mixture.
+This problem is called \emph{source separation}.
+Surprisingly, it has been shown that humans are able to do such a task, segregating a  source, even without eye contact and when no spatial cues are used~\cite{bregman90}.
+
 Despite its lengthy academic history, source separation significantly improved in the last decade, but it is still is still not considered as a ``solved problem''.
-This is mainly because it yields very specific challenges and opportunities both, mathematically and on the application side. 
+This is mainly because it yields very specific challenges and opportunities, both, mathematically and on the application side. 
 Source separation methods has relevant applications for music and speech mixtures such as attenuation of hearing aids, karaoke or music creation due to isolated sample composition.
 It also indirectly helps for related task such as upmixing/remixing, improved music transcription or automatic speech recognition (ASR). 
 \par
@@ -290,11 +296,11 @@ One of the earliest work on audio source separation started in the mid 70s~\cite
 Since then a large amount of contributions were made in this field, both, targeted at speech and music separation.
 Due to this large number of contributions, it is not feasible to give an extensive overview on existing methods in the context of this thesis.
 
-Often researchers do not deal with the general source separation problem but propose contributions to specific sub problems, usually targeted at a much more constraint scenario.
+Often, researchers do not deal with the general source separation problem but propose contributions to specific sub problems, usually targeted at a much more constraint scenario.
 I therefore decided to present my key decisions that I made for the work in this thesis and I refer the readers to overview literature with respect to other scenarios when appropriate.
 
 \subsubsection*{Underdetermined vs. Overdetermined Separation}
-As mentioned in Section~\ref{sources-and-mixtures}, generating sound mixtures is closely related to the process of the mixing taken place during recording (speech) or with the help of professional recording engineers (music).
+As mentioned in Section~\ref{sources-and-mixtures}, generating sound mixtures is closely related to the process of mixing taken place during recording (speech) or with the help of professional recording engineers (music).
 One assumption that was not mentioned before, is the importance of the number sensors or microphones used to create the mixture.
 A source separation problem is \emph{over-determined} when the number of sources is smaller than the number of sensors; \emph{determined} when they are equal.
 For these two cases, a large number of method exist and in same cases a closed form solution is possible.
