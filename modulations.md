@@ -3,6 +3,14 @@
 
 ## why isn't there more research on on modulation based processing
 
+% The upper limit of modulation detection extends to 2.2 kHz
+
+% <20Hz -> ~\cite{schreiner88}
+
+% \cite{zwicker52, plomp93, fastl90}
+
+% General psychoacoustic theory: \cite{bregman}
+
 Humans use amplitude modulation for their common grouping procedure.
 
 > ~\cite{dau99}: It appears that the auditory system is very sensitive to slow modulations. Slow modulations are associated with the perception of rhythm. Samples of running speech, for example, show distributions of modulation frequencies with peaks around 3-4 Hz, approximately corresponding to the sequence rate of syllables (Plomp, 1983). Results from physiological studies have shown that, at least in mammals, the auditory cortex seems to be limited in its ability to follow fast temporal changes.

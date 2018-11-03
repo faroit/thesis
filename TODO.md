@@ -4,11 +4,16 @@
 
 Make sure that modulation are also used to analyse time frequency
 
+## Random shit
+
+* add liutkus15c reference for wiener filtering
+* common fate plots from https://www.researchgate.net/profile/Fatemeh_Pishdadian/publication/328540398_MULTI-RESOLUTION_COMMON_FATE_TRANSFORM/links/5bd34823299bf1124fa62805/MULTI-RESOLUTION-COMMON-FATE-TRANSFORM.pdf
+
 # Bernd 19.10.2018
 
 - [ ] Begründung warum analyse nach synthese
 
-* [ ] Common Fate interpretation
+* [ ] Common Fate interpretation mit plots
 * [ ] NMF
 
 - [x] paper from fatimeh nach referencen durchforsten
@@ -37,6 +42,12 @@ Make sure that modulation are also used to analyse time frequency
 * [ ] Unison Dataset
 
 * [ ] appendix, filter plots from countnet
+
+# Fragen an Antoine
+
+* Chapter 2 is a mix between a literature overview and a fundamentals chapter
+* For the linear mixing case, the process can be transferred to the frequency domain as the Fourier transform is a linear operator.
+% However, since we are normally dealing with the non-negative magnitude representation this is only an approximation~\cite{klapuri06book}.
 
 # Tasks for Highly Overlapped sources
 

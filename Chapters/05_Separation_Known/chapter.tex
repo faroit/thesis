@@ -1,6 +1,8 @@
 \chapter{Separation by Known Modulation}
 \label{cha:known}
 
+% TODO: add \cite{smaragdis08} for shift invariant NMFs and discuss the differences.
+
 % start coverted from dafx
 In most scenarios for source separation, as presented in Chapter~\ref{objectives-and-challenges}, it is common to assume that the spectral harmonics do only partially overlap.
 This enabled unsupervised algorithms like non-negative matrix factorization (NMF) to approximate the mixture from a lower-rank decomposition in an unsupervised way.
@@ -20,6 +22,16 @@ Therefore, in this work, we evaluate the feasibility to increase the prior infor
 
 From this starting point, two kinds of approaches can be distinguished between, depending on how they exploit this information.
 The first option to obtain the separated source is to re-synthesize it using a sinusoidal model, which has been studied in several methods which are not detailed in this thesis (for a detailed overview, I refer the reader to Section III A of~\cite{rafii}).
+
+% TODO: move this to fundamentals?
+In this work we assume that we can separate overlapping partials of the sources based on differences in amplitude and/or frequency modulation, resulting in the following model for a signal with $P$ commonly modulated partials
+\begin{equation}
+  \begin{array}{l}
+   x(n) = \displaystyle \sum_{p=1}^{P} \Big[\big(1 + a(n)\big) \\
+   \hspace{3.5em}\displaystyle \cdot\sin \Big(2\pi f_{p,0}\big(n + \frac{1}{f_{1,0}} \sum_{m=m_0}^{n}{f(m)} \big) + \phi_{p,0} \Big)\Big] ,
+  \end{array}
+\end{equation}
+where effectively the amplitude modulation is $a(n)$ and the frequency modulation of the first partial is $f(n)$.
 
 Due to the problem that sinusoidal synthesis suffers from a typical \textit{metallic} sound quality, which is mostly due to discrepancies between the estimated excitation signals of the lead signal compared to the ground truth, we decided to take an alternative approach which is to exploit harmonicity in another way, by filtering out everything from the mixture that is not located close to the detected harmonics.
 \par
