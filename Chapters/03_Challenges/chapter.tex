@@ -1,17 +1,8 @@
-\hypertarget{objectives-and-challenges}{%
-\chapter{Objectives and Challenges}\label{objectives-and-challenges}}
-
-\begin{itemize}
-  \item What is the likeliness for two target signals being overlapped for different scenarios
-  \item Unison
-  \item past research was focused on solving source separation because its such an interesting and challenging mathematical problem. Data driven separation, however, changed this.
-\end{itemize}
-
-In the previous chapter, I introduced the basic signal processing fundamentals in the context of audio mixtures and typical tasks and applications.
-In this chapter I want to point out possible objectives and challenges that were the basis for the work that was carried out for this thesis as possible future research that this work might have enabled.
-
 \hypertarget{highly-overlapped-signals}{%
-\section{The Case of Highly Overlapped Signals}\label{highly-overlapped-signals}}
+\chapter{The Case of Highly Overlapped Signals}\label{highly-overlapped-signals}}
+
+In the previous chapter, I introduced basic signal processing fundamentals in the context of audio mixtures.
+In this chapter I want to point out possible objectives and challenges that were the basis for the work that was carried out for this thesis as possible future research that this work might have enabled.
 
 % from zafar >> rewrite!
 A TF representation is typically used as a first step in processing the audio because sources tend to be less overlapped in the TF representation than in the waveform~\cite{rickard02, giannoulis11}.
@@ -96,7 +87,6 @@ This is similar to music where the overlap can range from two instruments with v
 \label{fig:count}
 \end{figure*}
 
-
 I depict spectrogram examples these scenarios in Figures~\ref{fig:dominance} and~\ref{fig:count}.
 The figure shows the the number of TF entries that predominantly belong to either one of the two source classes.
 Also it shows for each TF entry the number of active sources.
@@ -114,8 +104,8 @@ So instead of a TF representation, one would need to pick a representation that 
 In audio long term modulations or spectral temporal variations of mixtures has not yet been studied well.
 Therefore, I want to focus on these modulational aspects on mixtures in the next section.
 
-\hypertarget{research-track-modulations}{%
-\section{Research track: Slow Modulation}\label{research-track-modulations}}
+\hypertarget{utililzing-slow-modulations}{%
+\section{Utililzing Slow Modulation}\label{utililzing-slow-modulations}}
 
 Modulations occur both in speech and music signals and is usually a combination between amplitude and frequency modulation.
 %lets start with speech
@@ -161,21 +151,20 @@ An advantage of the source-filter model approach is indeed that one can dissocia
 Modeling the common amplitude modulation to separate mixtures has already been done in~\cite{li07} and
 \cite{cano14}, which additionally included common amplitude modulation characteristics in the separation scheme.
 
-\section{Objectives}
 
-Even though modulations were already part of many scientific activities, I understand that there are still many open issues regarding the analysis and processing of these specific signals.
-Therefore I identfy the following objectives as the basis for the contributions I made during this thesis.
-\begin{description}
-  \item[Scenarios and Datasets:] One of the objectives here is develop a new scenario where sources are highly overlapped such   as unison instruments or a large number of concurrent speakers. Also I envision scenarios where slow modulations can be      exploited. However generally data often is not available. Therefore one objective of this thesis is investigate the          creation new real and synthetic datasets.
-  \item[Representations:] Highly overlapped signals require better representations, because separability is of highly overlapped source with modulations is sufficiently possible in the TF domain.
-    Many of the representations require a parametric approach. And the existing modulation tensor is only able to capture amplitude modulation, hence it cannot solve general modulations.
-    An objective of this thesis is to study representations that allow to analyse mixtures to improve separation.\emph{Chapter~\ref{X}}
-  \item[Processing Methods:] Objective is to develop new methods to address the source separation scenario. These methods would be designed for the constrained scenarios where modulational effects can easily be exploited.
-  \item[Generalisibility:] The goal then is to transfer the results and insights gained by these
-    studies onto simpler scenarios to measure the actual effect.
-  \item[Number of Sources:] Finally, in the context of source seperation of highly overlapped signals, an estimation of the number of sources is valuable. As very little research has been done in this direction, I want to investigate new methods to address the task of estimating the number of sources in highly overlapped mixtures.
-\end{description}
-
-In the next two chapters, I will present methods and arguments to address these objectives.
 
 % TODO: add deep learning
+
+% TODO: the gap
+
+
+
+Highly overlapped signals require suitable representations, because separability is of highly overlapped source with modulations is sufficiently possible in the TF domain.
+
+Many of the representations require a parametric approach. And the existing modulation tensor is only able to capture amplitude modulation, hence it cannot solve general modulations.
+
+\begin{itemize}
+  \item What is the likeliness for two target signals being overlapped for different scenarios
+  \item Unison
+  \item past research was focused on solving source separation because its such an interesting and challenging mathematical problem. Data driven separation, however, changed this.
+\end{itemize}
