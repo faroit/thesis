@@ -251,35 +251,46 @@ In music it is important to understand that the process of mixing is of paramoun
 This is because mixing sources is as a creative task that involves recording engineers and tonmeisters, and often the artists itself.
 In today's digital mastering processes, professionally produced music consists of several intermediate mixing steps before the final mixture is produced:
 
+% TODO: add block diagram
 \begin{description}
   \item[1) Microphone Recording:] in this step the analog sources are captured and D/A converted. 
   Vocals and other acoustic instruments are recorded using one or multiple microphones.
   Electric instruments such as keyboards or synthesizers may be amplified and then directly digitized.
-  \item[2) Raw Source Image:] the digital raw source signals are grouped and mixed together into what is called a \emph{source image\footnote{Sometimes this is referred to as ``stem''.}}.
+  \item[2) Raw Source Image:] the digital raw source signals are grouped and mixed together into what is called a \emph{source image} or \emph{stem}.
   This grouping involves a creative process, hence it is usually done by a recording engineer.
   The source image is mixed to a specific number of output channels (e.g. stereo) even though the recording may have used less (e.g. vocals) or more than two microphones (e.g. drums).
   In this stage a panning is added to spatially position the source images.
-  \item[3) Mastered Source Image:] for each of the images, an additional mastering step can be applied that may involves additional processing.
+  \item[3) Mastered Source Image:] for each of the images, an additional mastering step can be applied..
   At this stage, effects such as artificial reverberation are added.
-  \item[4) Raw Mix:] all source images are mixed for the final number of target channels (often two).
-  This step is usually a linear sum of all images.
+  \item[4) Raw Mix:] the linear sum of all source images are mixed for the final number of target channels (often two).
   \item[5: Mastered Mix:] again, an additional mastering is applied.
-  Often this step involves non-linear processing such as dynamic range compression.
+  Often, this step involves non-linear processing such as dynamic range compression.
 \end{description}
 
-In each of these steps, one of the mixing models described in Table~\ref{tab:mixing_models} can be applied which is the reason why modeling music mixtures is considered to be a very challenging problem.
-In fact, this emphasizes that the definition of a musical audio source cannot clearly be given as it is subjective and depends on the application and its context.
+This shows why models for music mixtures are considered to be a very challenging problem as in each of these steps one of the mixing models, mentioned above in Table~\ref{tab:mixing_models}, could be applied.
+In fact, it also emphasizes that the definition of a source cannot clearly be given as it is subjective and depends on the application and its context.
 This is problematic for various applications that deal with modeling mixtures and their underlying sources.
+% TODO: add reference here
 
 \hypertarget{processing-and-analysis-of-mixtures}{%
-\section{Processing and Analyzing Mixtures}\label{sec:processing-and-analzing-of-mixtures}}
+\section{Processing and Analysis of Mixtures}\label{sec:processing-and-analysis-of-mixtures}}
 
-% add speech
+In many ways, mixtures are not different to any other audio signal, meaning that one can envision a countless number of audio related processing and analysis tasks.
+However, two tasks stand out they are would be answer two very basic questions:
 
-\subsection{Source Separation}
+\begin{itemize}
+    \item Can the process of mixing sources be undone? 
+    \item How many sources were involved in mix?
+\end{itemize}
 
-Speech maybe the most important type of signal as it is the basis for human communication.
-When humans talk to each other, we are often not aware of that we are listening to a mixture of several sources (e.g. from multiple talkers) or noise.
+To answer these two questions, I want to introduce the two basic scientific research fields of \emph{Sound Source Separation} and \emph{Source Count Estimation}.
+
+% TODO: is this a fundamental or is this already an objective?
+% TODO: should I explain the order of the two tasks?
+\subsection{Sound Source Separation}
+
+We apply source separation every day in our life.
+Speech is the basis for human communication and when humans talk to each other, we are often not aware of that we are listening to a mixture of several sources (e.g. from multiple talkers) or noise.
 However, not all sources require our attention.
 Often, a specific talker is considered to be ``desired'', carrying information, whereas noise or other speakers interfere with this signal.
 The attenuation of undesired speakers, when multiple concurrent speakers are present, is well known as the ``cocktail party problem''~\cite{cherry53, haykin05}.
@@ -294,10 +305,9 @@ It also indirectly helps for related task such as upmixing/remixing, improved mu
 \par
 One of the earliest work on audio source separation started in the mid 70s~\cite{miller73}.
 Since then a large amount of contributions were made in this field, both, targeted at speech and music separation.
-Due to this large number of contributions, it is not feasible to give an extensive overview on existing methods in the context of this thesis.
-
-Often, researchers do not deal with the general source separation problem but propose contributions to specific sub problems, usually targeted at a much more constraint scenario.
-I therefore decided to present my key decisions that I made for the work in this thesis and I refer the readers to overview literature with respect to other scenarios when appropriate.
+Due to this large number of contributions, it is not feasible to give an extensive overview on all existing methods in the context and I refer the reader to overview literature with respect to other scenarios when appropriate.
+Researchers often do not deal with general source separation but specific sub problems, usually targeted at a much more constraint scenario.
+In the following present categories of separation scenarios.
 
 \subsubsection*{Underdetermined vs. Overdetermined Separation}
 As mentioned in Section~\ref{sources-and-mixtures}, generating sound mixtures is closely related to the process of mixing taken place during recording (speech) or with the help of professional recording engineers (music).
@@ -343,7 +353,9 @@ For a detailed overview of recent source separation applications and methods, th
 
 \subsection{Source Count Estimation}
 % copy from icassp paper maybe
-Even the number of sources is a simple but very important information for source separation algorithms. One of the main drawbacks of many source separation systems is that they rely on this information. In some scenarios, like popular western music, the sources to separate are grouped into Melody + Bass + Drums and a residual signal. Constraining the system to such a scenario allows the results to be evaluated even if the set of sources being separated is incomplete. Constrained systems like these are also sufficient for real-world applications such as the eminent karaoke scenario. Limiting the number of desired sources helps not only to improve the performance of the algorithms but is also related to the fact that the number of sources humans can perceive is limited, too. Although a threshold has not been systematically addressed so far, a variety of experiments have been carried out. David Huron found \cite{huron89} that the number of voices humans can correctly identify is up to three.
+The number of sources is a simple but very important information for source separation and many source separation systems rely on this information. 
+In some scenarios, like popular western music, the sources to separate are grouped into Melody + Bass + Drums and a residual signal. 
+Constraining the system to such a scenario allows the results to be evaluated even if the set of sources being separated is incomplete. Constrained systems like these are also sufficient for real-world applications such as the eminent karaoke scenario. Limiting the number of desired sources helps not only to improve the performance of the algorithms but is also related to the fact that the number of sources humans can perceive is limited, too. Although a threshold has not been systematically addressed so far, a variety of experiments have been carried out. David Huron found \cite{huron89} that the number of voices humans can correctly identify is up to three.
 % copied from my icassp 2018 paper
 In a “cocktail-party” scenario with many concurrent speakers, a typical assumption is that the number of concurrent speakers is known.
 In practice, almost all system assume the number of sources to be known even when they are aiming for a blind separation system.
