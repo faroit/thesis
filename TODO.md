@@ -1,5 +1,7 @@
 # Motivation
 
+# Add research questions
+
 ## why monoaural
 
 Make sure that modulation are also used to analyse time frequency
@@ -13,7 +15,7 @@ Make sure that modulation are also used to analyse time frequency
 
 - [ ] Begründung warum analyse nach synthese
 
-* [ ] Common Fate interpretation mit plots
+* [ ] Common Fate interpretation mit plots (siehe fatimeh poster)
 * [ ] NMF
 
 - [x] paper from fatimeh nach referencen durchforsten
@@ -25,9 +27,10 @@ Make sure that modulation are also used to analyse time frequency
 
 # Software releases/ Bernd Fragen
 
-
 * [ ] Release WICE dataset
-* [ ] Commonfate: parafac2 fast release
+* [ ] 
+* [ ] Commonfate: parafac2 fast release von Jeremy
+* [ ]
 
 # General status
 
@@ -48,6 +51,7 @@ Make sure that modulation are also used to analyse time frequency
 * Chapter 2 is a mix between a literature overview and a fundamentals chapter
 * For the linear mixing case, the process can be transferred to the frequency domain as the Fourier transform is a linear operator.
 % However, since we are normally dealing with the non-negative magnitude representation this is only an approximation~\cite{klapuri06book}.
+* Aim, Objective, 
 
 # Tasks for Highly Overlapped sources
 
