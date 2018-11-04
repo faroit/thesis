@@ -275,21 +275,20 @@ This is problematic for various applications that deal with modeling mixtures an
 \hypertarget{processing-and-analysis-of-mixtures}{%
 \section{Processing and Analysis of Mixtures}\label{sec:processing-and-analysis-of-mixtures}}
 
-In many ways, mixtures are not different to any other audio signal, meaning that one can envision a countless number of audio related processing and analysis tasks.
-However, two tasks stand out they are would be answer two very basic questions:
+While in many ways, mixtures are not different to any other audio signal, two research questions stand out prominently:
 
 \begin{itemize}
-    \item Can the process of mixing sources be undone? 
+    \item Can the process of mixing sources be inverted? 
     \item How many sources were involved in mix?
 \end{itemize}
 
-To answer these two questions, I want to introduce the two basic scientific research fields of \emph{Sound Source Separation} and \emph{Source Count Estimation}.
+To answer these two questions, I want to introduce the research fields of \emph{Sound Source Separation} and \emph{Source Count Estimation} which aim two address these questions.
 
 % TODO: is this a fundamental or is this already an objective?
 % TODO: should I explain the order of the two tasks?
 \subsection{Sound Source Separation}
 
-We apply source separation every day in our life.
+We apply source separation in our every day life.
 Speech is the basis for human communication and when humans talk to each other, we are often not aware of that we are listening to a mixture of several sources (e.g. from multiple talkers) or noise.
 However, not all sources require our attention.
 Often, a specific talker is considered to be ``desired'', carrying information, whereas noise or other speakers interfere with this signal.
@@ -297,17 +296,18 @@ The attenuation of undesired speakers, when multiple concurrent speakers are pre
 For almost 70 years now, research is fascinated by the idea to create a machine to inverse the process of mixing and to extract or separate the desired sources from a mixture.
 This problem is called \emph{source separation}.
 Surprisingly, it has been shown that humans are able to do such a task, segregating a  source, even without eye contact and when no spatial cues are used~\cite{bregman90}.
-
-Despite its lengthy academic history, source separation significantly improved in the last decade, but it is still is still not considered as a ``solved problem''.
+\par
+One of the earliest work on audio source separation started in the mid 70s~\cite{miller73}.
+Since then a large amount of contributions were made in this field, both, targeted at speech and music separation.
+Due to this large number of contributions, it is not feasible to give an extensive overview on all existing methods in the context and I refer the reader to~\cite{vincent18, comon10, rafii}, that is gives a detailed overview into source separation.
+Researchers often do not deal with general source separation but specific sub problems, usually targeted at a much more constraint scenario.
+\par
+Due to its strong academic efforts, source separation significantly improved in the last decade, but still is not considered as a ``solved problem''.
 This is mainly because it yields very specific challenges and opportunities, both, mathematically and on the application side. 
 Source separation methods has relevant applications for music and speech mixtures such as attenuation of hearing aids, karaoke or music creation due to isolated sample composition.
 It also indirectly helps for related task such as upmixing/remixing, improved music transcription or automatic speech recognition (ASR). 
 \par
-One of the earliest work on audio source separation started in the mid 70s~\cite{miller73}.
-Since then a large amount of contributions were made in this field, both, targeted at speech and music separation.
-Due to this large number of contributions, it is not feasible to give an extensive overview on all existing methods in the context and I refer the reader to overview literature with respect to other scenarios when appropriate.
-Researchers often do not deal with general source separation but specific sub problems, usually targeted at a much more constraint scenario.
-In the following present categories of separation scenarios.
+In the following, I present three ways to group separation scenarios:
 
 \subsubsection*{Underdetermined vs. Overdetermined Separation}
 As mentioned in Section~\ref{sources-and-mixtures}, generating sound mixtures is closely related to the process of mixing taken place during recording (speech) or with the help of professional recording engineers (music).
@@ -316,22 +316,25 @@ A source separation problem is \emph{over-determined} when the number of sources
 For these two cases, a large number of method exist and in same cases a closed form solution is possible.
 The reader is referred to~\cite{common10}, which is gives a detailed overview of these methods.\\
 Many real world source separation problems, however, are under-determined and up to date for a large number of scenarios, the problem of separating sources is still very challenging.
+\par
 In this thesis I only focus on methods that perform separation on underdetermined mixtures.
-% Todo: add argumentation here
+% TODO: add argumentation here
 
 \subsubsection*{Single Channel vs. Multichannel Separation}
 % from zafar
 Approaches based on panning information aim at exploiting stereo cues to identify and separate individual sources. Such approaches typically compare the left and right channels of a mixture in the TF domain to estimate the \textit{panning coefficients} of the sources and then generate TF masks to separate them. They generally assume that the one source has a fixed panning, which is often the case with the vocals in popular music. This idea can be extended to more than two channels, in which case multichannel diversity is often called \textit{spatial information}.
+\par
 As a large number of recording nowadays is still stored as single channel, in this thesis I want to focus on this single channel separation only.
 
 \subsubsection*{Blind vs. Supervised Separation}
 A blind separation source separation system does not require any additional information about the source signals or mixing system, the location or acoustical environment to perform separation~\cite{makino07}.
 In practice it is known that the general blind source separation problem is ill-posed and it is not generally possible to find a solution.
 This why many proposed methods rely on additional information such as in~\cite{liutkus13, ewert14}.
-% In this thesis I will study and present methods for both, blind and the supervised case.
+\par
+In this thesis I will study and present methods for both, blind and the supervised case.
 % TODO: move to 3 
 
-\subsubsection*{Vocal Accompaniment Separation}
+\subsection{Vocal Accompaniment Separation}
 Vocal Accompaniment separation has specific issues and assumptions when compared to other separation scenarios like speech.
 Many music separation methods often rely on knowledge about the mixing process as made in Table~\ref{tab:mixing_models}.
 While there exist many source separation methods that aim to extract the actual raw audio recording (Step 1 in  Table~\ref{tab:mixing_models}), often it is sufficient to extract the source images from the raw mixture.
@@ -340,22 +343,23 @@ In fact, separation of convoluted mixtures is very active field in source separa
 In the context of music a separation, however, this becomes less relevant as today's recording and studio mixing environment is mostly digital.
 This means that the last step in creating music mixtures, as described earlier, results in a linear mixture.
 While the source images can yield from a mixing process undergoing the various assumptions, for the case of a mixture of source images, we consider usually only consider linear mixing in this thesis.
-For a more detailed description of this scenario and applications of source image extraction, see~\cite{sturmel12}.\\
-
+For a more detailed description of this scenario and applications of source image extraction, see~\cite{sturmel12}.
+\par
 Another specific about music separation is that applications typical are restricted to a well defined set of musical sources.
 These restrictions are typically made because not for all kind of music separation scenarios, data sets are available, which would make evaluation as well as training machine learning models difficult.
 In music separation, by far the most popular task is to extract the vocals and the background of the music.
 This allows for example automatic karaoke recordings.
-An extensive overview of music separation methods can be found in~\cite{rafii18}.
+An extensive overview of music separation methods can be found in~\cite{rafii18} which I co-authored.
 Even though the overview is focused on vocal accompaniment separation, most approaches can be generalized to other sources.
-\par
-For a detailed overview of recent source separation applications and methods, the reader is referred to~\cite{vincent18,comon10, rafii}.
 
 \subsection{Source Count Estimation}
+% TODO: REwrite
 % copy from icassp paper maybe
 The number of sources is a simple but very important information for source separation and many source separation systems rely on this information. 
 In some scenarios, like popular western music, the sources to separate are grouped into Melody + Bass + Drums and a residual signal. 
-Constraining the system to such a scenario allows the results to be evaluated even if the set of sources being separated is incomplete. Constrained systems like these are also sufficient for real-world applications such as the eminent karaoke scenario. Limiting the number of desired sources helps not only to improve the performance of the algorithms but is also related to the fact that the number of sources humans can perceive is limited, too. Although a threshold has not been systematically addressed so far, a variety of experiments have been carried out. David Huron found \cite{huron89} that the number of voices humans can correctly identify is up to three.
+Constraining the system to such a scenario allows the results to be evaluated even if the set of sources being separated is incomplete. Constrained systems like these are also sufficient for real-world applications such as the eminent karaoke scenario. Limiting the number of desired sources helps not only to improve the performance of the algorithms but is also related to the fact that the number of sources humans can perceive is limited, too. Although a threshold has not been systematically addressed so far, a variety of experiments have been carried out. 
+David Huron found \cite{huron89} that the number of voices humans can correctly identify is up to three.
+\par
 % copied from my icassp 2018 paper
 In a “cocktail-party” scenario with many concurrent speakers, a typical assumption is that the number of concurrent speakers is known.
 In practice, almost all system assume the number of sources to be known even when they are aiming for a blind separation system.
