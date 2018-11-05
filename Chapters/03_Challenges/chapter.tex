@@ -1,29 +1,32 @@
 \hypertarget{highly-overlapped-signals}{%
-\chapter{The Case of Highly Overlapped Signals}\label{highly-overlapped-signals}}
+\chapter{Highly Overlapped Signals}\label{highly-overlapped-signals}}
 
 In the previous chapter, I introduced basic signal processing fundamentals in the context of audio mixtures.
-In this chapter I want to point out possible objectives and challenges that were the basis for the work that was carried out for this thesis as possible future research that this work might have enabled.
+In this chapter I want to focus on scenarios of highly overlapped signals.
+In order to make an attempt to formalize these, I start with a recap of time-frequency representations as introduced in Section~\ref{sub:time-frequency-representation} and how they are typically applied to address the source separation problem.
 
-% from zafar >> rewrite!
-A TF representation is typically used as a first step in processing the audio because sources tend to be less overlapped in the TF representation than in the waveform~\cite{rickard02, giannoulis11}.
-E.g. a STFT can be used as it can allows for easy reconstruction of the original waveform and provides a good trade-off between computational complexity and overlap.
-The TF representation makes it easier to filter the mixture that correspond to only a single source.
-% todo check where this is from
-The focus of many source separation methods is to extract individual by modeling their respective target in the non-negative
-time-frequency domain.
-%check
-For many separation scenarios this is a reasonable approach as it is usually assumed that the time-frequency-domain (STFT) provides sufficient level of separability (e.g.~by given a perfect mask).
-The actual extraction or filtering is then done by synthesizing the estimate of the model and applying the originals mixture phase.
-Often the assumption here is that the mixture representation allows to apply filtering in a way that sufficiently extracts all targets from the mixture.
-\\
+\hypertarget{separability-of-mixtures}{%
+\section{Separability of Mixtures}\label{separability-of-mixtures}}
 
-In practice this depends on the amount of overlap of the sources.
-A small amount of overlap can be tolerated to still sufficiently extract the sources.
-If sources are fully overlapped a separation in the TF domain is hardly possible.
-The separability of sources in the time frequency domain can be measured as it has been done in~\cite{rickard02, giannoulis11}.
+TF representations have obvious benefits such as the improved interpretability due to its ``image-like'' two-dimensional properties.
+But more importantly, such a representation is very suitable to separate mixtures of speech and musical instruments.
+The reason for this is that these mixtures may be fully overlapped in the time domain but are less overlapped in the frequency domain~\cite{rickard02, giannoulis11, rafii}.
+% still minor relation to rafii, but seems ok
+In turn, a TF representation allows to apply filtering in a way that sufficiently extracts all targets from the mixture.
+Furthermore, it allows for simple reconstruction of the original waveform and provides a good trade-off between computational complexity and separation quality.
+\par
+Due to these reasons many source separation methods focus on extracting individual sources by modeling their respective target in the time-frequency domain.
 % check
-In linear mixtures, \emph{separability} is defined as a measure that indicates the percentage of time-frequency bins of a source is disjoint from those of interfering sources.
-An extensive study using this W-disjoint orthogonality metric (WDO) is given in~\cite{rickard02}.
+It is a reasonable approach where it is usually assumed that the time-frequency-domain (STFT) provides sufficient level of separability (e.g.~by given a perfect mask).
+The actual extraction or filtering is done by synthesizing the magnitude estimate of the model and applying the originals mixture phase.
+\par
+In practice, the ability to extract a source from a mixture, depends on the amount of overlap between sources.
+Without any overlap, separation is not necessary, and a small amount of overlap can be tolerated to still sufficiently extract the sources.
+However, if sources are fully overlapped in both, time and frequency, a separation in the TF domain is hardly possible.
+This property, called \emph{separability}, was found by Rickard in~\cite{rickard02} and a useful metric for both, speech and music~\cite{giannoulis11} signals.
+\par
+% check
+In linear mixtures, separability is defined as \emph{a measure that indicates the percentage of time-frequency bins of a source is disjoint from those of interfering sources}.
 If \(M\) is the ideal binary mask for a given target \(S\) and it's interfering
 magnitude model \(Y\), \(WDO\) is defined as:
 
@@ -44,21 +47,23 @@ magnitude model \(Y\), \(WDO\) is defined as:
 
 A \(WDO\) of one means the sources are perfectly disjoint, hence no overlap.
 A \(WDO\) zero means can be interpreted as sources being fully overlapped.
-So we identify an important aspect which is the levels of overlap in the context of audio sources.
-In the past many research has been focused on separation and analysis of mixtures in various scenarios.
-Two scenarios remain to be very popular for the reason of either large amount of applications or the number of available data samples:
+An extensive study using this W-disjoint orthogonality metric (WDO) is given in~\cite{rickard02}.
+\par
+Research on mixtures is often focused on specific, application-driven scenarios to analyze and separate mixtures.
+I want to focus on two scenarios that remain very popular among research with a large amount of contributions:
 
 \begin{description}
-  \item[Cocktail Party:] Here, multiple speakers are active at the same time (concurrent).
-  Due to the fact that concurrent speakers are speaking the same sentences, it results in an overlap of speech signals in both time an frequency.
-  \item[Vocal Accompaniment Separation:] In music separation this is one of the most popular separation tasks with a large number of contributions~\cite{rafii18}.
-  Usually the assumption is that the vocals is more sparse whereas the accompaniment is more stationary.
+  \item[Cocktail Party] where multiple speakers are active at the same time (concurrent).
+  Due to the fact that concurrent speakers are speaking at the same time, it results in an overlap of speech signals in both time an frequency.
+  \item[Vocals and Accompaniment] are usually present at the same time in professionally produce music. 
+  Often, the main assumption is that vocals are more sparse, whereas the accompaniment is more stationary.
 \end{description}
 
-For music signals, the type of instrument is important for the amount of overlap.
-Furthermore, both scenarios depend on the number of sources, e.g. imagine a cocktail party of ten concurrent speakers speaking with same amplitude level.
-This is similar to music where the overlap can range from two instruments with very different characteristics like guitar and drums, to two instruments playing the same note (unison).\\
-
+Now, for both scenarios, the actual overlap is dependent on additional parameters like the the number of sources, the class of source or the fundamental frequency.
+For instance, the overlap in a cocktail party of two speakers is smaller than with ten concurrent speakers speaking.
+Also the overlap between male and female or brass and string instruments is smaller than with two instruments of the same class. 
+And if two instrumental notes share the same fundamental frequency (playing in \emph{unison}), the sources are almost completely overlapped.
+\par
 \begin{figure*}[h]
 \centering
 \subcaptionbox[Speech]{Speech}%
@@ -87,25 +92,20 @@ This is similar to music where the overlap can range from two instruments with v
 \label{fig:count}
 \end{figure*}
 
-I depict spectrogram examples these scenarios in Figures~\ref{fig:dominance} and~\ref{fig:count}.
-The figure shows the the number of TF entries that predominantly belong to either one of the two source classes.
-Also it shows for each TF entry the number of active sources.
-From this plot one can see that the overlap of a typical speech mixture is comparable to a music recording where the task is to separate vocals and accompaniment.\\
-
-If we compare this to a scenario where sources are fully overlapped as in Figure~\ref{fig:unison_count} we can see that almost all TF bins are overlapped and separation will hardly be possible.
-In a small experiment, I computed the average \(WDO\) for random 1000 mixtures of each scenario~\footnote{Please see details in Chapter~\ref{X}}.
-It turned out that for speech separation of \(k=2\) speakers, \(WDO=0.9\) and for the vocal accompaniment scenario \(WDO=0.87\), which is surprisingly similar even though both scenarios are so fundamentally different.
-In the case of the two instruments playing in unison the average WDO is \(0.65\), hence a good separation in the time frequency domain is barely possible.
+To illustrate this, I depict the different scenarios in Figures~\ref{fig:dominance} and~\ref{fig:count}.
+The Figure~\ref{fig:dominance} shows the number of TF entries that predominantly belong to either one of the two source classes.
+Figure~\ref{fig:count} shows the number of active sources of each TF entry for the same audio signals.
+From these figures, one can see that the overlap of a typical speech mixture is comparable to a music recording where the task is to separate vocals and accompaniment.
+If we now compare this to the scenario where sources are fully overlapped as in the unison scenario, almost all TF bins are overlapped and separation would hardly be possible.
+\par
 While this is an extreme scenario, it provides a case where typical assumptions are violated and it would facilitate the demand to develop new methods that do not rely so much on these long standing assumptions.
-\\
-In fact, coming up with an idea for a method that could separate the example of Figure~\ref{fig:unison_count} is possible by just looking closely at the spectrograms of Figure~\ref{X}.
-We see that the slow spectro-temporal modulations caused by the vibrato is one of the aspects where the two sources differ significantly.
+To come up with an idea for a method that could successfully separate unison case is possible by just observing closely the spectrograms of Figure~\ref{fig:count}.
+We see that the slow spectro-temporal modulations caused by the vibratos is one of the aspects where the two sources differ significantly.
 So instead of a TF representation, one would need to pick a representation that allows to separate the two sources in their modulation domain.
-In audio long term modulations or spectral temporal variations of mixtures has not yet been studied well.
-Therefore, I want to focus on these modulational aspects on mixtures in the next section.
+Therefore, I want to focus on these ``modulational'' aspects on mixtures in the next section.
 
-\hypertarget{utililzing-slow-modulations}{%
-\section{Utililzing Slow Modulation}\label{utililzing-slow-modulations}}
+\hypertarget{utilizing-slow-modulations}{%
+\section{Utilizing Slow Modulation}\label{utilizing-slow-modulations}}
 
 Modulations occur both in speech and music signals and is usually a combination between amplitude and frequency modulation.
 %lets start with speech
@@ -151,14 +151,11 @@ An advantage of the source-filter model approach is indeed that one can dissocia
 Modeling the common amplitude modulation to separate mixtures has already been done in~\cite{li07} and
 \cite{cano14}, which additionally included common amplitude modulation characteristics in the separation scheme.
 
-
-
 % TODO: add deep learning
 
 % TODO: the gap
 
-
-
+% summary (mini objectives)
 Highly overlapped signals require suitable representations, because separability is of highly overlapped source with modulations is sufficiently possible in the TF domain.
 
 Many of the representations require a parametric approach. And the existing modulation tensor is only able to capture amplitude modulation, hence it cannot solve general modulations.

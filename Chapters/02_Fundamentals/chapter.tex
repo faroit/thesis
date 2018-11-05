@@ -32,7 +32,7 @@ However, for many applications, a lower sampling rate is sufficient, e.g. in spe
 For further details we refer the reader to audio signal processing basics such as~Chapter 1 in~\cite{proakis96} or Chapter 2 in~\cite{Mueller15}.
 
 \hypertarget{time-frequency-representation}{%
-\subsection{Time-Frequency Representation}\label{time-frequency-representation}}
+\subsection{Time-Frequency Representation}\label{sub:time-frequency-representation}}
 
 Real world sounds such as speech and music include periodicity.
 Therefore, sounds are often analyzed in the frequency domain as a \emph{spectrum} to reduce redundancy and improve the computational efficiency of the signal processing.
@@ -42,7 +42,7 @@ At the same time, spectral representations relates to our human auditory system~
 \par
 The periodicity of real world sounds, as mentioned above, usually only holds for short time scales of several milliseconds, often referred to as ``quasi-stationarity''.
 Instead, sounds are non-stationary over the course of several seconds and it therefore is useful to analyze and process short-time spectra, computed in an overlapped fashion, resulting in a \emph{time-frequency} (TF) representation.
-Simply put, a TF representation encodes the time-varying \textit{spectra} into a matrix \(\mX(k\) with frequencies \(k\) and time frames \(n\).
+Simply put, a TF representation encodes the time-varying \textit{spectra} into a matrix \(\mX\) with frequencies \(k\) and time frames \(n\).
 For signals with more than one channel, the representation is extended to yield a three-dimensional tensor, where \(c\) represents the channel.
 \par
 When sounds are processed in the time-frequency domain the transformation needs to be inverted, hence many researchers chose a representation that allows to easily reconstruct the signal.
@@ -50,7 +50,7 @@ The short-time Fourier transform (STFT) is the most commonly used TF representat
 STFT matrices \(\mX \in \sC^{n \times k \times c}\) are complex meaning that they include the phase information along with and the magnitude which represents the amplitude of that signal.
 Often the magnitude of the STFT is referred to as the~\emph{spectrogram}.
 
-\subsection{Fundamental Frequency, Pitch and Harmonicity}
+\subsection{Fundamental Frequency and Harmonicity}
 % TODO: Add STFT plot from Cello Dataset, showing f0, overtones vibrato extend etc.
 % \cite{stoeter15acm}, to be downloaded in \cite{oss}
 
@@ -282,7 +282,7 @@ While in many ways, mixtures are not different to any other audio signal, two re
     \item How many sources were involved in mix?
 \end{itemize}
 
-To answer these two questions, I want to introduce the research fields of \emph{Sound Source Separation} and \emph{Source Count Estimation} which aim two address these questions.
+To answer these two questions, research came up with the two major fields of \emph{Sound Source Separation} and \emph{Source Count Estimation} which aim two address these questions.
 
 % TODO: is this a fundamental or is this already an objective?
 % TODO: should I explain the order of the two tasks?
@@ -318,8 +318,8 @@ The reader is referred to~\cite{common10}, which is gives a detailed overview of
 Many real world source separation problems, however, are under-determined and up to date for a large number of scenarios, the problem of separating sources is still very challenging.
 \par
 In this thesis I only focus on methods that perform separation on underdetermined mixtures.
-% TODO: add argumentation here
 
+% TODO: add argumentation here
 \subsubsection*{Single Channel vs. Multichannel Separation}
 % from zafar
 Approaches based on panning information aim at exploiting stereo cues to identify and separate individual sources. Such approaches typically compare the left and right channels of a mixture in the TF domain to estimate the \textit{panning coefficients} of the sources and then generate TF masks to separate them. They generally assume that the one source has a fixed panning, which is often the case with the vocals in popular music. This idea can be extended to more than two channels, in which case multichannel diversity is often called \textit{spatial information}.
@@ -330,9 +330,6 @@ As a large number of recording nowadays is still stored as single channel, in th
 A blind separation source separation system does not require any additional information about the source signals or mixing system, the location or acoustical environment to perform separation~\cite{makino07}.
 In practice it is known that the general blind source separation problem is ill-posed and it is not generally possible to find a solution.
 This why many proposed methods rely on additional information such as in~\cite{liutkus13, ewert14}.
-\par
-In this thesis I will study and present methods for both, blind and the supervised case.
-% TODO: move to 3 
 
 \subsection{Vocal Accompaniment Separation}
 Vocal Accompaniment separation has specific issues and assumptions when compared to other separation scenarios like speech.
