@@ -107,12 +107,13 @@ Therefore, I want to focus on these ``modulational'' aspects on mixtures in the 
 \hypertarget{utilizing-slow-modulations}{%
 \section{Utilizing Slow Modulation}\label{utilizing-slow-modulations}}
 
-Modulations occur both in speech and music signals and is usually a combination between amplitude and frequency modulation.
-%lets start with speech
-In speech, techniques to utilise spectro-temporal modulation patterns in processing enables further applications such as~\cite{mesgarani04} or extract spatial acoustic signatures from mixtures~\cite{sukittanon06}.
-Is also shown that it can improve speech intelligibility~\cite{elhilali03} or automatic speech recognition~\cite{kingsbury98}.
+Slowly varying tempo-spectral modulations occur both in speech and music signals and are a combination between amplitude and frequency modulation (See introduction in Section~\ref{sub:time-variant-audio-signals}).
 
-% now go to music, TODO: check papers by in ewert and driedger
+% Steps: 
+% 1. analyse the cause of fluctuation
+% 2. analyze the target (mix)
+
+\subsection{Analysis}
 In music, vibrato is an effect that is well studied especially in musicology~\cite{A, B, C, D, E}.
 Performers of musical to perform a vibrato in the same way when repeating a performance. This can be exploited in
 source separation scenarios.
@@ -126,14 +127,57 @@ Humans make use of the concept of Common Amplitude Modulation~\cite{bregman90} t
 CAM is effectively the property of harmonics that share the
 same amplitude modulation across the bins.
 
+% The upper limit of modulation detection extends to 2.2 kHz
+
+% <20Hz -> ~\cite{schreiner88}
+
+% \cite{zwicker52, plomp93, fastl90}
+
+% General psychoacoustic theory: \cite{bregman}
+
+Humans use amplitude modulation for their common grouping procedure.
+
+> ~\cite{dau99}: It appears that the auditory system is very sensitive to slow modulations. Slow modulations are associated with the perception of rhythm. Samples of running speech, for example, show distributions of modulation frequencies with peaks around 3-4 Hz, approximately corresponding to the sequence rate of syllables (Plomp, 1983). Results from physiological studies have shown that, at least in mammals, the auditory cortex seems to be limited in its ability to follow fast temporal changes.
+
+depending on the carrier frequency and the modulation frequency, humans describe modulations differently as fluctuation, roughness, or residue pitch (See Figure 2 in~\cite{joris04}).
+
+~\cite{bacon89, dau99} showed that human perceptual limits of amplitude modulations can be modeled...
+
+~\cite{mcadams89} showed that modulation cues are used to group sounds. 
+--> Common fate
+
+--> challanges
+
+* tracking modulations is hard, because f0 estimation doesn't easily work on mixtures. Reason is that crossing partials is a big problem for sinusoidal modeling~\cite{viste03}
+
+* modulations are not present in all signal types. so you need to be lucky 
+* Papers with detecting vibrato?
+* Representations are not easily invertible
+
+~\cite{scheirer99}
+> technique  operates  by  discovering  common  modulation  behavior among groups of frequency subbands in the autocorrelogram domain.  
+
 \subsection{Representations}
-One way of analysing amplitude modulations is to use a modulation spectrogram~\cite{greenberg97} which is a frequency-frequency
+One way of analyzing amplitude modulations is to use a modulation spectrogram~\cite{greenberg97} which is a frequency-frequency
 representation of a time domain input signal.
 A complete signal representation can be archived by a modulation tensor which holds the modulation spectrograms for each time frame.
 For further details the reader is referred to~\cite{barker15}.
 
-\subsection{Modulations for Processing Mixtures}
+\subsection{Processing}
 There exist a number of method that utilise spectro-temporal modulation to process or separate mixtures.
+
+~\cite{creager16} VibratoNTF uses DOA 
+
+~\cite{li09}, exploitung common amplitude modulation for source separation
+
+\cite{viste03}
+\begin{quote}
+harmonic relation, the common onset, offset, amplitude modulation (AM), and frequency modulation (FM).These are all important cues for grouping.  
+\end{quote}
+
+%lets start with speech
+In speech, techniques to utilize modulation patterns enabled applications such as~\cite{mesgarani04} or extract spatial acoustic signatures from mixtures~\cite{sukittanon06}.
+Is also shown that it can improve speech intelligibility~\cite{elhilali03} or automatic speech recognition~\cite{kingsbury98}.
 
 % from zafar!
 Wang proposed instantaneous and frequency-warped techniques for signal parameterization and source separation, with application to voice separation in music~\cite{wang94,wang95}.
@@ -145,11 +189,20 @@ Wolf et al. proposed an approach using rigid motion segmentation, with applicati
 Yen et al. proposed an approach using spectro-temporal modulation features \cite{yen14,yen15}. They decomposed a mixture using a two-stage auditory model which consists of a cochlear module \cite{chi05} and cortical module \cite{chi99}. They then extracted spectro-temporal modulation features from the TF units and clustered the TF units into harmonic, percussive, and vocal components using the EM algorithm and resynthesized the estimated signals.\\
 % from zafar
 % double check this!
+Virtanen made us of sinuoidal modeling \cite{virtanen00} to model and separate sources with tempo spectral modulation like vibrato.
+
 Usage for source separation, non FM modulations are considered: \cite{hennequin10}.
 An advantage of the source-filter model approach is indeed that one can dissociate the pitched content of the signal, embodied by the position of its harmonics, from its TF envelope which describes where the energy of the sound lies. In the case of vocals, it yields the ability to distinguish between the actual note being sung (pitch content) and the phoneme being uttered (mouth and vocal tract configuration), respectively. One key feature of vocals is they typically exhibit great variability in fundamental frequency over time. They can also exhibit larger \textit{vibratos} (fundamental frequency modulations) and \textit{tremolos} (amplitude modulations) in comparison to other instruments.
+
 % from zafar
-Modeling the common amplitude modulation to separate mixtures has already been done in~\cite{li07} and
-\cite{cano14}, which additionally included common amplitude modulation characteristics in the separation scheme.
+The concept of \emph{common amplitude modulation} by~\cite{bregman, wang06} which exploits that amplitude envelopes of different harmonics of the same source tend to be similar.
+Modeling the common amplitude modulation to separate mixtures has already been done in~\cite{li07} and \cite{cano14}, which additionally included common amplitude modulation characteristics in the separation scheme.
+
+separating without understanding
+
+> ~\cite{greenberg96} the energy in the modulation spectrum may be derived from syllabic segmentation. This association is of interest in light of recent demonstrations that speech intelligibility is crucially dependent on the preservation of the portion of the modulation spectrum between 2 and 10 Hz
+
+\section{Summary and Discussion}
 
 % TODO: add deep learning
 
