@@ -20,6 +20,13 @@ Make sure that modulation are also used to analyse time frequency
 
 - [x] paper from fatimeh nach referencen durchforsten
 
+- [ ] department-fremder der uni erlangen: 
+```
+How deep is deep enough? - Optimizing deep neural network architecture
+Achim Schilling1, Jonas Rietsch1, Richard Gerum2, Holger Schulze1, Claus Metzner2, and Patrick Krauss1
+1 => Experimental Otolaryngology, Neuroscience Group, University, Hospital Erlangen, Germany
+2 => Biophysics Group, Department of Physics, Friedrich-Alexander University Erlangen-Nürnberg (FAU), Germany
+```
 
 # introducing NMF like Dittmar:
 
@@ -173,3 +180,22 @@ No, but From Chollet
 * [x] example that works quite nice... http://sisec17.audiolabs-erlangen.de/#/listen/20/STO1?mode=embed
 
 # * add sampling reference paper from ismir 2018 tutorial slides
+
+# Outlook
+
+BEYOND EQUAL-LENGTH SNIPPETS: HOW LONG IS SUFFICIENT TO RECOGNIZE AN AUDIO SCENE? https://arxiv.org/pdf/1811.01095.pdf
+
+# Defense 
+
+## Wackelkandidaten
+
+
+### NMF, NTF
+
+- how to derive the cost functions
+- Erklärung von Antoine/Vincent
+
+### Backprop
+
+- Guided Backpropagation
+- http://blog.qure.ai/notes/deep-learning-visualization-gradient-based-methods

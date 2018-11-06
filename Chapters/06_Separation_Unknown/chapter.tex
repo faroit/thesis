@@ -60,10 +60,6 @@ In the following subsection I will introduce the work of Barker and how it can b
 
 \marginpar{Parts of this subsection is also based on the work~\cite{stoeter14}.}
 
-% TODO: rewrite this paragraph
-Even though amplitude modulation is normally not present isolated in acoustical instruments.
-Using solely the amplitude modulation to separate mixtures has already been done in \cite{li09} which makes use of the concept of \emph{Common Amplitude Modulation}.
-\textsc{CAM} is effectively the property of harmonics that share the same amplitude modulation across the bins.
 One way of analyzing it is the modulation spectrogram which is a frequency-frequency representation of a time domain input signal.
 There are also other ways to generate a modulation spectrum.
 A complete signal representation can be archived by a modulation tensor which holds the modulation spectrograms for each time frame.
@@ -73,7 +69,7 @@ In practice, the modulation tensor \(\mathbf{V}_{f, b, t}\) can be computed from
 % the key point is that after the TF transform the magnitude has to be taken to compute the amplitude modulation. Computing the frequency modulation spectrogram is not possble in a simple way. WHY?
 
 % Known modulation
-The core intuition here is that one could observe that different amplitude modulation frequencies on certain frequency bands could be a destinct property of some instruments.
+The core intuition here is that one could observe that different amplitude modulation frequencies on certain frequency bands could be a distinct property of some instruments.
 For example, if we mix together two harmonic signals having a fundamental frequency of 440Hz where one signal has a stationary amplitude modulation of 4~Hz and another one of 10~Hz, these differences are latent in a non-negative time frequency representation such as a time-frequency spectrogram.
 
 Barker and Virtanen~\cite{barker13} were the first who proposed to use the modulation tensor for single channel source separation by factorizing the modulation tensor representation using Non-negative Tensor factorization (NTF).
@@ -148,9 +144,9 @@ In the next section we therefore investigated how the complex modulation that co
 \marginpar{This section is based on the work that has been published in 2016~\cite{stoeter16}. The work has been done in collaboration with Antoine Liutkus (INRIA, France) and Roland Badeau (ParisTech, France).}
 
 In this work we introduce a novel tensor signal representation which additionally exploits similarities in the frequency direction.
-We can therefore make use of dependencies between modulations of neighbouring bins.
+We can therefore make use of dependencies between modulations of neighboring bins.
 This is similar to the recently proposed High-Resolution Nonnegative Matrix Factorization model that accounts for dependencies in the time-frequency plane (HR-NMF~\cite{badeau11}).
-In short, HR-NMF models each complex entry of a time-frequency transform of an audio signal as a linear combination of its neighbours, enabling the modelling of damped sinusoids, along with an independent innovation.
+In short, HR-NMF models each complex entry of a time-frequency transform of an audio signal as a linear combination of its neighbors, enabling the modeling of damped sinusoids, along with an independent innovation.
 This model was generalized to multichannel mixtures in~\cite{badeau13a,badeau14} and was shown to provide considerably better oracle performance for source separation than alternative models in~\cite{magron15a}.
 Indeed, even though some variational approximations were introduced in~\cite{badeau13} to strongly reduce their complexity, those algorithms are often demanding for practical applications.
 In this work, we proposed to relax some assumptions of HR-NMF in the interest of simplifying the estimation procedure.
@@ -232,11 +228,11 @@ we assume here independence of overlapping patches. Due to the
 overlap between them, this assumption is an approximation,
 and one may wonder what the advantage is of dropping independent frames
 for independent patches. The answer lies in the fact that the latter
-permits us to model phase dependencies between neighbouring STFT entries,
+permits us to model phase dependencies between neighboring STFT entries,
 and also to model much longer-term dependencies, as required for instance
 by deterministic damped or frequency-modulated sinusoidal signals.\label{enu:assumption_independent_patches}
 \item Each patch is \emph{stationary}: its distribution
-is assumed invariant under translations in the TF plane. This is where we do not assume independence, but on the contrary expect dependencies among neighbouring STFT entries. Our approach assumes this happens in a way that only depends on the relative positions in
+is assumed invariant under translations in the TF plane. This is where we do not assume independence, but on the contrary expect dependencies among neighboring STFT entries. Our approach assumes this happens in a way that only depends on the relative positions in
 the TF plane. It can easily be shown that mixtures of
 damped sinusoids have this property. Assuming stationarity not only over time but over both time and frequency
 also permits us to naturally account for mixtures of frequency-modulated
