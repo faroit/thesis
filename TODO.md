@@ -51,6 +51,8 @@ Achim Schilling1, Jonas Rietsch1, Richard Gerum2, Holger Schulze1, Claus Metzner
 * [ ] add pescador training to count net paper.
 * [ ] Unison Dataset
 
+* [ ] put some evaluation shit
+
 * [ ] appendix, filter plots from countnet
 
 # Fragen an Antoine
