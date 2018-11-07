@@ -134,8 +134,7 @@ In the following, I will give an overview of existing work focussed on analysis 
 
 \subsection{Analysis}
 
-Modulations can be important for various audio analysis tasks.
-Often the type of the modulation is assumed to be known in advance.
+Modulations play an important role for various audio analysis tasks.
 %lets start with speech
 In speech, which usually equipped with amplitude modulations, techniques to utilize modulation patterns improved applications such as speech discrimination~\cite{mesgarani04} or extract spatial acoustic signatures from mixtures~\cite{sukittanon06}.
 One way of analyzing amplitude modulations is to use a modulation spectrogram~\cite{greenberg97} which is a frequency-frequency representation of a time domain input signal.
@@ -143,9 +142,11 @@ A complete signal representation can be archived by a modulation tensor which ho
 Interestingly, Greenberg assumed that ``the energy in the modulation spectrum may be derived from syllabic segmentation'' and that ``the preservation of the portion of the modulation spectrum between 2 and 10 Hz''.
 Following this, it was later proved that the detection of modulations can improve speech intelligibility~\cite{elhilali03} or automatic speech recognition~\cite{kingsbury98}.
 \par
+% go to music
 Amplitude modulations were also proposed for music tasks. 
 Work by Scheirer in ~\cite{scheirer99}, proposed a method that operates by utilizing common modulation among groups of frequency sub-bands in the autocorrelogram domain.
-In music, predominantly cause by vibrato, amplitude modulations are considered to be that important and the reader is referred to~\cite{muller11} for further details.
+In music, predominantly caused by vibrato, amplitude modulations are considered to be that important and the reader is referred to~\cite{muller11} for further details.
+Disch and Edler proposed to decompose an audio signal into band pass signals and each of them parametrically modeled by a sinusoidal carrier and its amplitude and frequency modulation~\cite{disch09}.
 For time-varying frequency modulations, the modulation spectrogram is not an effective, as it would only be able to track the modulation rate due the side-lobes of the modulation.
 A common way to explicitly analyze frequency variations is to first analyze the fundamental frequency and then track the fundamental frequency over time. 
 An overview of various techniques are summarized in~\cite{driedger16}.
@@ -159,7 +160,7 @@ As described in Chapter 2, modulations are a natural way to group and segregate 
 harmonic relation, the common onset, offset, amplitude modulation (AM), and frequency modulation (FM).These are all important cues for grouping.  
 \end{quote}
 
-It is therefore not suprising that a number of methods exist, that utilize spectro-temporal modulations to separate mixtures.
+It is therefore not surprising that a number of methods exist, that utilize spectro-temporal modulations to separate mixtures.
 % from zafar!
 Wang proposed instantaneous and frequency-warped techniques for signal parameterization and source separation, with application to voice separation in music~\cite{wang94,wang95}.
 He introduced a frequency-locked loop algorithm which uses multiple harmonically constrained trackers.
@@ -173,38 +174,24 @@ Wolf et al. proposed an approach using rigid motion segmentation, with applicati
 Yen et al. proposed an approach using spectro-temporal modulation features \cite{yen14,yen15}. They decomposed a mixture using a two-stage auditory model which consists of a cochlear module \cite{chi05} and cortical module \cite{chi99}. They then extracted spectro-temporal modulation features from the TF units and clustered the TF units into harmonic, percussive, and vocal components using the EM algorithm and resynthesized the estimated signals.\\
 % from zafar
 % double check this!
-Virtanen made us of sinuoidal modeling \cite{virtanen00} to model and separate sources with tempo spectral modulation like vibrato.
+Virtanen made us of sinusoidal modeling \cite{virtanen00} to model and separate sources with tempo spectral modulation like vibrato.
 % TODO: more cites for source filter model
 In another vein, the source-filter model was deployed to separation sources~\cite{hennequin10}.
 An advantage of the source-filter model approach is indeed that one can dissociate the pitched content of the signal, embodied by the position of its harmonics, from its TF envelope which describes where the energy of the sound lies. In the case of vocals, it yields the ability to distinguish between the actual note being sung (pitch content) and the phoneme being uttered (mouth and vocal tract configuration), respectively. One key feature of vocals is they typically exhibit great variability in fundamental frequency over time. They can also exhibit larger \textit{vibratos} (fundamental frequency modulations) and \textit{tremolos} (amplitude modulations) in comparison to other instruments.
 
 % TODO: add this to chapter commonfate: ~\cite{creager16} VibratoNTF uses DOA 
 
-\section{Summary and Discussion}
+\section{Summary}
 
-* Datasets for modulations are missing
-* Scenario of severe overlap is a showcase to utilize modulations for separation
-* Representations like modulation spectrogram only cover amplitude modualtions, how can generic modulation patterns be tracked?
-* Does deep learning help here?
-* tracking modulations is hard, because f0 estimation often doesn't work on mixtures. Reason is that crossing partials is a big problem for sinusoidal modeling~\cite{viste03}. 
-robustness and accuracy of tracking modulations and fundamental frequency variations can be improved.
-
-* modulations are not present in all signal types. so you need to be lucky 
-* Papers with detecting vibrato?
-* Representations are not easily invertible
-
-
-% TODO: add deep learning
-
-% TODO: the gap
-
-% summary (mini objectives)
-Highly overlapped signals require suitable representations, because separability is of highly overlapped source with modulations is sufficiently possible in the TF domain.
-
-Many of the representations require a parametric approach. And the existing modulation tensor is only able to capture amplitude modulation, hence it cannot solve general modulations.
-
-\begin{itemize}
-  \item What is the likeliness for two target signals being overlapped for different scenarios
-  \item Unison
-  \item past research was focused on solving source separation because its such an interesting and challenging mathematical problem. Data driven separation, however, changed this.
-\end{itemize}
+Modulations play an important role in audio signal analysis. 
+However past research was mainly focused on the analysis of single notes and not on overlapped sounds.
+It is therefore to be investigated if scenarios with severe overlap can utilize modulations as well.
+This comes with a number of challenges: Firstly, parameterization of modulation characteristics of a single source is difficult, when only the mixture is observed. 
+For example, it is known~\cite{salamon13} that the extraction of the fundamental frequency in a mixture is difficult. 
+The reason is that crossing partials is a big problem for sinusoidal modeling~\cite{viste03}. 
+And even if the tracking would work perfectly, evaluation of robustness and accuracy is often hardly possible when the reference data is only annotated with human precision.
+Secondly, representations like modulation spectrogram only cover amplitude modulations, how can modulation patterns of generic nature (AM/FM, timbre modulation) tracked.
+Highly overlapped signals require suitable representations that have a better separability than classical STFT.
+Improving the separability, however, may not necessarily lead to better separation results when representations are not easily invertible.
+Furthermore, approaches that exploit modulations for source separation were mostly focussed on known modulations in contrast to unsupervised methods.
+Furthermore, with the recent success of deep learning based methods, it to be seen, if learning based methods can utilize modulations from data.
