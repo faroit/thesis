@@ -1,22 +1,22 @@
 \chapter{Datasets for Separation and Analysis}
 \label{cha:datasets}
-In the previous chapter applications and problems in the context of modulations of highly overlapped signals were presented.
-Before I present methods that separate or analyze such signals, I find it helpful to study and understand the importance of data with these properties.
-This becomes especially important as many methods nowadays rely on machine learning algorithms.
-One of the objectives in this thesis is to discuss its modulation properties of the signals can be used as a cue for the signal.
-Even though modulation is an intrinsic property of many audio recordings such as speech and music, very few dataset are available to actually study influence of the modulation into various tasks such as source separation.
-Furthermore, datasets are also required for evaluation purposes.
+In the previous chapter the fundamentals of highly overlapped signals were presented.
+Before I present methods that separate or analyze such signals, it is useful to study and understand the importance of data.
+This becomes especially important as many methods nowadays rely on machine learning algorithms and for the sake of evaluation.
+One of the objectives of this thesis is to discuss its modulation properties of the signals can be used as a cue for the signal.
+Even though modulation is an intrinsic property of audio recordings such as speech and music, very few dataset are available to actually study the influence of modulations on various tasks such as source separation.
 \par
-In the following I will give three examples for datasets that were created in the course of this thesis.
+During the course of this thesis, I often relied on audio datasets for the purpose of development and evaluation.
+Often suitable audio material was not publicly available, therefore I created and released custom data and software to foster reproducible research.
+The datasets are categorized in the synthetic data and real data as followed.
 
-In music however, recordings are usually not available as separated tracks due to legal issues.
-And very few publicly available datasets exist that include separated tracks.
+\section{Synthetic Mixtures}
 
-\section{Synthetic Datasets}
-
+Synthetic mixtures are mixtures that are created from single source sounds, e.g. through (often random) summation. 
 In speech, it is wide spread to mix clean speech and noise~\cite{varga93} or different clean speech signals such as~\cite{garofolo93} to generate mixtures.
-By contrast, the conversational aspect of human-to-human communication is lost, which means does not assemble a realistic cocktail party nor a conversation.
-There are use-cases for single note datasets such as for the evaluation of F0 estimation algorithms or to identify the instrument.
+By contrast, the conversational aspect of human-to-human communication is lost, and a realistic  conversation would be challenging to create synthetically.
+Compared to speech, musical content usually does share common orchestration and can usually not superimposed in a random way, which makes a simple summing of isolated random notes from instrumental databases not practical.
+However, there are use-cases for single note datasets such as for the evaluation of F0 estimation algorithms or to identify the instrument.
 Single note datasets allow to use the data as a sampler to synthesize any musical score.
 It also allows to quickly generate a large amount of mixture using randomly permuted mixtures.
 \par
@@ -24,20 +24,22 @@ It also allows to quickly generate a large amount of mixture using randomly perm
 Creating datasets of synthetic mixture with high overlap is not trivial.
 Obviously, the simplest way to assemble highly overlapped data is to use individual audio recordings and randomly mix them together.
 
-\subsection{Unison Instrument Scenario}
+\subsection{Unison Mixtures}
 \label{sec:scenario}
 
-And, compared to speech, musical content usually does share common orchestration and can usually not superimposed in a random way, which makes simply summing isolated random notes from instrumental databases to produce mixtures.
-However, when all instruments playing \emph{in unison} to create mixtures with very high overlap, e.g. single note datasets are useful and also helpful for two reasons:
+\marginpar{The scenario of unison mixtures was first introduced in~\cite{stoeter14} of which part of this section is based on.}
+
+When all instruments playing~\emph{in unison} to create mixtures with very high overlap, single note datasets are useful for two reasons:
 
 \begin{itemize}
-  \item A random summation of multiple instruments playing the same note is musically meaningful mixtures.
+  \item A random summation of multiple instruments playing the same note is musically a meaningful mixture.
   \item Unison mixtures are important in classical music to extend the timbre of a note.
+  \item When notes were played with vibrato, having access to the individual modulation patterns can help to study the influence of modulations.
 \end{itemize}
 
-% TODO: True Unison would be if 2 violins perceived as a single source, and usually there is no need to separate their signals from each other.
+% TODO: A strict definition of unison mixtures does not exist.,True Unison is when multiple instruments of the same class play the same note.
 
-However, when using two random recordings of the same musical note from different players, we are facing a number of problems: A) two notes of the same fundamental frequency are not exactly the same (reference pitch), B) The modulations are not reproducible. C) Two recordings may have completely different acoustic environments.\par
+% When using two random recordings of the same musical note from different players, we are facing a number of problems: A) two notes of the same fundamental frequency are not exactly the same (reference pitch), B) The modulations are not reproducible. C) Two recordings may have completely different acoustic environments.\par
 
 % from common fate introduction
 % TODO: Move back to NMF
@@ -46,8 +48,8 @@ However, when using two random recordings of the same musical note from differen
 % Since humans are able to reliably detect even instruments played in unison, this is a good motivation to expect the same from an algorithm. In this paper we want to address this scenario which has not been brought up so far. We believe creating and evaluating new algorithms for separating sources playing in unison will improve source separation systems in general.
 
 % TODO: unison source separation scenario, aber wohin mit dem datenset?
-We propose a scenario where instruments play in unison. 
-This means that they share the same fundamental frequency (regardless of the octave) so that the sources can overlap both in time and frequency. In fact unison\footnote{greek: with \emph{one voice}} mixtures are meant to be as much overlapped as possible, hence they are very difficult to separate. However, due to masking effects, a relatively good subjective quality for the separated sources can be obtained, even if the other sources are not perfectly suppressed.
+We propose a scenario where instruments play in unison\footnote{greek: with \emph{one voice}}. 
+This means that they share the same fundamental frequency (regardless of the octave) so that the sources can overlap both in time and frequency. In fact unison mixtures are meant to be as much overlapped as possible, hence they are very difficult to separate. However, due to masking effects, a relatively good subjective quality for the separated sources can be obtained, even if the other sources are not perfectly suppressed.
 As far as we know, there is no contribution to the source separation scene that focuses on mixtures of such unison sources. \\
 
 % TODO: Extend this
@@ -73,7 +75,7 @@ The items have each been generated by rendering C4 notes in a state of the art s
   Flute & yes & 73\\
 \end{tabular}
 \end{center}
-\caption{Instrument item test set}
+\caption{Selected Instruments from the \emph{Unison Source Separation Dataset} (~\cite{oss_unison}) as it has been used in~\cite{stoeter14, stoeter16}.}
 \label{tab:testset}
 \end{table}
 
@@ -82,9 +84,11 @@ It turned out that for speech separation of \(k=2\) speakers, \(WDO=0.9\) and fo
 In the case of the two instruments playing in unison the average WDO is \(0.65\), hence a good separation in the time frequency domain is barely possible.
 
 The dataset is available for download~\cite{oss_unison}.
-% TODO: add figure from google spreadsheets
 
-\section{Realistic Data}
+% TODO: add figure from google spreadsheets
+% TODO: add little dataset table
+
+\section{Real Mixtures}
 
 \subsection{High Resolution Modulations}
 
@@ -153,4 +157,8 @@ In any case, it can be seen that datasets of sufficient duration to build data-d
 		\end{tabular}
 \end{table*}
 
+% TODO: describe my own work here
 % TODO: add description of tools
+
+\section{Discussion}
+
