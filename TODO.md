@@ -1,10 +1,11 @@
-# Motivation
+# Introduction/Motivation
 
 # Add research questions
 
-## why monoaural
+## why monoaural?
 
-Make sure that modulation are also used to analyse time frequency
+* Make sure that modulation are also used to analyse time frequency
+* why counting
 
 ## Random shit
 
@@ -14,19 +15,10 @@ Make sure that modulation are also used to analyse time frequency
 # Bernd 19.10.2018
 
 - [ ] Begründung warum analyse nach synthese
-
 * [ ] Common Fate interpretation mit plots (siehe fatimeh poster)
 * [ ] NMF
-
-- [x] paper from fatimeh nach referencen durchforsten
-
-- [ ] department-fremder der uni erlangen: 
-```
-How deep is deep enough? - Optimizing deep neural network architecture
-Achim Schilling1, Jonas Rietsch1, Richard Gerum2, Holger Schulze1, Claus Metzner2, and Patrick Krauss1
-1 => Experimental Otolaryngology, Neuroscience Group, University, Hospital Erlangen, Germany
-2 => Biophysics Group, Department of Physics, Friedrich-Alexander University Erlangen-Nürnberg (FAU), Germany
-```
+* [ ] Fragen, ob Korrekturen später möglich sind und in welchem Umfang
+* [ ] Grafiken aus IEEE publikationen übernehmen?
 
 # introducing NMF like Dittmar:
 
@@ -35,24 +27,15 @@ Achim Schilling1, Jonas Rietsch1, Richard Gerum2, Holger Schulze1, Claus Metzner
 # Software releases/ Bernd Fragen
 
 * [ ] Release WICE dataset
-* [ ] 
 * [ ] Commonfate: parafac2 fast release von Jeremy
-* [ ]
 
 # General status
 
-* [X] Write Common Fate DNN Section
-* [X] Merge Counting Papers
-* [ ] Redo Dataset Chapter
-* [X] Fix bibliography of chapter 05 and 06
 * [ ] NMF Example
-* [X] Add CountNet
 * [ ] add negative log likelihood
 * [ ] add pescador training to count net paper.
-* [ ] Unison Dataset
 * [ ] reference all datasets
 * [ ] put some evaluation shit
-
 * [ ] appendix, filter plots from countnet
 
 # Fragen an Antoine
@@ -61,13 +44,6 @@ Achim Schilling1, Jonas Rietsch1, Richard Gerum2, Holger Schulze1, Claus Metzner
 * For the linear mixing case, the process can be transferred to the frequency domain as the Fourier transform is a linear operator.
 % However, since we are normally dealing with the non-negative magnitude representation this is only an approximation~\cite{klapuri06book}.
 * Aim, Objective, 
-
-# Tasks for Highly Overlapped sources
-
-Source Separation Literature and basic techniques
-Source Counting literature
-
-Aber wie soll das funktionieren für counting. Es gibt keine basic techniques die funktionieren. Daher passt da snicht so gut rein.
 
 # Aspects of Concurrency
 
@@ -133,7 +109,6 @@ Daniel D. Lee and H. Sebastian Seung. Algorithms for non-negative matrix factori
 \cite{wang95} is using frequency warping to
 
 > Frequency-warped signal processing is useful for the analysis of sinusoidal signals with varying frequency.
-
 > Frequency warping a signal p(t) is nothing more than multiplying it by a unit amplitudee phase factor p(t). To invert the frequency warping we simply multiply the result.
 
 ```
@@ -170,7 +145,6 @@ Broze, Y., Paul, B., Allen, E., & Guarna, K. (2014). Polyphonic Voice Multiplici
 
 > The excerpts’ short length could create further problems, as stream segregation appears to be cumulative (see Bregman, 1978):
 listeners tend to hear one stream at first before subsequently resolving more. In all, because our stimuli are both short and isotextural, counting would not be expected to be a successful strategy in the present denumeration task.
-
 
 # Is deep learning a black box? 
 
