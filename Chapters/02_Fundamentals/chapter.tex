@@ -35,17 +35,17 @@ For further details we refer the reader to audio signal processing basics such a
 \subsection{Time-Frequency Representation}\label{sub:time-frequency-representation}}
 
 Real world sounds such as speech and music include periodicity.
-Therefore, sounds are often analyzed in the frequency domain as a \emph{spectrum} to reduce redundancy and improve the computational efficiency of the signal processing.
+Therefore, sounds are often analyzed in the frequency domain which also improves the computational efficiency of many signal processing methods.
 This is commonly achieved trough the use of discrete Fourier transform (DFT) and its fast FFT implementation~\cite{cooley65}. 
 For details, the reader is referred to~Chapter 4 of~\cite{proakis96}.
 At the same time, spectral representations relates to our human auditory system~\cite{zwicker13, moore89, bregman90} allowing us to process sounds the way we perceive them.
 \par
-The periodicity of real world sounds, as mentioned above, usually only holds for short time scales of several milliseconds, often referred to as ``quasi-stationarity''.
+The periodicity of real world sounds, as mentioned above, usually only holds for short durations of several milliseconds, often referred to as ``quasi-stationarity''.
 Instead, sounds are non-stationary over the course of several seconds and it therefore is useful to analyze and process short-time spectra, computed in an overlapped fashion, resulting in a \emph{time-frequency} (TF) representation.
 Simply put, a TF representation encodes the time-varying \textit{spectra} into a matrix \(\mX\) with frequencies \(k\) and time frames \(n\).
 For signals with more than one channel, the representation is extended to yield a three-dimensional tensor, where \(c\) represents the channel.
 \par
-When sounds are processed in the time-frequency domain the transformation needs to be inverted, hence many researchers chose a representation that allows to easily reconstruct the signal.
+When sounds are processed in the time-frequency domain, the transformation greatly benefits from being invertible, hence many researchers chose a representation that allows to easily reconstruct the signal.
 The short-time Fourier transform (STFT) is the most commonly used TF representation~\cite{mcaulay86}.
 STFT matrices \(\mX \in \sC^{n \times k \times c}\) are complex meaning that they include the phase information along with and the magnitude which represents the amplitude of that signal.
 Often the magnitude of the STFT is referred to as the~\emph{spectrogram}.
@@ -59,7 +59,7 @@ And it is this property we perceive as \emph{pitched}.
 \emph{Pitch} is defined by Klapuri~\cite{klapuri06book} as 
 
 \begin{quote}
-a perceptual attribute which allows the ordering of sounds on a frequency-related scale extending from high to low.
+``a perceptual attribute which allows the ordering of sounds on a frequency-related scale extending from high to low.''
 \end{quote}
 
 It is important to note that \emph{pitch} is a subjective measure.
@@ -85,7 +85,7 @@ In signal processing this is referred to as modulations and is, in fact, of para
 Modulations can be defined as time-variant functions that modulate a target parameter of signal over time.
 In the case of audio signals, often both, the modulating function (modulator) and the signal being modulated are are periodic.
 Signal modulations are often created intentionally but also occur naturally in many real-world audio signals such as speech.
-In the following, I will present a typical audio modulation categories and their cause, underlining the importance of them.
+In the following, I will present typical audio modulation categories and their cause, underlining the importance of them.
 
 \subsubsection*{Audio Signal Communication}
 
@@ -106,8 +106,9 @@ In comparison to AM, Frequency modulation (FM) varies the frequency of the carri
 
 where A is the amplitude, $\omega_0$ is the carrier frequency, $\omega_m(\theta)$ is the instantaneous modulation frequency, and $m$ is the modulation index $m = \frac{\Delta \omega_0} { \omega_{m} }$.
 
-It is well known that the Fourier spectrum of $z_{FM}(t)$ is quite difficult due to its non-linearity and involves computations using the Bessel function.
-For applications where the modulation frequencies that are a lot smaller than the carrier frequency, the spectrum that is caused by frequency modulations can be similar to those of amplitude modulations.
+It is well known that the Fourier spectrum of $z_{FM}(t)$ is not simple to comprehend due to its non-linearity and it involves computations using the Bessel function.
+For applications where the modulation frequencies are a lot smaller than the carrier frequency, the spectrum that is caused by frequency modulations is similar to those of amplitude modulations.
+This is the reason why algorithms that aim to capture the amplitude modulation will also capture part of the frequency modulation as well.
 The total bandwidth in this scenario is approximately $2\Delta \omega_0$, as found by Carson in~\cite{carson22}.\par
 For the purpose of audio communication, the modulation frequency or rate is defined by the bandwidth of the audio signal to be transmitted.
 Modulations in music or speech are much slower --- typically up to 10~\si{\hertz} (slow) or up to 100~\si{\hertz} (medium/fast).
@@ -119,7 +120,7 @@ Here, the modulations are created by a conscious physical manipulation of a musi
 In traditional instruments, modulations are often referred to as \emph{vibrato}, which is defined by~\cite{seashore31} as
 
 \begin{quote}
-...a periodic pulsation, generally involving pitch, intensity, and timbre, which produces a pleasing flexibility, mellowness and richness of tone.
+``...a periodic pulsation, generally involving pitch, intensity, and timbre, which produces a pleasing flexibility, mellowness and richness of tone.''
 \end{quote}
 
 Pitch and intensity vibrato can be mapped directly to AM and FM, a timbre vibrato, however, is not easily defined and is often linked to AM and FM~\cite{desain99}.
@@ -145,8 +146,8 @@ The vibrato rate is similar to that of instrumental vibrato with its peak around
 
 Unlike singing voice, speech modulations are part of human communication and therefore part of our language.
 Analyzing amplitude modulations in speech revealed slow modulations similar to instrumental vibrato with peaks of 4~\si{\hertz}~\cite{greenberg97, fuellgrabe09}
-However, these are not amplitude nor frequency modulations but rather correlate to the syllable rate~\cite{plomp83, houtgast85}.
-Modulations in speech --- produced by the glottal pulse excitation ---  also include medium to fast modulations up to a few hundred Hertz that are perceptually linked to \emph{roughness} and ]]\emph{residue pitch}.\\
+However, these are not amplitude and not frequency modulations but rather correlate to the syllable rate~\cite{plomp83, houtgast85}.
+Modulations in speech --- produced by the glottal pulse excitation ---  also include medium to fast modulations up to a few hundred Hertz that are perceptually linked to \emph{roughness} and \emph{residue pitch}.
 In fact, it was shown in studies like~\cite{joris04} that speech modulations are probably the reason why our human auditory system can detect amplitude modulations so well.
 It was even shown on the cortex level that humans are capable of processing rhythm-like envelope fluctuations~\cite{schreiner88, plomp83}.
 
@@ -352,18 +353,22 @@ Even though the overview is focused on vocal accompaniment separation, most appr
 \subsection{Source Count Estimation}
 % TODO: REwrite
 % copy from icassp paper maybe
-The number of sources is a simple but very important information for source separation and many source separation systems rely on this information. 
-In some scenarios, like popular western music, the sources to separate are grouped into Melody + Bass + Drums and a residual signal. 
-Constraining the system to such a scenario allows the results to be evaluated even if the set of sources being separated is incomplete. Constrained systems like these are also sufficient for real-world applications such as the eminent karaoke scenario. Limiting the number of desired sources helps not only to improve the performance of the algorithms but is also related to the fact that the number of sources humans can perceive is limited, too. Although a threshold has not been systematically addressed so far, a variety of experiments have been carried out. 
-David Huron found \cite{huron89} that the number of voices humans can correctly identify is up to three.
-\par
+The number of sources is a simple but very important information for source separation and many source separation 
+systems rely on this information. 
 % copied from my icassp 2018 paper
 In a “cocktail-party” scenario with many concurrent speakers, a typical assumption is that the number of concurrent speakers is known.
 In practice, almost all system assume the number of sources to be known even when they are aiming for a blind separation system.
 Unfortunately, in real world applications, information about the actual number of concurrent speakers
 is often not available.
-Surprisingly, very few methods have been proposed to address the task of
-counting the number of speakers.
 %from source counting paper
 For music signals, this task is especially challenging because the definition of a musical source can not clearly be given.
+In some scenarios, like popular western music, the sources to separate are grouped into Melody + Bass + Drums and a residual signal. 
+Constraining the system to such a scenario allows the results to be evaluated even if the set of sources being separated is incomplete. 
+Constrained systems like these are also sufficient for real-world applications such as the eminent karaoke scenario. Limiting the number of desired sources helps not only to improve the performance of the algorithms but is also related to the fact that the number of sources humans can perceive is limited, too. 
+Although a threshold has not been systematically addressed so far, a variety of experiments have been carried out. 
+Huron found \cite{huron89} that the number of voices humans can correctly identify, is up to three.
+While voices in music~\footnote{Explain a voice here} are not the same as the number of sources, the results of Huron showed a great correlation to the work carried out by Kashino in~\cite{kashino96} and Kawashima in~\cite{kawashima15}.
+They found in extensive experiments that participants were able to correctly estimate up to three simultaneously active speakers without using any spatial cues.
+
+
 

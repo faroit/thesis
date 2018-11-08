@@ -115,7 +115,7 @@ Further, it was shown in~\cite{bacon89} that the ability of detecting amplitude 
 It was then found by Dau in~\cite{dau99}, humans are especially sensitive at slow modulations:
 
 \begin{quote}
-Slow modulations are associated with the perception of rhythm. Samples of running speech, for example, show distributions of modulation frequencies with peaks around 3-4 Hz, approximately corresponding to the sequence rate of syllables~\cite{plomp93}. Results from physiological studies have shown that, at least in mammals, the auditory cortex seems to be limited in its ability to follow fast temporal changes.  
+``Slow modulations are associated with the perception of rhythm. Samples of running speech, for example, show distributions of modulation frequencies with peaks around 3-4 Hz, approximately corresponding to the sequence rate of syllables~\cite{plomp83}. Results from physiological studies have shown that, at least in mammals, the auditory cortex seems to be limited in its ability to follow fast temporal changes.''
 \end{quote}
 
 Dau, in fact, proposed a model that mimics the humans ability to detect modulation patterns and pointed out applications to improve hearing of hearing-impaired listener or speech intelligibility.
@@ -136,7 +136,7 @@ In the following, I will give an overview of existing work focussed on analysis 
 
 Modulations play an important role for various audio analysis tasks.
 %lets start with speech
-In speech, which usually equipped with amplitude modulations, techniques to utilize modulation patterns improved applications such as speech discrimination~\cite{mesgarani04} or extract spatial acoustic signatures from mixtures~\cite{sukittanon06}.
+In speech techniques to utilize modulation patterns improved applications such as speech discrimination~\cite{mesgarani04} or extract spatial acoustic signatures from mixtures~\cite{sukittanon06}.
 One way of analyzing amplitude modulations is to use a modulation spectrogram~\cite{greenberg97} which is a frequency-frequency representation of a time domain input signal.
 A complete signal representation can be archived by a modulation tensor which holds the modulation spectrograms for each time frame.
 Interestingly, Greenberg assumed that ``the energy in the modulation spectrum may be derived from syllabic segmentation'' and that ``the preservation of the portion of the modulation spectrum between 2 and 10 Hz''.
@@ -144,20 +144,22 @@ Following this, it was later proved that the detection of modulations can improv
 \par
 % go to music
 Amplitude modulations were also proposed for music tasks. 
-Work by Scheirer in ~\cite{scheirer99}, proposed a method that operates by utilizing common modulation among groups of frequency sub-bands in the autocorrelogram domain.
+Work by Scheirer in~\cite{scheirer99}, proposed a method that operates by utilizing common modulation among groups of frequency sub-bands in the autocorrelogram domain.
 In music, predominantly caused by vibrato, amplitude modulations are considered to be that important and the reader is referred to~\cite{muller11} for further details.
-Disch and Edler proposed to decompose an audio signal into band pass signals and each of them parametrically modeled by a sinusoidal carrier and its amplitude and frequency modulation~\cite{disch09}.
-For time-varying frequency modulations, the modulation spectrogram is not an effective, as it would only be able to track the modulation rate due the side-lobes of the modulation.
+\par
 A common way to explicitly analyze frequency variations is to first analyze the fundamental frequency and then track the fundamental frequency over time. 
 An overview of various techniques are summarized in~\cite{driedger16}.
 The authors of this paper also proposed a novel method to directly estimate the parameters of potential frequency modulations in the time-frequency domain by matching sinusoidal templates.
+\par
+For time-varying frequency modulations, the modulation spectrogram is not an effective, as it would only be able to track the modulation rate due the side-lobes of the modulation.
+Disch and Edler proposed to decompose an audio signal into band pass signals and each of them parametrically modeled by a sinusoidal carrier and its amplitude and frequency modulation~\cite{disch09}.
 
 \subsection{Separation}
 
-As described in Chapter 2, modulations are a natural way to group and segregate sounds. Viste et al. describes the impact of modulation in~\cite{viste03} as:
+As described in Chapter 2, modulations are used by humans to group and segregate sounds. Viste et al. describes the impact of modulation in~\cite{viste03} as:
 
 \begin{quote}
-harmonic relation, the common onset, offset, amplitude modulation (AM), and frequency modulation (FM).These are all important cues for grouping.  
+``harmonic relation, the common onset, offset, amplitude modulation (AM), and frequency modulation (FM).These are all important cues for grouping.''
 \end{quote}
 
 It is therefore not surprising that a number of methods exist, that utilize spectro-temporal modulations to separate mixtures.
@@ -193,5 +195,5 @@ And even if the tracking would work perfectly, evaluation of robustness and accu
 Secondly, representations like modulation spectrogram only cover amplitude modulations, how can modulation patterns of generic nature (AM/FM, timbre modulation) tracked.
 Highly overlapped signals require suitable representations that have a better separability than classical STFT.
 Improving the separability, however, may not necessarily lead to better separation results when representations are not easily invertible.
-Furthermore, approaches that exploit modulations for source separation were mostly focussed on known modulations in contrast to unsupervised methods.
+Another problem is that approaches that exploit modulations for source separation were mostly focussed on known modulations in contrast to unsupervised methods.
 Furthermore, with the recent success of deep learning based methods, it to be seen, if learning based methods can utilize modulations from data.
