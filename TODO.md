@@ -50,7 +50,7 @@ Achim Schilling1, Jonas Rietsch1, Richard Gerum2, Holger Schulze1, Claus Metzner
 * [ ] add negative log likelihood
 * [ ] add pescador training to count net paper.
 * [ ] Unison Dataset
-
+* [ ] reference all datasets
 * [ ] put some evaluation shit
 
 * [ ] appendix, filter plots from countnet
