@@ -4,15 +4,17 @@
 % TODO: add \cite{smaragdis08} for shift invariant NMFs and discuss the differences.
 
 % start coverted from dafx
-In most scenarios for source separation, as presented in Chapter~\ref{objectives-and-challenges}, it is common to assume that the spectral harmonics do only partially overlap.
-This enabled unsupervised algorithms like non-negative matrix factorization (NMF) to approximate the mixture from a lower-rank decomposition in an unsupervised way.
-Such systems are described in \cite{smaragdis03} and \cite{virtanen07} and further details will be given later in Chapter~\ref{cha:unknown}.
-Additionally the popularity of the class of NMF algorithms can be explained by the intuitive way in which they work on time-frequency representations of the mixture signal.
+In most scenarios for source separation, as presented in Chapter~\ref{objectives-and-challenges}, it is common to assume that the spectral harmonics are not fully overlapped.
+This enabled many unsupervised algorithms like non-negative matrix factorization (NMF) to approximate the mixture from a lower-rank decomposition in an unsupervised way.
 \par
-The separation of sound sources from a single channel mixture is considered as an under-determined case which does not have a single solution. Knowing the way in which source signals are mixed together is crucial to the quality of separation systems. In the context of speech separation even unsupervised methods can lead to good results. This is due to the fact that mixtures of speech signals (like in a cocktail party environment) show a high degree of statistical independence. Mixtures of musical instruments, however, are highly correlated which is a desired aim of musical performances in general.
-
-In the context of musical instrument source separation, many researchers have focused on including prior information about the sources in their algorithms \cite{ozerov12}.
-The availability and detail of such a-priori information varies. Often systems learn spectral as well as temporal cues from training data or parts of the mixture where only one instrument is active.
+% The separation of sound sources from a single channel mixture is considered as an under-determined case and does not have a unique solution. 
+% Therefore, knowing the way in which source signals are mixed together is crucial to the quality of separation systems. 
+% In the context of speech separation even unsupervised methods can lead to good results. 
+% This is due to the fact that mixtures of speech signals (like in a cocktail party environment) show a high degree of statistical independence. 
+% Mixtures of musical instruments, however, are highly correlated which is a desired aim of musical performances in general.
+In the context of musical instrument source separation, many researchers have focused on including prior information about the sources in their algorithms~\cite{ozerov12}.
+The availability and detail of such a-priori information varies. 
+Often, systems learn spectral as well as temporal cues from training data or parts of the mixture where only one instrument is active.
 One example of such informed source separation systems is described by Ewert and M\"uller \cite{ewert12}.
 It incorporates the pitch and onset information encoded in a MIDI file to improve the separation result.
 % end coverted from dafx

@@ -179,7 +179,8 @@ Yen et al. proposed an approach using spectro-temporal modulation features \cite
 Virtanen made us of sinusoidal modeling \cite{virtanen00} to model and separate sources with tempo spectral modulation like vibrato.
 % TODO: more cites for source filter model
 In another vein, the source-filter model was deployed to separation sources~\cite{hennequin10}.
-An advantage of the source-filter model approach is indeed that one can dissociate the pitched content of the signal, embodied by the position of its harmonics, from its TF envelope which describes where the energy of the sound lies. In the case of vocals, it yields the ability to distinguish between the actual note being sung (pitch content) and the phoneme being uttered (mouth and vocal tract configuration), respectively. One key feature of vocals is they typically exhibit great variability in fundamental frequency over time. They can also exhibit larger \textit{vibratos} (fundamental frequency modulations) and \textit{tremolos} (amplitude modulations) in comparison to other instruments.
+An advantage of the source-filter model approach is indeed that one can dissociate the pitched content of the signal, embodied by the position of its harmonics, from its TF envelope which describes where the energy of the sound lies. In the case of vocals, it yields the ability to distinguish between the actual note being sung (pitch content) and the phoneme being uttered (mouth and vocal tract configuration), respectively. 
+One key feature of vocals is they typically exhibit great variability in fundamental frequency over time. They can also exhibit larger \textit{vibratos} (fundamental frequency modulations) and \textit{tremolos} (amplitude modulations) in comparison to other instruments.
 
 % TODO: add this to chapter commonfate: ~\cite{creager16} VibratoNTF uses DOA 
 
@@ -195,5 +196,9 @@ And even if the tracking would work perfectly, evaluation of robustness and accu
 Secondly, representations like modulation spectrogram only cover amplitude modulations, how can modulation patterns of generic nature (AM/FM, timbre modulation) tracked.
 Highly overlapped signals require suitable representations that have a better separability than classical STFT.
 Improving the separability, however, may not necessarily lead to better separation results when representations are not easily invertible.
-Another problem is that approaches that exploit modulations for source separation were mostly focussed on known modulations in contrast to unsupervised methods.
-Furthermore, with the recent success of deep learning based methods, it to be seen, if learning based methods can utilize modulations from data.
+% TODO: move to 5 or 6
+% Another problem is that approaches that exploit modulations for source separation were mostly focussed on known modulations in contrast to unsupervised methods.
+% Furthermore, with the recent success of deep learning based methods, it to be seen, if learning based methods can utilize modulations from data.
+\par
+In the next two chapters, I will introduce methods that utilize the modulations of sources through either prior knowledge (known) or by operating blindly (unknown).
+In any case, this differentiation does only affect how modulations are incorporated --- the underlying method is based on both, supervised and unsupervised methods.

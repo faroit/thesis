@@ -1,10 +1,29 @@
 # Introduction/Motivation
 
+
+$$
+x_{ijk} \approx \sum_{r=1}^{R}a_{ir}b_{jr}c_{kr}
+$$
+
+for  $i = 1 , \ldots , I , j = 1 , \ldots , J , k = 1 , \ldots , K$
+
+sometimes also written (and implemented) as 
+
+$$
+\mathbf { X } _ { k } \approx \mathbf { A D } ^ { ( k ) } \mathbf { B } ^ { \top } , \quad \text { where } \quad \mathbf { D } ^ { ( k ) } \equiv \operatorname { diag } \left( \mathbf { c } _ { k : } \right) \quad \text { for } \quad k = 1 , \ldots , K
+$$
+
+### CFM
+
+$$
+x_{ijk} \approx \sum_{r=1}^{R}a_{ir}b_{jr}c_{kr}
+$$
+
 # Add research questions
 
 ## why monoaural?
 
-* Make sure that modulation are also used to analyse time frequency
+* Make sure that modulation are also used to analyze time frequency
 * why counting
 
 ## Random shit
@@ -31,12 +50,17 @@
 
 # General status
 
-* [ ] NMF Example
+* [ ] NMF Example + Figures --> Mathieu
+* [ ] Add chapter summaries --> Stibie, Patricio, Thomas
+* [ ] remove numberering from contributions
+* [ ] Write Introduction --> Christophe, Antoine
+
 * [ ] add negative log likelihood
 * [ ] add pescador training to count net paper.
 * [ ] reference all datasets
 * [ ] put some evaluation shit
 * [ ] appendix, filter plots from countnet
+* [ ] check the wording for magnitude spectrogram (check mainards book)
 
 # Fragen an Antoine
 
