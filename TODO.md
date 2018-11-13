@@ -1,11 +1,13 @@
 # Introduction/Motivation
 
 
+shifted NMF \cite{jaiswal13, rodriguezserrano16, fitzgerald05s}
+
 $$
-x_{ijk} \approx \sum_{r=1}^{R}a_{ir}b_{jr}c_{kr}
+x_{ft} \approx \sum_{k=1}^{K}w_{fk}h_{tk}
 $$
 
-for  $i = 1 , \ldots , I , j = 1 , \ldots , J , k = 1 , \ldots , K$
+for  $f = 1 , \ldots , F , t = 1 , \ldots , T , k = 1 , \ldots , K$
 
 sometimes also written (and implemented) as 
 
@@ -16,8 +18,11 @@ $$
 ### CFM
 
 $$
-x_{ijk} \approx \sum_{r=1}^{R}a_{ir}b_{jr}c_{kr}
+x_{abft} \approx \sum_{j=1}^{K}a_{abfk}h_{tk}
 $$
+
+for  $a = 1 , \ldots , N_a, b = 1 , \ldots , N_b, f = 1 , \ldots , N_f , t = 1 , \ldots , N_t , k = 1 , \ldots , K$
+
 
 # Add research questions
 
@@ -67,7 +72,8 @@ $$
 * Chapter 2 is a mix between a literature overview and a fundamentals chapter
 * For the linear mixing case, the process can be transferred to the frequency domain as the Fourier transform is a linear operator.
 % However, since we are normally dealing with the non-negative magnitude representation this is only an approximation~\cite{klapuri06book}.
-* Aim, Objective, 
+* Aim, Objective?
+* Why doesn't shift-invariant NMF solve the vibrato case? 
 
 # Aspects of Concurrency
 
