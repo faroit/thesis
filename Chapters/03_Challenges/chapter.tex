@@ -26,6 +26,7 @@ However, if sources are fully overlapped in both, time and frequency, a separati
 A metric that is often used for the purpose of evaluation is called \emph{separability} and was found by Rickard in~\cite{rickard02} as a useful metric for both, speech and music~\cite{giannoulis11} signals.
 \par
 % check
+
 In linear mixtures, separability is defined as \emph{a measure that indicates the percentage of time-frequency bins of a source is disjoint from those of interfering sources}.
 If \(M\) is the ideal binary mask for a given target \(S\) and it's interfering
 magnitude model \(Y\), \(WDO\) is defined as:
@@ -98,9 +99,9 @@ From these figures, one can see that the overlap of a typical speech mixture is 
 If we now compare this to the scenario where sources are fully overlapped as in the unison scenario, almost all TF bins are overlapped and separation would hardly be possible.
 \par
 While this is an extreme scenario, it still provides a useful example where typical assumptions are violated and it would facilitate the demand to develop new methods that do not rely so much on these long standing assumptions.
-In fact, a naïve method can be developed by just observing closely the spectrograms of Figure~\ref{fig:count}.
+In fact, a naïve method can be developed by just observing closely the time-frequency representation in Figure~\ref{fig:count}.
 We see that the slow spectro-temporal modulations caused by the vibratos is one of the aspects where the two sources differ significantly.
-So here, the classical STFT does not sufficiently offer enough separability and representations like the \emph{modulation spectrogram}, presented by~\cite{greenberg96}, allow to separate the two sources in a \emph{modulation domain}.
+So here, the classical STFT does not sufficiently offer enough separability and representations as in the \emph{modulation spectrogram}, presented by~\cite{greenberg96}, allow to separate the two sources in a \emph{modulation domain}.
 Details about this approach are discussed in Chapter 5.
 Now I want to focus on these ``modulational'' aspects on mixtures and their applications in the next section.
 

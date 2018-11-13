@@ -47,8 +47,8 @@ For signals with more than one channel, the representation is extended to yield 
 \par
 When sounds are processed in the time-frequency domain, the transformation greatly benefits from being invertible, hence many researchers chose a representation that allows to easily reconstruct the signal.
 The short-time Fourier transform (STFT) is the most commonly used TF representation~\cite{mcaulay86}.
-STFT matrices \(\mX \in \sC^{n \times k \times c}\) are complex meaning that they include the phase information along with and the magnitude which represents the amplitude of that signal.
-Often the magnitude of the STFT is referred to as the~\emph{spectrogram}.
+STFT matrices \(\mX \in \sC^{n \times k \times c}\) are complex meaning that they include the phase information.
+However, very often analysis and processing is only focussed only on the \emph{magnitude} \(|\mX|\) or the \emph{spectrogram} \(|\mX|^2\).
 
 \subsection{Fundamental Frequency and Harmonicity}
 % TODO: Add STFT plot from Cello Dataset, showing f0, overtones vibrato extend etc.
@@ -67,7 +67,7 @@ The objective equivalent is referred to as the \emph{fundamental frequency} (\(F
 \(F_{0}\) is can be defined as the lowest frequency/partial of an harmonic signal.
 All frequencies together formed by the integer multiples of the fundamental frequency are named \textit{harmonics}~\cite{schenker54}.
 When the fundamental frequency changes, the frequencies of these harmonics changes accordingly.
-This results in the typical comb-like spectrograms of harmonic signals.
+This results in the typical comb-like structure of harmonic signals when analyzed in the time-frequency domain.
 % TODO:
 % An example of a harmonic signal can be seen in Figure~\ref{fig:cello} that depicts a single played note from a violoncello.
 \par

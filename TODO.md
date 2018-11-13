@@ -1,7 +1,9 @@
 # Introduction/Motivation
 
 
-shifted NMF \cite{jaiswal13, rodriguezserrano16, fitzgerald05s}
+$$
+d _ { \beta } ( x | y ) \stackrel { \mathrm { def } } { = } \left\{ \begin{array} { c } { \frac { 1 } { \beta ( \beta - 1 ) } \left( x ^ { \beta } + ( \beta - 1 ) y ^ { \beta } - \beta x y ^ { \beta - 1 } \right) \quad \beta \in \mathbb { R } \backslash \{ 0,1 \} } \\ { x \log \frac { x } { y } - x + y } & { \beta = 1 } \\ { \frac { x } { y } - \log \frac { x } { y } - 1 } & { \beta = 0 } \end{array} \right.
+$$
 
 $$
 x_{ft} \approx \sum_{k=1}^{K}w_{fk}h_{tk}
@@ -44,10 +46,6 @@ for  $a = 1 , \ldots , N_a, b = 1 , \ldots , N_b, f = 1 , \ldots , N_f , t = 1 ,
 * [ ] Fragen, ob Korrekturen später möglich sind und in welchem Umfang
 * [ ] Grafiken aus IEEE publikationen übernehmen?
 
-# introducing NMF like Dittmar:
-
-> When using NMF for ADT, it is essential to choose a suitable rank R ∈ N of the approximation (i.e., number of components) and to provide a good initialization for W. One popular choice (see for example [7, 37, 158, 160]) is to set R to the number of distinct drum instruments and to initialize individual columns W (:, r) with averaged spectra of isolated drum sound events. The rationale is to let the NMF component updates start from a point in the parameter space that is already close to a meaningful local optimum.
-
 # Software releases/ Bernd Fragen
 
 * [ ] Release WICE dataset
@@ -63,9 +61,9 @@ for  $a = 1 , \ldots , N_a, b = 1 , \ldots , N_b, f = 1 , \ldots , N_f , t = 1 ,
 * [ ] add negative log likelihood
 * [ ] add pescador training to count net paper.
 * [ ] reference all datasets
-* [ ] put some evaluation shit
 * [ ] appendix, filter plots from countnet
-* [ ] check the wording for magnitude spectrogram (check mainards book)
+* [X] check the wording for magnitude spectrogram (check mainards book)
+* [ ] add step-count plot
 
 # Fragen an Antoine
 

@@ -9,7 +9,7 @@ In fact, some of the methods operate blindly, meaning they do not require any fu
 % \section{Modulation Spectrogram based Separation}
 % Intro commonfate START
 % Unknown modulation!
-In blind source separation research, many contributions in the past were based on non-negative matrix factorization (NMF)~\cite{lee99, lee01}.
+In blind source separation research, many contributions in the were based on non-negative matrix factorization (NMF)~\cite{lee99, lee01}.
 
 NMF quickly became one of the main scientific frameworks in the field of audio source separation with a large number of contributions.
 The popularity of NMF algorithms can be explained by the intuitive way in which they work on (non-negative) time-frequency representations of the mixture signal.
@@ -30,8 +30,32 @@ As it can be seen, the NMF product can also be written as the outer product betw
 \end{figure}
 
 The NMF provides a rank reduction which is needed to decompose mixtures into (\(K\)) source components.
-At the same time, the factorization inherently follow specific properties of music spectrograms which is the fact that harmonic sources have be described using a pitch/tone based dictionary (\(\mW\)) and its note activations (\(\mH\)).
-In Figure~\ref{fig:nmf_separation}, an example where this is demonstrated in a simple example, is depicted.
+At the same time, the factorization inherently follow specifics of music observable in time-frequency representations: the fact that harmonic sources can be described using a pitch/tone (represented in \(\mW\)) and its duration (represented in \(\mH\)).
+It is this property that also allowed to use NMF for the purpose of transcriptions~\cite{smaragdis03}.
+\par
+The factorization is done 
+
+% from barker
+Factorisation is essentially an optimisation problem. Factors are chosen so that the error between the target and its estimation is minimised. A model which minimises some cost function does not necessarily ensure good source separation quality, so the cost function for a particular problem should be sensibly designed.
+\begin{equation}
+  \min _ { \mathbf { W } , \mathrm { H } } D ( \mathbf { V } | \mathbf { W } \mathbf { H } ) \text { subject to } \mathbf { W } \geq 0 , \mathbf { H } \geq 0
+\end{equation}
+
+\begin{equation}
+  d _ { \beta } ( x | y ) \stackrel { \mathrm { def } } { = } \left\{ \begin{array} { c } { \frac { 1 } { \beta ( \beta - 1 ) } \left( x ^ { \beta } + ( \beta - 1 ) y ^ { \beta } - \beta x y ^ { \beta - 1 } \right) \quad \beta \in \mathbb { R } \backslash \{ 0,1 \} } \\ { x \log \frac { x } { y } - x + y } & { \beta = 1 } \\ { \frac { x } { y } - \log \frac { x } { y } - 1 } & { \beta = 0 } \end{array} \right.
+\end{equation}
+
+The special cases of \(\beta = 0\) and \(\beta = 1\) correspond to the Itakura-Saito (IS) and Kullback-Leibler (KL) divergence, but also Euclidean distances (\(\beta = 2\)) is used in practice.
+
+
+
+After factorizing into its \(K\) components, one can easily obtain \(K\) magnitude spectra.
+However, \(K\) is usually selected to be larger or equal to the total number of sources.
+When it is larger than the number of sources, components can be clustered into the number of desired sources.
+Often this can be achieved by some similarity metric that compares the \(k\)-th component with one of the desired sources by a \textit{k}-means clustering algorithm~\cite{spiertz09}.
+A separation example is depicted in Figure~\ref{fig:nmf_separation}. 
+Here the number of components \(K\) is six per sources, resulting in total number of \(K=12\). 
+Each component is clustered to one of the two sources to generate the two estimates.
 
 \begin{figure}
   \centering
@@ -40,15 +64,8 @@ In Figure~\ref{fig:nmf_separation}, an example where this is demonstrated in a s
   \label{fig:nmf_separation}
 \end{figure}
 
-It is this property that also allowed to use NMF for the purpose of transcriptions~\cite{smaragdis03}.
-\par
-% stolen from somewhere
-After factorizing into its \(K\) components, one can easily obtain \(K\) magnitude spectra.
-However, \(K\) is usually selected to be larger or equal to the total number of sources.
-When it is larger than the number of sources, components can be clustered into the number of desired sources.
-Often this can be achieved by some similarity metric that compares the \(k\)-th component with one of the desired sources by a \textit{k}-means clustering algorithm~\cite{spiertz09}.
-It is exactly this step that transforms the NMF as an unsupervised algorithm into a supervised algorithm.
-As for other spectrogram based methods, separation is performed using Wiener filters to extract the sources from the mixture~\cite{liutkus15c}.
+It is this step that transforms the NMF as an unsupervised algorithm into a supervised algorithm.
+As for other separation methods performed in the time-frequency domain, separation is achieved using Wiener filters to extract the sources from the mixture~\cite{liutkus15c}.
 \par
 
 % from zafar...
@@ -58,14 +75,14 @@ They used NMF to separate vocals from mixtures and first discriminated between v
 Since then a la large variety NMF ``flavors'' were introduced to deal with certain aspects of the NMF for the application of Music. 
 Many of then can be found in Chapter 16 of~\cite{vincent}.
 Here the authors also describe one of the main problems with NMF which is that ``standard NMF is shown to be efficient when the notes of the analyzed music signal are nearly stationary''.
-As I showed in Chapter~\ref{cha:highly-overlapped-signals}, this is especially false for notes that incorporate vibrato.
-This becomes a problem for NMF based processing because with a representation based on a standard NMF and the magnitude spectrogram, it is hard to model these sources with only a few spectral templates. 
+As I showed in Chapter~\ref{cha:highly-overlapped-signals}, this is especially important for notes that incorporate vibrato.
+Here it becomes a problem for NMF based processing, because standard NMF and its magnitude STFT representation makes it hard to model these sources.
 \par
-To underpin this issue, I depict this problem in Figure~\ref{fig:am_tensor}, where I show the factorization of a simple amplitude modulated input signal for comparison. 
+To underpin this issue, I depict this problem in Figure~\ref{fig:am_tensor}, where I show the factorization of a simple amplitude modulated input signal. 
 The signal consists of two sinusoids which are linearly mixed. 
 Both share the same carrier frequency but have different amplitude modulation frequencies. 
 I choose a factorization into $K=2$ components. 
-From the activation components one can see that NMF is not able to separate the two signals sufficiently. 
+From the activation components one can see that NMF is not able to separate the two signals sufficiently.
 % TODO
 \begin{figure}[h]
 \centering
@@ -81,36 +98,19 @@ From the activation components one can see that NMF is not able to separate the 
 \label{fig:am_tensor}
 \end{figure}
 
-One way to get a better separation result would be to increasing the number of components per source, however this introduce difficulties for the clustering.
+One way to towards better separations is to increase the number of components per source, however this introduces difficulties for the clustering.
+Another method is based proposed by in~\cite{smaragdis04, fitzgerald05s, jaiswal13, rodriguezserrano16} which use convolutions to model shifts in components.
+This lead to factorizations that are able to also model vibrato events.
+However as stated in~\cite{hennequin11}, it does ``not  permit  any variation  between  different  occurrences  of  the  same  event (atom), its duration and spectral content evolution being fixed''. 
 Instead, Hennequin proposes~\cite{hennequin11} frequency-dependent activation matrices by using a source/filter-based model.
+The model is based on an Auto-Regressive Moving Average (ARMA) time varying model that allows single spectral components to be modeled along with their spectral variations. 
+The model, as reported by the authors, however, does only allow for small frequency variations and fitting the ARMA model is a time-consuming process.
 
-% Chanrungutai and Ratanamahatana proposed to use NMF with automatic component selection\cite{chanrungutai08}. They first decomposed the mixture spectrogram using NMF with a fixed number of basis components. They then removed the components with brief rhythmic and long-lasting continuous events, assuming that they correspond to instrumental sounds. They finally used the remaining components to reconstruct the singing voice, after refining them using a high-pass filter.
-% % from zafar...
-
-% Marxer and Janer proposed an approach based on a Tikhonov regularization~\cite{tikhonov63} as an alternative to NMF, for singing voice separation~\cite{marxer122}. Their method sacrificed the non-negativity constraints of the NMF in exchange for a computationally less expensive solution for spectrum decomposition, making it more interesting in low-latency scenarios.
-% from zafar...
-
-
-% Yang et al. proposed a Bayesian NMF approach \cite{yang14,chien15}. Following the approaches in \cite{cemgil09} and \cite{schmidt09}, they used a Poisson distribution for the likelihood function and exponential distributions for the model parameters in the NMF algorithm, and derived a variational Bayesian EM  algorithm \cite{dempster77} to solve the NMF problem. They also adaptively determined the number of bases from the mixture. They finally grouped the bases into singing voice and background music by using a 
-
-% In a different manner, Smaragdis and Mysore proposed a user-guided approach for removing sounds from mixtures by humming the target sound to be removed, for example a vocal track \cite{smaragdis09}. They modeled the mixture using probabilistic latent component analysis (PLCA) \cite{smaragdis07}, another equivalent formulation of NMF. One key feature of exploiting user input was to facilitate the grouping of components into vocals and accompaniment, as humming helped to identify some of the parameters for modeling the vocals.
-% end zafar
 \par
+% Intro commonfate START
+Since vibrato does not only cause frequency modulation (FM) but also amplitude modulation (AM), so-called modulation spectra can be used to identify the modulation pattern. 
+The \emph{modulation spectrogram} has already gathered much attention in speech recognition~\cite{greenberg97,kingsbury98} and classification~\cite{kinnunen08, markaki09} as introduced in Chapter~\ref{cha:fundamentals}.
 
-Fitzgeral proposed to use the tensor model to separate using the channels information~\cite{fitzgerald05}.
-
-
-In a setting where two musical instruments with vibrato play in unison, both assumptions could break, which makes it a challenging scenario~\cite{stoeter14}.\\
-
-\begin{figure}
-  \centering
-  \includegraphics[width=0.8\textwidth]{Chapters/06_Separation_Unknown/figures/cpd.pdf}
-  \caption{NMF }
-  \label{fig:cpd}
-\end{figure}
-
-
-In the following subsection I will introduce the work of Barker and how it can be applied to the unison source separation problem.
 
 %\from dafx
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -119,31 +119,37 @@ In the following subsection I will introduce the work of Barker and how it can b
 
 \marginpar{Parts of this subsection is also based on the work~\cite{stoeter14}.}
 
+\begin{figure}
+  \centering
+  \includegraphics[width=0.8\textwidth]{Chapters/06_Separation_Unknown/figures/cpd.pdf}
+  \caption{NMF }
+  \label{fig:cpd}
+\end{figure}
 
-% Intro commonfate START
-Since the vibrato does not only cause frequency modulation (FM) but also amplitude modulation (AM), so-called modulation spectra can be used to identify the modulation pattern. This is often calculated by taking the Fourier transform of a magnitude spectrum. Thus, the \emph{modulation spectrogram} has already gathered much attention in speech recognition~\cite{greenberg97,kingsbury98} and classification~\cite{kinnunen08, markaki09}.
-
-% from zafar
-Expanding NMF to tensors allows to incorporate more complex models, useful in many applications like multi-channel separation.
-Extensions to NMF such as shift-invariance or convolutions were carried over to non-negative tensor (NTF) based algorithms~\cite{fitzgerald05, fitzgerald08, fitzgerald06, fevotte10, ozerov11}. 
-These approaches, relying on decomposing mixtures of musical instruments, work well when certain assumptions hold to be true.
-
-One way of analyzing it is the modulation spectrogram which is a frequency-frequency representation of a time domain input signal.
+In the following subsection I will introduce the work of Barker and how it can be applied to the unison source separation problem.
+The modulation spectrogram is a time-frequency-frequency representation of a time domain input signal.
 A complete signal representation can be archived by a modulation tensor which holds the modulation spectrograms for each time frame.
 In practice, the modulation tensor \(\mathbf{V}_{f, b, t}\) can be computed from a the modulus of a time frequency matrix \(| \mathbf{X}_{f, t} |\) by computing \(f\) time frequency transforms over frequency band of \(\mathbf{X}\).
+\par
+% shortly introduce some tensor factorizations
+To utilize the third dimension, a variety of tensor factorization models exist to factorize the tensor into multiple factors and apply rank reductions --- for a detailed overview the reader is referred to~\cite{cichoki09}.
+Tensors factorizations allow to incorporate more complex models and are therefore useful for applications with more than two dimensions.
+% from zafar
+In audio separation, tensor factorization were originally proposed to address multichannel separation as in~\cite{fitzgerald08, fevotte10, ozerov11}. 
+\par
+Barker and Virtanen~\cite{barker13} were the first to propose a modulation tensor representation for single channel source separation. 
 
-% TODO: add more info about how to form a modulation tensor for AM.
-% the key point is that after the TF transform the magnitude has to be taken to compute the amplitude modulation. Computing the frequency modulation spectrogram is not possble in a simple way. WHY?
 
 % Known modulation
 The core intuition here is that one could observe that different amplitude modulation frequencies on certain frequency bands could be a distinct property of some instruments.
-For example, if we mix together two harmonic signals having a fundamental frequency of 440Hz where one signal has a stationary amplitude modulation of 4~Hz and another one of 10~Hz, these differences are latent in a non-negative time frequency representation such as a time-frequency spectrogram.
+For example, if we mix together two harmonic signals having a fundamental frequency of 440Hz where one signal has a stationary amplitude modulation of 4~Hz and another one of 10~Hz, these differences are latent in a non-negative time frequency representation.
 
-Barker and Virtanen~\cite{barker13} were the first to propose a modulation tensor representation for single channel source separation. 
-This work factorization on the tensor by using the well known PARAFAC/CANDECOMP (CP) decomposition~\cite{cichocki09, kolda09}.\\
+% TODO: By extending both, the representation as well as the factorization model, the results in some kind of end-to-end modulation based model.
 
 
 \subsection{Non-Negative Tensor Factorization}
+
+This work factorization on the tensor by using the well known PARAFAC/CANDECOMP (CP) decomposition~\cite{cichocki09, kolda09}.\\
 
 % TODO:
 % we implemented a custom C++ version of the PARAFAC product.
@@ -174,7 +180,7 @@ Tensor factorization is often not consistent, please see~\cite{kolda09} for a un
   \label{fig:cpd}
 \end{figure}
 \par
-Compared to~\cite{barker13} we choose to generate the modulation tensor in way that is simpler and easier to invert. Barker and Virtanen use a Gammatone filter bank and  rectification to model the characteristics of the human auditory system. We used a two-stage DFT filter bank where the modulation domain is based on  magnitude spectrograms. Although this can give perceptually less optimal results, each step can be directly inverted by using the complex representation. Barker already showed that the NTF based approach gives better results on speech signals. We found that this approach can be used to separate two instrument mixtures by their amplitude modulation characteristics and is therefore ideal for the unison scenario.
+Compared to~\cite{barker13} we choose to generate the modulation tensor in way that is simpler and easier to invert. Barker and Virtanen use a Gammatone filter bank and rectification to model the characteristics of the human auditory system. We used a two-stage DFT filter bank where the modulation domain is based on magnitude STFT. Although this can give perceptually less optimal results, each step can be directly inverted by using the complex representation. Barker already showed that the NTF based approach gives better results on speech signals. We found that this approach can be used to separate two instrument mixtures by their amplitude modulation characteristics and is therefore ideal for the unison scenario.
 
 NTF gives a smoother activation matrix and is able to generate the output with the separated amplitude modulations on each sinusoid. The modulation frequency gain matrix shows the two modulation frequency templates and the DC-component.
 
@@ -192,34 +198,11 @@ NTF gives a smoother activation matrix and is able to generate the output with t
 \label{fig:count}
 \end{figure}
 
-
-% \begin{figure}[H]
-%     \centering
-%     \tiny
-%     \subfloat[Input]{
-%        \includegraphics[width=0.8\columnwidth]{Chapters/05_Separation_Known/figures/Timepdf-crop.png}\hspace{-7mm}
-%     }\hfill
-%     \subfloat[Spectrogram]{
-%        \input{Chapters/05_Separation_Known/figures/AMPlots/STFT.tex}%
-%     }%
-%     \subfloat[Tensor Slice]{
-%        \input{Chapters/05_Separation_Known/figures/AMPlots/Tmod.tex}%
-%     }\hfill
-%
-%     \subfloat[NMF]{
-%      	\input{Chapters/05_Separation_Known/figures/AMPlots/WH.tex}%
-%     }\hfill
-%     \subfloat[Non-Negative Tensor Factorization]{
-%        \input{Chapters/05_Separation_Known/figures/AMPlots/GAS.tex}%
-%     }\hfill
-%     \caption{Example of separating a mixture of two amplitude modulated signals by NMF and Modulation-NTF. \\ \textbf{(a)} Mixture of two sinusoids at $440$ Hz with AM of $4.7$ Hz and $12.6$ Hz (fs=$8$ kHz), \textbf{(b)} STFT (FFT length = 256), \textbf{(c)} Slice of Modulation Tensor (FFT length = 256),  \textbf{(d)} $\mathbf{W} \times \mathbf{H}$ Result of Non-Negative Matrix Factorization ($\beta = 1$) after 100 iterations, \textbf{(e)}  $\mathbf{G} \times \mathbf{A} \times \mathbf{S} $ Result of Non-Negative Tensor Factorization ($\beta = 1$) after 100 iterations,}
-%     \label{fig:am_tensor}
-% \end{figure}
-
 A comparison of the modulation tensor approach in the context of unison separation has been carried out in our work published in~\cite{stoeter14}.
 
 Furthermore in that work, we also compared to the pitch variation informed method, presented in the previous chapter.
 Results indicated that modulation tensor factorization approach work on some instruments mixtures but not generally.
+The overall performance is depicted in~\cite{stoeter14}.
 The reason is that, that it does only consider amplitude modulation even though frequency modulations are the actual source of modulation.
 In the next section we therefore investigated how the complex modulation that consist of both, frequency and amplitude modulation patterns caused by the instrument vibratos, can be utilized.
 
@@ -512,11 +495,11 @@ To illustrate the CFT representation we processed a mixture consisting of two si
 For an evaluation of the method, we selected five musical instruments' samples, all featuring vibrato: violin, cello, tenor sax, English horn, and flute. It is important to note that vibrato techniques differ between instruments: whereas the English horn and the flute only produce a very subtle modulation, the violin and tenor sax have powerful frequency modulations with a higher modulation frequency as well as a higher modulation index. The signals have each been generated by rendering C4 (261.63~Hz) notes in a state-of-the-art software sampler\footnote{\textsc{Vienna Symphonic Library} (\url{https://vsl.co.at})}. All samples last about three seconds. We then generated a combination of ten mixtures of two instruments each, each one generated with a simple SourceA --- SourceB --- (SourceA + SourceB) scheme. Data were encoded in 44.1 kHz / 16 bit.
 For evaluation, we compared separation performance of six different methods, summarized in Table~\ref{tab:methods}:
 \begin{description}[style=unboxed,leftmargin=0cm]
-\item[CFM] For the CFM model, we took an STFT with frames of 1024 samples and a hop-size of 512 samples. The resulting complex spectrogram was then split into a grid of patches of size $(N_a, N_b) = (4, 64)$, each having a half-window overlap in both dimensions.
+\item[CFM] For the CFM model, we took an STFT with frames of 1024 samples and a hop-size of 512 samples. The resulting complex STFT was then split into a grid of patches of size $(N_a, N_b) = (4, 64)$, each having a half-window overlap in both dimensions.
 \item[MOD] We implemented a modified version of~\cite{barker13} where for the sake of comparability, we used a STFT instead of a gammatone filterbank. A DFT length of 1024 and a hop-size of 512 samples were chosen. After taking the magnitude value, a second STFT of size 32 and hop-size 16 samples was computed for each frequency.
-\item[CFMMOD] We selected patch sizes of $(N_a, N_b) = (1, 64)$ and modified the representation so that the magnitude spectrogram was used before computing the 2D-DFT.\@ This permits to compare the advantage of our proposed factorization model~(\ref{eq:NTF_model}) over MOD, when using the same kind of energy-modulation representation in both cases.
-\item[CFMM] For comparing the influence of computing modulations over complex STFT or magnitude spectrograms, we tried our factorization model when the magnitude of the STFT is taken before 2D-DFT, with patches of the same size as for the CFM method.
-\item[NMF] We took a standard NMF based method~\cite{virtanen07}. We highlight that taking a spectrogram with frames of length 1024 would not make a fair comparison, because the CFM model actually results in a larger frequency resolution. Therefore a comparable NMF is based on an STFT of DFT-length 32768.
+\item[CFMMOD] We selected patch sizes of $(N_a, N_b) = (1, 64)$ and modified the representation so that the magnitude was applied before computing the 2D-DFT.\@ This permits to compare the advantage of our proposed factorization model~(\ref{eq:NTF_model}) over MOD, when using the same kind of energy-modulation representation in both cases.
+\item[CFMM] For comparing the influence of computing modulations over complex STFT or magnitude STFT, we tried our factorization model when the magnitude of the STFT is taken before 2D-DFT, with patches of the same size as for the CFM method.
+\item[NMF] We took a standard NMF based method~\cite{virtanen07}. We highlight that taking a STFT with frames of length 1024 would not make a fair comparison, because the CFM model actually results in a larger frequency resolution. Therefore a comparable NMF is based on an STFT of DFT-length 32768.
 \item[HR-NMF] See description in~\cite{magron15a}.
 \end{description}
 All factorizations ran for 100 iterations and were repeated five times. We chose $j=(2\ldots6)$ components for each factorization. For $j > 2$ we used oracle clustering to show the upper limit of SDR which can be achieved.
@@ -566,7 +549,7 @@ Most methods mainly differ in the architecture picked for the network, its input
   % [Deep learning methods.
   %   the mixture is fed into a pre-processing step, that outputs the spectrogram. That spectrogram is input to a DNN block, which has an optional split in two parts (lead/accompaniment separate or joint). Then, we have two options for the output: either we output the mask directly, or the spectrograms to be used for building a ratio mask.
   % ]
-  \caption{General architecture for methods exploiting deep learning. The network inputs the mixture and outputs either the sources spectrograms or a TF mask. Methods usually differ in their choice for a network architecture and the way it is learned using the training data.}
+  \caption{General architecture for methods exploiting deep learning. The network inputs the mixture and outputs either the sources magnitude STFT or a TF mask. Methods usually differ in their choice for a network architecture and the way it is learned using the training data.}
   \label{fig:methods_dnn}
 \end{figure}
 

@@ -1019,7 +1019,7 @@ In this section, we focus on the problem of interpreting the strategy undergone 
 \subsection{Saliency Maps}
 We first conducted a visual analysis based on salience map representations~\cite{simonyan13}.
 % taken from https://github.com/Lasagne/Recipes/blob/master/examples/Saliency%20Maps%20and%20Guided%20Backpropagation.ipynb
-In the deep learning context, saliency maps are visualizations that are able to show which specific input elements a neural network used for a particular prediction. This allows an object classifier to be used for object localization or in the case of audio spectrograms, which time-frequency bins are most relevant.
+In the deep learning context, saliency maps are visualizations that are able to show which specific input elements a neural network used for a particular prediction. This allows an object classifier to be used for object localization or in the case of audio, spectrograms, which time-frequency bins are most relevant.
 The common idea is to compute the gradient of the model's prediction with respect to the input, holding the weights fixed. This determines which input elements need to be changed the least to affect the prediction the most.
 \par
 In this work, we used guided backpropagation, first introduced in~\cite{Springenberg14} and successfully deployed in~\cite{schluter16} to compute a saliency map for singing voice detection.
