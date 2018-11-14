@@ -26,6 +26,7 @@ $$
 * Make sure that modulation are also used to analyze time frequency
 * why counting
 
+* Separation has relevancy for audio coding~\cite{herre12}
 ## Random shit
 
 * add liutkus15c reference for wiener filtering
@@ -43,6 +44,7 @@ $$
 
 * [ ] Release WICE dataset
 * [ ] Commonfate: parafac2 fast release von Jeremy
+* [ ] noch mal den Titel checken, deutsche Variante, vielleicht doch mehr in Richtung Modulation?
 
 # General status
 
@@ -172,15 +174,12 @@ listeners tend to hear one stream at first before subsequently resolving more. I
 No, but From Chollet
 > The same is true of backprop in deep learning -- knowing how to code up backprop by hand gives you no useful knowledge wrt deep learning, and inversely, developing powerful mental models for deep learning does not in any way require knowing the algorithmic details of backprop
 
-# Random s*** for my presentation
-
-* [x] example that works quite nice... http://sisec17.audiolabs-erlangen.de/#/listen/20/STO1?mode=embed
-
-# * add sampling reference paper from ismir 2018 tutorial slides
+# * add sampling reference paper from ISMIR 2018 tutorial slides
 
 # Outlook
 
 BEYOND EQUAL-LENGTH SNIPPETS: HOW LONG IS SUFFICIENT TO RECOGNIZE AN AUDIO SCENE? https://arxiv.org/pdf/1811.01095.pdf
+
 
 # Defense 
 
@@ -196,3 +195,7 @@ BEYOND EQUAL-LENGTH SNIPPETS: HOW LONG IS SUFFICIENT TO RECOGNIZE AN AUDIO SCENE
 
 - Guided Backpropagation
 - http://blog.qure.ai/notes/deep-learning-visualization-gradient-based-methods
+
+# Random s*** for my presentation
+
+* [x] example that works quite nice... http://sisec17.audiolabs-erlangen.de/#/listen/20/STO1?mode=embed
