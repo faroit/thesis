@@ -1,10 +1,5 @@
 # Introduction/Motivation
 
-
-$$
-d _ { \beta } ( x | y ) \stackrel { \mathrm { def } } { = } \left\{ \begin{array} { c } { \frac { 1 } { \beta ( \beta - 1 ) } \left( x ^ { \beta } + ( \beta - 1 ) y ^ { \beta } - \beta x y ^ { \beta - 1 } \right) \quad \beta \in \mathbb { R } \backslash \{ 0,1 \} } \\ { x \log \frac { x } { y } - x + y } & { \beta = 1 } \\ { \frac { x } { y } - \log \frac { x } { y } - 1 } & { \beta = 0 } \end{array} \right.
-$$
-
 $$
 x_{ft} \approx \sum_{k=1}^{K}w_{fk}h_{tk}
 $$
@@ -13,17 +8,15 @@ for  $f = 1 , \ldots , F , t = 1 , \ldots , T , k = 1 , \ldots , K$
 
 sometimes also written (and implemented) as 
 
-$$
-\mathbf { X } _ { k } \approx \mathbf { A D } ^ { ( k ) } \mathbf { B } ^ { \top } , \quad \text { where } \quad \mathbf { D } ^ { ( k ) } \equiv \operatorname { diag } \left( \mathbf { c } _ { k : } \right) \quad \text { for } \quad k = 1 , \ldots , K
-$$
 
-### CFM
+### Generalized Wiener Filter Reconstruction
 
 $$
-x_{abft} \approx \sum_{j=1}^{K}a_{abfk}h_{tk}
+\begin{array} { c } { \text { which are applied to the complex mixture spectrogram } \mathbf { X } ^ { * } \text { with elementwise } } \\ { \text { multiplication, so produce the speech spectrogram } \mathbf { S } ^ { * } } \\ { \mathbf { S } ^ { * } = \mathbf { X } ^ { * } \otimes \frac { \mathbf { Y } _ { s } } { \mathbf { Y } _ { s } + \mathbf { Y } _ { n } } } \end{array}
 $$
 
-for  $a = 1 , \ldots , N_a, b = 1 , \ldots , N_b, f = 1 , \ldots , N_f , t = 1 , \ldots , N_t , k = 1 , \ldots , K$
+### DNN Basics
+
 
 
 # Add research questions

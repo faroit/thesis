@@ -336,11 +336,11 @@ This why many proposed methods rely on additional information such as in~\cite{l
 Vocal Accompaniment separation has specific issues and assumptions when compared to other separation scenarios like speech.
 Many music separation methods often rely on knowledge about the mixing process as made in Table~\ref{tab:mixing_models}.
 While there exist many source separation methods that aim to extract the actual raw audio recording (Step 1 in  Table~\ref{tab:mixing_models}), often it is sufficient to extract the source images from the raw mixture.
-In live recording this would result inverting the process of convolution as well.
-In fact, separation of convoluted mixtures is very active field in source separation described in~\cite{pedersen07}.
-In the context of music a separation, however, this becomes less relevant as today's recording and studio mixing environment is mostly digital.
-This means that the last step in creating music mixtures, as described earlier, results in a linear mixture.
-While the source images can yield from a mixing process undergoing the various assumptions, for the case of a mixture of source images, we consider usually only consider linear mixing in this thesis.
+In a live recording, this would result inverting the process of convolution as well.
+Separation of convoluted mixtures is a very active field in source separation described in~\cite{pedersen07}.
+In the context of music a separation, however, this becomes less relevant as today's recording and studio mixing environment are mostly digital.
+Here, the last step in creating music mixtures, as described earlier, is a linear mix.
+While the source images can yield from a mixing process undergoing the various assumptions, for the case of a mixture of source images, we usually consider only consider linear mixing in this thesis.
 For a more detailed description of this scenario and applications of source image extraction, see~\cite{sturmel12}.
 \par
 Another specific about music separation is that applications typical are restricted to a well defined set of musical sources.
