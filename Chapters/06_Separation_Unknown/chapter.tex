@@ -80,7 +80,7 @@ Both share the same carrier frequency but have different amplitude modulation fr
 I choose a factorization into $K=2$ components. 
 From the activation components one can see that NMF is unable to separate the two signals sufficiently.
 % TODO
-\begin{figure}[h]
+\begin{figure}[H]
 \centering
 \subcaptionbox{Time Domain}%
 [1\textwidth]{\includegraphics[width=0.8\textwidth]{Chapters/05_Separation_Known/figures/Timepdf-crop.pdf}}%
@@ -114,13 +114,6 @@ The \emph{modulation spectrogram} has already gathered much attention in speech 
 
 \marginpar{Parts of this subsection is also based on the work~\cite{stoeter14}.}
 
-\begin{figure}
-  \centering
-  \includegraphics[width=0.8\textwidth]{Chapters/06_Separation_Unknown/figures/cpd.pdf}
-  \caption{NMF }
-  \label{fig:cpd}
-\end{figure}
-
 % shortly introduce some tensor factorizations
 To utilize the third dimension, a variety of tensor factorization models exist to factorize the tensor into multiple factors and apply rank reductions.
 Tensors factorizations allow to incorporate more complex models and are therefore useful for applications with more than two dimensions.
@@ -141,10 +134,10 @@ The product of this n-way factorization is often referred to as \emph{PARAFAC}~\
 \end{equation}
 
 as depicted in Figure~\ref{fig:cpd}.
-\begin{figure}[h]
+\begin{figure}[!h]
   \centering
   \includegraphics[width=0.8\textwidth]{Chapters/06_Separation_Unknown/figures/cpd.pdf}
-  \caption{PARAFAC Decomposition in an example for a three-dimensional tensor \(mathbf{V}\) into three rank 1 vectors.}
+  \caption{PARAFAC Decomposition in an example for a three-dimensional tensor \(\mV\) into three rank 1 vectors.}
   \label{fig:cpd}
 \end{figure}
 This notation is very commonly used in many tensor factorization applications~\cite{kolda09}.
@@ -170,7 +163,7 @@ These differences now turn out to be latent in a non-negative modulation tensor 
 In contrast to NMF, Figure~\ref{fig:am_ntf} shows valid factorization of unison signal using NTF.
 It gives a smoother activation matrix and is able to generate the output with the separated amplitude modulations on each sinusoid. The modulation frequency gain matrix shows the two modulation frequency templates and the DC-component.
 
-\begin{figure}[h]
+\begin{figure}[!h]
 \centering
 % \subcaptionbox{Time Domain}%
 % [1\textwidth]{\includegraphics[width=0.8\textwidth]{Chapters/05_Separation_Known/figures/Timepdf-crop.pdf}}%
@@ -385,13 +378,12 @@ Then, $\vh$ is an activation vector that indicates the strength
 of source on the patches located at temporal position~$t$.
 The factorization model is depicted in Figure~\ref{fig:cfm}
 
-\begin{figure}[h!]
+\begin{figure}[!htbp]
 \centering
 \includegraphics[width=0.66\columnwidth]{Chapters/06_Separation_Unknown/figures/cfm.pdf}
-\caption{Common Fate Model.}
+\caption{Visualization of the Common Fate Model factorization model.}
 \label{fig:cfm}
 \end{figure}
-
 
 % TODO: we also experiment with a, b * f * t with worse results. This means that the modulation tensor is not frequency independent.
 
@@ -410,8 +402,7 @@ and which includes Euclidean, Kullback-Leibler and Itakura-Saito as
 special cases~\cite{fitzgerald08a}. As usual in such nonnegative models,
 each parameter is updated in turn, while the others are kept fixed.
 We provide the multiplicative updates in Algorithm~\ref{alg:Fitting-NTF}.
-After a few iterations, the parameters can be used in~\eqref{eq:alpha_wiener} to separate
-the sources.
+After a few iterations, the parameters can be used to separate the sources using the Wiener filter as described in~\cite{liutkus15}.
 
 \begin{algorithm}
 With $v=\left|x\right|$ and always using the latest
@@ -484,8 +475,6 @@ We ran the performance evaluation by using BSSeval~\cite{vincent06}. The results
 Ratio (SDR), Signal to Interference Ratio (SIR), and Signal to Artifacts Ration (SAR) are depicted in Figure~\ref{fig:boxplot_overall}. Results indicate that the CFM model performs well in all measures. However, in terms of SIR the results of HR-NMF are better than CFM method. The results for CFMMOD indicate the positive influence of the CFM factorization compared to~\cite{barker13}.
 The results of CFMM indicate that the complex CFT lead to better results. NMF did perform surprisingly well, which may only hold for our test set, where each source is active for a long period. This results in a cyclic stationary vibrato, revealing spectral side lobes at such a high resolution. With more than one component per source, the results of CFM do improve, but it can be seen that more than two components ($k=4$) will not increase the SDR values. The separation results and a full Python implementation of the CFM algorithm can be found on the companion website for this paper\footnote{\url{github.com/aliutkus/commonfate}}.
 
-To understand the influence of the underlying matrix or tensor representation we additionally computed a normalized tensor correlation for each of the methods before before applying the factorization. Therefore for each source we compute the sum of the Hadamard product and normalize the output to the it's energy. The mean results of this correlation are shown in table~\ref{tab:correlation}.
-
 \begin{figure}[ht!]
 \centering
 		\includegraphics[width=0.8\textwidth]{Chapters/06_Separation_Unknown/figures/cfm_boxplot.pdf}
@@ -500,17 +489,14 @@ To understand the influence of the underlying matrix or tensor representation we
 \label{fig:iterations}
 \end{figure}
 
-% TODO: move conclusion somewhere else
-In this work we presented a method to exploit common modulation textures for source separation. A transformation based on a complex tensor representation computed from patches of the STFT has been introduced. We then showed how these patches are factorized by the proposed \emph{Common Fate Model}, which is derived from the idea of humans perceiving common modulation over time as one source. Our results on unisonous musical instruments indicate that this method can perform well for this scenario. The CFM model could also be successfully used in other scenarios, such as speech separation.
-
 \section{Common Fate Model for Lead Accompaniment Separation using Deep Neural Network}
 
-\marginpar{This section is original work being done as part of the \emph{STO1} and \emph{STO2} submission for the SiSEC 2016~\cite{sisec16}.}
+\marginpar{This section is original work being done as part of the \emph{STO1} and \emph{STO2} submission for the SiSEC 2016~\cite{sisec16}. Part of the literature overview is take from~\cite{rafii}.}
 
 In the previous section, we showed, that the common fate model is suitable to separate highly overlapped signals based on their spatial-temporal modulation texture.
-In this section I show how to extend this work for the application of lead  and accompaniment separation.
-This scenario is significantly more complex than the separation of single instrument notes, hence, a separation model is neede that is flexible enough to handle many of the critical edge cases which make music separation challenging.
-With recent success of machine learning models, it, however, became apparent that an unsupervised model such as NTF or CFM is not flexible enough to enforce the significant amount of domain knowledge to improve performance.
+In this section I show how to extend this work for the application of lead and accompaniment separation.
+This scenario is significantly more complex than the separation of single instrument notes, hence the separation model needs to be flexible enough to handle many of the critical edge cases which make music separation challenging.
+With recent success of machine learning models, it, however, became apparent that an unsupervised model such as NTF or CFM may not flexible enough to enforce the significant amount of domain knowledge to improve performance.
 % from zafar
 Taking advantage of the recent availability of sufficiently large databases of isolated vocals along with their accompaniment, several researchers investigated the use of machine learning methods to directly estimate a mapping between the mixture and the sources.
 There already some works based on end-to-end separation methods, processing the raw waveform~\cite{venkataramani17}.
@@ -546,11 +532,11 @@ This method can be described as a variant of a stacked denoising autoencoder~\ci
 \par
 I decided to deploy model of Uhlich~\cite{uhlich15} to evaluate the separation quality.
 The aim of this work was not to exactly reproduce the results of~\cite{uhlich15}.
-Instead, the objective was to evaluate one main research questions: would an DNN based model benefit from the common fate representation which is able to capture more of the modulation texture?
-For the reimplementation of the model, I using the Keras~\cite{chollet15} deep learning framework to systematically assess the input-and output representation of the system.
+Instead, the objective was to evaluate one main research questions: does a DNN based model benefit from the common fate representation being able to better capture the modulation texture?
+For the implementation of the model, I using the Keras~\cite{chollet15} deep learning framework to systematically assess the input-and output representation of the system.
 
 \par
-The network is a three layer FNN where each of the hidden layer has the same number of hidden nodes as the targeted output representation.
+The network, as proposed in~\cite{uhlich15} is a three layer fully connected network, where each of the hidden layer has the same number of hidden nodes as the targeted output representation.
 The architecture is depicted in Figure~\ref{fig:cft_dnn}.
 
 \begin{figure}[ht!]
@@ -563,8 +549,8 @@ The architecture is depicted in Figure~\ref{fig:cft_dnn}.
 \subsection{Inputs and Outputs}
 
 FNN networks can hardly deal with temporal structure of succeeding samples (here: frames).
-Also any two-dimenionaly matrix is reshaped to a supervector to be processed by the FNN.
-This makes it difficult to learn structure of neighbouring time frequency bins. However this drawback is compensated by the large number of parameters in an FNN layer.
+Also any two-dimensionality matrix is reshaped to a super vector to be processed by the FNN.
+This makes it difficult to learn structure of neighboring time frequency bins. However this drawback is compensated by the large number of parameters in an FNN layer.
 
 Since the the STFT, GFT and CFT are lapped transforms different scenarios for the input and output representation of the FNN can be envisioned:
 
@@ -589,7 +575,7 @@ We then form input and output samples from these tracks, depending on the chosen
 To form a single sample as input for the FNN, we first compute the input representation of an audio track from the DSD100 set and then create samples by randomly sampling without replacement from these tracks.
 The actual training has been done using mini-batches of size 32.
 Each architecture is trained using the ADAM optimizer~\cite{kingma14} (learning rate: \(1 \cdot 10^{-3}\), \(\beta_1=0.9\), \(\beta_2=0.999\), \(\epsilon=1 \cdot 10^{-8}\))
-The model was trained for a fixed number of 30 epochs and, in contrast to~\cite{uhlich15}, greedy layerwise pretraining was not applied.
+The model was trained for a fixed number of 30 epochs and, in contrast to~\cite{uhlich15}, greedy layerwise pre-training was not applied.
 
 \subsection{Results}
 
@@ -600,7 +586,7 @@ The model was trained for a fixed number of 30 epochs and, in contrast to~\cite{
 \label{fig:deep_cft_boxplots}
 \end{figure}
 
-For evaluation, the bsseval metrics of all representations for the DSD100 test set were computed.
+For evaluation, the BSSEval metrics of all representations for the DSD100 test set were computed.
 The results are depicted in Figure~\ref{fig:deep_cft_boxplots}.
 They indicate that the common fate representation is indeed improving the baseline \emph{STFT-STFT} results.
 Overall, we can report a mean difference of 0.4~dB for CFT-CFT and 0.5dB for GFT-GFT, compared the \emph{STFT-STFT} representation.
@@ -611,7 +597,7 @@ However, it is worth mentioning that both, the GFT and the CFT representation le
 
 \marginpar{Parts of this subsection has been published for the SiSEC 2016~\cite{sisec16} which was coorganized by me.}
 
-The results result have beend submitted to the 2016 SiSEC source separation challenge.
+The results result have been submitted to the 2016 SiSEC source separation challenge.
 Therefore I am able to relate my work in comparison to $22$ other source separation methods, all evaluated on the same test data, as part of the task for separating professionally-produced music recordings at SiSEC 2016.
 Table~\ref{tab:sisec_systems} lists the participating systems.
 \begin{table*}[htbp]
@@ -666,7 +652,7 @@ As discussed in Section~\ref{sec:datadriven-approaches}, the availability of lea
 As mentioned above, a striking fact we see in Figure~\ref{fig:eval} is that the overall performance of data-driven DNN methods is the highest. This shows that exploiting learning data does help separation greatly compared to only relying on \textit{a priori} assumptions such as the harmonicity or redundancy. Additionally, dynamic models such as CNN or LSTM appear more adapted to music than FNN. These good performances in audio source separation go in line with the recent success of DNNs in fields as varied as computer vision, speech recognition, and natural language processing \cite{lecun15}.
 
 %but it's clear that they benefit from smart ideas
-However, the picture may be seen to be more subtle than simply black-box DNN systems beating all other approaches. For instance, exploiting multichannel probabilistic models, as discussed in Section~\ref{sec:multichannel}, leads to the NUG and UHL2-3 methods, that significantly outperform the DNN methods ignoring stereo information. In the same vein, we expect other specific assumptions and musicological ideas to be exploited for further improving the quality of the separation.
+However, the picture may be seen to be more subtle than simply black-box DNN systems beating all other approaches. For instance, exploiting multichannel probabilistic models, leads to the NUG and UHL2-3 methods, that significantly outperform the DNN methods ignoring stereo information. In the same vein, we expect other specific assumptions and musicological ideas to be exploited for further improving the quality of the separation.
 
 %weakness of metrics
 One particular feature of this evaluation is that it also shows obvious weaknesses in the objective metrics. For instance, the GRA method behaves significantly worse than any other methods. However, when listening to the separated signals, this does not seem deserved. All in all, designing new and convenient metrics that better match perception and that are specifically built for music on large datasets clearly appears as a desirable milestone.
@@ -697,6 +683,8 @@ TODO
 \end{figure}
 
 \section{Chapter Summary and Discussion}
+
+In this work we presented a method to exploit common modulation textures for source separation. A transformation based on a complex tensor representation computed from patches of the STFT has been introduced. We then showed how these patches are factorized by the proposed \emph{Common Fate Model}, which is derived from the idea of humans perceiving common modulation over time as one source. Our results on unisonous musical instruments indicate that this method can perform well for this scenario. The CFM model could also be successfully used in other scenarios, such as speech separation.
 
 \begin{itemize}
   \item DNNs: Super-Frames are computationaly too complex and a the same time not flexible enough regarding processing of variable length input. This can be solved by recurrent models. 
