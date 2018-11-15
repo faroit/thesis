@@ -607,7 +607,7 @@ However, it is worth mentioning that both, the GFT and the CFT representation le
 \subsection{Submission to SiSEC 2016}
 \label{ssec:performance}
 
-\marginpar{Parts of this subsection has been published for the SiSEC 2016~\cite{sisec16} which was coorganized by me.}
+\marginpar{Parts of this subsection has been published in the SiSEC anlysis section of~\cite{rafii} which was coorganized by the author of this thesis.}
 
 The results result have been submitted to the 2016 SiSEC source separation challenge.
 Therefore I am able to relate my work in comparison to $22$ other source separation methods, all evaluated on the same test data, as part of the task for separating professionally-produced music recordings at SiSEC 2016.
@@ -640,7 +640,7 @@ Table~\ref{tab:sisec_systems} lists the participating systems.
 \end{table*}
 
 %announcing the results and the webpage
-The objective scores for these methods were obtained using BSS Eval and are given in Figure~\ref{fig:eval}.
+The objective scores for my proposed methods were obtained using BSS Eval and are given in Figure~\ref{fig:eval}.
 
 \begin{figure*}[htbp]
 	\includegraphics[width=\textwidth]{Chapters/06_Separation_Unknown/figures/evaluation.pdf}
@@ -648,32 +648,28 @@ The objective scores for these methods were obtained using BSS Eval and are give
 	\label{fig:eval}
 \end{figure*}
 
-%DNN are definitely performing awesomely
-As mentioned above, a striking fact we see in Figure~\ref{fig:eval} is that the overall performance of data-driven DNN methods is the highest. This shows that exploiting learning data does help separation greatly compared to only relying on \textit{a priori} assumptions such as the harmonicity or redundancy. Additionally, dynamic models such as CNN or LSTM appear more adapted to music than FNN. These good performances in audio source separation go in line with the recent success of DNNs in fields as varied as computer vision, speech recognition, and natural language processing \cite{lecun15}.
-
-%but it's clear that they benefit from smart ideas
-However, the picture may be seen to be more subtle than simply black-box DNN systems beating all other approaches. For instance, exploiting multichannel probabilistic models, leads to the NUG and UHL2-3 methods, that significantly outperform the DNN methods ignoring stereo information. In the same vein, we expect other specific assumptions and musicological ideas to be exploited for further improving the quality of the separation.
-
-%weakness of metrics
-% One particular feature of this evaluation is that it also shows obvious weaknesses in the objective metrics. For instance, the GRA method behaves significantly worse than any other methods. However, when listening to the separated signals, this does not seem deserved. All in all, designing new and convenient metrics that better match perception and that are specifically built for music on large datasets clearly appears as a desirable milestone.
-
+% Maybe want to rewrite as it has been stolen from zafar
+The first observation one can see in Figure~\ref{fig:eval} the difference in performance between data-driven methods and ``classical'' unsupervised methods. 
+Further it shows that exploiting learning data does help separation greatly compared to only relying on \textit{a priori} assumptions such as the harmonicity or redundancy. Additionally, dynamic models such as LSTM from UHL2-3 appear more adapted to music than FNN. 
+These good performances in audio source separation go in line with the recent success of DNNs in fields as varied as computer vision, speech recognition, and natural language processing \cite{lecun15}.
+\par
+Relating our results of STO1 and STO2 to the other methods, we observe that our results performed only slightly below the state-of-the-art performance of UHL and NUG.
+Furthermore, the difference between test and validation dataset indicate, that our CFT DNN model even has better generalization as the one in NUG. 
+While our STO model share the same network architecture as UHL1, we were unable to reproduce the results, as we are approximately 1~dB below UHL1.
+One reason is in the difference in initialization of the model as well as the fact that NUG and UHL models exploit multichannel information. 
 %IBM much better: room for improvement
-In any case, the performance achieved by a totally informed filtering method such as IBM is significantly higher than that of any submitted method in this evaluation. This means that lead and accompaniment separation has room for much improvement, and that the topic is bound to witness many breakthroughs still. 
+\par
+In SiSEC 2016, the separation performance achieved by a totally informed filtering method such as IBM, is significantly higher than that of any submitted method in this evaluation. 
+This means that lead and accompaniment separation has room for much improvement, and that the topic is bound to witness many breakthroughs still. 
 This is even more true considering that IBM is not the best upper bound for separation performance: other filtering methods such as \textit{ideal ratio mask}~\cite{liutkus15c} or multichannel Wiener filter~\cite{duong10} may be considered as references.
 \par
-Relating our results of STO1 and STO2 to the other methods, we observe that our results are comparable to the state-of-the-art performance of UHL and NUG.
-Also the difference between test and validation dataset indicate, that our CFT has better generalization than NUG.
-
-For more details about the results and for listening to the estimates, we refer the reader to the dedicated interactive website\footnote{\url{http://www.sisec17.audiolabs-erlangen.de}}.
-
-Modern JavaScript technologies like the Web Audio API make it possible to interactively assess source separation results in the browser.
-For the first time, interested researchers are able to listen to over 10000 stimuli from all participating systems.
-For each track, we provide the separation results as well as the objective BSSeval scores.
+For more details and the ability for playback of the estimates, I refer to the dedicated interactive website that I built as part of my organizational help for SiSEC\footnote{\url{http://www.sisec17.audiolabs-erlangen.de}}.
+In fact, for the first time, interested researchers are now able to listen to over 10000 stimuli from all participating systems.
+This was made possible through modern JavaScript technologies like the Web Audio API to interactively assess source separation results in the browser.
+For each track, separation results are provided as well as the objective BSSeval scores, all of the data is available via the repository\footnote{\url{https://github.com/faroit/sisec-mus-results}}.
 Figure~\ref{fig:sisec_website} depicts a screenshot of the website.
-The objective scores are depicted as interactive matrix where users are able to sort the results for each track an each system interactively by the the source of interest.
-Clicking on one ... an interactive player is opened that allows.
-TODO
-
+The objective scores are depicted as an interactive matrix where users are able to sort the results for each track an each system interactively by the the source of interest.
+Clicking on one rectangles in the heatmap opens the interactive player that allows to simultaneously playback the separated sources including changing the volume of each source.
 
 \begin{figure}[t]
 \centering
@@ -688,7 +684,7 @@ TODO
 In this work we presented a method to exploit common modulation textures for source separation. A transformation based on a complex tensor representation computed from patches of the STFT has been introduced. We then showed how these patches are factorized by the proposed \emph{Common Fate Model}, which is derived from the idea of humans perceiving common modulation over time as one source. Our results on unisonous musical instruments indicate that this method can perform well for this scenario. The CFM model could also be successfully used in other scenarios, such as speech separation.
 
 \begin{itemize}
-  \item DNNs: Super-Frames are computationaly too complex and a the same time not flexible enough regarding processing of variable length input. This can be solved by recurrent models. 
+  \item DNNs: Super-Frames are computationally too complex and a the same time not flexible enough regarding processing of variable length input. This can be solved by recurrent models. 
   % TODO add reference to show equivalence between NMF/NTF and DNNs
   \item I evaluated the common transform in the context of deep neural network based separation.
   Todays phase aware DNNs (cite complex dnn, phasenet), are a line of research.
