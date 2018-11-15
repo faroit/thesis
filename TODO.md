@@ -59,6 +59,7 @@ $$
 * [ ] appendix, filter plots from countnet
 * [X] check the wording for magnitude spectrogram (check mainards book)
 * [ ] add step-count plot
+* [ ] Figures durchgehen
 
 # Fragen an Antoine
 
