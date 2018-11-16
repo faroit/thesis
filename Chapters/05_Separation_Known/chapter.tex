@@ -184,23 +184,20 @@ The results were evaluated by using commonly used evaluation measures provided b
 The mean values of the PEASS evaluation are provided in Table~\ref{tab:results}. It can be seen that the SDR values give a different tendency than the OPS score, showing that the differences between both measures are substantial. Since unison mixtures are even very challenging for humans to segregate we chose to focus on the psycho-acoustically weighted performance measures only. The results show a slightly better overall performance for the PVI-NMF. A more fine grained overview from the OPS results experiment is presented in Figure~\ref{tab:resultsmatrix}.
 The results have also been evaluated and confirmed subjectively by informal listening. Additionally we provide selected stimuli online on an accompanying webpage \footnote{\url{http://www.audiolabs-erlangen.de/resources/2014-DAFx-Unison/}}. In general the PEASS scores give a good indication of quality. However the artifacts that are introduced by the standard NMF synthesis seem to be not well reflected. One possible reason is that PEASS toolbox has not been tested on artifacts from unison mixtures. \\
 
-Our paper proposes a new source separation scenario for instruments played in unison. It highlights the time-varying aspects of the signal sources like amplitude or frequency modulations. By addressing these aspects, the separation quality for non-unison mixtures can generally be improved, too.
-Furthermore we present two methods to decompose those mixtures based on differences in the amplitude or frequency modulation of the sources. One is using a method already published based on a modulation tensor factorization. The other is a novel method that uses an estimate of the pitch variation of the two input sources to warp the mixture. Within the warped domain the frequency modulation of the desired source is removed so that the sources can be separated more easily from the mixture. The results of 45 mixtures have been evaluated by using the PEASS toolbox. The scores indicate an improvement of about 2 OPS points in favor of the pitch variation informed NMF compared to the standard NMF.
-
 \begin{table}
 \begin{center}
 \small
 \begin{tabular}{ r | r r }
-  Algorithm & NMF & PVI-NMF \\
+  Metric & NMF & PVI-NMF \\
+  \hline
+  SDR & \textbf{2.96} & 2.54 \\
+  SIR & \textbf{2.31} & 1.80 \\
+  SAR & 22.87 & \textbf{23.35} \\
   \hline
   OPS & 15.76 & \textbf{17.64}\\
   TPS & 30.17 & \textbf{32.80}\\
   IPS & 26.07 & \textbf{27.03}\\
   APS & 46.14 & \textbf{54.74}\\
-  \hline
-  SDRi & \textbf{2.96} & 2.54 \\
-  SIRi & \textbf{2.31} & 1.80 \\
-  SARi & 22.87 & \textbf{23.35} \\
 \end{tabular}
 \end{center}
   \caption{Results from Evaluation with PEASS 2.0 Toolbox \cite{emiya11}. Best performing algorithm is marked bold.}
@@ -617,3 +614,19 @@ Furthermore, even if the musical accompaniment will exhibit more redundancy, the
 % end zafar
 
 Future work could include a robust multi pitch variation estimator for musical instruments. Salamon and Gomez~\cite{salamon12} describe the current state of the art of f0 estimation. Some approaches use source separation to estimate multiple f0 pitch tracks. Therefore our approach shows that a robust multi pitch f0 estimate can also help to improve source separation. In the future an iterative multi-step procedure could lead to better results in both problem domains.\par
+
+% from DAFX conclusion
+
+This paper proposes a new source separation scenario for instruments played in unison. It highlights the time-varying aspects of the signal sources like amplitude or frequency modulations. By addressing these aspects, the separation quality for non-unison mixtures can generally be improved, too.
+Furthermore we present two methods to decompose those mixtures based on differences in the amplitude or frequency modulation of the sources. One is using a method already published based on a modulation tensor factorization. The other is a novel method that uses an estimate of the pitch variation of the two input sources to warp the mixture. Within the warped domain the frequency modulation of the desired source is removed so that the sources can be separated more easily from the mixture. The results of 45 mixtures have been evaluated by using the PEASS toolbox. The scores indicate an improvement in favor of the pitch variation informed NMF compared to the standard NMF.
+
+* Warping based separation is simple and can work surprisingly well on some signals but is generally of limited use.
+However, the presented concepts such as warping are transferrable...
+
+* Fundamental concepts stay the same for ML models. 
+* End-to-End source separation does exist, but 
+* DNN based (superior) melody estimation
+* Modulations CTC (warped) loss functions.
+* Applications for Style transfer (applying modulation characteristics on other voices or instruments)
+* Generative Models for modulations (generate artificial vibrato)
+

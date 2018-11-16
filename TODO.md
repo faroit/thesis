@@ -59,7 +59,7 @@ $$
 * [ ] appendix, filter plots from countnet
 * [X] check the wording for magnitude spectrogram (check mainards book)
 * [ ] add step-count plot
-* [ ] Figures durchgehen
+* [ ] Figures durch gehen
 
 # Fragen an Antoine
 
@@ -67,7 +67,8 @@ $$
 * For the linear mixing case, the process can be transferred to the frequency domain as the Fourier transform is a linear operator.
 % However, since we are normally dealing with the non-negative magnitude representation this is only an approximation~\cite{klapuri06book}.
 * Aim, Objective?
-* Why doesn't shift-invariant NMF solve the vibrato case? 
+* Why doesn't shift-invariant NMF solve the vibrato case? or does it?
+* Do you think I should add the SiSEC 2018 paper?
 
 # Aspects of Concurrency
 
