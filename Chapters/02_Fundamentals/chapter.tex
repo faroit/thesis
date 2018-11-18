@@ -347,28 +347,40 @@ Another specific about music separation is that applications typical are restric
 These restrictions are typically made because not for all kind of music separation scenarios, data sets are available, which would make evaluation as well as training machine learning models difficult.
 In music separation, by far the most popular task is to extract the vocals and the background of the music.
 This allows for example automatic karaoke recordings.
-An extensive overview of music separation methods can be found in~\cite{rafii18} which I co-authored.
+An extensive overview of music separation methods can be found in~\cite{rafii18}.
 Even though the overview is focused on vocal accompaniment separation, most approaches can be generalized to other sources.
 
-\subsection{Source Count Estimation}
-% TODO: REwrite
-% copy from icassp paper maybe
-The number of sources is a simple but very important information for source separation and many source separation 
-systems rely on this information. 
-% copied from my icassp 2018 paper
-In a “cocktail-party” scenario with many concurrent speakers, a typical assumption is that the number of concurrent speakers is known.
-In practice, almost all system assume the number of sources to be known even when they are aiming for a blind separation system.
-Unfortunately, in real world applications, information about the actual number of concurrent speakers
-is often not available.
-%from source counting paper
-For music signals, this task is especially challenging because the definition of a musical source can not clearly be given.
-In some scenarios, like popular western music, the sources to separate are grouped into Melody + Bass + Drums and a residual signal. 
-Constraining the system to such a scenario allows the results to be evaluated even if the set of sources being separated is incomplete. 
-Constrained systems like these are also sufficient for real-world applications such as the eminent karaoke scenario. Limiting the number of desired sources helps not only to improve the performance of the algorithms but is also related to the fact that the number of sources humans can perceive is limited, too. 
-Although a threshold has not been systematically addressed so far, a variety of experiments have been carried out. 
-Huron found \cite{huron89} that the number of voices humans can correctly identify, is up to three.
-While voices in music~\footnote{Explain a voice here} are not the same as the number of sources, the results of Huron showed a great correlation to the work carried out by Kashino in~\cite{kashino96} and Kawashima in~\cite{kawashima15}.
-They found in extensive experiments that participants were able to correctly estimate up to three simultaneously active speakers without using any spatial cues.
+\subsection{Estimating the Number of Sources}
+
+% TODO: remove `speaker' from figure
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.8\columnwidth]{Chapters/08_Analysis_CountNet/figures/teaser.pdf}
+  \caption{Illustration of three concurrent sources (A, B, C) and their respective activity. Bottom plot shows the mixture (input), the number of concurrently active sources and its maximum \(k\).}%
+  \label{fig:teaser}%
+\end{figure}
+
+The number of sources is a simple but yet important information to be used in source separation and many other related research fields.
+In real world applications, information about the actual number of concurrent speakers is often not available.
+\par
+The \emph{number of sources} \(k \in \sZ\) appears to be a clearly defined property of a mixture. 
+However the meaning of the property can differ, depending on its application.
+Let us assume that we have \(L\) sources and mixture of duration \(N\).
+Further, I imagine a latent binary \textit{source activity} variable~$v_{nl}\in \left\{ 0,1 \right\}$ that indicates the activity of each source \(l\) and for each time instance \(n\).
+Now, concerning the number of sources, two definitions of \(k\) can be imagined:
+
+\begin{description}
+\item[A)] maximum number of sources, even if not concurrently active. It is simply the sum of all sources that are active at least once within \(N\). This definition is more useful when the sources can be identified or detected first. This definition can also be considered as ``counting by detection''.
+\item[B)] maximum number of concurrent speakers even if the sources belong to the same class. Here, it represents the maximum the mixtures concurrency. This definition is more useful as a preprocessing for a separation system since such a system would only require the number of \texttt{auditory\ streams} and not the number of (non-concurrent) sources. For such approaches it becomes possible to apply separation only when its ``needed''. This definition can also be considered as ``direct count estimation''\footnote{Please note the subtle difference between ``counting'', which refers to a sequential process and ``count estimation'' or ``denumerating'', which directly relate to an integer.}.
+\end{description}
+
+At short time scales A) is equal to B) because on such time scale (a few seconds), the sources/instrumentation usually doesn't change. 
+In Fig.~\ref{fig:teaser}, I illustrate a setup featuring~$L=3$ unique sources.
+At any given time, one can see --- given definition B) --- that at most~$k=L=3$ sources are active at the same time and~$k=2$ could be the outcome if a smaller excerpt would be evaluated.
+In this thesis, I will pick definition B when concerned about estimating the number of sources.
+However, when dealing with the human ability of estimating the number of sources, such a clear definition can not be made.
+For instance, obtaining this number is even more challenging because the definition of a musical source can not clearly be given.
+In some scenarios, like popular western music, the sources to be separated, are grouped clear melody, bass, drums and ``other'' (the remainder), in other scenarios, e.g. the ``drums'' would count as multiple instruments.
 
 
 
