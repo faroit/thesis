@@ -5,13 +5,8 @@
 
 % start coverted from dafx
 In most scenarios for source separation, as presented in Chapter~\ref{objectives-and-challenges}, it is common to assume that the spectral harmonics are not fully overlapped.
-This enabled many unsupervised algorithms like non-negative matrix factorization (NMF) to approximate the mixture from a lower-rank decomposition in an unsupervised way.
+This is exploited in many unsupervised algorithms like non-negative matrix factorization (NMF) to approximate the mixture from a lower-rank decomposition in an unsupervised way.
 \par
-% The separation of sound sources from a single channel mixture is considered as an under-determined case and does not have a unique solution. 
-% Therefore, knowing the way in which source signals are mixed together is crucial to the quality of separation systems. 
-% In the context of speech separation even unsupervised methods can lead to good results. 
-% This is due to the fact that mixtures of speech signals (like in a cocktail party environment) show a high degree of statistical independence. 
-% Mixtures of musical instruments, however, are highly correlated which is a desired aim of musical performances in general.
 In the context of musical instrument source separation, many researchers have focused on including prior information about the sources in their algorithms~\cite{ozerov12}.
 The availability and detail of such a-priori information varies. 
 Often, systems learn spectral as well as temporal cues from training data or parts of the mixture where only one instrument is active.
@@ -21,9 +16,9 @@ It incorporates the pitch and onset information encoded in a MIDI file to improv
 
 In the case of highly overlapped signals of unison instruments, the score information is not useful.
 Therefore, in this work, we evaluate the feasibility to increase the prior information to use the fundamental frequency estimate of the source to be extracted.
-
+\par
 From this starting point, two kinds of approaches can be distinguished between, depending on how they exploit this information.
-The first option to obtain the separated source is to re-synthesize it using a sinusoidal model, which has been studied in several methods which are not detailed in this thesis (for a detailed overview, I refer the reader to Section III A of~\cite{rafii}).
+The first option to obtain the separated source is to re-synthesize it using a sinusoidal model which has been studied in several methods which are not detailed in this thesis (for a detailed overview, I refer the reader to Section III A of~\cite{rafii}).
 
 % TODO: move this to fundamentals?
 In this work we assume that we can separate overlapping partials of the sources based on differences in amplitude and/or frequency modulation, resulting in the following model for a signal with $P$ commonly modulated partials
@@ -37,7 +32,7 @@ where effectively the amplitude modulation is $a(n)$ and the frequency modulatio
 
 Due to the problem that sinusoidal synthesis suffers from a typical \textit{metallic} sound quality, which is mostly due to discrepancies between the estimated excitation signals of the lead signal compared to the ground truth, we decided to take an alternative approach which is to exploit harmonicity in another way, by filtering out everything from the mixture that is not located close to the detected harmonics.
 \par
-In the past many research has been focused on such a procedure as it turned out to be a common task in source separation systems:
+In the past, many research has been focused on such a procedure as it turned out to be a common task in source separation systems:
 
 % from zafar
 E.g. Li and Wang proposed to use a vocal/non-vocal classifier and a predominant pitch detection algorithm \cite{li06, li07}. They first detected the singing voice by using a spectral change detector \cite{duxbury03} to partition the mixture into homogeneous portions, and GMMs on MFCCs to classify the portions as vocal or non-vocal. Then, they used the predominant pitch detection algorithm in~\cite{li05} to detect the pitch contours from the vocal portions, extending the multi-pitch tracking algorithm in~\cite{wu03}. Finally, they extracted the singing voice by decomposing the vocal portions into TF units and labeling them as singing or accompaniment dominant, extending the speech separation algorithm in \cite{hu02}.
@@ -53,13 +48,11 @@ Cano et al. proposed various approaches for solo and accompaniment separation. I
 Bosch et al. proposed to separate the lead instrument using a musical score \cite{bosch12}. After a preliminary alignment of the score to the mixture, they estimated a score confidence measure to deal with local misalignments and used it to guide the predominant pitch tracking. Finally, they performed low-latency separation based on the method in \cite{marxer12}, by combining harmonic masks derived from the estimated pitch.
 
 Vaneph et al. proposed a framework for vocal isolation to help spectral editing \cite{vaneph16}. They first used a voice activity detection process based on a deep learning technique \cite{leglaive15}. Then, they used pitch tracking to detect the melodic line of the vocal and used it to separate the vocal and background, allowing a user to provide manual annotations when necessary.
-\par
-In the following, I present parts of work that has been published in 2014~\cite{stoeter14}.
 
 \section{Pitch variation informed Separation}
 \label{sub:frequency_modulation}
 
-\marginpar{This section is based on the work that has been submitted in 2014 and together with my collegues Stefan Bayer ~\cite{stoeter14}. Both publications were based on my original ideas}
+\marginpar{This section is based on the work that has been submitted in 2014 and together with my collegue Stefan Bayer ~\cite{stoeter14}. The publication is based on my original idea.}
 
 % TODO add signal model here
 % \begin{equation}
@@ -328,7 +321,6 @@ The mixture is then time warped based on the fundamental frequency of the melody
 
 \subsection{Predominant Melody Estimation}
 
-% TODO:  add phd thesis from justin: ~\cite{salamon13}
 The first step to extend the pitch variation informed separation system is to obtain a warp contour that follows the predominant source by means of extraction from the mixture (blind) or by human annotation (informed).
 In the following I want to focus how to obtain such a warp contour using a predominant melody algorithm.\par
 
@@ -380,10 +372,10 @@ In order to then extract the vocals, zero-phase filtering is applied.
 The extracted vocals were unwarped to linear time and the accompaniment signal is created by subtracting the estimated vocals from the mixture signals.
 Each excerpt is then linearly crossfaded into the unaltered, accompaniment/mixture using a 10ms window.
 To further reduce the complexity of the separation system, instead one comb filter for each excerpts, I modified the warping algorithm so that a user defined target pitch \(P\), rounded to integer, is used.
-That way, the full signal is unwarped and resampled to the same pitch, which then only requires a singe comb filter to extract the signal.
+That way, the full signal is unwarped and resampled to the same pitch, which then only requires a single comb filter to extract the signal.
 A stereo signal is produced by using a signal filtering both channels individually.
 
-The full procedure is depcited in Figure~\ref{fig:warp_demo}.
+The full procedure is depicted in Figure~\ref{fig:warp_demo}.
 
 \begin{figure}
 \begin{tabular}{cc}
@@ -404,7 +396,7 @@ The full procedure is depcited in Figure~\ref{fig:warp_demo}.
 \label{ssec:performance}
 
 The algorithm has been applied to the Mixing Secret Dataset 100 (MSD100) dataset,  consisting of a total of 100 songs of different styles.
-The separation results were evaluated using BSSeval~\cite{todo} and submitted to the SiSEC 2015 evaluation challenge~\cite{ono15}.
+The separation results were evaluated using BSSeval~\cite{fevotte05} and submitted to the SiSEC 2015 evaluation challenge~\cite{ono15}.
 The system was ranked in the last third of the participants and scored only slightly better than RPCA based methods~\cite{huang12}.
 The reason for this is that our proposed system highly depends on the melody estimation algorithm which in turns is based on the assumption that there exist a predominant melody in the mixture.
 Unfortunately, the newly created MSD100 dataset was not mixed using professional mastering, resulting in vocals that are below average in loudness.
@@ -427,7 +419,7 @@ I want to briefly describe the system published in in~\cite{Leglaive15}, for mor
 Also in the course of this thesis more of my work is based on the deep learning framework and will be explained in further details in Chapter~\ref{chapx, chapy}
 \par
 The method proposed in~\cite{Leglaive15} is based on a recurrent neural network (RNN) layer is very similar to a classical fully connected neural network, except that RNN applies the same set of weights recursively over an input sequence.
-RNNs excelt at detecting structure in sequential data of arbitrary length.
+RNNs excel at detecting structure in sequential data of arbitrary length.
 This makes it ideal to model time series, however, in practice, the temporal context learnt is limited to only a few time instances, because of the vanishing gradient problem~\cite{Hochreiter98}.
 To alleviate this problem, forgetting factors (also called gating) were proposed.
 One of the most popular gated recurrent cells is the Long Short-Term Memory (LSTM)~\cite{Hochreiter97} cell.
@@ -622,11 +614,9 @@ Furthermore we present two methods to decompose those mixtures based on differen
 
 * Warping based separation is simple and can work surprisingly well on some signals but is generally of limited use.
 However, the presented concepts such as warping are transferrable...
-
 * Fundamental concepts stay the same for ML models. 
 * End-to-End source separation does exist, but 
 * DNN based (superior) melody estimation
 * Modulations CTC (warped) loss functions.
 * Applications for Style transfer (applying modulation characteristics on other voices or instruments)
 * Generative Models for modulations (generate artificial vibrato)
-

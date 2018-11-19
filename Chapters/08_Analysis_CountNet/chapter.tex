@@ -1,14 +1,10 @@
 \chapter{CountNet}
 \label{cha:countnet}
 
-% TODO: add confusion matrix and chapter scatter plot
+\marginpar{This chapter is based on the work that has been published in~\cite{stoeter18, stoeter19} together with Soumitro Chakrabarty and Emanuël Habets. The contributions and experiments my own work and the co-authors mainly helped with ideas and writing.}
 
-\begin{figure}[h]
-  \centering
-  \includegraphics[width=0.8\columnwidth]{Chapters/08_Analysis_CountNet/figures/teaser.pdf}
-  \caption{Illustration of our application scenario of three concurrent speakers (A, B, C) and their respective speech activity. Bottom plot shows the mixture (input), the number of concurrently active speakers and its maximum \(k\) which is our targeted output.}%
-  \label{fig:teaser}%
-\end{figure}
+% TODO: add confusion matrix and chapter scatter plot
+% TODO: The question if machines could outperform humans, or if they are subject to similar limitations, remains to be answered.
 
 % Introduce the task of estimating the maximum number of concurrent speakers in a single-channel mixture.
 % * Lets start right into the task
@@ -22,6 +18,8 @@ real-world systems do not straightforwardly provide information about the actual
 It, therefore, is desirable to close the gap between theory and practice by devising reliable methods to estimate the number of sound sources in realistic environments.
 Surprisingly, very few methods exist for this purpose in an audio context, in particular from a single microphone recording.
 % TODO: Maybe mention model selection, spectral clustering, gap statistics etc.
+% TODO: am besten aus Wolfgangs Arbeit nehmen!
+
 %% Transition paragraphs
 % Describe two ways of getting the number of speakers: Counting vs Estimation
 From a theoretical perspective, estimating the number of concurrent speakers is closely related to the more difficult problem of \textit{identifying} them, which is the topic of speaker diarization~\cite{angueramiro12, rouvier13, rouvier15, ramaiah17}.
@@ -51,19 +49,16 @@ In this scenario, a method of estimating the maximum number of concurrent speake
 % * How do humans do count and why can't machines?
 \par
 When speaker overlap is as prevalent as in a ``cocktail-party'' scenario, developing an algorithm to detect the number of speakers is challenging.
-This is in contrast to humans whom we know are excellent in segregating one source from a mixture~\cite{bregman} and tend to use this skill to perceptually segregate speakers before they can estimate a count, as highlighted, e.g.\ in~\cite{kawashima15}.
-As shown in~\cite{kashino96, kawashima15}, humans are able to correctly estimate up to three simultaneously active speakers without using spatial information.
-Similarly, in music, psycho-acoustic researchers came up with a ``one-two-three-many'' hypothesis~\cite{huron89, stoeter13, schoeffler13}.
-The question if machines could outperform humans, or if they are subject to similar limitations, remains to be answered.
-%
+% This is in contrast to humans whom we know are excellent in segregating one source from a mixture~\cite{bregman} and tend to use this skill to perceptually segregate speakers before they can estimate a count, as highlighted, e.g.\ in~\cite{kawashima15}.
+% As shown in~\cite{kashino96, kawashima15}, humans are able to correctly estimate up to three simultaneously active speakers without using spatial information.
+% Similarly, in music, psycho-acoustic researchers came up with a ``one-two-three-many'' hypothesis~\cite{huron89, stoeter13, schoeffler13}.
+% %
+% \par
+% Identifying isolated sources in realistic mixtures is challenging~\cite{bregman} and psychology studies in vision~\cite{jevons1871} have shown that humans can instantly estimate the number of objects without actually counting and therefore identifying them.
+% This phenomenon is known as \textit{subitizing} and has been inspiring research in vision~\cite{chattopadhyay17}.
+Since there are indications that the auditory system is capable of subitizing sources~\cite{hoopen79}, we transfer this fact to the audio domain and directly attempt in this study to estimate the number of audio sources through ``direct count estimation''.
+The question if machines could outperform humans, or if they are subject to similar limitations, remains to be answered and is also part of this work.
 \par
-Identifying isolated sources in realistic mixtures is challenging~\cite{bregman} and psychology studies in vision~\cite{jevons1871} have shown that humans can instantly estimate the number of objects without actually counting and therefore identifying them.
-This phenomenon is known as \textit{subitizing} and has been inspiring research in vision~\cite{chattopadhyay17}.
-Since there are indications that the auditory system is also capable of subitizing sources~\cite{hoopen79}, we transfer this fact to the audio domain and directly attempt in this study to estimate the number of audio sources instead of counting them after identification.
-We refer to this strategy as ``direct count estimation''.
-
-\par
-
 %% State-of-the-art
 % Reference counting methods with restrictions to audio and concurrent speech.
 % * Single-channel vs. multi-channel (harder problem is single-channel)
@@ -160,6 +155,7 @@ Our objective of estimating the maximum number of concurrent speakers can now be
 k=\underset{n}{\max}\left(\sum_{l = 1}^{L} v_{nl}\right) \; n \in \{ 1,\ldots, N \}
 \label{eq:definition_k}.
 \end{equation}
+% TODO: to which case does this match in chapter 2
 %
 As can be seen, our proposed task of estimating $k\leq L$, is more closely related to source separation whereas the estimation of \(L\) is more useful for tasks where speakers do not overlap.
 For instance, three non-overlapping speakers would result in \(L = 3\) and \(\cardinality = 1\).
@@ -170,8 +166,6 @@ In the remainder of this work, we assume that no additional prior information ab
 
 While speaker diarization would mean estimating the whole speech activity matrix~$v_{nl}$, our problem of estimating only~$k$ in~(\ref{eq:definition_k}) is more abstract as it requires a direct estimation of the count.
 
-In Fig.~\ref{fig:teaser}, we illustrate our setup in a ``cocktail-party'' scenario featuring~$L=3$ unique speakers.
-At any given time, we see that at most~$k=L=3$ speakers are active at the same time and~$k=2$ could be the outcome if a smaller excerpt would be evaluated.
 By processing such excerpts in a sliding-window fashion, our proposed solution can be applied straightforwardly to context sizes commonly used in source separation.
 Furthermore, our proposed system can be used also to detect overlap ($k > 1$), which can be useful as a pre-processing step for diarization.
 
@@ -494,45 +488,7 @@ For the Poisson regression, the likelihood of parameter \(\lambda \) given the t
 \label{sec:training}
 
 To successfully train and evaluate the proposed DNNs, due to the number of parameters, a large amount of training data is required.
-In this section, we introduce relevant speech corpora and describe how the training dataset was assembled.
-
-\subsection{Speech Corpora and Annotations}%
-\label{ssec:corpus}
-% * Libri Speech
-% * Describe the used VAD
-To date, many available speech datasets contain recordings where only a single speaker is active.
-Datasets that include overlapped speech segments, either lack accurate annotations because the annotation of speech onsets and offsets in mixtures is cumbersome for humans or lack a controlled auditory environment such as in TV/broadcasting scenarios~\cite{Gravier12}.
-Since a realistic dataset of fully overlapped speakers is not available, we chose to generate synthetic mixtures.
-We recognize that in a simulated ``cocktail-party'' environment, mixtures lack the conversational aspect of human communication but provide a controlled environment which helps to understand how a DNN solves the count estimation problem.
-As we aim for a speaker independent solution, we selected a speech corpus with preference to a high number of different speakers instead of the number of utterances, thus increasing the number of unique mixtures.
 We selected \emph{LibriSpeech clean-360}\ \cite{panayotov15} which includes 363 hours of clean speech of English utterances from 921 speakers (439 female and 482 male speakers) sampled at 16 kHz.
-Compared to \emph{LibriSpeech}, \emph{TIMIT} is of lower recording quality and \emph{THCHS} represents mandarin speech.
-\par
-As revealed in Equation~\ref{eq:definition_k}, the maximum number of concurrent speakers \(cardinality\) requires annotation of the activity of each individual speaker.
-Even though many corpora come with word and phonemes annotation, they often are not consistent across different corpora.
-We therefore generated annotations based on a voice activity detection algorithm (VAD). As we rely on a robust VAD estimate, we found the implementation from the \emph{Chromium Web Browser} as part of the WebRTC Standard~\footnote{WebRTC 1.0: Real-time Communication Between Browsers W3C Editor's Draft 05 June 2017} to yield good results.
-In the further course of this work (see Section~\ref{sec:evaluation}), we also present the results from test sets of two other datasets as listed in Table~\ref{tab:corpora}.
-Furthermore, we included non-speech examples from the TUT Acoustic Scenes dataset~\cite{Mesaros16} in our training data to avoid using zero input samples for \(\cardinality = 0\) to increase the robustness against noise.
-
-\subsection{Training Dataset}%
-\label{ssec:train}
-
-To generate a single training sample, a tuples of speech mixtures and their ground truth speaker count \(\cardinality \), we draw a unique set of \(\cardinality \) speakers from the corpus.
-For each of the speakers we then select a random utterance, resampled to 16 kHz sampling rate and apply VAD.\@
-The VAD method was configured using default parameters using a hop size of 10~ms.
-Further, the VAD estimate was used to remove silence in the beginning and the end of an utterance recording.
-In the next step, more utterances from the same speaker are drawn from the corpus until the desired duration is reached.
-Both, the audio recording and the VAD annotation of each utterance is concatenated.
-The procedure is repeated for all speaker so that \(\cardinality \) time domain signals are created.
-Signals are mixed according to Equation~\ref{eq:mixing_model} and peak normalised to avoid clipping.
-Mixtures are then transformed to a time-frequency matrix \(X \in D \times F\).
-The VAD matrix \(v_{nl}\) is upsampled in temporal direction using nearest neighbour interpolation to match \(D\).
-The ground truth output \(\cardinality \) is then computed based on Equation~\ref{eq:definition_k}.
-\par
-We follow the proposal of~\cite{wang15} and include non-speech examples in our training data to avoid using zero input samples for \(\cardinality = 0\) and also to increase the robustness against noise.
-We used the TUT Acoustic Scenes dataset~\cite{Mesaros16} to create training samples using the same procedure as described above.
-As environmental sounds could include speech, we omitted obvious subsets such as \texttt{cafe/restaurant}, \texttt{grocery store} and \texttt{metro station}.
-Additionally we used the VAD to verify if any sample contains speech.
 
 \begin{table}
   \centering
@@ -551,38 +507,38 @@ Additionally we used the VAD to verify if any sample contains speech.
   \end{tabular}
 \end{table}
 
+Compared to \emph{LibriSpeech}, \emph{TIMIT} is of lower recording quality and \emph{THCHS} represents mandarin speech.
 \par
-A single training tuple \( \left\{\mathbf{X}, k\right\} \) is generated by a synthetic speech mixture and their ground truth speaker count \(\cardinality \).
-The mixtures are formed from random utterances of different speakers where silence in the beginning and end was removed to increase the overlap within one segment.
-In fact, our method to generate synthetic samples results in an average overlap for \(k=2\) of 85\% and for \(k=10\) of 55\% (based on 5s segments).
-This procedure is similar to~\cite{mesaros17} used to label the data.
-Signals are mixed according to (\ref{eq:mixing_model}), peak normalized and then transformed to a time-frequency matrix \(X \in D \times F\).
-Based on a voice activity detection algorithm (VAD), we used an implementation based on the WebRTC Standard~\cite{webrtc} where we computed the ground truth output \(\cardinality \) via (\ref{eq:definition_k}).
+% TODO: check for duplicates
+As revealed in Equation~\ref{eq:definition_k}, the maximum number of concurrent speakers \(cardinality\) requires annotation of the activity of each individual speaker.
+Even though many corpora come with word and phonemes annotation, they often are not consistent across different corpora.
+In the further course of this work (see Section~\ref{sec:evaluation}), we also present the results from test sets of two other datasets as listed in Table~\ref{tab:corpora}.
+\par
+We follow the proposal of~\cite{wang15} and include non-speech examples in our training data to avoid using zero input samples for \(\cardinality = 0\) and also to increase the robustness against noise.
+We used the TUT Acoustic Scenes dataset~\cite{Mesaros16} to create training samples using the same procedure as described above.
+As environmental sounds could include speech, we omitted obvious subsets such as \texttt{cafe/restaurant}, \texttt{grocery store} and \texttt{metro station}.
+Additionally we used the VAD to verify if any sample contains speech.
+\par
 All samples are normalized to the average Euclidean norm of \(duration\) frames to be robust against gain variations as proposed by~\cite{uhlich15}.
 Furthermore, the data was scaled to zero mean and unit standard deviation across the frequency dimension \(F\) over the full training data.
 Scaling parameters were saved for validation and test.
-For a more detailed description of the data set, the reader is referred to~\cite{stoeter17}.
 
-\subsubsection{Standardization, Normalization}%
-\label{ssec:norm}
-
+\subsection{Training Procedure}%
+\label{ssec:parameters}
+% * Optimizer
+% other things
+For all experiments we chose a medium sized training dataset of \(\cardinality \in \textrm{\{0, \ldots, 10\}}\) forming a total of \(T_{\textrm{train}} = 20.020\) mixtures  (1820 per \(k\)), each containing 10 seconds of audio, resulting in 55.55 hours of training material.
 As our application more closely relates to source separation we want our trained DNN system to be robust against gain variations.
 We therefore find it important that the DNN can not leverage the gain factors of the mixture.
 We found that the averaged energy of one bin across \(duration\) already is a solid indicator for the number of speakers.
 In fact, in early experiments of the methods described in~\cite{sayoud10, andrei15} we were only able to reproduce their results when no normalization was applied.
 To accommodate these findings, we normalize \(\mathbf{X}\) to the average Euclidean norm of \(duration\) frames as proposed by~\cite{uhlich15}.
 Additionally, as common in machine learning, we scale the normalised input representation so that the feature dimension \(F\) have zero mean and unit variance/standard deviation across the whole training dataset (Standardization).
-
-\subsection{Training Procedure}%
-\label{ssec:parameters}
-% * Optimizer
-% other things
-% To train each network we use Poisson sampling to balance the number of samples \(T_{ \cardinality}\) for each \(\cardinality \).
-For all experiments we chose a medium sized training dataset of \(\cardinality \in \textrm{\{0, \ldots, 10\}}\) forming a total of \(T_{\textrm{train}} = 20.020\) mixtures  (1820 per \(k\)), each containing 10 seconds of audio, resulting in 55.55 hours of training material.
+To train each network we use Poisson sampling to balance the number of samples \(T_{ \cardinality}\) for each \(\cardinality \).
 For each sample fed into the network, we select a random excerpt of duration \(D\) from each mixture. If not stated otherwise, \(D=5\)~seconds.
 That way, for each epoch, the network is seeing slightly different samples, reducing the number of redundant samples and thus helping to speed up the stochastic gradient based training process.
 \footnote{Note that for the validation and testing, excerpts are fixed.}
-A similar training procedure is detailed in~\cite{schluter16, stoeter17}.
+A similar training procedure is detailed in~\cite{schluter16}.
 Each architecture is trained using the ADAM optimizer~\cite{kingma14} (learning rate: \(1 \cdot 10^{-3}\), \(\beta_1=0.9\), \(\beta_2=0.999\), \(\epsilon=1 \cdot 10^{-8}\)) using mini-batches of size 32.
 Our training procedure verifies that all samples within a batch are from a different set of speakers.
 In addition to the training dataset, we created a fully separated validation dataset of \(T_{\textrm{valid}} = 5720\) samples using a different set of speakers from \emph{LibriSpeech dev-clean}.
@@ -971,7 +927,7 @@ However, if instead of the count estimation MAE we compute the accuracy to detec
 \label{ssec:listening_experiment}
 % * Reference existing listening tests which report the same thing
 % * Are we really doing it? We can decide on this once the first full draft is ready.
-To compare the results of our trained CRNN on our synthesized dataset to human performance, we chose to compare the machine model against the experiments made in~\cite{kawashima15, kashino96} and our own as described in Section~TODO.
+To compare the results of our trained CRNN on our synthesized dataset to human performance, we chose to compare the machine model against the experiments made in~\cite{kawashima15, kashino96} and our own as described in Section~\ref{sec:count_experiment}.
 % The results of our lab-based experiments are shown in Figure~\ref{fig:experiment}.
 
  % Kawashima et al.\ found in extensive experiments using Japanese speech samples, that participants were able to correctly estimate up to three simultaneously active speakers without using any spatial cues.
@@ -992,9 +948,7 @@ To compare the results of our trained CRNN on our synthesized dataset to human p
  Finally, we can report that the machine model reached superhuman performance.
  Unlike humans, the CRNN is subject to over-estimations for \(4 < k \leq 9\).
  However, with extensive training, humans might be able to perform on par.
- When we asked participants about the strategy they pursued, many reported that with more than three speakers it is not possible to identify (and count) the speakers but rather compare the \emph{density} of the speech to that of 1-3 speakers.
- For higher speaker counts, participants reported that the integrated phoneme activity was a relevant cue, supporting our previously mentioned hypothesis.
-
+ 
 \begin{figure}[t!]
    \centering
    \begin{adjustbox}{width=0.7\columnwidth}
@@ -1107,8 +1061,10 @@ Lastly, in an ablation study, we found that the CRNN uses a strategy to segment 
 Hence, we hypothesize that a speaker count estimate is influenced by the average speaking rates of certain languages.
 Finally, to underpin this hypothesis, we showed that the speaking rate has a significant effect on the error of our model.
 
+Limitations:
 \begin{itemize}
+  \item the addition problem, extrapolation?
   \item extrapolation NALU
-  \item music
+  \item counting on music
   \item non-overlapping sounds
 \end{itemize}

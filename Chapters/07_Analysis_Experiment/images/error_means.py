@@ -43,7 +43,7 @@ ax1.set_xticklabels(error_means_grouped_by_instr.index)
 ax1.set_xlim([1,6])
 ax1.set_ylim([0,1.05])
 ax1.set_xlabel('Number of Instruments')
-ax1.set_ylabel('Error probability')
+ax1.set_ylabel('Prop. of Correct Responses')
 l1,l2,l3 = ax1.plot(
 	error_means_grouped_by_instr.index,error_means_grouped_by_instr[0],'m^-',
 	error_means_grouped_by_instr.index,error_means_grouped_by_instr[1],'co-',
