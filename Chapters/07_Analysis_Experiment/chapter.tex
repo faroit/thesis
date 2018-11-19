@@ -1,34 +1,36 @@
-\chapter{Human Ability of Estimating the Number of Sources}
+\chapter[Experiments on Estimating the Number of Sources]{One, Two, Three, Many: Experiments on Estimating the Number of Sources}
 \label{cha:countanalysis}
 \bigskip
+\bigskip
+\bigskip
+\bigskip
+%
 The separation of mixtures into its original audio sources, as presented in the previous chapters, is a challenging task.
-Furthermore source separation is difficult to evaluate and researchers compare to a known reference even though this doesn't reflect how humans separate mixtures.
-In fact, it has long been a research topic to answer the question \emph{if} humans are able to separate, by means of fully extracting the desired source or if we can focus our attention to one source --- segregate them~\cite{bregman}.
-And, despite recent progress in auditory science~\cite{carlyon04, koelsch05, rabinowitz13}, research still is investigating how separation takes place in auditory cortex or other parts of the human brain.
-One thing, however, we are able to assess directly, is if humans can reliably detect the number of sources in a mixture of several sources.
+Furthermore, source separation is difficult to evaluate, and researchers compare to a known reference even though this does not reflect how humans separate mixtures.
+It has long been a research topic to answer the question \emph{if} humans can separate, by fully extracting the desired source or if we can focus our attention on one source --- segregate them~\cite{bregman}.
+Moreover, despite recent progress in auditory science~\cite{carlyon04, koelsch05, rabinowitz13}, research still is investigating how separation takes place in the auditory cortex or other parts of the human brain.
+One thing, however, we can assess directly is if humans can reliably detect the number of sources in a mixture of several sources.
 \par
-In order to address this question, one must ask how humans generally infer counts and if our strategy depends on the number to be counted.
-When we look at vision, these are questions that have already been discussed over hundred years ago in scientific research. 
-To my knowledge, the earliest study in psychology of vision was published in 1871 by Jevons~\cite{jevons1871}. 
-He presented an experiment to count the number objects (beans) and came up with the hypothesis that humans can instantly estimate the number of objects without actually counting and therefore identifying them (``counting by detection'').
+In order to address this question, it helps to understand how humans infer counts and if our strategy is depending on the count.
+When we look at vision, these are questions that have already been discussed over a hundred years ago in scientific research; an early study in the field of psychology of vision published by Jevons in 1871~\cite{jevons1871}. 
+He presented an experiment to quickly infer the number objects (beans) and came up with the hypothesis that humans can instantly estimate the number of objects without actually counting and therefore identifying them (``counting by detection'').
 He mentioned in~\cite{jevons1871}:
 
 \begin{quote}
 ``It is well known that the mind is unable through the eye to estimate any large number of objects without  counting them successively. A small number, for instance three or four, it can certainly comprehend and count by an instantaneous and apparently single act of mental attention.''
 \end{quote}
 
-This ``one-two-three-many'' hypothesis was a fundamental observation and since then, the fact that we can directly infer the numerosity of small numbers of objects, up to about four, is known as \emph{subitizing}~\cite{kaufman49, burr10}.
-I will also refer to this strategy as ``direct count estimation''.
-Regarding our hearing, there are indications that the auditory system is capable of subitizing audio sources~\cite{hoopen79}.
+This ``one-two-three-many'' hypothesis was a fundamental observation. 
+The fact that we can directly infer the numerosity of small numbers of objects, up to about four, is also known as \emph{subitizing}~\cite{kaufman49, burr10}.
+I refer to this strategy as ``direct count estimation''.
+Concerning our hearing, there are indications that the auditory system is capable of subitizing audio sources~\cite{hoopen79}.
 And surprisingly, as shown in~\cite{kashino96, kawashima15}, humans share the same limitations of correctly estimate up to three simultaneously active speakers.
 \par
 In this chapter, I present two experiments contributing to this interesting field of research.
 The first experiment (Section~\ref{sec:ismir}) addresses the question if the number of instruments in polyphonic music are subject to the same limitations.
 In the second contribution (Section~\ref{sec:ismir}) the aim is to verify the findings of and earlier experiment in~\cite{kawashima15} and increase the number of stimuli to be used for comparison of machine learning based count estimations methods
 
-% TODO: Put tables into Appendix
-
-\section{Experiments on the Instrument Count Estimation}%
+\section{Experiments on Instrument Count Estimation}%
 \label{sec:ismir}
 
 \marginpar{This chapter is based on the work that has been published in~\cite{stoeter13, schoeffler13} together with my collegue Michael Schoeffler. Based on my original idea, in both publications the two first authors contributed equally to the work.}
@@ -77,7 +79,7 @@ The MIDI excerpts were humanized and rendered by a sequencer software utilizing 
 \begin{table}[htb]
 \center
 \small
-\begin{tabular}{cr@{.}lr@{.}lp{5.8cm}c}
+\begin{tabular}{cr@{.}lr@{.}lp{6cm}c}
 \toprule[1.5pt]
 RWC~ID & \multicolumn{2}{c}{Start~[s]} & \multicolumn{2}{c}{Dur.~[s]} & Instrumentation & \(k\)\\
 \midrule
@@ -625,7 +627,9 @@ legend cell align=left
 % \par
 % It is often recommended to use headphones instead of loudspeakers for Internet experiments. From the relative low average marginal effect of $\textit{Setup}$ (Table~\ref{table:data_web_lm}), it can be derived that the type of the setup had only minor effects on the results of the Internet experiment.
 
-% Surprising was the small number of participants who had to be screened. We excluded 27 participants since they gave at least one non-serious response which is about 2.3\% (1195 participants remained after excluding all trials which were not the first ones). Most of these excluded participants responded with either very high numbers (e.~g. 99) or responded with zeros for their estimated number of instruments being played. We assume that especially participants who responded with zero only wanted to get an impression of the experiment.
+% In our previous result analysis of the laboratory experiment, we set the focus on the differences between musicians and non-musicians. Between the Internet experiment and the laboratory experiment, slightly different results were obtained when looking into how musicians and non-musicians performed (Figure~\ref{figure:error_probability_iis_vs_web}). In the laboratory experiment musicians performed much better compared to non-musicians than in the Internet Experiment. One reason seems to be that in the laboratory experiment 74.2\% of the musicians had also a professional background in audio. In the Internet experiment only 27.5\% of the musicians had a professional background in audio. Since audio professionals more often have to detect hardly audible differences in audio files they are more trained in this field. As mentioned before, being a musician in our context does just mean that the participant plays an instrument without any information about his expert level or the time he or she spends on practicing.
+
+Surprising was the small number of participants who had to be screened. We excluded 27 participants since they gave at least one non-serious response which is about 2.3\% (1195 participants remained after excluding all trials which were not the first ones). Most of these excluded participants responded with either very high numbers (e.~g. 99) or responded with zeros for their estimated number of instruments being played. We assume that especially participants who responded with zero only wanted to get an impression of the experiment.
 
 \section{Experiment on Speaker Count Estimation}%
 \label{sec:count_experiment}
@@ -663,7 +667,7 @@ Further, the VAD estimate was used to remove silence in the beginning and the en
 In the next step, more utterances from the same speaker are drawn from the corpus until the desired duration is reached.
 Both, the audio recording and the VAD annotation of each utterance is concatenated.
 The procedure is repeated for all speaker so that \(\cardinality \) time domain signals are created.
-Signals are linearly mixed according and peak normalised to avoid clipping.
+Signals are linearly mixed according and peak normalized to avoid clipping.
 The ground truth output \(\cardinality \) for each sample is then computed on the interpolation of VAD matrix using the maximum of the sum over all speakers.
 \par
 The mixtures are formed from random utterances of different speakers where silence in the beginning and end was removed to increase the overlap within one segment.
@@ -681,19 +685,21 @@ However, the maximum number of speakers was revealed to the other group (informe
 Further, none of the participants received any feedback about the error made during the trials.
 The participants were able to pause and resume the experiment at any time to reduce fatigue.
 Similarly to~\cite{kawashima15}, lab-based experiments were conducted with ten participants for each group (\(n=20\)) using a custom designed web-based software. 
+None of the participants were native English speakers.
 The experiment and its results from all participants is made available through~\cite{oss_countit}.
-A simplified and shorter version of the experiment is made available through a web application\footnote{\url{https://denumerate.app}}.
+A simplified version of the experiment is made available through a web application\footnote{\url{https://denumerate.app}}, with the purpose of continuously gather data.
 
 \subsection{Results}
 To reveal over and underestimation errors, we decided to report the average response for each group of \(k\).
-As a reference, we also included the average results from~\cite{kawashima15} (Experiment 1, 5~seconds durations) which shows similar results compared to our blind experiment.
+As a reference, we also included the average results from~\cite{kawashima15} (Experiment 1, 5~seconds durations) which shows similar (with slightly higher error probability) results compared to our blind experiment.
+Also in~\cite{kawashima15} the maximum number of speakers to tested was 6 whereas we evaluated stimuli with up to ten speakers.
 The results of our lab-based experiments are shown in Figure~\ref{fig:experiment}.
 Results indicate that underestimation becomes apparent for \(k > 3\).
 First, and foremost we can confirm the ``one-two-three-many'' paradigm on our experiment with english utterances.
 When we asked participants about the strategy they pursued, many reported that with more than three speakers it is not possible to identify (and count) the speakers but rather compare the \emph{density} of the speech to that of 1-3 speakers.
 For higher speaker counts, participants reported that the phoneme density was a relevant cue that allowed them extrapolate a source count estimate.
 Interestingly, our results of the informed experiment reveal that they performed significantly better than those that participated blindly.
-Another observation refers to the fact that the informed participants did perform better overall even though lower speaker counts such as $k=3,4$ should not be affected.
+This is especially obvious for six and more speakers where the informed group performed better by more than 1\(k\) in mean absolute deviation.
 
 \begin{figure}[t!]
     \centering
@@ -716,23 +722,33 @@ Another observation refers to the fact that the informed participants did perfor
 
 \section{Chapter Summary and Discussion}
 
-\begin{itemize}
-  \item More stimulus instead of more participants to train a dnn to match human performance.
-  \item good task for a web based experiment.
-  \item Underestimation is the main problem of humans.
-  \item Contribution is interesting for musicologist but the data set is not sufficient to model human perception. One would need more stimuli and maybe less participants. 
-\end{itemize}
+In this chapter I presented two experiments that we conducted to get a better understanding of the human ability on estimating the number of sources in mixtures.
+\par
+First, we showed that estimating the number of instruments in music mixtures is a difficult task for humans.
+We presented the results of an experiment with 62 participants, the focus was set to stimuli of inhomogeneous timbre and also mixed genre. 
+In Chapter~\ref{cha:fundamentals}, two different questions were introduced how to frame the count estimation problem. 
+In this experiment, we explicitly used an open question of ``How many instruments can you hear'' to gather more knowledge into the strategies being applied by the participants.
+Another reason was that the stimuli durations were too long to ask for the maximum number of concurrent items, thus promoting ``counting by detection'' as good strategy to approach the problem.
+By comparing musicians to non-musicians, we revealed that there is a significant difference in performance. 
+Particularly, we found a that this gap is most prominent for items of three and four instruments. 
+Furthermore, for all stimuli (ranging from one to six instruments) we saw that musicians performed about 20\% better than non-musicians, hence revealing a ``gap of one instrument'' in mean absolute error.
+In turn, our experiment indicated that the upper limit is reached with more than three instruments, related to a previous experiment~\cite{huron89} which focused on voices instead of instruments.
+We then repeated this experiment in an open, uncontrolled environment with more than 1000 participants.
+Regarding the ability of estimating the number of instruments, the web experiment confirmed the results of the laboratory experiment. 
+For both environments, the outcome is the same: the probability to correctly estimate up to about three instruments is higher than 50\%.
+These results were surprising because many participants did not use professional audio equipment.
+In comparison to audio quality experiments like MUSHRA~\cite{recommendation2001MUSHRA}, we can therefore conclude that count estimation tasks are suitable for highly scalable crowd sourced listening experiments.
+\par
+In our second experiment we reproduced an earlier experiment presented in~\cite{kawashima15} to estimate the maximum number of concurrent speakers in short audio mixtures, simulating a ``cocktail-party'' environment.
+Our experiment went a step further with respect to the maximum amount of speakers to be estimated (up two \(k=10\)).
+The results indicated almost no person was able to correctly estimate up to ten speakers. 
+However, we also observed that even for more than seven speakers the mean response did further (but not linearly) increase. 
+This indicates that humans are possibly interpolating some sort of a speech density to make up their decision.
+\par
+I can conclude that both count experiments share the same results: A) humans are unable to correctly estimate more four sources and B), underestimation is the main cause of error.
+Also we revealed that source count estimation studies can be easily be setup participated by non-professional listeners.
+Our results could be a first step towards modeling count estimation as a target for research in auditory modeling. 
+With such a model one could further improve lossy compression for object based music recordings such for~\cite{herre12saoc} by only transmitting a ``perceivable'' number of sources.
 
-Regarding the ability of estimating the number of instruments, the web experiment confirmed the results of the laboratory experiment\cite{Stoter2013}. Both experiments share the same outcome: The probability to correctly estimate up to about three instruments is higher than 50\%.
-
-Source Count estimation can be easily set up. 
-
-One of the main reasons for conducting the experiment was to find out which influence the Internet environment has on the results. All three regression models which included data of both experiments revealed that the Internet environment had only very minor effects on the results. Moreover, despite the large number of participants in both experiments, the predictor variable $\textit{Environment}$ was even not significant in two out of three regression models.
-
-% from ICA paper
-This paper shows that counting the number of instruments in a music item is a difficult task for humans. A new experiment with 62 participants was conducted to address the question of how many instruments one can estimate correctly.
-In this experiment, the focus was set on stimuli of inhomogeneous timbre and also mixed genre. By comparing musicians to non-musicians, we revealed that there is a significant difference in performance. Particularly this gap is most prominent for items of three and four instruments. Furthermore, for all stimuli (ranging from one to six instruments) we see that musicians performed about 20\% better than non-musicians. The experiment shows an assumed upper limit for items with more than three instruments. Our results are closely related to a previous experiment which focused on voices instead of instruments.
-This work can be used as a basis to define target functions for related research in auditory modeling. Future work could address different groups of items to reveal if certain instrumentations or compositions influence the results.
-
-
-~\cite{huron89} Reaction times: ``it takes five times longer to count to the number five than it does to count to the number one.''.
+% TODO: maybe add that more stimuli vs nb. of participants?
+% ~\cite{huron89} Reaction times: ``it takes five times longer to count to the number five than it does to count to the number one.''.

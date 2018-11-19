@@ -1,23 +1,8 @@
-# Introduction/Motivation
-
-$$
-x_{ft} \approx \sum_{k=1}^{K}w_{fk}h_{tk}
-$$
-
-for  $f = 1 , \ldots , F , t = 1 , \ldots , T , k = 1 , \ldots , K$
-
-sometimes also written (and implemented) as 
-
-
 ### Generalized Wiener Filter Reconstruction
 
 $$
 \begin{array} { c } { \text { which are applied to the complex mixture spectrogram } \mathbf { X } ^ { * } \text { with elementwise } } \\ { \text { multiplication, so produce the speech spectrogram } \mathbf { S } ^ { * } } \\ { \mathbf { S } ^ { * } = \mathbf { X } ^ { * } \otimes \frac { \mathbf { Y } _ { s } } { \mathbf { Y } _ { s } + \mathbf { Y } _ { n } } } \end{array}
 $$
-
-### DNN Basics
-
-
 
 # Add research questions
 
@@ -27,6 +12,7 @@ $$
 * why counting
 
 * Separation has relevancy for audio coding~\cite{herre12}
+
 ## Random shit
 
 * add liutkus15c reference for wiener filtering
@@ -39,6 +25,9 @@ $$
 * [ ] NMF
 * [ ] Fragen, ob Korrekturen später möglich sind und in welchem Umfang
 * [ ] Grafiken aus IEEE publikationen übernehmen?
+* [ ] Bei der vorstellung der Paper... alle Autoren inklusive Professoren?
+* [ ] Tables und Figures in Appendix?
+
 
 # Software releases/ Bernd Fragen
 
@@ -60,6 +49,10 @@ $$
 * [X] check the wording for magnitude spectrogram (check mainards book)
 * [ ] add step-count plot
 * [ ] Figures durch gehen
+* [ ] Check website availability
+
+# Allgemeine Fragen
+
 
 # Fragen an Antoine
 
@@ -69,6 +62,7 @@ $$
 * Aim, Objective?
 * Why doesn't shift-invariant NMF solve the vibrato case? or does it?
 * Do you think I should add the SiSEC 2018 paper?
+* Every chapter conclusion should be read so that it does't steal from the final conclusion. If a sentence in a chapter conclusion is not close enough bounded to the actual chapter topic, it should better go into the --> final conclusion
 
 # Aspects of Concurrency
 
@@ -117,14 +111,6 @@ Dimitrios Giannoulis, Daniele Barchiesi, Anssi Kliapuri and Mark D. Plumbley
 ## separation
 
 Goto, M. (2007). Active music listening interfaces based on signal processing. In Acoustics, Speech and Signal Processing, 2007. ICASSP 2007. IEEE International Conference on, vol. 4, pp. IV–1441. IEEE. [Cited on pages 3 and 12.]
-
-[42] A. de Cheveigne, \Strategies for voice separation based on harmonicity." To be presented at ICSLP, Yokohama.
-
-[43] A. de Cheveigne, \Separation of concurrent harmonic sounds: Fundamental frequency estimation and a time-domain cancellation model of auditory processing," J. Acoust. Soc. Am., vol. 93, pp. 3271{3290, June 1993.
-
-[44] A. de Cheveigne, \Time-domain comb filtering for speech separation," Technical Report TRH-016, ATR Human Information Processing Research Laboratories, 2-2, Hikaridai, Seika-cho, Soraku-gun, Kyoto 619-02 Japan, July 1993.
-
-[45] A. de Cheveigne, H. Kawahara, K. Aikawa, and A. Lea, \Speech separation for speech recognition," Journal de Physique IV, vol. 4, pp. C5{545{C5{548, May 1994.
 
 # NMF Literature
 Daniel D. Lee and H. Sebastian Seung. Algorithms for non-negative matrix factorization. In Proceedings of the Neural Information Processing Systems (NIPS), pages 556–562, Denver, CO, USA, 2000.
