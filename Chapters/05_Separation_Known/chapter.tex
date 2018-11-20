@@ -115,8 +115,9 @@ Plots (a) and (b) show the two input signals which are linearly mixed (c).
 For each source the warp contour needs to be calculated. 
 The mixture is then warped with F0 variation estimates of source 1 (d) and source 2 (e). 
 The actual separation/filtering of the sources is then done by using NMF which is not shown here. 
-To separate the components from the warped mixture we used NMF on a STFT computed with a very long DFT (about 0.5 s). 
-NMF can work unsupervised by detecting the more tonal $\textbf{W}$ component by using a spectral flatness measure. The separated signals (f) and (g) then need to be warped back into the original time domain resulting in (h) and (i).
+To separate the components from the warped mixture we used NMF on a STFT computed with a long DFT (about 0.5 s). 
+% TODO: cite SFM
+We applied NMF fully unsupervised clustering components based on tonality of $\textbf{W}$ by using a spectral flatness measure. The separated signals (f) and (g) then need to be warped back into the original time domain resulting in (h) and (i).
 
 It is important to clarify that this approach would not be able to separate two modulating instruments playing in unison without having prior knowledge about the individual modulation functions. Although a F0 variation estimate might be difficult to achieve in a mixture, our approach shows that such a system could work if that estimate is accurate.
 
@@ -188,17 +189,17 @@ The results have also been evaluated and confirmed subjectively by informal list
   \label{tab:results}
 \end{table}
 
+\begin{figure}
+  \includegraphics[width=\textwidth]{Chapters/05_Separation_Known/figures/toy.pdf}
+\caption{Example of F0 variation informed NMF in the warped domain. \textit{Time} is shown on horizontal axes. \textit{Frequency} is shown on vertical axes.}%
+\label{fig:warpingdemo}
+\end{figure}
 
 % TODO:
 % \begin{figure}[H]
 %     \centering
 %     \tiny
 %     \subfloat[Source 1]{
-%         \begin{tikzpicture}
-%             \begin{axis}[mystyle]
-%             \addplot [forget plot] graphics [xmin=0.5,xmax=1121.5,ymin=0.5,ymax=273.5] {Chapters/05_Separation_Known/figures/src1-1.png};
-%             \end{axis}
-%         \end{tikzpicture}%
 %     }\hfill
 %     \subfloat[Source 2]{
 %         \begin{tikzpicture}
@@ -384,14 +385,14 @@ As mentioned in the previous section, voice activity detection is of paramount i
 Therefore, I decided to evaluate if the performance of the system can be improved by using a more robust voice activity detection method as a separate preprocessing step.
 \par
 Shortly after I submitted the separation results to the SiSEC 2015 evaluation campaign, the whole audio community was shaken up by the recent success of deep learning throughout several audio related tasks that go beyond automatic speech recognition.
-Among them are several tasks related to music information retrieval (MIR) such as singing voice detection which received major breakthroughs in 2014 and 2015~\cite{Lehner14, Lehner15, Leglaive15, schlueter15}.
+Among them are several tasks related to music information retrieval (MIR) such as singing voice detection which received major breakthroughs in 2014 and 2015~\cite{lehner14, lehner15, Leglaive15, schlueter15}.
 \par
 Locking back, at that time, I did not have enough knowledge to understand how and why deep learning method are so successful~\footnote{And even today, very few people would say that the deep learning community made significant progress regarding the understanding of DNNs.}.
 Therefore, I decided to deploy a state-of-the-art singing voice detection system into my separation pipeline and evaluate just the end-to-end performance.
 I chose to reimplement the system by Leglaive~\cite{Leglaive15}, since it was a good compromise between complexity (its uses hand-crafted features instead of large STFT frames) and performance.
 In fact, the system reached a state-of-the-art accuracy of 91.5\% (F-measure of 91.5) for classifying frames of singing voice for the annotated \emph{Jamendo} singing voice detection dataset~\cite{ramona08}, which is an improvement of more than 10\% compared to the best performing non-DNN system.
 I want to briefly describe the system published in in~\cite{Leglaive15}, for more details, the reader is referred to the original authors publications.
-Also in the course of this thesis more of my work is based on the deep learning framework and will be explained in further details in Chapter~\ref{chapx, chapy}
+Also in the course of this thesis, more of my work is based on the deep learning framework and will be explained in further details in Chapter~\ref{cha:countnet}.
 \par
 The method proposed in~\cite{Leglaive15} is based on a recurrent neural network (RNN) layer is very similar to a classical fully connected neural network, except that RNN applies the same set of weights recursively over an input sequence.
 RNNs excel at detecting structure in sequential data of arbitrary length.
@@ -399,7 +400,7 @@ This makes it ideal to model time series, however, in practice, the temporal con
 To alleviate this problem, forgetting factors (also called gating) were proposed.
 One of the most popular gated recurrent cells is the Long Short-Term Memory (LSTM)~\cite{Hochreiter97} cell.
 Its effectiveness has been proven in various applications and LSTMs are the state-of-the-art approach for speech recognition~\cite{Graves13}.
-The basic structue of such a sequential network is depicted in Figure~\ref{fig:lstm_2}.
+The basic structure of such a sequential network is depicted in Figure~\ref{fig:lstm_2}.
 \begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{Chapters/05_Separation_Known/figures/lstm_2.pdf}
@@ -413,7 +414,7 @@ The vocal activity labels were obtained from the dataset by analyzing the true v
 The network was created and trained using the Keras python framework~\cite{chollet15}.
 I stacked up to three layers using the parameters as mentioned in~\cite{Leglaive15} but used unidirectional LSTMs instead of bi-directional to reduce computation complexity.
 The trained network achieves an accuracy of 85\% on the separate test set.\par
-While the original network proposed in~\cite{leglaive15} was framed as  classification problem, I modified the sigmoid output activation and replaced it with a linear activation to get a linear gain \(g\) instead of probability.
+While the original network proposed in~\cite{Leglaive15} was framed as  classification problem, I modified the sigmoid output activation and replaced it with a linear activation to get a linear gain \(g\) instead of probability.
 This gain is then multiplied with the mixture signal so that segments with less energy are reduced in volume.
 In experiments I found out that this helps the \emph{Melodia} algorithm to better detect vocal activity throughout an audio track and therefore yields in melody estimates with fewer errors.
 
