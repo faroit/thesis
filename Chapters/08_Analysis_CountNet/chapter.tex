@@ -17,6 +17,7 @@ real-world systems do not straightforwardly provide information about the actual
 % Assuming knowledge of speaker counts thus appears more as convenient than as realistic in practice.
 It, therefore, is desirable to close the gap between theory and practice by devising reliable methods to estimate the number of sound sources in realistic environments.
 Surprisingly, very few methods exist for this purpose in an audio context, in particular from a single microphone recording.
+
 % TODO: Maybe mention model selection, spectral clustering, gap statistics etc.
 % TODO: am besten aus Wolfgangs Arbeit nehmen!
 
@@ -34,7 +35,7 @@ When sources are simultaneously active, as in real cocktail party environments, 
 In fact, overlapping speech segments typically are a major source of error in speaker diarization~\cite{angueramiro12}.
 \par
 To improve the robustness of these detection-based methods, a number of approaches attempt to detect and possibly reject the overlapping speech segments to improve performance~\cite{boakye08, huijbregts09}.
-Overlap detection has since evolved into its own line of research with many recent publications such as~\cite{geiger13, shokouhi17, hagerer17, andrei17}.
+Overlap detection has since evolved into its own line of research with many recent publications such as~\cite{geiger13, shokouhi17,andrei17}.
 Overlap detection can be seen as a binarized version of the count estimation problem where the number of speakers equals to one (\emph{no overlap}) or more than one (\emph{overlap}).
 It is, therefore, possible to apply a count estimation system for the overlap detection problem but not vice versa.
 Also, an overlap detection system cannot be easily utilized in a source separation system.
@@ -446,6 +447,7 @@ For each of the decision functions a suitable output activation and loss is used
 \subsubsection{Classification}
 For \emph{classification}, the output is required to be one-hot-encoded so that the output is of dimension \(y \in \mathbb{B}^{L + 1}\), where \(L\) is the maximum number of concurrent speakers to be expected.
 In the final layer of the network, a softmax activation function is used with the cross-entropy function as the loss.
+% TODO: uncomment functions?
 % to perform classification:
 % \begin{equation}
 %   f_j(z) = \frac{e^{z_j}}{\sum_k e^{z_k}}
@@ -523,7 +525,7 @@ All samples are normalized to the average Euclidean norm of \(duration\) frames 
 Furthermore, the data was scaled to zero mean and unit standard deviation across the frequency dimension \(F\) over the full training data.
 Scaling parameters were saved for validation and test.
 
-\subsection{Training Procedure}%
+\subsection*{Training Procedure}%
 \label{ssec:parameters}
 % * Optimizer
 % other things
@@ -1043,7 +1045,7 @@ This indicates that a decrease in speaking rate of 1 syllable per second will in
 Even though this is considered as a small effect size, it gives an interesting hint for the strategy taken of our proposed model and also suggests that for improved robustness, training would benefit from a large variety of speaking rates.
 Furthermore, it still remains unclear the model would suffer from languages with a speaking rate which is naturally higher or lower than English or Chinese (see~\cite{Osser64}).
 
-\section{Chapter Summary and Discussion}%
+\section{Summary and Discussion}%
 \label{sec:conclusion}
 
 We introduced the task of estimating the maximum number of concurrent speakers in a simulated ``cocktail-party'' environment using a data-driven approach, discussing how to frame this task in a deep learning context.
