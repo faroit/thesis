@@ -51,6 +51,7 @@ STFT matrices \(\mX \in \sC^{n \times k \times c}\) are complex meaning that the
 However, very often analysis and processing is only focussed only on the \emph{magnitude} \(|\mX|\) or the \emph{spectrogram} \(|\mX|^2\).
 
 \subsection{Fundamental Frequency and Harmonicity}
+% TODO: add note pitch vs pitch discussion
 % TODO: Add STFT plot from Cello Dataset, showing f0, overtones vibrato extend etc.
 % \cite{stoeter15acm}, to be downloaded in \cite{oss}
 
@@ -93,6 +94,15 @@ The transmission of an audio signal using a modulator/demodulator (modem) system
 The principle is used the broadcasting of radio using a high frequency carrier signal that is modulated by an audio signal to be transmitted, which is assumed to be of slower frequency than the carrier signal.
 The modulator is targeted to vary the amplitude or the frequency of the carrier signal.
 If we imagine a sinusoidal carrier signal $x(t) = \cos \omega_c t$, \emph{amplitude modulation} (AM) is applying by a modulation function $a(t)$ so that:
+
+% We assume that we can separate overlapping partials of the sources based on differences in amplitude and/or frequency modulation, resulting in the following model for a signal with $P$ commonly modulated partials
+% \begin{equation}
+%   \begin{array}{l}
+%    x(n) = \displaystyle \sum_{p=1}^{P} \Big[\big(1 + a(n)\big) \\
+%    \hspace{3.5em}\displaystyle \cdot\sin \Big(2\pi f_{p,0}\big(n + \frac{1}{f_{1,0}} \sum_{m=m_0}^{n}{f(m)} \big) + \phi_{p,0} \Big)\Big] ,
+%   \end{array}
+% \end{equation}
+% where effectively the amplitude modulation is $a(n)$ and the frequency modulation of the first partial is $f(n)$.
 
 \begin{equation*}
     s_{AM}(t) = a(t) \cos \left( \omega_{c} t\right).    

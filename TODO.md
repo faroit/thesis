@@ -20,14 +20,12 @@ $$
 
 # Bernd 19.10.2018
 
-- [ ] Begründung warum analyse nach synthese
 * [ ] Common Fate interpretation mit plots (siehe fatimeh poster)
-* [ ] NMF
 * [ ] Fragen, ob Korrekturen später möglich sind und in welchem Umfang
-* [ ] Grafiken aus IEEE publikationen übernehmen?
+* [ ] Grafiken aus IEEE publikationen übernehmen? nur hinweis bei IEEE und AES?
 * [ ] Bei der vorstellung der Paper... alle Autoren inklusive Professoren?
 * [ ] Tables und Figures in Appendix?
-
+* [ ] Citation Style numerisch oder alphanumerisch ok?
 
 # Software releases/ Bernd Fragen
 
@@ -37,9 +35,9 @@ $$
 
 # General status
 
-* [ ] NMF Example + Figures --> Mathieu
+* [X] NMF Example + Figures --> Mathieu
 * [ ] Add chapter summaries --> Stibie, Patricio, Thomas
-* [ ] remove numberering from contributions
+* [ ] remove numbering from contributions
 * [ ] Write Introduction --> Christophe, Antoine
 
 * [ ] add negative log likelihood
@@ -48,8 +46,10 @@ $$
 * [ ] appendix, filter plots from countnet
 * [X] check the wording for magnitude spectrogram (check mainards book)
 * [ ] add step-count plot
-* [ ] Figures durch gehen
+* [ ] Figures durchgehen
+* [ ] countnet lesen
 * [ ] Check website availability
+* [ ] add gap statistics and elbow method and other clustering shit from wolfgangs diplomarbeit
 
 # Allgemeine Fragen
 
@@ -63,6 +63,7 @@ $$
 * Why doesn't shift-invariant NMF solve the vibrato case? or does it?
 * Do you think I should add the SiSEC 2018 paper?
 * Every chapter conclusion should be read so that it does't steal from the final conclusion. If a sentence in a chapter conclusion is not close enough bounded to the actual chapter topic, it should better go into the --> final conclusion
+* 
 
 # Aspects of Concurrency
 
