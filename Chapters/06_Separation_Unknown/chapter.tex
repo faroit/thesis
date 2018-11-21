@@ -501,10 +501,10 @@ The results of CFMM indicate that the complex CFT lead to better results. NMF di
 
 \marginpar{This section is original work being done as part of the \emph{STO1} and \emph{STO2} submission for the SiSEC 2016~\cite{sisec16}. Part of the literature overview is take from~\cite{rafii}.}
 
-In the previous section, we showed, that the common fate model is suitable to separate highly overlapped signals based on their spatial-temporal modulation texture.
+In the previous section, we showed that the common fate model is suitable to separate highly overlapped signals based on their spatial-temporal modulation texture.
 In this section, I want to show how this method can be extended for the application of lead and accompaniment separation.
-This scenario is significantly more complex than the separation of single instrument notes, hence the separation model needs to be flexible enough to handle many of the critical edge cases which make music separation challenging.
-With recent success of machine learning models, it, however, became apparent that an unsupervised model such as NTF or CFM may not be flexible enough to enforce the significant amount of domain knowledge that is present in this scenario to improve performance.
+This scenario is significantly more complex than the separation of instrument mixtures, hence the separation model needs to be flexible enough to handle many of the critical edge cases which make music separation challenging.
+With recent success of machine learning models~\cite{HintonSpeech}, it became apparent that an unsupervised model such as NTF or CFM may not be flexible enough to enforce the significant amount of domain knowledge that is present in this scenario to improve performance.
 % from zafar
 Taking advantage of the recent availability of sufficiently large databases of isolated vocals along with their accompaniment, several researchers investigated the use of machine learning methods to directly estimate a mapping between the mixture and the sources.
 However, most other systems today, still use classical time-frequency representations, building time-frequency masks.
@@ -526,23 +526,23 @@ Most methods mainly differ in the architecture picked for the network, its input
 % from zafar
 Providing a thorough introduction to deep neural networks (DNN) is out of the scope of this thesis.
 For the understanding of this section, it is sufficient to mention that DNNs consist of a cascade of several, possibly non-linear transformations of the input, which are learned during a training stage.
-They were shown to effectively learn representations and mappings, provided enough data is available for estimating their parameters \cite{deng14, lecun15, goodfellow16}.
+They were shown to effectively learn representations and mappings, provided, enough data is available for estimating their parameters \cite{deng14, lecun15, goodfellow16}.
 Different architectures for neural networks may be combined/cascaded together, and many architectures were proposed in the past, such as feedforward fully-connected neural networks (FNN), convolutional neural networks (CNN), or recurrent neural networks (RNN) and variants such as the long short-term memory (LSTM) and the gated-recurrent units (GRU).
 Training of such functions is achieved by stochastic gradient descent \cite{robbins51} and associated algorithms, such as backpropagation~\cite{rumelhart862} or backpropagation through time~\cite{rumelhart86} (BTT) for the case of RNNs.
 \par
 %The first one: Huang
 % zafar
-Huang et al. were the first to propose deep neural networks, RNNs here \cite{hermans13,pascanu14}, for singing voice separation in \cite{huang14,huang15}. They adapted their framework from \cite{huang142} to model all sources simultaneously through masking. Input and target functions were the mixture magnitude and a joint representation of the individual sources. The objective was to estimate jointly either singing voice and accompaniment music, or speech and background noise from the corresponding mixtures.
+Huang et al. were the first to propose RNNs~\cite{hermans13,pascanu14} for singing voice separation in \cite{huang14,huang15}. They adapted their framework from \cite{huang142} to model all sources simultaneously through masking. Input and target functions were the mixture magnitude and a joint representation of the individual sources. The objective was to estimate jointly either singing voice and accompaniment music, or speech and background noise from the corresponding mixtures.
 \par
 %Exploiting context: FNN with context, LSTM
-Modeling the temporal structures of both the lead and the accompaniment is a considerable challenge, even when using DNN methods. As an alternative to the RNN approach proposed by Huang et al. in \cite{huang14}, Uhlich et al. proposed the usage of the simpler FNNs \cite{uhlich15} whose input consists of \textit{supervectors} of a few consecutive frames from the mixture.
+Modeling the temporal structures of both the lead and the accompaniment is a considerable challenge, even when using DNN methods. As an alternative to the RNN approach proposed by Huang et al. in \cite{huang14}, Uhlich et al. proposed the usage of a simpler FNNs \cite{uhlich15} whose input consists of \textit{supervectors} stacked of few consecutive frames from the mixture.
 \par
-I decided to deploy model of Uhlich~\cite{uhlich15} to evaluate the separation quality.
+I decided to reimplement the model of Uhlich~\cite{uhlich15} to evaluate the separation quality.
 The aim of this work was to exactly reproduce the results of~\cite{uhlich15} but instead, to evaluate one main research questions: does a DNN based model benefit from the common fate representation being able to better capture the modulation texture?
-For the implementation of the model, I using the Keras~\cite{chollet15} deep learning framework to systematically assess the input-and output representation of the system.
+For the implementation of the model, I using the Keras~\cite{chollet15} deep learning framework to systematically assess different combinations of input-and output representation of the system.
 
 \par
-The network, as proposed in~\cite{uhlich15} is a three layer fully connected network, where each of the hidden layer has the same number of hidden nodes as the targeted output representation.
+The network, as proposed in~\cite{uhlich15} consists of a three layer fully connected network, where each of the hidden layer has the same number of hidden nodes as the targeted output representation.
 This method can be described as a variant of a stacked denoising autoencoder~\cite{pvincent08}, where the noisy input is mapped to a clean output of the same dimensionality.
 The architecture is depicted in Figure~\ref{fig:cft_dnn}. 
 
@@ -555,13 +555,13 @@ The architecture is depicted in Figure~\ref{fig:cft_dnn}.
 
 \subsection{Inputs and Outputs}
 
-The purpose of the FNN then is to create a non-linear mapping function from the magnitude of the input mixture \(\mX\) to the magnitude of the target source \(\mY_j\).
+The purpose of the FNN is to create a non-linear mapping function from the magnitude of the input mixture \(\mX\) to the magnitude of the target source \(\mY_j\).
 The optimal parameters (weights) \(\theta_j\) of such a mapping function \(\mY_j = f_{\theta_j}(\mX)\) are learned via supervised training.
 FNN networks, such as the one used here, can only deal with temporal structure by reshaping the time-frequency input to a super vector to be processed by the FNN.
-This makes it difficult to learn structure of neighboring time frequency bins. 
+This makes it difficult to learn the structure of neighboring time frequency bins. 
 However this drawback is compensated by the large number of parameters in an FNN layer.
 
-Since the STFT, GFT and CFT are lapped transforms different scenarios for the input and output representation of the FNN can be envisioned:
+Since the STFT, GFT and CFT are lapped transforms, different scenarios for the input and output representation of the FNN can be envisioned:
 
 \begin{description}[style=unboxed,leftmargin=0cm]
 \item[STFT-STFT]: for the \emph{input}, I computed the STFT (\(N=1024, Hop=512\) of each the audio track and select excerpts of size, \(\mathbf{X} \in \mathcal{R}^{2C + 1}_{+} \), where \(C\) is the number of preceding and succeeding frames around the central frame \(\mathbf{X}_{i+C}\). For the \emph{output}, only a single central frame \(\mathbf{Y}_{i+C}\) is selected.
@@ -577,10 +577,9 @@ The results in an identical shapes as in the \emph{GFT-GFT} but with added benef
 \end{description}
 
 I used the DSD100 dataset~\cite{ono15} for training and test. 
-For each sample fed into the network, I randomly selected mixture tracks from the DSD100 dataset.
+For each sample fed into the network, I randomly selected mixtures (without replacement) from the DSD100 dataset.
 
 \subsection{Training}
-
 I then sample from the DSD100 tracks and form single sample as input for the FNN.
 Therefore I first compute the input representation of an audio track from the DSD100 set and then create samples by randomly sampling without replacement from these tracks.
 The actual training has been done using mini-batches of size 32.
@@ -651,7 +650,7 @@ An obvious observation in Figure~\ref{fig:eval} is the difference in performance
 Further it shows that exploiting learning data does help separation greatly compared to only relying on \textit{a priori} assumptions such as the harmonicity or redundancy. Additionally, dynamic models such as LSTM from UHL2-3 appear more adapted to music than FNN. 
 These good performances in audio source separation go in line with the recent success of DNNs in fields as varied as computer vision, speech recognition, and natural language processing \cite{lecun15}.
 \par
-Relating our results of STO1 and STO2 to the other methods, we observe that our results performed only slightly below the state-of-the-art performance of UHL and NUG.
+Relating our results of STO1 and STO2 to the other methods, we observe that the performance was only slightly below the state-of-the-art performance of UHL and NUG.
 Furthermore, the difference between test and validation dataset indicate, that our CFT DNN model even has better generalization as the one in NUG. 
 While our STO model share the same network architecture as UHL1, we were unable to reproduce the results, as we are approximately 1~dB below UHL1.
 One reason is in the difference in initialization of the model as well as the fact that NUG and UHL models exploit multichannel information. 
