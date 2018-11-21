@@ -81,6 +81,51 @@ It turned out that for speech separation of \(k=2\) speakers, \(WDO=0.9\) and fo
 In the case of the two instruments playing in unison the average WDO is \(0.65\), hence a good separation in the time frequency domain is barely possible, which makes the dataset more challenging than existing scenarios.
 The dataset is available for download~\cite{oss_unison}.
 
+\begin{figure}
+\begin{tikzpicture}
+	\begin{axis}[
+		xlabel=Number of Sources,
+    ylabel=Separability/WDO]
+    % speakers
+	\addplot[color=red,mark=x] coordinates {
+		(2,0.9)
+		(3,0.79)
+		(4,0.69)
+		(5,0.6)
+		(6,0.536)
+		(7,0.462)
+		(8,0.4197)
+		(9,0.352199)
+		(10,0.32)
+  };
+  % single note
+  	\addplot[color=blue,mark=x] coordinates {
+		(2,0.928)
+		(3,0.864)
+		(4,0.8)
+		(5,0.77)
+		(6,0.682)
+		(7,0.637)
+		(8,0.592)
+		(9,0.5647)
+		(10,0.5434)
+  };
+  % unison
+    \addplot[color=yellow,mark=x] coordinates {
+		(2,0.626)
+		(3,0.32)
+		(4,0.2)
+		(5,0.13)
+		(6,0.083)
+		(7,0.038)
+		(8,0.025)
+		(9,0.017)
+		(10,0.01)
+	};
+	\end{axis}
+\end{tikzpicture}
+\end{figure}
+
 % TODO: add figure from google spreadsheets
 % TODO: add little dataset table
 
