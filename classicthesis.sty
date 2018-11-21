@@ -536,26 +536,26 @@
 %\cftsetindents{table}{0em}{\tablelabelwidth}
 \cftsetindents{table}{0em}{\figurelabelwidth}
 % listings
-\ifthenelse{\boolean{ct@listings}}%
-{%
-    \newlistof{listings}{lol}{\lstlistlistingname}%
-    \renewcommand{\cftlistingspresnum}{\scshape\MakeTextLowercase}%
-    \renewcommand{\cftlistingsfont}{\normalfont}%
-    \renewcommand{\cftlistingspresnum}{\lstlistingname~}%
-    \renewcommand{\cftlistingspagefont}{\normalfont}%
-    \ifthenelse{\boolean{ct@dottedtoc}}{\relax}%
-    {%
-        \renewcommand{\cftlistingsleader}{\hspace{1.5em}}%
-        \renewcommand{\cftlistingsafterpnum}{\cftparfillskip}%
-    }
-    \newlength{\listingslabelwidth}%
-    \settowidth{\listingslabelwidth}{\cftlistingspresnum~999}%
-    \addtolength{\listingslabelwidth}{2.5em}%
-    %\cftsetindents{listings}{0em}{\listingslabelwidth}%
-    \cftsetindents{listings}{0em}{\figurelabelwidth}%
-    \let\l@lstlisting\l@listings%
-    \let\lstlistoflistings\listoflistings%
-}{\relax}%
+% \ifthenelse{\boolean{ct@listings}}%
+% {%
+%     \newlistof{listings}{lol}{\lstlistlistingname}%
+%     \renewcommand{\cftlistingspresnum}{\scshape\MakeTextLowercase}%
+%     \renewcommand{\cftlistingsfont}{\normalfont}%
+%     \renewcommand{\cftlistingspresnum}{\lstlistingname~}%
+%     \renewcommand{\cftlistingspagefont}{\normalfont}%
+%     \ifthenelse{\boolean{ct@dottedtoc}}{\relax}%
+%     {%
+%         \renewcommand{\cftlistingsleader}{\hspace{1.5em}}%
+%         \renewcommand{\cftlistingsafterpnum}{\cftparfillskip}%
+%     }
+%     \newlength{\listingslabelwidth}%
+%     \settowidth{\listingslabelwidth}{\cftlistingspresnum~999}%
+%     \addtolength{\listingslabelwidth}{2.5em}%
+%     %\cftsetindents{listings}{0em}{\listingslabelwidth}%
+%     \cftsetindents{listings}{0em}{\figurelabelwidth}%
+%     \let\l@lstlisting\l@listings%
+%     \let\lstlistoflistings\listoflistings%
+% }{\relax}%
 
 % dirty work-around to get the spacing after the toc/lot/lof-titles right
 \ifthenelse{\boolean{ct@parts}}%

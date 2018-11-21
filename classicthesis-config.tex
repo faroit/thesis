@@ -158,31 +158,35 @@
 % ****************************************************************************************************
 % 5. Setup code listings
 % ****************************************************************************************************
-\usepackage{listings}
+% \usepackage{listings}
 \usepackage{longtable}
 
 %\lstset{emph={trueIndex,root},emphstyle=\color{BlueViolet}}%\underbar} % for special keywords
-\lstset{language=[LaTeX]Tex,%C++,
-  morekeywords={PassOptionsToPackage,selectlanguage},
-  keywordstyle=\color{RoyalBlue},%\bfseries,
-  basicstyle=\small\ttfamily,
-  %identifierstyle=\color{NavyBlue},
-  commentstyle=\color{Green}\ttfamily,
-  stringstyle=\rmfamily,
-  numbers=none,%left,%
-  numberstyle=\scriptsize,%\tiny
-  stepnumber=5,
-  numbersep=8pt,
-  showstringspaces=false,
-  breaklines=true,
-  %frameround=ftff,
-  %frame=single,
-  belowcaptionskip=.75\baselineskip
-  %frame=L
-}
+% \lstset{language=[LaTeX]Tex,%C++,
+%   morekeywords={PassOptionsToPackage,selectlanguage},
+%   keywordstyle=\color{RoyalBlue},%\bfseries,
+%   basicstyle=\small\ttfamily,
+%   %identifierstyle=\color{NavyBlue},
+%   commentstyle=\color{Green}\ttfamily,
+%   stringstyle=\rmfamily,
+%   numbers=none,%left,%
+%   numberstyle=\scriptsize,%\tiny
+%   stepnumber=5,
+%   numbersep=8pt,
+%   showstringspaces=false,
+%   breaklines=true,
+%   %frameround=ftff,
+%   %frame=single,
+%   belowcaptionskip=.75\baselineskip
+%   %frame=L
+% }
 % ****************************************************************************************************
 
+\usepackage{minted} % Syntax highlighting                                                                                                                                                                                                      
+\usemintedstyle{tango}
+\definecolor{tango-bg}{HTML}{F8F8F8}
 
+\newminted{python}{bgcolor=tango-bg,frame=lines,framesep=2mm,samepage=true,fontsize=\footnotesize}
 
 
 % ****************************************************************************************************
