@@ -10,18 +10,51 @@
 \let\cleardoublepage\relax
 
 \chapter*{Abstract}
-Short summary of the contents in English\dots a great guide by
-Kent Beck how to write good abstracts can be found here:
-\begin{center}
-\url{https://plg.uwaterloo.ca/~migod/research/beckOOPSLA.html}
-\end{center}
+%%%%% What is the problem?
+% Not more than 3-4 sentences telling the reader what the problem is, in as simple English as possible
+Audio signals that overlap in time and frequency are a common source of difficulty for many tasks that process or analyze these mixtures.
+To separate sources in the time-frequency domain, it is assumed that they are not fully overlapped and methods exploit this aspect in techniques such as non-negative matrix factorization.
+Although most scientific efforts have focused on separation, we also consider the task of estimating the number of sources where non-overlapping segments can be used to facilitate ``count by detection''.
+However, when two instruments play the same note (unison) or when many talkers speak at the same time (``cocktail party''), the overlap is severe, highlighting the need for new representations and more powerful models in order to address these two tasks.
+%%%%% Why is the problem hard? 
+% What has eluded us in solving it?
+% What does the literature say about this problem?
+% What are the obstacles/challenges? Why is it non-trivial? 
+Existing separation methods often perform poorly because underlying time-frequency representations do not offer a sufficient level of separability.
+Source count estimation is a hard and abstract problem when sources are overlapped severely and strategies need to shift towards directly inferring a count.
+%%%%% What is your approach/result to solving this problem?
+% How come you solved it? 
+% sit up and take notice claims that your thesis will plan to prove/demonstrate 
+To address both problems, we used conventional signal processing techniques as well as the recent deep learning framework.
+More specifically, we first address the source separation problem for unison instruments mixtures.
+Here, we discovered the distinct tempo-spectral modulations caused by vibrato. 
+In a first step to exploit these modulations, we develop a method based on time warping that relies on an estimate of the fundamental frequency variation of the sources. 
+For cases where such estimates are not available, we present a model based on non-negative tensor factorization and inspired by the way humans group time-varying sources (common fate).
+This contribution comes with a novel representation that improves the separability for overlapped and modulated sources.
+We developed and present datasets to evaluate these models on unison mixtures.
+Furthermore, we showed that this representation can be used as an input for a deep neural network based model to also improve vocal/accompaniment separation.
+\par
+We address the count estimation task by first study how humans can solve this task. 
+Therefore, we conducted listening experiments for both, overlapped speech as well as polyphonic music recordings. 
+These experiments confirm that humans could only count up to four sources.
+In order to answer the question if machines can perform similarly, we present CountNet, a DNN architecture, trained to estimate the maximum number of concurrent speakers in a cocktail party scenario of up to ten speakers.
+Our results show significant improvements compared to other methods. 
+Furthermore, the model outperformed humans on the same task.
+\par
+%%%%% What is the consequence of your approach?
+% So, now that you’ve made me sit up and take notice, what is the impact? 
+% What does your approach/result enable?
+Modulation based based processing
+An accurate estimate of the number of sources is of paramount importance to address any real-world source separation scenario.
+Our model enables application such as crowd counting or to further address speaker diarization (who speaks when) in meeting rooms.
+
 
 \vfill
 
 \begin{otherlanguage}{ngerman}
 \pdfbookmark[1]{Zusammenfassung}{Zusammenfassung}
 \chapter*{Zusammenfassung}
-Kurze Zusammenfassung des Inhaltes in deutscher Sprache\dots
+t.b.a\dots
 \end{otherlanguage}
 
 \endgroup
