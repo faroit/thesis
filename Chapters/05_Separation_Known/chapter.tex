@@ -6,7 +6,8 @@
 For many source separation methods it is common to assume that the spectral harmonics are not fully overlapped.
 In turn, this assumption is exploited in methods such as non-negative matrix factorization (NMF) to approximate the mixture from a lower-rank decomposition in an unsupervised way.
 Still, in order to improve separation quality, researchers imposed additional constraints based on  prior information about the sources in their algorithms~\cite{ozerov12}.
-The extent of such meta information very often depends on the availability the data.
+The extent of such meta information very often depends on 
+the availability the data.
 One example of an informed source separation systems is described by Ewert and M\"uller \cite{ewert12}.
 They proposed to incorporate the note pitch and onset information of the musical score, encoded in a MIDI file, synchronized to the audio, to improve the separation result.
 % end converted from dafx
@@ -194,76 +195,6 @@ The results have also been evaluated and confirmed subjectively by informal list
 \caption{Example of F0 variation informed NMF in the warped domain. \textit{Time} is shown on horizontal axes. \textit{Frequency} is shown on vertical axes.}%
 \label{fig:warpingdemo}
 \end{figure}
-
-% TODO:
-% \begin{figure}[H]
-%     \centering
-%     \tiny
-%     \subfloat[Source 1]{
-%     }\hfill
-%     \subfloat[Source 2]{
-%         \begin{tikzpicture}
-%             \begin{axis}[mystyle]
-%             \addplot [forget plot] graphics [xmin=0.5,xmax=1121.5,ymin=0.5,ymax=273.5] {Chapters/05_Separation_Known/figures/src2-1.png};
-%             \end{axis}
-%         \end{tikzpicture}%
-%     }
-%
-%     \subfloat[Mixture]{
-%         \begin{tikzpicture}
-%             \begin{axis}[mystyle]
-%             \addplot [forget plot] graphics [xmin=0.5,xmax=1121.5,ymin=0.5,ymax=273.5] {Chapters/05_Separation_Known/figures/mix-1.png};
-%             \end{axis}
-%         \end{tikzpicture}%
-%     }
-%
-%     \subfloat[Mix. warped by Pitch 1]{
-%         \begin{tikzpicture}
-%             \begin{axis}[mystyle]
-%             \addplot [forget plot] graphics [xmin=0.5,xmax=1121.5,ymin=0.5,ymax=273.5] {Chapters/05_Separation_Known/figures/mixwrpedsrc1-1.png};
-%             \end{axis}
-%         \end{tikzpicture}%
-%     }\hfill
-%     \subfloat[Mix. warped by Pitch 2]{
-%         \begin{tikzpicture}
-%             \begin{axis}[mystyle]
-%             \addplot [forget plot] graphics [xmin=0.5,xmax=1121.5,ymin=0.5,ymax=273.5] {Chapters/05_Separation_Known/figures/mixwrpedsrc2-1.png};
-%             \end{axis}
-%         \end{tikzpicture}%
-%     }
-%
-%     \subfloat[Target 1 warped]{
-%         \begin{tikzpicture}
-%             \begin{axis}[mystyle]
-%             \addplot [forget plot] graphics [xmin=0.5,xmax=1121.5,ymin=0.5,ymax=273.5] {Chapters/05_Separation_Known/figures/src1wrped-1.png};
-%             \end{axis}
-%         \end{tikzpicture}%
-%     }\hfill
-%     \subfloat[Target 2 warped]{
-%         \begin{tikzpicture}
-%             \begin{axis}[mystyle]
-%             \addplot [forget plot] graphics [xmin=0.5,xmax=1121.5,ymin=0.5,ymax=273.5] {Chapters/05_Separation_Known/figures/src2wrped-1.png};
-%             \end{axis}
-%         \end{tikzpicture}%
-%     }
-%
-%     \subfloat[Target 1 unwarped]{
-%         \begin{tikzpicture}
-%             \begin{axis}[mystyle]
-%             \addplot [forget plot] graphics [xmin=0.5,xmax=1121.5,ymin=0.5,ymax=273.5] {Chapters/05_Separation_Known/figures/src1unwarped-1.png};
-%             \end{axis}
-%         \end{tikzpicture}%
-%     }\hfill
-%     \subfloat[Target 2 unwarped]{
-%         \begin{tikzpicture}
-%             \begin{axis}[mystyle]
-%             \addplot [forget plot] graphics [xmin=0.5,xmax=1121.5,ymin=0.5,ymax=273.5] {Chapters/05_Separation_Known/figures/src2unwarped-1.png};
-%             \end{axis}
-%         \end{tikzpicture}%
-%     }
-%     \caption{Example of F0 variation informed NMF in the warped domain. \textit{Time} is shown on horizontal axes. \textit{Frequency} is shown on vertical axes.}
-%     \label{fig:warpingdemo}
-% \end{figure}
 
 \section{Extending F0 Variation Informed Separation}
 

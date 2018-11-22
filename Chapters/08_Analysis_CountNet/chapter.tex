@@ -995,20 +995,20 @@ The conducted analysis suggests that the network is doing count estimation based
 
 We assume that the CRNN model learned the aggregated phoneme or syllable activity of all speakers in a fixed, given excerpt.
 
-\captionof{table}{Binary Logit Regression}\label{Binary Logit Regression}\begin{center}
-\begin{tabular}{lclc}
-\toprule
-\textbf{Dep. Variable:} &      error         & \textbf{  No. Observations:  } &     2000   \\
-\textbf{Model:}         &      Logit       & \textbf{  Df Residuals:      } &     1998   \\
-\textbf{Method:}        &       MLE        & \textbf{  Df Model:          } &        1   \\
-\textbf{Date:}          & Mon, 29 Jan 2018 & \textbf{  Pseudo R-squ.:     } &  0.01108   \\
-\textbf{Time:}          &     16:38:38     & \textbf{  Log-Likelihood:    } &   -1370.9  \\
-\textbf{converged:}     &       True       & \textbf{  LL-Null:           } &   -1386.3  \\
-\textbf{ }              &                  & \textbf{  LLR p-value:       } & 2.980e-08  \\
-\bottomrule
-\end{tabular}
-\caption{Logit Regression Results}
-\end{center}
+% \captionof{table}{Binary Logit Regression}\label{Binary Logit Regression}\begin{center}
+% \begin{tabular}{lclc}
+% \toprule
+% \textbf{Dep. Variable:} &      error         & \textbf{  No. Observations:  } &     2000   \\
+% \textbf{Model:}         &      Logit       & \textbf{  Df Residuals:      } &     1998   \\
+% \textbf{Method:}        &       MLE        & \textbf{  Df Model:          } &        1   \\
+% \textbf{Date:}          & Mon, 29 Jan 2018 & \textbf{  Pseudo R-squ.:     } &  0.01108   \\
+% \textbf{Time:}          &     16:38:38     & \textbf{  Log-Likelihood:    } &   -1370.9  \\
+% \textbf{converged:}     &       True       & \textbf{  LL-Null:           } &   -1386.3  \\
+% \textbf{ }              &                  & \textbf{  LLR p-value:       } & 2.980e-08  \\
+% \bottomrule
+% \end{tabular}
+% \caption{Logit Regression Results}
+% \end{center}
 
 If that is the case, it would mean that the speaker count estimate would be affected if the speakers would speak slower or faster in relation to the fixed input window (speaking rate).
 We therefore want to see if very slow or very fast speakers significantly increase the error of our proposed CRNN model.
@@ -1070,3 +1070,6 @@ Limitations:
   \item counting on music
   \item non-overlapping sounds
 \end{itemize}
+
+% TODO: WE tried on music, but it was not able to train. We used the musicnet dataset.
+% training count error of 0.2, but a validation error of more than 2 (20 times higher than for speaker count). Poission, non negative binomial distribution....

@@ -34,21 +34,20 @@ For further details we refer the reader to audio signal processing basics such a
 \hypertarget{time-frequency-representation}{%
 \subsection{Time-Frequency Representation}\label{sub:time-frequency-representation}}
 
-Real world sounds such as speech and music include periodicity.
-Therefore, sounds are often analyzed in the frequency domain which also improves the computational efficiency of many signal processing methods.
-This is commonly achieved trough the use of discrete Fourier transform (DFT) and its fast FFT implementation~\cite{cooley65}. 
+Real world sounds such as speech and music have periodicities.
+Therefore, sounds are analyzed in the frequency domain which also improves the computational efficiency of signal processing methods.
+This is commonly achieved through the use of discrete Fourier transform (DFT) and its fast FFT implementation~\cite{cooley65}. 
 For details, the reader is referred to~Chapter 4 of~\cite{proakis96}.
-At the same time, spectral representations relates to our human auditory system~\cite{zwicker13, moore89, bregman90} allowing us to process sounds the way we perceive them.
+At the same time, spectral representations relates to our human auditory system~\cite{zwicker13, moore89} allowing us to process sounds the way we perceive them.
 \par
 The periodicity of real world sounds, as mentioned above, usually only holds for short durations of several milliseconds, often referred to as ``quasi-stationarity''.
-Instead, sounds are non-stationary over the course of several seconds and it therefore is useful to analyze and process short-time spectra, computed in an overlapped fashion, resulting in a \emph{time-frequency} (TF) representation.
-Simply put, a TF representation encodes the time-varying \textit{spectra} into a matrix \(\mX\) with frequencies \(k\) and time frames \(n\).
-For signals with more than one channel, the representation is extended to yield a three-dimensional tensor, where \(c\) represents the channel.
-\par
-When sounds are processed in the time-frequency domain, the transformation greatly benefits from being invertible, hence many researchers chose a representation that allows to easily reconstruct the signal.
+Therefore, we analyze and process short-time spectra, computed in an overlapped fashion, resulting in a \emph{time-frequency} (TF) representation.
 The short-time Fourier transform (STFT) is the most commonly used TF representation~\cite{mcaulay86}.
-STFT matrices \(\mX \in \sC^{n \times k \times c}\) are complex meaning that they include the phase information.
-However, very often analysis and processing is only focussed only on the \emph{magnitude} \(|\mX|\) or the \emph{spectrogram} \(|\mX|^2\).
+It encodes the time-varying spectra into a matrix \(\mX\) with frequencies \(k\) and time frames \(n\).
+\par
+When sounds are processed in the time-frequency domain, the transformation greatly benefits from being invertible to reconstruct a time domain signal.
+STFT matrices \(\mX \in \sC^{n \times k \times c}\) are complex and include phase information.
+However, analysis and processing is often focussed  on the \emph{magnitude} \(|\mX|\) or the \emph{spectrogram} \(|\mX|^2\).
 
 \subsection{Fundamental Frequency and Harmonicity}
 % TODO: add note pitch vs pitch discussion
@@ -65,12 +64,11 @@ And it is this property we perceive as \emph{pitched}.
 
 It is important to note that \emph{pitch} is a subjective measure.
 The objective equivalent is referred to as the \emph{fundamental frequency} (\(F_0\))\footnote{Pitch and $F_{0}$ are often used synonymously in audio research. Even though this is incorrect, I sometimes may refer to other work where pitch instead of $F_{0}$ is used.}.
-\(F_{0}\) is can be defined as the lowest frequency/partial of an harmonic signal.
+\(F_{0}\) can defined as the lowest frequency/partial of an harmonic signal.
 All frequencies together formed by the integer multiples of the fundamental frequency are named \textit{harmonics}~\cite{schenker54}.
 When the fundamental frequency changes, the frequencies of these harmonics changes accordingly.
 This results in the typical comb-like structure of harmonic signals when analyzed in the time-frequency domain.
-% TODO:
-% An example of a harmonic signal can be seen in Figure~\ref{fig:cello} that depicts a single played note from a violoncello.
+% TODO: An example of a harmonic signal can be seen in Figure~\ref{fig:cello} that depicts a single played note from a violoncello.
 \par
 An estimate of the fundamental frequency of a signal is required in various applications of audio and speech signal processing.
 Some scenarios are targeted to extract the fundamental frequency of the predominant source~\cite{salamon12} in a mixture of other sources.
@@ -216,7 +214,7 @@ Another differentiation is made between instantaneous or convolutive mixtures.
 For instantaneous mixtures, all sources are mixed using fixed mixing parameters \(a_j\).
 This is the typical scenario when sources are mixed using a mixing console (pan-pot mix).
 In \emph{convolutive} mixtures, each source \(\mathbf{s_j}\) is convolved with a filter response \(r_j\).
-This scenario approximates a real world acoustic environment like a cocktail party where each speaker is then convoluted with a room impulse response.
+This scenario approximates a real world acoustic environment like a ``cocktail party'' where each speaker is then convoluted with a room impulse response.
 \par
 Usually, the mixing process is assumed to be time-invariant but for a variety of signals, such as live recordings with moving sources, it can also be time-variant.
 I summarize the mathematical notation of different mixing models in Table~\ref{tab:mixing_models}.
@@ -262,7 +260,6 @@ In music it is important to understand that the process of mixing is of paramoun
 This is because mixing sources is as a creative task that involves recording engineers and tonmeisters, and often the artists itself.
 In today's digital mastering processes, professionally produced music consists of several intermediate mixing steps before the final mixture is produced:
 
-% TODO: add block diagram
 \begin{description}
   \item[1) Microphone Recording:] in this step the analog sources are captured and D/A converted. 
   Vocals and other acoustic instruments are recorded using one or multiple microphones.
@@ -299,20 +296,12 @@ To answer these two questions, research came up with the two major fields of \em
 % TODO: should I explain the order of the two tasks?
 \subsection{Sound Source Separation}
 
-We apply source separation in our every day life.
-Speech is the basis for human communication and when humans talk to each other, we are often not aware of that we are listening to a mixture of several sources (e.g. from multiple talkers) or noise.
-However, not all sources require our attention.
-Often, a specific talker is considered to be ``desired'', carrying information, whereas noise or other speakers interfere with this signal.
-The attenuation of undesired speakers, when multiple concurrent speakers are present, is well known as the ``cocktail party problem''~\cite{cherry53, haykin05}.
-For almost 70 years now, research is fascinated by the idea to create a machine to inverse the process of mixing and to extract or separate the desired sources from a mixture.
-This problem is called \emph{source separation}.
-Surprisingly, it has been shown that humans are able to do such a task, segregating a  source, even without eye contact and when no spatial cues are used~\cite{bregman90}.
-\par
 One of the earliest work on audio source separation started in the mid 70s~\cite{miller73}.
 Since then a large amount of contributions were made in this field, both, targeted at speech and music separation.
 Due to this large number of contributions, it is not feasible to give an extensive overview on all existing methods in the context and I refer the reader to~\cite{vincent18, comon10, rafii}, that is gives a detailed overview into source separation.
 Researchers often do not deal with general source separation but specific sub problems, usually targeted at a much more constraint scenario.
 \par
+% TODO: DNNS! DNNS! DNNS!... paradigma shift
 Due to its strong academic efforts, source separation significantly improved in the last decade, but still is not considered as a ``solved problem''.
 This is mainly because it yields very specific challenges and opportunities, both, mathematically and on the application side. 
 Source separation methods has relevant applications for music and speech mixtures such as attenuation of hearing aids, karaoke or music creation due to isolated sample composition.
@@ -329,8 +318,8 @@ The reader is referred to~\cite{common10}, which is gives a detailed overview of
 Many real world source separation problems, however, are under-determined and up to date for a large number of scenarios, the problem of separating sources is still very challenging.
 \par
 In this thesis I only focus on methods that perform separation on underdetermined mixtures.
-
 % TODO: add argumentation here
+
 \subsubsection*{Single Channel vs. Multichannel Separation}
 % from zafar
 Approaches based on panning information aim at exploiting stereo cues to identify and separate individual sources. Such approaches typically compare the left and right channels of a mixture in the TF domain to estimate the \textit{panning coefficients} of the sources and then generate TF masks to separate them. They generally assume that the one source has a fixed panning, which is often the case with the vocals in popular music. This idea can be extended to more than two channels, in which case multichannel diversity is often called \textit{spatial information}.

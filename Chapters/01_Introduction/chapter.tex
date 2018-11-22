@@ -2,10 +2,31 @@
 \chapter{Introduction}\label{ch:introduction}
 %************************************************
 
+We apply source separation in our every day life. % TODO: maybe put into introduction
+Speech is the basis for human communication and when humans talk to each other, we are often not aware of that we are listening to a mixture of several sources (e.g. from multiple talkers) or noise.
+However, not all sources require our attention.
+Often, a specific talker is considered to be ``desired'', carrying information, whereas noise or other speakers interfere with this signal.
+The attenuation of undesired speakers, when multiple concurrent speakers are present, is well known as the ``cocktail party problem''~\cite{cherry53, haykin05}.
+For almost 70 years now, research is fascinated by the idea to create a machine to inverse the process of mixing and to extract or separate the desired sources from a mixture.
+This problem is called \emph{source separation}.
+Surprisingly, it has been shown that humans are able to do such a task, segregating a source, even without eye contact and when no spatial cues are used~\cite{bregman90}.
 
-% count estimation is faszinating research because the task sounds so simple, yet there so much behind it that we don't
-Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+% TODO: DNNS! DNNS! DNNS!... paradigma shift
 
+% [ ] Tell a story, and tell it well
+% [ ] Tell the reader the problem you are tackling in this project.
+% [ ] Quote data sources, e.g., industry analysts, market surveys, case studies 
+% [ ] Use plenty of concrete examples (or a running example) and figures 
+% [ ] State clearly how you aim to deal with this problem.
+% [ ] Limit the scope of your study.
+
+% 1. blabla, everyday life application, examples, 
+% 2. 
+
+% count estimation is faszinating research because the task sounds so simple, yet there so much behind it that we don't. Imagine counting the number trees in a field, compared to counting marbles on a table. Time! Modulation!
+% Estimating  the  number  of  people  in  an  image  is  a practical machine vision task that is gaining popularity in the security and surveillance community. 
+% on images spatial overlap
+% estimating counts i
 
 \section{Objectives}
 
@@ -13,13 +34,11 @@ The aim of this thesis is \textbf{to investigate the influence of modulations in
 In order to do this, I outline the following objectives as the basis for this thesis:
 
 \begin{description}
-  \item[Scenarios and Datasets:] to develop scenarios where sources are highly overlapped. Also I envision scenarios where slow modulations can be exploited. However generally data often is not available. Therefore one objective of this thesis is the creation of new realistic as well as synthetic datasets.
-  \item[Representations:] 
-    to study and develop representations that allow to improve analysis and processing of these signals.
-  \item[Processing Methods:] to develop new methods to address the source separation scenario. These methods would be designed for the constrained scenarios where modulation effects can easily be exploited.
-  \item[Generalization:] to transfer the results and insights gained by these
-    % TODO: needs to be put somewhere else
-    studies onto simpler scenarios to measure the actual effect.
+  \item[Scenarios and Datasets:] to develop scenarios where sources are highly overlapped. Also envision scenarios where slow modulations can be exploited. 
+  However as real world data often is not available, one objective of this thesis is the creation of new realistic as well as synthetic datasets.
+  \item[Representations:] to study and develop representations that allow to improve analysis and processing of these signals.
+  \item[Processing Methods:] to develop new methods to address source separation scenarios. These methods would be designed for the constrained scenarios where modulation effects can easily be exploited.
+  \item[Generalization:] to transfer the results and insights gained by these controlled studies onto more real-world scenarios.
   \item[Number of Sources:] to investigate and develop new methods to address the task of estimating the number of sources in highly overlapped mixtures.
 \end{description}
 
@@ -32,8 +51,8 @@ This thesis comes with five main contributions:
 \begin{enumerate}
 \item I discuss scenarios of time and frequency overlapped audio sources.
 I consider known scenarios for speech and music but also present an novel scenario where instruments are playing in unison.
-In this scenario, I show, how slowly varying tempo-spectral modulations, caused e.g. by vibrato, can be utilized for separation and analysis of unison signal.
-Furthermore I show how these scenarios can stimulate new research directions to \emph{analyze} and \emph{process} such sounds.\\
+In this scenario, I show, how slowly varying tempo-spectral modulations, caused e.g. by vibrato, can be utilized for separation and source count estimation of highly overlapped signals.
+Furthermore I show how these scenarios can stimulate new research directions to \emph{analyze} and \emph{process} such signals.\\
 
 \item I developed two novel methods to \emph{separate} unison instrument mixtures: one is informed by an estimate of the fundamental frequency variation.
 The other is unsupervised, inspired by the way how humans segregate time-varying sources.
@@ -41,25 +60,25 @@ Finally, I study how the observations from the unison scenario can be transferre
 
 \item I provide two detailed experimental studies to assess how humans perceive highly overlapped mixtures.
 In these studies I focussed on the \emph{number of concurrent sources} in scenarios such as a overlapped speech as well as polyphonic music recordings.
-In this vein, I results of auditory experiments that study the humans ability to detect the maximum number of sources.\\
+In this vein, I present the results of auditory experiments that studied the humans ability to detect the maximum number of sources.\\
 
-\item For the task of \emph{estimating the maximum number of concurrent} speakers I developed a state-of-the art method based on deep neural networks that addresses cocktail party like environments.
-Furthermore, I show that this model supersedes human performance when compared with the results of subjective listening experiments.
-Finally I revealed the relation between slow modulations in speech and the ability of a model to count. 
-\\
+\item For the task of \emph{estimating the maximum number of concurrent} speakers I developed a method based on deep neural networks that addresses cocktail party like environments.
+Furthermore, I show that this model reached state-of-the art performance when compared to other models and also supersedes human performance when compared with the results of subjective listening experiments.
+Finally I revealed the relation between slow modulations in speech and the ability of a model to count.\\
 
 \item Last, but not least, I provided service to the research community by co-organizing the international source separation evaluation campaign (SiSEC) and helped out to improve sustainability and reproducibility in our field.
 In that vein, I provided open software to assess the quality of separation system. 
 These tools were also used throughout the work presented in this thesis.
 \end{enumerate}
 
+Since this work is based on these publications, they are cited repeatedly throughout this thesis. However, for readability reasons, if a section is mainly based on one of these publication, a remark is added at side of the section, instead of citing the same publication exhaustively. Furthermore, it should be note that these contributions are based on the ideas and research of the author of this thesis, and is reflected in the publications by being the lead author.
 
 \section{Structure of this Thesis}
 
 The thesis and its relevant linked publications are organized into 6 main chapters.
 \begin{description}
   \item[Chapter 1], this chapter.
-  \item[Chapter 2] explains the fundamental concepts of audio signals, sources and overlapped sounds, relevant for the remainder of this thesis. This includes commonly used transformations and signal representations for the task of source separation and analysis of mixtures.
+  \item[Chapter 2] explains the fundamental concepts of audio signals, sources and overlapped sounds, relevant for the remainder of this thesis. This includes commonly used transformations and signal representations for the task of source separation and source count estimation.
   Furthermore, the process of mixing sound sources as well as its inverse task --- sound source separation --- are explained.
   The chapter also covers basics of fundamental frequency and its variations as an important feature for harmonic audio signals.
   Part of this chapter is based on~\cite{rafii18}.

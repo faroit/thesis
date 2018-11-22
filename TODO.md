@@ -1,3 +1,19 @@
+### MY THESIS
+
+humans are not good a counting larger numbers. So its easy for machines to improve on this. This is not AI!
+
+Problem statement or Hypothesis
+Why is this a Hard Problem
+Approach or Methodology 
+Why is this Innovative
+Assumptions and Constraints
+Initial Results (Promise of Great Things to Come) 
+Validation Plan
+Limitations and Applicability
+Expected Contributions
+What’s beyond this thesis
+Roadmap of Thesis
+
 ### Generalized Wiener Filter Reconstruction
 
 $$
@@ -10,7 +26,6 @@ $$
 
 * Make sure that modulation are also used to analyze time frequency
 * why counting
-
 * Separation has relevancy for audio coding~\cite{herre12}
 
 ## Random shit
@@ -20,26 +35,28 @@ $$
 
 # Bernd 19.10.2018
 
-* [ ] Common Fate interpretation mit plots (siehe fatimeh poster)
-* [ ] Fragen, ob Korrekturen später möglich sind und in welchem Umfang
-* [ ] Grafiken aus IEEE publikationen übernehmen? nur hinweis bei IEEE und AES?
-* [ ] Bei der vorstellung der Paper... alle Autoren inklusive Professoren?
-* [ ] Tables und Figures in Appendix?
-* [ ] Citation Style numerisch oder alphanumerisch ok?
+* [X] noch mal den Titel checken, deutsche Variante, vielleicht doch mehr in Richtung Modulation?
+* [X] Dataset Kapitel ok oder überflüssig --appendix?
 
-# Software releases/ Bernd Fragen
-
-* [ ] Release WICE dataset
-* [ ] Commonfate: parafac2 fast release von Jeremy
-* [ ] noch mal den Titel checken, deutsche Variante, vielleicht doch mehr in Richtung Modulation?
+* [X] Tables und Figures in Appendix?
+* [X] Common Fate interpretation mit plots (siehe fatimeh poster), aber future work
+* [X] Grafiken aus IEEE publikationen übernehmen? nur hinweis bei IEEE und AES?
+* [X] Bei der vorstellung der Paper... alle Autoren inklusive Bernd?
+* [X] Citation Style numerisch oder alphanumerisch ok?
+* [X] Release WICE dataset
+* [ ] Commonfate: parafac2 fast release von Jeremy?
+* [X] Fragen, ob Korrekturen später möglich sind und in welchem Umfang?
+* [X] Publikationsliste inklusive neuer Publikationen! Auch in Thesis?
 
 # General status
 
 * [X] NMF Example + Figures --> Mathieu
-* [ ] Add chapter summaries --> Stibie, Patricio, Thomas
+* [X] Add chapter summaries --> Stibie, Patricio, Thomas
+
+* [ ] Table 2.1, Introduction, Fundamentals, NMF, Conclusion --> Patricio
 * [ ] remove numbering from contributions
 * [ ] Write Introduction --> Christophe, Antoine
-
+* [ ] Countnet nochmal lesen
 * [ ] add negative log likelihood
 * [ ] add pescador training to count net paper.
 * [ ] reference all datasets
@@ -47,7 +64,8 @@ $$
 * [X] check the wording for magnitude spectrogram (check mainards book)
 * [ ] add step-count plot
 * [ ] Figures durchgehen
-* [ ] countnet lesen
+* [ ] Grafiken IEEE
+* [ ] Tabelltenverzeichnis, Figureverzeichnis etc
 * [ ] Check website availability
 * [ ] add gap statistics and elbow method and other clustering shit from wolfgangs diplomarbeit
 
