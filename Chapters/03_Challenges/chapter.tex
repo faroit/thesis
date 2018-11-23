@@ -8,7 +8,7 @@ In order to make an attempt to formalize the \emph{level of overlap}, I start wi
 \hypertarget{separability-of-mixtures}{%
 \section{Separability of Mixtures}\label{separability-of-mixtures}}
 
-TF representations have obvious benefits such as the improved interpretability due to its ``image-like'' two-dimensional properties.
+Time frequency representations such as the short-time Fourier transform (STFT) have obvious benefits such as the improved interpretability due to its ``image-like'' two-dimensional properties.
 More importantly, however, such a representation allows to separate mixtures of speech and musical instruments.
 The reason for this is that these mixtures may be fully overlapped in the time domain but are less overlapped in the frequency domain~\cite{rickard02, giannoulis11, rafii}.
 % still minor relation to rafii, but seems ok
@@ -16,8 +16,8 @@ In turn, a TF representation allows to apply filtering in a way that sufficientl
 Furthermore, it allows for simple reconstruction of the original waveform and provides a good trade-off between computational complexity and separation quality.
 \par
 Due to these reasons, many source separation methods focus on extracting individual sources by modeling their respective target in the time-frequency domain.
-% check
-It is a reasonable approach where it is usually assumed that the time-frequency-domain (STFT) provides sufficient level of separability (e.g.~by given a perfect mask).
+% TODO: check
+It is a reasonable approach where it is usually assumed that an STFT provides sufficient level of separability (e.g.~by given a perfect mask).
 The actual extraction or filtering is done by synthesizing the magnitude estimate of the model and applying the originals mixture phase.
 \par
 In practice, the ability to extract a source from a mixture, depends on the amount of overlap between sources.
@@ -111,15 +111,16 @@ Now I want to focus on these ``modulational'' aspects on mixtures and their appl
 Tempo-spectral modulations occur both in speech and music signals as detailed in Section~\ref{sub:time-variant-audio-signals}).
 Exploiting modulations is natural for humans: early research from Zwicker in 1952 focused on the human ability to detect amplitude modulations~\cite{zwicker52}. 
 Later, it was shown by Bregman, McAdams and Fastl in~\cite{mcadams89, bregman90, fastl90} that humans use amplitude modulations to group sources; this concept was called \emph{Common Amplitude Modulation} (CAM).
-CAM exploits the fact that harmonics that share the same amplitude modulation across the bins, are perceived as \emph{integrated} as opposed to~\emph{segregated}.
-Further, it was shown in~\cite{bacon89} that the ability of detecting amplitude modulations can be integrated into auditory models.
-It was then found by Dau in~\cite{dau99}, humans are especially sensitive at slow modulations:
+CAM exploits the fact that harmonics share the same amplitude modulation across frequency bins, are perceived \emph{integrated} as opposed to~\emph{segregated}.
+Further, it was shown in~\cite{bacon89} that the ability of detecting amplitude modulations can be incorporated into auditory models.
+It was then found by Dau in~\cite{dau99}, humans are especially sensitive at low frequency modulations:
 
 \begin{quote}
 ``Slow modulations are associated with the perception of rhythm. Samples of running speech, for example, show distributions of modulation frequencies with peaks around 3-4 Hz, approximately corresponding to the sequence rate of syllables~\cite{plomp83}. Results from physiological studies have shown that, at least in mammals, the auditory cortex seems to be limited in its ability to follow fast temporal changes.''
 \end{quote}
 
-Dau, in fact, proposed a model that mimics the humans ability to detect modulation patterns and pointed out applications to improve hearing of hearing-impaired listener or speech intelligibility.
+% TODO: maybe move to intro, objectives?
+Dau then proposed a model that mimics the humans ability to detect modulation patterns and pointed out applications to improve hearing of hearing-impaired listener or speech intelligibility.
 \par
 Auditory science shows that modulations are important for humans, possible research questions for the scope of this thesis are:
 
@@ -129,7 +130,6 @@ Auditory science shows that modulations are important for humans, possible resea
   \item Can modulations still be utilized when modulation function and its cause of modulation is unknown?
 \end{itemize}
 
-% depending on the carrier frequency and the modulation frequency, humans describe modulations differently as fluctuation, roughness, or residue pitch (See Figure 2 in~\cite{joris04}).
 Previously, research aimed to address these questions for various tasks of processing and analysis. 
 In the following, I will give an overview of existing work focussed on analysis and separation of modulated sounds.
 
@@ -188,16 +188,16 @@ One key feature of vocals is they typically exhibit great variability in fundame
 \section{Summary}
 
 Modulations play an important role in audio signal analysis. 
-However past research was mainly focused on the analysis of single notes and not on overlapped sounds.
+However past research was mainly focused on single notes and not on overlapped sounds.
 It is therefore to be investigated if scenarios with severe overlap can utilize modulations as well.
 This comes with a number of challenges: Firstly, parameterization of modulation characteristics of a single source is difficult, when only the mixture is observed. 
-For example, it is known~\cite{salamon13} that the extraction of the fundamental frequency in a mixture is difficult. 
+For example, it is known~\cite{salamon13} that the extraction of the fundamental frequency in a mixture is challenging. 
 The reason is that crossing partials is a big problem for sinusoidal modeling~\cite{viste03}. 
 And even if the tracking would work perfectly, evaluation of robustness and accuracy is often hardly possible when the reference data is only annotated with human precision.
 Secondly, representations like modulation spectrogram only cover amplitude modulations, how can modulation patterns of generic nature (AM/FM, timbre modulation) tracked.
 Highly overlapped signals require suitable representations that have a better separability than classical STFT.
 Improving the separability, however, may not necessarily lead to better separation results when representations are not easily invertible.
-% TODO: move to 5 or 6
+% TODO: move to 5 or 6x
 % Another problem is that approaches that exploit modulations for source separation were mostly focussed on known modulations in contrast to unsupervised methods.
 % Furthermore, with the recent success of deep learning based methods, it to be seen, if learning based methods can utilize modulations from data.
 \par

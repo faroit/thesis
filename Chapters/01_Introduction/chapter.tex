@@ -65,7 +65,7 @@ This thesis comes with five main contributions:
 
 \begin{enumerate}
 \item I discuss scenarios of time and frequency overlapped audio sources.
-I consider known scenarios for speech and music but also present an novel scenario where instruments are playing in unison.
+I consider known scenarios for speech and music but also present a novel scenario where instruments are playing in unison.
 In this scenario, I show, how slowly varying tempo-spectral modulations, caused e.g. by vibrato, can be utilized for separation and source count estimation of highly overlapped signals.
 Furthermore I show how these scenarios can stimulate new research directions to \emph{analyze} and \emph{process} such signals.\\
 
@@ -92,16 +92,17 @@ Since this work is based on these publications, they are cited repeatedly throug
 
 The thesis and its relevant linked publications are organized into 6 main chapters.
 \begin{description}
-  \item[Chapter 1], this chapter.
-  \item[Chapter 2] explains the fundamental concepts of audio signals, sources and overlapped sounds, relevant for the remainder of this thesis. This includes commonly used transformations and signal representations for the task of source separation and source count estimation.
+  \item[Chapter 2] explains the fundamental concepts of audio signals (Section~\ref{sec:specifics-of-audio-signals}) as well as sources and overlapped sounds (Section~\ref{sources-and-mixtures}), relevant for the remainder of this thesis. 
+  This includes commonly used transformations and signal representations for the task of source separation and source count estimation.
   Furthermore, the process of mixing sound sources as well as its inverse task --- sound source separation --- are explained.
-  The chapter also covers basics of fundamental frequency and its variations as an important feature for harmonic audio signals.
+  The chapter also covers basics of fundamental frequency and its variations (Section~\ref{sub:time-variant-audio-signals}) as an important feature for harmonic audio signals.
   Part of this chapter is based on~\cite{rafii18}.
   \item[Chapter 3] introduces relevant tasks and applications in the context of highly overlapped sounds.
-  Furthermore, the relevance of highly overlapped source scenarios are discussed and a new research track of long term slow modulations is proposed.
+  Furthermore, the relevance of highly overlapped source scenarios are discussed and a new research track of slow  modulations (Section~\ref{exploiting-slow-modulations}) is proposed.
   \item[Chapter 4] presents and discusses the importance of data for analysis and evaluation.
-  In this chapter datasets that were created during the course of this thesis are discussed~\cite{oss_wice, oss_unison, oss_libricount, liutkus17}.
-  \item[Chapter 5 and 6] presents separation methods that are developed over the course of this thesis. It covers techniques that uitilize modulation information when available~\cite{stoeter14, stoeter15acm, stoeter15icassp} as well as blind methods~\cite{stoeter16, liutkus17}.
+  In this chapter synthetic (Section~\ref{}) and realistic (Section~\ref{}) datasets are presented, created during the course of this thesis~\cite{oss_wice, oss_unison, oss_libricount, liutkus17}.
+  \item[Chapter 5 and 6] presents separation methods that are developed over the course of this thesis. 
+  The covers techniques that utilize modulation information when available(Chapter 5, ~\cite{stoeter14, stoeter15acm, stoeter15icassp}) as well as blind methods (Chapter 6~\cite{stoeter16, liutkus17}).
   \item[Chapter 7 and 8] covers the analysis of overlapped sounds. Specifically, it deals with identifying and estimating the number of sources on music~\cite{schoeffler13, stoeter13} and the cocktail party scenario~\cite{stoeter19, stoeter18}.
   \item[Chapter 9] Concludes this thesis and gives a and outlook into future research directions.
 \end{description}

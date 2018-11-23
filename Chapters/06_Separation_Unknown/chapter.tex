@@ -82,7 +82,7 @@ To underpin this issue, I depict this problem in Figure~\ref{fig:am_tensor_nmf} 
 The signal consists of two sinusoids which are linearly mixed. 
 Both share the same carrier frequency but have different amplitude modulation rates. 
 When we apply a factorization with $K=2$, one can see that NMF is unable to separate the two signals sufficiently and instead activates both sources in an alternating pattern.
-% TODO
+
 \begin{figure}[H]
 \centering
 \subcaptionbox{Time Domain}%
@@ -139,7 +139,7 @@ However, I found that it is easier follow when the individual tensor elements ar
   v_{fbt} \approx \sum_{k = 1}^{K} w_{fk} m_{bk} h_{tk}.
 \end{equation}
 
-A visualization of the 3-way PARAFAC product is depicted in Figure~\ref{fig:cpd}.
+A visualization of the three-way PARAFAC product is depicted in Figure~\ref{fig:cpd}.
 
 \begin{figure}[!t]
   \centering
@@ -332,9 +332,8 @@ relatively high temporal resolution. The periodicities in the spectra caused
 by downsampling make the CFT relatively independent of frequency shifts, so
 that, for example, the output patch of a single sinusoidal sweep is mainly
 influenced by the sweep rate.
-% TODO: show sweeps?
-% TODO: add complexity analaysis and plot maybe?
 
+% TODO: add complexity analysis and plot maybe?
 
 \subsection{Signal Separation}
 Now, let us assume that the observed waveform is actually the sum
@@ -380,7 +379,8 @@ is different for each frequency band~$f$, and that captures the
 long term modulation profile of each source around that frequency.
 Then, $\vh \triangleq \{h_{tk}\}_{t,k}$ is an activation vector that indicates the strength
 of source on the patches located at temporal position~$t$.
-The factorization model is depicted in Figure~\ref{fig:cfm}
+The factorization model is depicted in Figure~\ref{fig:cfm}.
+We also experimented with other two and three-factor combinations but never got any promising results, suggesting that our proposed NMF-like model is a good choice.
 
 \begin{figure}[!htbp]
 \centering
@@ -389,12 +389,10 @@ The factorization model is depicted in Figure~\ref{fig:cfm}
 \label{fig:cfm}
 \end{figure}
 
-% TODO: we also experiment with a, b * f * t with worse results. This means that the modulation tensor is not frequency independent.
-
 % TODO: All patches are independent? Wie passt das zusammen?
 
-Learning those parameters can be achieved using the conventional Nonnegative
-Tensor Factorization methodology (see e.g.~\cite{cichoki09,ozerov12,smaragdis14}
+Learning those parameters can be achieved using the non-negative
+tensor factorization (see e.g.~\cite{cichoki09,ozerov12,smaragdis14}
 for an overview), except that it is applied to the CFT instead of the STFT,
 and that the particular factorization to be used is~\eqref{eq:NTF_model}.
 
@@ -427,6 +425,8 @@ H_{k}\left(t\right)\leftarrow H_{k}\left(t\right)\tfrac{\sum_{a,b,f}v\left(a,b,f
 \subsection{Experiments}
 \label{sec:experiment}
 
+In this section, we present separation experiments utilizing CFM and compare it with other methods.
+
 \begin{table*}[ht!]
   \centering
   \scriptsize
@@ -445,8 +445,6 @@ H_{k}\left(t\right)\leftarrow H_{k}\left(t\right)\tfrac{\sum_{a,b,f}v\left(a,b,f
 \caption{Overview of the evaluated algorithms}
 \label{tab:methods}
 \end{table*}
-
-In this section, we present separation experiments utilizing CFM and compare it with other methods.
 
 \subsubsection{Synthetic Example}
 \label{sub:Synthentic_Examples}

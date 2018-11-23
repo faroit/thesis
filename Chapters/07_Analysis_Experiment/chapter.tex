@@ -119,7 +119,6 @@ The experiment was attended by 62 participants, where half of them regularly pla
 Instead of a slider UI-element, the interface only features plus and minus buttons so that the subjects were not biased about the maximum number of instruments. Item \emph{J021**} had been selected as training item and was presented to the subjects during the introduction phase to make them familiar with the user interface. This trial also unveiled the number and name of the instruments within that piece. After they had read the introduction page, the subjects were asked to adjust the volume during the training example to their preference and leave the volume at that level for the duration of the experiment. The stimuli were presented on \textsc{Beyerdynamics DT770} headphones connected to a \textsc{RME Babyface}. The complete test took about 20 minutes on average for every participant.
 
 \subsection{Results: A gap of one instrument}
-% TODO: musicians are known to be better in many tasks: ~\cite{kishon01}
 
 \begin{figure}[h]
 \centering
@@ -728,10 +727,11 @@ First, we showed that estimating the number of instruments in music mixtures is 
 We presented the results of an experiment with 62 participants, the focus was set to stimuli of inhomogeneous timbre and also mixed genre. 
 In Chapter~\ref{cha:fundamentals}, two different questions were introduced how to frame the count estimation problem. 
 In this experiment, we explicitly used an open question of ``How many instruments can you hear'' to gather more knowledge into the strategies being applied by the participants.
-Another reason was that the stimuli durations were too long to ask for the maximum number of concurrent items, thus promoting ``counting by detection'' as good strategy to approach the problem.
-By comparing musicians to non-musicians, we revealed that there is a significant difference in performance. 
-Particularly, we found a that this gap is most prominent for items of three and four instruments. 
-Furthermore, for all stimuli (ranging from one to six instruments) we saw that musicians performed about 20\% better than non-musicians, hence revealing a ``gap of one instrument'' in mean absolute error.
+Another reason was that the stimuli durations were too long to ask for the maximum number of concurrent stimuli, thus promoting ``counting by detection'' as good strategy to approach the problem.\par
+Musicians often perform better than non-musicians on some auditory tasks~\cite{kishon01}.
+By comparing musicians to non-musicians, we confirmed that there is a significant difference in count estimation, too.
+Particularly, we found a that this gap is most prominent for stimuli of three and four instruments. 
+Furthermore, for all stimuli (ranging from one to six instruments) we revealed that musicians performed about 20\% better than non-musicians, hence revealing a ``gap of one instrument'' in mean absolute error.
 In turn, our experiment indicated that the upper limit is reached with more than three instruments, related to a previous experiment~\cite{huron89} which focused on voices instead of instruments.
 We then repeated this experiment in an open, uncontrolled environment with more than 1000 participants.
 Regarding the ability of estimating the number of instruments, the web experiment confirmed the results of the laboratory experiment. 
@@ -751,4 +751,3 @@ Our results could be a first step towards modeling count estimation as a target 
 With such a model one could further improve lossy compression for object based music recordings such for~\cite{herre12saoc} by only transmitting a ``perceivable'' number of sources.
 
 % TODO: maybe add that more stimuli vs nb. of participants?
-% ~\cite{huron89} Reaction times: ``it takes five times longer to count to the number five than it does to count to the number one.''.
