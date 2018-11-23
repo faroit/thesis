@@ -610,7 +610,7 @@ Even though MFCCs are used in related tasks and are included in our baseline eva
 This is why we decided to not to use the MFCCs as an input for the proposed architectures.
 The remaining input representations are identical to those listed in~\cite{stoeter17}:
 
-\noindent\textbf{1) STFT}: magnitude of the Short-time Fourier transform computed using Hann-windows.
+\noindent\textbf{1) STFT}: magnitude of the short-time Fourier transform computed using Hann-windows.
 A frame length of 25~ms has been used.
 The resulting input is \(X \in \mathbb{R}^{500 \times 201}\).\\
 \textbf{2) LOGSTFT}: logarithmically scaled magnitudes from STFT representation using \(\log(1 + STFT)\).

@@ -188,7 +188,7 @@ Results indicated that modulation tensor factorization generally performs worse 
 The reason is that, that it does only consider amplitude modulation even though frequency modulations are the actual source of modulation.
 In the next section we investigated how the complex modulation patterns that consist of both, frequency and amplitude modulation patterns caused by the instrument vibratos, can improve the separation quality.
 
-\section{The Common Fate Model for the Separation of Unison Mixtures}
+\section{The Common Fate Model of Unison Mixtures}
 
 \marginpar{This section is based on the work that has been published in 2016~\cite{stoeter16}. The original idea was developed with Antoine Liutkus (INRIA, France) and the publication was written with the support of Roland Badeau (ParisTech, France) and Paul Magron (ParisTech, France)}
 
@@ -196,7 +196,7 @@ In this work a novel tensor signal representation is introduced which additional
 We can therefore make use of dependencies between modulations of neighboring bins.
 This is similar to the proposed High-Resolution Nonnegative Matrix Factorization model that accounts for dependencies in the time-frequency plane (HR-NMF~\cite{badeau11}).
 In short, HR-NMF models each complex entry of a time-frequency transform of an audio signal as a linear combination of its neighbors, enabling the modeling of damped sinusoids, along with an independent innovation.
-This model was generalized to multichannel mixtures in~\cite{badeau13a,badeau14} and was shown to provide considerably better oracle performance for source separation than alternative models in~\cite{magron15a}.
+This model was generalized to multichannel mixtures in~\cite{badeau13a, badeau14} and was shown to provide considerably better oracle performance for source separation than alternative models in~\cite{magron15a}.
 Indeed, even though some variational approximations were introduced in~\cite{badeau13} to strongly reduce their complexity, those algorithms are often demanding for practical applications.
 In this work, we proposed to relax some assumptions of HR-NMF in the interest of simplifying the estimation procedure.
 The core idea is to divide the complex spectrogram into modulation patches in order to group common modulation in time and frequency direction.

@@ -1,6 +1,5 @@
 ### MY THESIS
 
-humans are not good a counting larger numbers. So its easy for machines to improve on this. This is not AI!
 
 Problem statement or Hypothesis
 Why is this a Hard Problem
