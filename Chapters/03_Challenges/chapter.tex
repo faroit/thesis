@@ -2,7 +2,7 @@
 \chapter{Highly Overlapped Signals}\label{cha:highly-overlapped-signals}}
 
 In the previous chapter, I introduced basic signal processing fundamentals in the context of audio mixtures.
-In this chapter I want to focus on scenarios of highly overlapped signals.
+In this chapter I focus on scenarios of highly overlapped signals.
 In order to make an attempt to formalize the \emph{level of overlap}, I start with a recap of time-frequency representations as introduced in Section~\ref{sub:time-frequency-representation} and how they are typically applied to address the source separation problem.
 
 \hypertarget{separability-of-mixtures}{%
@@ -122,15 +122,7 @@ It was then found by Dau in~\cite{dau99}, humans are especially sensitive at low
 % TODO: maybe move to intro, objectives?
 Dau then proposed a model that mimics the humans ability to detect modulation patterns and pointed out applications to improve hearing of hearing-impaired listener or speech intelligibility.
 \par
-Auditory science shows that modulations are important for humans, possible research questions for the scope of this thesis are:
-
-\begin{itemize}
-  \item Can modulations be automatically detected or extracted from highly overlapped signals?
-  \item If modulations are known, can they be exploited to improve a task such as source separation?
-  \item Can modulations still be utilized when modulation function and its cause of modulation is unknown?
-\end{itemize}
-
-Previously, research aimed to address these questions for various tasks of processing and analysis. 
+Previously, research has address a variety of tasks of processing and analysis in the context of modulations.
 In the following, I will give an overview of existing work focussed on analysis and separation of modulated sounds.
 
 \subsection{Analysis}
@@ -145,7 +137,7 @@ Following this, it was later proved that the detection of modulations can improv
 \par
 % go to music
 Amplitude modulations were also proposed for music tasks. 
-Work by Scheirer in~\cite{scheirer99}, proposed a method that operates by utilizing common modulation among groups of frequency sub-bands in the autocorrelogram domain.
+Work by Scheirer in~\cite{scheirer99} proposed a method that operates by utilizing common modulation among groups of frequency sub-bands in the autocorrelogram domain.
 In music, predominantly caused by vibrato, amplitude modulations are considered to be that important and the reader is referred to~\cite{muller11} for further details.
 \par
 A common way to explicitly analyze frequency variations is to first analyze the fundamental frequency and then track the fundamental frequency over time. 
@@ -155,7 +147,7 @@ The authors of this paper also proposed a novel method to directly estimate the 
 For time-varying frequency modulations, the modulation spectrogram is not an effective, as it would only be able to track the modulation rate due the side-lobes of the modulation.
 Disch and Edler proposed to decompose an audio signal into band pass signals and each of them parametrically modeled by a sinusoidal carrier and its amplitude and frequency modulation~\cite{disch09}.
 
-\subsection{Separation}
+\subsection{Processing}
 
 As described in Chapter 2, modulations are used by humans to group and segregate sounds. Viste et al. describes the impact of modulation in~\cite{viste03} as:
 
@@ -174,7 +166,7 @@ Modeling the common amplitude modulation to separate mixtures has already been d
 % from zafar
 Wolf et al. proposed an approach using rigid motion segmentation, with application to singing voice separation \cite{wolf14,wolf16}. They introduced harmonic template models with amplitude and pitch modulations defined by a velocity vector. They applied a wavelet transform \cite{anden14} on the harmonic template models to build an audio image where the amplitude and pitch dynamics can be separated through the velocity vector. They then derived a velocity equation, similar to the optical flow velocity equation used in images \cite{bernard01}, to segment velocity components. Finally, they identified the harmonic templates which model different sources in the mixture and separated them by approximating the velocity field over the corresponding harmonic template models.\\
 % from zafar
-Yen et al. proposed an approach using spectro-temporal modulation features \cite{yen14,yen15}. They decomposed a mixture using a two-stage auditory model which consists of a cochlear module \cite{chi05} and cortical module \cite{chi99}. They then extracted spectro-temporal modulation features from the TF units and clustered the TF units into harmonic, percussive, and vocal components using the EM algorithm and resynthesized the estimated signals.\\
+Yen et al. proposed an approach using spectro-temporal modulation features \cite{yen14,yen15}. They decomposed a mixture using a two-stage auditory model which consists of a cochlear module \cite{chi05} and cortical module \cite{chi99}. They then extracted spectro-temporal modulation features from the TF units and clustered the TF units into harmonic, percussive, and vocal components using the EM algorithm and re-synthesized the estimated signals.\\
 % from zafar
 % double check this!
 Virtanen made us of sinusoidal modeling \cite{virtanen00} to model and separate sources with tempo spectral modulation like vibrato.
@@ -187,19 +179,27 @@ One key feature of vocals is they typically exhibit great variability in fundame
 
 \section{Summary}
 
-Modulations play an important role in audio signal analysis. 
+Modulations play an important role in audio signals. 
 However past research was mainly focused on single notes and not on overlapped sounds.
 It is therefore to be investigated if scenarios with severe overlap can utilize modulations as well.
-This comes with a number of challenges: Firstly, parameterization of modulation characteristics of a single source is difficult, when only the mixture is observed. 
+This comes with a number of challenges: Firstly, parameterization of modulation characteristics of a single source is difficult, when only the mixture can be observed. 
 For example, it is known~\cite{salamon13} that the extraction of the fundamental frequency in a mixture is challenging. 
-The reason is that crossing partials is a big problem for sinusoidal modeling~\cite{viste03}. 
-And even if the tracking would work perfectly, evaluation of robustness and accuracy is often hardly possible when the reference data is only annotated with human precision.
-Secondly, representations like modulation spectrogram only cover amplitude modulations, how can modulation patterns of generic nature (AM/FM, timbre modulation) tracked.
-Highly overlapped signals require suitable representations that have a better separability than classical STFT.
-Improving the separability, however, may not necessarily lead to better separation results when representations are not easily invertible.
+The reason is that crossing partials are a challenging problem for sinusoidal modeling~\cite{viste03}. 
+And even if tracking of such them would work perfectly, evaluation of robustness and accuracy is often hardly possible when the reference data is only annotated with human precision.
+Secondly, representations like modulation spectrograms only cover amplitude modulations, whereas generic modulation patterns (AM/FM, timbre modulation) cannot be covered.
+% Highly overlapped signals require suitable representations improves separability compared to STFT.
+% Improving the separability, however, may not necessarily lead to better separation results when representations are not easily invertible.
 % TODO: move to 5 or 6x
 % Another problem is that approaches that exploit modulations for source separation were mostly focussed on known modulations in contrast to unsupervised methods.
 % Furthermore, with the recent success of deep learning based methods, it to be seen, if learning based methods can utilize modulations from data.
 \par
-In the next two chapters, I will introduce methods that utilize the modulations of sources through either prior knowledge (known) or by operating blindly (unknown).
-In any case, this differentiation does only affect how modulations are incorporated --- the underlying method is based on both, supervised and unsupervised methods.
+Auditory science shows that modulations are important for humans, possible research questions for the scope of this thesis are:
+
+\begin{itemize}
+  \item Can modulations be automatically detected or extracted from highly overlapped signals?
+  \item If modulations are known, can they be exploited to improve a task such as source separation?
+  \item Can modulations still be utilized when modulation function and its cause of modulation is unknown?
+  \item What is the role of modulations in the task of count estimation?
+\end{itemize}
+
+In the next two chapters, I will address this questions by utilizing the modulations of sources for separation tasks; either via prior knowledge (known) or by operating blindly (unknown).

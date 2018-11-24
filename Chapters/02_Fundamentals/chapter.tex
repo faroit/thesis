@@ -301,7 +301,6 @@ Since then a large amount of contributions were made in this field, both, target
 Due to this large number of contributions, it is not feasible to give an extensive overview on all existing methods in the context and I refer the reader to~\cite{vincent18, comon10, rafii}, that is gives a detailed overview into source separation.
 Researchers often do not deal with general source separation but specific sub problems, usually targeted at a much more constraint scenario.
 \par
-% TODO: DNNS! DNNS! DNNS!... paradigma shift
 Due to its strong academic efforts, source separation significantly improved in the last decade, but still is not considered as a ``solved problem''.
 This is mainly because it yields very specific challenges and opportunities, both, mathematically and on the application side. 
 Source separation methods has relevant applications for music and speech mixtures such as attenuation of hearing aids, karaoke or music creation due to isolated sample composition.
@@ -360,10 +359,10 @@ Even though the overview is focused on vocal accompaniment separation, most appr
 \end{figure}
 
 The number of sources is a simple but yet important information to be used in source separation and many other related research fields.
-In real world applications, information about the actual number of concurrent speakers is often not available.
+However, in real world applications, information about the actual number of concurrent speakers is often not available.
 \par
 The \emph{number of sources} \(k \in \sZ\) appears to be a clearly defined property of a mixture. 
-However the meaning of the property can differ, depending on its application.
+However the meaning of it can differ, depending on its application.
 Let us assume that we have \(L\) sources and mixture of duration \(N\).
 Further, I imagine a latent binary \textit{source activity} variable~$v_{nl}\in \left\{ 0,1 \right\}$ that indicates the activity of each source \(l\) and for each time instance \(n\).
 Now, concerning the number of sources, two definitions of \(k\) can be imagined:

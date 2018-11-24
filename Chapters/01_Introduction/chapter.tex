@@ -2,31 +2,65 @@
 \chapter{Introduction}\label{ch:introduction}
 %************************************************
 
+It is very likely that you know the following situation: you were at a crowded party and the next day your best friend, who was unable to join, asked you ``How many people where there?''. 
+You then struggled to find an answer because you had such intense conversations with the guests that you were unable to put your focus on the other guests.
+It turns out that this scene includes many interesting aspects that are relevant for this thesis.
+\par
+It reminds us that in our daily life we are exposed to situations where multiple events overlap in time.
+In the case of the conversation at a party where, is obvious that we can not see all the other guests in crowd of many people.
+Concerning our hearing, we know that humans are notably good at performing such a task.
+In such a noisy environment we are able to steer our attention to one sound source, even without eye contact and using only a single ear~\cite{bregman90}.
+However, this attention mechanisms prevents us from observing the full acoustic scene, even though we would have been able to listen to all sounds.
+\par
 
-% Overlap, prevents us from seeing things, thus makes it
-% Changing the perspective helps.
-
-% latent
 
 
+Research questions
+The attenuation of undesired speakers, when multiple concurrent speakers are present, is well known as the ``cocktail party problem''~\cite{haykin05}.
+Since almost 70 years (~\cite{cherry53}), research is fascinated by the idea to create a machine extracts the desired sources from a mixture.
+This problem is called \emph{source separation} and has many applications for speech and music signals.
+
+
+
+Modulations:
+The most important observation of speech or music is that sound are not stationary but varies with time and carries the informations.
+% DAU
+"With most sounds in our environment, such as speech and music, information is contained to a large extent in the changes of sound parameters with time, rather than in the stationary sound segments."
+
+estimating the number of sources might sound simple, but in fact it is very challenging since it is a very abstract problem.
+
+task sounds so simple, yet there so much behind it that we don't. Imagine counting the number trees in a field, compared to counting marbles on a table. Time! Modulation!
+% Estimating  the  number  of  people  in  an  image  is  a practical machine vision task that is gaining popularity in the security and surveillance community. 
+% on images spatial overlap
+% estimating counts i
+
+Scope: We don't want to improve source separation.
+
+Overlap, prevents us from seeing things, thus makes it
+Changing the perspective helps.
+
+latent
+
+
+With the advent of deep learning and AI, research is seeing a paradigm shift 
+
+Compared to vision, audio has a very specific problem 
+
+Now think of a sound object 
+
+
+We as humans learned to focus on a particular sound source, but in some situation it is very challenging, however, for computers these situation constitute a challenging task.
 % Humans are good at classification but not good at extra/interpolation.
 % humans are not good a counting larger numbers. So its easy for machines to improve on this. 
+Currently we are  a paradigm shift happened. 
+Today, machines learning methods can replace hand crafted, engineering researchers often directly 
 
+Do we need to rely on machine learning to solve the task?
 
-% We apply source separation in our every day life.
-% Speech is the basis for human communication and when humans talk to each other, we are often not aware of that we are perceiving mixtures of several sources (e.g. from multiple talkers) or noise.
-% However, not all sources require our attention.
-% Often, a specific talker is considered to be ``desired'', carrying information, whereas noise or other speakers interfere with this signal.
-% The attenuation of undesired speakers, when multiple concurrent speakers are present, is well known as the ``cocktail party problem''~\cite{cherry53, haykin05}.
-% For almost 70 years now, research is fascinated by the idea to create a machine to inverse the process of mixing and to extract or separate the desired sources from a mixture.
-% This problem is called \emph{source separation}.
-% Surprisingly, it has been shown that humans are able to do such a task, segregating a source, even without eye contact and w
+paradigma shift
 
-% paradigma shift
+the main questions...
 
-% the main questions...
-
-% TODO: DNNS! DNNS! DNNS!... paradigma shift
 
 % [ ] Tell a story, and tell it well
 % [ ] Tell the reader the problem you are tackling in this project.
@@ -35,13 +69,7 @@
 % [ ] State clearly how you aim to deal with this problem.
 % [ ] Limit the scope of your study.
 
-% 1. blabla, everyday life application, examples, 
-% 2. 
-
-% count estimation is faszinating research because the task sounds so simple, yet there so much behind it that we don't. Imagine counting the number trees in a field, compared to counting marbles on a table. Time! Modulation!
-% Estimating  the  number  of  people  in  an  image  is  a practical machine vision task that is gaining popularity in the security and surveillance community. 
-% on images spatial overlap
-% estimating counts i
+ 
 
 \section{Objectives}
 
@@ -56,6 +84,12 @@ In order to do this, I outline the following objectives as the basis for this th
   \item[Generalization:] to transfer the results and insights gained by these controlled studies onto more real-world scenarios.
   \item[Number of Sources:] to investigate and develop new methods to address the task of estimating the number of sources in highly overlapped mixtures.
 \end{description}
+
+% \item Can modulations be automatically detected or extracted from highly overlapped signals?
+% \item If modulations are known, can they be exploited to improve a task such as source separation?
+% \item Can modulations still be utilized when modulation function and its cause of modulation is unknown?
+% \item What is the role of modulations in the task of count estimation?
+
 
 
 \clearpage

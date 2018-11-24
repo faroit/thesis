@@ -1,3 +1,41 @@
+### Dead or Alive
+
+## FR
+
+* [ ] Aktuelle Version Stibie
+* [ ] Aktuelle Version Thomas
+* [ ] Introduction, Conclusion
+* [ ] Dann zu Patricio
+* [ ] Einmal kurz überfliegen
+* [ ] Zu Bernd
+
+## Samstag
+
+* [ ] Politur Intro, Conclusion
+* [ ] Abstract, Intro, Conclusions -> Antoine
+
+## Sonntag
+
+* [ ] TODOs durchgehen
+* [ ] Vollständig lesen
+
+## Montag 
+
+* [ ] Layout und quirks
+* [ ] Korrekturen einbauen
+* [ ] Vollständig lesen
+
+## Dienstag
+
+* [ ] Vollständig lesen
+
+## Mittwoch
+
+* [ ] Drucken
+* [ ] Durchsehen
+* [ ] Abschicken
+
+
 ### MY THESIS
 
 
