@@ -179,6 +179,10 @@ One key feature of vocals is they typically exhibit great variability in fundame
 
 \section{Summary}
 
+% TODO: 
+% [ ] Repeat the highlights of the chapter
+% [ ] Transition sentence that acts as a “teaser” for the next chapter
+
 Modulations play an important role in audio signals. 
 However past research was mainly focused on single notes and not on overlapped sounds.
 It is therefore to be investigated if scenarios with severe overlap can utilize modulations as well.
@@ -187,11 +191,7 @@ For example, it is known~\cite{salamon13} that the extraction of the fundamental
 The reason is that crossing partials are a challenging problem for sinusoidal modeling~\cite{viste03}. 
 And even if tracking of such them would work perfectly, evaluation of robustness and accuracy is often hardly possible when the reference data is only annotated with human precision.
 Secondly, representations like modulation spectrograms only cover amplitude modulations, whereas generic modulation patterns (AM/FM, timbre modulation) cannot be covered.
-% Highly overlapped signals require suitable representations improves separability compared to STFT.
-% Improving the separability, however, may not necessarily lead to better separation results when representations are not easily invertible.
-% TODO: move to 5 or 6x
-% Another problem is that approaches that exploit modulations for source separation were mostly focussed on known modulations in contrast to unsupervised methods.
-% Furthermore, with the recent success of deep learning based methods, it to be seen, if learning based methods can utilize modulations from data.
+% TODO: Highly overlapped signals require suitable representations improves separability compared to STFT.
 \par
 Auditory science shows that modulations are important for humans, possible research questions for the scope of this thesis are:
 
@@ -203,3 +203,4 @@ Auditory science shows that modulations are important for humans, possible resea
 \end{itemize}
 
 In the next two chapters, I will address this questions by utilizing the modulations of sources for separation tasks; either via prior knowledge (known) or by operating blindly (unknown).
+

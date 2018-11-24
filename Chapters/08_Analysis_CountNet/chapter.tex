@@ -745,7 +745,7 @@ Random Effect \(k\)            &  0.057 &    0.297 &        &             \\
 \label{tab:mixedmodel1}
 \end{table}
 
-% wrap things up here, describe the ouput shape dimensions and the temporal resolution.
+% TODO: wrap things up here, describe the ouput shape dimensions and the temporal resolution.
 
 \begin{table}
   \caption{Proposed CRNN Architecture}%
@@ -782,7 +782,6 @@ Random Effect \(k\)            &  0.057 &    0.297 &        &             \\
   \label{fig:complexity}
 \end{figure}
 
-%!TEX root = ../stoeter_sourcecount.tex
 \section{Evaluation Results}%
 \label{sec:evaluation}
 In this section, we perform several experiments on the proposed CRNN model that has been selected in the previous section.
@@ -1063,13 +1062,9 @@ Lastly, in an ablation study, we found that the CRNN uses a strategy to segment 
 Hence, we hypothesize that a speaker count estimate is influenced by the average speaking rates of certain languages.
 Finally, to underpin this hypothesis, we showed that the speaking rate has a significant effect on the error of our model.
 
-Limitations:
-\begin{itemize}
-  \item the addition problem, extrapolation?
-  \item extrapolation NALU
-  \item counting on music
-  \item non-overlapping sounds
-\end{itemize}
-
+% TODO: Counting for meeting room scenario of non-overlapping sounds
 % TODO: WE tried on music, but it was not able to train. We used the musicnet dataset.
 % training count error of 0.2, but a validation error of more than 2 (20 times higher than for speaker count). Poission, non negative binomial distribution....
+TODO: Write in 06 that I tested redundancy reduction but it didn't work and cft is like JPG!
+TODO: Context length is that makes the problem difficult and easy.
+TODO: without any overlap, count estimation would be useless... counting is a quantification of overlap

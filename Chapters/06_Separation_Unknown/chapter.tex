@@ -679,9 +679,10 @@ Clicking on one rectangles in the heatmap opens the interactive player that allo
 % [X] A summary of findings and limitations
 % [ ] Practical applications/implications
 % [X] Recommendations for further research
-In this chapter, I presented methods that exploit modulations for source separation using unsupervised methods. 
-In the first part of this chapter, I presented a study where we demonstrated the use of the modulation spectrogram tensors for separating unison instrument mixtures, comparing the results with those presented in the previous chapter.
-In a next step we proposed complex tensor representation, the Common Fate Transform (CFT), computed from rectangular patches of the complex STFT using a two-dimensional DFTs.
+
+In this chapter, we presented methods that exploit modulations for source separation without knowing them a priori. 
+In the first part of this chapter, we presented a study where we demonstrated the use of the modulation spectrogram tensors for separating unison instrument mixtures, comparing the results with those presented in the previous chapter.
+In a next step we proposed complex tensor representation, the Common Fate Transform (CFT), computed from rectangular patches of the complex STFT using two-dimensional DFTs.
 This novel representation exposes joint modulation characteristics of amplitude and frequency modulated signals while being fully invertible.
 We demonstrated the usefulness of this representation using our Common Fate Model that factorizes patches from the CFT into two components, a modulation pattern and it is activation. 
 The model is inspired by the humans' ability to group common modulations into a single sources.
@@ -689,9 +690,9 @@ We presented results on unison musical instruments that indicate that it outperf
 \par
 At the time, our research was conducted, NMF and NTF models were clearly considered to be the best choice when it comes to state-of-the-art separation models. 
 However, for the scenario of music separation, it turned out that the CFM model was still requiring a significant amount of additional hand crafted engineering.
-This, changed over the course of 2015/2016 when other researchers successfully proved the superiority of supervised learning based methods for separation (See SiSEC 2015~\cite{ono15}).
-In the second part of this chapter, to further study the effectiveness the Common Fate representation, I replaced the Common Fate model and instead combined it with an existing deep learning based separation model~\cite{uhlich15}.
-I showed that the CFT indeed improved separation quality compared to  STFT in fully connected deep neural network.
+This changed when over the course of 2015/2016, other researchers successfully proved the superiority of supervised learning based methods for separation (See SiSEC 2015~\cite{ono15}).
+In the second part of this chapter, to further study the effectiveness the Common Fate representation, we replaced the Common Fate model and instead combined it with an existing deep learning based separation model~\cite{uhlich15}.
+We showed that the CFT improved separation quality compared to STFT in fully connected deep neural network.
 Last, but not least, I presented interactive evaluation tools, developed for SiSEC, that allows to interactively assess the performance of separation systems both, objectively and subjectively.
 \par
 The research, that has been carried out marks an important step in multidimensional representations that more closely model the human perception when it comes to highly overlapped, modulated mixtures.
@@ -703,4 +704,6 @@ One limitation of the CFT is its increased redundancy, introduced by its aliasin
 Interestingly, preliminary studies suggested that a removal of the (redundant) components did not improve the performance.
 It remains to be studied how this aspect of the CFT can be improved.
 \par
-A promising route for future work would be to replace the fully connected model based on~\cite{uhlich15} with a model that specifically is designed to deal with higher dimensional data such as the 4D CFT. Capsule network, or multidimensional convolutional networks.
+A promising route for future work would be to evaluate modern DNN architectures that are specifically designed to deal with higher dimensional data such as the 4D CFT such as capsule network or multidimensional convolutional networks.
+
+% TODO: Combinations of DNNs and Factorization models are not done: ~\cite{vu16, leroux15}

@@ -370,7 +370,7 @@ An informed system like the one we described in the previous section often has l
 Further, it can be assumed that this upper bound is especially relevant for a warping based system that relies on an instantaneous estimation of the fundamental frequency.
 \par
 Such algorithms for estimating the fundamental frequency ($F0$) of a signal vary in stability and accuracy.
-While we developed the framework for a F0 variation informed separation, we found that we can utilize this to also optimize fundamental frequency estimators itself.
+While we developed the framework for a $F0$ variation informed separation, we found that we can utilize this to also optimize fundamental frequency estimators itself.
 In turn, we proposed a method which iteratively improves the estimates of such algorithms by applying in each step a time warp on the input signal based on the previously estimated fundamental frequency.
 This time warp is designed to lead to a nearly constant $F0$. A refinement is then calculated through inverse time warping of the result of an $F0$ estimation applied to the warped signal. The proposed refinement algorithm is not limited to specific estimators or optimized for specific input signal characteristics. The method is evaluated on synthetic audio signals as well as speech recordings and polyphonic music recordings. Results indicate a significant improvement on accuracy when using the proposed refinement in combination with several well-known $F0$ estimators
 
@@ -501,42 +501,33 @@ Pitch estimation of polyphonic mixture input signals in general is known to be m
 
 \section{Summary and Discussion}
 
-In this chapter, I highlighted the time-varying aspects of musical sources such as vibrato for the use in source separation applications.
-To address this scenario, we developed a method that utilizes time warping to more easily extract a source from the mixture.
+% [X] A summary of findings and limitations
+% [X] Practical applications/implications
+% [X] Recommendations for further research
+
+In this chapter, we highlighted the time-varying aspects of musical sources such as vibrato for the use in source separation applications.
+To address this scenario, we developed a method that utilizes time warping to extract a source from the mixture.
 More specifically, the additional information is used to warp the mixture based on the fundamental frequency estimate of the source to be extracted. 
-In the warped time domain the frequency modulation of the desired source is canceled. 
-In our first study we evaluated this method on separating single note from instruments playing in unison.
+In the warped time domain the frequency modulation of the desired source is removed. 
+In our first study, we evaluated this method on separating single note from instruments playing in unison.
 For the actual separation, we used a standard NMF separation approach.
 The results of 45 mixtures have been evaluated by using the PEASS toolbox and the scores indicated an improvement in favor of the F0 variation informed NMF compared to the standard NMF.
 \par
-In order to evaluate if the our method can be applied to a more realistic scenario, we proposed an extension of the method for the scenario of vocal/accompaniment separation.
-We used a state-of-the-art melody estimation technique to extract the F0 variation of the vocal source to apply the warping on the mixture.
+In order to evaluate if our method can be applied on more realistic scenario, we proposed an extension of the method for the scenario of vocal/accompaniment separation.
+We used a state-of-the-art melody estimation technique to extract the \(F0\) variation of the vocal source to apply warping to the mixture.
 We performed separation in the time domain using a comb filter to further reduce artifact.
 When the method was applied on the DSD100 dataset, several limitations became apparent which is why the overall performance of the system was not satisfying in this scenario.
 The main limitation of the method is that it relies on an precise and robust estimate of both, the fundamental frequency estimate as well as vocal activity estimate. 
 \par
-To address the latter, I extended the method to include a deep neural network based vocal activity detector.
+To address the latter, the method was extended to include a deep neural network based vocal activity detector.
 This helped to exclude non-vocal parts from the warping and in turn, improved the vocal separation performance by 1.5~\si{\decibel} SDR.
-In order to improve the accuracy of F0 estimates, we proposed a method, based on the same time warping principle, in the last section of this chapter. 
-The proposed method applies time warping iteratively based on an initial F0 estimate. 
-Therefore the implementation can be applied to any F0 estimator as a post-processing step.
+In order to improve the accuracy of \(F0\) estimates, we proposed a method, based on the same time warping principle, in the last section of this chapter. 
+The proposed method applies time warping iteratively based on an initial \(F0\) estimate, assuming that more iteration remove more variation, thus simplifies the \(F0\) estimation process.
+This idea can be applied to any \(F0\) estimator as a post-processing step.
+Future work could include an optimization criterion to control the number of iterations, however, we have to emphasize that improvements in accuracy are difficult to evaluate on real datasets~\cite{stoeter15acm}.
 \par
 To conclude, time warping based separation can work surprisingly well on some signals but requires further hand crafted tuning to yield good results.
 However, the presented concepts can still be applied to todays data-driven models as time warping is already applied in current state-of-the art loss functions~\cite{graves06} for speech recognition models~\cite{amodei16}.
 Lastly, one could also imagine a generative model that generate warp contours to \emph{add} instead of \emph{remove} vibrato to improve the naturalness of synthesis models.
 
-% TODO: add limitations of warped F0
-% However, we have to make clear that the improvements in accuracy are not Maybe in combination with high accuracy dataset such as the one we developed in~\cite{stoeter15acm}
-% time warping techniques can also be used 
-
-
-% my own conclusions
-% * refined pitch estimation needs optimization criterion
-% * 
-% * Fundamental concepts stay the same for ML models. 
-% * End-to-End source separation does exist, but 
-% * DNN based (superior) melody estimation
-% * Modulations CTC (warped) loss functions~\cite{graves06}.
-% * Applications for Style transfer (applying modulation characteristics on other voices or instruments)
-% * Generative Models for modulations (generate artificial vibrato)
-% * 
+% TODO: We showed that warping based separation showed to produce limited results but
