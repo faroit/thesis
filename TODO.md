@@ -15,6 +15,7 @@
 
 * [ ] Zu Bernd
 * [ ] Abstract, Intro, Conclusions -> Antoine
+* [ ] Christophe
 * [ ] TODOs durchgehen
 * [ ] Fehlende Plots machen
 * [ ] Vollständig lesen
