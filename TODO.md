@@ -13,17 +13,18 @@
 
 ## Sonntag
 
-* [ ] Zu Bernd
-* [ ] Abstract, Intro, Conclusions -> Antoine
-* [ ] Christophe
+* [X] Zu Bernd
+* [X] Abstract, Intro, Conclusions -> Antoine
+* [X] Christophe
+* [X] Abstract deutsch
+* [X] Abstract Annika
 * [ ] TODOs durchgehen
 * [ ] Fehlende Plots machen
 * [ ] Vollständig lesen
-* [ ] Abstract deutsch
-* [ ] Abstract Annika
+* [ ] Korrekturen einbauen
 * [ ] Mail an Promotionsbüro
 
-## Montag 
+## Montag
 
 * [ ] Intro, Conclusion Patricio
 * [ ] Layout und quirks
@@ -32,6 +33,7 @@
 
 ## Dienstag
 
+* [ ] Korrekturen einbauen
 * [ ] Vollständig lesen
 
 ## Mittwoch
@@ -46,10 +48,10 @@
 
 Problem statement or Hypothesis
 Why is this a Hard Problem
-Approach or Methodology 
+Approach or Methodology
 Why is this Innovative
 Assumptions and Constraints
-Initial Results (Promise of Great Things to Come) 
+Initial Results (Promise of Great Things to Come)
 Validation Plan
 Limitations and Applicability
 Expected Contributions
@@ -124,7 +126,7 @@ $$
 * Why doesn't shift-invariant NMF solve the vibrato case? or does it?
 * Do you think I should add the SiSEC 2018 paper?
 * Every chapter conclusion should be read so that it does't steal from the final conclusion. If a sentence in a chapter conclusion is not close enough bounded to the actual chapter topic, it should better go into the --> final conclusion
-* 
+*
 
 # Aspects of Concurrency
 
@@ -219,7 +221,7 @@ Broze, Y., Paul, B., Allen, E., & Guarna, K. (2014). Polyphonic Voice Multiplici
 > The excerpts’ short length could create further problems, as stream segregation appears to be cumulative (see Bregman, 1978):
 listeners tend to hear one stream at first before subsequently resolving more. In all, because our stimuli are both short and isotextural, counting would not be expected to be a successful strategy in the present denumeration task.
 
-# Is deep learning a black box? 
+# Is deep learning a black box?
 
 No, but From Chollet
 > The same is true of backprop in deep learning -- knowing how to code up backprop by hand gives you no useful knowledge wrt deep learning, and inversely, developing powerful mental models for deep learning does not in any way require knowing the algorithmic details of backprop
@@ -231,7 +233,7 @@ No, but From Chollet
 BEYOND EQUAL-LENGTH SNIPPETS: HOW LONG IS SUFFICIENT TO RECOGNIZE AN AUDIO SCENE? https://arxiv.org/pdf/1811.01095.pdf
 
 
-# Defense 
+# Defense
 
 ## Wackelkandidaten
 
@@ -250,4 +252,4 @@ BEYOND EQUAL-LENGTH SNIPPETS: HOW LONG IS SUFFICIENT TO RECOGNIZE AN AUDIO SCENE
 
 * [x] example that works quite nice... http://sisec17.audiolabs-erlangen.de/#/listen/20/STO1?mode=embed
 
-% TODO: understanding without Separation 
+% TODO: understanding without Separation
