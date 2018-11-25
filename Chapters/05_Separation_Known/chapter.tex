@@ -252,7 +252,7 @@ In turn I used the \emph{Melodia} algorithm, published by Salamon et al. in 2012
 \noindent\textbf{1)}: a time-frequency transformation is applied and spectral peaks are extracted.
 \textbf{2)}: these form the basis of a \emph{saliency} spectrogram that is computed using a weighted sum over all frequencies. This allows emphasize the predominant/salient frequencies in the signal and is the core part of the \emph{Melodia} algorithm.
 \textbf{3)}: From the saliency map, again, peaks are extracted and then connected to a melody line. This would already a good starting point for the melody estimate but usually contains way to many outliers due to the noisiness of the saliency representation.
-\textbf{4)}: The melody line is post-processed using a viterbi decoder.
+\textbf{4)}: The melody line is post-processed using a Viterbi decoder.
 The purpose of it is to filter the contour by removing outliers, octave jumps and generally improves the smoothness of the contour using a number of heuristics.
 It is important to note that this step is tracking the melody line of the previous step over time.
 Usually this step is sensitive to the overall length of the processed mixture and often, this step is computed in a semantically meaningful segment of the mixture like a full track or a refrain.
@@ -276,10 +276,10 @@ Therefore I used a simple IIR Filter with the frequency response
 
 where \(P\) is constant --- due to the time warping --- pitch period in samples.
 In order to then extract the vocals, zero-phase filtering is applied.
-The extracted vocals were unwarped to linear time and the accompaniment signal is created by subtracting the estimated vocals from the mixture signals.
+The extracted vocals were inverse warped to linear time and the accompaniment signal is created by subtracting the estimated vocals from the mixture signals.
 Each excerpt is then linearly crossfaded into the unaltered, accompaniment/mixture using a 10ms window.
 To further reduce the complexity of the separation system, instead one comb filter for each excerpts, I modified the warping algorithm so that a user defined target pitch \(P\), rounded to integer, is used.
-That way, the full signal is unwarped and resampled to the same pitch, which then only requires a single comb filter to extract the signal.
+That way, the full signal is inverse warped and resampled to the same pitch, which then only requires a single comb filter to extract the signal.
 A stereo signal is produced by using a signal filtering both channels individually.
 
 The full procedure is depicted in Figure~\ref{fig:warp_sisec_demo}.
@@ -504,9 +504,11 @@ Pitch estimation of polyphonic mixture input signals in general is known to be m
 % [X] A summary of findings and limitations
 % [X] Practical applications/implications
 % [X] Recommendations for further research
+% [X] Repeat the highlights of the chapter
+% [X] Transition sentence that acts as a “teaser” for the next chapter
 
-In this chapter, we highlighted the time-varying aspects of musical sources such as vibrato for the use in source separation applications.
-To address this scenario, we developed a method that utilizes time warping to extract a source from the mixture.
+In this chapter, we highlighted the time-varying aspects of musical sources such as vibrato to be utilized for the application of source separation.
+To address this task, we developed a method that utilizes time warping to extract a source from the mixture.
 More specifically, the additional information is used to warp the mixture based on the fundamental frequency estimate of the source to be extracted. 
 In the warped time domain the frequency modulation of the desired source is removed. 
 In our first study, we evaluated this method on separating single note from instruments playing in unison.
@@ -516,8 +518,7 @@ The results of 45 mixtures have been evaluated by using the PEASS toolbox and th
 In order to evaluate if our method can be applied on more realistic scenario, we proposed an extension of the method for the scenario of vocal/accompaniment separation.
 We used a state-of-the-art melody estimation technique to extract the \(F0\) variation of the vocal source to apply warping to the mixture.
 We performed separation in the time domain using a comb filter to further reduce artifact.
-When the method was applied on the DSD100 dataset, several limitations became apparent which is why the overall performance of the system was not satisfying in this scenario.
-The main limitation of the method is that it relies on an precise and robust estimate of both, the fundamental frequency estimate as well as vocal activity estimate. 
+The method relies on a robust and accurate estimate of the fundamental frequency as well as vocal activity estimate.
 \par
 To address the latter, the method was extended to include a deep neural network based vocal activity detector.
 This helped to exclude non-vocal parts from the warping and in turn, improved the vocal separation performance by 1.5~\si{\decibel} SDR.
@@ -526,8 +527,5 @@ The proposed method applies time warping iteratively based on an initial \(F0\) 
 This idea can be applied to any \(F0\) estimator as a post-processing step.
 Future work could include an optimization criterion to control the number of iterations, however, we have to emphasize that improvements in accuracy are difficult to evaluate on real datasets~\cite{stoeter15acm}.
 \par
-To conclude, time warping based separation can work surprisingly well on some signals but requires further hand crafted tuning to yield good results.
-However, the presented concepts can still be applied to todays data-driven models as time warping is already applied in current state-of-the art loss functions~\cite{graves06} for speech recognition models~\cite{amodei16}.
-Lastly, one could also imagine a generative model that generate warp contours to \emph{add} instead of \emph{remove} vibrato to improve the naturalness of synthesis models.
-
-% TODO: We showed that warping based separation showed to produce limited results but
+To conclude, time warping based separation can work well on some signals but requires further hand crafted tuning to yield good results.
+In the next chapter we want to investigate if separation can still benefit from spectro-temporal modulations if they are not known or estimated a priori.

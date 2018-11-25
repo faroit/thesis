@@ -3,7 +3,7 @@
 
 In the previous chapter, I introduced basic signal processing fundamentals in the context of audio mixtures.
 In this chapter I focus on scenarios of highly overlapped signals.
-In order to make an attempt to formalize the \emph{level of overlap}, I start with a recap of time-frequency representations as introduced in Section~\ref{sub:time-frequency-representation} and how they are typically applied to address the source separation problem.
+In order to make an attempt to formalize the \emph{level of overlap}, a time-frequency representation as introduced in Section~\ref{sub:time-frequency-representation} and how they are typically applied to address the source separation problem.
 
 \hypertarget{separability-of-mixtures}{%
 \section{Separability of Mixtures}\label{separability-of-mixtures}}
@@ -170,7 +170,9 @@ Yen et al. proposed an approach using spectro-temporal modulation features \cite
 % from zafar
 % double check this!
 Virtanen made us of sinusoidal modeling \cite{virtanen00} to model and separate sources with tempo spectral modulation like vibrato.
+
 % TODO: more cites for source filter model
+
 In another vein, the source-filter model was deployed to separation sources~\cite{hennequin10}.
 An advantage of the source-filter model approach is indeed that one can dissociate the pitched content of the signal, embodied by the position of its harmonics, from its TF envelope which describes where the energy of the sound lies. In the case of vocals, it yields the ability to distinguish between the actual note being sung (pitch content) and the phoneme being uttered (mouth and vocal tract configuration), respectively. 
 One key feature of vocals is they typically exhibit great variability in fundamental frequency over time. They can also exhibit larger \textit{vibratos} (fundamental frequency modulations) and \textit{tremolos} (amplitude modulations) in comparison to other instruments.

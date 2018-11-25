@@ -648,7 +648,7 @@ An obvious observation in Figure~\ref{fig:eval} is the difference in performance
 Further it shows that exploiting learning data does help separation greatly compared to only relying on \textit{a priori} assumptions such as the harmonicity or redundancy. Additionally, dynamic models such as LSTM from UHL2-3 appear more adapted to music than FNN. 
 These good performances in audio source separation go in line with the recent success of DNNs in fields as varied as computer vision, speech recognition, and natural language processing \cite{lecun15}.
 \par
-Relating our results of STO1 and STO2 to the other methods, we observe that the performance was only slightly below the state-of-the-art performance of UHL and NUG.
+Relating our results of STO1 and STO2 to the other methods, we observe that the performance was only slightly below the two state-of-the-art performance of UHL and NUG.
 Furthermore, the difference between test and validation dataset indicate, that our CFT DNN model even has better generalization as the one in NUG. 
 While our STO model share the same network architecture as UHL1, we were unable to reproduce the results, as we are approximately 1~dB below UHL1.
 One reason is in the difference in initialization of the model as well as the fact that NUG and UHL models exploit multichannel information. 
@@ -657,7 +657,11 @@ One reason is in the difference in initialization of the model as well as the fa
 In SiSEC 2016, the separation performance achieved by a totally informed filtering method such as IBM, is significantly higher than that of any submitted method in this evaluation. 
 This means that lead and accompaniment separation has room for much improvement, and that the topic is bound to witness many breakthroughs still. 
 This is even more true considering that IBM is not the best upper bound for separation performance: other filtering methods such as \textit{ideal ratio mask}~\cite{liutkus15c} or multichannel Wiener filter~\cite{duong10} may be considered as references.
-\par
+
+\subsection{Evaluation Website}
+\label{ssec:evaluation Website}
+
+% TODO: Web Audio API + cite
 For more details and the ability for playback of the estimates, I refer to the dedicated interactive website that I built as part of my organizational help for SiSEC\footnote{\url{http://www.sisec17.audiolabs-erlangen.de}}.
 In fact, for the first time, interested researchers are now able to listen to over 10000 stimuli from all participating systems.
 This was made possible through modern JavaScript technologies like the Web Audio API to interactively assess source separation results in the browser.
@@ -679,6 +683,7 @@ Clicking on one rectangles in the heatmap opens the interactive player that allo
 % [X] A summary of findings and limitations
 % [ ] Practical applications/implications
 % [X] Recommendations for further research
+% [X] Transition sentence that acts as a “teaser” for the next chapter
 
 In this chapter, we presented methods that exploit modulations for source separation without knowing them a priori. 
 In the first part of this chapter, we presented a study where we demonstrated the use of the modulation spectrogram tensors for separating unison instrument mixtures, comparing the results with those presented in the previous chapter.
@@ -688,22 +693,11 @@ We demonstrated the usefulness of this representation using our Common Fate Mode
 The model is inspired by the humans' ability to group common modulations into a single sources.
 We presented results on unison musical instruments that indicate that it outperforms existing methods.
 \par
-At the time, our research was conducted, NMF and NTF models were clearly considered to be the best choice when it comes to state-of-the-art separation models. 
-However, for the scenario of music separation, it turned out that the CFM model was still requiring a significant amount of additional hand crafted engineering.
-This changed when over the course of 2015/2016, other researchers successfully proved the superiority of supervised learning based methods for separation (See SiSEC 2015~\cite{ono15}).
 In the second part of this chapter, to further study the effectiveness the Common Fate representation, we replaced the Common Fate model and instead combined it with an existing deep learning based separation model~\cite{uhlich15}.
-We showed that the CFT improved separation quality compared to STFT in fully connected deep neural network.
-Last, but not least, I presented interactive evaluation tools, developed for SiSEC, that allows to interactively assess the performance of separation systems both, objectively and subjectively.
-\par
-The research, that has been carried out marks an important step in multidimensional representations that more closely model the human perception when it comes to highly overlapped, modulated mixtures.
-Work by other researchers built upon our first findings, even further increased the perceptual aspect of the representation by introducing a multi-resolution version of the CFT~\cite{seetharaman17, pishdadian17}.
-\par
+We showed that the CFT improved separation quality compared to STFT in a fully connected deep neural network.
 Even though the CFT significantly increases the input size (due to its redundancy) and the number of trainable network parameters (due to its stacked auto-encoder architecture), generalization performance did not suffer.
-The results were submitted to the 2016 SiSEC Evaluation campaign~\cite{sisec16} and ranked in the upper third of all 23 submitted systems.
-One limitation of the CFT is its increased redundancy, introduced by its aliasing components,  which increases the complexity of the training.
-Interestingly, preliminary studies suggested that a removal of the (redundant) components did not improve the performance.
-It remains to be studied how this aspect of the CFT can be improved.
 \par
-A promising route for future work would be to evaluate modern DNN architectures that are specifically designed to deal with higher dimensional data such as the 4D CFT such as capsule network or multidimensional convolutional networks.
+The results of the best performing model were submitted to SiSEC 2016, were we scored among the top three participating research teams.
+In this vein, I presented interactive evaluation tools, developed for SiSEC, that allows to interactively assess the performance of separation systems both, objectively and subjectively.
 
 % TODO: Combinations of DNNs and Factorization models are not done: ~\cite{vu16, leroux15}

@@ -2,25 +2,29 @@
 
 ## FR
 
-* [ ] Aktuelle Version Stibie
-* [ ] Aktuelle Version Thomas
+* [X] Aktuelle Version Stibie
+* [X] Aktuelle Version Thomas
 * [ ] Introduction, Conclusion
-* [ ] Dann zu Patricio
-* [ ] Einmal kurz überfliegen
-* [ ] Zu Bernd
 
 ## Samstag
 
 * [ ] Politur Intro, Conclusion
-* [ ] Abstract, Intro, Conclusions -> Antoine
+* [ ] Einmal kurz überfliegen
 
 ## Sonntag
 
+* [ ] Zu Bernd
+* [ ] Abstract, Intro, Conclusions -> Antoine
 * [ ] TODOs durchgehen
+* [ ] Fehlende Plots machen
 * [ ] Vollständig lesen
+* [ ] Abstract deutsch
+* [ ] Abstract Annika
+* [ ] Mail an Promotionsbüro
 
 ## Montag 
 
+* [ ] Intro, Conclusion Patricio
 * [ ] Layout und quirks
 * [ ] Korrekturen einbauen
 * [ ] Vollständig lesen
@@ -101,8 +105,9 @@ $$
 * [X] check the wording for magnitude spectrogram (check mainards book)
 * [ ] add step-count plot
 * [ ] Figures durchgehen
-* [ ] Grafiken IEEE
-* [ ] Tabelltenverzeichnis, Figureverzeichnis etc
+* [ ] Grafiken IEEE in Captions
+* [ ] Literatur durchgehen (PAPERS folder! und löschen)
+* [ ] Tabelltenverzeichnis, Figureverzeichnis etc fixen (Kurzversion von labeln)
 * [ ] Check website availability
 * [ ] add gap statistics and elbow method and other clustering shit from wolfgangs diplomarbeit
 
@@ -243,3 +248,5 @@ BEYOND EQUAL-LENGTH SNIPPETS: HOW LONG IS SUFFICIENT TO RECOGNIZE AN AUDIO SCENE
 # Random s*** for my presentation
 
 * [x] example that works quite nice... http://sisec17.audiolabs-erlangen.de/#/listen/20/STO1?mode=embed
+
+% TODO: understanding without Separation 
