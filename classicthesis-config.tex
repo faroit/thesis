@@ -95,7 +95,7 @@
   % style=ieee,%
   % dashed=false,
   defernumbers,
-  style=alphabetic, % Author 1999, 2010
+  style=ieee, % Author 1999, 2010
   %bibstyle=authoryear,dashed=false, % dashed: substitute rep. author with ---
   sorting=nyt, % name, year, title
   maxbibnames=10, % default: 3, et al.
@@ -104,7 +104,7 @@
 }{biblatex}
 
 \usepackage{biblatex}
-
+\def\citepunct{,\,}
 \ExecuteBibliographyOptions{%
   sorting=nty, % Sort by name, title, year.
   maxbibnames=15,%
@@ -184,8 +184,8 @@
 %   %frame=L
 % }
 % ****************************************************************************************************
-\usepackage{setspace}                                                                                               
-\usepackage{minted} % Syntax highlighting                                                                                                      
+\usepackage{setspace}
+\usepackage{minted} % Syntax highlighting
 \usemintedstyle{tango}
 \definecolor{tango-bg}{HTML}{F8F8F8}
 
