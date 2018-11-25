@@ -2,7 +2,7 @@
 \chapter{Introduction}\label{ch:introduction}
 %************************************************
 
-It is very likely that you know the following situation: you were at a crowded party and the next day your best friend, who was unable to join, asked you ``How many people where there?''. 
+It is very likely that you know the following situation: you were at a crowded party and the next day your best friend, who was unable to join, asked you ``How many people where there?''.
 You then struggled to find an answer because you had such intense conversations with the guests that you were unable to put your focus on the other guests.
 It turns out that this scene includes many interesting aspects that are relevant to this thesis.
 \par
@@ -27,10 +27,10 @@ In this unique scenario where sources are overlapped in time and frequency, obse
 Here, it is important to note that sounds are not stationary, but they vary with time.
 Instruments and our voice can have distinct modulations such as vibrato, created by conscious physical manipulation of the sound, to make a sound more pleasant to the listener~\cite{fletcher01}.
 \par
-In this thesis, we want to investigate if modulations can be used to separate highly overlapped speech and music source signals and 
+In this thesis, we want to investigate if modulations can be used to separate highly overlapped speech and music source signals and
 To address this question we want to study scenarios where sources are highly overlapped.
 We then want to study and develop representations that allow improving analysis and processing of these signals.
-Also, we want to develop new methods to address source separation scenarios. 
+Also, we want to develop new methods to address source separation scenarios.
 These methods are designed for the constrained scenarios where modulation effects can easily be exploited.
 Also, we want to transfer the results and insights gained by these controlled studies onto more real-world scenarios.
 And last but not least to investigate and develop new methods to address the task of estimating the number of sources in highly overlapped mixtures.
@@ -39,12 +39,11 @@ And last but not least to investigate and develop new methods to address the tas
 
 % [X] Tell a story, and tell it well
 % [X] Tell the reader the problem you are tackling in this project.
-% [ ] Quote data sources, e.g., industry analysts, market surveys, case studies 
-% [ ] Use plenty of concrete examples (or a running example) and figures 
+% [ ] Quote data sources, e.g., industry analysts, market surveys, case studies
+% [ ] Use plenty of concrete examples (or a running example) and figures
 % [X] State clearly how you aim to deal with this problem.
 % [ ] Limit the scope of your study.
 
-\clearpage
 \section{Summary of Contributions}
 
 This thesis comes with five main contributions:
@@ -62,7 +61,7 @@ Next, I study how the observations from the unison scenario can be transferred t
 \\
 
 \item I conducted two detailed experimental studies to assess how humans perceive highly overlapped mixtures and how they perform when asked to estimate the number of sources.
-In these studies I focussed on scenarios of overlapped speech as well as polyphonic music recordings. 
+In these studies I focussed on scenarios of overlapped speech as well as polyphonic music recordings.
 Both studies confirmed earlier studies, indicating that humans can only correctly estimate the number of concurrent sources up to three.
 I \\
 
@@ -70,7 +69,7 @@ I \\
 Furthermore, I show that this model reached state-of-the art performance when compared to other models and also supersedes human performance when compared with the results of my subjective listening experiments.
 Finally I revealed the relation between slow modulations in speech and the ability of a model of \emph{learning to count}.\\
 
-\item As a practical contribution, I developed tools to assess the quality of separation system and co-organized the international source separation evaluation campaign (SiSEC) to improve sustainability and reproducibility for the research community. 
+\item As a practical contribution, I developed tools to assess the quality of separation system and co-organized the international source separation evaluation campaign (SiSEC) to improve sustainability and reproducibility for the research community.
 \end{enumerate}
 
 This thesis is based on the previously listed publications. As such, they are cited repeatedly throughout this thesis. For readability reasons, if a section is mainly based on one of these publication, a remark is added at side of the page, instead of citing the same publication exhaustively. Furthermore, it should be noted ––– if not stated otherwise ---  that these contributions in the publications are based on the ideas and research of the author of this thesis.
@@ -79,7 +78,7 @@ This thesis is based on the previously listed publications. As such, they are ci
 
 The thesis and its relevant linked publications are organized into 6 main chapters.
 \begin{description}
-  \item[Chapter~\ref{cha:fundamentals}] explains the fundamental concepts of audio signals (Section~\ref{sec:specifics-of-audio-signals}) as well as sources and overlapped sounds (Section~\ref{sources-and-mixtures}), relevant for the remainder of this thesis. 
+  \item[Chapter~\ref{cha:fundamentals}] explains the fundamental concepts of audio signals (Section~\ref{sec:specifics-of-audio-signals}) as well as sources and overlapped sounds (Section~\ref{sources-and-mixtures}), relevant for the remainder of this thesis.
   This includes commonly used transformations and signal representations for the task of source separation and source count estimation.
   Furthermore, the process of mixing sound sources as well as its inverse task --- sound source separation --- are explained.
   The chapter also covers basics of fundamental frequency and its variations (Section~\ref{sub:time-variant-audio-signals}) as an important feature for harmonic audio signals.
@@ -88,7 +87,7 @@ The thesis and its relevant linked publications are organized into 6 main chapte
   Furthermore, the relevance of highly overlapped source scenarios are discussed and the research track of slow  modulations (Section~\ref{exploiting-slow-modulations}) to address separation tasks is proposed.
   \item[Chapter~\ref{cha:datasets}] presents and discusses the importance of data for analysis and evaluation.
   In this chapter synthetic (Section~\ref{}) and realistic (Section~\ref{}) datasets are presented, created during the course of this thesis~\cite{oss_wice, oss_unison, oss_libricount, stoeter15acm, liutkus17}.
-  \item[Chapter~\ref{cha:known} and \ref{cha:unknown}] presents separation methods that are developed over the course of this thesis. 
+  \item[Chapter~\ref{cha:known} and \ref{cha:unknown}] presents separation methods that are developed over the course of this thesis.
   The covers techniques that utilize modulation information when available(Chapter 5, ~\cite{stoeter14, stoeter15icassp}) as well as blind methods (Chapter 6~\cite{stoeter16, liutkus17}).
   \item[Chapter~\ref{cha:countanalysis} and ~\ref{cha:countanalysis}] covers the analysis of overlapped sounds. Specifically, it deals with identifying and estimating the number of sources on music~\cite{schoeffler13, stoeter13} and the cocktail party scenario~\cite{stoeter19, stoeter18}.
   \item[Chapter~\ref{cha:conclusion}] concludes this thesis and gives a and outlook into future research directions.
