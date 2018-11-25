@@ -4,12 +4,12 @@
 
 * [X] Aktuelle Version Stibie
 * [X] Aktuelle Version Thomas
-* [ ] Introduction, Conclusion
+* [X] Introduction, Conclusion
 
 ## Samstag
 
-* [ ] Politur Intro, Conclusion
-* [ ] Einmal kurz überfliegen
+* [X] Politur Intro, Conclusion
+* [X] Einmal kurz überfliegen
 
 ## Sonntag
 
