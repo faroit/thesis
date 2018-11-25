@@ -15,11 +15,11 @@ This simple finding allowed us to better observe the characteristics for the tas
 The combination of separation and count estimation is important since it finally allows to build a real-world separation system, where the number of sources is not known in advance.
 On my journey I was faced with several limitations and challenges:
 \par
-When we developed time warping (Chapter~\ref{cha:known}) to separate audio signals based on their estimated \(F0\) trajectory, we optimized and tuned the method on a handful of music tracks, since a large test data set was not available. When we then applied it on the --- back then --- new DSD100~\cite{liutkus17} dataset, several limitations became apparent which is why the overall performance was not satisfying. For example, one limitation of the method is that it relies too much on a precise and robust estimate of the \(F0\) trajectory and its voice activity. When we included a data-driven activity method in the system, the performance improved.
+When we developed time warping (Chapter~\ref{cha:known}) to separate audio signals based on their estimated \(F0\) trajectory, we optimized and tuned the method on a handful of music tracks, since a large test data set was not available. When we then applied it on the (back then) new DSD100~\cite{liutkus17} dataset, several limitations became apparent which is why the overall performance was not satisfying. For example, one limitation of the method is that it relies too much on a precise and robust estimate of the \(F0\) trajectory and its voice activity. When we included a data-driven activity method in the system, the performance improved.
 \par
 When it comes to source separation, at the time our research was conducted and we proposed the Common Fate Model (Section~\ref{sec:the_common_fate_model_for_unison_mixtures}), factorization models were considered to be state-of-the-art.
 However, for the scenario of music separation, it turned out that the Common Fate Model still required a significant amount of additional handcrafted engineering.
-By 2015/2016, other researchers showed in~\cite{uhlich15, nugraha162} that supervised learning methods for separation led to huge improvements. This induced us to successfully evaluate such as system in combination with our proposed Common Fate Representation (Section~\ref{sec:cft_for_lead_accompaniment_separation}).
+By 2016, other researchers showed in~\cite{uhlich15, nugraha162} that supervised learning methods for separation led to huge improvements. This induced us to successfully evaluate such as system in combination with our proposed Common Fate Representation (Section~\ref{sec:cft_for_lead_accompaniment_separation}).
 It shows that such specialized representation, designed to capture general modulation patterns, is still useful in data-driven methods.
 Our research marks an essential step in multidimensional representations that more closely model the human perception when it comes to highly overlapped, modulated mixtures. Work by other researchers built upon our first findings even further increased the perceptual aspect of the representation by introducing a multi-resolution version of the CFT~\cite{seetharaman17, pishdadian18}.
 \par
@@ -76,6 +76,4 @@ CountNet was developed to address the count estimation task in both, a classific
 However, counts are often not bounded to the maximum number, which would require to extrapolate and not just interpolate.
 CountNet, as it was proposed, is, therefore, unable to estimate more than ten speakers when trained using the same maximum number. 
 This is related to learn the summation of two random numbers, known as the ``adding problem''~\cite{Hochreiter97} which is challenging benchmark in machine learning. 
-Only very recently, the machine learning community proposed a solution to this problem (see \cite{trask18}).
-
-
+Only very recently, the machine learning community proposed a solution to this problem (See \cite{trask18}).
