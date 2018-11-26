@@ -156,7 +156,7 @@ He computed the estimated fundamental frequency from a maximum-likelihood weight
 The concept of \emph{common amplitude modulation} by~\cite{bregman, wang06} which exploits that amplitude envelopes of different harmonics of the same source tend to be similar.
 Modeling the common amplitude modulation to separate mixtures has already been done in~\cite{li07, li09} and \cite{cano14}, which additionally included common amplitude modulation characteristics in the separation scheme.
 % from zafar
-Wolf et al. proposed an approach using rigid motion segmentation, with application to singing voice separation \cite{wolf14,wolf16}. They introduced harmonic template models with amplitude and pitch modulations defined by a velocity vector. They applied a wavelet transform \cite{anden14} on the harmonic template models to build an audio image where the amplitude and pitch dynamics can be separated through the velocity vector. They then derived a velocity equation, similar to the optical flow velocity equation used in images \cite{bernard01}, to segment velocity components. Finally, they identified the harmonic templates which model different sources in the mixture and separated them by approximating the velocity field over the corresponding harmonic template models.\\
+Wolf et al. proposed an approach using rigid motion segmentation, with application to singing voice separation \cite{wolf14, wolf16}. They introduced harmonic template models with amplitude and pitch modulations defined by a velocity vector. They applied a wavelet transform \cite{anden14} on the harmonic template models to build an audio image where the amplitude and pitch dynamics can be separated through the velocity vector. They then derived a velocity equation, similar to the optical flow velocity equation used in images \cite{bernard01}, to segment velocity components. Finally, they identified the harmonic templates which model different sources in the mixture and separated them by approximating the velocity field over the corresponding harmonic template models.\\
 % from zafar
 Yen et al. proposed an approach using spectro-temporal modulation features \cite{yen14,yen15}. They decomposed a mixture using a two-stage auditory model which consists of a cochlear module \cite{chi05} and cortical module \cite{chi99}. They then extracted spectro-temporal modulation features from the TF units and clustered the TF units into harmonic, percussive, and vocal components using the EM algorithm and re-synthesized the estimated signals.\\
 % from zafar
@@ -165,20 +165,18 @@ Virtanen made us of sinusoidal modeling \cite{virtanen00} to model and separate 
 
 In another vein, the source-filter model was deployed to separation sources~\cite{hennequin10}.
 An advantage of the source-filter model approach is indeed that one can dissociate the pitched content of the signal, embodied by the position of its harmonics, from its TF envelope which describes where the energy of the sound lies. In the case of vocals, it yields the ability to distinguish between the actual note being sung (pitch content) and the phoneme being uttered (mouth and vocal tract configuration), respectively. 
-One key feature of vocals is they typically exhibit great variability in fundamental frequency over time. They can also exhibit larger \textit{vibratos} (fundamental frequency modulations) and \textit{tremolos} (amplitude modulations) in comparison to other instruments.
-
-% TODO: more cites for source filter model
+One key feature of vocals is they typically exhibit great variability in fundamental frequency over time. 
+They can also exhibit larger \textit{vibratos} and \textit{tremolos} in comparison to other instruments.
 
 \section{Summary}
 
-Modulations play an important role in audio signals. 
+Modulations play an essential role in audio signals. 
 However past research was mainly focused on single notes and not on overlapped sounds.
-It is therefore to be investigated if scenarios with severe overlap can utilize modulations as well.
-This comes with a number of challenges: Firstly, parameterization of modulation characteristics of a single source is difficult, when only the mixture can be observed. 
-For example, it is known~\cite{salamon13} that the extraction of the fundamental frequency in a mixture is challenging. 
+It is, therefore, to be investigated if scenarios with severe overlap can utilize modulations as well: Firstly, parameterization of modulation characteristics of a single source is difficult, when only the mixture can be observed. 
+It is known~\cite{salamon13} that the extraction of the fundamental frequency in a mixture is challenging. 
 The reason is that crossing partials are a challenging problem for sinusoidal modeling~\cite{viste03}. 
-And even if tracking of such them would work perfectly, evaluation of robustness and accuracy is often hardly possible when the reference data is only annotated with human precision.
-Secondly, representations like modulation spectrograms only cover amplitude modulations, whereas generic modulation patterns (AM/FM, timbre modulation) cannot be covered.
+And even if tracking of them would work correctly, evaluation of robustness and accuracy is often hardly possible when the reference data is annotated with human precision.
+Secondly, representations like modulation spectrograms only cover amplitude modulations, whereas general modulation patterns (AM/FM, timbre modulation) cannot be covered.
 \par
 In the last chapter, we showed the importance of modulations and in the next two chapters address this questions by utilizing the modulations of sources for separation tasks; either via prior knowledge (known) or by operating blindly (unknown).
 
