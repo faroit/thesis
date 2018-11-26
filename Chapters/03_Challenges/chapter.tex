@@ -1,23 +1,21 @@
 \hypertarget{highly-overlapped-signals}{%
 \chapter{Highly Overlapped Signals}\label{cha:highly-overlapped-signals}}
 
-In the previous chapter, I introduced basic signal processing fundamentals in the context of audio mixtures.
-In this chapter I focus on scenarios of highly overlapped signals.
-In order to make an attempt to formalize the \emph{level of overlap}, a time-frequency representation as introduced in Section~\ref{sub:time-frequency-representation} and how they are typically applied to address the source separation problem.
+In the previous chapter, I introduced signal processing fundamentals in the context of audio mixtures.
+In this chapter, I focus on scenarios of highly overlapped signals.
+To formalize the \emph{level of overlap}, a time-frequency representation as introduced in Section~\ref{sub:time-frequency-representation} and how they are typically applied to address the source separation problem.
 
 \hypertarget{separability-of-mixtures}{%
 \section{Separability of Mixtures}\label{separability-of-mixtures}}
 
-Time frequency representations such as the short-time Fourier transform (STFT) have obvious benefits such as the improved interpretability due to its ``image-like'' two-dimensional properties.
+Time-frequency representations such as the short-time Fourier transform (STFT) have clear benefits such as the improved interpretability due to its ``image-like'' two-dimensional properties.
 More importantly, however, such a representation allows to separate mixtures of speech and musical instruments.
 The reason for this is that these mixtures may be fully overlapped in the time domain but are less overlapped in the frequency domain~\cite{rickard02, giannoulis11, rafii}.
-% still minor relation to rafii, but seems ok
-In turn, a TF representation allows to apply filtering in a way that sufficiently extracts all targets from the mixture.
-Furthermore, it allows for simple reconstruction of the original waveform and provides a good trade-off between computational complexity and separation quality.
+In turn, a TF representation allows applying to filter in a way that sufficiently extracts all targets from the mixture.
+Furthermore, it allows for the reconstruction of the original waveform and provides a good trade-off between computational complexity and separation quality.
 \par
 Due to these reasons, many source separation methods focus on extracting individual sources by modeling their respective target in the time-frequency domain.
-% TODO: check
-It is a reasonable approach where it is usually assumed that an STFT provides sufficient level of separability (e.g.~by given a perfect mask).
+Further it is assumed that the STFT provides sufficient level of separability.
 The actual extraction or filtering is done by synthesizing the magnitude estimate of the model and applying the originals mixture phase.
 \par
 In practice, the ability to extract a source from a mixture, depends on the amount of overlap between sources.
@@ -25,8 +23,6 @@ Without any overlap, separation is obviously not necessary, and a small amount o
 However, if sources are fully overlapped in both, time and frequency, a separation in the TF domain is hardly possible.
 A metric that is often used for the purpose of evaluation is called \emph{separability} and was found by Rickard in~\cite{rickard02} as a useful metric for both, speech and music~\cite{giannoulis11} signals.
 \par
-% check
-
 In linear mixtures, separability is defined as \emph{a measure that indicates the percentage of time-frequency bins of a source is disjoint from those of interfering sources}.
 If \(M\) is the ideal binary mask for a given target \(S\) and it's interfering
 magnitude model \(Y\), \(WDO\) is defined as:
@@ -43,26 +39,22 @@ magnitude model \(Y\), \(WDO\) is defined as:
     WDO_{M} = PSR_{M} - \frac{PSR_{M}}{SIR_{M}}
 \end{equation}
 
-%Ideal Ratio Mask:
-%\(\hat{\mathbf{x}}=\frac{\mathbf{v_j}}{\sum_{j'=1}^{J}\mathbf{v}_j'}\mathbf{x}\)
-
 A \(WDO\) of one means the sources are perfectly disjoint, hence no overlap.
 A \(WDO\) zero means can be interpreted as sources being fully overlapped.
 An extensive study using this W-disjoint orthogonality metric (WDO) is given in~\cite{rickard02}.
 \par
-Research on mixtures is often focused on specific, application-driven scenarios to analyze and separate mixtures.
-To give an example, I want to focus on two scenarios that are very popular among research, each with a large amount of contributions:
+The ability to separate sources is depending on the scenario and its applications.
+Two scenarios that are very popular among research are:
 
 \begin{description}
   \item[Cocktail Party] where multiple speakers are speaking concurrently, it results in an overlap of speech signals in both time an frequency. 
-  \item[Vocals and Accompaniment] are usually present at the same time in professionally produce music. 
-  Often, the main assumption is that vocals are more sparse, whereas the accompaniment is more stationary.
+  \item[Vocals and Accompaniment] are often active at the same time in professionally produced music.
 \end{description}
 
-Now, for both scenarios, the actual overlap is dependent on additional parameters like the the number of sources, the class of source or the fundamental frequency.
+Now, for both scenarios, the actual overlap depends on additional parameters like the number of sources, the class of source or the fundamental frequency.
 For instance, the overlap in a cocktail party of two speakers is smaller than with ten concurrent speakers speaking.
-Also the overlap between male and female or brass and string instruments is smaller than with two instruments of the same class. 
-And if two instrumental notes share the same fundamental frequency (playing in \emph{unison}), the sources are almost completely overlapped.
+Also, the overlap between male and female or brass and string instruments is smaller than with two instruments of the same class. 
+And if two instrumental notes share the same fundamental frequency (playing in \emph{unison}), the sources are almost entirely overlapped.
 \par
 \begin{figure*}[h]
 \centering
@@ -92,68 +84,68 @@ And if two instrumental notes share the same fundamental frequency (playing in \
 \label{fig:count}
 \end{figure*}
 
-To illustrate this, I depict the different scenarios in Figures~\ref{fig:dominance} and~\ref{fig:count}.
-The Figure~\ref{fig:dominance} shows the number of TF entries that predominantly belong to either one of the two source classes.
-Figure~\ref{fig:count} shows the number of active sources of each TF entry for the same audio signals.
+To illustrate this, we depict the different scenarios in two figures.
+Figure~\ref{fig:dominance} assigns each time-frequency entry that their predominant source classes.
+Figure~\ref{fig:count} depicts the number of active sources of each TF entry.
 From these figures, one can see that the overlap of a typical speech mixture is comparable to a music recording where the task is to separate vocals and accompaniment.
-If we now compare this to the scenario where sources are fully overlapped as in the unison scenario, almost all TF bins are overlapped and separation would hardly be possible.
+If we now compare this to the scenario where sources are fully overlapped as in the unison scenario, almost all TF bins are overlapped, and separation would hardly be possible.
 \par
-While this is an extreme scenario, it still provides a useful example where typical assumptions are violated and it would facilitate the demand to develop new methods that do not rely so much on these long standing assumptions.
-In fact, a naïve method can be developed by just observing closely the time-frequency representation in Figure~\ref{fig:count}.
-We see that the slow spectro-temporal modulations caused by the vibratos is one of the aspects where the two sources differ significantly.
-So here, the classical STFT does not sufficiently offer enough separability and representations as in the \emph{modulation spectrogram}, presented by~\cite{greenberg96}, allow to separate the two sources in a \emph{modulation domain}.
-Details about this approach are discussed in Chapter 5.
-Now I want to focus on these ``modulational'' aspects on mixtures and their applications in the next section.
+While this is an extreme scenario, it still provides a useful example where common assumptions are violated, and it would facilitate the demand to develop new methods that do not rely so much on these long-standing assumptions.
+A naïve method can be developed by just observing the time-frequency representation in Figure~\ref{fig:count} closely.
+We see that the slow spectro-temporal modulations caused by the vibrato are one of the aspects where the two sources differ significantly.
+So here, the classical STFT does provide enough separability and representations as in the \emph{modulation spectrogram}, presented by~\cite{greenberg96} may be preferable.
+Details about this approach are discussed in Chapter~\ref{cha:unknown}.
 
 \hypertarget{exploiting-slow-modulations}{%
 \section{Exploiting Slow Modulations}\label{exploiting-slow-modulations}}
 
 Tempo-spectral modulations occur both in speech and music signals as detailed in Section~\ref{sub:time-variant-audio-signals}).
 Exploiting modulations is natural for humans: early research from Zwicker in 1952 focused on the human ability to detect amplitude modulations~\cite{zwicker52}. 
-Later, it was shown by Bregman, McAdams and Fastl in~\cite{mcadams89, bregman90, fastl90} that humans use amplitude modulations to group sources; this concept was called \emph{Common Amplitude Modulation} (CAM).
+Later, it was shown by Bregman, McAdams, and Fastl in~\cite{mcadams89, bregman90, fastl90} that humans use amplitude modulations to group sources; this concept was called \emph{Common Amplitude Modulation} (CAM).
 CAM exploits the fact that harmonics share the same amplitude modulation across frequency bins, are perceived \emph{integrated} as opposed to~\emph{segregated}.
-Further, it was shown in~\cite{bacon89} that the ability of detecting amplitude modulations can be incorporated into auditory models.
-It was then found by Dau in~\cite{dau99}, humans are especially sensitive at low frequency modulations:
+Further, it was shown in~\cite{bacon89} that the ability to detect amplitude modulations can be incorporated into auditory models.
+It was then found by Dau in~\cite{dau99}; humans are especially sensitive at low-frequency modulations:
 
 \begin{quote}
 ``Slow modulations are associated with the perception of rhythm. Samples of running speech, for example, show distributions of modulation frequencies with peaks around 3-4 Hz, approximately corresponding to the sequence rate of syllables~\cite{plomp83}. Results from physiological studies have shown that, at least in mammals, the auditory cortex seems to be limited in its ability to follow fast temporal changes.''
 \end{quote}
 
-% TODO: maybe move to intro, objectives?
-Dau then proposed a model that mimics the humans ability to detect modulation patterns and pointed out applications to improve hearing of hearing-impaired listener or speech intelligibility.
+Dau then proposed a model that mimics the ability to detect modulation patterns and pointed out applications to improve the perception for hearing-impaired listener or speech intelligibility.
 \par
-Previously, research has address a variety of tasks of processing and analysis in the context of modulations.
-In the following, I will give an overview of existing work focussed on analysis and separation of modulated sounds.
+Previously, research has addressed a variety of tasks of processing and analysis in the context of modulations.
+In the following, we give an overview of existing work focussed on analysis and separation of modulated sounds.
 
 \subsection{Analysis}
 
-Modulations play an important role for various audio analysis tasks.
+Modulations play an essential role in various audio analysis tasks.
 %lets start with speech
-In speech techniques to utilize modulation patterns improved applications such as speech discrimination~\cite{mesgarani04} or extract spatial acoustic signatures from mixtures~\cite{sukittanon06}.
+In speech techniques to utilize modulation patterns improved applications such as speech, discrimination~\cite{mesgarani04} or extract spatial acoustic signatures from mixtures~\cite{sukittanon06}.
 One way of analyzing amplitude modulations is to use a modulation spectrogram~\cite{greenberg97} which is a frequency-frequency representation of a time domain input signal.
 A complete signal representation can be archived by a modulation tensor which holds the modulation spectrograms for each time frame.
 Interestingly, Greenberg assumed that ``the energy in the modulation spectrum may be derived from syllabic segmentation'' and that ``the preservation of the portion of the modulation spectrum between 2 and 10 Hz''.
-Following this, it was later proved that the detection of modulations can improve speech intelligibility~\cite{elhilali03} or automatic speech recognition~\cite{kingsbury98}.
+Following this, it was later proved that the detection of modulations could improve speech intelligibility~\cite{elhilali03} or automatic speech recognition~\cite{kingsbury98}.
 \par
 % go to music
 Amplitude modulations were also proposed for music tasks. 
-Work by Scheirer in~\cite{scheirer99} proposed a method that operates by utilizing common modulation among groups of frequency sub-bands in the autocorrelogram domain.
-In music, predominantly caused by vibrato, amplitude modulations are considered to be that important and the reader is referred to~\cite{muller11} for further details.
+Work by Scheirer in~\cite{scheirer99} proposed a method that operates by utilizing common modulation among groups of frequency sub-bands in the auto correlogram domain.
+In music, predominantly caused by vibrato, amplitude modulations are considered to be that important, and the reader is referred to~\cite{muller11} for further details.
 \par
-A common way to explicitly analyze frequency variations is to first analyze the fundamental frequency and then track the fundamental frequency over time. 
-An overview of various techniques are summarized in~\cite{driedger16}.
+A common way to explicitly analyze frequency variations is first to analyze the fundamental frequency and then track the fundamental frequency over time. 
+An overview of various techniques is summarized in~\cite{driedger16}.
 The authors of this paper also proposed a novel method to directly estimate the parameters of potential frequency modulations in the time-frequency domain by matching sinusoidal templates.
 \par
-For time-varying frequency modulations, the modulation spectrogram is not an effective, as it would only be able to track the modulation rate due the side-lobes of the modulation.
-Disch and Edler proposed to decompose an audio signal into band pass signals and each of them parametrically modeled by a sinusoidal carrier and its amplitude and frequency modulation~\cite{disch09}.
+For time-varying frequency modulations, the modulation spectrogram is not effective, as it would only be able to track the modulation rate due to the side-lobes of the modulation.
+Disch and Edler proposed in~\cite{disch09} to decompose an audio signal into bandpass signals and each of them parametrically modeled by a sinusoidal carrier and its amplitude and frequency modulation.
 
 \subsection{Processing}
 
-As described in Chapter 2, modulations are used by humans to group and segregate sounds. Viste et al. describes the impact of modulation in~\cite{viste03} as:
+As described in the previous chapter, modulations are used by humans to group and segregate sounds. Viste et al. describes the impact of modulation in~\cite{viste03} as:
 
 \begin{quote}
-``harmonic relation, the common onset, offset, amplitude modulation (AM), and frequency modulation (FM).These are all important cues for grouping.''
+``harmonic relation, the common onset, offset, amplitude modulation (AM), and frequency modulation (FM). These are all important cues for grouping.''
 \end{quote}
+
+\marginpar{This subsection is based on the work that has been published in~\cite{rafii}}
 
 It is therefore not surprising that a number of methods exist, that utilize spectro-temporal modulations to separate mixtures.
 % from zafar!
@@ -171,19 +163,13 @@ Yen et al. proposed an approach using spectro-temporal modulation features \cite
 % double check this!
 Virtanen made us of sinusoidal modeling \cite{virtanen00} to model and separate sources with tempo spectral modulation like vibrato.
 
-% TODO: more cites for source filter model
-
 In another vein, the source-filter model was deployed to separation sources~\cite{hennequin10}.
 An advantage of the source-filter model approach is indeed that one can dissociate the pitched content of the signal, embodied by the position of its harmonics, from its TF envelope which describes where the energy of the sound lies. In the case of vocals, it yields the ability to distinguish between the actual note being sung (pitch content) and the phoneme being uttered (mouth and vocal tract configuration), respectively. 
 One key feature of vocals is they typically exhibit great variability in fundamental frequency over time. They can also exhibit larger \textit{vibratos} (fundamental frequency modulations) and \textit{tremolos} (amplitude modulations) in comparison to other instruments.
 
-% TODO: add this to chapter commonfate: ~\cite{creager16} VibratoNTF uses DOA 
+% TODO: more cites for source filter model
 
 \section{Summary}
-
-% TODO: 
-% [ ] Repeat the highlights of the chapter
-% [ ] Transition sentence that acts as a “teaser” for the next chapter
 
 Modulations play an important role in audio signals. 
 However past research was mainly focused on single notes and not on overlapped sounds.
@@ -193,9 +179,8 @@ For example, it is known~\cite{salamon13} that the extraction of the fundamental
 The reason is that crossing partials are a challenging problem for sinusoidal modeling~\cite{viste03}. 
 And even if tracking of such them would work perfectly, evaluation of robustness and accuracy is often hardly possible when the reference data is only annotated with human precision.
 Secondly, representations like modulation spectrograms only cover amplitude modulations, whereas generic modulation patterns (AM/FM, timbre modulation) cannot be covered.
-% TODO: Highly overlapped signals require suitable representations improves separability compared to STFT.
 \par
-Auditory science shows that modulations are important for humans, possible research questions for the scope of this thesis are:
+In the last chapter, we showed the importance of modulations and in the next two chapters address this questions by utilizing the modulations of sources for separation tasks; either via prior knowledge (known) or by operating blindly (unknown).
 
 \begin{itemize}
   \item Can modulations be automatically detected or extracted from highly overlapped signals?
@@ -204,5 +189,4 @@ Auditory science shows that modulations are important for humans, possible resea
   \item What is the role of modulations in the task of count estimation?
 \end{itemize}
 
-In the next two chapters, I will address this questions by utilizing the modulations of sources for separation tasks; either via prior knowledge (known) or by operating blindly (unknown).
 
