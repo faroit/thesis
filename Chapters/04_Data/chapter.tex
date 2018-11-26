@@ -1,20 +1,18 @@
 \chapter{Datasets}
 \label{cha:datasets}
-% TODO: rename
-In the previous chapter, the fundamentals of highly overlapped signals were presented.
-In order to present methods that separate or analyze such signals, it is useful to study and understand the importance of data.
+
+In the previous chapter, we presented the fundamentals of highly overlapped signals.
 Data is of paramount importance as many methods nowadays rely on machine learning algorithms and for the sake of evaluation.
-One of the objectives of this thesis is to discuss its modulation properties of the signals can be used as a cue for the signal.
-Even though modulation is an intrinsic property of audio recordings such as speech and music, very few datasets are available to study the influence of modulations on various tasks such as source separation.
+One of the objectives of this thesis is to discuss its modulation properties of the signals can be used as a cue for separation or count estimation.
+Even though modulation is an intrinsic property of audio recordings such as speech and music, very few datasets are available to explicitly study the influence of modulations for various tasks such as source separation.
 \par
-In this thesis, methods often rely on audio datasets for development and evaluation and often suitable audio material was not publicly available. Therefore we created and released custom data and software to foster reproducible research.
-The datasets are categorized in the synthetic data and real data as followed.
+Methods rely on audio datasets for development and evaluation, and often suitable audio material was not publicly available which is why we created our own data.
 
 \section{Synthetic Mixtures}
 
 Synthetic mixtures are mixtures that are created from single source sounds, e.g., through (often random) summation. 
 In speech, it is common to mix clean speech and noise~\cite{varga93} or different clean speech signals such as~\cite{garofolo93} to generate mixtures.
-By contrast, the conversational aspect of human-to-human communication is lost, and a realistic  conversation would be challenging to create synthetically.
+By contrast, the conversational aspect of human-to-human communication is lost.
 Compared to speech, musical content usually does share familiar orchestration and can hardly be superimposed randomly. 
 That makes summing of isolated random notes from instrumental databases not practical.
 However, there are use-cases for single note datasets such as for the evaluation of F0 estimation algorithms or to identify the instrument.
@@ -29,31 +27,17 @@ Creating datasets of synthetic mixtures with high overlap is not trivial.
 
 \marginpar{The scenario of unison mixtures was first introduced in~\cite{stoeter14} of which part of this section is based on.}
 
-When all instruments play~\emph{in unison} to create mixtures with very high overlap, single note datasets are useful for three reasons:
+In the special case when all instruments play~\emph{in unison}, single note datasets are a valid way to approximate real unison mixtures since.
 
 \begin{itemize}
-  \item A random summation of multiple instruments playing the same note is musically a meaningful mixture.
-  \item Unison mixtures are important in classical music to extend the timbre of a note.
-  \item When notes were played with vibrato, having access to the individual modulation patterns can help to study the influence of modulations.
+  \item a random summation of multiple instruments playing the same note does not necessarily differ from realistic unison mixture.
+  \item when notes were played with vibrato, having access to the individual modulation patterns can help to study the influence of modulations.
+  \item unison mixtures are important in classical music to extend the timbre of a note.
 \end{itemize}
 
-% TODO: A strict definition of unison mixtures does not exist.,True Unison is when multiple instruments of the same class play the same note.
-
-% When using two random recordings of the same musical note from different players, we are facing a number of problems: A) two notes of the same fundamental frequency are not exactly the same (reference pitch), B) The modulations are not reproducible. C) Two recordings may have completely different acoustic environments.\par
-
-% from common fate introduction
-% TODO: Move back to NMF
-% When St\"oter and Schoeffler et. al. \cite{stoeter13, schoeffler13} asked participants to identify the number of instruments in a piece of music, the participants were only able to identify up to three, similar to Huron's voice experiments. There is very little chance that listeners are able to detect the presence of more than three sources. However in trials with fewer than three instruments, listeners tended to be very sensitive: One of the stimuli in the \cite{stoeter13, schoeffler13} experiments with 1168 participants consisted of a mixture of Violin and Flute played in unison. The results showed that $76\%$ of the participants correctly identified two instruments. Only $18\%$ of the participants underestimated by one instrument, $6\%$ overestimated by one instrument.
+Note that different instruments playing the same note is a less strict definition of unison compared to multiple instruments of the same class play the same note (two first violins in an symphonic orchestra).
 
 % Since humans are able to reliably detect even instruments played in unison, this is a good motivation to expect the same from an algorithm. In this paper we want to address this scenario which has not been brought up so far. We believe creating and evaluating new algorithms for separating sources playing in unison will improve source separation systems in general.
-
-In~\cite{stoeter14}, we proposed a scenario where instruments play in unison\footnote{greek: with \emph{one voice}}. 
-This means that they share the same fundamental frequency (regardless of the octave) so that the sources overlap both in time and frequency. 
-In fact unison mixtures are meant to be as much overlapped as possible, hence they are very difficult to separate. However, due to masking effects, a relatively good subjective quality for the separated sources can be obtained, even if the other sources are not perfectly suppressed.
-% TODO: move! "To our knowledge, this contribution was the first that focuses on mixtures of such unison sources for source separation."
-
-
-
 \par
 % TODO: Extend this
 The stimuli have each been generated by rendering notes in a state of the art software sampler\textsc{Vienna Symphonic Library}\footnote{\url{https://vsl.co.at}}. All test have a duration of about three seconds. Items were equalized in loudness by using an iterative calculation of the loudness algorithm of the time varying Zwicker model~\cite{zwicker13}. 

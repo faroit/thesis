@@ -369,7 +369,12 @@ One can see that the DNN vocal activity detection improved the vocals SDR by 1.5
 An informed system like the one we described in the previous section often has limitations due to the fact that the provided fundamental frequency variation estimate might not be accurate enough and therefore is subject to an upper limit.
 Further, it can be assumed that this upper bound is especially relevant for a warping based system that relies on an instantaneous estimation of the fundamental frequency.
 \par
-Such algorithms for estimating the fundamental frequency ($F0$) of a signal vary in stability and accuracy.
+An estimate of the fundamental frequency of a signal is required in various applications of audio and speech signal processing.
+Some scenarios are targeted to extract the fundamental frequency of the predominant source~\cite{salamon12} in a mixture of other sources.
+In other applications, algorithms are used to extract fundamental frequencies of multiple sources simultaneously present in a signal~\cite{klapuri03}.
+However, the most common scenario in many works is to extract the fundamental frequency of a monophonic and harmonic audio signal containing speech or music~\cite{talkin95, boersma02, decheveigne02, resch07, tidhar10, christensen07}.
+\par
+Algorithms for estimating the fundamental frequency ($F0$) of a signal vary in stability and accuracy.
 While we developed the framework for a $F0$ variation informed separation, we found that we can utilize this to also optimize fundamental frequency estimators itself.
 In turn, we proposed a method which iteratively improves the estimates of such algorithms by applying in each step a time warp on the input signal based on the previously estimated fundamental frequency.
 This time warp is designed to lead to a nearly constant $F0$. A refinement is then calculated through inverse time warping of the result of an $F0$ estimation applied to the warped signal. The proposed refinement algorithm is not limited to specific estimators or optimized for specific input signal characteristics. The method is evaluated on synthetic audio signals as well as speech recordings and polyphonic music recordings. Results indicate a significant improvement on accuracy when using the proposed refinement in combination with several well-known $F0$ estimators

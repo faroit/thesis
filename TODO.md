@@ -110,9 +110,10 @@ $$
 * [ ] Figures durchgehen
 * [ ] Grafiken IEEE in Captions
 * [ ] Literatur durchgehen (PAPERS folder! und löschen)
-* [ ] Tabelltenverzeichnis, Figureverzeichnis etc fixen (Kurzversion von labeln)
+* [X] Tabelltenverzeichnis, Figureverzeichnis etc fixen (Kurzversion von labeln)
 * [ ] Check website availability
 * [ ] add gap statistics and elbow method and other clustering shit from wolfgangs diplomarbeit
+* [ ] add MUSERC dataset to OSS stuff
 
 # Allgemeine Fragen
 
