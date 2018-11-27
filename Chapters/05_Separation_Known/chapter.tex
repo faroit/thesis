@@ -296,7 +296,7 @@ The full procedure is depicted in Figure~\ref{fig:warp_sisec_demo}.
 \end{figure}
 
 \subsection{Results on SiSEC 2015}
-\label{ssec:performance}
+\label{ssec:performance_sisec15}
 
 The algorithm has been applied to the Mixing Secret Dataset 100 (MSD100) dataset,  consisting of a total of 100 songs of different styles.
 The separation results were evaluated using BSSeval~\cite{fevotte05} and submitted to the SiSEC 2015 evaluation challenge~\cite{ono15}.
@@ -435,7 +435,7 @@ From $\breve{x}[n]$ a new $F0$ estimate $\breve{\Pitch_1}[\nu]$ is being calcula
 	\item A refined $F0$ estimate after one iteration is then calculated by $\Pitch_1^r[n] = \Pitch_1[n] \cdot W[n] / \bar{W}$ assuming that the warp contour is initialized as in step \textbf{(A)} above.
 	\item The refinement can be repeated $k$ times to obtain a better estimate. To avoid accumulating errors introduced by the re-sampling based warping, more iterations benefit from calculating a refined warp contour/warp map instead of doing a nested warping on the input signal. The map is obtained by inverse time warping of the warp contour $\breve{W}_1[\nu]$ resulting in $W_1[n]$. A refined warp contour $W_1^r[n]$ is then obtained in the same way as the refined $F0$ estimate is calculated. For the calculation of the $k$th step, time warping is based on the $W_{k-1}^r[n]$ refined warp contour.
 \end{itemize}
-An example of the proposed refinement is depicted in Figure~\ref{fig:teaser}. The final refined estimate is closer to the reference than the $F0$ estimator without refinement. It also shows (right plot) how much ``flatter'' the $F0$ contour becomes after each iteration.
+An example of the proposed refinement is depicted in Figure~\ref{fig:teaser_refined}. The final refined estimate is closer to the reference than the $F0$ estimator without refinement. It also shows (right plot) how much ``flatter'' the $F0$ contour becomes after each iteration.
 Note that compared to~\cite{resch07}, our method does not use a complex optimization scheme but relies on the performance of the pitch estimator in successive iterations. Hence our ``black box'' like post processing simplifies the procedure such that it can be applied to any pitch estimator. That way the selection of a pitch estimator which best fits to the signal type can be seen as an optimization.
 
 \begin{figure}[t]
@@ -446,7 +446,7 @@ Note that compared to~\cite{resch07}, our method does not use a complex optimiza
 %
 \end{tikzpicture}
 \caption{$F0$ refinement for one excerpt of synthesized speech using \textbf{YIN}~\cite{decheveigne02} with 10 iterations. \emph{Left}: Estimated $F0$ in linear time. \emph{Right}: estimates after each warping iteration in warped time.}
-\label{fig:teaser}
+\label{fig:teaser_refined}
 \end{figure}
 
 \subsection{Experiments and Evaluation} % (fold)
@@ -477,12 +477,12 @@ We present the results of the synthetic data as box plots in Figure~\ref{fig:ptd
 
 \vspace{-0.6em}
 \subsubsection{Speech Data} % (fold)
-\label{ssub:real_data}
+\label{ssub:speech}
 For the results of the algorithm on real data we first used the same PTDB-TUG items as in the synthetic data but processed the accompanying speech recordings. The MFPE values were then calculated by averaging the sample wise $F0$ estimates from our proposed method over frame lengths of 10~ms to match the annotation data. The results are shown in Figure~\ref{fig:ptdbtug_real}. The mean values indicate that the MELODIA algorithm performs best overall. We can see that the refinement does not show a clear effect on the iRAPT estimator. The oracle refinement results indicate that even if a ground truth is known, the refinement based on the warped (constant) signal can not get much lower in MFPE. As also seen on synthetic data, iRAPT2 does not show any significant improvements compared to our proposed refinements.
 
 \vspace{-0.6em}
 \subsubsection{Polyphonic Mixtures} % (fold)
-\label{ssub:real_data}
+\label{ssub:polyphonic}
 
 Pitch estimation of polyphonic mixture input signals in general is known to be more difficult than on monophonic signals. To show that our proposed refinement is not bound to the optimization on specific signals we processed the \mbox{MedleyDB}~\cite{MedleyDB} which consists of 108 professionally recorded music mixes where the main melody has been annotated by humans. We only evaluate the MELODIA~\cite{salamon14} estimator in this scenario. Frame lengths and hop sizes were increased to 92~ms and 23~ms, respectively. The set is processed at 44.1~kHz. To further back up the results of the fine pitch error in this scenario, we additionally evaluated the results of a correlation based measure as introduced in~\cite{resch07} (See Equation (19)). Instead of computing the correlation coefficients on the mixture, we used the accompanying multi-tracks. The track which most predominantly contributed to the main melody has been chosen for the correlation coefficient measure. The results of the experiment are shown in Figure~\ref{fig:medley}.
 

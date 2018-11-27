@@ -542,7 +542,7 @@ In fact, our method to generate synthetic samples results in an average overlap 
 This procedure is similar to~\cite{mesaros17} used to label the data.
 Signals are mixed according to (\ref{eq:mixing_model}), peak normalized and then transformed to a time-frequency matrix \(X \in D \times F\).
 Based on a voice activity detection algorithm (VAD), we used an implementation based on the WebRTC Standard~\cite{webrtc} where we computed the ground truth output \(\cardinality \) via (\ref{eq:definition_k}).
-All samples are normalized to the average Euclidean norm of \(duration\) frames to be robust against gain variations as proposed by~\cite{Uhlich15}.
+All samples are normalized to the average Euclidean norm of \(duration\) frames to be robust against gain variations as proposed by~\cite{uhlich15}.
 Furthermore, the data was scaled to zero mean and unit standard deviation across the frequency dimension \(F\) over the full training data.
 Scaling parameters were saved for validation and test.
 For a more detailed description of the data set, the reader is referred to~\cite{stoeter17}.
@@ -554,7 +554,7 @@ For a more detailed description of the data set, the reader is referred to~\cite
 % We therefore find it important that the DNN can not leverage the gain factors of the mixture.
 % We found that the averaged energy of one bin across \(duration\) already is a solid indicator for the number of speakers.
 % In fact, in early experiments of the methods described in~\cite{sayoud10, andrei15} we were only able to reproduce their results when no normalization was applied.
-% To accommodate these findings, we normalize \(\mathbf{X}\) to the average Euclidean norm of \(duration\) frames as proposed by~\cite{Uhlich15}.
+% To accommodate these findings, we normalize \(\mathbf{X}\) to the average Euclidean norm of \(duration\) frames as proposed by~\cite{uhlich15}.
 % Additionally, as common in machine learning, we scale the normalised input representation so that the feature dimension \(F\) have zero mean and unit variance/standard deviation across the whole training dataset (Standardization).
 
 \subsection{Training Procedure}%
