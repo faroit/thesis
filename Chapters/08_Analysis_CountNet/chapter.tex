@@ -88,7 +88,7 @@ The different strategies undertaken there rely on classical and grounded signal 
 However, our experience shows (see Section~\ref{sec:evaluation}) that they leave much room for improvement when applied to more diverse and challenging signals than those corresponding to their targeted applications, notably in the case of many different and constantly overlapping speakers.
 % * Existing single-channel methods require segments where only a single speaker is active.
 This is due to their main common weakness, which is to rely on the assumption that there are segments where only one speaker is active, in a way that is similar to the classical speaker diarization studies mentioned before.
-In~\cite{stoeter17} we presented a first data-driven approach based on a recurrent network, motivated by the recent and impressive successes of deep learning approaches in various audio tasks like speech separation~\cite{yu16, hershey16, grais17} and speaker diarization~\cite{yella14, hruz16, garciaromero17}.
+In~\cite{stoeter17} we presented a first data-driven approach based on a recurrent network, motivated by the recent and impressive successes of deep learning approaches in audio tasks such as speech separation~\cite{yu16, hershey16, grais17} and speaker diarization~\cite{yella14, hruz16, garciaromero17}.
 The methods proposed in~\cite{stoeter17} to address speaker count estimation were built upon recent methods to count objects in images, which is a popular application with many contributions from the deep learning community~\cite{wang15, chattopadhyay17, khan16, segui15, zhang15, arteta16, marsden16, boominathan16, zhang2015salient}.
 In~\cite{stoeter17} two main paradigms were evaluated: a) count estimation as regression problem, where the systems are directly trained to output the number of objects as a point estimate, and b) classification, where every possible number of objects is encoded as a different class and the output of a predicting system corresponds to a probability distribution over these classes.
 The results of the proposed method indicated that a classification based neural network performed better than one based on regression.
@@ -120,7 +120,7 @@ Finally, for the sake of reproducibility, the trained networks (models), as well
 % introduce the section
 We consider the task of estimating the maximum number of concurrent speakers \( \cardinality \in \mathbb{Z}^{+}_{0} \) in a single-channel audio mixture \(\mathbf{x}\).
 This is achieved by applying a mapping from \(\mathbf{x}\) to \(\cardinality \).
-We now provide details on the notations, the general structure of the method, and various ways to exploit the deep learning framework to estimate \(\cardinality \).
+We now provide details on the notations, the general structure of the method, and ways to exploit the deep learning framework to estimate \(\cardinality \).
 
 \subsection{Signal Model}%
 \label{ssec:signal_model}
@@ -360,7 +360,7 @@ This makes it ideal to model time series, however, in practice, the temporal con
 
 To alleviate this problem, forgetting factors (also called gating) were proposed.
 One of the most popular gated recurrent cells is the Long Short-Term Memory (LSTM)~\cite{Hochreiter97} cell.
-Its effectiveness has been proven in various applications and LSTMs are the state-of-the-art approach for speech recognition~\cite{Graves13} and singing voice detection~\cite{Leglaive15}~\footnote{For a deeper mathematical background of LSTMs, due to space constraints, the reader is referred to the aforementioned papers.}.
+Its effectiveness has been proven in applications and LSTMs are the state-of-the-art approach for speech recognition~\cite{Graves13} and singing voice detection~\cite{Leglaive15}~\footnote{For a deeper mathematical background of LSTMs, due to space constraints, the reader is referred to the aforementioned papers.}.
 For a given input of dimensions \(D \times F \times C\), the output of a recurrent layer is either only the last step of dimension \(1 \times A\) or the full sequence \(D \times A\).
 The latter is useful to stack multiple LSTMs or to apply temporal max pooling of the sequence.
 In~\cite{stoeter17} such an architecture based on three bi-directional LSTM cells, was proposed. The architecture is similar to the one employed in~\cite{Leglaive15}.
