@@ -1,8 +1,8 @@
 \chapter{Separation by Unknown Modulation}
 \label{cha:unknown}
 
-In the previous chapter, methods were proposed to separate highly overlapped signals, informed by an estimate of pitch variation of the source to be separated.
-Even though, I showed that pitch variation can be estimated from the mixture, often, it is not easy to obtain in practice.
+In the previous chapter, methods were proposed to separate highly overlapped signals, informed by an estimate of fundamental frequency \(F0\) variation of the source to be separated.
+Even though, I showed that \(F0\)  variation can be estimated from the mixture, often, it is not easy to obtain in practice.
 In contrast, in this chapter, I will introduce separation methods which do not incorporate prior knowledge about the modulation. 
 In fact, some of the methods operate blindly, meaning they do not require any further information about the sources except for the number of sources to be separated.
 \par
@@ -129,7 +129,7 @@ In the vein of the NMF factorization mentioned in Equation~\ref{eq:vanilla_nmf},
 \end{equation}
 
 This notation is very commonly used in many tensor factorization applications~\cite{kolda09}.
-However, we found that it is easier follow when the individual tensor elements are used, which is also the recommended notation proposed in~\cite{kiers00}, for  $f = 1,\ldots,F; b=1,\ldots,B;t=1,\ldots,T$:
+However, we found that it is easier to follow when the individual tensor elements are used, which is also the recommended notation proposed in~\cite{kiers00}, for  $f = 1,\ldots,F; b=1,\ldots,B;t=1,\ldots,T$:
 
 \begin{equation}
   v_{fbt} \approx \sum_{k = 1}^{K} w_{fk} m_{bk} h_{tk}.
@@ -152,14 +152,14 @@ A visualization of the three-way PARAFAC product is depicted in Figure~\ref{fig:
 % this product for every factor, but only for each iteration !  This implementation can be used not only for Beta-NTF but also for
 % many other algorithms using PARAFAC or CANDECOMP
 \par
-Compared to~\cite{barker13}, we choose to generate the modulation tensor in way that is simpler and easier to invert. 
+Compared to~\cite{barker13}, we chose to generate the modulation tensor in a way that is simpler and easier to invert. 
 Barker and Virtanen used a Gammatone filter bank and rectification to model the characteristics of the human auditory system. 
 We simplified the processing and used a two-stage DFT filter bank where the modulation domain is based on magnitude STFT. 
 Although this can give perceptually less optimal results, each step can be directly inverted by using the complex representation.
 Barker already showed that the NTF based approach gives good results on speech signals compared to the standard NMF. 
 Motivated by these results, we wondered if the modulation NTF can be used to separate two instrument mixtures by their amplitude modulation characteristics, as it is the case in the unison scenario.
 \par
-Thus, let us return to the example from Figure~\ref{fig:am_tensor_nmf} of two harmonic signals having the same fundamental frequency of 440~\si{\hertz} and one signal has a stationary amplitude modulation of 4~\si{\hertz} whereas the another one of 10~\si{\hertz}. 
+Thus, let us return to the example from Figure~\ref{fig:am_tensor_nmf} of two harmonic signals having the same fundamental frequency of 440~\si{\hertz}, with stationary amplitude of 4~\si{\hertz} and 10~\si{\hertz} respectively. 
 These differences now turn out to be latent in a non-negative modulation tensor representation.
 In contrast to NMF, Figure~\ref{fig:am_ntf} shows valid factorizations of unison signal using NTF.
 It gives a smoother activation matrix and is able to generate the output with the separated amplitude modulations on each sinusoid. The modulation frequency gain matrix shows the two modulation frequency templates and the DC-component.
@@ -178,9 +178,11 @@ It gives a smoother activation matrix and is able to generate the output with th
 \label{fig:am_ntf}
 \end{figure}
 \par
-A comparison of the modulation tensor approach compared to the pitch variation informed method on the unison separation scenario has been carried out in our work published in~\cite{stoeter14}.
-Results indicated that modulation tensor factorization generally performs worse than informed methods.
-The reason is that, that it does only consider amplitude modulation even though frequency modulations are the actual source of modulation.
+% TODO: variation?
+A comparison of the modulation tensor approach compared to the \(F0\) variation informed method on the unison separation scenario has been carried out in our work published in~\cite{stoeter14}.
+Results indicated that the modulation tensor factorization generally performs worse than informed methods.
+This is because it only considers amplitude modulations even though frequency modulations are the
+actual source of the modulation.
 In the next section we investigated how the complex modulation patterns that consist of both, frequency and amplitude modulation patterns caused by the instrument vibratos, can improve the separation quality.
 
 \section{The Common Fate Model for Unison Mixtures}%
@@ -657,7 +659,7 @@ In fact, for the first time, interested researchers are now able to listen to ov
 This was made possible through modern JavaScript technologies like the Web Audio API to interactively assess source separation results in the browser.
 For each track, separation results are provided as well as the objective BSSeval scores, all of the data is reproducible and was made available in~\cite{oss_sisecwebsite}.
 Figure~\ref{fig:sisec_website} depicts a screenshot of the website.
-The objective scores are depicted as an interactive matrix where users are able to sort the results for each track an each system interactively by the the source of interest.
+The objective scores are depicted as an interactive matrix where users are able to sort the results for each track and each system interactively by the the source of interest.
 Clicking on one rectangles in the heatmap, opens the interactive player that allows to simultaneously playback the separated sources including changing the volume of each source.
 
 \begin{figure}[!h]
@@ -677,15 +679,15 @@ Clicking on one rectangles in the heatmap, opens the interactive player that all
 
 In this chapter, we presented methods that exploit modulations for source separation without knowing them a priori. 
 In the first part of this chapter, we presented a study where we demonstrated the use of the modulation spectrogram tensors for separating unison instrument mixtures, comparing the results with those presented in the previous chapter.
-In a next step, we proposed complex tensor representation, the Common Fate Transform (CFT), computed from rectangular patches of the complex STFT using two-dimensional DFTs.
+In a next step, we proposed a complex tensor representation, the Common Fate Transform (CFT), computed from rectangular patches of the complex STFT using two-dimensional DFTs.
 This novel representation exposes joint modulation characteristics of amplitude and frequency modulated signals while being fully invertible.
-We demonstrated the usefulness of this representation using our Common Fate Model that factorizes patches from the CFT into two components, a modulation pattern and it is activation. 
-The model is inspired by the humans' ability to group common modulations into single sources.
-We presented results on unison musical instruments that indicate that it outperforms existing methods.
+We demonstrated the usefulness of this representation using our Common Fate Model that factorizes patches from the CFT into two components, a modulation pattern and its activation. 
+The model is inspired by the humans ability to group common modulations into single sources.
+We presented results on unison musical instrument mixtures, indicating that it outperforms existing methods.
 \par
 In the second part of this chapter, we combined the CFT with an existing deep learning based separation model~\cite{uhlich15}.
 We showed that the CFT improved separation quality compared to STFT in a fully connected deep neural network.
 Even though the CFT significantly increases the input size (due to its redundancy) and the number of trainable network parameters (due to its stacked auto-encoder architecture), generalization performance did not suffer.
 \par
-The results of the best performing model were submitted to SiSEC 2016, were we scored among the top three participating research teams.
-Finally, we presented interactive evaluation tools, developed for SiSEC, that allow to interactively assess the performance of separation systems both, objectively and subjectively.
+The results of the best performing model were submitted to SiSEC 2016, where we scored among the top three participating research teams.
+Finally, we presented interactive evaluation tools, developed for SiSEC, allowing to interactively assess the performance of separation systems both objectively and subjectively.
