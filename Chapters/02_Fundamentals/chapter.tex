@@ -2,7 +2,7 @@
 \chapter{Fundamentals of Overlapped Sounds}\label{cha:fundamentals}}
 
 In this thesis the core part in focussed on \emph{analysis} and \emph{processing} of sound recordings of music and speech, commonly referred to as \emph{audio signals}.
-In this chapter, I therefore introduce basic concepts of digital audio signals which are relevant to apprehend the remaining chapters.
+In this chapter, we therefore introduce basic concepts of digital audio signals which are relevant to apprehend the remaining chapters.
 
 \hypertarget{Audio Signals}{%
 \section{Audio Signals}\label{sec:specifics-of-audio-signals}}
@@ -10,7 +10,7 @@ In this chapter, I therefore introduce basic concepts of digital audio signals w
 When a sound wave travels through a medium like air it, this signal can be captured using a microphone by measuring the local pressure deviation over time.
 Such a signal can be written as a function \(x(t)\) continuous in both, time \(t \in \sR\) and the amplitude \(x(t) \in \sR\).
 An \emph{audio signal} can be introduced as a signal that is meant to be perceived by the human auditory system --- through our ears.
-Therefore, one could observe specifics properties of audio signals, consistent with the limitations of the human hearing system, for example in dynamics/loudness as well as a limited signal bandwidth.
+Therefore, one could observe specific properties of audio signals, consistent with the limitations of the human hearing system, for example in dynamics/loudness as well as a limited signal bandwidth.
 Many other signals exist with similar characteristics such as signals from finance, geophysics, meteorology or medical data.
 The result is that often audio research is inspired by applications of other fields of signal processing and vice versa.
 
@@ -23,7 +23,7 @@ A digital audio signal can be obtained from an analog signal using analog-to-dig
 In short, this process includes two steps: first, the continuous time signal \(x(t)\) is converted to a discrete time series, so that one sample\footnote{Please note, that the use of the word \emph{sample} will have different meanings in the context of machine learning, where a sample is an instance of a full signal instead of a single time step.} \(x_n\) is \emph{sampled} with equidistant steps \(T\); second, the amplitude values are \emph{quantized} resulting in vector \(\vx \in \sZ\), represented as a one dimensional time series of amplitudes.
 An important parameter in the process of digitization is the sample rate \(F_s = 1/T\) where \(T\) is the sampling period.
 Often, \(F_s\) has a significant effect on the quality of audio signals.
-And, it is the objective of a real-world audio system not to introduce perceptible degradation in audio quality when a digital signal is reproduced over headphones or loudspeakers.
+And, it is the objective of a real-world audio system not to introduce perceivable degradation in audio quality when a digital signal is reproduced over headphones or loudspeakers.
 Due to the Nyquist-Shannon sampling theorem, the sample rate needs to be at least twice the bandwidth of the analog signal.
 Since the hearing range of normal listening humans is 20~\si{\hertz} - 20~\si{\kilo\hertz}~\cite{fastl90, moore89}, typically for audio signals, 
 sample rates of 44100~\si{\hertz} are chosen to facilitate the full human hearing range.
@@ -34,7 +34,7 @@ For further details, we refer the reader to audio signal processing basics such 
 \subsection{Time-Frequency Representation}\label{sub:time-frequency-representation}}
 
 Real world sounds such as speech and music have periodicities.
-Therefore, we analyze sounds in the frequency domain to improve the computational efficiency of signal processing methods.
+Therefore, we analyze sounds in the frequency domain where the redundancy of the signal is redundancy which improves the computational efficiency of signal processing methods.
 It is common to achieve this through the use of discrete Fourier transform (DFT) and its fast FFT implementation~\cite{cooley65} (for details, the reader is referred to~Chapter 4 of~\cite{proakis96}).
 Spectral representations also relate to our human auditory system~\cite{zwicker13, moore89},allowing us to process sounds closer to how we perceive them.
 \par
@@ -44,7 +44,7 @@ The short-time Fourier transform (STFT) is the most commonly used TF representat
 It encodes the time-varying spectra into a matrix \(\mX\) with frequencies \(k\) and time frames \(n\).
 \par
 When sounds are processed in the time-frequency domain, the transformation greatly benefits from being invertible to reconstruct a time domain signal.
-STFT matrices \(\mX \in \sC^{n \times k \times c}\) are complex and include phase information.
+STFT matrices \(\mX \in \sC^{n \times k}\) are complex and include phase information.
 However, analysis and processing is often focussed  on the \emph{magnitude} \(|\mX|\) or the \emph{spectrogram} \(|\mX|^2\).
 
 \subsection{Fundamental Frequency and Harmonicity}
@@ -66,7 +66,7 @@ And it is this property we perceive as \emph{pitched}.
 
 It is important to note that \emph{pitch} is a subjective measure.
 The objective equivalent is referred to as the \emph{fundamental frequency} (\(F_0\))\footnote{Pitch and $F_{0}$ are often used synonymously in audio research. 
-Even though this is incorrect, I sometimes may refer to other work where pitch instead of $F_{0}$ is used.}.
+Even though this is incorrect, we sometimes may refer to other work where pitch instead of $F_{0}$ is used.}.
 An example of a harmonic signal can be seen in Figure~\ref{fig:cello_example} that depicts a single note (E3) played by violoncello.
 \(F_{0}\) can defined as the lowest frequency/partial of an harmonic signal.
 All frequencies together formed by the integer multiples of the fundamental frequency are named \textit{harmonics}~\cite{schenker54}.
@@ -77,25 +77,25 @@ For a a detailed overview into the research field of pitch and \(F_{0}\), the re
 \subsection{Time-Variant Audio Signals}\label{sub:time-variant-audio-signals}
 
 Audio signals are considered to be stationary or time-invariant when their properties such as the amplitude of the fundamental frequency of the signal do not change over time.
-A stationary sound can turn into time-invariant sound using modulations
-And in fact, modulations are of paramount importance in signal processing as they enabled technologies such as radio transmission~\cite{shannon48}.
+% A stationary sound can turn into time-invariant sound using modulations
+Modulations are of paramount importance in signal processing as they enabled technologies such as radio transmission~\cite{shannon48}.
 Modulations can be defined as time-variant functions that change a parameter of a signal over time.
 In the case of audio signals, often both, the modulating function (modulator) and the signal being modulated are periodic.
 Signal modulations are often created intentionally but also occur naturally in many real-world audio signals such as speech.
-In the following, I will present typical audio modulation categories and their cause, underlining the importance of them.
+In the following, we will present typical audio modulation categories and their cause, underlining the importance of them.
 
 \subsubsection*{Audio Signal Communication}
 
-The transmission of an audio signal using a modulator/demodulator (modem) system may be one of the most essential applications for audio modulations. 
-The principle is used the broadcasting of radio using a high-frequency carrier signal that is modulated by an audio signal to be transmitted, which is assumed to be of lower frequency than the carrier signal.
-The modulator is targeted to vary the amplitude or the frequency of the carrier signal.
+% The transmission of an audio signal using a modulator/demodulator (modem) system may be one of the most essential applications for audio modulations. 
+% The principle is used the broadcasting of radio using a high-frequency carrier signal that is modulated by an audio signal to be transmitted, which is assumed to be of lower frequency than the carrier signal.
+% The modulator is targeted to vary the amplitude or the frequency of the carrier signal.
 If we imagine a sinusoidal carrier signal $x(t) = \cos \omega_c t$, \emph{amplitude modulation} (AM) is applying by a modulation function $a(t)$ so that:
 
 % We assume that we can separate overlapping partials of the sources based on differences in amplitude and/or frequency modulation, resulting in the following model for a signal with $P$ commonly modulated partials
 % \begin{equation}
 %   \begin{array}{l}
 %    x(n) = \displaystyle \sum_{p=1}^{P} \Big[\big(1 + a(n)\big) \\
-%    \hspace{3.5em}\displaystyle \cdot\sin \Big(2\pi f_{p,0}\big(n + \frac{1}{f_{1,0}} \sum_{m=m_0}^{n}{f(m)} \big) + \phi_{p,0} \Big)\Big] ,
+%    \hspace{3.5em}\displaystyle \cdot\sin \Big(2\pwe f_{p,0}\big(n + \frac{1}{f_{1,0}} \sum_{m=m_0}^{n}{f(m)} \big) + \phi_{p,0} \Big)\Big] ,
 %   \end{array}
 % \end{equation}
 % where effectively the amplitude modulation is $a(n)$ and the frequency modulation of the first partial is $f(n)$.
@@ -113,9 +113,9 @@ In comparison to AM, Frequency modulation (FM) varies the frequency of the carri
 where A is the amplitude, $\omega_0$ is the carrier frequency, $\omega_m(\theta)$ is the instantaneous modulation frequency, and $m$ is the modulation index $m = \frac{\Delta \omega_0} { \omega_{m} }$.
 
 The Fourier spectrum of $z_{FM}(t)$ is complicated due to its non-linearity, involve using the Bessel function.
-For applications where the modulation frequencies are a lot smaller than the carrier frequency, the spectrum that is caused by frequency modulations is similar to those of amplitude modulations.
-This is the reason why algorithms that aim to capture the amplitude modulation will also observe frequency modulations.
-The total bandwidth in this scenario is approximately $2\Delta \omega_0$, as found by Carson in~\cite{carson22}.\par
+For applications where the modulation frequencies are a lot smaller than the carrier frequency, the spectrum that results by frequency modulations is similar to those of amplitude modulations.
+% This is the reason why algorithms that aim to capture the amplitude modulation will also observe frequency modulations.
+% The total bandwidth in this scenario is approximately $2\Delta \omega_0$, as found by Carson in~\cite{carson22}.\par
 For audio communication such as FM radio, the modulation frequency or rate is the same as the audio signal being transmitted (audio rate modulations).
 In music or speech, modulations are much slower --- typically up to 10~\si{\hertz} (slow) or up to 100~\si{\hertz} (medium/fast).
 
@@ -157,34 +157,34 @@ Furthermore, it was shown that humans are capable of processing rhythm-like enve
 
 \subsubsection*{The importance of Slow Modulations}
 
-Table~\ref{tab:modulations} summarized the many types of modulations in audio signals.
-Interestingly, many modulations have a rate of around 5~\si{\hertz}. 
+% Table~\ref{tab:modulations} summarized the many types of modulations in audio signals.
+It is interesting to observe that many modulations have a rate of around 5~\si{\hertz}. 
 Zwicker found in~\cite{zwicker52} that humans are very sensitive at detecting amplitude modulations at such a low modulation frequency.
 This observation can be confirmed when looking at physical modulations that occur when humans suffer from vocal tremor~\cite{ramig87} or Parkinson~\cite{botzel14}: in both cases, muscle contractions are actuated with the same frequency, indicating that these modulations are a natural for us.
 
-\begin{table}[]
-\scriptsize
-\centering
-\begin{adjustbox}{angle=90}
-\begin{tabular}{@{}lllp{3.5cm}ll@{}}
-\toprule
-                          & Carrier Signal    & Modulation Function & Modulated Parameters        & Modulation rate & References\\ 
-\midrule
-AM/FM/PM                  & HF Sinusoid       & any audio signal    & amplitude, frequency, phase & up to 20~\si{\kilo\hertz}     & \cite{shannon48}        \\
-String Vibrato & String Excitation & sinusoidal-like     & string length   & 5-7~\si{\hertz}          & \cite{fletcher01, macleod06}\\
-Woodwind and Brass Vibrato & Resonator & sinusoidal-like & amplitude, timbre               & 4-8~\si{\hertz}          & \cite{fletcher01, gilbert05}\\
-Modular Synthesizer       & any audio signal  & LFO                 & any parameter               & not limited     & \cite{buchla05, pinch09}\\ 
-Electronic Organ with Tremolo  & instrument sound & doppler effect      & amplitude and frequency & 1~\si{\hertz}/7~\si{\hertz} & \cite{leslie49} \\
-Singing Voice  & vocal &  sinusoidal/triangular &  amplitude and frequency & 5-8~\si{\hertz} & \cite{sundberg94} \\
-Speech  & glottal pulse, language & not defined & amplitude, frequency, \newline phoneme duration, timbre& 4-10~\si{\hertz} & \cite{plomp83, fuellgrabe09}\\
-Parkinsonian tremor  & muscle activity &  sinusoidal-like & amplitude & 5~\si{\hertz} & \cite{botzel14}\\
-Auditory cortex  & nerve activity &  sinusoidal-like & amplitude & up to 20~\si{\hertz} & \cite{schreiner88}\\
-\bottomrule
-\end{tabular}
-\end{adjustbox}
-\caption{Overview of modulations in audio signals and a selection of their respective properties.}%
-\label{tab:modulations}
-\end{table}
+% \begin{table}[]
+% \scriptsize
+% \centering
+% \begin{adjustbox}{angle=90}
+% \begin{tabular}{@{}lllp{3.5cm}ll@{}}
+% \toprule
+%                           & Carrier Signal    & Modulation Function & Modulated Parameters        & Modulation rate & References\\ 
+% \midrule
+% AM/FM/PM                  & HF Sinusoid       & any audio signal    & amplitude, frequency, phase & up to 20~\si{\kilo\hertz}     & \cite{shannon48}        \\
+% String Vibrato & String Excitation & sinusoidal-like     & string length   & 5-7~\si{\hertz}          & \cite{fletcher01, macleod06}\\
+% Woodwind and Brass Vibrato & Resonator & sinusoidal-like & amplitude, timbre               & 4-8~\si{\hertz}          & \cite{fletcher01, gilbert05}\\
+% Modular Synthesizer       & any audio signal  & LFO                 & any parameter               & not limited     & \cite{buchla05, pinch09}\\ 
+% Electronic Organ with Tremolo  & instrument sound & doppler effect      & amplitude and frequency & 1~\si{\hertz}/7~\si{\hertz} & \cite{leslie49} \\
+% Singing Voice  & vocal &  sinusoidal/triangular &  amplitude and frequency & 5-8~\si{\hertz} & \cite{sundberg94} \\
+% Speech  & glottal pulse, language & not defined & amplitude, frequency, \newline phoneme duration, timbre& 4-10~\si{\hertz} & \cite{plomp83, fuellgrabe09}\\
+% Parkinsonian tremor  & muscle activity &  sinusoidal-like & amplitude & 5~\si{\hertz} & \cite{botzel14}\\
+% Auditory cortex  & nerve activity &  sinusoidal-like & amplitude & up to 20~\si{\hertz} & \cite{schreiner88}\\
+% \bottomrule
+% \end{tabular}
+% \end{adjustbox}
+% \caption{Overview of modulations in audio signals and a selection of their respective properties.}%
+% \label{tab:modulations}
+% \end{table}
 
 \hypertarget{sources-and-mixtures}{%
 \section{Sources and Mixtures}\label{sources-and-mixtures}}
@@ -206,7 +206,7 @@ In \emph{convolutive} mixtures, each source \(\mathbf{s_j}\) is convolved by a f
 Usually, the mixing process is assumed to be time-invariant but for a variety of signals, such as live recordings with moving sources, it can also be time-variant.
 The mathematical notations of different mixing models are summarized in Table~\ref{tab:mixing_models}.
 \par
-In the remainder of this thesis, I will only consider the linear case of time-invariant mixing, but many of the methods could be transferred to other cases.
+In the remainder of this thesis, we will only consider the linear case of time-invariant mixing, but many of the methods could be transferred to other cases.
 
 \begin{table}[]
     \centering
@@ -283,10 +283,10 @@ One of the earliest work on audio source separation started in the mid 70s~\cite
 Since then a large amount of contributions were made in this field, both, targeted at speech and music separation.
 Due to this large number of contributions, it is not feasible to give an extensive overview on all existing methods in the context and the reader is referred to~\cite{vincent18, comon10, rafii}.
 \par
-Source separation methods has relevant applications for music and speech mixtures such as attenuation of hearing aids, karaoke or music creation due to isolated sample composition.
+Source separation methods have relevant applications for music and speech mixtures such as attenuation of hearing aids, karaoke or music creation due to isolated sample composition.
 It also indirectly helps for related task such as upmixing/remixing, improved music transcription or automatic speech recognition (ASR). 
 \par
-In the following, I present three ways to group separation scenarios:
+In the following, we present three ways to group separation scenarios:
 
 \subsubsection*{Underdetermined vs. Overdetermined Separation}
 As mentioned in Section~\ref{sources-and-mixtures}, generating sound mixtures is closely related to the process of mixing taken place during recording (speech) or with the help of professional recording engineers (music).
@@ -348,7 +348,7 @@ In real world applications, information about the actual number of concurrent sp
 The \emph{number of sources} \(k \in \sZ\) appears to be a clearly defined property of a mixture. 
 However the meaning of it can differ, depending on its application.
 Let us assume that we have \(L\) sources and mixture of duration \(N\).
-Further, I imagine a latent binary \textit{source activity} variable~$v_{nl}\in \left\{ 0,1 \right\}$ that indicates the activity of each source \(l\) and for each time instance \(n\).
+Further, we imagine a latent binary \textit{source activity} variable~$v_{nl}\in \left\{ 0,1 \right\}$ that indicates the activity of each source \(l\) and for each time instance \(n\).
 Now, concerning the number of sources, two definitions of \(k\) can be imagined:
 
 \begin{description}
@@ -357,9 +357,9 @@ Now, concerning the number of sources, two definitions of \(k\) can be imagined:
 \end{description}
 
 At short time scales A) is equal to B) because, on such a time scale (a few seconds), the sources/instrumentation usually doesn't change. 
-In Fig.~\ref{fig:teaser}, I illustrate a setup featuring~$L=3$ unique sources.
+In Fig.~\ref{fig:teaser}, we illustrate a setup featuring~$L=3$ unique sources.
 At any given time, one can see --- given definition B) --- that at most~$k=L=3$ sources are active at the same time and~$k=2$ could be the outcome if a smaller excerpt would be evaluated.
-In this thesis, I will pick definition B when concerned about estimating the number of sources.
+In this thesis, we will pick definition B when concerned about estimating the number of sources.
 However, when dealing with the human ability to estimate the number of sources, such a clear definition cannot be made.
 For instance, obtaining this number is even more challenging because the definition of a musical source cannot be given.
 In some scenarios, like popular western music, the sources to be separated, are grouped clear melody, bass, drums and ``other'' (the remainder), in other scenarios, e.g., the ``drums'' would count as multiple instruments.
