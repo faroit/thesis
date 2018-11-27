@@ -1,14 +1,14 @@
 \hypertarget{Fundamentals of Overlapped Sounds}{%
 \chapter{Fundamentals of Overlapped Sounds}\label{cha:fundamentals}}
 
-In this thesis the core part in focussed on \emph{analysis} and \emph{processing} of sound recordings of music and speech, commonly referred to as \emph{audio signals}.
+In this thesis, the core part is focussed on \emph{analysis} and \emph{processing} of sound recordings of music and speech, commonly referred to as \emph{audio signals}.
 In this chapter, we therefore introduce basic concepts of digital audio signals which are relevant to apprehend the remaining chapters.
 
 \hypertarget{Audio Signals}{%
 \section{Audio Signals}\label{sec:specifics-of-audio-signals}}
 
-When a sound wave travels through a medium like air it, this signal can be captured using a microphone by measuring the local pressure deviation over time.
-Such a signal can be written as a function \(x(t)\) continuous in both, time \(t \in \sR\) and the amplitude \(x(t) \in \sR\).
+When a sound wave travels through a medium like air, this signal can be captured using a microphone by measuring the local air pressure deviation over time.
+Such a signal can be written as a function \(x(t)\) continuous in both time \(t \in \sR\) and the amplitude \(x(t) \in \sR\).
 An \emph{audio signal} can be introduced as a signal that is meant to be perceived by the human auditory system --- through our ears.
 Therefore, one could observe specific properties of audio signals, consistent with the limitations of the human hearing system, for example in dynamics/loudness as well as a limited signal bandwidth.
 Many other signals exist with similar characteristics such as signals from finance, geophysics, meteorology or medical data.
@@ -33,10 +33,9 @@ For further details, we refer the reader to audio signal processing basics such 
 \hypertarget{time-frequency-representation}{%
 \subsection{Time-Frequency Representation}\label{sub:time-frequency-representation}}
 
-Real world sounds such as speech and music have periodicities.
-Therefore, we analyze sounds in the frequency domain where the redundancy of the signal is redundancy which improves the computational efficiency of signal processing methods.
+We often analyze sounds in the frequency domain where the redundancy of the signal is redundancy which improves the computational efficiency of signal processing methods, especially for speech and music that have periodicities.
 It is common to achieve this through the use of discrete Fourier transform (DFT) and its fast FFT implementation~\cite{cooley65} (for details, the reader is referred to~Chapter 4 of~\cite{proakis96}).
-Spectral representations also relate to our human auditory system~\cite{zwicker13, moore89},allowing us to process sounds closer to how we perceive them.
+Spectral representations also relate to our human auditory system~\cite{zwicker13, moore89}, allowing us to process sounds closer to how we perceive them.
 \par
 The periodicity of real-world sounds, as mentioned above, usually only holds for short durations of several milliseconds, often referred to as ``quasi-stationarity''.
 Therefore, we analyze and process short-time spectra, computed in an overlapped fashion, resulting in a \emph{time-frequency} (TF) representation.
@@ -52,7 +51,7 @@ However, analysis and processing is often focussed  on the \emph{magnitude} \(|\
 \begin{figure}[h]
   \centering
   \includegraphics[width=0.8\columnwidth]{gfx/cello.pdf}
-  \caption{Spectrogram of single violoncello note (E3) of a fundamental frequency \(F0\) of about 164\si{\hertz}. The vibrato is clearly visible in the upper part of the harmonic spectrum. The sound is part of the MUSERC dataset~\cite{stoeter15acm}.}%
+  \caption{Spectrogram of single violoncello note (E3) of a fundamental frequency \(F0\) of about 164\si{\hertz}. The vibrato is clearly visible in the upper part of the harmonic spectrum. The audio signal is part of the MUSERC dataset~\cite{stoeter15acm}.}%
   \label{fig:cello_example}%
 \end{figure}
 
@@ -61,16 +60,16 @@ And it is this property we perceive as \emph{pitched}.
 \emph{Pitch} is defined by Klapuri in~\cite{klapuri06book} as 
 
 \begin{quote}
-``a perceptual attribute which allows the ordering of sounds on a frequency-related scale extending from high to low.''
+``a perceptual attribute which allows the ordering of sounds on a frequency-related scale extending from low to high.''
 \end{quote}
 
 It is important to note that \emph{pitch} is a subjective measure.
 The objective equivalent is referred to as the \emph{fundamental frequency} (\(F_0\))\footnote{Pitch and $F_{0}$ are often used synonymously in audio research. 
 Even though this is incorrect, we sometimes may refer to other work where pitch instead of $F_{0}$ is used.}.
 An example of a harmonic signal can be seen in Figure~\ref{fig:cello_example} that depicts a single note (E3) played by violoncello.
-\(F_{0}\) can defined as the lowest frequency/partial of an harmonic signal.
+\(F_{0}\) can be defined as the lowest frequency/partial of an harmonic signal.
 All frequencies together formed by the integer multiples of the fundamental frequency are named \textit{harmonics}~\cite{schenker54}.
-When the fundamental frequency changes, the frequencies of these harmonics changes accordingly.
+When the fundamental frequency changes, the frequencies of these harmonics change accordingly.
 This results in the typical comb-like structure of harmonic signals when analyzed in the time-frequency domain.
 For a a detailed overview into the research field of pitch and \(F_{0}\), the reader is referred to~\cite{klapuri06book}.
 
@@ -80,7 +79,7 @@ Audio signals are considered to be stationary or time-invariant when their prope
 % A stationary sound can turn into time-invariant sound using modulations
 Modulations are of paramount importance in signal processing as they enabled technologies such as radio transmission~\cite{shannon48}.
 Modulations can be defined as time-variant functions that change a parameter of a signal over time.
-In the case of audio signals, often both, the modulating function (modulator) and the signal being modulated are periodic.
+In the case of audio signals, often both the modulating function (modulator) and the signal being modulated are periodic.
 Signal modulations are often created intentionally but also occur naturally in many real-world audio signals such as speech.
 In the following, we will present typical audio modulation categories and their cause, underlining the importance of them.
 
@@ -112,7 +111,7 @@ In comparison to AM, Frequency modulation (FM) varies the frequency of the carri
 
 where A is the amplitude, $\omega_0$ is the carrier frequency, $\omega_m(\theta)$ is the instantaneous modulation frequency, and $m$ is the modulation index $m = \frac{\Delta \omega_0} { \omega_{m} }$.
 
-The Fourier spectrum of $z_{FM}(t)$ is complicated due to its non-linearity, involve using the Bessel function.
+The Fourier spectrum of $s_{FM}(t)$ is complicated due to its non-linearity involves using the Bessel function~\cite{abramowitz64}.
 For applications where the modulation frequencies are a lot smaller than the carrier frequency, the spectrum that results by frequency modulations is similar to those of amplitude modulations.
 % This is the reason why algorithms that aim to capture the amplitude modulation will also observe frequency modulations.
 % The total bandwidth in this scenario is approximately $2\Delta \omega_0$, as found by Carson in~\cite{carson22}.\par
@@ -221,14 +220,14 @@ Convolutive\strut
 \end{minipage}\tabularnewline
 \midrule
 \endhead
-\begin{minipage}[t]{0.26\columnwidth}\raggedright
+\begin{minipage}[t]{0.30\columnwidth}\raggedright
 Time-Invariant\strut
 \end{minipage} & \begin{minipage}[t]{0.42\columnwidth}\raggedright
 \(\mathbf{x}=\sum_{j=1}^{J}a_j\mathbf{s}_j\)\strut
 \end{minipage} & \begin{minipage}[t]{0.23\columnwidth}\raggedright
 \(\mathbf{x} = \sum_{j=1}^{J}r_{j} \ast \mathbf{s}_j\)\strut
 \end{minipage}\tabularnewline
-\begin{minipage}[t]{0.26\columnwidth}\raggedright
+\begin{minipage}[t]{0.30\columnwidth}\raggedright
 Time-Variant\strut
 \end{minipage} & \begin{minipage}[t]{0.42\columnwidth}\raggedright
 \(\mathbf{x}=\sum_{j=1}^{J}a_j(n)\mathbf{s}_j\)\strut

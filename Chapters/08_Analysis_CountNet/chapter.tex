@@ -373,7 +373,7 @@ The main motivation to stack these layers is to combine the benefits of convolut
 
 There are different ways to stack CNNs and RNNs to form a CRNN architecture.
 In our application the motivation is to aggregate local time-frequency features coming from the output convolutional neural network and use the LSTM layer to model long temporal structures.
-As the output of a CNN layer is a 3D volume \(D \times F \times C\) and the input of a recurrent layer only takes a 2D sequence, the dimension would need to be reduced. Naturally, the time dimension would need to be kept, therefore the channel dimension \(C\) is stacked with the frequency dimension \(F\) resulting in a \(D \times F \cdot C\) output (compare Figure~\cite{fig:crnn}).
+As the output of a CNN layer is a 3D volume \(D \times F \times C\) and the input of a recurrent layer only takes a 2D sequence, the dimension would need to be reduced. Naturally, the time dimension would need to be kept, therefore the channel dimension \(C\) is stacked with the frequency dimension \(F\) resulting in a \(D \times F \cdot C\) output (compare Figure~\ref{fig:crnn}).
 
 \begin{figure}[t]
 \centering
@@ -580,7 +580,7 @@ Early stopping (\(patience = 10\)) is applied by monitoring the validation loss 
 % Additionally it allows us to evaluate on different excerpt durations \(D\), while keeping the training dataset fixed.
 Training never exceeded more than 50 epochs.
 \par
-We used the Keras~\cite{chollet2015keras} framework and trained on multiple instances of Nvidia GTX 1080 GPUs.
+We used the Keras~\cite{chollet15} framework and trained on multiple instances of Nvidia GTX 1080 GPUs.
 
 %!TEX root = ../stoeter_sourcecount.tex
 \section{Model Selection}%

@@ -24,17 +24,20 @@
 ## Montag
 
 * [X] TODOs killen
-* [ ] Vollständig lesen
-* [ ] Korrekturen einbauen
-* [ ] Intro, Conclusion Patricio
-* [ ] Layout und quirks
+* [X] Korrekturen einbauen
+* [X] Intro, Conclusion Patricio
+
 * [ ] Vollständig lesen
 * [ ] Korrekturen einbauen
 
 ## Dienstag
 
 * [ ] Korrekturen einbauen
+* [ ] Layout und quirks
 * [ ] Vollständig lesen
+* [ ] Rohlinge kaufen
+* [ ] Zwei Einfache USB sticks (marke: kingston, sandisk)
+* [ ] Test-Druck und Bindung
 
 ## Mittwoch
 
@@ -45,6 +48,14 @@
 * [ ] Drucken
 * [ ] Durchsehen
 * [ ] Abschicken
+
+## Druckliste
+
+* [ ] Lebenslauf MIT Foto
+* [ ] sämtliche Anträge
+* [ ] 5 Arbeiten!
+* [ ] 
+* [ ] Unterschrieben!!!!
 
 
 ### If I have time...
@@ -90,6 +101,19 @@ No, but From Chollet
 
 # Defense
 
+## Questions
+
+- What is common fate (read paper)
+
+## Modulation
+
+- why does FM cause AM?
+
+## Count Estimation
+
+- explain how to count
+- gap statistics, elbow, BIC
+
 ## time warping by applying non-linear resampling
 
 - normally its x(n) := f[n*t], how does it work for invariant pitch
@@ -102,16 +126,22 @@ No, but From Chollet
 
 ### NMF, NTF
 
+- explain the beta divergence
 - how to derive the cost functions
 - Erklärung von Antoine/Vincent
+- understand HR-NMF, shift-invariant-nmf, hennquin10
+
+### Separation
+
+- Warum wiener filter für power spectrum?
 
 ### Backprop
 
-- Guided Backpropagation
+- How does Guided Backpropagation work?
 - http://blog.qure.ai/notes/deep-learning-visualization-gradient-based-methods
 
 # Random s*** for my presentation
 
 * [x] example that works quite nice... http://sisec17.audiolabs-erlangen.de/#/listen/20/STO1?mode=embed
 
-# BEYOND EQUAL-LENGTH SNIPPETS: HOW LONG IS SUFFICIENT TO RECOGNIZE AN AUDIO SCENE? https://arxiv.org/pdf/1811.01095.pdf
+# BEYOND EQUAL-LENGTH SNIPPETS: HOW LONG IS SUFFICIENT TO RECOGNIZE AN AUDIO SCENE? &* https://arxiv.org/pdf/1811.01095.pdf
