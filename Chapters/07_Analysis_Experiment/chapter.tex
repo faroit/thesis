@@ -30,14 +30,14 @@ In this chapter, I present two experiments contributing to this interesting fiel
 The first experiment (Section~\ref{sec:ismir}) addresses the question if the number of instruments in polyphonic music are subject to the same limitations.
 In the second contribution (Section~\ref{sec:ismir}) the aim is to verify the findings of and earlier experiment in~\cite{kawashima15} and increase the number of stimuli to be used for comparison of machine learning based count estimations methods
 
-\section{Experiments on Instrument Count Estimation}%
+\section{Instrument Count Estimation}%
 \label{sec:ismir}
 
 \marginpar{This chapter is based on the work that has been published in~\cite{stoeter13, schoeffler13} together with my collegue Michael Schoeffler. Based on my original idea, in both publications the two first authors contributed equally to the work.}
 
 % From ISMIR
 In psychoacoustics, a sequence of sounds grouped by the auditory system is known as an ``auditory stream'' which was coined by Bregman and Campbell in ~\cite{Bregman1971}.
-In the past decades, a lot of experimental work related to ``auditory streams'' has been done\cite{Bregman1990}.
+In the past decades, a lot of experimental work related to ``auditory streams'' has been done~\cite{Bregman1990}.
 A majority of these experiments were psychoacoustically motivated, e.~g. the stimuli used were mostly of simple type like sinusoids or noises.
 Especially from a psychoacoustic point of view, music is a very complex sound signal which contains high-level information (e.~g. instrumentation and song lyrics).
 When listening to music, this high-level information is also mentally processed by humans.
@@ -635,10 +635,10 @@ One of the stimuli in the experiments consisted of a unison mixture. The results
 \par
 Surprising was the small number of participants who had to be screened. We excluded 27 participants since they gave at least one non-serious response which is about 2.3\% (1195 participants remained after excluding all trials which were not the first ones). Most of these excluded participants responded with either very high numbers (e.~g. 99) or responded with zeros for their estimated number of instruments being played. We assume that especially participants who responded with zero only wanted to get an impression of the experiment.
 
-\section{Experiment on Speaker Count Estimation}%
+\section{Speaker Count Estimation}%
 \label{sec:count_experiment}
 
-\marginpar{This chapter is based on the work that has been published in 2018~\cite{stoeter19} together with Soumitro Chakrabarty and Emanuël Habets. The contributions and experiments my own work and the co-authors mainly helped with ideas and writing.}
+\marginpar{This chapter is based on the work that has been published in 2018~\cite{stoeter19} together with Soumitro Chakrabarty and Emanuël Habets.}
 
 \begin{figure}[htb]
 	\centering
@@ -649,41 +649,41 @@ Surprising was the small number of participants who had to be screened. We exclu
 
 Humans are excellent in segregating one source from a mixture~\cite{bregman} and tend to use this skill to perceptually segregate speakers before they can estimate a count, as highlighted, e.g.\ in~\cite{kawashima15}.
 As shown in~\cite{kashino96, kawashima15} with extensive experiments using Japanese speech samples, humans are able to correctly estimate up to three simultaneously active speakers without using any spatial cues.
-In this experiment we reproduced the experiments made in~\cite{kawashima15, kashino96} using stimuli of English speakers.
+In this experiment we reproduced the experiments conducted in~\cite{kawashima15, kashino96} using stimuli of English speakers.
 Designed to address source separation research, we also modified the question to ask participants for ``the maximum number of concurrent speakers'' in a short excerpt of speech.
 
 \subsection{Stimuli}
 To date, many available speech datasets contain recordings where only a single speaker is active.
-Datasets that include overlapped speech segments, either lack accurate annotations because the annotation of speech onsets and offsets in mixtures is cumbersome for humans or lack a controlled auditory environment such as in TV/broadcasting scenarios~\cite{Gravier12}.
+Datasets that include overlapped speech segments either lack accurate annotations because the annotation of speech onsets and offsets in mixtures is cumbersome for humans or lack a controlled auditory environment such as in TV/broadcasting scenarios~\cite{Gravier12}.
 Since a realistic dataset of fully overlapped speakers is not available, we chose to generate synthetic mixtures.
 We recognize that in a simulated ``cocktail-party'' environment, mixtures lack the conversational aspect of human communication but provide a controlled environment which helps to understand how a DNN solves the count estimation problem.
 As we aim for a speaker independent solution, we selected a speech corpus with preference to a high number of different speakers instead of the number of utterances, thus increasing the number of unique mixtures.
 We selected \emph{LibriSpeech clean-360}~\cite{panayotov15} which includes 363 hours of clean speech of English utterances from 921 speakers (439 female and 482 male speakers) sampled at 16 kHz.
 \par
-As compute maximum number concurrent speakers \(cardinality\), annotation of the activity of each individual speaker is required.
+To compute the maximum number concurrent speakers \(\cardinality\), annotation of the activity of each individual speaker is required.
 Even though many corpora come with word and phonemes annotation, they often are not consistent across different corpora.
-We therefore generated annotations based on a voice activity detection algorithm (VAD). As we rely on a robust VAD estimate, we found the implementation from the \emph{Chromium Web Browser} as part of the WebRTC Standard~\footnote{WebRTC 1.0: Real-time Communication Between Browsers W3C Editor's Draft 05 June 2017} to yield good results.
+We therefore generated annotations based on a voice activity detection algorithm (VAD). As we rely on a robust VAD estimate, we found the implementation from the \emph{Chromium Web Browser} as part of the WebRTC Standard\footnote{WebRTC 1.0: Real-time Communication Between Browsers W3C Editor's Draft 05 June 2017} to yield good results.
 \par
-To generate a single example, a tuples of speech mixtures and their ground truth speaker count \(\cardinality \), we draw a unique set of \(\cardinality \) speakers from the corpus.
+To generate a single example, a tuple of a speech mixture and its ground truth speaker count \(\cardinality \), we draw a unique set of \(\cardinality \) speakers from the corpus.
 For each of the speakers we then select a random utterance, resampled to 16 kHz sampling rate and apply VAD.\@
 The VAD method was configured using default parameters using a hop size of 10~ms.
-Further, the VAD estimate was used to remove silence in the beginning and the end of an utterance recording.
+Further, the VAD estimate was used to remove silence from the beginning and the end of an utterance recording.
 In the next step, more utterances from the same speaker are drawn from the corpus until the desired duration is reached.
+We removed silence in the beginning and end of each utterance to increase the overlap within one segment.
 Both, the audio recording and the VAD annotation of each utterance is concatenated.
-The procedure is repeated for all speaker so that \(\cardinality \) time domain signals are created.
-Signals are linearly mixed according and peak normalized to avoid clipping.
-The ground truth output \(\cardinality \) for each sample is then computed on the interpolation of VAD matrix using the maximum of the sum over all speakers.
+The procedure is repeated for all speakers such that \(\cardinality \) time domain signals are created.
+Signals are linearly mixed and peak normalized to avoid clipping.
+The ground truth output \(\cardinality \) for each sample is then computed from the VAD matrix using the maximum of the sum over all speakers.
 \par
-The mixtures are formed from random utterances of different speakers where silence in the beginning and end was removed to increase the overlap within one segment.
 In fact, our method to generate synthetic samples results in an average overlap for \(k=2\) of 85\% and for \(k=10\) of 55\% (based on 5s segments).
 This procedure is similar to~\cite{mesaros17} used to label the data.
 The Dataset is available for download~\cite{oss_libricount}.
 
 \subsection{Experimental Setup}
 
-We conducted the study using the simulated data from the \emph{LIBRI Count Dataset} data set as mentioned in the previous Sub-Section.
-In turn, we randomly selected 10 samples for each \(k \in [0, \ldots, 10]\), resulting in 100 mixtures of 5~seconds duration each.
-The stimuli were presented in random order using a custom web based interface (depicted in Figure~\ref{fig:user_interface_speaker}) that was connected to a database API that collected the anonymized count responses and additional information about the participant session such as the response time.
+We conducted the study using the simulated data from the \emph{LIBRI Count Dataset} as mentioned in the previous subsection.
+In turn, we randomly selected 10 samples for each \(k \in {0, \ldots, 10}\), resulting in 100 mixtures of 5~seconds duration each.
+The stimuli were presented in random order using a custom web-based interface (depicted in Figure~\ref{fig:user_interface_speaker}) connected to a database API that saved the anonymized count responses and additional information about the participant session such as the response time.
 The experiment was done using \emph{between-group design}, where one group (blind experiment) did not get any prior information about the maximum number of speakers in the test set (similar to~\cite{kawashima15}).
 However, the maximum number of speakers was revealed to the other group (informed experiment).
 Further, none of the participants received any feedback about the error made during the trials.
@@ -691,19 +691,19 @@ The participants were able to pause and resume the experiment at any time to red
 Similarly to~\cite{kawashima15}, lab-based experiments were conducted with ten participants for each group (\(n=20\)) using a custom designed web-based software.
 None of the participants were native English speakers.
 The experiment and its results from all participants is made available through~\cite{oss_countit}.
-A simplified version of the experiment is made available through a web application\footnote{\url{https://denumerate.app}}, with the purpose of continuously gather data.
+A simplified version of the experiment is made available through a web application\footnote{\url{https://denumerate.app}} with the purpose to continuously gather data.
 
 \subsection{Experiment Results}
 To reveal over and underestimation errors, we decided to report the average response for each group of \(k\).
-As a reference, we also included the average results from~\cite{kawashima15} (Experiment 1, 5~seconds durations) which shows similar (with slightly higher error probability) results compared to our blind experiment.
-Also in~\cite{kawashima15} the maximum number of speakers to tested was 6 whereas we evaluated stimuli with up to ten speakers.
+As a reference, we also included the average results from~\cite[Experiment 1, 5~seconds duration]{kawashima15} which shows similar (with slightly higher error probability) results compared to our blind experiment.
+Also in~\cite{kawashima15} the maximum number of speakers to test was six whereas we evaluated stimuli with up to ten speakers.
 The results of our lab-based experiments are shown in Figure~\ref{fig:experimentA} and Figure~\ref{fig:experimentB}.
 Results indicate that underestimation becomes apparent for \(k > 3\).
-First, and foremost we can confirm the ``one-two-three-many'' paradigm on our experiment with english utterances.
+First and foremost, we can confirm the ``one-two-three-many'' paradigm on our experiment with English utterances.
 When we asked participants about the strategy they pursued, many reported that with more than three speakers it is not possible to identify (and count) the speakers but rather compare the \emph{density} of the speech to that of 1-3 speakers.
-For higher speaker counts, participants reported that the phoneme density was a relevant cue that allowed them extrapolate a source count estimate.
+For higher speaker counts, participants reported that the phoneme density was a relevant cue that allowed them to extrapolate a source count estimate.
 Interestingly, our results of the informed experiment reveal that they performed significantly better than those that participated blindly.
-This is especially obvious for six and more speakers where the informed group performed better by more than 1\(k\) in mean absolute deviation.
+This is especially obvious for six and more speakers where the informed group performed better by more than one speaker in mean absolute deviation.
 
 \begin{figure}[t!]
     \centering
@@ -737,13 +737,13 @@ We presented the results of a controlled experiment with 62 participants, listen
 Our experiment indicated that the upper limit is reached with more than three instruments, related to an earlier experiment~\cite{huron89} focused on voices instead of instruments.
 In Chapter~\ref{cha:fundamentals}, two different questions were introduced how to frame the count estimation problem.
 In this experiment, we explicitly used an open question of ``How many instruments can you hear'' to gather more knowledge into the strategies being applied by the participants.
-Another reason was that the stimuli durations were too long to ask for the maximum number of concurrent stimuli, thus promoting ``counting by detection'' as good strategy to approach the problem.\par
+Another reason was that the stimuli durations were too long to ask for the maximum number of concurrent stimuli, thus promoting ``counting by detection'' as a good strategy to approach the problem.\par
 By comparing musicians to non-musicians, we showed that there is a significant difference in performance for count estimation, confirming similar findings in other auditory tasks~\cite{kishon01}.
 Particularly, we found a that this gap is most prominent for stimuli of three and four instruments.
 Furthermore, for all stimuli (ranging from one to six instruments) we revealed that musicians performed about 20\% better than non-musicians, hence revealing a ``gap of one instrument'' in mean absolute error.
 \par
 We then repeated this experiment in an open, uncontrolled environment with more than 1000 participants.
-To our knowledge this was the first larger crowd sourced auditory experiment within the Signal Processing or MIR community, 
+To our knowledge this was the first larger crowd sourced auditory experiment within the Signal Processing or MIR community.
 Regarding the ability of estimating the number of instruments, the web experiment and the laboratory experiment share the same outcome: the probability to correctly estimate up to about three instruments is higher than 50\%.
 These results were surprising because many participants did not use professional audio equipment.
 In comparison to audio quality experiments like MUSHRA~\cite{recommendation2001MUSHRA}, we can therefore conclude that count estimation tasks are suitable for highly scalable crowd sourced listening experiments.
