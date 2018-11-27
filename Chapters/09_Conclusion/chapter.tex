@@ -4,16 +4,16 @@
 \marginpar{Note that additional conclusions can be found at the end of the respective chapters.}
 
 \section{Discussion}
-This thesis builds on and contributes to work in the research field of separation and source count estimation of audio mixtures. The methods that were developed throughout this thesis share a common concept: when signals are mixed, we focussed on the overlapping part instead of the non-overlapping part. 
-This simple finding allowed us to better observe the characteristics for the task of separation and source count estimation:
+This thesis built on and contributed to work in the research field of separation and source count estimation of audio mixtures. The methods that were developed throughout this thesis share a common concept: when signals are mixed, we focussed on the overlapping part instead of the non-overlapping part. 
+This approach allowed us to better observe the characteristics for the task of separation and source count estimation:
 
 \begin{itemize}
-  \item In separation, our proposed unison signals almost entirely overlap in time and frequency which reflect a natural property of many real-world audio signals.
-  \item For the task of source count estimation, we focused on the overlap to learn a model that directly infer counts or \emph{counting without detection}. The motivation is in the tradition of~\cite{scheirer99}, who proposed techniques for \emph{understanding without separation}.
+  \item In our proposed unison source separation scenario, signals almost entirely overlap in time and frequency which reflect a natural property of many real-world audio signals.
+  \item For the task of source count estimation, we focused on the overlap to learn a model that directly infers counts or \emph{counting without detection}. The motivation is in the tradition of~\cite{scheirer99}, who proposed techniques for \emph{understanding without separation}.
 \end{itemize}
 
-The combination of separation and count estimation is important since it finally allows to build a real-world separation system, where the number of sources is not known in advance.
-On my journey I was faced with several limitations and challenges:
+The combination of separation and count estimation is important since it allows to build a real-world separation system, where the number of sources is not known in advance.
+On this way, we were faced with several limitations and challenges:
 \par
 When we developed time warping (Chapter~\ref{cha:known}) to separate audio signals based on their estimated \(F0\) trajectory, we optimized and tuned the method on a handful of music tracks, since a large test data set was not available. When we then applied it on the (back then) new DSD100~\cite{liutkus17} dataset, several limitations became apparent which is why the overall performance was not satisfying. For example, one limitation of the method is that it relies too much on a precise and robust estimate of the \(F0\) trajectory and its voice activity. When we included a data-driven activity method in the system, the performance improved.
 \par
@@ -21,14 +21,13 @@ When it comes to source separation, at the time our research was conducted and w
 However, for the scenario of music separation, it turned out that the Common Fate Model still required a significant amount of additional handcrafted engineering.
 By 2016, other researchers showed in~\cite{uhlich15, nugraha162} that supervised learning methods for separation led to huge improvements. This induced us to successfully evaluate such as system in combination with our proposed Common Fate Representation (Section~\ref{sec:cft_for_lead_accompaniment_separation}).
 It shows that such specialized representation, designed to capture general modulation patterns, is still useful in data-driven methods.
-Our research marks an essential step in multidimensional representations that more closely model the human perception when it comes to highly overlapped, modulated mixtures. Work by other researchers built upon our first findings even further increased the perceptual aspect of the representation by introducing a multi-resolution version of the CFT~\cite{seetharaman17, pishdadian18}.
+Our research marks an essential step in multidimensional representations that more closely model the human perception when it comes to highly overlapped, modulated mixtures. Work by other researchers built upon our first findings and further increased the perceptual aspect of the representation by introducing a multi-resolution version of the CFT~\cite{seetharaman17, pishdadian18}.
 \par
-In our count estimation studies on speech and music (Chapter~\ref{cha:countanalysis}), we showed that humans follow a `one-two-three-many` strategy: we are good at directly infer small quantities up to four, but we have problems to extrapolate to higher numbers.
+In our count estimation studies on speech and music (Chapter~\ref{cha:countanalysis}), we showed that humans follow a `one-two-three-many` strategy: we are good at directly inferring small quantities up to four, but we have problems to extrapolate to higher numbers.
 We showed that our proposed CountNet model (Chapter~\ref{cha:countnet}) improved state-of-the-art and even reached super-human performance by shifting the performance boundary beyond four sources. In the ablations studies (Section~\ref{sec:ablation}), we revealed that modulations also played an essential role in CountNet when estimating the number of speakers.
 The network showed a significant dependency on different syllable rate. This indicates that CountNet may not have learned the actual difference between two and three speakers but instead took a ``shortcut'' and learned the distinct modulation patterns of our language.
-This achievement, however, does not mean that CountNet can generalize to example outside of the used datasets or languages. 
+This achievement, however, does not mean that CountNet can generalize to examples outside of the used datasets or languages. 
 \par
-We adapted and developed in this work include a broad range from descriptive statistics, signal processing up to deep learning.
 This work covers many different techniques ranging from advanced audio signal processing, tensor factorization, up to recent supervised machine learning methods such as deep learning.
 When I started this thesis, the research landscape for source separation methods was built upon the expertise from a decade of “classical” signal processing.
 With the success of deep learning, a paradigm shift took place that enabled many state-of-the-art results in the audio domain. However, adapting these techniques to work in the audio domain required a lot of work (especially in creating suitable data sets) but also dropping established ideas from so-called “classical” signal processing.
