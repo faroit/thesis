@@ -9,8 +9,8 @@ In this chapter, we therefore introduce basic concepts of digital audio signals 
 
 When a sound wave travels through a medium like air, this signal can be captured using a microphone by measuring the local air pressure deviation over time.
 Such a signal can be written as a function \(x(t)\) continuous in both time \(t \in \sR\) and the amplitude \(x(t) \in \sR\).
-An \emph{audio signal} can be introduced as a signal that is meant to be perceived by the human auditory system --- through our ears.
-Therefore, one could observe specific properties of audio signals, consistent with the limitations of the human hearing system, for example in dynamics/loudness as well as a limited signal bandwidth.
+An \emph{audio signal} is meant to be perceived by the human auditory system --- through our ears.
+Therefore, we can observe specific properties, consistent with the limitations of the human hearing system, for example in dynamics/loudness as well as a limited signal bandwidth.
 Many other signals exist with similar characteristics such as signals from finance, geophysics, meteorology or medical data.
 The result is that often audio research is inspired by applications of other fields of signal processing and vice versa.
 
@@ -22,18 +22,17 @@ Today, digital representations are used to store, analyze or process audio signa
 A digital audio signal can be obtained from an analog signal using analog-to-digital/digital-to-analog converters (ADC/DAC) which can be found in almost any every-day device such as laptops and smartphones.
 In short, this process includes two steps: first, the continuous time signal \(x(t)\) is converted to a discrete time series, so that one sample\footnote{Please note, that the use of the word \emph{sample} will have different meanings in the context of machine learning, where a sample is an instance of a full signal instead of a single time step.} \(x_n\) is \emph{sampled} with equidistant steps \(T\); second, the amplitude values are \emph{quantized} resulting in vector \(\vx \in \sZ\), represented as a one dimensional time series of amplitudes.
 An important parameter in the process of digitization is the sample rate \(F_s = 1/T\) where \(T\) is the sampling period.
-Often, \(F_s\) has a significant effect on the quality of audio signals.
-And, it is the objective of a real-world audio system not to introduce perceivable degradation in audio quality when a digital signal is reproduced over headphones or loudspeakers.
-Due to the Nyquist-Shannon sampling theorem, the sample rate needs to be at least twice the bandwidth of the analog signal.
-Since the hearing range of normal listening humans is 20~\si{\hertz} - 20~\si{\kilo\hertz}~\cite{fastl90, moore89}, typically for audio signals, 
-sample rates of 44100~\si{\hertz} are chosen to facilitate the full human hearing range.
+% Often, \(F_s\) has a significant effect on the quality of audio signals.
+% And, it is the objective of a real-world audio system not to introduce perceivable degradation in audio quality when a digital signal is reproduced over headphones or loudspeakers.
+% Due to the Nyquist-Shannon sampling theorem, the sample rate needs to be at least twice the bandwidth of the analog signal.
+Since the hearing range of normal listening humans is 20~\si{\hertz} - 20~\si{\kilo\hertz}~\cite{fastl90, moore89}, due to the Nyquist-Shannon sampling theorem, sample rates at least 40~\si{\kilo\hertz} are often chosen to facilitate the full human hearing range.
 However, for many applications, a lower sampling rate is sufficient, e.g., in speech communication where intelligibility often is more important than quality.
 For further details, we refer the reader to audio signal processing basics such as~Chapter 1 in~\cite{proakis96} or Chapter 2 in~\cite{Mueller15}.
 
 \hypertarget{time-frequency-representation}{%
 \subsection{Time-Frequency Representation}\label{sub:time-frequency-representation}}
 
-We often analyze sounds in the frequency domain where the redundancy of the signal is redundancy which improves the computational efficiency of signal processing methods, especially for speech and music that have periodicities.
+We often analyze sounds in the frequency domain where the reduced redundancy of the signal improves the computational efficiency of signal processing methods, especially for speech and music that have periodicities.
 It is common to achieve this through the use of discrete Fourier transform (DFT) and its fast FFT implementation~\cite{cooley65} (for details, the reader is referred to~Chapter 4 of~\cite{proakis96}).
 Spectral representations also relate to our human auditory system~\cite{zwicker13, moore89}, allowing us to process sounds closer to how we perceive them.
 \par
@@ -77,9 +76,9 @@ For a a detailed overview into the research field of pitch and \(F_{0}\), the re
 
 Audio signals are considered to be stationary or time-invariant when their properties such as the amplitude of the fundamental frequency of the signal do not change over time.
 % A stationary sound can turn into time-invariant sound using modulations
-Modulations are of paramount importance in signal processing as they enabled technologies such as radio transmission~\cite{shannon48}.
-Modulations can be defined as time-variant functions that change a parameter of a signal over time.
-In the case of audio signals, often both the modulating function (modulator) and the signal being modulated are periodic.
+The signal becomes time-variant when an external function changes the parameters of a signal over time.
+These are the basis for many break-through inventions such as radio transmission~\cite{shannon48} and usually referred to as \emph{modulations}.
+In the case of audio signals, often both the modulating function (modulator or carrier) and the signal being modulated (input) are periodic.
 Signal modulations are often created intentionally but also occur naturally in many real-world audio signals such as speech.
 In the following, we will present typical audio modulation categories and their cause, underlining the importance of them.
 
@@ -112,11 +111,12 @@ In comparison to AM, Frequency modulation (FM) varies the frequency of the carri
 where A is the amplitude, $\omega_0$ is the carrier frequency, $\omega_m(\theta)$ is the instantaneous modulation frequency, and $m$ is the modulation index $m = \frac{\Delta \omega_0} { \omega_{m} }$.
 
 The Fourier spectrum of $s_{FM}(t)$ is complicated due to its non-linearity involves using the Bessel function~\cite{abramowitz64}.
-For applications where the modulation frequencies are a lot smaller than the carrier frequency, the spectrum that results by frequency modulations is similar to those of amplitude modulations.
+% For applications where the modulation frequencies are a lot smaller than the carrier frequency, the spectrum that results by frequency modulations is similar to those of amplitude modulations.
 % This is the reason why algorithms that aim to capture the amplitude modulation will also observe frequency modulations.
 % The total bandwidth in this scenario is approximately $2\Delta \omega_0$, as found by Carson in~\cite{carson22}.\par
 For audio communication such as FM radio, the modulation frequency or rate is the same as the audio signal being transmitted (audio rate modulations).
-In music or speech, modulations are much slower --- typically up to 10~\si{\hertz} (slow) or up to 100~\si{\hertz} (medium/fast).
+In music signals, the carrier could be a single note, played by a violin and the modulation signal is the movement of the finger on the fretboard, producing a vibrato effect.
+In music or speech, these modulations are much slower --- typically up to 10~\si{\hertz} (slow) or up to 100~\si{\hertz} (medium/fast).
 
 \subsubsection*{Modulations in Music --- Vibrato}
 
@@ -149,7 +149,7 @@ The vibrato rate is similar to that of instrumental vibrato with its peak around
 \subsubsection*{Modulations in Speech}
 
 Unlike singing voice, speech modulations are part of human communication and therefore part of our language.
-Modulations in speech --- produced by the glottal pulse excitation ---   include medium to fast modulations up to a few hundred Hertz perceived as \emph{roughness} and \emph{residue pitch}.
+Modulations in speech include medium to fast modulations of up to a few hundred Hertz perceived as \emph{roughness} or \emph{residue pitch}.
 Speech also contains slow modulations with peaks of 4~\si{\hertz}~\cite{greenberg97, fuellgrabe09} that correlate to the syllable rate~\cite{plomp83, houtgast85}.
 It was shown in~\cite{joris04} that speech modulations are the reason why our human auditory system can detect amplitude modulations so well.
 Furthermore, it was shown that humans are capable of processing rhythm-like envelope fluctuations of the same rate in the brain~\cite{schreiner88, plomp83}.

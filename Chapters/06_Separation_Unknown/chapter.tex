@@ -98,11 +98,11 @@ One way towards better separation is to increase the number of components per so
 Another method is proposed in~\cite{smaragdis04, fitzgerald05s, jaiswal13, rodriguezserrano16} which use convolutions to model shifts in components.
 This lead to factorizations that are able to also model vibrato events.
 However as stated in~\cite{hennequin11}, it does ``not  permit  any variation  between  different  occurrences  of  the  same  event (atom), its duration and spectral content evolution being fixed''. 
-Instead, Hennequin proposes a frequency-dependent activation matrices by using a source/filter-based model.
+Instead, they proposed a frequency-dependent activation matrices by using a source/filter-based model.
 The model is based on an Auto-Regressive Moving Average (ARMA) time varying model that allows single spectral components to be modeled along with their spectral variations. 
 The model, as reported by the authors, however, does only allow for small frequency variations and fitting the ARMA model is a time-consuming process.
 
-\section{Exploiting Amplitude Modulation using Tensor Factorizations}
+\section{Tensor Factorizations for Modulation Spectrograms}
 \label{sub:am}
 
 \marginpar{Parts of this subsection is also based on the work~\cite{stoeter14}.}
@@ -489,13 +489,13 @@ The results of CFMM indicate that the complex CFT lead to better results. NMF di
 \label{fig:iterations}
 \end{figure}
 
-\section{Common Fate Transform for Lead Accompaniment Separation}%
+\section{Common Fate Transform for Music Separation}%
 \label{sec:cft_for_lead_accompaniment_separation}
 
 \marginpar{This section is original work being done as part of the \emph{STO1} and \emph{STO2} submission for the SiSEC 2016~\cite{sisec16}. Part of the literature overview is taken from~\cite{rafii}.}
 
 In the previous section, we showed that the common fate model is suitable to separate highly overlapped signals based on their spatial-temporal modulation texture.
-In this section, we want to show how this method can be extended for the application of lead and accompaniment separation~\cite{rafii}.
+In this section, we want to show how this method can be extended for the application of vocal and accompaniment separation~\cite{rafii}.
 This scenario is significantly more complex than the separation of instrument mixtures, hence the separation model needs to be flexible enough to handle many of the critical edge cases which make music separation challenging.
 With the recent success of machine learning models~\cite{HintonSpeech}, it became likely that an unsupervised model such as NTF or CFM may not be flexible enough to enforce the significant amount of domain knowledge that is present in this scenario to improve performance.
 % from zafar
