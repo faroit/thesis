@@ -74,7 +74,11 @@ Therefore we calculated an ``instrumental stationarity'' metric.
 The annotated MIDI files from \cite{rwc} were converted into piano roll representations for each instrument channel. This representation was then converted into a binary \emph{instrumentation activity matrix} $\mathbf{I}_{AM}\lbrack \mathbf{\underline{k}}_1 \vert \mathbf{\underline{k}}_2 \vert  ... \vert \mathbf{\underline{k}}_N \rbrack \in \{0,1\}$, where at each discrete time instant $i$ a vector $\mathbf{\underline{k}}_i$ indicates which instruments are active. The aim is then to select frames of length $N$ which are stationary by means of changes in instrumentation and activity. To get many items with a high instruments count, the maximum number of instruments within a frame was stored in a binary mask $\mathbf{\underline{k}}_{max}$ which was compared with all $\mathbf{\underline{k}}_{i=1...N}$ so that $(\vert\mathbf{\underline{k}}_{i} \oplus \mathbf{\underline{k}}_{max}\vert \leq 1) \lor (\mathbf{\underline{k}}_{i} = \underline{0})$. The resulting binary vector was smoothed with an averaging kernel of size $N$. By peak picking we got a list of possible candidates which contained a high stationarity in instrumentation.
 Further the RWC files were filtered a priori to exclude items dominated by electronic instruments or singing voice. Table~\ref{tab:items} presents the selected 12 items representing pairs of one to six simultaneously present instruments. Each item is around seven seconds long. By cutting at note offsets we varied the lengths of the items to make it semantically more meaningful. Six items (notated as RM-C***) belong to the classical western music genre whereas the other items are of mixed genre.
 \par
-The MIDI excerpts were humanized and rendered by a sequencer software utilizing state-of-the-art commercial sampling products into WAV files. The rendered files were processed with convolutive reverb to match the original recordings. In informal listening tests the quality of the renderings was evaluated. In addition, participants did not give negative feedback about the artificialness of the items during the laboratory experiment. Additionally a loudness normalization was applied according to EBU-R128\cite{EBU2011}. To avoid spatial cues the files were downmixed to mono at 16~bit/44.1~kHz.
+The MIDI excerpts were humanized and rendered by a sequencer software utilizing state-of-the-art commercial sampling products.
+The process is similar to the dataset creation mentioned in Section~\ref{unison_dataset}.
+The rendered files were processed with convolutive reverb to match the original recordings. 
+In informal listening tests the quality of the renderings was evaluated. 
+In addition, participants did not give negative feedback about the artificialness of the items during the laboratory experiment. Additionally a loudness normalization was applied according to EBU-R128\cite{EBU2011}. To avoid spatial cues the files were downmixed to mono at 16~bit/44.1~kHz.
 
 \begin{table}[htb]
 \center
@@ -689,7 +693,7 @@ None of the participants were native English speakers.
 The experiment and its results from all participants is made available through~\cite{oss_countit}.
 A simplified version of the experiment is made available through a web application\footnote{\url{https://denumerate.app}}, with the purpose of continuously gather data.
 
-\subsection{Results}
+\subsection{Experiment Results}
 To reveal over and underestimation errors, we decided to report the average response for each group of \(k\).
 As a reference, we also included the average results from~\cite{kawashima15} (Experiment 1, 5~seconds durations) which shows similar (with slightly higher error probability) results compared to our blind experiment.
 Also in~\cite{kawashima15} the maximum number of speakers to tested was 6 whereas we evaluated stimuli with up to ten speakers.
@@ -737,7 +741,9 @@ Another reason was that the stimuli durations were too long to ask for the maxim
 By comparing musicians to non-musicians, we showed that there is a significant difference in performance for count estimation, confirming similar findings in other auditory tasks~\cite{kishon01}.
 Particularly, we found a that this gap is most prominent for stimuli of three and four instruments.
 Furthermore, for all stimuli (ranging from one to six instruments) we revealed that musicians performed about 20\% better than non-musicians, hence revealing a ``gap of one instrument'' in mean absolute error.
+\par
 We then repeated this experiment in an open, uncontrolled environment with more than 1000 participants.
+To our knowledge this was the first larger crowd sourced auditory experiment within the Signal Processing or MIR community, 
 Regarding the ability of estimating the number of instruments, the web experiment and the laboratory experiment share the same outcome: the probability to correctly estimate up to about three instruments is higher than 50\%.
 These results were surprising because many participants did not use professional audio equipment.
 In comparison to audio quality experiments like MUSHRA~\cite{recommendation2001MUSHRA}, we can therefore conclude that count estimation tasks are suitable for highly scalable crowd sourced listening experiments.
@@ -751,7 +757,6 @@ This indicates that humans are possibly interpolating some sort of a speech dens
 We conclude that all of our count experiments share the same results: A) humans are unable to correctly estimate more than four sources and B), underestimation is the main cause of error.
 Also we revealed that source count estimation studies can be easily be participated by non-professional listeners.
 
-% TODO: interpolation vs extrapolation
 % TODO: release of listening experiment software
 % TODO: maybe add that more stimuli vs nb. of participants?
 % TODO: web based erwähnen

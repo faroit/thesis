@@ -1,4 +1,4 @@
-\chapter[Estimating the Maximum Number of Concurrent Speakers]{CountNet:  Estimating the Maximum Number of Concurrent Speakers]}
+\chapter[Data-Driven Speaker Count Estimation]{CountNet: Data-Driven Speaker Count Estimation}
 \label{cha:countnet}
 
 \marginpar{This chapter is based on the work that has been published in~\cite{stoeter18, stoeter19} together with Soumitro Chakrabarty and Emanuël Habets. The contributions and experiments my own work and the co-authors mainly helped with ideas and writing.}
@@ -17,8 +17,8 @@ real-world systems do not straightforwardly provide information about the actual
 It, therefore, is desirable to close the gap between theory and practice by devising reliable methods to estimate the number of sound sources in realistic environments.
 Surprisingly, very few methods exist for this purpose in an audio context, in particular from a single microphone recording.
 
-% TODO: Maybe mention model selection, spectral clustering, gap statistics etc.
-% TODO: am besten aus Wolfgangs Arbeit nehmen!
+% TODO: Maybe mention model selection, gap statistics etc.
+% Gap statistics \cite{tibshirani01} ~\cite{NbClust} 
 
 %% Transition paragraphs
 % Describe two ways of getting the number of speakers: Counting vs Estimation
@@ -56,7 +56,7 @@ When speaker overlap is as prevalent as in a ``cocktail-party'' scenario, develo
 % \par
 % Identifying isolated sources in realistic mixtures is challenging~\cite{bregman} and psychology studies in vision~\cite{jevons1871} have shown that humans can instantly estimate the number of objects without actually counting and therefore identifying them.
 % This phenomenon is known as \textit{subitizing} and has been inspiring research in vision~\cite{chattopadhyay17}.
-Since there are indications that the auditory system is capable of subitizing sources~\cite{hoopen79}, we transfer this fact to the audio domain and directly attempt in this study to estimate the number of audio sources through ``direct count estimation''.
+Since there are indications that the auditory system is capable of subitizing sources~\cite{hoopen79}, we transfer this fact to the audio domain and directly attempt in this study to estimate the number of audio sources through ``direct count estimation'' (see also Chapter~\ref{cha:countanalysis}).
 The question if machines could outperform humans, or if they are subject to similar limitations, remains to be answered and is also part of this work.
 \par
 %% State-of-the-art
@@ -88,8 +88,8 @@ The different strategies undertaken there rely on classical and grounded signal 
 However, our experience shows (see Section~\ref{sec:evaluation}) that they leave much room for improvement when applied to more diverse and challenging signals than those corresponding to their targeted applications, notably in the case of many different and constantly overlapping speakers.
 % * Existing single-channel methods require segments where only a single speaker is active.
 This is due to their main common weakness, which is to rely on the assumption that there are segments where only one speaker is active, in a way that is similar to the classical speaker diarization studies mentioned before.
-In~\cite{stoeter17} a first data-driven approach based on a recurrent network was presented, motivated by the recent and impressive successes of deep learning approaches in various audio tasks like speech separation~\cite{yu16, hershey16, grais17} and speaker diarization~\cite{yella14, hruz16, garciaromero17}.
-The methods proposed in~\cite{stoeter17} to address speaker count estimation using deep learning were built upon recent methods to count objects in images, which is a popular application with many contributions from the deep learning community~\cite{wang15, chattopadhyay17, khan16, segui15, zhang15, arteta16, marsden16, boominathan16, zhang2015salient}.
+In~\cite{stoeter17} we presented a first data-driven approach based on a recurrent network, motivated by the recent and impressive successes of deep learning approaches in various audio tasks like speech separation~\cite{yu16, hershey16, grais17} and speaker diarization~\cite{yella14, hruz16, garciaromero17}.
+The methods proposed in~\cite{stoeter17} to address speaker count estimation were built upon recent methods to count objects in images, which is a popular application with many contributions from the deep learning community~\cite{wang15, chattopadhyay17, khan16, segui15, zhang15, arteta16, marsden16, boominathan16, zhang2015salient}.
 In~\cite{stoeter17} two main paradigms were evaluated: a) count estimation as regression problem, where the systems are directly trained to output the number of objects as a point estimate, and b) classification, where every possible number of objects is encoded as a different class and the output of a predicting system corresponds to a probability distribution over these classes.
 The results of the proposed method indicated that a classification based neural network performed better than one based on regression.
 One drawback, however, is that the maximum number of speakers (the number of classes) is known in advance.
@@ -113,14 +113,7 @@ Furthermore, we present a statistical analysis of the results to determine wheth
 iv) we conducted a listening experiment to relate the best-performing machine to human performance.
 We describe one of the strategies taken by the data-driven approach that might explain its superior performance.
 Finally, for the sake of reproducibility, the trained networks (models), as well as the test dataset, are made available on the accompanying website\footnote{\url{https://www.audiolabs-erlangen.de/resources/2017-CountNet}.}.
-\par
-%% Organisation
-The remainder of this paper is organized as follows. In Section~\ref{sec:problem_formulation}, we describe the count estimation problem formally and the general ideas we propose to tackle it.
-In Section~\ref{sec:supervised_learning}, we propose several architectures, each of them adjusted to estimate the number of speakers from short audio segments of 5~s.
-In Section~\ref{sec:hyperparameters}, we then assess several common hyperparameters for all of our proposed architectures, so that we are able to propose a single, best-performing model.
-In Section~\ref{sec:evaluation} this model is compared to several baseline systems under various acoustical conditions.
-Additionally, we compare the proposed method to human performance.
-We point out possible limitations and provide indications for the strategy being taken by the DNN in Section~\ref{sec:ablation} before we conclude in Section~\ref{sec:conclusion}.
+
 
 \section{Problem Formulation}%
 \label{sec:problem_formulation}
@@ -155,14 +148,13 @@ Our objective of estimating the maximum number of concurrent speakers can now be
 k=\underset{n}{\max}\left(\sum_{l = 1}^{L} v_{nl}\right) \; n \in \{ 1,\ldots, N \}
 \label{eq:definition_k}.
 \end{equation}
-% TODO: to which case does this match in chapter 2
-%
-As can be seen, our proposed task of estimating $k\leq L$, is more closely related to source separation whereas the estimation of \(L\) is more useful for tasks where speakers do not overlap.
+
+As can be seen, our proposed task of estimating $k\leq L$, is more closely related to source separation whereas the estimation of \(L\) is more useful for tasks where speakers do not overlap (see Section~\ref{sub:count_problemstatement}).
 For instance, three non-overlapping speakers would result in \(L = 3\) and \(\cardinality = 1\).
 It should be noted that at short time scales both task definitions provide the same outcome because on such a time scale the speaker configuration usually does not change. The problem arises for long-term recordings (e.g. larger than ten seconds) which are not considered in this work.
-In any case, we want to emphasize that in all experiments presented in this paper, we made sure that for all audio segments $L = k$.
+In any case, we want to emphasize that in all experiments presented in this Chapter, we made sure that for all audio segments $L = k$.
 \par
-In the remainder of this work, we assume that no additional prior information about the speakers is given to the system except possibly the maximum number of concurrent speakers~$k_{\max}$, that is application-dependent and represents an upper bound for the estimation.
+In the remainder of this chapter, we assume that no additional prior information about the speakers is given to the system except possibly the maximum number of concurrent speakers~$k_{\max}$, that is application-dependent and represents an upper bound for the estimation.
 
 While speaker diarization would mean estimating the whole speech activity matrix~$v_{nl}$, our problem of estimating only~$k$ in~(\ref{eq:definition_k}) is more abstract as it requires a direct estimation of the count.
 
@@ -223,7 +215,7 @@ For notational convenience, we write~(\ref{eq:estimate_hatk}) as
 and $q\left(\cdot\right)$ is called the~\textit{decision function}.
 Using this strategy, we have everything to produce a single source count estimate~$\hat{k}$ from input features~$\mathbf{X}$, provided the parametric family~$\mathcal{L}$ and the mapping $f_{\mathbf{\theta}}$ as well as its parameters $\mathbf{\theta}$ are known.
 
-In this study, we choose a deep neural network for the mapping $f_{\mathbf{\theta}}$, whose weights~$\mathbf{\theta}$ are trained in a supervised manner.
+In this study, we choose a deep neural network for the mapping $f_{\mathbf{\theta}}$, whose weights~$\mathbf{\theta}$ are trained in a supervised manner (compare Figure~\ref{fig:blockdiagram}).
 Once a particular network architecture has been chosen, learning its parameters is achieved through classical stochastic gradient descent.
 If we assume that the particular family~$\mathcal{L}$ of output distributions has been chosen, it appears natural to learn the parameters~$\mathbf{\theta}$ that maximize the likelihood of the learning data.
 More specifically, the total cost to be minimized becomes
@@ -234,29 +226,42 @@ The derivative of this cost (\ref{eq:total_cost}) with respect to the parameters
 \par
 Three different choices for the family of output distributions (classification, Gaussian regression and Poisson regression) are summarized below.
 
+\begin{figure}[t]
+  \centering
+  \begin{adjustbox}{width=.8\textwidth}
+    \input{Chapters/08_Analysis_CountNet/figures/blockdiagram}
+  \end{adjustbox}
+\caption{%
+Block diagram of the proposes supervised learning model.
+Training is realised using tuples of spectro-temporal inputs \(\mathbf{X}\) and
+the true number of concurrent speakers \(k\). For inference the output \(y\) is post-processed using a decision function \(q\) to generate estimates \(\hat{k}\).
+}%
+\label{fig:blockdiagram}
+\end{figure}
+
 \subsubsection{Classification}
 In a classification setting, the output distribution is directly taken as \textit{discrete}, discarding any meaning concerning the ordering of the different possible values.
-In other words, \(\cardinality \) may only take a finite set of values, whose actual labeling is not assumed to bear any particular information.
-In that case, the output distribution~$\mathcal{L}\left(k\mid f_\mathbf{\theta}\left(\mathbf{X}\right)\right)$ is taken as multinomial with~\((k_{\max} + 1)\) (when we assume that \(k\) can be 0) classes.
+% In other words, \(\cardinality \) may only take a finite set of values, whose actual labeling is not assumed to bear any particular information.
+% In that case, the output distribution~$\mathcal{L}\left(k\mid f_\mathbf{\theta}\left(\mathbf{X}\right)\right)$ is taken as multinomial with~\((k_{\max} + 1)\) (when we assume that \(k\) can be 0) classes.
 Given some particular input~$\mathbf{X}$, the network generates the posterior output probability for \((k_{\max} + 1)\) classes (including \(k=0\)) and a maximum a posteriori (MAP) decision function is chosen that simply picks the most likely class \(q = \arg\max(\cdot)\).
-\begin{equation}
-\hat{k}=q\left(f_{\mathbf{\theta}}\left(\mathbf{X}\right)\right)=\arg\max\mathcal{L}(k\mid f_{\mathbf{\theta}}\left(\mathbf{X}\right)).
-\end{equation}
+% \begin{equation}
+% \hat{k}=q\left(f_{\mathbf{\theta}}\left(\mathbf{X}\right)\right)=\arg\max\mathcal{L}(k\mid f_{\mathbf{\theta}}\left(\mathbf{X}\right)).
+% \end{equation}
 
-Notwithstanding its conceptual simplicity, classification has two drawbacks.
-First, the intuitive ranking between different estimates is lost: e.g. \(p(\cardinality = 6) \) may not depend on \(p(\cardinality = 5) \).
-Second, the largest possible count $L$ is given \textit{a priori}.
-Despite these limitations,
+% Notwithstanding its conceptual simplicity, classification has two drawbacks.
+% First, the intuitive ranking between different estimates is lost: e.g. \(p(\cardinality = 6) \) may not depend on \(p(\cardinality = 5) \).
+% Second, the largest possible count $L$ is given \textit{a priori}.
+% Despite these limitations,
 Classification based approaches have successfully been applied in deep neural networks for counting objects~\cite{segui15, zhang2015salient, khan16} in images.
 
 \subsubsection{Gaussian Regression}
 In regression, $k$ is derived from an output distribution defined on the real line.
 However, this comes with the additional difficulty of handling the fact that~$k$ is integer.
-To circumvent it, we take $k$ as the rounding of a latent variable $f_{\mathbf{\theta}}\left(\mathbf{X}\right)\in\mathbb{R}$, and exploit the fact that rounding may be efficiently modeled as introducing white additive Gaussian noise, we may write:
-\begin{equation}
-k\sim\mathcal{N}\left(f_{\mathbf{\mathbf{\theta}}}\left(\mathbf{X}\right),\Delta\right),\label{eq:AWGN_model}
-\end{equation}
-where $\mathcal{N}$ is the Gaussian scalar distribution and $\Delta$ is the rounding noise variance, that is independent of any model parameters but only depends on the fact that $k$ is the integer closest to $f_{\mathbf{\mathbf{\theta}}}\left(\mathbf{X}\right)$.
+% To circumvent it, we take $k$ as the rounding of a latent variable $f_{\mathbf{\theta}}\left(\mathbf{X}\right)\in\mathbb{R}$, and exploit the fact that rounding may be efficiently modeled as introducing white additive Gaussian noise, we may write:
+% \begin{equation}
+% k\sim\mathcal{N}\left(f_{\mathbf{\mathbf{\theta}}}\left(\mathbf{X}\right),\Delta\right),\label{eq:AWGN_model}
+% \end{equation}
+% where $\mathcal{N}$ is the Gaussian scalar distribution and $\Delta$ is the rounding noise variance, that is independent of any model parameters but only depends on the fact that $k$ is the integer closest to $f_{\mathbf{\mathbf{\theta}}}\left(\mathbf{X}\right)$.
 
 The output distribution in this setting is assumed to be Gaussian and the associated cost function is the classical squared error.
 During inference and given the output~$f_{\mathbf{\mathbf{\theta}}}\left(\mathbf{X}\right)$ of the network, the best discrete value that is consistent with the model is simply the rounding operator $q = \left[\cdot\right]$.
@@ -271,9 +276,9 @@ Second, the model avoids the inconvenience of the classification approach to com
 Due to these advantages, the Poisson distribution has been used in studies devising deep architectures for counting systems~\cite{Rezatofigh16}.
 For instance in~\cite{fallah09, chan09, Rezatofigh16}, it is shown that the number of objects in images can be well modeled by the Poisson distribution. Inspired by these previous works, we also consider the Poisson output distribution \(\mathcal{P}\left(k\mid f_{\mathbf{\mathbf{\theta}}}\left(\mathbf{X}\right)\right)\)
 
-\begin{equation}
-p \left(k\mid f_{\mathbf{\theta}}\left(\mathbf{X}\right)\right)=\mathcal{P}\left(k\mid f_{\mathbf{\mathbf{\theta}}}\left(\mathbf{X}\right)\right),
-\end{equation}
+% \begin{equation}
+% p \left(k\mid f_{\mathbf{\theta}}\left(\mathbf{X}\right)\right)=\mathcal{P}\left(k\mid f_{\mathbf{\mathbf{\theta}}}\left(\mathbf{X}\right)\right),
+% \end{equation}
 
 where $\mathcal{P}\left(\cdot\mid\lambda\right)$ denotes the Poisson distribution with scale parameter~$\lambda$.
 
@@ -289,18 +294,6 @@ q\left(f_{\mathbf{\mathbf{\theta}}}\left(\mathbf{X}\right)\right) & =\underset{\
 \end{subequations}
 where the last expression is an approximation of the median of a Poisson distributed random variable of scale parameter~$f_{\mathbf{\mathbf{\theta}}}\left(\mathbf{X}\right)$~\cite{Choi94}.
 
-\begin{figure}[t]
-  \centering
-  \begin{adjustbox}{width=1\columnwidth}
-    \input{Chapters/08_Analysis_CountNet/figures/blockdiagram}
-  \end{adjustbox}
-\caption{%
-Block diagram of the proposes supervised learning model.
-Training is realised using tuples of spectro-temporal inputs \(\mathbf{X}\) and
-the true number of concurrent speakers \(k\). For inference the output \(y\) is post-processed using a decision function \(q\) to generate estimates \(\hat{k}\).
-}%
-\label{fig:blockdiagram}
-\end{figure}
 
 %!TEX root = ../stoeter_sourcecount.tex
 \section{DNNs for Count Estimation}%
@@ -325,7 +318,7 @@ All architectures under investigation are summarized in Fig.~\ref{fig:networkove
 \subsubsection{Convolutional Neural Networks (CNN)}%
 Convolutional Neural Networks (CNNs) are a variant of standard fully-connected neural networks, where the architecture generally consists of one or more ``convolution layers'' followed by fully-connected layers leading to the output.
 
-A convolution layer generally consists of a convolution operation, followed by feature pooling.
+A convolutional layer consists of a convolution operation, followed by feature pooling.
 The convolution operation applies a set of filters to local regions of the input, and the application of each such filter outputs a \emph{feature map}.
 It should be noted that the convolution operation, generally, also constitutes the application of a point-wise non-linear activation function on each feature map.
 This is followed by feature pooling, that aims to reduce the feature space dimensions by combining the filter activations over a specified region.
@@ -345,20 +338,19 @@ Note, that the convolution operation is performed independently for every input 
 In preliminary experiments we found that by using max-pooling we received significantly better performance when used after CNN layers.
 
 \subsubsection{Recurrent Neural Networks (RNN)}%
-While convolutional layers excel in capturing local structures, RNNs can detect structure in sequential data of arbitrary length.
-This makes it ideal to model time series; however, in practice, the learned temporal context is limited to only a few time instances, because of the vanishing gradient problem~\cite{Hochreiter98}.
-To alleviate this problem, forgetting factors (also called gating) were proposed.
-One of the most popular variants of RNNs with forgetting factors is the Long Short-Term Memory (LSTM)~\cite{Hochreiter97} cell.
-In~\cite{stoeter17} such an architecture based on three bi-directional LSTM cells, was proposed. The architecture is similar to the one employed in~\cite{Leglaive15}.
+% While convolutional layers excel in capturing local structures, RNNs can detect structure in sequential data of arbitrary length.
+% This makes it ideal to model time series; however, in practice, the learned temporal context is limited to only a few time instances, because of the vanishing gradient problem~\cite{Hochreiter98}.
+% To alleviate this problem, forgetting factors (also called gating) were proposed.
+% One of the most popular variants of RNNs with forgetting factors is the Long Short-Term Memory (LSTM)~\cite{Hochreiter97} cell.
 
-\begin{figure}[t]
-\centering
-\includegraphics[width=\columnwidth]{Chapters/08_Analysis_CountNet/figures/conv.pdf}
-\caption{Illustrative diagram to show the convolution operation in
-convolution layers of CNN.\@ We consider N different local filters each
-of size \(J\times I\)}%
-\label{fig:conv}
-\end{figure}
+% \begin{figure}[t]
+% \centering
+% \includegraphics[width=\columnwidth]{Chapters/08_Analysis_CountNet/figures/conv.pdf}
+% \caption{Illustrative diagram to show the convolution operation in
+% convolution layers of CNN.\@ We consider N different local filters each
+% of size \(J\times I\)}%
+% \label{fig:conv}
+% \end{figure}
 
 % * good for temporal dependencies.
 % * State-of-the-art speech recognition, NLP, diarization
@@ -371,6 +363,7 @@ One of the most popular gated recurrent cells is the Long Short-Term Memory (LST
 Its effectiveness has been proven in various applications and LSTMs are the state-of-the-art approach for speech recognition~\cite{Graves13} and singing voice detection~\cite{Leglaive15}~\footnote{For a deeper mathematical background of LSTMs, due to space constraints, the reader is referred to the aforementioned papers.}.
 For a given input of dimensions \(D \times F \times C\), the output of a recurrent layer is either only the last step of dimension \(1 \times A\) or the full sequence \(D \times A\).
 The latter is useful to stack multiple LSTMs or to apply temporal max pooling of the sequence.
+In~\cite{stoeter17} such an architecture based on three bi-directional LSTM cells, was proposed. The architecture is similar to the one employed in~\cite{Leglaive15}.
 
 \subsubsection{Convolutional Recurrent Neural Networks (CRNN)}%
 % * Combination of CNN and Recurrent
@@ -380,7 +373,7 @@ The main motivation to stack these layers is to combine the benefits of convolut
 
 There are different ways to stack CNNs and RNNs to form a CRNN architecture.
 In our application the motivation is to aggregate local time-frequency features coming from the output convolutional neural network and use the LSTM layer to model long temporal structures.
-As the output of a CNN layer is a 3D volume \(D \times F \times C\) and the input of a recurrent layer only takes a 2D sequence, the dimension would need to be reduced. Naturally, the time dimension would need to be kept, therefore the channel dimension \(C\) is stacked with the frequency dimension \(F\) resulting in a \(D \times F \cdot C\) output.
+As the output of a CNN layer is a 3D volume \(D \times F \times C\) and the input of a recurrent layer only takes a 2D sequence, the dimension would need to be reduced. Naturally, the time dimension would need to be kept, therefore the channel dimension \(C\) is stacked with the frequency dimension \(F\) resulting in a \(D \times F \cdot C\) output (compare Figure~\cite{fig:crnn}).
 
 \begin{figure}[t]
 \centering
@@ -446,7 +439,6 @@ For each of the decision functions a suitable output activation and loss is used
 \subsubsection{Classification}
 For \emph{classification}, the output is required to be one-hot-encoded so that the output is of dimension \(y \in \mathbb{B}^{L + 1}\), where \(L\) is the maximum number of concurrent speakers to be expected.
 In the final layer of the network, a softmax activation function is used with the cross-entropy function as the loss.
-% TODO: uncomment functions?
 % to perform classification:
 % \begin{equation}
 %   f_j(z) = \frac{e^{z_j}}{\sum_k e^{z_k}}
@@ -476,21 +468,56 @@ The output layer nodes have linear activation, and mean squared error is used as
 \subsubsection{Poisson Regression}
 For the Poisson regression, the likelihood of parameter \(\lambda \) given the true count \(\cardinality \) is computed by the negative log-likelihood loss \(E = \sum \lambda - \cardinality * \log(\lambda + eps)\). The output layer activation is the exponential function.
 
-%
-\begin{figure*}[tb]
+\begin{figure*}[!hp]
 \centering
 \includegraphics[width=0.9\textwidth]{Chapters/08_Analysis_CountNet/figures/networkoverview.pdf}
 \caption{Overview of the proposed Architectures.}%
 \label{fig:networkoverview}%
 \end{figure*}
 
-%!TEX root = ../stoeter_sourcecount.tex
 \section{Training}%
 \label{sec:training}
 
 To successfully train and evaluate the proposed DNNs, due to the number of parameters, a large amount of training data is required.
-We selected \emph{LibriSpeech clean-360}\ \cite{panayotov15} which includes 363 hours of clean speech of English utterances from 921 speakers (439 female and 482 male speakers) sampled at 16 kHz.
+In this section, we introduce relevant speech corpora and describe how the training dataset was assembled.
 
+\subsection{Speech Corpora and Annotations}%
+\label{ssec:corpus}
+% * Libri Speech
+% * Describe the used VAD
+To date, many available speech datasets contain recordings where only a single speaker is active.
+Datasets that include overlapped speech segments, either lack accurate annotations because the annotation of speech onsets and offsets in mixtures is cumbersome for humans as shown in Section~\ref{sec:introduction} or lack a controlled auditory environment such as in TV/broadcasting scenarios~\cite{Gravier12}.
+Since a realistic dataset of fully overlapped speakers is not available, we chose to generate synthetic mixtures.
+We recognize that in a simulated ``cocktail-party'' environment, mixtures lack the conversational aspect of human communication but provide a controlled environment which helps to understand how a DNN solves the count estimation problem.
+As we aim for a speaker independent solution, we selected a speech corpus with preference to a high number of different speakers instead of the number of utterances, thus increasing the number of unique mixtures.
+We selected \emph{LibriSpeech clean-360}\ \cite{panayotov15} which includes 363 hours of clean speech of English utterances from 921 speakers (439 female and 482 male speakers) sampled at 16 kHz.
+% Compared to \emph{LibriSpeech}, \emph{TIMIT} is of lower recording quality and \emph{THCHS} represents mandarin speech.
+% \par
+% As revealed in Equation~\ref{eq:definition_k}, the maximum number of concurrent speakers \(cardinality\) requires annotation of the activity of each individual speaker.
+% Even though many corpora come with word and phonemes annotation, they often are not consistent across different corpora.
+% We therefore generated annotations based on a voice activity detection algorithm (VAD). As we rely on a robust VAD estimate, we found the implementation from the \emph{Chromium Web Browser} as part of the WebRTC Standard~\footnote{WebRTC 1.0: Real-time Communication Between Browsers W3C Editor's Draft 05 June 2017} to yield good results.
+In the further course of this work (see Section~\ref{sec:evaluation}), we also present the results from test sets of two other datasets as listed in Table~\ref{tab:corpora}.
+Furthermore, we included non-speech examples from the TUT Acoustic Scenes dataset~\cite{Mesaros16} in our training data to avoid using zero input samples for \(\cardinality = 0\) to increase the robustness against noise.
+
+% \subsection{Training Dataset}%
+% \label{ssec:train}
+%
+% To generate a single training sample, a tuples of speech mixtures and their ground truth speaker count \(\cardinality \), we draw a unique set of \(\cardinality \) speakers from the corpus.
+% For each of the speakers we then select a random utterance, resampled to 16 kHz sampling rate and apply VAD.\@
+% The VAD method was configured using default parameters using a hop size of 10~ms.
+% Further, the VAD estimate was used to remove silence in the beginning and the end of an utterance recording.
+% In the next step, more utterances from the same speaker are drawn from the corpus until the desired duration is reached.
+% Both, the audio recording and the VAD annotation of each utterance is concatenated.
+% The procedure is repeated for all speaker so that \(\cardinality \) time domain signals are created.
+% Signals are mixed according to Equation~\ref{eq:mixing_model} and peak normalised to avoid clipping.
+% Mixtures are then transformed to a time-frequency matrix \(X \in D \times F\).
+% The VAD matrix \(v_{nl}\) is upsampled in temporal direction using nearest neighbour interpolation to match \(D\).
+% The ground truth output \(\cardinality \) is then computed based on Equation~\ref{eq:definition_k}.
+% \par
+% We follow the proposal of~\cite{wang15} and include non-speech examples in our training data to avoid using zero input samples for \(\cardinality = 0\) and also to increase the robustness against noise.
+% We used the TUT Acoustic Scenes dataset~\cite{Mesaros16} to create training samples using the same procedure as described above.
+% As environmental sounds could include speech, we omitted obvious subsets such as \texttt{cafe/restaurant}, \texttt{grocery store} and \texttt{metro station}.
+% Additionally we used the VAD to verify if any sample contains speech.
 \begin{table}
   \centering
   \caption{Overview of speech corpora used in this work.}%
@@ -508,52 +535,52 @@ We selected \emph{LibriSpeech clean-360}\ \cite{panayotov15} which includes 363 
   \end{tabular}
 \end{table}
 
-Compared to \emph{LibriSpeech}, \emph{TIMIT} is of lower recording quality and \emph{THCHS} represents mandarin speech.
 \par
-% TODO: check for duplicates
-As revealed in Equation~\ref{eq:definition_k}, the maximum number of concurrent speakers \(cardinality\) requires annotation of the activity of each individual speaker.
-Even though many corpora come with word and phonemes annotation, they often are not consistent across different corpora.
-In the further course of this work (see Section~\ref{sec:evaluation}), we also present the results from test sets of two other datasets as listed in Table~\ref{tab:corpora}.
-\par
-We follow the proposal of~\cite{wang15} and include non-speech examples in our training data to avoid using zero input samples for \(\cardinality = 0\) and also to increase the robustness against noise.
-We used the TUT Acoustic Scenes dataset~\cite{Mesaros16} to create training samples using the same procedure as described above.
-As environmental sounds could include speech, we omitted obvious subsets such as \texttt{cafe/restaurant}, \texttt{grocery store} and \texttt{metro station}.
-Additionally we used the VAD to verify if any sample contains speech.
-\par
-All samples are normalized to the average Euclidean norm of \(duration\) frames to be robust against gain variations as proposed by~\cite{uhlich15}.
+A single training tuple \( \left\{\mathbf{X}, k\right\} \) is generated by a synthetic speech mixture and their ground truth speaker count \(\cardinality \).
+The mixtures are formed from random utterances of different speakers where silence in the beginning and end was removed to increase the overlap within one segment.
+In fact, our method to generate synthetic samples results in an average overlap for \(k=2\) of 85\% and for \(k=10\) of 55\% (based on 5s segments).
+This procedure is similar to~\cite{mesaros17} used to label the data.
+Signals are mixed according to (\ref{eq:mixing_model}), peak normalized and then transformed to a time-frequency matrix \(X \in D \times F\).
+Based on a voice activity detection algorithm (VAD), we used an implementation based on the WebRTC Standard~\cite{webrtc} where we computed the ground truth output \(\cardinality \) via (\ref{eq:definition_k}).
+All samples are normalized to the average Euclidean norm of \(duration\) frames to be robust against gain variations as proposed by~\cite{Uhlich15}.
 Furthermore, the data was scaled to zero mean and unit standard deviation across the frequency dimension \(F\) over the full training data.
 Scaling parameters were saved for validation and test.
+For a more detailed description of the data set, the reader is referred to~\cite{stoeter17}.
 
-\subsection*{Training Procedure}%
+% \subsubsection{Standardization, Normalization}%
+% \label{ssec:norm}
+%
+% As our application more closely relates to source separation we want our trained DNN system to be robust against gain variations.
+% We therefore find it important that the DNN can not leverage the gain factors of the mixture.
+% We found that the averaged energy of one bin across \(duration\) already is a solid indicator for the number of speakers.
+% In fact, in early experiments of the methods described in~\cite{sayoud10, andrei15} we were only able to reproduce their results when no normalization was applied.
+% To accommodate these findings, we normalize \(\mathbf{X}\) to the average Euclidean norm of \(duration\) frames as proposed by~\cite{Uhlich15}.
+% Additionally, as common in machine learning, we scale the normalised input representation so that the feature dimension \(F\) have zero mean and unit variance/standard deviation across the whole training dataset (Standardization).
+
+\subsection{Training Procedure}%
 \label{ssec:parameters}
 % * Optimizer
 % other things
+% To train each network we use Poisson sampling to balance the number of samples \(T_{ \cardinality}\) for each \(\cardinality \).
 For all experiments we chose a medium sized training dataset of \(\cardinality \in \textrm{\{0, \ldots, 10\}}\) forming a total of \(T_{\textrm{train}} = 20.020\) mixtures  (1820 per \(k\)), each containing 10 seconds of audio, resulting in 55.55 hours of training material.
-As our application more closely relates to source separation we want our trained DNN system to be robust against gain variations.
-We therefore find it important that the DNN can not leverage the gain factors of the mixture.
-We found that the averaged energy of one bin across \(duration\) already is a solid indicator for the number of speakers.
-In fact, in early experiments of the methods described in~\cite{sayoud10, andrei15} we were only able to reproduce their results when no normalization was applied.
-To accommodate these findings, we normalize \(\mathbf{X}\) to the average Euclidean norm of \(duration\) frames as proposed by~\cite{uhlich15}.
-Additionally, as common in machine learning, we scale the normalised input representation so that the feature dimension \(F\) have zero mean and unit variance/standard deviation across the whole training dataset (Standardization).
-To train each network we use Poisson sampling to balance the number of samples \(T_{ \cardinality}\) for each \(\cardinality \).
 For each sample fed into the network, we select a random excerpt of duration \(D\) from each mixture. If not stated otherwise, \(D=5\)~seconds.
 That way, for each epoch, the network is seeing slightly different samples, reducing the number of redundant samples and thus helping to speed up the stochastic gradient based training process.
 \footnote{Note that for the validation and testing, excerpts are fixed.}
-A similar training procedure is detailed in~\cite{schluter16}.
+A similar training procedure is detailed in~\cite{schluter16, stoeter17}.
 Each architecture is trained using the ADAM optimizer~\cite{kingma14} (learning rate: \(1 \cdot 10^{-3}\), \(\beta_1=0.9\), \(\beta_2=0.999\), \(\epsilon=1 \cdot 10^{-8}\)) using mini-batches of size 32.
 Our training procedure verifies that all samples within a batch are from a different set of speakers.
 In addition to the training dataset, we created a fully separated validation dataset of \(T_{\textrm{valid}} = 5720\) samples using a different set of speakers from \emph{LibriSpeech dev-clean}.
 Early stopping (\(patience = 10\)) is applied by monitoring the validation loss to reduce the effect of overfitting.
-As we are interested in evaluating different input durations, we need to accommodate this our training procedure where we, instead of using the full duration of one input sample, may select an excerpt of duration \(D\).
-Now instead iterating with hop size of 1 resulting in many redundant (slightly shifted) samples, we instead randomly select the offset of this excerpt for each sample.
-This procedure verifies that all samples within a batch are from different speakers.
-After every epoch the offsets are being reset so that each epoch is seeing slightly different samples (in different order) of the same training dataset.
-Note that this is not the case for the evaluation and test dataset where the offsets are fixed using an initial seed.
-We found this procedure (also used in~\cite{schluter16}) help to speed up the stochastic gradient based training process.
-Additionally it allows us to evaluate on different excerpt durations \(D\), while keeping the training dataset fixed.
+% As we are interested in evaluating different input durations, we need to accommodate this our training procedure where we, instead of using the full duration of one input sample, may select an excerpt of duration \(D\).
+% Now instead iterating with hop size of 1 resulting in many redundant (slightly shifted) samples, we instead randomly select the offset of this excerpt for each sample.
+% This procedure verifies that all samples within a batch are from different speakers.
+% After every epoch the offsets are being reset so that each epoch is seeing slightly different samples (in different order) of the same training dataset.
+% Note that this is not the case for the evaluation and test dataset where the offsets are fixed using an initial seed.
+% We found this procedure (also used in~\cite{schluter16}) help to speed up the stochastic gradient based training process.
+% Additionally it allows us to evaluate on different excerpt durations \(D\), while keeping the training dataset fixed.
 Training never exceeded more than 50 epochs.
 \par
-We used the Keras~\cite{chollet15} framework and trained on multiple instances of Nvidia GTX 1080 GPUs.
+We used the Keras~\cite{chollet2015keras} framework and trained on multiple instances of Nvidia GTX 1080 GPUs.
 
 %!TEX root = ../stoeter_sourcecount.tex
 \section{Model Selection}%
@@ -586,10 +613,10 @@ performed evaluation of all models on \(T_{\textrm{test}} = 5720\) unique and un
 % \subsection{Input Representations}
 % Up to date, most discriminative models for speech applications rely on  time-frequency (TF) magnitude representations.
 % This is because, compared to raw time-domain models, TF models allow for faster training due to less data redundancy leading to generally fewer trainable parameters or shorter training duration.
-Several well-established input representations were evaluated in~\cite{stoeter17} such as (linear or logarithmically scaled) short-time Fourier transform (STFT), Mel filter bank outputs (MEL), Mel Frequency Cepstral Coefficients (MFCC) representations, typically chosen for speech applications.
+Several well-established input representations were evaluated in~\cite{stoeter17} such as (linear or logarithmically scaled) short-time Fourier transform (STFT), Mel filter bank outputs (MEL), Mel Frequency Cepstral Coefficients (MFCC) representations, typically chosen for speech applications (compare Table~\ref{tab:inputrep})
 
 \begin{table}
-\caption{Speech related Input representations}
+\caption{Speech related input representations in related work.}
 \label{tab:inputrep}
   \centering
 \begin{tabular}{rll}
@@ -604,7 +631,7 @@ References & Task & Representation \\
 \end{tabular}
 \end{table}
 
-As for the task of estimating the number of speakers, we assume that a fine frequency resolution is needed to discriminate time-frequency bins with overlapped speech segments from those that only belong to a single speaker.
+% As for the task of estimating the number of speakers, we assume that a fine frequency resolution is needed to discriminate time-frequency bins with overlapped speech segments from those that only belong to a single speaker.
 Even though MFCCs are used in related tasks and are included in our baseline evaluations, they are known to perform poorly when used in CNNs~\cite{Seltzer13}.
 This is why we decided to not to use the MFCCs as an input for the proposed architectures.
 The remaining input representations are identical to those listed in~\cite{stoeter17}:
@@ -744,37 +771,35 @@ Random Effect \(k\)            &  0.057 &    0.297 &        &             \\
 \label{tab:mixedmodel1}
 \end{table}
 
-% TODO: wrap things up here, describe the ouput shape dimensions and the temporal resolution.
-
-\begin{table}
-  \caption{Proposed CRNN Architecture}%
-  \label{fig:crnndetail}
-  \centering
-\begin{tabular}{llll}
-  \toprule
-  Layername (type)              & Configuration    & Output Shape    & \# Param\\
-  Input                         &                  &  (500, 201, 1)  & 0 \\
-  Convolution                   & $3\times 3$, 64  &  (498, 199, 64) & 640 \\
-  Convolution                   & $3\times 3$, 32  &  (496, 197, 32) & 18464 \\
-  Max Pooling                   & $3\times 3$      &  (165, 65, 32)  & 0 \\
-  Convolution                   & $3\times 3$, 128 &  (163, 63, 128) & 36992 \\
-  Convolution                   & $3\times 3$, 64  &  (161, 61, 64)  & 73792 \\
-  Max Pooling                   & $3\times 3$      &  (53, 20, 64)   & 0 \\
-  Dropout                       & 0.25             &  (53, 20, 64)   & 0 \\
-  Reshape                       &                  &  (53, 1280)     & 0 \\
-  lstm1 (LSTM)                  & 40               &  (53, 40)       & 211360 \\
-  Temporal Pooling              & $2$              &  (26, 40)       & 0 \\
-  Reshape                       &                  &  (1040)         & 0 \\
-  Fully Connected (FC)          &                  &  (11)            & 11451 \\
-  \midrule
-  & & Total nb params & 352,699 \\
-  \bottomrule
-  \end{tabular}
-\end{table}
+% \begin{table}
+%   \caption{Proposed CRNN Architecture}%
+%   \label{fig:crnndetail}
+%   \centering
+% \begin{tabular}{llll}
+%   \toprule
+%   Layername (type)              & Configuration    & Output Shape    & \# Param\\
+%   Input                         &                  &  (500, 201, 1)  & 0 \\
+%   Convolution                   & $3\times 3$, 64  &  (498, 199, 64) & 640 \\
+%   Convolution                   & $3\times 3$, 32  &  (496, 197, 32) & 18464 \\
+%   Max Pooling                   & $3\times 3$      &  (165, 65, 32)  & 0 \\
+%   Convolution                   & $3\times 3$, 128 &  (163, 63, 128) & 36992 \\
+%   Convolution                   & $3\times 3$, 64  &  (161, 61, 64)  & 73792 \\
+%   Max Pooling                   & $3\times 3$      &  (53, 20, 64)   & 0 \\
+%   Dropout                       & 0.25             &  (53, 20, 64)   & 0 \\
+%   Reshape                       &                  &  (53, 1280)     & 0 \\
+%   lstm1 (LSTM)                  & 40               &  (53, 40)       & 211360 \\
+%   Temporal Pooling              & $2$              &  (26, 40)       & 0 \\
+%   Reshape                       &                  &  (1040)         & 0 \\
+%   Fully Connected (FC)          &                  &  (11)            & 11451 \\
+%   \midrule
+%   & & Total nb params & 352,699 \\
+%   \bottomrule
+%   \end{tabular}
+% \end{table}
 
 \begin{figure}[t]
   \centering
-    \begin{adjustbox}{width=0.66\columnwidth}
+    \begin{adjustbox}{width=0.8\columnwidth}
       \input{Chapters/08_Analysis_CountNet/figures/complexity}
     \end{adjustbox}
     \caption{Complexity in number of floating point multiplications and number of weight parameters (in brackets) over performance in MAE of our five proposed models.}%
@@ -818,25 +843,26 @@ Similarly to our proposed DNN based methods, we treat the output as either a cla
 % * Performance drops slightly
 %
 % * --> CNN and CRNN, are most robust to gain variation
-\begin{table*}[h]
-\tiny
+\begin{table*}[t]
+\scriptsize
 
-\caption{Averaged MAE results of different methods on several datasets for \( k = [0 \ldots 10] \) with equal power and random gains (up to $\pm 6~\mbox{dB}$)) as well as reverberation. Bold face indicates the best-performing method.}
+\caption{Averaged MAE results of different methods on several datasets for \( k = [0 \ldots 10] \) with equal power and random gains (up to $\pm 6~\mbox{dB}$)) as well as reverberation (rev). Bold face indicates the best-performing method. Standard deviation values are listed in~\cite{stoeter19}.}
+
 \begin{center}
 \begin{tabular}{lcccccccc}
 \toprule
-Trained on & \multicolumn{7}{c}{\emph{LIBRI}} & \multicolumn{1}{c}{\emph{LIBRI-Reverb}} \\
+Trained on & \multicolumn{7}{c}{\emph{LIBRI}} & \multicolumn{1}{c}{\emph{LIBRI-Rev}} \\
 \cmidrule(r){2-8} \cmidrule(r){9-9}
-Test Set & \multicolumn{3}{c}{LIBRI} & \multicolumn{2}{c}{THCS10} & \multicolumn{2}{c}{TIMIT} & \multicolumn{1}{c}{LIBRI-Reverb} \\
+Test Set & \multicolumn{3}{c}{LIBRI} & \multicolumn{2}{c}{THCS10} & \multicolumn{2}{c}{TIMIT} & \multicolumn{1}{c}{LIBRI-Rev} \\
 \cmidrule(r){2-4} \cmidrule(r){5-6} \cmidrule(r){7-8} \cmidrule(r){9-9}
-Variation &     – &     $\pm 6~\mbox{dB}$ & Reverb &  – &     $\pm 6~\mbox{dB}$ &     – &  $\pm 6~dB$ & Reverb \\
+Variation &     – &     $\pm 6~\mbox{dB}$ & Rev &  – &     $\pm 6~\mbox{dB}$ &     – &  $\pm 6~dB$ & – \\
 \midrule
-CRNN    &  $\mathbf{0.27 \pm{0.22}}$ & $\mathbf{0.43 \pm{0.39}}$ & $1.63 \pm{0.22}$ & $\mathbf{0.36 \pm{0.25}}$  & $\mathbf{0.50 \pm{0.46}}$ & $\mathbf{0.31 \pm{0.33}}$ & $\mathbf{0.52 \pm{0.52}}$  &  $\mathbf{0.48 \pm{0.22}}$\\
-RNN~\cite{stoeter17} & $0.38 \pm{0.28}$ & $0.57 \pm{0.49}$ & $1.41 \pm{0.87}$ & $0.58 \pm{0.50}$ &$0.76 \pm{0.72}$ & $0.48 \pm{0.41}$ & $0.72 \pm{0.65}$ & $0.59 \pm{0.43}$\\
-SVR     &  $0.58 \pm{0.27}$ & $0.61 \pm{0.31}$ & $\mathbf{0.76 \pm{0.35}}$ & $0.69 \pm{0.28}$ &  $0.73 \pm{0.32}$ & $0.70 \pm{0.45}$ & $0.62 \pm{0.36}$ & $0.71 \pm{0.35}$ \\
-SVC     &  $0.63 \pm{0.39}$ & $0.66 \pm{0.37}$ & $0.85 \pm{0.51}$ & $0.77 \pm{0.37}$ &  $0.77 \pm{0.36}$ & $0.89 \pm{0.75}$ & $0.76 \pm{0.61}$ & $0.78 \pm{0.45}$ \\
-VQ \cite{sayoud10} &  $2.41 \pm{1.08}$ & $2.41 \pm{1.06}$ & $2.41 \pm{1.08}$ & $2.98 \pm{1.62}$ &  $2.98 \pm{1.60}$ & $2.13 \pm{1.06}$ & $2.15 \pm{1.07}$ & $2.41 \pm{1.13}$ \\
-MEAN    &  $2.73 \pm{1.63}$ & $2.73 \pm{1.63}$ & $2.73 \pm{1.63}$ & $2.73 \pm{1.64}$ &  $2.73 \pm{1.63}$ & $2.73 \pm{1.63}$ & $2.73 \pm{1.63}$ & $2.73 \pm{1.63}$ \\
+CRNN    &  $\mathbf{0.27}$ & $\mathbf{0.43}$ & $1.63$ & $\mathbf{0.36}$  & $\mathbf{0.50}$ & $\mathbf{0.31}$ & $\mathbf{0.52}$  &  $\mathbf{0.48}$\\
+RNN~\cite{stoeter17} & $0.38$ & $0.57$ & $1.41$ & $0.58$ &$0.76$ & $0.48$ & $0.72$ & $0.59$\\
+SVR     &  $0.58$ & $0.61$ & $\mathbf{0.76}$ & $0.69$ &  $0.73$ & $0.70$ & $0.62$ & $0.71$ \\
+SVC     &  $0.63$ & $0.66$ & $0.85$ & $0.77$ &  $0.77$ & $0.89$ & $0.76$ & $0.78$ \\
+VQ \cite{sayoud10} &  $2.41$ & $2.41$ & $2.41$ & $2.98$ &  $2.98$ & $2.13$ & $2.15$ & $2.41$ \\
+MEAN    &  $2.73$ & $2.73$ & $2.73$ & $2.73$ &  $2.73$ & $2.73$ & $2.73$ & $2.73$ \\
 \bottomrule
 \end{tabular}
 \end{center}
@@ -941,7 +967,7 @@ To compare the results of our trained CRNN on our synthesized dataset to human p
  % We therefore decided to report the average response for each group of \(k\).
  % The results of our lab-based experiments are shown in Figure~\ref{fig:experiment}.
  The results for up to three speakers indicate that humans perform similarly (or better in terms of variance) compared to our proposed CRNN model.
- % Results of the blind experiment show that underestimation becomes apparent for \(k > 3\).
+%  Results of the blind experiment show that underestimation becomes apparent for \(k > 3\).
  % As a reference, we also included the average results from~\cite{kawashima15} (Experiment 1, 5~seconds durations) which shows similar results compared to our blind experiment.
  For larger speaker counts, the gap between humans and algorithm is almost three speakers on average.
  Interestingly, the results of the informed experiment reveal that this gap closes down to an average difference of one speaker.
@@ -1042,7 +1068,7 @@ To better understand the effect of our predictor, we computed an odds ratio \(\e
 This indicates that a decrease in speaking rate of 1 syllable per second will increase the likeliness of an underestimation error by 28 percent.
 Even though this is considered as a small effect size, it gives an interesting hint for the strategy taken of our proposed model and also suggests that for improved robustness, training would benefit from a large variety of speaking rates.
 Furthermore, it still remains unclear the model would suffer from languages with a speaking rate which is naturally higher or lower than English or Chinese (see~\cite{Osser64}).
-% TODO: \cite{clomp83}
+
 \section{Summary and Discussion}%
 \label{sec:conclusion}
 
@@ -1057,13 +1083,11 @@ In further simulations, we revealed that our model is robust to unseen languages
 However, including reverberated samples in the training reduces the error.
 Additionally, we conducted a perceptual experiment showing that these results clearly outperform humans.
 We hope our research stimulates future research on data-driven count estimation, a task that currently lacks real-world datasets.
+Future methods could also work on further reducing the duration of excerpts to improve the conceptual latency.\par
 Lastly, in an ablation study, we found that the CRNN uses a strategy to segment phonemes/syllables to estimate the count.
 Hence, we hypothesize that a speaker count estimate is influenced by the average speaking rates of certain languages.
-Finally, to underpin this hypothesis, we showed that the speaking rate has a significant effect on the error of our model.
+To underpin this hypothesis, we showed that the speaking rate has a significant effect on the error of our model.
+Interestingly, the speaking rate is an important source of modulations in speech~\cite{plomp83} and this discovery establishes a link between speech analysis in humans and machines.
+% TODO: patricio nach geiler machen fragen
 
-% TODO: Counting for meeting room scenario of non-overlapping sounds
-% TODO: WE tried on music, but it was not able to train. We used the musicnet dataset.
-% training count error of 0.2, but a validation error of more than 2 (20 times higher than for speaker count). Poission, non negative binomial distribution....
-% TODO: Write in 06 that I tested redundancy reduction but it didn't work and cft is like JPG!
-% TODO: Context length is that makes the problem difficult and easy.
-% TODO: without any overlap, count estimation would be useless... counting is a quantification of overlap
+% TODO: cft is like JPG!

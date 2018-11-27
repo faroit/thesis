@@ -67,12 +67,7 @@ Each component is clustered into one of two sources to generate two estimates.
 It is this step that transforms the NMF as an unsupervised algorithm into a supervised algorithm.
 As for other separation methods performed in the time-frequency domain, separation is achieved using Wiener filters to extract the sources from the mixture~\cite{liutkus15c}.
 \par
-% TODO: from zafar... rewrite
-The first work on NMF based audio separation was proposed by Vembu and Baumann in~\cite{vembu05}. 
-They used NMF to separate vocals from mixtures and first discriminated between vocal and non-vocal sections in a mixture by using different combinations of features, such as MFCCs \cite{david80}. 
-The components are grouped into vocal and non-vocal by using a vocal/non-vocal classifier with MFCC coefficients.
-% end zafar...
-Since then a large variety of NMF ``flavors'' were introduced to improve certain aspects of the NMF in the application of music. 
+Since NMF first appeared to the source separation community in~\cite{smaragdis03} and in~\cite{vembu05}, a large variety of NMF ``flavors'' were introduced to improve certain aspects of the NMF in the application of music. 
 Many of them are listed in~\cite{vincent}.
 In Chapter~16 of that book the authors describe one of the main problems with NMF which is that ``standard NMF is shown to be efficient when the notes of the analyzed music signal are nearly stationary''.
 As I described in Chapter~\ref{cha:highly-overlapped-signals}, this is especially important for pitches that incorporate vibrato.
@@ -148,7 +143,6 @@ A visualization of the three-way PARAFAC product is depicted in Figure~\ref{fig:
   \label{fig:cpd}
 \end{figure}
 
-% TODO: add parafac product by jeremy
 % we implemented a custom C++ version of the PARAFAC product.
 % we included Parallelisation, SIMD Vectorized and it is Cache Optimized
 %
@@ -334,8 +328,6 @@ by downsampling make the CFT relatively independent of frequency shifts, so
 that, for example, the output patch of a single sinusoidal sweep is mainly
 influenced by the sweep rate.
 
-% TODO: add complexity analysis and plot maybe?
-
 \subsection{Signal Separation}
 Now, let us assume that the observed waveform is actually the sum
 of~$K$ underlying components~$\{ \tilde{s}_{k}\} _{k=1,\dots,K}$.
@@ -389,8 +381,6 @@ We also experimented with other two and three-factor combinations but never got 
 \caption{Visualization of the Common Fate factorization model (CFM).}
 \label{fig:cfm}
 \end{figure}
-
-% TODO: All patches are independent? Wie passt das zusammen?
 
 Learning those parameters can be achieved using the non-negative
 tensor factorization (see e.g.~\cite{cichoki09,ozerov12,smaragdis14}
@@ -499,7 +489,7 @@ The results of CFMM indicate that the complex CFT lead to better results. NMF di
 \section{Common Fate Model for Lead Accompaniment Separation using Deep Neural Network}%
 \label{sec:cft_for_lead_accompaniment_separation}
 
-\marginpar{This section is original work being done as part of the \emph{STO1} and \emph{STO2} submission for the SiSEC 2016~\cite{sisec16}. Part of the literature overview is take from~\cite{rafii}.}
+\marginpar{This section is original work being done as part of the \emph{STO1} and \emph{STO2} submission for the SiSEC 2016~\cite{sisec16}. Part of the literature overview is taken from~\cite{rafii}.}
 
 In the previous section, we showed that the common fate model is suitable to separate highly overlapped signals based on their spatial-temporal modulation texture.
 In this section, I want to show how this method can be extended for the application of lead and accompaniment separation.
@@ -663,14 +653,13 @@ This is even more true considering that IBM is not the best upper bound for sepa
 \subsection{Evaluation Website}
 \label{ssec:evaluation Website}
 
-% TODO: Web Audio API + cite
-For more details and the ability for playback of the estimates, I refer to the dedicated interactive website that I built as part of my organizational help for SiSEC\footnote{\url{http://www.sisec17.audiolabs-erlangen.de}}.
+For more details and the ability for playback of the estimates, we refer to the dedicated interactive website that I built as part of my organizational help for SiSEC\footnote{\url{http://www.sisec17.audiolabs-erlangen.de}}.
 In fact, for the first time, interested researchers are now able to listen to over 10000 stimuli from all participating systems.
 This was made possible through modern JavaScript technologies like the Web Audio API to interactively assess source separation results in the browser.
 For each track, separation results are provided as well as the objective BSSeval scores, all of the data is reproducible and was made available in~\cite{oss_sisecwebsite}.
 Figure~\ref{fig:sisec_website} depicts a screenshot of the website.
 The objective scores are depicted as an interactive matrix where users are able to sort the results for each track an each system interactively by the the source of interest.
-Clicking on one rectangles in the heatmap opens the interactive player that allows to simultaneously playback the separated sources including changing the volume of each source.
+Clicking on one rectangles in the heatmap, opens the interactive player that allows to simultaneously playback the separated sources including changing the volume of each source.
 
 \begin{figure}[t]
 \centering
@@ -701,5 +690,3 @@ Even though the CFT significantly increases the input size (due to its redundanc
 \par
 The results of the best performing model were submitted to SiSEC 2016, were we scored among the top three participating research teams.
 In this vein, I presented interactive evaluation tools, developed for SiSEC, that allows to interactively assess the performance of separation systems both, objectively and subjectively.
-
-% TODO: Combinations of DNNs and Factorization models are not done: ~\cite{vu16, leroux15}

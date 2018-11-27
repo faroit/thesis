@@ -39,10 +39,10 @@ Bosch et al. proposed to separate the lead instrument using a musical score \cit
 \par
 Vaneph et al. proposed a framework for vocal isolation to help spectral editing \cite{vaneph16}. They first used a voice activity detection process based on a deep learning technique \cite{Leglaive15}. Then, they used pitch tracking to detect the melodic line of the vocal and used it to separate the vocal and background, allowing a user to provide manual annotations when necessary.
 
-\section{F0 variation informed Separation}
+\section{F0 Variation Informed Separation}
 \label{sub:frequency_modulation}
 
-\marginpar{This section is based on the work that has been submitted in 2014 and together with my collegue Stefan Bayer ~\cite{stoeter14}. The publication is based on my original idea.}
+\marginpar{This section is based on the work published in 2014 together with my collegue Stefan Bayer ~\cite{stoeter14}. The publication is based on my original idea.}
 
 Frequency modulation caused by vibrato is a very common playing style for string instruments but also for woodwind and brass instruments.
 Vibrato is an effect that is well studied especially in musicology, for more information the reader is referred to the overview given in the Section~\ref{sub:time-variant-audio-signals}.
@@ -93,6 +93,8 @@ In this work, the time-warping was done globally over the full lengths of the
 signals under consideration. The globally time-warped sample sequence
 was then used in the further processing steps. In Figure~\ref{fig:timewarptime} we show the results of the warping process in the time domain. \\
 
+The use of time variable rate sampling was first proposed by~\cite{wulich92} which used this method to analyze FM signals.
+
 A similar approach using frequency modulation to separate a harmonic
 source from a mixture was proposed in \cite{wang95}. Here the
 individual lines are demodulated to the base band using a combined frequency
@@ -101,11 +103,6 @@ the absolute instantaneous frequency for every harmonic line has to be known
 instead of a relative frequency that is common to all harmonic lines of a single
 source. This relative frequency might be obtained easier than its
 absolute value for a mixed signal. Secondly every harmonic line has to be individually frequency demodulated while in our approach the full signal is frequency demodulated in one algorithmic step.\\
-
-% TODO:
-% On the plus side is that our approach does reduce the quality of the recording
-% from~\cite{wang94}:
-% > Additionally, frequency components near f s =2, where f s is taken to be the average sampling rate, will be aliased when the sampling rate decreases.
 
 \subsection{Separation} % (fold)
 \label{sub:pitch_variation_informed_source_separation}
@@ -117,8 +114,7 @@ For each source the warp contour needs to be calculated.
 The mixture is then warped with F0 variation estimates of source 1 (d) and source 2 (e). 
 The actual separation/filtering of the sources is then done by using NMF which is not shown here. 
 To separate the components from the warped mixture we used NMF on a STFT computed with a long DFT (about 0.5 s). 
-% TODO: cite SFM
-We applied NMF fully unsupervised clustering components based on tonality of $\textbf{W}$ by using a spectral flatness measure. The separated signals (f) and (g) then need to be warped back into the original time domain resulting in (h) and (i).
+We applied NMF fully unsupervised clustering components based on tonality of $\textbf{W}$ by using a spectral flatness measure~\cite{gray74}. The separated signals (f) and (g) then need to be warped back into the original time domain resulting in (h) and (i).
 
 It is important to clarify that this approach would not be able to separate two modulating instruments playing in unison without having prior knowledge about the individual modulation functions. Although a F0 variation estimate might be difficult to achieve in a mixture, our approach shows that such a system could work if that estimate is accurate.
 
@@ -295,7 +291,7 @@ The full procedure is depicted in Figure~\ref{fig:warp_sisec_demo}.
 \multicolumn{2}{c}{\includegraphics[width=65mm]{Chapters/05_Separation_Known/warp-demo/Estimate.pdf} }\\
 \multicolumn{2}{c}{(g) Vocals Estimate}
 \end{tabular}
-\caption{Examples of a F0 variation informed separation of the audio track \emph{Tamy - Que Pena Tanto Fa}.}%
+\caption{Examples of a F0 variation informed separation of the audio track \emph{Tamy - Que Pena Tanto Fa} form the (MASS) dataset~\cite{MTGMASSdb}.}%
 \label{fig:warp_sisec_demo}
 \end{figure}
 

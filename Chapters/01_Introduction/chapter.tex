@@ -52,31 +52,31 @@ This thesis comes with five main contributions:
 \item I review scenarios of time and frequency overlapped audio sources.
 I designed a novel scenario where instruments are highly overlapped (unison) but I also consider known scenarios for speech and music.
 In this unison scenario, I review, how slowly varying tempo-spectral modulations, caused e.g. by vibrato, can be utilized for separation and source count estimation of highly overlapped signals.
-Furthermore I show how these scenarios can stimulate new research directions to \emph{analyze} and \emph{process} such signals.\\
+Furthermore I show how these scenarios can stimulate new research directions to \emph{analyze} and \emph{process} such signals.
 
 \item I designed two novel methods to \emph{separate} unison instrument mixtures: one is informed by an estimate of the fundamental frequency variation.
 The other is unsupervised, inspired by the way how humans segregate time-varying sources.
 Along the way, I also proposed an post-processing to improve \(F0\) estimates based on the same principles.
 Next, I study how the observations from the unison scenario can be transferred to real world scenarios such as lead accompaniment separation by applying the deep learning framework.
-\\
 
 \item I conducted two detailed experimental studies to assess how humans perceive highly overlapped mixtures and how they perform when asked to estimate the number of sources.
 In these studies I focussed on scenarios of overlapped speech as well as polyphonic music recordings.
 Both studies confirmed earlier studies, indicating that humans can only correctly estimate the number of concurrent sources up to three.
-I \\
 
 \item We designed a method to automatically estimate the maximum number of concurrent speakers. This method uses deep neural networks to addresses ``cocktail party'' like environments.
 Furthermore, I show that this model reached state-of-the art performance when compared to other models and also supersedes human performance when compared with the results of my subjective listening experiments.
-Finally I revealed the relation between slow modulations in speech and the ability of a model of \emph{learning to count}.\\
+Finally I revealed the relation between slow modulations in speech and the ability of a model of \emph{learning to count}.
 
-\item As a practical contribution, I developed tools to assess the quality of separation system and co-organized the international source separation evaluation campaign (SiSEC) to improve sustainability and reproducibility for the research community.
+\item As a practical contribution, I developed tools to assess the quality of separation system by means of interactive web applications. 
+I helped to create publicly available datasets for separation and \(F0\) estimation.
+Furthermore, I  co-organized the international source separation evaluation campaign (SiSEC) to improve sustainability and reproducibility for the research community.
 \end{enumerate}
 
 This thesis is based on the previously listed publications. As such, they are cited repeatedly throughout this thesis. For readability reasons, if a section is mainly based on one of these publication, a remark is added at side of the page, instead of citing the same publication exhaustively. Furthermore, it should be noted ––– if not stated otherwise ---  that these contributions in the publications are based on the ideas and research of the author of this thesis.
 
 \section{Structure of this Thesis}
 
-The thesis and its relevant linked publications are organized into 6 main chapters.
+The thesis and its relevant linked publications are organized into six main chapters.
 \begin{description}
   \item[Chapter~\ref{cha:fundamentals}] explains the fundamental concepts of audio signals (Section~\ref{sec:specifics-of-audio-signals}) as well as sources and overlapped sounds (Section~\ref{sources-and-mixtures}), relevant for the remainder of this thesis.
   This includes commonly used transformations and signal representations for the task of source separation and source count estimation.

@@ -185,7 +185,7 @@
 % }
 % ****************************************************************************************************
 \usepackage{setspace}
-\usepackage{minted} % Syntax highlighting
+\usepackage[newfloat]{minted}
 \usemintedstyle{tango}
 \definecolor{tango-bg}{HTML}{F8F8F8}
 
@@ -350,3 +350,8 @@
 %     \raggedright\spacedallcaps{#1}%
 %     \end{minipage}%
 % }
+
+\usepackage{caption}
+
+\newenvironment{code}{\captionsetup{type=listing}}{}
+\SetupFloatingEnvironment{listing}{name=Source Code}
