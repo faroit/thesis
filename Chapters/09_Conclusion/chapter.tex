@@ -6,12 +6,12 @@
 % TODO: datasets
 
 \section{Discussion}
-This thesis built on and contributed to work in the research field of separation and source count estimation of audio mixtures. The methods that were developed throughout this thesis share a common concept: when signals are mixed, we focussed on the overlapping part instead of the non-overlapping part. 
+This thesis built on and contributed to work in the research field of separation and source count estimation of audio mixtures. The methods that were developed throughout this thesis share a common concept: when signals are mixed, we focussed on the overlapping part instead of the non-overlapping part.
 This approach allowed us to better observe the characteristics for the task of separation and source count estimation:
 
 \begin{itemize}
   \item In our proposed unison source separation scenario, signals almost entirely overlap in time and frequency which reflect a natural property of many real-world audio signals.
-  \item For the task of source count estimation, we focused on the overlap to learn a model that directly infers counts or \emph{counting without detection}. The motivation is in the tradition of~\cite{scheirer99}, who proposed techniques for \emph{understanding without separation}.
+  \item For the task of source count estimation, we focused on the overlap to learn a model that directly infers counts, i.e. proposed \emph{counting without detection}. The motivation is in the tradition of~\cite{scheirer99}, who proposed techniques for \emph{understanding without separation}.
 \end{itemize}
 
 The combination of separation and count estimation is important since it allows to build a real-world separation system, where the number of sources is not known in advance.
@@ -19,20 +19,20 @@ On this way, we were faced with several limitations and challenges:
 \par
 When we developed time warping (Chapter~\ref{cha:known}) to separate audio signals based on their estimated \(F0\) trajectory, we optimized and tuned the method on a handful of music tracks, since a large test dataset was not available. When we then applied it on the (back then) new DSD100~\cite{liutkus17} dataset, several limitations became apparent which is why the overall performance was not satisfying. For example, one limitation of the method is that it relies too much on a precise and robust estimate of the \(F0\) trajectory and its voice activity. When we included a data-driven activity method in the system, the performance improved.
 \par
-When it comes to source separation, at the time our research was conducted and we proposed the Common Fate Model (Section~\ref{sec:the_common_fate_model_for_unison_mixtures}), factorization models were considered to be state-of-the-art.
+When it comes to source separation, at the time our research was conducted and we proposed the Common Fate Model (Section~\ref{sec:the_common_fate_model_for_unison_mixtures}), factorization models were the state-of-the-art.
 However, for the scenario of music separation, it turned out that the Common Fate Model still required a significant amount of additional handcrafted engineering.
 By 2016, other researchers showed in~\cite{uhlich15, nugraha162} that supervised learning methods for separation led to huge improvements. This induced us to successfully evaluate such as system in combination with our proposed Common Fate Representation (Section~\ref{sec:cft_for_lead_accompaniment_separation}).
 It shows that such specialized representation, designed to capture general modulation patterns, is still useful in data-driven methods.
 Our research marks an step towards multidimensional representations, inspired by human perception, when it comes to highly overlapped, modulated mixtures. Work by other researchers built upon our first findings and further increased the perceptual aspect of the representation by introducing a multi-resolution version of the CFT~\cite{seetharaman17, pishdadian18}.
 \par
-In our count estimation studies on speech and music (Chapter~\ref{cha:countanalysis}), we showed that humans follow a `one-two-three-many` strategy: we can correctly inferring small quantities up to four, but we have problems to extrapolate to higher numbers.
+In our count estimation studies on speech and music (Chapter~\ref{cha:countanalysis}), we showed that humans follow a `one-two-three-many` strategy: we can correctly infer small quantities up to four, but we have problems to extrapolate to higher numbers.
 We showed that our proposed CountNet model (Chapter~\ref{cha:countnet}) improved state-of-the-art and even reached super-human performance by shifting the performance boundary beyond four sources. In the ablations studies (Section~\ref{sec:ablation}), we revealed that modulations also played an essential role in CountNet when estimating the number of speakers.
 The network showed a significant dependency on different syllable rate. This indicates that CountNet may not have learned the actual difference between two and three speakers but instead took a ``shortcut'' and learned the distinct modulation patterns of our language.
-This achievement, however, does not mean that CountNet can generalize to examples outside of the used datasets or languages. 
+This achievement, however, does not mean that CountNet can generalize to examples outside of the used datasets or languages. Such generalization properties should be properly investigated further.
 \par
 This work covers many different techniques ranging from advanced audio signal processing, tensor factorization, up to recent supervised machine learning methods such as deep learning.
-When I started this thesis, the research landscape for source separation methods was built upon the expertise from a decade of “classical” signal processing.
-With the success of deep learning, a paradigm shift took place that enabled many state-of-the-art results in the audio domain. However, adapting these techniques to work in the audio domain required a lot of work (especially in creating suitable data sets) but also dropping established ideas from so-called “classical” signal processing.
+When I started this thesis, the research landscape for source separation methods was built upon the expertise from a decade of signal processing.
+With the success of deep learning, a paradigm shift took place that enabled many improvements with respect to state-of-the-art in the audio domain. However, adapting deep learning techniques to work in the audio domain is far from trivial. First, it requires a significant amount of work in creating suitable data sets. Second, it still takes expertise in so-called ``classical'' signal processing for such models to work correctly.
 
 \section{Perspectives}
 
@@ -47,36 +47,36 @@ We can imagine that generative models could explore a modulation space, e.g. to 
 
 Recall that the Common Fate Transform proposed in Section~\ref{sub:CFT}, led to increased redundancy, introduced by its aliasing components, which in turn, increases the complexity of the training.
 Interestingly, preliminary studies suggested that removal of the (redundant) components did not improve the performance.
-Future work could reduce this redundancy of the CFT, making it more compact, at the same time, still being able to yield similar results.
-In the context of deep learning, it remains to be studied if redundancy helps or hinders supervised learning based separation systems.
-Taking the raw waveform as input features~\cite{Dieleman14, oord16} is a promising direction of research (as opposed to phase aware representations) but requires large amounts of data since the DNN needs first to learn a filterbank representation.
+Future work could lessen this redundancy of the CFT, making it more compact, while at the same time yielding similar separation results.
+In the context of deep learning, it remains unclear if redundancy helps or hinders supervised learning based separation systems.
+Taking the raw waveform as input features~\cite{Dieleman14, oord16} is a promising direction of research (as opposed to phase aware representations) but it requires large amounts of data since the DNN needs first to learn a filterbank representation.
+Such large amounts are not yet publicly available for music processing.
 
 \subsection*{Deep Common Fate}
 
-% TODO: Combinations of DNNs and Factorization models are not done: ~\cite{vu16, leroux15}
-
-The combination of more powerful DNN architectures such as convolutional neural networks (CNN) with Common Fate Transform (CFT) is a promising route for future work. 
-This is especially interesting because it would require network architectures to be specifically designed to deal with higher dimensional data such as the four-dimensional CFT. I can imagine applying recent architecture designs such as multidimensional convolutional networks or capsule networks~\cite{sabour17}. 
+The combination of more powerful DNN architectures such as convolutional neural networks (CNN) with Common Fate Transform (CFT) is a promising route for future work.
+This is especially interesting because it would require network architectures to be specifically designed to deal with higher dimensional data such as the four-dimensional CFT. I can imagine applying recent architecture designs such as multidimensional convolutional networks or capsule networks~\cite{sabour17}.
 Furthermore, it is to be seen if learning based methods can directly utilize modulations from raw data.
 
-\subsection*{Applications for Crowd Sourced Count Estimation}
+\subsection*{Applications for Crowd Sources Count Estimation}
 
 In our experiments to study the human ability to estimate the number of sources (Section~\ref{cha:countanalysis}), we made use of recent web technologies such as the \textsc{Web Audio API} to enable crowdsourced listening experiments. As current web audio technologies mature we will see many more web-based experiment and evaluation tools coming.
-With more data being annotated on source count estimates, we can imagine using this data to build an auditory model that approximates the perception of estimating counts.
+With more data being annotated on human source count estimates, we can imagine using this data to build an auditory model that approximates the perception of estimating counts.
 With such a model one may further improve lossy compression for object-based music recordings such as audio coding~\cite{herre12} by only transmitting a ``perceivable'' number of sources.
 
 \subsection*{Count Estimation as an Evaluation Measure for Separation}
 
-The recent results SiSEC 2018~\cite{stoeter18sisec}\footnote{\url{See https://sisec18.unmix.app}} indicated that for the first time since the advent of source separation, methods were proposed performing comparably to the oracle separation methods.
-This success was made possible with better deep learning models such as as~\cite{takahashi17} and the availability of data. 
+The recent results on SiSEC 2018~\cite{stoeter18sisec}\footnote{\url{See https://sisec18.unmix.app}} indicated that for the first time since the advent of source separation, methods were proposed that perform comparably to the oracle separation methods.
+This success was made possible with better deep learning models such as as~\cite{takahashi17} and the availability of data.
 The future of how to improve music source separation is unclear. Possible directions are to enhance the efficiency of the learning architectures or to develop new cost functions which better reflect human perception.
-Furthermore, improving the evaluation metrics is another driving force for better separation algorithms. Unfortunately for separation, humans cannot easily evaluate the audio quality without a reference, which makes annotations cumbersome and expensive. 
-Therefore a simpler task such as count estimation could serve as an intermediate evaluation metric which is easier to annotate and does not require a reference. Then a model such as CountNet could approximate the human results and in turn, be used (hence differentiable) inside the cost function of other separation models.
+Furthermore, improving the evaluation metrics is another driving force for better separation algorithms. Unfortunately for separation, humans cannot easily evaluate the audio quality without a reference, which makes annotations cumbersome and expensive.
+Therefore a simpler task such as count estimation could serve as an intermediate evaluation metric which is easier to annotate and does not require a reference. Then, a model such as CountNet could approximate the human results and in turn, be used (hence differentiable) inside the cost function of other separation models.
 
 \subsection*{Teaching CountNet to Extrapolate}
 
-CountNet was developed to address the count estimation task in both, a classification or a regression framework. 
-However, counts are often not bounded to the maximum number, which would require to extrapolate and not just interpolate.
-CountNet, as it was proposed, is, therefore, unable to estimate more than ten speakers when trained using the same maximum number. 
-This is related to learn the summation of two random numbers, known as the ``adding problem''~\cite{Hochreiter97} which is challenging benchmark in machine learning. 
+CountNet was developed to address the count estimation task in both, a classification or a regression framework.
+However, counts are often not bounded to a maximum number, which would require to extrapolate and not just interpolate.
+CountNet, as it was proposed, is unable to estimate more than ten speakers when trained using the same maximum number.
+This is related to learning the summation of two random numbers, known as the ``adding problem''~\cite{Hochreiter97} which is a challenging benchmark in machine learning.
 Only very recently, the machine learning community proposed a solution to this problem (See \cite{trask18}).
+With these advances, extrapolating counts there seems like a natural follow-up to the work presented here.
