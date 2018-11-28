@@ -21,7 +21,8 @@ To exploit these modulations, we develop a method based on time warping informed
 For cases where such estimates are not available, we present an unsupervised model, inspired by the way humans group time-varying sources (common fate).
 This contribution comes with a novel representation that improves separation for overlapped and modulated sources on unison mixtures but also improves vocal and accompaniment separation when used as an input for a DNN model.
 Then, we focus on estimating the number of sources in a mixture, which is important for real-world scenarios.
-Most existing approaches rely on non-overlapping segments to facilitate ``counting by detection'' but with a higher amount of overlap, instead, we consider the problem of directly inferring a count.
+Most existing approaches rely on non-overlapping segments to facilitate ``counting by detection''.
+In the presence of more overlap, however, we consider the problem of directly inferring a count.
 Our work on count estimation was motivated by a study on how humans can solve this task, which lead us to conduct listening experiments confirming that humans are only able to estimate up to four sources correctly.
 To answer the question of whether machines can perform similarly, we present a DNN architecture, trained to estimate the number of concurrent speakers in a cocktail party scenario of up to ten speakers. 
 Our results show improvements compared to other methods, and the model even outperformed humans on the same task.
