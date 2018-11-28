@@ -3,11 +3,15 @@
 
 In the previous chapter, we presented the fundamentals of highly overlapped signals.
 To study these signals, suitable and controlled data is of paramount importance since many methods rely on audio datasets for development and evaluation.
-Often suitable audio material is not publicly available which is why we created our own data.
+Often, suitable audio material is not publicly available which is why we created our own data.
+In the following sections, we present three data sets which we helped creating with the aim to fill this gap and which will be used in subsequent experiments.
 
-\section{Synthetic Mixtures}
+\section{Unison Mixtures}
+\label{sec:unison_dataset}
 
-Synthetic mixtures are mixtures that are created from single source sounds, e.g., through (often random) summation. 
+\marginpar{This subsection is based on~\cite{stoeter14} where the scenario of unsion mixtures was first introduced.}
+
+Synthetic mixtures are created from single source sounds, e.g., through (often random) summation. 
 In speech, it is common to mix clean speech and noise~\cite{varga93} or different clean speech signals such as~\cite{garofolo93} to generate mixtures.
 By contrast, the conversational aspect of human-to-human communication is lost.
 Compared to speech, musical content usually does share familiar orchestration and can hardly be superimposed randomly, and the summing of isolated random notes from musical instrument databases does not reflect musical performances.
@@ -15,33 +19,28 @@ On the positive side, there are use-cases for single note datasets such as for e
 Furthermore, single note datasets allow to use the data to synthesize musical score as long as the recordings have enough variance of expressions.
 It also allows to quickly generate a large amount of mixtures using randomly permuted mixtures, fostering applications in machine learning.
 
-\subsection{Unison Mixtures}
-\label{sec:unison_dataset}
-
-\marginpar{This subsection is based on~\cite{stoeter14} where the scenario of unsion mixtures was first introduced.}
-
 As an exception compared to other music scenarios, when all instruments play~\emph{in unison}, single note datasets are appropriate to approximate real mixtures:
 
 \begin{itemize}
   \item A random summation of multiple instruments playing the same note does not necessarily differ from realistic unison mixture.
-  \item When notes were played with vibrato, having access to the individual modulation patterns can help to study the influence of modulations in systematic fashion.
+  \item When notes are played with vibrato, having access to the individual modulation patterns can help to study the influence of modulations in a systematic fashion.
   \item Unison mixtures are part of many classical compositions, to extend the timbre of a note.
 \end{itemize}
 
 \par
-In order to create such a dataset, we could use existing single note datasets such as the \emph{Univ. of Iowa Musical Instrument Sample Database}\footnote{\url{http://theremin.music.uiowa.edu/index.htm}}, created from acoustic recording sessions.
+In order to create a dataset, we could use existing single note datasets such as the \emph{Univ. of Iowa Musical Instrument Sample Database}\footnote{\url{http://theremin.music.uiowa.edu/index.htm}}, created from acoustic recording sessions.
 However, to better study the influence of vibrato we require extended control over certain parameters such as: note duration, vibrato duration, exact fundamental frequency, vibrato rate, vibrato extend, reproducibility, loudness or expression.
 \par
-Also, it is important to note that vibrato techniques differ between instruments: whereas the English horn and the flute only produce a very subtle modulation, the violin and tenor sax are capable of powerful frequency modulations with a higher modulation frequency as well as a higher modulation index~\cite{gilbert05}.
+Also, it is important to note that vibrato techniques differ between instruments: whereas the English horn and the flute only produce a very subtle modulation, the violin and tenor sax are capable of powerful frequency modulations~\cite{gilbert05}.
 \par
-We therefore generated the notes using a state-of-the-art software sampler \textsc{Vienna Symphonic Library}\footnote{\url{https://vsl.co.at}} which allows us to control the parameters such as the vibrato.
+We therefore generated the notes using a software sampler \textsc{Vienna Symphonic Library}\footnote{\url{https://vsl.co.at}} which allows us to control the parameters such as the vibrato.
 All our test stimuli have a duration of three seconds.
 Items were equalized in loudness by using an iterative calculation of the loudness algorithm of the time varying Zwicker model~\cite{zwicker13}. 
 We used an implementation released in~\cite{genesis12}. 
 \par
 We rendered 29 notes of C4, resulting in 841 unique unison instrument mixtures per pitch class.
 An except of the instruments is listed in Table~\ref{tab:testset}.
-The dataset is available under a Creative Commons License~\cite{oss_unison}.
+The dataset is available from~\cite{oss_unison}.
 
 \begin{table}
 \begin{center}
@@ -114,11 +113,7 @@ In the case of two instruments playing in unison the average WDO is \(0.65\), in
 % \end{tikzpicture}
 % \end{figure}
 
-\section{Real Mixtures}
-
-Synthetic data sets are a great tool for systematic evaluations. However, in real-world scenarios, additional components such as recording conditions play an essential role which may degrade the algorithm’s performance. In the following sections, we present two data sets which aim to fill this gap and which will be used in subsequent experiments.
-
-\subsection{High Resolution Vibrato}
+\section{High Resolution Vibrato}
 
 \marginpar{This subsection is based on the work that has been published in~\cite{stoeter15acm} together with my former student Michael Müller who helped with the experiments.}
 
@@ -136,7 +131,7 @@ If the $F0$ varies over time, the complexity increases, and it is also more diff
 For speech signals, an EGG device (also known as laryngograph) captures the excitation of the human vocal tract. 
 This signal is then processed by an $F0$ estimator to generate the ground truth. 
 Such a method is accepted in published research because the EGG signal is considered to be easier to process than speech. 
-The retrieved F0-trajectory based on the EGG signal is easier to process and the generated annotations are considered as a very close ground truth~\cite{pirker11, babacan13}.
+The retrieved F0-trajectory based on the EGG signal is easier to process and the generated annotations are considered as a good ground truth~\cite{pirker11, babacan13}.
 Motivated by this, we propose a new data set for musical instruments where we recorded a violin cello with extra sensors on the fretboard in addition to audio and video.
 We made use of multiple sensors to capture the most relevant processes involved in creating time-varying output signals as depicted in Figure~\ref{fig:teaser_hdf0}.
 We included sensor recordings capturing the finger position on the fingerboard which is converted into an instantaneous frequency estimate.
@@ -156,13 +151,13 @@ The derived motion estimates shows similarity to the EGG signals used in speech.
 The slowest feature rate of the set is 750 Hz, which enables to evaluate $F0$ estimators with high temporal resolution. 
 \par
 In~\cite{stoeter15acm}, we also showed how to derive high resolution $F0$ contours from the data which can be used to improve $F0$ estimators or help to analyze playing styles in recordings, usually relying on conventional $F0$ estimators based on the audio signal~\cite{mellody2000time}. 
-By using sensor data samples from our test set researchers get more robust and detailed data to compute features like mean vibrato frequency. 
+By using sensor data samples from our test set, researchers get more robust and detailed data to compute features like mean vibrato frequency. 
 Further, it can be used for synthesizers to add a natural vibrato by using the sensor data as modulation source.
 \par
 The resulting test set yields in $148$ recorded notes after removal of some notes due to errors in the sensor recordings.
 By making this dataset public domain~\cite{oss_muserc} and including the raw recordings, we believe other researchers can benefit from the data and possibly generate their own derived data.
 
-\subsection{Multitrack Data}
+\section{Multitrack Data}
 
 \marginpar{This subsection is based on parts of the work that has been published in~\cite{liutkus17, rafii}. The parts that are cited here were co-authored by me.}
 
@@ -174,11 +169,11 @@ For professionally-produced or recorded music, the separated sources are often e
 Indeed, they are considered amongst the most precious assets of right holders, and it is challenging to find isolated vocals and accompaniment of professional bands that are freely available for the research community to work on without copyright infringements.
 % zafar end
 In this context, the development of datasets for music separation was a long process. 
-In early times, it was common for researchers to test their methods on some private data. 
+In early times, it was common for researchers to test their methods on private data. 
 To the best of our knowledge, the first attempt at releasing a public dataset for evaluating vocals and accompaniment separation was the Music Audio Signal Separation (MASS) dataset~\cite{MTGMASSdb}.
 It strongly boosted research in the area, even if it only featured 2.5 minutes of data. The breakthrough was made possible by some artists which made their mixed-down audio, as well as its constitutive stems (unmixed tracks), available under open licenses such as Creative Commons, or authorized scientists to use their material for research.
 % 
-The MASS dataset then formed the core content of the early Signal Separation Evaluation Campaigns (SiSEC) \cite{vincent09}. 
+The MASS dataset formed the core content of the early Signal Separation Evaluation Campaigns (SiSEC) \cite{vincent09}. 
 For a long time, vocals separation methods were very demanding computationally and it was already considered extremely challenging to separate excerpts of only a few seconds.
 
 In the following years, new datasets were proposed that improved over the MASS dataset in many directions. 

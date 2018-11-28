@@ -3,8 +3,8 @@
 %*******************************************************
 \pdfbookmark[1]{Publications}{publications}
 \chapter*{Publications}
-This might come in handy for PhD theses: some ideas and figures have appeared previously in the following publications:
-
+Chapters 4-8 of this thesis is mainly build on the following publications that I published or submitted during my time as a doctoral student:
+% TODO: note zafar
 %\noindent Put your publications from the thesis here. The packages \texttt{multibib} or \texttt{bibtopic} etc. can be used to handle multiple different bibliographies in your document.
 
 % \boldnames: etoolbox-list of names to typeset bold in \printbibiliography
@@ -24,7 +24,7 @@ This might come in handy for PhD theses: some ideas and figures have appeared pr
 \xapptobibmacro{name:last-first}{\endgroup}{}{}
 \xapptobibmacro{name:delim}{\endgroup}{}{}
 
-\DeclareNameAlias{default}{last-first/first-last}
+% \DeclareNameAlias{default}{last-first/first-last}
 
 \DeclareFieldFormat{labelnumberwidth}{#1\adddot}
 \newlength{\periodwidth}
@@ -54,7 +54,6 @@ This might come in handy for PhD theses: some ideas and figures have appeared pr
 
 \newrefcontext[sorting=ynt]
 \section*{Main Publications}
-Chapters~\cref{cha:datasets, cha:known, cha:unknown, cha:countanalysis, cha:countnet} of this thesis is mainly build on the following publications that I published or submitted during my time as a doctoral student:
 \begin{refsection}[ownref.bib]%
 \nocite{*}
 \forcsvlist{\listadd\boldnames}{{Stöter, Fabian-Robert}, {Stöter, F.R.}, {F.-R. St{\"o}ter}, {F.-R. Stöter}, {St{\"o}ter, F.-R.}}

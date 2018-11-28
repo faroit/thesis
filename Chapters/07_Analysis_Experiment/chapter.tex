@@ -7,7 +7,7 @@
 %
 The separation of mixtures into its original audio sources, as presented in the previous chapters, is a challenging task.
 Furthermore, source separation is difficult to evaluate, and researchers compare to a known reference even though this does not reflect how humans separate mixtures.
-It has long been a research topic to answer the question \emph{if} humans can separate, by fully extracting the desired source or if we can focus our attention on one source --- segregate them~\cite{bregman}.
+It has long been a research topic to answer the question \emph{if} humans can separate, by fully extracting the desired source or if we can focus our attention on one source --- segregate them~\cite{bregman90}.
 Moreover, despite recent progress in auditory science~\cite{carlyon04, koelsch05, rabinowitz13}, research still is investigating how separation takes place in the auditory cortex or other parts of the human brain.
 One thing, however, we can assess directly is if humans can reliably detect the number of sources in a mixture of several sources.
 \par
@@ -21,12 +21,11 @@ He mentioned in~\cite{jevons1871}:
 \end{quote}
 
 This ``one-two-three-many'' hypothesis was a fundamental observation.
-The fact that we can directly infer the numerosity of small numbers of objects, up to about four, is also known as \emph{subitizing}~\cite{kaufman49, burr10}.
-I refer to this strategy as ``direct count estimation''.
+The fact that we can directly infer the numerosity of small numbers of objects, up to about four, is also known as \emph{subitizing}~\cite{kaufman49, burr10}. We refer to this strategy as ``direct count estimation''.
 Concerning our hearing, there are indications that the auditory system is capable of subitizing audio sources~\cite{hoopen79}.
 And surprisingly, as shown in~\cite{kashino96, kawashima15}, humans share the same limitations of correctly estimate up to three simultaneously active speakers.
 \par
-In this chapter, I present two experiments contributing to this interesting field of research.
+In this chapter, we present two experiments contributing to this interesting field of research.
 The first experiment (Section~\ref{sec:ismir}) addresses the question if the number of instruments in polyphonic music are subject to the same limitations.
 In the second contribution (Section~\ref{sec:ismir}) the aim is to verify the findings of and earlier experiment in~\cite{kawashima15} and increase the number of stimuli to be used for comparison of machine learning based count estimations methods
 
@@ -37,7 +36,7 @@ In the second contribution (Section~\ref{sec:ismir}) the aim is to verify the fi
 
 % From ISMIR
 In psychoacoustics, a sequence of sounds grouped by the auditory system is known as an ``auditory stream'' which was coined by Bregman and Campbell in ~\cite{Bregman1971}.
-In the past decades, a lot of experimental work related to ``auditory streams'' has been done~\cite{Bregman1990}.
+In the past decades, a lot of experimental work related to ``auditory streams'' has been done~\cite{bregman90}.
 A majority of these experiments were psychoacoustically motivated, e.~g. the stimuli used were mostly of simple type like sinusoids or noises.
 Especially from a psychoacoustic point of view, music is a very complex sound signal which contains high-level information (e.~g. instrumentation and song lyrics).
 When listening to music, this high-level information is also mentally processed by humans.
@@ -56,7 +55,6 @@ Later in 1996, Reuter~\cite{reuter96} has analyzed how combinations of different
 % However, none of them is motivated to model the perceived number of musical sources. Kashino et. al \cite{kashino1995} addresses the questions for concurrent speakers in a ``cocktail party'' like environment and found an upper limit of three voices humans can perceive. When the focus shifts to musical instruments as sources, research has to take concepts from musicology into account. Huron \cite{huron89} was the first who addressed this question in 1989 at a musically meaningful level. Huron asked for the number of voices within a piece of music, where by voices in musicology one can define it as a line of sound or note events (See~\cite{Cambouropoulos2008} for further definitions). Huron determined by experimental results that the number of correctly identified voices is up to three.
 We wanted to take a first step by designing an experiment where we focus on polyphonic music of inhomogeneous timbre, where the question is: What is the number of instruments humans can estimate correctly?
 Several results are addressed in this work include a possible upper limit of the number of perceived instruments, but also if one can see significant differences in performance of musicians compared to non-musicians.
-Such results can be used in auditory modeling or as a pre-processing step for source separation algorithms.
 
 \subsection{Experiment}
 For the purpose of gaining more knowledge in understanding the human perception of multiple present instruments, an experiment was conducted. Huron selected voices from organ pieces only. We wanted to address the more general case where voices are played by different instruments.
@@ -75,14 +73,14 @@ The annotated MIDI files from \cite{rwc} were converted into piano roll represen
 Further the RWC files were filtered a priori to exclude items dominated by electronic instruments or singing voice. Table~\ref{tab:items} presents the selected 12 items representing pairs of one to six simultaneously present instruments. Each item is around seven seconds long. By cutting at note offsets we varied the lengths of the items to make it semantically more meaningful. Six items (notated as RM-C***) belong to the classical western music genre whereas the other items are of mixed genre.
 \par
 The MIDI excerpts were humanized and rendered by a sequencer software utilizing state-of-the-art commercial sampling products.
-The process is similar to the dataset creation mentioned in Section~\ref{unison_dataset}.
+The process is similar to the dataset creation mentioned in Section~\ref{sec:unison_dataset}.
 The rendered files were processed with convolutive reverb to match the original recordings. 
 In informal listening tests the quality of the renderings was evaluated. 
 In addition, participants did not give negative feedback about the artificialness of the items during the laboratory experiment. Additionally a loudness normalization was applied according to EBU-R128\cite{EBU2011}. To avoid spatial cues the files were downmixed to mono at 16~bit/44.1~kHz.
 
 \begin{table}[htb]
 \center
-\small
+\scriptsize
 \begin{tabular}{cr@{.}lr@{.}lp{6cm}c}
 \toprule[1.5pt]
 RWC~ID & \multicolumn{2}{c}{Start~[s]} & \multicolumn{2}{c}{Dur.~[s]} & Instrumentation & \(k\)\\
@@ -153,7 +151,7 @@ The independent variable $I(i)$ is the number of instruments of one music item $
 The primary statistical null hypothesis ($H_1$) is stated in that the means of $\Delta$ and $E$\footnote{The fact that $E$ is dichotomous will lead to a mean value that equals to a probability of a binary distribution.}, grouped by the number of instruments, do not differ significantly. As we also want to test the between-groups performance of musicians versus non-musicians, we introduce another dependent variable $M(s) \in \{0,1\}$ of binary scale. This is stated in a secondary null hypothesis ($H_2$) where the means of $\Delta$ and $E$ are not significantly different between musicians and non-musicians.
 No subjects were screened from the results, although there are two cases where no valid response had been made. Results are grouped by items of $I$ instruments.
 \par
-In general participants tended to perform worse for items with more than two instruments. The probability of correctly counting one instrument was 90.0\% whereas only one person out of 62 gave a correct response for an item with six instruments. In some cases the number of instruments does not correspond to the number of voices for every item. Items where an instrument plays more than one voice and voices which are played by more than one instrument. However most of the chosen instruments are monophonic so in our case this occurred only for items where piano or guitar is present. Also we made sure that the number of total voices did not exceed the maximum number of instruments in that item. Voices being played by more than one instrument are called unison, which is present in G068, that showed surprisingly good results.
+In general participants tended to perform worse for items with more than two instruments. The probability of correctly counting one instrument was 90.0\% whereas only one person out of 62 gave a correct response for an item with six instruments. In some cases the number of instruments does not correspond to the number of voices for every item. Items where an instrument plays more than one voice and voices which are played by more than one instrument. However most of the chosen instruments are monophonic so in our case this occurred only for items where piano or guitar is present. Also we made sure that the number of total voices did not exceed the maximum number of instruments in that item. Voices being played by more than one instrument (unison), which is present in G068, that showed surprisingly good results.
 
 \subsubsection*{Underestimation}
 
@@ -435,7 +433,7 @@ The estimated coefficients, p-values and average marginal effects can be found i
 % \par
 % As expected, participants who play an instrument or do singing ($\textit{Musical} = true$) performed slightly better than non-musicians. According to the average marginal effect their chance of estimating the number of instruments correctly is $6.61\%$ more likely for all stimuli. A similar increase for estimating the number correctly ($4.15\%$) can be seen for participants being a professional in audio ($\textit{Professional} = true$).
 The average marginal effects of $\textit{Num}_{\mathrm{Inst}}$ indicates up to which point humans are able to correctly estimate the number of instruments being played back. The average marginal effect of $\textit{Num}_{\mathrm{Inst}} = 2$ shows that it is $12.93\%$ less likely to estimate correctly when listening to two instruments instead of one instrument. Furthermore, in case of three instruments being played back the probability of estimating the wrong number increases to $20.12\%$. The highly negative average marginal effect of $-0.4481$ for $\textit{Num}_{\mathrm{Inst}} = 4$ indicates that it is very unlikely for humans to estimate the number of instruments correctly compared to estimating the number of one to three instruments. This, we confirmed the results of our laboratory experiment.
-\cite
+\par
 For a detailed analysis of the differences between the Internet experiment and the laboratory experiment in a controlled environment, a second logit regression model was calculated. This logit regression model includes the data of the previous experiment which has responses of 62 participants and also added an additional predictor variable $\textit{Environment}$.
 The model fit output can be found in~\cite{schoeffler13}.
 % escribed in Table~\ref{table:data_both_lm}).
@@ -640,14 +638,7 @@ Surprising was the small number of participants who had to be screened. We exclu
 
 \marginpar{This chapter is based on the work that has been published in 2018~\cite{stoeter19} together with Soumitro Chakrabarty and Emanuël Habets.}
 
-\begin{figure}[htb]
-	\centering
-		\fbox{\includegraphics[width=0.8\textwidth]{Chapters/07_Analysis_Experiment/figures/experiment_ui.png}}
-	\caption{Speaker count estimation experiment user interface.}
-	\label{fig:user_interface_speaker}
-\end{figure}
-
-Humans are excellent in segregating one source from a mixture~\cite{bregman} and tend to use this skill to perceptually segregate speakers before they can estimate a count, as highlighted, e.g.\ in~\cite{kawashima15}.
+Humans are excellent in segregating one source from a mixture~\cite{bregman90} and tend to use this skill to perceptually segregate speakers before they can estimate a count, as highlighted, e.g.\ in~\cite{kawashima15}.
 As shown in~\cite{kashino96, kawashima15} with extensive experiments using Japanese speech samples, humans are able to correctly estimate up to three simultaneously active speakers without using any spatial cues.
 In this experiment we reproduced the experiments conducted in~\cite{kawashima15, kashino96} using stimuli of English speakers.
 Designed to address source separation research, we also modified the question to ask participants for ``the maximum number of concurrent speakers'' in a short excerpt of speech.
@@ -680,6 +671,13 @@ This procedure is similar to~\cite{mesaros17} used to label the data.
 The Dataset is available for download~\cite{oss_libricount}.
 
 \subsection{Experimental Setup}
+
+\begin{figure}[htb]
+	\centering
+		\fbox{\includegraphics[width=0.8\textwidth]{Chapters/07_Analysis_Experiment/figures/experiment_ui.png}}
+	\caption{Speaker count estimation experiment user interface.}
+	\label{fig:user_interface_speaker}
+\end{figure}
 
 We conducted the study using the simulated data from the \emph{LIBRI Count Dataset} as mentioned in the previous subsection.
 In turn, we randomly selected 10 samples for each \(k \in {0, \ldots, 10}\), resulting in 100 mixtures of 5~seconds duration each.

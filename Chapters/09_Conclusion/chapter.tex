@@ -3,6 +3,8 @@
 
 \marginpar{Note that additional conclusions can be found at the end of the respective chapters.}
 
+% TODO: datasets
+
 \section{Discussion}
 This thesis built on and contributed to work in the research field of separation and source count estimation of audio mixtures. The methods that were developed throughout this thesis share a common concept: when signals are mixed, we focussed on the overlapping part instead of the non-overlapping part. 
 This approach allowed us to better observe the characteristics for the task of separation and source count estimation:
@@ -15,7 +17,7 @@ This approach allowed us to better observe the characteristics for the task of s
 The combination of separation and count estimation is important since it allows to build a real-world separation system, where the number of sources is not known in advance.
 On this way, we were faced with several limitations and challenges:
 \par
-When we developed time warping (Chapter~\ref{cha:known}) to separate audio signals based on their estimated \(F0\) trajectory, we optimized and tuned the method on a handful of music tracks, since a large test data set was not available. When we then applied it on the (back then) new DSD100~\cite{liutkus17} dataset, several limitations became apparent which is why the overall performance was not satisfying. For example, one limitation of the method is that it relies too much on a precise and robust estimate of the \(F0\) trajectory and its voice activity. When we included a data-driven activity method in the system, the performance improved.
+When we developed time warping (Chapter~\ref{cha:known}) to separate audio signals based on their estimated \(F0\) trajectory, we optimized and tuned the method on a handful of music tracks, since a large test dataset was not available. When we then applied it on the (back then) new DSD100~\cite{liutkus17} dataset, several limitations became apparent which is why the overall performance was not satisfying. For example, one limitation of the method is that it relies too much on a precise and robust estimate of the \(F0\) trajectory and its voice activity. When we included a data-driven activity method in the system, the performance improved.
 \par
 When it comes to source separation, at the time our research was conducted and we proposed the Common Fate Model (Section~\ref{sec:the_common_fate_model_for_unison_mixtures}), factorization models were considered to be state-of-the-art.
 However, for the scenario of music separation, it turned out that the Common Fate Model still required a significant amount of additional handcrafted engineering.

@@ -49,12 +49,12 @@ In this scenario, a method of estimating the maximum number of concurrent speake
 % * How do humans do count and why can't machines?
 \par
 When speaker overlap is as prevalent as in a ``cocktail-party'' scenario, developing an algorithm to detect the number of speakers is challenging.
-% This is in contrast to humans whom we know are excellent in segregating one source from a mixture~\cite{bregman} and tend to use this skill to perceptually segregate speakers before they can estimate a count, as highlighted, e.g.\ in~\cite{kawashima15}.
+% This is in contrast to humans whom we know are excellent in segregating one source from a mixture~\cite{bregman90} and tend to use this skill to perceptually segregate speakers before they can estimate a count, as highlighted, e.g.\ in~\cite{kawashima15}.
 % As shown in~\cite{kashino96, kawashima15}, humans are able to correctly estimate up to three simultaneously active speakers without using spatial information.
 % Similarly, in music, psycho-acoustic researchers came up with a ``one-two-three-many'' hypothesis~\cite{huron89, stoeter13, schoeffler13}.
 % %
 % \par
-% Identifying isolated sources in realistic mixtures is challenging~\cite{bregman} and psychology studies in vision~\cite{jevons1871} have shown that humans can instantly estimate the number of objects without actually counting and therefore identifying them.
+% Identifying isolated sources in realistic mixtures is challenging~\cite{bregman90} and psychology studies in vision~\cite{jevons1871} have shown that humans can instantly estimate the number of objects without actually counting and therefore identifying them.
 % This phenomenon is known as \textit{subitizing} and has been inspiring research in vision~\cite{chattopadhyay17}.
 Since there are indications that the auditory system is capable of subitizing sources~\cite{hoopen79}, we transfer this fact to the audio domain and directly attempt in this study to estimate the number of audio sources through ``direct count estimation'' (see also Chapter~\ref{cha:countanalysis}).
 The question if machines could outperform humans, or if they are subject to similar limitations, remains to be answered and is also part of this work.
@@ -373,14 +373,14 @@ The main motivation to stack these layers is to combine the benefits of convolut
 
 There are different ways to stack CNNs and RNNs to form a CRNN architecture.
 In our application the motivation is to aggregate local time-frequency features coming from the output convolutional neural network and use the LSTM layer to model long temporal structures.
-As the output of a CNN layer is a 3D volume \(D \times F \times C\) and the input of a recurrent layer only takes a 2D sequence, the dimension would need to be reduced. Naturally, the time dimension would need to be kept, therefore the channel dimension \(C\) is stacked with the frequency dimension \(F\) resulting in a \(D \times F \cdot C\) output (compare Figure~\ref{fig:crnn}).
+As the output of a CNN layer is a 3D volume \(D \times F \times C\) and the input of a recurrent layer only takes a 2D sequence, the dimension would need to be reduced. Naturally, the time dimension would need to be kept, therefore the channel dimension \(C\) is stacked with the frequency dimension \(F\) resulting in a \(D \times F \cdot C\) output.
 
-\begin{figure}[t]
-\centering
-\includegraphics[width=\columnwidth]{Chapters/08_Analysis_CountNet/figures/crnn.pdf}
-\caption{Illustrative diagram to show the stacking of the output of a convolution layer into a recurrent layer with \(A\) hidden nodes per memory cell.}%
-\label{fig:crnn}
-\end{figure}
+% \begin{figure}[t]
+% \centering
+% \includegraphics[width=\columnwidth]{Chapters/08_Analysis_CountNet/figures/crnn.pdf}
+% \caption{Illustrative diagram to show the stacking of the output of a convolution layer into a recurrent layer with \(A\) hidden nodes per memory cell.}%
+% \label{fig:crnn}
+% \end{figure}
 
 \subsubsection{Full-band Convolutional Neural Networks (F-CNN)}%
 % * using full frequency band filters.
@@ -393,9 +393,8 @@ To further optimize the performance of the network, we applied a hyper-parameter
 We used a search space of several hyper-parameters as shown in Table~\ref{tab:fcnnhyper} and set the maximum number of evaluations to 200.
 
 \begin{table}
-  \caption{Parameter Optimization of F-CNN Model through hyper-parameter search. Bold hyper-parameters were found optimal.}%
-  \label{tab:fcnnhyper}
   \centering
+  \scriptsize
 \begin{tabular}{lll}
   \toprule
   Layer               & Parameters        & Value Range \\
@@ -417,6 +416,8 @@ We used a search space of several hyper-parameters as shown in Table~\ref{tab:fc
   Dropout 2           & Dropout Percentage& \( [0.1, \mathbf{0.2}, 0.5] \) \\
   \bottomrule
   \end{tabular}
+    \caption{Parameter optimization of F-CNN model through hyper-parameter search. Bold hyper-parameters were found optimal.}%
+  \label{tab:fcnnhyper}
 \end{table}
 
 The results are in agreement with the findings in~\cite{schluter16} where small filter kernels of size 3 outperformed larger kernels. Also, it can be seen from the results, that increasing the number of feature maps of the convolutional layers does not necessarily increase the performance.
@@ -486,7 +487,7 @@ In this section, we introduce relevant speech corpora and describe how the train
 % * Libri Speech
 % * Describe the used VAD
 To date, many available speech datasets contain recordings where only a single speaker is active.
-Datasets that include overlapped speech segments, either lack accurate annotations because the annotation of speech onsets and offsets in mixtures is cumbersome for humans as shown in Section~\ref{sec:introduction} or lack a controlled auditory environment such as in TV/broadcasting scenarios~\cite{Gravier12}.
+Datasets that include overlapped speech segments, either lack accurate annotations because the annotation of speech onsets and offsets in mixtures is cumbersome for humans or lack a controlled auditory environment such as in TV/broadcasting scenarios~\cite{Gravier12}.
 Since a realistic dataset of fully overlapped speakers is not available, we chose to generate synthetic mixtures.
 We recognize that in a simulated ``cocktail-party'' environment, mixtures lack the conversational aspect of human communication but provide a controlled environment which helps to understand how a DNN solves the count estimation problem.
 As we aim for a speaker independent solution, we selected a speech corpus with preference to a high number of different speakers instead of the number of utterances, thus increasing the number of unique mixtures.
@@ -522,6 +523,7 @@ Furthermore, we included non-speech examples from the TUT Acoustic Scenes datase
   \centering
   \caption{Overview of speech corpora used in this work.}%
 \label{tab:corpora}
+\scriptsize
 \begin{tabular}{llrrr}
   \toprule
   & & \multicolumn{3}{c}{Number of Speakers} \\
@@ -619,6 +621,7 @@ Several well-established input representations were evaluated in~\cite{stoeter17
 \caption{Speech related input representations in related work.}
 \label{tab:inputrep}
   \centering
+  \scriptsize
 \begin{tabular}{rll}
 \toprule
 References & Task & Representation \\
@@ -749,8 +752,8 @@ It can be seen that the CRNN is not only the one that performs best but also has
 In contrast, the F-CRNN model does only have a fraction of the number of parameters of the other models, which makes it the most suitable model for mobile applications.
 
 \begin{table}[t]
-\caption{Mixed Effects Linear Model for \(k = \{1, 2\dots7\}\). Model: \(MAE \sim architecture + feature + objective + (1|k)\)}
 \begin{center}
+\scriptsize
 \begin{tabular}{lcccc}
 \toprule
 Factor                    & Coef.  & Std.Err. &   z    & \(P>|z|\) \\
@@ -768,6 +771,7 @@ Random Effect \(k\)            &  0.057 &    0.297 &        &             \\
 \bottomrule
 \end{tabular}
 \end{center}%
+\caption{Mixed Effects Linear Model for \(k = \{1, 2\dots7\}\). Model: \(MAE \sim architecture + feature + objective + (1|k)\).}
 \label{tab:mixedmodel1}
 \end{table}
 
@@ -799,7 +803,7 @@ Random Effect \(k\)            &  0.057 &    0.297 &        &             \\
 
 \begin{figure}[t]
   \centering
-    \begin{adjustbox}{width=0.8\columnwidth}
+    \begin{adjustbox}{width=0.7\columnwidth}
       \input{Chapters/08_Analysis_CountNet/figures/complexity}
     \end{adjustbox}
     \caption{Complexity in number of floating point multiplications and number of weight parameters (in brackets) over performance in MAE of our five proposed models.}%
@@ -846,8 +850,6 @@ Similarly to our proposed DNN based methods, we treat the output as either a cla
 \begin{table*}[t]
 \scriptsize
 
-\caption{Averaged MAE results of different methods on several datasets for \( k = [0 \ldots 10] \) with equal power and random gains (up to $\pm 6~\mbox{dB}$)) as well as reverberation (rev). Bold face indicates the best-performing method. Standard deviation values are listed in~\cite{stoeter19}.}
-
 \begin{center}
 \begin{tabular}{lcccccccc}
 \toprule
@@ -866,6 +868,7 @@ MEAN    &  $2.73$ & $2.73$ & $2.73$ & $2.73$ &  $2.73$ & $2.73$ & $2.73$ & $2.73
 \bottomrule
 \end{tabular}
 \end{center}
+\caption{Averaged MAE results of different methods on several datasets for \( k = [0 \ldots 10] \) with equal power and random gains (up to $\pm 6~\mbox{dB}$)) as well as reverberation (rev). Bold face indicates the best-performing method. Standard deviation values are listed in~\cite{stoeter19}.}
 \label{tab:expgainreverb}
 \end{table*}
 
@@ -924,6 +927,17 @@ For robustness against different acoustic conditions, it is essential to include
 
 \subsection{Effect of Duration and Overlap Detection Error}%
 \label{ssec:exp_duration}
+
+\begin{figure}[h!]
+   \centering
+   \centering
+   \begin{adjustbox}{width=0.7\columnwidth}
+     \input{Chapters/08_Analysis_CountNet/figures/duration}
+   \end{adjustbox}
+   \caption{Evaluation of trained CRNN networks over different input duration length \(D\). Error bars show 95\% confidence intervals.}%
+   \label{fig:timesteps}
+\end{figure}
+
 % * Pick best: CRNN, STFT, Classification
 % * (Re) Trained and evaluated on (1s...9s)
 % * Longer context
@@ -938,17 +952,6 @@ If latency is critical, keeping \(D\) above 2 seconds is recommended for good re
 For segments as short as 1 second the MAE of around 0.6 is almost twice as high as for segments of 5 seconds duration.
 However, if instead of the count estimation MAE we compute the accuracy to detect overlap \(k > 1\) vs.\ non-overlap \(k \in {0, 1}\), we still achieve 98.7\% accuracy (precision: 99.7\%, recall: 98.7\%). This shows that our system can be effectively used to address overlap detection.
 
-\begin{figure}[h!]
-   \centering
-   \centering
-   \begin{adjustbox}{width=0.8\columnwidth}
-     \input{Chapters/08_Analysis_CountNet/figures/duration}
-   \end{adjustbox}
-   \caption{Evaluation of trained CRNN networks over different input duration length \(D\). Error bars show 95\% confidence intervals.}%
-   \label{fig:timesteps}
-\end{figure}
-
-\vspace*{-0.25cm}%
 \subsection{Listening Experiment}%
 \label{ssec:listening_experiment}
 % * Reference existing listening tests which report the same thing

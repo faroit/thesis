@@ -27,19 +27,27 @@
 * [X] Korrekturen einbauen
 * [X] Intro, Conclusion Patricio
 
-* [ ] Vollständig lesen
-* [ ] Korrekturen einbauen
+* [X] Vollständig lesen
+* [X] Korrekturen einbauen
 
 ## Dienstag
 
+* [X] abbreviations? fuckit
+* [ ] Randnotizen ergänzen
 * [ ] Korrekturen einbauen
 * [ ] Layout und quirks
-* [ ] Vollständig lesen
-* [ ] Rohlinge kaufen
-* [ ] Zwei Einfache USB sticks (marke: kingston, sandisk)
-* [ ] Test-Druck und Bindung
+* [X] Vollständig lesen
+* [X] Test-Druck und Bindung
 
 ## Mittwoch
+
+* [ ] Thomas
+* [ ] Christophe
+* [ ] Antoine
+* [ ] 
+TODO: <!-- ultidimensional representations that more closely model the human perceptio -->
+* [ ] Rohlinge kaufen
+* [ ] Zwei Einfache USB sticks (marke: kingston, sandisk)
 
 * [ ] Vollständig lesen
 
@@ -130,6 +138,7 @@ No, but From Chollet
 - how to derive the cost functions
 - Erklärung von Antoine/Vincent
 - understand HR-NMF, shift-invariant-nmf, hennquin10
+- warum kein WDO auf CFT? Siehe pardo journal oder response
 
 ### Separation
 

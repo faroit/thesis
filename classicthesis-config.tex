@@ -88,14 +88,17 @@
     \usepackage{babel}
 
 \usepackage{csquotes}
+
 \PassOptionsToPackage{%
   backend=biber,bibencoding=utf8, %instead of bibtex
   % backend=bibtex8,bibencoding=ascii,%
   language=auto,%
   % style=ieee,%
   % dashed=false,
+  firstinits=true,
   defernumbers,
   style=ieee, % Author 1999, 2010
+  dashed=false,
   %bibstyle=authoryear,dashed=false, % dashed: substitute rep. author with ---
   sorting=nyt, % name, year, title
   maxbibnames=10, % default: 3, et al.
@@ -104,11 +107,7 @@
 }{biblatex}
 
 \usepackage{biblatex}
-\def\citepunct{,\,}
-\ExecuteBibliographyOptions{%
-  sorting=nty, % Sort by name, title, year.
-  maxbibnames=15,%
-}%
+
 
 % Emphasize own name in References with boldface
 \usepackage{xpatch}
