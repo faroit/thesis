@@ -3,8 +3,6 @@
 
 \marginpar{Note that additional conclusions can be found at the end of the respective chapters.}
 
-% TODO: datasets
-
 \section{Discussion}
 This thesis built on and contributed to work in the research field of separation and source count estimation of audio mixtures. The methods that were developed throughout this thesis share a common concept: when signals are mixed, we focussed on the overlapping part instead of the non-overlapping part.
 This approach allowed us to better observe the characteristics for the task of separation and source count estimation:
@@ -27,7 +25,7 @@ Our research marks an step towards multidimensional representations, inspired by
 \par
 In our count estimation studies on speech and music (Chapter~\ref{cha:countanalysis}), we showed that humans follow a `one-two-three-many` strategy: we can correctly infer small quantities up to four, but we have problems to extrapolate to higher numbers.
 We showed that our proposed CountNet model (Chapter~\ref{cha:countnet}) improved state-of-the-art and even reached super-human performance by shifting the performance boundary beyond four sources. In the ablations studies (Section~\ref{sec:ablation}), we revealed that modulations also played an essential role in CountNet when estimating the number of speakers.
-The network showed a significant dependency on different syllable rate. This indicates that CountNet may not have learned the actual difference between two and three speakers but instead took a ``shortcut'' and learned the distinct modulation patterns of our language.
+The network showed a significant dependency on different syllable rates. This indicates that CountNet may not have learned the actual difference between two and three speakers but instead took a ``shortcut'' and learned the distinct modulation patterns of our language.
 This achievement, however, does not mean that CountNet can generalize to examples outside of the used datasets or languages. Such generalization properties should be properly investigated further.
 \par
 This work covers many different techniques ranging from advanced audio signal processing, tensor factorization, up to recent supervised machine learning methods such as deep learning.
@@ -70,7 +68,7 @@ The recent results on SiSEC 2018~\cite{stoeter18sisec}\footnote{\url{See https:/
 This success was made possible with better deep learning models such as as~\cite{takahashi17} and the availability of data.
 The future of how to improve music source separation is unclear. Possible directions are to enhance the efficiency of the learning architectures or to develop new cost functions which better reflect human perception.
 Furthermore, improving the evaluation metrics is another driving force for better separation algorithms. Unfortunately for separation, humans cannot easily evaluate the audio quality without a reference, which makes annotations cumbersome and expensive.
-Therefore a simpler task such as count estimation could serve as an intermediate evaluation metric which is easier to annotate and does not require a reference. Then, a model such as CountNet could approximate the human results and in turn, be used (hence differentiable) inside the cost function of other separation models.
+Therefore a simpler task such as count estimation could serve as an intermediate evaluation metric to quantify overlap, which is easier to annotate and does not require a reference. Then, a model such as CountNet could approximate the human results and in turn, be used (hence differentiable) inside the cost function of other separation models.
 
 \subsection*{Teaching CountNet to Extrapolate}
 

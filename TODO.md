@@ -34,19 +34,26 @@
 
 * [X] abbreviations? fuckit
 * [ ] Randnotizen ergänzen
-* [ ] Korrekturen einbauen
-* [ ] Layout und quirks
+* [X] Korrekturen einbauen
+* [X] Layout und quirks
 * [X] Vollständig lesen
 * [X] Test-Druck und Bindung
 
 ## Mittwoch
 
-* [ ] Thomas
-* [ ] Christophe
-* [ ] Antoine
-* [ ] Rohlinge kaufen
-* [ ] Zwei Einfache USB sticks (marke: kingston, sandisk)
+* [X] Thomas
+* [X] Christophe
+* [X] Annika
+* [X] Florian
+* [X] Bernd
+* [X] Antoine
+* [ ] contributions refs
+* [X] Rohlinge kaufen
+* [X] Zwei Einfache USB sticks (marke: kingston, sandisk)
 
+* [ ] Vollständig lesen
+* [ ] Korrektur
+* [ ] Grammarly Plagiat
 * [ ] Vollständig lesen
 
 ## Donnerstag
@@ -60,17 +67,11 @@
 * [ ] Lebenslauf MIT Foto
 * [ ] sämtliche Anträge
 * [ ] 5 Arbeiten!
-* [ ] 
+* [ ] Unterschrieben!!!!
+* [ ] Unterschrieben!!!!
 * [ ] Unterschrieben!!!!
 
-
-### If I have time...
-
-% TODO: without any overlap, count estimation would be useless... counting is a quantification of overlap
-
-% TODO: discuss that music signals lack a proper source definition. Therefore counting on music signals in ill defined. However, it may work on some specific cases. We tried on ... but it didn't work.
-
-# Bernd 19.10.2018
+# Anderer Krams
 
 * [X] noch mal den Titel checken, deutsche Variante, vielleicht doch mehr in Richtung Modulation?
 * [X] Dataset Kapitel ok oder überflüssig --appendix?
@@ -90,9 +91,7 @@
 * [ ] reference all datasets
 * [ ] appendix, filter plots from countnet
 * [ ] Figures durchgehen
-* [ ] Grafiken IEEE in Captions
 * [ ] Literatur durchgehen (PAPERS folder! und löschen)
-* [ ] Check website availability
 * [ ] add gap statistics and elbow method and other clustering shit from wolfgangs diplomarbeit
 
 # Fragen an Antoine

@@ -36,20 +36,20 @@ Our proposed common fate transform is an adequate representation to disentangle 
 
 Im Alltag sind wir von gemischten Signalen umgeben: Musik besteht aus einer Mischung von Instrumenten; in einem Meeting oder auf einer Konferenz sind wir einer Mischung menschlicher Stimmen ausgesetzt.
 Für diese Mischungen ist die automatische Quellentrennung oder die Bestimmung der Anzahl an Quellen eine anspruchsvolle Aufgabe.
-Eine häufige Annahme bei der Verarbeitung von gemischten Signalen im Zeit-Frequenzbereich ist, dass die Quellen nicht vollständig überlappt sind.
-In dieser Arbeit betrachten wir jedoch einige Fälle, in denen die Überlappung immens ist --- zum Beispiel, wenn Instrumente den gleichen Ton spielen (unisono) oder wenn viele Menschen gleichzeitig sprechen (Cocktailparty) --- ,so dass die Notwendigkeit nach neuen Repräsentationen und leistungsfähigeren Modelle besteht.
+Eine häufige Annahme bei der Verarbeitung von gemischten Signalen im Zeit-Frequenzbereich ist, dass die Quellen sich nicht vollständig überlappen.
+In dieser Arbeit betrachten wir jedoch einige Fälle, in denen die Überlappung immens ist --- zum Beispiel, wenn Instrumente den gleichen Ton spielen (unisono) oder wenn viele Menschen gleichzeitig sprechen (Cocktailparty) ---, so dass neue Signal-Repräsentationen und leistungsfähigere Modelle notwendig sind.
 \par
-Um die zwei genannten Probleme zu bewältigen, haben wir sowohl konventionelle Signalverbeitungsmethoden als  auch tiefgehende neuronale Netze (DNN) verwendet.
-Wir gehen zunächst auf das Problem der Quellentrennung für Unisono-Instrumentenmischungen ein und untersuchen die speziellen, zeitlich-spektralen Modulationen, ausgelöst durch Vibrato.
-Um diese Modulationen auszunutzen, entwickelten wir eine Methode, die auf Zeitverzerrung basiert und eine Schätzung der Grundfrequenz als zusätzliche Information nutzt.
-Für Fälle, in denen diese Schätzungen nicht verfügbar sind, stellen wir ein unüberwachtes Modell vor, das inspiriert ist von der Art und Weise wie Menschen zeitveränderliche Quellen gruppieren (Common Fate).
-Dieser Beitrag enthält eine neuartige Repräsentation, die die Separierbarkeit für überlappte und modulierte Quellen in Unisono-Mischungen erhöht, aber auch die Trennung in Gesang und Begleitung verbessert, wenn sie als in einem DNN-Modell verwendet wird.
+Um die zwei genannten Probleme zu bewältigen, verwenden wir sowohl konventionelle Signalverbeitungsmethoden als auch tiefgehende neuronale Netze (DNN).
+Wir gehen zunächst auf das Problem der Quellentrennung für Unisono-Instrumentenmischungen ein und untersuchen die speziellen, durch Vibrato ausgelösten, zeitlich-spektralen Modulationen
+Um diese Modulationen auszunutzen entwickelten wir eine Methode, die auf Zeitverzerrung basiert und eine Schätzung der Grundfrequenz als zusätzliche Information nutzt.
+Für Fälle, in denen diese Schätzungen nicht verfügbar sind, stellen wir ein unüberwachtes Modell vor, das inspiriert ist von der Art und Weise, wie Menschen zeitveränderliche Quellen gruppieren (Common Fate).
+Dieser Beitrag enthält eine neuartige Repräsentation, die die Separierbarkeit für überlappte und modulierte Quellen in Unisono-Mischungen erhöht, aber auch die Trennung in Gesang und Begleitung verbessert, wenn sie  in einem DNN-Modell verwendet wird.
 \par
-Im Weiteren beschäftigen wir uns mit der Schätzung der Anzahl der an Quellen in einer Mischung, was für reale Szenarien wichtig ist.
-Unsere Arbeit an der Schätzung der Anzahl war motiviert durch eine Studie die zeigt wie Menschen diese Aufgabe angehen.
-Die hat uns dazu veranlasst, eigene Hörversuche durchzuführen, die bestätigten, dass Menschen nur in der Lage sind, die Anzahl von bis zu vier Quellen korrekt abzuschätzen.
-Um nun die Frage zu beantworten, ob Maschinen dies ähnlich gut können, stellen wir eine DNN-Architektur vor, die erlernt hat, die Anzahl der gleichzeitigen sprechenden Sprecher zu ermitteln.
-Die Ergebnisse zeigen Verbesserungen im Vergleich zu anderen Methoden aber vor allem auch im Vergleich zu menschlichen Hörern.
+Im Weiteren beschäftigen wir uns mit der Schätzung der Anzahl von Quellen in einer Mischung, was für reale Szenarien wichtig ist.
+Unsere Arbeit an der Schätzung der Anzahl war motiviert durch eine Studie, die zeigt, wie wir Menschen diese Aufgabe angehen.
+Dies hat uns dazu veranlasst, eigene Hörexperimente durchzuführen, die bestätigten, dass Menschen nur in der Lage sind, die Anzahl von bis zu vier Quellen korrekt abzuschätzen.
+Um nun die Frage zu beantworten, ob Maschinen dies ähnlich gut können, stellen wir eine DNN-Architektur vor, die erlernt hat, die Anzahl der gleichzeitig sprechenden Sprecher zu ermitteln.
+Die Ergebnisse zeigen Verbesserungen im Vergleich zu anderen Methoden, aber vor allem auch im Vergleich zu menschlichen Hörern.
 \par
 Sowohl bei der Quellentrennung als auch bei der Schätzung der Anzahl an Quuellen ist ein Kernbeitrag dieser Arbeit das Konzept der ``Modulation'', welches wichtig ist, um die Strategien von Menschen mittels Computern nachzuahmen.
 Unsere vorgeschlagene Common Fate Transformation ist eine adäquate Darstellung, um die Überlappung von Signalen für die Trennung zugänglich zu machen und eine Inspektion unseres DNN-Zählmodells ergab schließlich, dass sich auch hier modulationsähnliche Merkmale finden lassen.

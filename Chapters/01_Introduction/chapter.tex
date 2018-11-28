@@ -2,56 +2,37 @@
 \chapter{Introduction}\label{ch:introduction}
 %************************************************
 
-% TODO: check present tense
-
 It is very likely that you know the following situation: you were at a crowded party and the next day your best friend, who was unable to join, asked you ``How many people were there?''.
 You then struggled to find an answer because you had such intense conversations with the guests that you were unable to put your focus on the other guests.
-It turns out that this scene includes many interesting aspects that are relevant to this thesis.
+It turns out that this scene includes many interesting aspects that are relevant to this thesis. It notably reminds us that in our daily life, we are exposed to situations where multiple events overlap in time.
 \par
-First, it reminds us that in our daily life, we are exposed to situations where multiple events overlap in time.
-In the proposed example of the conversation at a party, it is evident that our field of view is limited and we can not see the other guests in a crowd.
-In contrast to our vision, we physically might have been able to listen to all sounds, but we deliberatively chose to focus on only a few sources and attenuate others.
-We know that humans are notably good at performing such a task.
-In such a noisy environment we can steer our attention to one sound source, even without eye contact and using only a single ear~\cite{bregman90}.
-However, this attention mechanisms prevents us from fully observing the acoustic scene.
+In contrast to our vision, we physically might have been able to \emph{hear} all sounds, but we deliberatively chose to \emph{listen to} only a few sources and attenuate others.
+Humans are known to be very good at performing such a task.
+In a noisy environment, we can steer our attention to one sound source, even without eye contact and using only a single ear~\cite{bregman90}.
+However, this attention mechanism prevents us from observing the acoustic scene as a whole.
+This ability to concentrate on a single source is not limited to just conversations. 
+It also applies to music. If we imagine attending a music concert of our favorite band, it is likely that we focus on the lead vocalist and miss out many details of the background band, demonstrating our ability to \emph{separate} audio mixtures, at least cognitively.
 \par
-In the audio research community, the attenuation of undesired speakers, when multiple concurrent speakers are present, is known as the ``cocktail party problem''~\cite{haykin05}.
+In the audio research community, building a machine that is capable of attenuating undesired speakers, when multiple concurrent speakers are present, is known as the ``cocktail party problem''~\cite{haykin05}. 
 Since almost 70 years (~\cite{cherry53}), research is fascinated by the idea to create a machine that separates the sources in a mixture.
-This problem is called \emph{source separation}.
-Although most scientific efforts have focused on separation, our example highlights that just the number of sources is already a valuable information.
-Many separation methods rely on this information for the effectiveness of subsequent processing.
-These two tasks, separating and estimating the number of sources, not just limited to conversations, also apply to music as well.
-If we imagine attending a music concert of our favorite band, it is likely that we focus on the lead vocalist and miss out many details of the background band.
-Furthermore, both scenarios of music and speech mixtures have more in common: it is valid to assume that estimating the number of sources and separating them is easier when there is less \emph{overlap} of the signals.
-% why?
-And both tasks become even more challenging when sources are almost entirely overlapped such as when multiple instruments are playing the same note (in unison).
-In this unique scenario where sources are overlapped in time and frequency, observable differences between sources are difficult to obtain.
-Here, it is important to note that sounds are not stationary, but they vary with time.
-Instruments and our voice can have distinct modulations such as vibrato, created by conscious physical manipulation of the sound, to make a sound more pleasant to the listener~\cite{fletcher01}.
+In the general setting, which is not restricted to the cocktail party scenario but also includes music processing, this problem is called \emph{source separation} and is one of the key topics considered in this thesis.
 \par
-In this thesis, we want to investigate if modulations can be used to separate highly overlapped speech and music source signals.
-To address this question we want to study scenarios where sources are highly overlapped.
-We then want to study and develop representations that allow improving analysis and processing of these signals.
-Also, we want to develop new methods to address source separation scenarios.
-These methods are designed for the constrained scenarios where modulation effects can easily be exploited.
-Also, we want to transfer the results and insights gained by these controlled studies onto more real-world scenarios.
-And finally, investigate and develop new methods to address the task of estimating the number of sources in highly overlapped mixtures.
-
-% \begin{itemize}
-%   \item Can modulations be automatically detected or extracted from highly overlapped signals?
-%   \item If modulations are known, can they be exploited to improve a task such as source separation?
-%   \item Can modulations still be utilized when modulation function and its cause of modulation is unknown?
-%   \item What is the role of modulations in the task of count estimation?
-% \end{itemize}
-
-% TODO: check if scope is clear (not promise too much)
-
-% [X] Tell a story, and tell it well
-% [X] Tell the reader the problem you are tackling in this project.
-% [ ] Quote data sources, e.g., industry analysts, market surveys, case studies
-% [ ] Use plenty of concrete examples (or a running example) and figures
-% [X] State clearly how you aim to deal with this problem.
-% [ ] Limit the scope of your study.
+Although most scientific efforts have focused on separation, our example highlights that just the number of sources is already a valuable information.
+From a more technical point of view, many separation methods rely on the prior knowledge of the number of sources for their computations, requiring this information to be estimated beforehand, or provided by a user~\cite{liutkus13}.
+As we illustrated, humans are not very good at counting the number of sources based on audio which sharply contrasts with our ability to focusing on a single source in a crowded audio scene.
+Both scenarios of music and speech mixtures have in common that estimating the number of sources and separating them becomes more challenging when the signals are more \emph{overlapped}.
+And both tasks become even more challenging when sources are almost entirely overlapped such as when multiple instruments are playing the same note (in unison).
+In this unique scenario where sources are overlapped in time and frequency,
+observable differences between sources are difficult to obtain at a short time scale.
+However, differences do appear when we consider longer time contexts, for which the variations of sources over time become important.
+For instance, speech and the sound of musical instruments can have distinct modulations such as vibrato, created by conscious physical manipulation of the sound, to make a sound more intelligible and pleasant.
+\par
+In this thesis, we aim to investigate if modulations can be utilized for analyzing and processing of highly overlapped speech and music source signals.
+For this, we first study and develop new representations that improve the analysis and processing of such signals, to address if modulations be automatically detected or extracted from highly overlapped signals.
+Second, we develop new methods built upon such representations to address source separation. 
+These methods are designed for constrained scenarios where modulation effects can easily be exploited.
+Third, to investigate and develop new methods to address the task of estimating the number of sources in highly overlapped mixtures.
+Finally, we show how such research may be transferred from synthetic signals to real-world scenarios.exemplify
 
 \section{Summary of Contributions}
 
@@ -88,17 +69,17 @@ This thesis is based on the previously listed publications. As such, they are ci
 
 The thesis and its relevant linked publications are organized into six main chapters.
 \begin{description}
-  \item[Chapter~\ref{cha:fundamentals}] explains the fundamental concepts of audio signals (Section~\ref{sec:specifics-of-audio-signals}) as well as sources and overlapped sounds (Section~\ref{sources-and-mixtures}), relevant for the remainder of this thesis.
-  This includes commonly used transformations and signal representations for the task of source separation and source count estimation.
+  \item[Chapter~\ref{cha:fundamentals}] explains the fundamental concepts of audio signals (Section~\ref{sec:specifics-of-audio-signals}), sources and overlapped sounds (Section~\ref{sources-and-mixtures}), relevant for the remainder of this thesis.
   Furthermore, the process of mixing sound sources as well as its inverse task --- sound source separation --- are explained.
   The chapter also covers basics of fundamental frequency and its variations (Section~\ref{sub:time-variant-audio-signals}) as an important feature for harmonic audio signals.
   Part of this chapter is based on~\cite{rafii18}.
   \item[Chapter~\ref{cha:highly-overlapped-signals}] introduces relevant tasks and applications in the context of highly overlapped sounds.
-  Furthermore, the relevance of highly overlapped source scenarios are discussed and the research track of slow  modulations (Section~\ref{exploiting-slow-modulations}) to address separation tasks is proposed.
+  Furthermore, the importance of slow modulations in this context is discussed (Section~\ref{exploiting-slow-modulations}).
   \item[Chapter~\ref{cha:datasets}] presents and discusses the importance of data for analysis and evaluation.
-  In this chapter synthetic (Section~\ref{}) and realistic (Section~\ref{}) datasets are presented, created during the course of this thesis~\cite{oss_wice, oss_unison, oss_libricount, stoeter15acm, liutkus17}.
-  \item[Chapters~\ref{cha:known} and \ref{cha:unknown}] present separation methods that are developed over the course of this thesis.
-  This covers techniques that utilize modulation information when available(Chapter 5, ~\cite{stoeter14, stoeter15icassp}) as well as blind methods (Chapter 6~\cite{stoeter16, liutkus17}).
-  \item[Chapters~\ref{cha:countanalysis} and ~\ref{cha:countanalysis}] cover the analysis of overlapped sounds. Specifically, it deals with identifying and estimating the number of sources on music~\cite{schoeffler13, stoeter13} and the cocktail party scenario~\cite{stoeter19, stoeter18}.
+  In this chapter we present a dataset for unison instrument mixtures (Section~\ref{sec:unison_dataset}~\cite{oss_unison, stoeter14}) and dataset for precise fundamental frequency estimates (Section~\ref{sec:muserc}~\cite{oss_muserc, stoeter15acm}). Furthermore we also present a short overview of relevant multitrack datasets for music separation~\cite{liutkus17, rafii18}.
+  \item[Chapter~\ref{cha:known}] present separation methods that are developed in this thesis. This covers techniques that utilize modulation information, when available. We present a method based on time warping using $F0$ estimates for unison mixtures (Section~\ref{sub:frequency_modulation}~\cite{stoeter14}) and show how it can be extended for the scenario of vocal and accompaniment separation (Section~\ref{sec:extendingf0}). Furthermore, we present a method to improve the precision of $F0$ estimates (Section~\ref{sec:f0method}~\cite{stoeter15icassp}).
+  \item[Chapter~\ref{cha:unknown}] presents separation methods utilizing modulation when prior information is not available. We present the \textsc{Common Fate Model} based on tensor factorization for unison mixtures (Section~\ref{sec:the_common_fate_model_for_unison_mixtures}~\cite{stoeter16}) and also propose an extension based on DNNs for vocal and accompaniment separation (Section~\ref{sec:cft_for_lead_accompaniment_separation}).
+  \item[Chapters~\ref{cha:countanalysis}] presents our listening experiments to find out what the number of sources is that humans are able identify in music~(Section~\ref{sec:ismir}~\cite{schoeffler13, stoeter13}) or concurrent speech(Section~\ref{sec:count_experiment}~\cite{stoeter19, stoeter18}). 
+  \item[Chapters~\ref{cha:countnet}] presents \textsc{CountNet}, our method to address the source count estimation problem using a data-driven model in a ``cocktail-party'' scenario~\cite{stoeter19}.
   \item[Chapter~\ref{cha:conclusion}] concludes this thesis and gives an outlook into future research directions.
 \end{description}
