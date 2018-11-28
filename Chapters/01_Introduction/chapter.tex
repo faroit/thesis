@@ -1,39 +1,52 @@
 %************************************************
 \chapter{Introduction}\label{ch:introduction}
 %************************************************
-
+%AN EXAMPLE
 It is very likely that you know the following situation: you were at a crowded party and the next day your best friend, who was unable to join, asked you ``How many people were there?''.
 You then struggled to find an answer because you had such intense conversations with the guests that you were unable to put your focus on the other guests.
-It turns out that this scene includes many interesting aspects that are relevant to this thesis.
+It turns out that this scene includes many interesting aspects that are relevant to this thesis. It notably reminds us that in our daily life, we are exposed to situations where multiple events overlap in time.
+
+%INTRODUCING separation
 \par
-First, it reminds us that in our daily life, we are exposed to situations where multiple events overlap in time.
 In the proposed example of the conversation at a party, it is evident that our field of view is limited and we can not see the other guests in a crowd.
-In contrast to our vision, we physically might have been able to listen to all sounds, but we deliberatively chose to focus on only a few sources and attenuate others.
-We know that humans are notably good at performing such a task.
-In such a noisy environment we can steer our attention to one sound source, even without eye contact and using only a single ear~\cite{bregman90}.
-However, this attention mechanisms prevents us from fully observing the acoustic scene.
+In contrast to our vision, we physically might have been able to \emph{hear} all sounds, but we deliberatively chose to \emph{listen to} (focus on) only a few sources and attenuate others.
+Humans are known to be very good at performing such a task.
+In such a noisy environment, we can steer our attention to one sound source, even without eye contact and using only a single ear~\cite{bregman90}.
+However, this attention mechanism prevents us from observing the acoustic scene as a whole.
+
+This ability to concentrate on a single source is not limited to just conversations. It also apply to music.
+If we imagine attending a music concert of our favorite band, it is likely that we focus on the lead vocalist and miss out many details of the background band, demonstrating again our ability to \emph{separate} audio mixtures, at least cognitively.
+
 \par
-In the audio research community, the attenuation of undesired speakers, when multiple concurrent speakers are present, is known as the ``cocktail party problem''~\cite{haykin05}.
-Since almost 70 years (~\cite{cherry53}), research is fascinated by the idea to create a machine that separates the sources in a mixture.
-This problem is called \emph{source separation}.
-Although most scientific efforts have focused on separation, our example highlights that just the number of sources is already a valuable information.
-Many separation methods rely on this information for the effectiveness of subsequent processing.
-These two tasks, separating and estimating the number of sources, not just limited to conversations, also apply to music as well.
-If we imagine attending a music concert of our favorite band, it is likely that we focus on the lead vocalist and miss out many details of the background band.
-Furthermore, both scenarios of music and speech mixtures have more in common: it is valid to assume that estimating the number of sources and separating them is easier when there is less \emph{overlap} of the signals.
+In the audio research community, building a machine that is capable of attenuating undesired speakers, when multiple concurrent speakers are present, is known as the ``cocktail party problem''~\cite{haykin05}.
+Since almost 70 years (~\cite{cherry53}), research is fascinated by this idea to computationally immitate this ability of humans to separate the sources in a mixture.
+In the general setting, which is not restricted to the cocktail party scenario but also includes music processing, this problem is called \emph{source separation} and is one of the key topics considered in this thesis.
+
+%INTRODUCING COUNTING
+Our example also highlights that before the actual content for the separate conversations at the party, the \emph{number of sources} may already be a valuable information to describe an audio scene and it is the second core topic of investigation considered in this thesis.
+
+As we exemplify in our work, humans are not impressively good for counting sources based on audio. The fact is that they can only robustly count the number of speakers in a crown up to three, above which they'd rather talk of ```many```.
+This sharply contrasts with their mastery for focusing on a single source in a crowded audio scene.
+\par
+That finding that humans are not experts in source counting suggests that it may be challenging in its own right to build a machine that solves this problem, although that topic appears much less investigated than separation. %YOU SHOULD PROBABLY MENTION SOME REFERENCE HERE ALL THE SAME
+Furthermore, from a more technical point of view, many separation methods rely on the prior knowledge of the number of sources for their computations, requiring this information to be estimated beforehand, or provided by a user.
+% you may cite our work with gael and durrieu at wiamis 2013 here if you'd like to polish gael (overview of informed source separation)
+
+
+% NOW WE SWITCH TO THE CONCEPT OF OVERLAP
+\par
+Our starting point in this thesis is that regardless we consider music or speech mixtures, the core concept that makes processing challenging is the \emph{overlap} of the signals. Our whole work then revolved around addressing separation and counting in cases of extreme signals overlap.
 % why?
-And both tasks become even more challenging when sources are almost entirely overlapped such as when multiple instruments are playing the same note (in unison).
-In this unique scenario where sources are overlapped in time and frequency, observable differences between sources are difficult to obtain.
-Here, it is important to note that sounds are not stationary, but they vary with time.
-Instruments and our voice can have distinct modulations such as vibrato, created by conscious physical manipulation of the sound, to make a sound more pleasant to the listener~\cite{fletcher01}.
+For this reason, our running scenario will consist in cases where sources almost entirely overlap both in time and in frequency: crowds of people talking all together, or multiple musical instruments playing the same note (in unison).
+
+In this setting of strong overlaps, observable differences between sources are difficult to obtain at a short time scale. However, the key fact we exploit throughout this work is that differences do appear when we consider longer time contexts, for which the variations of sources over time do make a difference.
+For instance, speech and the sound of musical instruments can have distinct modulations such as vibrato, created by different physical resonators. In speech, vibratos may actually be achieved on purpose, to make a sound more pleasant to the listener~\cite{fletcher01}.
 \par
-In this thesis, we want to investigate if modulations can be used to separate highly overlapped speech and music source signals and
-To address this question we want to study scenarios where sources are highly overlapped.
-We then want to study and develop representations that allow improving analysis and processing of these signals.
-Also, we want to develop new methods to address source separation scenarios.
-These methods are designed for the constrained scenarios where modulation effects can easily be exploited.
-Also, we want to transfer the results and insights gained by these controlled studies onto more real-world scenarios.
-And finally, investigate and develop new methods to address the task of estimating the number of sources in highly overlapped mixtures.
+In this thesis, we show how this concept of ```modulations``` can be used to separate highly overlapped speech and music source signals and
+to successfuly achieve separation and counting in such cases.
+For this purpose, we first study and develop new representations that improve the analysis and processing of such signals.
+Second, we develop new methods built upon such representations to address source separation. Third, we show how features that may be unedrstood as modulation-based play a fundamental role in data-driven models that achieve source counting.
+Finally, we show how such research may be transferred from synthetic signals to real-world scenarios 
 
 % TODO: check if scope is clear (not promise too much)
 
@@ -67,7 +80,7 @@ Both studies confirmed earlier studies, indicating that humans can only correctl
 Furthermore, I show that this model reached state-of-the art performance when compared to other models and also supersedes human performance when compared with the results of my subjective listening experiments.
 Finally I revealed the relation between slow modulations in speech and the ability of a model of \emph{learning to count}.
 
-\item As a practical contribution, I developed tools to assess the quality of separation system by means of interactive web applications. 
+\item As a practical contribution, I developed tools to assess the quality of separation system by means of interactive web applications.
 I helped to create publicly available datasets for separation and \(F0\) estimation.
 Furthermore, I  co-organized the international source separation evaluation campaign (SiSEC) to improve sustainability and reproducibility for the research community.
 \end{enumerate}
