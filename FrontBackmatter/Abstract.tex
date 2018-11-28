@@ -10,23 +10,23 @@
 \let\cleardoublepage\relax
 
 \chapter*{Abstract}
-Everyday audio recordings involve mixture signals: music contains a mixture of instruments; in a meeting or conference, there is a mixture of human voices.
-Although human listeners can focus their attention on a particular sound source, automatically applying separation and count estimation remains a challenging task for a machine.
-A common assumption when processing mixtures in the time-frequency domain (as is the case of non-negative matrix factorization) is that sources are not fully overlapped.
-However, in this work we consider some cases where the overlap is severe --- for instance, when instruments play the same note (unison) or when many people speak concurrently ("cocktail party") --- highlighting the need for new representations and powerful models to address these two tasks.
+Everyday audio recordings involve mixture signals: music contains a mixture of instruments; in a meeting or conference, there is a mixture of human voices. 
+For these mixtures, automatically separating or estimating the number of sources is a challenging task.
+A common assumption when processing mixtures in the time-frequency domain is that sources are not fully overlapped.
+However, in this work we consider some cases where the overlap is severe --- for instance, when instruments play the same note (unison) or when many people speak concurrently ("cocktail party") --- highlighting the need for new representations and more powerful models.
 \par
-To address the problems of source separation and counting, we used conventional signal processing techniques as well as deep neural networks (DNN).
+To address the problems of source separation and count estimation, we use conventional signal processing techniques as well as deep neural networks (DNN).
 We first address the source separation problem for unison instrument mixtures, studying the distinct spectro-temporal modulations caused by vibrato.
-To exploit these modulations, we develop a method based on time warping informed by an estimate of the fundamental frequency.
+To exploit these modulations, we developed a method based on time warping, informed by an estimate of the fundamental frequency.
 For cases where such estimates are not available, we present an unsupervised model, inspired by the way humans group time-varying sources (common fate).
 This contribution comes with a novel representation that improves separation for overlapped and modulated sources on unison mixtures but also improves vocal and accompaniment separation when used as an input for a DNN model.
+\par
 Then, we focus on estimating the number of sources in a mixture, which is important for real-world scenarios.
-Most existing approaches rely on non-overlapping segments to facilitate ``counting by detection''.
-In the presence of more overlap, however, we consider the problem of directly inferring a count.
-Our work on count estimation was motivated by a study on how humans can solve this task, which lead us to conduct listening experiments confirming that humans are only able to estimate the number of up to four sources correctly.
-To answer the question of whether machines can perform similarly, we present a DNN architecture, trained to estimate the number of concurrent speakers in a cocktail party scenario of up to ten speakers. 
+Our work on count estimation was motivated by a study on how humans can address this task, which lead us to conduct listening experiments, confirming that humans are only able to estimate the number of up to four sources correctly.
+To answer the question of whether machines can perform similarly, we present a DNN architecture, trained to estimate the number of concurrent speakers.
 Our results show improvements compared to other methods, and the model even outperformed humans on the same task.
-In both the source separation and source counting tasks, the key contribution of this thesis is the concept of ``modulation'', which  is fundamental to computationally mimic human performance. 
+\par
+In both the source separation and source count estimation tasks, the key contribution of this thesis is the concept of ``modulation'', which is important to computationally mimic human performance. 
 Our proposed common fate transform is an adequate representation to disentangle overlapping signals for separation, and an inspection of our DNN count model revealed that it proceeds to find modulation-like intermediate features.
 \vfill
 
@@ -34,9 +34,15 @@ Our proposed common fate transform is an adequate representation to disentangle 
 \pdfbookmark[1]{Zusammenfassung}{Zusammenfassung}
 \chapter*{Zusammenfassung}
 
-In unserem Alltag sind wir ständig von Signalmischungen umgeben: Musik  besteht aus einer Mischung von Instrumenten; in einem Meeting oder auf einer Konferenz sind wir Mischungen der menschlichen Stimme ausgesetzt.
-Obwohl es für den menschlichen Zuhörer leicht ist, seine Aufmerksamkeit auf eine bestimmte Klangquelle zu fokussieren, bleibt die automatische Zählung und Trennung der Quellen eine anspruchsvolle Aufgabe.
-Wenn zwei Instrumente die gleiche Note spielen (Unisono) oder wenn viele Menschen gleichzeitig sprechen (``Cocktail-Party''), ist die Überlappung groß, was die Notwendigkeit an neuen Repräsentationen und leistungsfähiger Modelle zur Bewältigung dieser beiden Aufgaben unterstreicht.
+In unserem Alltag sind wir ständig von gemischten Signalen umgeben: Musik besteht aus einer Mischung von Instrumenten; in einem Meeting oder auf einer Konferenz sind wir einer Mischung menschlicher Stimmen ausgesetzt.
+Obwohl wir Menschen unsere Aufmerksamkeit auf bestimmte Klangquellen richten können, bleibt die automatische Zählung und Trennung der Quellen eine anspruchsvolle Aufgabe für den Computer.
+Eine häufige Annahme bei der Verarbeitung von gemischten Signalen im Zeit-Frequenzbereich ist, dass ihre Quellen nicht vollständig überlappend sind.
+In dieser Arbeit betrachten wir jedoch einige Fälle, in denen die Überlappung immens ist --- zum Beispiel, wenn Instrumente den gleichen Ton spielen (unisono) oder wenn viele Menschen gleichzeitig sprechen (Cocktailparty) --- ,so dass die Notwendigkeit nach neuen Repräsentationen und leistungsfähigeren Modelle besteht.
+Um die zwei genanten Probleme zu bewältigen, haben wir sowohl konventionelle Signalverbeitungsmethoden als  auch tiefgehende neuronale Netze (DNN) verwendet.
+Wir gehen zunächst auf das Problem der Quellentrennung für unisono Instrumentenmischungen ein und untersuchen die speziellen, zeitlich-spektralen Modulationen, ausgelöst durch das Vibrato.
+Um diese Modulationen auszunutzen, entwickelten wir eine Methode, die auf dem Zeitverzerrung basiert und eine Schätzung der Grundfrequenz als zusätzliche Information nutzt.
+
+Wenn zwei Instrumente den gleichen Ton spielen (unisono) oder wenn viele Menschen gleichzeitig sprechen (``Cocktail-Party''), ist die Überlappung groß, was die Notwendigkeit an neuen Repräsentationen und leistungsfähiger Modelle zur Bewältigung dieser beiden Aufgaben unterstreicht.
 Bei der Trennung von Quellen im Zeit-Frequenzbereich (wie bei der nicht-negativen Matrixfaktorisierung) wird häufig angenommen, dass die Quellen nicht vollständig überlappt sind.
 Die meisten Ansätze haben sich jedoch auf nicht überlappende Segmente konzentriert um eine Zählung durch Erkennung zu erleichtern, aber mit einer grösseren Überlappung müssen die Strategien hinzu eine direkten  Anzahl verlagert werden.
 Die genaue Schätzung der Anzahl von Quellen ist für reale Szenarien sehr wichtig.

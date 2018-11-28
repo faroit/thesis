@@ -2,12 +2,15 @@
 % Table of Contents
 %*******************************************************
 \pagestyle{scrheadings}
+
 %\phantomsection
 \pdfbookmark[1]{\contentsname}{tableofcontents}
 \setcounter{tocdepth}{1} % <-- 1 includes up to sections in the ToC
 \setcounter{secnumdepth}{2} % <-- 2 numbers up to subsections
 \manualmark
 \markboth{\spacedlowsmallcaps{\contentsname}}{\spacedlowsmallcaps{\contentsname}}
+\vspace{-10mm}
+
 \tableofcontents
 \automark[section]{chapter}
 \renewcommand{\chaptermark}[1]{\markboth{\spacedlowsmallcaps{#1}}{\spacedlowsmallcaps{#1}}}
@@ -20,6 +23,7 @@
 \begingroup
     \let\clearpage\relax
     \let\cleardoublepage\relax
+    
     %*******************************************************
     % List of Figures
     %*******************************************************

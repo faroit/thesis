@@ -193,7 +193,7 @@ Assume for the rest of this section that these parameters~$\mathbf{\theta}$ are 
 Given a previously unseen input~$\mathbf{X}$, expression~(\ref{eq:output_distribution}) means we can compute the distribution of the source count~$k$.
 % The advantage of that probabilistic formulation is to introduce some flexibility instead of enforcing a more classical deterministic mapping such as~$k_{t}=f_{\mathbf{\theta}}\left(\mathbf{X}_{t}\right)$.
 
-The objective of our counting system is to produce a point estimate~$\hat{k}$ rather than a whole output distribution~$\mathbb{P}\left(k\mid\mathbf{X}\right)$.
+The objective of our count estimation system is to produce a point estimate~$\hat{k}$ rather than a whole output distribution~$\mathbb{P}\left(k\mid\mathbf{X}\right)$.
 A first option is to pick as an estimate the most likely outcome for the output distribution, thus resorting to Maximum A Posteriori (MAP) estimation:
 \begin{equation}
 \hat{k}=\underset{k}{\text{argmax}}\ \mathcal{L}\left(k\mid f_{\mathbf{\theta}}\left(\mathbf{X}\right)\right).
@@ -252,7 +252,7 @@ Given some particular input~$\mathbf{X}$, the network generates the posterior ou
 % First, the intuitive ranking between different estimates is lost: e.g. \(p(\cardinality = 6) \) may not depend on \(p(\cardinality = 5) \).
 % Second, the largest possible count $L$ is given \textit{a priori}.
 % Despite these limitations,
-Classification based approaches have successfully been applied in deep neural networks for counting objects~\cite{segui15, zhang2015salient, khan16} in images.
+Classification based approaches have successfully been applied in deep neural networks for estimating counts in objects~\cite{segui15, zhang2015salient, khan16} in images.
 
 \subsubsection{Gaussian Regression}
 In regression, $k$ is derived from an output distribution defined on the real line.
@@ -266,14 +266,14 @@ However, this comes with the additional difficulty of handling the fact that~$k$
 The output distribution in this setting is assumed to be Gaussian and the associated cost function is the classical squared error.
 During inference and given the output~$f_{\mathbf{\mathbf{\theta}}}\left(\mathbf{X}\right)$ of the network, the best discrete value that is consistent with the model is simply the rounding operator $q = \left[\cdot\right]$.
 
-Gaussian regression has achieved state-of-the-art counting performance in computer vision using deep learning frameworks~\cite{zhang15, marsden16, boominathan16}.
+Gaussian regression has achieved state-of-the-art count estimation performance in computer vision using deep learning frameworks~\cite{zhang15, marsden16, boominathan16}.
 
 \subsubsection{Discrete Poisson modeling}
 When it comes to modeling count data, it is often shown effective to adopt the Poisson distribution~\cite{fallah09}.
 First, this strategy retains the advantage of the classification approach to directly pick a probabilistic model over the actual discrete observations, avoiding the somewhat artificial trick of introducing a latent variable that would be rounded to yield the observation.
 Second, the model avoids the inconvenience of the classification approach to completely drop dependencies between classes.
 
-Due to these advantages, the Poisson distribution has been used in studies devising deep architectures for counting systems~\cite{Rezatofigh16}.
+Due to these advantages, the Poisson distribution has been used in studies devising deep architectures for count estimation systems~\cite{Rezatofigh16}.
 For instance in~\cite{fallah09, chan09, Rezatofigh16}, it is shown that the number of objects in images can be well modeled by the Poisson distribution. Inspired by these previous works, we also consider the Poisson output distribution \(\mathcal{P}\left(k\mid f_{\mathbf{\mathbf{\theta}}}\left(\mathbf{X}\right)\right)\)
 
 % \begin{equation}
@@ -475,12 +475,6 @@ For the Poisson regression, the likelihood of parameter \(\lambda \) given the t
 \caption{Overview of the proposed Architectures.}%
 \label{fig:networkoverview}%
 \end{figure*}
-
-\section{Training}%
-\label{sec:training}
-
-To successfully train and evaluate the proposed DNNs, due to the number of parameters, a large amount of training data is required.
-In this section, we introduce relevant speech corpora and describe how the training dataset was assembled.
 
 \subsection{Speech Corpora and Annotations}%
 \label{ssec:corpus}
@@ -907,7 +901,7 @@ These results suggest that the trained model is speaker and language independent
 % * --> Significant Performance Drop (diff 2.0 MAE)
 % * Retrained using train room: [3, 4, 2] and valid room: [4, 5, 3]
 % * Performance back to (0.6 MAE)
-Different acoustical conditions such as increased reverberation time were shown~\cite{Pasha17_reverb} to have a large effect in speaker counting.
+Different acoustical conditions such as increased reverberation time were shown~\cite{Pasha17_reverb} to have a large effect in speaker count estimation.
 To analyze this effect, different acoustic conditions were simulated by generating the room impulse responses using the image method~\cite{allen79, habets16}.
 For this experiment we set up an acoustical room with dimension ($3.5~\mbox{m} \times 4.5~\mbox{m} \times 2.5~\mbox{m}$)
 The microphone was positioned at (1m, 1m, 1m).
@@ -997,7 +991,7 @@ To compare the results of our trained CRNN on our synthesized dataset to human p
 \label{fig:convoutputs}
 \end{figure}
 % Select best-performing system (CRNN, Classification, STFT) and analyse how it achieves the performance.
-In this section, we focus on the problem of interpreting the strategy undergone by this system for successful counting.
+In this section, we focus on the problem of interpreting the strategy undergone by this system for successful estimating counts.
 
 \subsection{Saliency Maps}
 We first conducted a visual analysis based on salience map representations~\cite{simonyan13}.
