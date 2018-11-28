@@ -44,8 +44,6 @@
 * [ ] Thomas
 * [ ] Christophe
 * [ ] Antoine
-* [ ] 
-TODO: <!-- ultidimensional representations that more closely model the human perceptio -->
 * [ ] Rohlinge kaufen
 * [ ] Zwei Einfache USB sticks (marke: kingston, sandisk)
 
