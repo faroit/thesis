@@ -40,7 +40,7 @@ Eine häufige Annahme bei der Verarbeitung von gemischten Signalen im Zeit-Frequ
 In dieser Arbeit betrachten wir jedoch einige Fälle, in denen die Überlappung immens ist --- zum Beispiel, wenn Instrumente den gleichen Ton spielen (unisono) oder wenn viele Menschen gleichzeitig sprechen (Cocktailparty) ---, so dass neue Signal-Repräsentationen und leistungsfähigere Modelle notwendig sind.
 \par
 Um die zwei genannten Probleme zu bewältigen, verwenden wir sowohl konventionelle Signalverbeitungsmethoden als auch tiefgehende neuronale Netze (DNN).
-Wir gehen zunächst auf das Problem der Quellentrennung für Unisono-Instrumentenmischungen ein und untersuchen die speziellen, durch Vibrato ausgelösten, zeitlich-spektralen Modulationen
+Wir gehen zunächst auf das Problem der Quellentrennung für Unisono-Instrumentenmischungen ein und untersuchen die speziellen, durch Vibrato ausgelösten, zeitlich-spektralen Modulationen.
 Um diese Modulationen auszunutzen entwickelten wir eine Methode, die auf Zeitverzerrung basiert und eine Schätzung der Grundfrequenz als zusätzliche Information nutzt.
 Für Fälle, in denen diese Schätzungen nicht verfügbar sind, stellen wir ein unüberwachtes Modell vor, das inspiriert ist von der Art und Weise, wie Menschen zeitveränderliche Quellen gruppieren (Common Fate).
 Dieser Beitrag enthält eine neuartige Repräsentation, die die Separierbarkeit für überlappte und modulierte Quellen in Unisono-Mischungen erhöht, aber auch die Trennung in Gesang und Begleitung verbessert, wenn sie  in einem DNN-Modell verwendet wird.
@@ -51,7 +51,7 @@ Dies hat uns dazu veranlasst, eigene Hörexperimente durchzuführen, die bestät
 Um nun die Frage zu beantworten, ob Maschinen dies ähnlich gut können, stellen wir eine DNN-Architektur vor, die erlernt hat, die Anzahl der gleichzeitig sprechenden Sprecher zu ermitteln.
 Die Ergebnisse zeigen Verbesserungen im Vergleich zu anderen Methoden, aber vor allem auch im Vergleich zu menschlichen Hörern.
 \par
-Sowohl bei der Quellentrennung als auch bei der Schätzung der Anzahl an Quuellen ist ein Kernbeitrag dieser Arbeit das Konzept der ``Modulation'', welches wichtig ist, um die Strategien von Menschen mittels Computern nachzuahmen.
+Sowohl bei der Quellentrennung als auch bei der Schätzung der Anzahl an Quellen ist ein Kernbeitrag dieser Arbeit das Konzept der ``Modulation'', welches wichtig ist, um die Strategien von Menschen mittels Computern nachzuahmen.
 Unsere vorgeschlagene Common Fate Transformation ist eine adäquate Darstellung, um die Überlappung von Signalen für die Trennung zugänglich zu machen und eine Inspektion unseres DNN-Zählmodells ergab schließlich, dass sich auch hier modulationsähnliche Merkmale finden lassen.
 \end{otherlanguage}
 
