@@ -50,7 +50,7 @@ For example, vibrato rates vary across different instruments.
 In~\cite{macleod06} the vibrato width (frequency deviation) was found to be significantly different between violinists and violists performers.
 This can be exploited in source separation scenarios.
 \par
-However, in the case of a NMF, it lacks the ability to model time-varying frequencies since the $\mathbf{W}$ matrix is fixed.
+However, in the case of a NMF, it lacks the ability to model time-varying frequencies (See details in Chapter~\ref{cha:unknown}).
 Several extensions for NMF have been proposed to improve the decomposition quality.
 Hennequin et al. proposed in \cite{hennequin11} a frequency dependent activations matrices, whereas Smaragdis et al. developed a variant of the NMF in ~\cite{smaragdis08} which is invariant to frequency shifts.
 Another approach is to model the spectral pattern changes by Markov chains \cite{nakano10}. All these approaches attempt to model the non-stationary effects within the decomposition model.
@@ -131,7 +131,7 @@ absolute value for a mixed signal. Secondly every harmonic line has to be indivi
 \label{fig:warpingdemo}
 \end{figure}
 
-With the ability to remove the frequency modulation from a signal, we included this system in a source separation system to address the non-stationarity issues of NMF based approaches. 
+With the ability to remove the frequency modulation from a signal, we included time warping in a source separation system to address the non-stationarity issues of NMF based approaches. 
 Figure~\ref{fig:warpingdemo} shows how this system works on a purely harmonic FM signal mixture. 
 Plots (a) and (b) show the two input signals which are linearly mixed (c). 
 For each source, the warp contour needs to be calculated. 
@@ -185,7 +185,7 @@ The results have also been evaluated and confirmed subjectively by informal list
 \section{Extending $F0$ Informed Separation}%
 \label{sec:extendingf0}
 
-\marginpar{This results of this extension were submitted and evaluated in SiSEC 2015 and SiSEC 2016.}
+\marginpar{This results of this extension were submitted and evaluated in SiSEC 2015.}
 
 In the previous section, we showed the effectiveness of a \(F0\) variation informed separation system on our constrained unison source separation scenario.
 In the following section, we show how the method can be extended to the scenario of separating the vocals/lead from the accompaniment by using predominant melody estimation as depicted in Figure~\ref{fig:methods_harmonicity}.
@@ -261,7 +261,7 @@ To reduce the complexity of the extraction, compared to the NMF mentioned in Sec
 Therefore, we used an IIR Filter with the frequency response
 
 \begin{equation}
-  H(z) = \frac{1}{1 - 0.75^z{-P}},
+  H(z) = \frac{1}{1 - 0.75z^{-P}},
 \end{equation}
 
 where \(P\) is constant --- due to the time warping --- pitch period in samples.
@@ -336,7 +336,7 @@ Shortly after we submitted the separation results to the SiSEC 2015 evaluation c
 Among them are several tasks related to music information retrieval (MIR) such as singing voice detection which received major breakthroughs in 2014 and 2015~\cite{lehner14, lehner15, Leglaive15, schlueter15}.
 \par
 % Locking back, at that time, we did not have enough knowledge to understand how and why deep learning method are so successful~\footnote{And even today, very few people would say that the deep learning community made significant progress regarding the understanding of DNNs.}.
-Therefore, we decided to integrate a state-of-the-art singing voice detection system into the separation pipeline and evaluate just the end-to-end performance.
+Therefore, we decided to integrate a state-of-the-art singing voice detection system into the separation pipeline and evaluate the end-to-end performance.
 We chose to reimplement the system by Leglaive~\cite{Leglaive15}, since it was a good compromise between complexity (its use of hand-crafted features instead of large STFT frames) and performance.
 In fact, the system reached a state-of-the-art accuracy of 91.5\% for classifying frames of singing voice for the annotated \emph{Jamendo} singing voice detection dataset~\cite{ramona08}, which is an improvement of more than 10\% compared to the best performing non-DNN system.
 % We want to briefly describe the system published in in~\cite{Leglaive15}, for more details, the reader is referred to the original author's publications.

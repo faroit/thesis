@@ -10,7 +10,7 @@ In blind source separation research, many contributions were based on non-negati
 NMF quickly became one of the main scientific frameworks in the field of audio source separation with a large number of contributions.
 The popularity of NMF algorithms can be explained by the intuitive way in which they work on (non-negative) time-frequency representations of the mixture signal.
 Let us consider the magnitude STFT \(\mX \in \sR_{+}^{F \times T}\) with \(F\) being the number of frequency bins and \(T\) the number of time frames.
-Now, the NMF incorporates non-negative constraints to perform the separation into the sum of \(K\) latent components which are each factored into two matrices (referred to as frequency \emph{basis} \(\mW \in \sR_{+}^ { F \times K }\) and temporal \emph{activations} \(\mH \in \sR_{+}^ { T \times K }\)). 
+Now, the NMF incorporates non-negative constraints to perform the separation into the sum of \(K\) latent components which are each factored into two matrices (referred to as frequency \emph{basis} \(\mW \in \sR_{+}^ { F \times K }\) and temporal \emph{activations} \(\mH \in \sR_{+}^ { T \times K }\)):
 
 \begin{equation}
    \mathbf{X} \approx \mW \mH^{T} = \sum\limits_{k=1}^{K} \vw_{k} \circ \vh_{k}

@@ -77,7 +77,7 @@ For a detailed overview into the research field of pitch and \(F0\), the reader 
 Audio signals are considered to be stationary or time-invariant when their properties such as the amplitude of the fundamental frequency of the signal do not change over time.
 % A stationary sound can turn into time-invariant sound using modulations
 The signal becomes time-variant when an external function changes (modulates) the parameters of a signal over time.
-These simple idea were the basis for many break-through inventions such as radio transmission~\cite{shannon48}.
+This simple idea was the basis for many break-through inventions such as radio transmission~\cite{shannon48}.
 In the case of audio signals, often both the modulating function (modulator or carrier) and the signal being modulated (input), are periodic.
 Signal modulations are often created intentionally but also occur naturally in many real-world audio signals such as speech.
 In the following, we will present audio modulation categories and their cause, underlining the importance of them.
@@ -110,7 +110,7 @@ In comparison to AM, Frequency modulation (FM) varies the frequency of the carri
 
 where A is the amplitude, $\omega_0$ is the carrier frequency, $\omega_m(\theta)$ is the instantaneous modulation frequency, and $m$ is the modulation index $m = \frac{\Delta \omega_0} { \omega_{m} }$.
 
-The Fourier spectrum of $s_FM(t)$, which depends, in theory, on Bessel functions that do not admit a closed-form expression, is intractable in practice~\cite{abramowitz64}.
+The Fourier spectrum of $s_{FM}(t)$, which depends, in theory, on Bessel functions that do not admit a closed-form expression, is intractable in practice~\cite{abramowitz64}.
 % For applications where the modulation frequencies are a lot smaller than the carrier frequency, the spectrum that results by frequency modulations is similar to those of amplitude modulations.
 % This is the reason why algorithms that aim to capture the amplitude modulation will also observe frequency modulations.
 % The total bandwidth in this scenario is approximately $2\Delta \omega_0$, as found by Carson in~\cite{carson22}.\par
@@ -131,8 +131,7 @@ Pitch and intensity vibrato can directly be mapped to AM and FM, a timbre vibrat
 Vibrato is an essential playing style for string instruments like a violin. 
 For these instruments, that are usually plucked or bowed, the strings are the primary source of excitation that is modulated in frequency by the player's finger on a fretboard~\cite{macleod06}.
 Modulations are also present in woodwind and brass instruments; however, instead of the excitation signal, the modulations affect the resonator.
-Many musicians use similar modulation rates to perform a vibrato.
-They vary across musicians and are usually in the range of 4-8\si{\hertz}.
+Many musicians use similar modulation rates to perform a vibrato, usually in the range of 4-8\si{\hertz}.
 A detailed overview of the different musical instruments and their modulation characteristics is presented in~\cite{fletcher01}.
 \par
 Real instruments are not capable of purely amplitude modulated sounds (\emph{tremolo}). 
@@ -144,7 +143,7 @@ Chowning found in~\cite{chowning73} that the modulation of sinusoids using audio
 \par
 It turns out that instrumental vibrato has similar properties compared to vibrato produced in singing voice.
 Vocal vibrato mainly dependents on frequency modulation even though amplitude fluctuations are present~\cite{sundberg94}. 
-The vibrato rate is similar to that of instrumental vibrato with its peak around 5~\si{\hertz}.
+Vocal vibrato rates are similar to that of instrumental vibrato with its peak around 5~\si{\hertz}.
 
 \subsubsection*{Modulations in Speech}
 
@@ -203,7 +202,7 @@ In \emph{convolutive} mixtures, each source \(\mathbf{s_j}\) is convolved by a f
 Usually, the mixing process is assumed to be time-invariant but for a variety of signals, such as live recordings with moving sources, it can also be time-variant.
 The mathematical notations of different mixing models are summarized in Table~\ref{tab:mixing_models}.
 \par
-In the remainder of this thesis, we will only consider the linear case of time-invariant mixing, but many of the methods could be transferred to other cases.
+In the remainder of this thesis, we will only consider the linear (instantaneous) case of time-invariant mixing, but many of the methods could be transferred to other cases.
 
 \begin{table}[]
     \centering
@@ -246,7 +245,7 @@ Mixing sources are a creative task that involves recording engineers and tonmeis
 In today's digital mastering processes, professionally produced music consists of several intermediate mixing steps before the final mixture is produced:
 
 \begin{description}
-  \item[1) Microphone Recording:] in this step, the analog sources are captured and D/A converted. 
+  \item[1) Microphone Recording:] in this step, the analog sources are captured and A/D converted. 
   Vocals and other acoustic instruments are recorded using one or multiple microphones.
   Electric instruments such as electric guitars, keyboards or synthesizers may be amplified and then directly digitized.
   \item[2) Raw Source Image:] the digital raw source signals are grouped and mixed into a \emph{source image} (also \emph{stem}).
@@ -305,7 +304,7 @@ E.g., often in popular music, a fixed panning for the vocals is correctly assume
 As a large number of recording nowadays is still stored as single channel, in this thesis we want to focus on this single channel separation.
 
 \subsubsection*{Blind vs. Supervised Separation}
-A blind separation source separation system does not require additional information about the source signals, the location or acoustical environment to perform separation~\cite{makino07}.
+A blind source separation system does not require additional information about the source signals, the location or acoustical environment to perform separation~\cite{makino07}.
 In practice, blind source separation is ill-posed and it is not generally possible to find a single solution.
 This why many proposed methods rely on additional information such as the acoustic environment, the musical score or the fundamental frequency~\cite{liutkus13, ewert14}.
 
@@ -350,7 +349,7 @@ Now, concerning the number of sources, two definitions of \(k\) can be imagined:
 
 \begin{description}
 \item[A)] maximum number of sources, even if not concurrently active. It is simply the sum of all sources that are active at least once within \(N\). This definition is more useful when the sources can be identified or detected first. This definition can also be considered as ``counting by detection''.
-\item[B)] maximum number of concurrent sources even if the sources belong to the same class. Here, it represents the maximum the mixtures concurrency. This definition is more useful as a preprocessing for a separation system since such a system would only require the number of auditory streams and not the number of (non-concurrent) sources. For such approaches it becomes possible to apply separation only when its ``needed''. This definition can also be considered as ``direct count estimation''\footnote{Note the subtle difference between ``counting'', which refers to a sequential process and ``count estimation'' or ``denumerating'', which directly relate to an integer.}.
+\item[B)] maximum number of concurrent sources even if the sources belong to the same class. Here, it represents the maximum of the mixtures concurrency. This definition is more useful as a preprocessing for a separation system since such a system would only require the number of auditory streams and not the number of (non-concurrent) sources. For such approaches it becomes possible to apply separation only when its ``needed''. This definition can also be considered as ``direct count estimation''\footnote{Note the subtle difference between ``counting'', which refers to a sequential process and ``count estimation'' or ``denumerating'', which directly relate to an integer.}.
 \end{description}
 
 At short time scales A) is equal to B) because the instrumentation usually does not change. 

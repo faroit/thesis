@@ -13,8 +13,8 @@ One thing, however, we can assess directly is if humans can reliably detect the 
 \par
 In order to address this question, it helps to understand how humans infer counts and if our strategy is depending on the count.
 When we look at vision, these are questions that have already been discussed over a hundred years ago in scientific research; an early study in the field of psychology of vision was published by Jevons in 1871~\cite{jevons1871}.
-He presented an experiment to quickly infer the number of objects (beans) and came up with the hypothesis that humans can instantly estimate the number of objects without actually counting and therefore identifying them.
-He mentioned in~\cite{jevons1871}:
+Jenvons presented an experiment to quickly infer the number of objects (beans) and came up with the hypothesis that humans can instantly estimate the number of objects without actually counting and therefore identifying them.
+Jenvons mentioned in~\cite{jevons1871}:
 
 \begin{quote}
 ``It is well known that the mind is unable through the eye to estimate any large number of objects without counting them successively. A small number, for instance, three or four, it can certainly comprehend and count by an instantaneous and apparently single act of mental attention.''
@@ -106,7 +106,7 @@ C001 & 147&8 & 6&0 & Bassoon, Clarinet, Contrabass, French~Horn, Oboe and Violin
 G028 & 17&5 & 6&5 & Electric~Bass, Electric~Guitar, Flute, Piano, Trombone and Trumpet & 6\\
 \bottomrule[1.5pt]
 \end{tabular}
-\caption{Selected items from the RWC Music Database \cite{rwc}. Item \emph{J021**} is used as training item.}
+\caption{Selected items from the RWC Music Database \cite{rwc}. Item \emph{J021} is used as training item.}
 \label{tab:items}
 \end{table}
 
@@ -633,6 +633,8 @@ One of the stimuli in the experiments consisted of a unison mixture. The results
 \par
 Surprising was the small number of participants who had to be screened. We excluded 27 participants since they gave at least one non-serious response which is about 2.3\% (1195 participants remained after excluding all trials which were not the first ones). Most of these excluded participants responded with either very high numbers (e.~g. 99) or responded with zeros for their estimated number of instruments being played. We assume that especially participants who responded with zero only wanted to get an impression of the experiment.
 
+\newpage
+
 \section{Speaker Count Estimation}%
 \label{sec:count_experiment}
 
@@ -680,7 +682,7 @@ The Dataset is available for download~\cite{oss_libricount}.
 \end{figure}
 
 We conducted a study using the simulated data from the \emph{LIBRI Count Dataset} as mentioned in the previous subsection.
-In turn, we randomly selected 10 samples for each \(k \in {0, \ldots, 10}\), resulting in 100 mixtures of 5~seconds duration each.
+In turn, we randomly selected 10 samples for each \(k \in {1, \ldots, 10}\), resulting in 100 mixtures of 5~seconds duration each.
 The stimuli were presented in random order using a custom web-based interface (depicted in Figure~\ref{fig:user_interface_speaker}) connected to a database API that saved the anonymized count responses and additional information about the participant session such as the response time.
 The experiment was done using \emph{between-group design}, where one group (blind experiment) did not get any prior information about the maximum number of speakers in the test set (similar to~\cite{kawashima15}).
 However, the maximum number of speakers was revealed to the other group (informed experiment).
