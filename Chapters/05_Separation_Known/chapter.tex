@@ -327,11 +327,10 @@ Unfortunately, the newly created MSD100 dataset was not mixed using professional
 Due to their small energy, they were not detected as voiced by \emph{Melodia}, hence the warping was not applied. Also, in some cases the estimates were one octave off, producing severe artifacts due to extreme warping.\par
 On the positive side, the proposed method is of very low complexity.
 
-\subsection{Improving Voiced/Unvoiced Detection using Deep Neural Networks}
+\subsection{Improving Voiced/Unvoiced Detection using DNNs}
 
 As mentioned in the previous section, voice activity detection is of paramount importance in the proposed music separation system.
 Therefore, we decided to evaluate if the performance of the system can be improved by using a more robust voice activity detection method as a separate preprocessing step.
-\par
 Shortly after we submitted the separation results to the SiSEC 2015 evaluation campaign, the whole audio community was shaken up by the recent success of deep learning throughout several audio related tasks that go beyond automatic speech recognition.
 Among them are several tasks related to music information retrieval (MIR) such as singing voice detection which received major breakthroughs in 2014 and 2015~\cite{lehner14, lehner15, Leglaive15, schlueter15}.
 \par
@@ -361,10 +360,12 @@ We trained the network using a fixed number of frames from the DSD100 training d
 The vocal activity labels were obtained from the dataset by analyzing the true vocals.
 The network was created and trained using the Keras framework~\cite{chollet15}.
 We stacked up to three layers using the parameters as mentioned in~\cite{Leglaive15} but used unidirectional LSTMs instead of bi-directional to reduce computational complexity.
-The trained network achieves an accuracy of 85\% on the test set.\par
+The trained network achieves an accuracy of 85\% on the test set.
 While the original network proposed in~\cite{Leglaive15} was framed as a classification task, we modified the sigmoid output activation and replaced it with a linear activation, then trained using the mean squared error cost function.
 This output gain is then multiplied with the mixture signal so that segments with less energy are reduced in volume instead of a boolean decision.
 In experiments, we found out that this helps the \emph{Melodia} algorithm to better detect vocal activity throughout an audio track and therefore yields in melody estimates with fewer errors.
+This DNN-optimized version of the algorithm was then compared (but not submitted) to the new the SiSEC 2016 dataset which was released in the meantime~\cite{liutkus17}.
+The results, depicted in Figure~\ref{fig:05_comparison_sto_stodnn} show that the DNN vocal activity detection improved the vocals SDR by 1.5~dB which is considered as a significant improvements.
 
 \begin{figure}
   \centering
@@ -372,11 +373,6 @@ In experiments, we found out that this helps the \emph{Melodia} algorithm to bet
   \caption{BSS Eval scores for the vocals and accompaniment estimates on the DSD100 dataset as used in~\cite{liutkus17}. Results are shown on the \emph{test} set only. Results indicate the improvements of the DNN based vocal activity detection system (\textsc{STOD}) in comparison to the baseline system (\textsc{STO}) that was submitted to~\cite{ono15}.}
   \label{fig:05_comparison_sto_stodnn}
 \end{figure}
-
-This DNN-optimized version of the algorithm was then compared (but not submitted) to the new the SiSEC 2016 dataset which was released in the meantime~\cite{liutkus17}.
-The results, depicted in Figure~\ref{fig:05_comparison_sto_stodnn} show that the DNN vocal activity detection improved the vocals SDR by 1.5~dB which is considered as a significant improvements.
-
-\clearpage
 
 \section{Improving $F0$ Estimation Using Time Warping} % (fold)
 \label{sec:f0method}

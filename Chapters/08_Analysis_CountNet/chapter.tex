@@ -610,8 +610,6 @@ performed evaluation of all models on \(T_{\textrm{test}} = 5720\) unique and un
 Several well-established input representations were evaluated in~\cite{stoeter17} such as (linear or logarithmically scaled) short-time Fourier transform (STFT), Mel filter bank outputs (MEL), Mel Frequency Cepstral Coefficients (MFCC) representations, typically chosen for speech applications (compare Table~\ref{tab:inputrep})
 
 \begin{table}
-\caption{Speech related input representations in related work.}
-\label{tab:inputrep}
   \centering
   \scriptsize
 \begin{tabular}{rll}
@@ -624,6 +622,8 @@ References & Task & Representation \\
 \cite{schluter15, schluter16} & Singing Voice AD & \(\log(1 + \mathbf{X})\) \\
 \bottomrule
 \end{tabular}
+\caption{Speech related input representations in related work.}
+\label{tab:inputrep}
 \end{table}
 
 % As for the task of estimating the number of speakers, we assume that a fine frequency resolution is needed to discriminate time-frequency bins with overlapped speech segments from those that only belong to a single speaker.
@@ -1045,8 +1045,6 @@ For these samples we computed an average speaking rate of \(3.40\) syllables per
 We chose a Generalized Linear Model (GLM) for the statistical test, as described in~\cite{jaeger08}.
 This allows us model the results with a binary logit regression model that turns the mean of E into a binomial distributed probability modeled by log linear values: \(\mbox{logit}(E) \sim \mbox{Intercept} + \beta \cdot{\mbox{Speaking Rate}}\).
 \begin{table}[t]
-\caption{Results of a binary logit regression test for the dependent variable \emph{correct response} over the independent variable \emph{speaking rate}. The results are based on $n=2000$ randomly drawn results of the CRNN model trained and evaluated on the TIMIT dataset.}%
-\label{tab:logit}
 \begin{center}
 \begin{tabular}{lcccc}
 \toprule
@@ -1056,6 +1054,8 @@ This allows us model the results with a binary logit regression model that turns
 \textbf{intercept}          &      4.3213  &        0.790     &    5.468  &         0.000  \\
 \bottomrule
 \end{tabular}
+\caption{Results of a binary logit regression test for the dependent variable \emph{correct response} over the independent variable \emph{speaking rate}. The results are based on $n=2000$ randomly drawn results of the CRNN model trained and evaluated on the TIMIT dataset.}%
+\label{tab:logit}
 \end{center}
 \end{table}
 The results of our test are shown in Table~\ref{tab:logit} and indicate the speaking rate has statistically significant influence on the error \(p < 0.05, df=1, \textrm{Pseudo}\ R^2=0.0111\).
