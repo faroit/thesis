@@ -117,7 +117,7 @@ The modulation spectrogram has already gathered much attention in speech recogni
 \par
 In practice, the modulation tensor \(\mathbf{V}_{f, b, t}\) , where \(b\) represents the modulation index, can be computed from the (magnitude) time frequency matrix \(\mathbf{X}_{f, t}\) by computing \(f\) time frequency transforms over each frequency band of \(\mathbf{X}\).
 As proposed by~\cite{barker13}, the non-negative tensor factorization approximates a modulation tensor \(\mV\) by a product of three matrices containing the frequency/basis \(\mW\), time/activation \(\mH\) signals, and the modulation gain for each component \(\mM\).
-The product of this factorization is generally referred to as \emph{PARAFAC} product\footnote{Also known as ``Polyadic form of a tensor'', PARAFAC (parallel factors), CANDECOMP or CAND (canonical decomposition) or CP (CANDECOMP/PARAFAC)~\cite{kolda09}}.
+The product of this factorization is generally referred to as \emph{PARAFAC} product\footnote{Also known as ``Polyadic form of a tensor'', PARAFAC (parallel factors), CANDECOMP or CAND (canonical decomposition) or CP (CANDECOMP/PARAFAC)~\cite{kolda09}.}.
 
 In the vein of the NMF factorization mentioned in Equation~\ref{eq:vanilla_nmf}, a 3-way NTF can simply be extended to:
 
