@@ -3,18 +3,17 @@
 
 In the previous chapter, we presented the fundamentals of highly overlapped signals.
 To study these signals, suitable and controlled data is of paramount importance since many methods rely on audio datasets for development and evaluation.
-Often, suitable audio material is not publicly available which is why we created our own data.
-In the following sections, we present three data sets which we helped creating with the aim to fill this gap and which will be used in subsequent experiments.
+Often, suitable audio material is not publicly available which is when we created our own data.
+In the following sections, we present three datasets which we helped creating with the aim to fill this gap and which will be used in subsequent experiments.
 
 \section{Unison Mixtures}
 \label{sec:unison_dataset}
 
 \marginpar{This subsection is based on~\cite{stoeter14} where the scenario of unsion mixtures was first introduced.}
 
-Synthetic mixtures are created from single source sounds, e.g., through (often random) summation. 
 In speech, it is common to mix clean speech and noise~\cite{varga93} or different clean speech signals such as~\cite{garofolo93} to generate mixtures.
 By contrast, the conversational aspect of human-to-human communication is lost.
-Compared to speech, musical content usually does share familiar orchestration and can hardly be superimposed randomly, and the summing of isolated random notes from musical instrument databases does not reflect musical performances.
+Compared to speech, musical content usually does share familiar orchestration, can hardly be superimposed randomly and the summing of isolated random notes from musical instrument databases does not reflect musical performances.
 On the positive side, there are use-cases for single note datasets such as for evaluation of \(F0\) estimation algorithms or the detection of instruments.
 Furthermore, single note datasets allow to use the data to synthesize musical score as long as the recordings have enough variance of expressions.
 It also allows to quickly generate a large amount of mixtures using randomly permuted mixtures, fostering applications in machine learning.
@@ -138,7 +137,7 @@ We included sensor recordings capturing the finger position on the fingerboard w
 We also included high speed video camera data to capture excitations from the string at 2000 fps.
 Recording video data was inspired by the work of Davis et.\ al.\ in~\cite{Davis2014VisualMic} presenting a ``visual microphone'' which is able to observe sound solely with a camera, pointing to objects in the sound field. 
 \par
-In the proposed test set we chose the violin cello for the following reasons: (1) vibrato is used as a common style for expression, (2) there is an observable physical relationship between frequency modulation and vibrato, and (3) the instrument is large enough to embed sensors to capture the vibrato. The properties of the cello are studied by research in acoustics~\cite{woodhouse04, woodhouse99}.
+In the proposed dataset we chose the violin cello for the following reasons: (1) vibrato is used as a common style for expression, (2) there is an observable physical relationship between frequency modulation and vibrato, and (3) the instrument is large enough to embed sensors to capture the vibrato. The properties of the cello are studied by research in acoustics~\cite{woodhouse04, woodhouse99}.
 \par
 To capture major aspects of the cello while being played by a musician, we focus on three main observations: (1) Excitation caused by the moving bow; (2) the vibrating string, and (3) the finger, controlling the string length by rolling it on the fingerboard.
 The main focus of the recordings is to analyze vibrato playing style. Since it is common that vibrato characteristics differ from musician to musician, all recordings were performed by two musicians. One is a professional cellist with 30 years of experience in a symphonic orchestra\footnote{\url{http://www.bambergerstreichquartett.de/de/Das_Quartett/Karlheinz_Busch}}.
@@ -164,8 +163,7 @@ By making this dataset public domain~\cite{oss_muserc} and including the raw rec
 
 Multitrack datasets are helpful, and often necessary to develop and evaluate methods on complex acoustic tasks such as source separation.
 The Signal Separation Evaluation Campaign (SiSEC) is a solid indicator of the progress in research within the field of source separation \cite{sisec13, ono15, liutkus17, stoeter18sisec}.
-% zafar begin
-Building a good data-driven method for source separation relies heavily on a training dataset to learn the separation model. 
+To evaluate participating methods, multitrack data is required, containing the true sources.
 For professionally-produced or recorded music, the separated sources are often either unavailable or private. 
 Indeed, they are considered amongst the most precious assets of right holders, and it is challenging to find isolated vocals and accompaniment of professional bands that are freely available for the research community to work on without copyright infringements.
 % zafar end
@@ -193,7 +191,7 @@ Over the years, DSD100/MUSDB18 became one of the most used datasets for source s
 The dataset is still tiny in comparison to recent machine learning sets, but it proved to be large enough to help DNN-based methods to reach break through results in source separation~\cite{stoeter18sisec}.
 \par
 Working with multitrack audio files can be cumbersome due to its hierarchical structure that needs to be parsed.
-Additionally, an accompanying software toolbox was developed in Python that permits the straightforward processing of the DSD100 dataset. This software is open source and was publicly broadcasted so as to allow the participants to run the evaluation themselves\footnote{\url{github.com/faroit/dsdtools}}.
+For that purpose, we developed a software toolbox for Python that permits the straightforward processing of the DSD100 dataset. This software is open source and was publicly broadcasted so as to allow the participants to run the evaluation themselves\footnote{\url{github.com/faroit/dsdtools}}.
 \par
 This package integrates with existing Python code, thus makes it easy to participate in the SISEC MUS tasks. The core of this package is calling a user-provided function that separates the mixtures from the DSD into several estimated target sources.
 

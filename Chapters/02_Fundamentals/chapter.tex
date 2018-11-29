@@ -2,7 +2,7 @@
 \chapter{Fundamentals of Overlapped Sounds}\label{cha:fundamentals}}
 
 In this thesis, the core part is focussed on \emph{analysis} and \emph{processing} of sound recordings of music and speech, commonly referred to as \emph{audio signals}.
-In this chapter, we therefore introduce basic concepts of digital audio signals which are relevant to apprehend the remaining chapters.
+In this chapter, we introduce basic concepts of digital audio signals which are relevant to apprehend the remaining chapters.
 
 \hypertarget{Audio Signals}{%
 \section{Audio Signals}\label{sec:specifics-of-audio-signals}}
@@ -10,7 +10,7 @@ In this chapter, we therefore introduce basic concepts of digital audio signals 
 When a sound wave travels through a medium like air, a signal can be captured using a microphone by measuring the local pressure deviation over time.
 Such a signal can be written as a function \(x(t)\), continuous in both time \(t \in \sR\) and the amplitude \(x(t) \in \sR\).
 An \emph{audio signal} is meant to be perceived by the human auditory system --- through our ears.
-Therefore, we can observe specific properties, consistent with the limitations of the human hearing system, for example in dynamics as well as a limited signal bandwidth.
+Therefore, we can observe specific properties, consistent with the limitations of the human hearing, for example in dynamics as well as in limited signal bandwidth.
 Many other signals exist with similar characteristics such as signals from finance, geophysics, meteorology or medical data.
 The result is that audio research is inspired by applications of other fields of signal processing and vice versa.
 
@@ -20,7 +20,7 @@ Signals}\label{digital-representations-of-audio-signals}}
 
 Today, digital representations are used to store, analyze or process audio signals conveniently.
 A digital audio signal can be obtained from an analog signal using analog-to-digital/digital-to-analog converters (ADC/DAC) which can be found in almost any every-day device such as laptops and smartphones.
-In short, this process includes two steps: first, the continuous time signal \(x(t)\) is converted to a discrete time series, so that one sample\footnote{Please note, that the use of the word \emph{sample} will have different meanings in the context of machine learning, where a sample is an instance of a full signal instead of a single time step.} \(x_n\) is \emph{sampled} with equidistant steps \(T\); second, the amplitude values are \emph{quantized} resulting in a vector \(\vx \in \sZ\), represented as a one dimensional time series of amplitudes.
+In short, this process includes two steps: first, the continuous time signal \(x(t)\) is converted to a discrete time series, so that one sample\footnote{Please note, that the use of the word \emph{sample} will have different meanings in the context of machine learning, where a sample is an instance of a full signal instead of a single time step.} \(x_n\) is \emph{sampled} with equidistant steps \(T\); second, the amplitude values can be \emph{quantized}, resulting in a vector \(\vx \in \sZ\), represented as a one dimensional time series of amplitudes.
 An important parameter in the process of digitization is the sample rate \(F_s = 1/T\) where \(T\) is the sampling period.
 % Often, \(F_s\) has a significant effect on the quality of audio signals.
 % And, it is the objective of a real-world audio system not to introduce perceivable degradation in audio quality when a digital signal is reproduced over headphones or loudspeakers.
@@ -36,7 +36,7 @@ We often analyze sounds in the frequency domain where the reduced redundancy of 
 It is common to achieve this through the use of discrete Fourier transform (DFT) and its fast FFT implementation~\cite{cooley65} (for details, the reader is referred to~Chapter 4 of~\cite{proakis96}).
 Spectral representations also relate to our human auditory system~\cite{zwicker13, moore89}, allowing us to process sounds closer to how we perceive them.
 \par
-The periodicity of real-world sounds, usually only holds for short durations of several milliseconds, often referred to as ``quasi-stationarity''.
+The periodicity of real-world sounds, usually only holds for short durations of several milliseconds, often referred to as \emph{quasi-stationarity}.
 We analyze and process short-time spectra, computed in an overlapped fashion, resulting in a \emph{time-frequency} (TF) representation.
 The short-time Fourier transform (STFT) is the most commonly used TF representation~\cite{mcaulay86}.
 It encodes the time-varying spectra into a matrix \(\mX\) with frequencies \(k\) and time frames \(n\).
@@ -50,7 +50,7 @@ However, analysis and processing is often focussed  on the \emph{magnitude} \(|\
 \begin{figure}[h!]
   \centering
   \includegraphics[width=0.8\columnwidth]{gfx/cello.pdf}
-  \caption{Spectrogram of single violoncello note (E3) of a fundamental frequency \(F0\) of about 164\si{\hertz}. The vibrato is clearly visible in the upper part of the harmonic spectrum. The audio signal is part of the MUSERC dataset~\cite{stoeter15acm}.}%
+  \caption{Spectrogram of single violoncello note (E3) of a fundamental frequency \(F0\) of about 164\si{\hertz}. The vibrato is clearly visible in the upper part of the harmonic spectrum. X-axis shows time (in seconds), y-axis depicts frequency (in Hertz). The audio signal is part of the MUSERC dataset~\cite{stoeter15acm}.}%
   \label{fig:cello_example}%
 \end{figure}
 
@@ -63,14 +63,14 @@ And it is this property we perceive as \emph{pitched}.
 \end{quote}
 
 It is important to note that \emph{pitch} is a subjective measure.
-The objective equivalent is referred to as the \emph{fundamental frequency} (\(F_0\))\footnote{Pitch and $F_{0}$ are often used synonymously in audio research. 
-Even though this is incorrect, we sometimes may refer to other work where pitch instead of $F_{0}$ is used.}.
-An example of a harmonic signal can be seen in Figure~\ref{fig:cello_example} that depicts a single note (E3) played by violoncello.
-\(F_{0}\) can be defined as the lowest frequency/partial of a harmonic signal.
+The objective equivalent is referred to as the \emph{fundamental frequency} (\(F0\))\footnote{Pitch and $F0$ are often used synonymously in audio research. 
+Even though this is incorrect, we sometimes may refer to other work where pitch instead of $F0$ is used.}.
 All frequencies together formed by the integer multiples of the fundamental frequency are named \textit{harmonics}~\cite{schenker54}.
+\(F0\) can be defined as the lowest frequency/partial of a harmonic signal.
+An example of a harmonic signal can be seen in Figure~\ref{fig:cello_example} that depicts a single note (E3) played by violoncello.
 When the fundamental frequency changes, the frequencies of these harmonics change accordingly.
 This results in the typical comb-like structure of harmonic signals when analyzed in the time-frequency domain.
-For a a detailed overview into the research field of pitch and \(F_{0}\), the reader is referred to~\cite{klapuri06book}.
+For a a detailed overview into the research field of pitch and \(F0\), the reader is referred to~\cite{klapuri06book}.
 
 \subsection{Time-Variant Audio Signals}\label{sub:time-variant-audio-signals}
 
@@ -78,7 +78,7 @@ Audio signals are considered to be stationary or time-invariant when their prope
 % A stationary sound can turn into time-invariant sound using modulations
 The signal becomes time-variant when an external function changes (modulates) the parameters of a signal over time.
 These simple idea were the basis for many break-through inventions such as radio transmission~\cite{shannon48}.
-In the case of audio signals, often both the modulating function (modulator or carrier) and the signal being modulated (input) are periodic.
+In the case of audio signals, often both the modulating function (modulator or carrier) and the signal being modulated (input), are periodic.
 Signal modulations are often created intentionally but also occur naturally in many real-world audio signals such as speech.
 In the following, we will present audio modulation categories and their cause, underlining the importance of them.
 
@@ -87,7 +87,7 @@ In the following, we will present audio modulation categories and their cause, u
 % The transmission of an audio signal using a modulator/demodulator (modem) system may be one of the most essential applications for audio modulations. 
 % The principle is used the broadcasting of radio using a high-frequency carrier signal that is modulated by an audio signal to be transmitted, which is assumed to be of lower frequency than the carrier signal.
 % The modulator is targeted to vary the amplitude or the frequency of the carrier signal.
-If we imagine a sinusoidal carrier signal $x(t) = \cos \omega_c t$, \emph{amplitude modulation} (AM) is applying by a modulation function $a(t)$ so that:
+If we imagine a sinusoidal carrier signal $x(t) = \cos \omega_c t$, \emph{amplitude modulation} (AM) is applying a modulation function $a(t)$ so that:
 
 % We assume that we can separate overlapping partials of the sources based on differences in amplitude and/or frequency modulation, resulting in the following model for a signal with $P$ commonly modulated partials
 % \begin{equation}
@@ -132,15 +132,15 @@ Vibrato is an essential playing style for string instruments like a violin.
 For these instruments, that are usually plucked or bowed, the strings are the primary source of excitation that is modulated in frequency by the player's finger on a fretboard~\cite{macleod06}.
 Modulations are also present in woodwind and brass instruments; however, instead of the excitation signal, the modulations affect the resonator.
 Many musicians use similar modulation rates to perform a vibrato.
-They vary across musicians and is usually in the range of 4-8\si{\hertz}.
-A detailed overview of the different musical instruments and their modulation characteristics are presented in~\cite{fletcher01}.
+They vary across musicians and are usually in the range of 4-8\si{\hertz}.
+A detailed overview of the different musical instruments and their modulation characteristics is presented in~\cite{fletcher01}.
 \par
 Real instruments are not capable of purely amplitude modulated sounds (\emph{tremolo}). 
-Today, many instruments are electric or are attached to electronic effects where such modulations can be applied using digital or analog signal processing.
+Today, many instruments are electric or attached to electronic effects where such modulations can be applied using digital or analog signal processing.
 For example, popular electric pianos like the ``Fender Rhodes'' can include an optional tremolo effect\footnote{Even though it is labeled as \emph{vibrato}.}.
 In its most pure form, synthesizers like~\cite{pinch09, buchla05} allow modulating almost any parameters of a sound using low-frequency oscillators (LFOs) or envelopes that produce sinusoidal, square or triangle functions of any rate.
 One of the most important sound synthesis methods --- FM Synthesis --- became popular in the early days of digital signal processing. 
-Chowning~\cite{chowning73} found that the modulation of sinusoids using audio rate modulators provides a computationally efficient way of producing fairly complex sounds which mimic, e.g. piano sounds using just four sinusoidal modulators.
+Chowning found in~\cite{chowning73} that the modulation of sinusoids using audio rate modulators provides a computationally efficient way of producing fairly complex sounds which mimic, e.g. piano sounds using just four sinusoidal modulators.
 \par
 It turns out that instrumental vibrato has similar properties compared to vibrato produced in singing voice.
 Vocal vibrato mainly dependents on frequency modulation even though amplitude fluctuations are present~\cite{sundberg94}. 
@@ -189,7 +189,7 @@ This observation can be confirmed when looking at physical modulations that occu
 
 In the real world, single isolated audio signals are rare.
 Instead, we are faced with sets of \emph{sound sources} that make up an \emph{acoustical sound scene}.
-When multiple sources are active at the same time, the sound that reaches our ears or is recorded using a microphone is superimposed or \emph{mixed} to a single sound.
+When multiple sources are active at the same time, the sound that reaches our ears or is recorded using a microphone, is superimposed or \emph{mixed} to a single sound.
 A \emph{mixture} represents a mapping from a set of sources \(\mathbf{s}\) to an output signal \(\mathbf{x}\).
 There exist a variety of different mixing models that are utilized in literature.
 \par
@@ -197,7 +197,7 @@ Usually these are build upon several assumptions to constrain the scenario and m
 The most important assumption is that the mixture is the linear sum of all sources.
 Another differentiation is made between instantaneous or convolutive mixtures.
 For instantaneous mixtures, all sources are mixed using fixed mixing parameters \(a_j\).
-This is the typical scenario when sources are mixed using a mixing console (pan-pot mix).
+This is the typical scenario when sources are mixed using a mixing console.
 In \emph{convolutive} mixtures, each source \(\mathbf{s_j}\) is convolved by a filter response \(r_j\) before summation.
 \par
 Usually, the mixing process is assumed to be time-invariant but for a variety of signals, such as live recordings with moving sources, it can also be time-variant.
@@ -287,11 +287,11 @@ In the following, we present three ways to group separation scenarios:
 
 \subsubsection*{Underdetermined vs. Overdetermined Separation}
 As mentioned in Section~\ref{sources-and-mixtures}, generating sound mixtures is closely related to the process of mixing taken place during recording (speech) or with the help of professional recording engineers (music).
-One assumption that was not mentioned before, is the importance of the number sensors or microphones used to create the mixture.
+One assumption that was not mentioned before, is the importance of the number of sensors or microphones used to create the mixture.
 A source separation problem is \emph{over-determined} when the number of sources is smaller than the number of sensors; \emph{determined} when they are equal.
 For these two cases, a large number of method exist and in a closed form solution is possible.
 The reader is referred to~\cite{common10}, which is gives a detailed overview of these methods.\\
-Many real world source separation problems, however, are under-determined and up to date for a large number of scenarios, the problem of separating sources is still very challenging.
+Many real world source separation problems, however, are \emph{under-determined} and up to date for a large number of scenarios, the problem of separating sources is still very challenging.
 \par
 In this thesis we only focus on methods that perform separation on underdetermined mixtures.
 
@@ -302,7 +302,7 @@ Today music recordings are mostly produced for stereo output.
 In many music recordings certain assumptions can be made (and utilized) of how sources are balanced between the two stereo channels. 
 E.g., often in popular music, a fixed panning for the vocals is correctly assumed.
 \par
-As a large number of recording nowadays is still stored as single channel, in this thesis we want to focus on this single channel separation only.
+As a large number of recording nowadays is still stored as single channel, in this thesis we want to focus on this single channel separation.
 
 \subsubsection*{Blind vs. Supervised Separation}
 A blind separation source separation system does not require additional information about the source signals, the location or acoustical environment to perform separation~\cite{makino07}.
@@ -316,7 +316,7 @@ Many music separation methods often rely on knowledge about the mixing process a
 While there exist many source separation methods that aim to extract the actual raw audio recording (Step 1 in  Table~\ref{tab:mixing_models}), often it is sufficient to extract the source images from the raw mixture.
 In a live recording, this results in inverting the process of convolution as well.
 Separation of convoluted mixtures is a very active field in source separation described in~\cite{pedersen07}.
-In the context of music a separation, however, this becomes less relevant as today's recording and studio mixing environment are mostly digital.
+In the context of music separation, however, this becomes less relevant as today's recording and studio mixing environment are mostly digital.
 Here, the last step in creating music mixtures, as described earlier, is a linear mix.
 While the source images can yield from a mixing process undergoing the various assumptions, for the case of a mixture of source images, we consider only linear mixing in this thesis.
 For a more detailed description of this scenario and applications of source image extraction, see~\cite{sturmel12}.
@@ -344,16 +344,16 @@ In real world applications, information about the actual number of concurrent sp
 \par
 The \emph{number of sources} \( \cardinality \in \mathbb{Z}^{+}_{0} \) appears to be a clearly defined property of a mixture. 
 However the meaning of it can differ, depending on its application.
-Let us assume that we have \(L\) sources and mixture of duration \(N\).
+Let us assume that we have \(L\) sources and a mixture of duration \(N\).
 Further, we imagine a latent binary \textit{source activity} variable~$v_{nl}\in \left\{ 0,1 \right\}$ that indicates the activity of each source \(l\) and for each time instance \(n\).
 Now, concerning the number of sources, two definitions of \(k\) can be imagined:
 
 \begin{description}
 \item[A)] maximum number of sources, even if not concurrently active. It is simply the sum of all sources that are active at least once within \(N\). This definition is more useful when the sources can be identified or detected first. This definition can also be considered as ``counting by detection''.
-\item[B)] maximum number of concurrent speakers even if the sources belong to the same class. Here, it represents the maximum the mixtures concurrency. This definition is more useful as a preprocessing for a separation system since such a system would only require the number of \texttt{auditory\ streams} and not the number of (non-concurrent) sources. For such approaches it becomes possible to apply separation only when its ``needed''. This definition can also be considered as ``direct count estimation''\footnote{Please note the subtle difference between ``counting'', which refers to a sequential process and ``count estimation'' or ``denumerating'', which directly relate to an integer.}.
+\item[B)] maximum number of concurrent sources even if the sources belong to the same class. Here, it represents the maximum the mixtures concurrency. This definition is more useful as a preprocessing for a separation system since such a system would only require the number of auditory streams and not the number of (non-concurrent) sources. For such approaches it becomes possible to apply separation only when its ``needed''. This definition can also be considered as ``direct count estimation''\footnote{Note the subtle difference between ``counting'', which refers to a sequential process and ``count estimation'' or ``denumerating'', which directly relate to an integer.}.
 \end{description}
 
-At short time scales A) is equal to B) because the sources/instrumentation usually does not change. 
+At short time scales A) is equal to B) because the instrumentation usually does not change. 
 In Fig.~\ref{fig:teaser}, we illustrate a setup featuring~$L=3$ unique sources.
 At any given time, one can see --- given definition B) --- that at most~$k=L=3$ sources are active at the same time and~$k=2$ could be the outcome if a smaller excerpt would be evaluated.
 In this thesis, we will pick definition B when concerned about developing methods to estimate the number of sources.

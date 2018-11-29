@@ -12,8 +12,8 @@ Moreover, despite recent progress in auditory science~\cite{carlyon04, koelsch05
 One thing, however, we can assess directly is if humans can reliably detect the number of sources in a mixture of several sources.
 \par
 In order to address this question, it helps to understand how humans infer counts and if our strategy is depending on the count.
-When we look at vision, these are questions that have already been discussed over a hundred years ago in scientific research; an early study in the field of psychology of vision published by Jevons in 1871~\cite{jevons1871}.
-He presented an experiment to quickly infer the number objects (beans) and came up with the hypothesis that humans can instantly estimate the number of objects without actually counting and therefore identifying them (``counting by detection'').
+When we look at vision, these are questions that have already been discussed over a hundred years ago in scientific research; an early study in the field of psychology of vision was published by Jevons in 1871~\cite{jevons1871}.
+He presented an experiment to quickly infer the number objects (beans) and came up with the hypothesis that humans can instantly estimate the number of objects without actually counting and therefore identifying them.
 He mentioned in~\cite{jevons1871}:
 
 \begin{quote}
@@ -27,7 +27,7 @@ And surprisingly, as shown in~\cite{kashino96, kawashima15}, humans share the sa
 \par
 In this chapter, we present two experiments contributing to this interesting field of research.
 The first experiment (Section~\ref{sec:ismir}) addresses the question if the number of instruments in polyphonic music are subject to the same limitations.
-In the second contribution (Section~\ref{sec:ismir}) the aim is to verify the findings of and earlier experiment in~\cite{kawashima15} and increase the number of stimuli to be used for comparison of machine learning based count estimations methods
+In the second contribution (Section~\ref{sec:ismir}) the aim is to verify the findings of an earlier experiment in~\cite{kawashima15} and increase the number of stimuli to be used for comparison of machine learning based count estimations methods
 
 \section{Instrument Count Estimation}%
 \label{sec:ismir}
@@ -272,7 +272,7 @@ The results indicate that interaction of Musician$\times$Instruments is not sign
 \subsection{Large Internet Experiment}
 It has been becoming more and more popular to use the Internet for experiments in music or auditory perception. One of the first auditory experiments were conducted by Welch and Krantz\cite{Welch1996} in 1996. A web experiment related to MIREX tasks using \emph{Amazon Mechanical Turk} has been conducted by Lee \cite{lee2010}. An experiment with a large attendance was done by Salganik~\textit{et~al.}\cite{Salganik2006} in 2006. They had over 14.000 participants and examined the social influence on participants in an artificial music market. An overview of recent Internet experiments is given by Reips\cite{Reips2012}.
 \par
-For many types of music perception experiments such as estimating the number of instruments, it is essential that the selected participants represent a large population. As recent research in cross-cultural music perception and cognition reveals: The perception of music is dependent on the origin of people\cite{stevens2012}. Besides the cultural background, other aspects like their profession might have an influence when estimating the number of instruments being played back, e.~g. musicians might recognize instruments much more easily since they are in touch with instruments in their everyday life. One of the advantages of Internet experiments (also called web-based experiments or web experiments) is that it is easier to gather participants with different backgrounds and from different regions than in laboratory experiments. For a summary of benefits and disadvantages of Internet experiments see \cite{Reips2002}. In music perception a major argument against Internet experiments is that there is no control about the environment. With the spreading of mobile devices with Internet connections this argument becomes more apparent, since the environment of the participants can range from a quiet place at home to a noisy place outside.
+For many types of music perception experiments such as estimating the number of instruments, it is essential that the selected participants represent a large population. As recent research in cross-cultural music perception and cognition reveals: The perception of music is dependent on the origin of people~\cite{stevens2012}. Besides the cultural background, other aspects like their profession might have an influence when estimating the number of instruments being played back, e.~g. musicians might recognize instruments much more easily since they are in touch with instruments in their everyday life. One of the advantages of Internet experiments (also called web-based experiments or web experiments) is that it is easier to gather participants with different backgrounds and from different regions than in laboratory experiments. For a summary of benefits and disadvantages of Internet experiments see \cite{Reips2002}. In music perception a major argument against Internet experiments is that there is no control about the environment. With the spreading of mobile devices with Internet connections this argument becomes more apparent, since the environment of the participants can range from a quiet place at home to a noisy place outside.
 \par
 By comparing the results of the Internet experiment to the results of the same experiment but previously conducted in a controlled environment as presented in the previous section, we contribute to answering the research question, whether the Internet can be used for experiments in music perception.
 Furthermore, subpopulations like headphones-users and loudspeaker-users are examined whether they lead to more reliable responses.
@@ -636,7 +636,7 @@ Surprising was the small number of participants who had to be screened. We exclu
 \section{Speaker Count Estimation}%
 \label{sec:count_experiment}
 
-\marginpar{This chapter is based on the work that has been published in 2018~\cite{stoeter19} together with Soumitro Chakrabarty and Emanuël Habets.}
+\marginpar{This chapter is based on the work that has been published in~\cite{stoeter19} together with Soumitro Chakrabarty and Emanuël Habets.}
 
 Humans are excellent in segregating one source from a mixture~\cite{bregman90} and tend to use this skill to perceptually segregate speakers before they can estimate a count, as highlighted, e.g.\ in~\cite{kawashima15}.
 As shown in~\cite{kashino96, kawashima15} with extensive experiments using Japanese speech samples, humans are able to correctly estimate up to three simultaneously active speakers without using any spatial cues.
@@ -679,7 +679,7 @@ The Dataset is available for download~\cite{oss_libricount}.
 	\label{fig:user_interface_speaker}
 \end{figure}
 
-We conducted the study using the simulated data from the \emph{LIBRI Count Dataset} as mentioned in the previous subsection.
+We conducted a study using the simulated data from the \emph{LIBRI Count Dataset} as mentioned in the previous subsection.
 In turn, we randomly selected 10 samples for each \(k \in {0, \ldots, 10}\), resulting in 100 mixtures of 5~seconds duration each.
 The stimuli were presented in random order using a custom web-based interface (depicted in Figure~\ref{fig:user_interface_speaker}) connected to a database API that saved the anonymized count responses and additional information about the participant session such as the response time.
 The experiment was done using \emph{between-group design}, where one group (blind experiment) did not get any prior information about the maximum number of speakers in the test set (similar to~\cite{kawashima15}).
