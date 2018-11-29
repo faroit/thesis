@@ -13,11 +13,11 @@ One thing, however, we can assess directly is if humans can reliably detect the 
 \par
 In order to address this question, it helps to understand how humans infer counts and if our strategy is depending on the count.
 When we look at vision, these are questions that have already been discussed over a hundred years ago in scientific research; an early study in the field of psychology of vision was published by Jevons in 1871~\cite{jevons1871}.
-He presented an experiment to quickly infer the number objects (beans) and came up with the hypothesis that humans can instantly estimate the number of objects without actually counting and therefore identifying them.
+He presented an experiment to quickly infer the number of objects (beans) and came up with the hypothesis that humans can instantly estimate the number of objects without actually counting and therefore identifying them.
 He mentioned in~\cite{jevons1871}:
 
 \begin{quote}
-``It is well known that the mind is unable through the eye to estimate any large number of objects without  counting them successively. A small number, for instance three or four, it can certainly comprehend and count by an instantaneous and apparently single act of mental attention.''
+``It is well known that the mind is unable through the eye to estimate any large number of objects without counting them successively. A small number, for instance, three or four, it can certainly comprehend and count by an instantaneous and apparently single act of mental attention.''
 \end{quote}
 
 This ``one-two-three-many'' hypothesis was a fundamental observation.
@@ -26,24 +26,24 @@ Concerning our hearing, there are indications that the auditory system is capabl
 And surprisingly, as shown in~\cite{kashino96, kawashima15}, humans share the same limitations of correctly estimate up to three simultaneously active speakers.
 \par
 In this chapter, we present two experiments contributing to this interesting field of research.
-The first experiment (Section~\ref{sec:ismir}) addresses the question if the number of instruments in polyphonic music are subject to the same limitations.
+The first experiment (Section~\ref{sec:ismir}) addresses the question if the number of instruments in polyphonic music is subject to the same limitations.
 In the second contribution (Section~\ref{sec:ismir}) the aim is to verify the findings of an earlier experiment in~\cite{kawashima15} and increase the number of stimuli to be used for comparison of machine learning based count estimations methods
 
 \section{Instrument Count Estimation}%
 \label{sec:ismir}
 
-\marginpar{This chapter is based on the work that has been published in~\cite{stoeter13, schoeffler13} together with my collegue Michael Schoeffler. Based on my original idea, in both publications the two first authors contributed equally to the work.}
+\marginpar{This chapter is based on the work that has been published in~\cite{stoeter13, schoeffler13} together with my colleague Michael Schoeffler. Based on my original idea, in both publications the two first authors contributed equally to the work.}
 
 % From ISMIR
 In psychoacoustics, a sequence of sounds grouped by the auditory system is known as an ``auditory stream'' which was coined by Bregman and Campbell in ~\cite{Bregman1971}.
 In the past decades, a lot of experimental work related to ``auditory streams'' has been done~\cite{bregman90}.
-A majority of these experiments were psychoacoustically motivated, e.~g. the stimuli used were mostly of simple type like sinusoids or noises.
+A majority of these experiments were psychoacoustically motivated, e.~g. the stimuli used were mostly of a simple type like sinusoids or noises.
 Especially from a psychoacoustic point of view, music is a very complex sound signal which contains high-level information (e.~g. instrumentation and song lyrics).
 When listening to music, this high-level information is also mentally processed by humans.
 For developing auditory models, it could be helpful to know the maximum number of instruments humans are able to estimate when listening to music.
 \par
 % From ISMIR
-In 1989, Huron conducted a musically motivated experiment related to stream segregation~\cite{Huron1989}. In his experiment he asked the participants for the number of voices in excerpts of organ music.
+In 1989, Huron conducted a musically motivated experiment related to stream segregation~\cite{Huron1989}. In his experiment, he asked the participants for the number of voices in excerpts of organ music.
 Huron defined a voice as a single ``line'' of sound, more or less continuous, that maintains a separate identity in a sound field or musical texture (an overview of voice definitions is given by Cambouropoulos in~\cite{Cambouropoulos2008}).
 Huron came to the conclusion that the number of correctly identified voices is \emph{up to three}.
 Later in 1996, Reuter~\cite{reuter96} has analyzed how combinations of different instruments are perceived which sets the focus on different instrumentation and not on denumerability.
@@ -52,20 +52,20 @@ Later in 1996, Reuter~\cite{reuter96} has analyzed how combinations of different
 
 % dup? ICA!
 % The perception of concurrent sound sources has been analyzed on different scales so far. Bregman's and McAdams' \cite{mcadams79} auditory stream theory can be seen as an analytical way of describing how sound events are perceived by the human auditory system. Unfortunately, it is difficult to model professionally produced music by auditory stream models because of its high complexity.
-% However, none of them is motivated to model the perceived number of musical sources. Kashino et. al \cite{kashino1995} addresses the questions for concurrent speakers in a ``cocktail party'' like environment and found an upper limit of three voices humans can perceive. When the focus shifts to musical instruments as sources, research has to take concepts from musicology into account. Huron \cite{huron89} was the first who addressed this question in 1989 at a musically meaningful level. Huron asked for the number of voices within a piece of music, where by voices in musicology one can define it as a line of sound or note events (See~\cite{Cambouropoulos2008} for further definitions). Huron determined by experimental results that the number of correctly identified voices is up to three.
+% However, none of them is motivated to model the perceived number of musical sources. Kashino et. al \cite{kashino1995} addresses the questions for concurrent speakers in a ``cocktail party'' like the environment and found an upper limit of three voices humans can perceive. When the focus shifts to musical instruments as sources, research has to take concepts from musicology into account. Huron \cite{huron89} was the first who addressed this question in 1989 at a musically meaningful level. Huron asked for the number of voices within a piece of music, whereby voices in musicology one can define it as a line of sound or note events (See~\cite{Cambouropoulos2008} for further definitions). Huron determined by experimental results that the number of correctly identified voices is up to three.
 We wanted to take a first step by designing an experiment where we focus on polyphonic music of inhomogeneous timbre, where the question is: What is the number of instruments humans can estimate correctly?
 Several results are addressed in this work include a possible upper limit of the number of perceived instruments, but also if one can see significant differences in performance of musicians compared to non-musicians.
 
 \subsection{Experiment}
 For the purpose of gaining more knowledge in understanding the human perception of multiple present instruments, an experiment was conducted. Huron selected voices from organ pieces only. We wanted to address the more general case where voices are played by different instruments.
 As we set our focus on comparison between musicians and non-musician.
-Our experiment was designed so that it respects the fact that the latter have only limited musical background.
+Our experiment was designed so that it respects the fact that the latter has an only limited musical background.
 \par
 Although it might be interesting to have direct comparison with Huron's experiment, we agree that expanding the methods to an inhomogeneous timbre case is error prone. One reason is that there is reasonable doubt about the non-musicians understandings in terms of how a voice is defined. This is why we choose a trade-off with a more simplified experiment where we asked for the number of instruments instead of voices. Also whereas Huron \cite{huron89}  excluded subjects from his experiment because of their lower performance, we compared the results of both groups.
 
 \subsection{Stimuli}
 
-The selection of music items is crucial for our experiment setup. Usually music recordings have no ground truth metadata available to determine the actual number of instruments. Using annotated music like that from the RWC database~\cite{rwc} fulfills this requirement but lacks the possibility to remix, attenuate or suppress specific sources. This is important so that the experiment consists of equally grouped stimuli. Instead of the original RWC recordings, the annotated MIDI data itself was used as prototypes for the stimuli.
+The selection of music items is crucial for our experimental setup. Usually music recordings have no ground truth metadata available to determine the actual number of instruments. Using annotated music like that from the RWC database~\cite{rwc} fulfills this requirement but lacks the possibility to remix, attenuate or suppress specific sources. This is important so that the experiment consists of equally grouped stimuli. Instead of the original RWC recordings, the annotated MIDI data itself was used as prototypes for the stimuli.
 
 To make the count estimation task less ambiguous for the subjects, the instrumentation was chosen to be mostly constant during the music piece.
 Therefore we calculated an ``instrumental stationarity'' metric.
@@ -113,12 +113,12 @@ G028 & 17&5 & 6&5 & Electric~Bass, Electric~Guitar, Flute, Piano, Trombone and T
 \subsection{Methods and Participants}
 The experiment was attended by 62 participants, where half of them regularly play a musical instrument. They were asked to count how many different instruments they can hear. 12 items from the test set (Table~\ref{tab:items}) were played back in random order. The experiment was presented by a user interface depicted in Figure~\ref{fig:experiment_ui}. Except for the training item, every subject could play back each stimulus up to three times. Additionally they were asked to estimate how certain they were in their decision (ranged from \emph{uncertain} to \emph{very certain}).
 \begin{figure}[h]
-	\centering
-		\fbox{\includegraphics[width=3in]{Chapters/07_Analysis_Experiment/figures/user_interface.png}}
-	\caption{Experiment User Interface}
-	\label{fig:experiment_ui}
+    \centering
+        \fbox{\includegraphics[width=3in]{Chapters/07_Analysis_Experiment/figures/user_interface.png}}
+    \caption{Experiment User Interface}
+    \label{fig:experiment_ui}
 \end{figure}
-Instead of a slider UI-element, the interface only features plus and minus buttons so that the subjects were not biased about the maximum number of instruments. Item \emph{J021**} had been selected as training item and was presented to the subjects during the introduction phase to make them familiar with the user interface. This trial also unveiled the number and name of the instruments within that piece. After they had read the introduction page, the subjects were asked to adjust the volume during the training example to their preference and leave the volume at that level for the duration of the experiment. The stimuli were presented on \textsc{Beyerdynamics DT770} headphones connected to a \textsc{RME Babyface}. The complete test took about 20 minutes on average for every participant.
+Instead of a slider UI-element, the interface only features plus and minus buttons so that the subjects were not biased about the maximum number of instruments. Item \emph{J021**} had been selected as a training item and was presented to the subjects during the introduction phase to make them familiar with the user interface. This trial also unveiled the number and name of the instruments within that piece. After they had read the introduction page, the subjects were asked to adjust the volume during the training example to their preference and leave the volume at that level for the duration of the experiment. The stimuli were presented on \textsc{Beyerdynamics DT770} headphones connected to a \textsc{RME Babyface}. The complete test took about 20 minutes on average for every participant.
 
 \subsection{Results: A gap of one instrument}
 
@@ -126,13 +126,13 @@ Instead of a slider UI-element, the interface only features plus and minus butto
 \centering
 \begin{minipage}{0.8\textwidth}
 \begin{tabular}{c}
-	\includegraphics[width=\textwidth]{Chapters/07_Analysis_Experiment/images/error_means.pdf}
+    \includegraphics[width=\textwidth]{Chapters/07_Analysis_Experiment/images/error_means.pdf}
 \end{tabular}
 \end{minipage}
 \\
 \begin{minipage}{0.8\textwidth}
 \begin{tabular}{c}
-	\includegraphics[width=\textwidth]{Chapters/07_Analysis_Experiment/images/error_diff.pdf}
+    \includegraphics[width=\textwidth]{Chapters/07_Analysis_Experiment/images/error_diff.pdf}
 \end{tabular}
 \end{minipage}
 \caption{Error probability (top) and Mean of $\Delta = I-R$ (right) categorized by the number of instruments.}
@@ -142,16 +142,16 @@ Instead of a slider UI-element, the interface only features plus and minus butto
 The independent variable $I(i)$ is the number of instruments of one music item $i$ where in this case $I(i) \in \{1,2,...,6\}$. $R(i,s)$ is defined as the number of instruments that are perceived and counted by subject $s$ for music item $i$. The dependent variable is the derived from the main subject response as $\Delta(i,s) = I(i) - R(i,s)$ transformed into a binary scale:
 \begin{align}%
 \label{eq:response}
-	E(i,s)&=\begin{cases}
-		0 & \text{if $|\Delta| = 0 $ } \\
-		1 & \text{if $|\Delta| > 0 $ .}\\
-	\end{cases}
+    E(i,s)&=\begin{cases}
+        0 & \text{if $|\Delta| = 0 $ } \\
+        1 & \text{if $|\Delta| > 0 $ .}\\
+    \end{cases}
 \end{align}
 \par
 The primary statistical null hypothesis ($H_1$) is stated in that the means of $\Delta$ and $E$\footnote{The fact that $E$ is dichotomous will lead to a mean value that equals to a probability of a binary distribution.}, grouped by the number of instruments, do not differ significantly. As we also want to test the between-groups performance of musicians versus non-musicians, we introduce another dependent variable $M(s) \in \{0,1\}$ of binary scale. This is stated in a secondary null hypothesis ($H_2$) where the means of $\Delta$ and $E$ are not significantly different between musicians and non-musicians.
 No subjects were screened from the results, although there are two cases where no valid response had been made. Results are grouped by items of $I$ instruments.
 \par
-In general participants tended to perform worse for items with more than two instruments. The probability of correctly estimating one instrument was 90.0\% whereas only one person out of 62 gave a correct response for an item with six instruments. In some cases the number of instruments does not correspond to the number of voices for every item. Items where an instrument plays more than one voice and voices which are played by more than one instrument. However most of the chosen instruments are monophonic so in our case this occurred only for items where piano or guitar is present. Also we made sure that the number of total voices did not exceed the maximum number of instruments in that item. Voices being played by more than one instrument (unison), which is present in G068, that showed surprisingly good results.
+In general, participants tended to perform worse for items with more than two instruments. The probability of correctly estimating one instrument was 90.0\% whereas only one person out of 62 gave a correct response for an item with six instruments. In some cases, the number of instruments does not correspond to the number of voices for every item. Items where an instrument plays more than one voice and voices which are played by more than one instrument. However, most of the chosen instruments are monophonic so in our case, this occurred only for items where piano or guitar is present. Also, we made sure that the number of total voices did not exceed the maximum number of instruments in that item. Voices being played by more than one instrument (unison), which is present in G068, that showed surprisingly good results.
 
 \subsubsection*{Underestimation}
 
@@ -160,28 +160,28 @@ We confirmed the results in~\cite{huron89} that the most common error is the und
 \subsubsection*{Main Effects}
 
 To test the null hypotheses ($H_1$ and $H_2$), statistical tools are required.
-The first tests focus on $\Delta$ which is an interval scaled variable. To show differences between means of two or more groups, usually One-Way-ANOVA tests are applied. ANOVA tests expect independent normally distributed variables and homogeneity of the variances in each group. However both the Kolmogorov--Smirnov test of normal distribution and Levene's test to determine the homogeneity of group variances fail. In such cases variables scaled like $\Delta$ could be transformed so that the boundaries are straightened out. A typically used $arcsin(\sqrt{\Delta})$ transformation was applied to $\Delta$ resulting in slightly higher $p$ values but still not statistically significant. Although ANOVA is known to be robust enough to run the tests against non-normal distributed cases and unequal variances, the significance levels of the results are doubtful. Therefore we choose to run a non-parametric test. The Kruskal--Wallis test can be applied even if the data is not normally distributed. However it has to be run on a slightly modified hypothesis which compares the medians of groups instead of the means. The Kruskal--Wallis test allows to reject both modified hypotheses (asymptotic $p = 0.000$, $\chi^2 = 499636$, $df=5$).
+The first tests focus on $\Delta$ which is an interval-scaled variable. To show differences between means of two or more groups, usually, One-Way-ANOVA tests are applied. ANOVA tests expect independent normally distributed variables and homogeneity of the variances in each group. However both the Kolmogorov--Smirnov test of normal distribution and Levene's test to determine the homogeneity of group variances fail. In such cases variables scaled like $\Delta$ could be transformed so that the boundaries are straightened out. A typically used $arcsin(\sqrt{\Delta})$ transformation was applied to $\Delta$ resulting in slightly higher $p$ values but still not statistically significant. Although ANOVA is known to be robust enough to run the tests against non-normal distributed cases and unequal variances, the significance levels of the results are doubtful. Therefore we choose to run a non-parametric test. The Kruskal--Wallis test can be applied even if the data is not normally distributed. However, it has to be run on a slightly modified hypothesis which compares the medians of groups instead of the means. The Kruskal--Wallis test allows to reject both modified hypotheses (asymptotic $p = 0.000$, $\chi^2 = 499636$, $df=5$).
 % As mentioned by \cite{fagerland2009} it may be crucial for the Kruskal--Wallis test to be run on groups with differently shaped distributions.
 %  This may not be assured in the case of $\Delta$ as the skewness highly increases for $I \geq 3$. Although the significance of the test has to be treated with caution, the median is a good indicator of a possible upper limit. The overall medians for all groups are plotted in Figure~\ref{fig:median} where one can see that three instruments are a possible upper bound.
 \par
 Concerning $E$ which is a categorical variable, linear models such as ANOVA cannot be used.
-As described in~\cite{jaeger08}, instead, a binary regression model that turns the mean of $E$ into a an binomial distributed probability, can be used.
+As described in~\cite{jaeger08}, instead, a binary regression model that turns the mean of $E$ into a binomial distributed probability can be used.
 Similar to ANOVA, the output variable will be modeled by a \emph{binary logit regression} that models the output using \emph{log linear} values.
 \par
 By including the main factors $I$ and $M$ we set up a \emph{Generalized Linear Model} (GLM)
 \begin{equation}
-	logit(E) =  \text{Intercept} + x_1 \text{I} + x_2 \text{M} .
-	\label{eq:logit_main}
+    logit(E) =  \text{Intercept} + x_1 \text{I} + x_2 \text{M} .
+    \label{eq:logit_main}
 \end{equation}
 A test of the main effects is statistically significant ($\chi^2$ = $437418$, $p < 0.000$, $df = 6$) so that both null hypotheses ($H_1$ and $H_2$) can be rejected. The significance of both effects as well as parameter estimates and Wald values of the calculated model are shown is shown in~\cite{stoeter13}.
-The results indicate that there is a significant difference in the error probability for groups of instrumentation counts but also for musicians versus non-musicians. A pairwise comparison test based on the mean differences reveals where these differences are located. Regarding the error probability of different instrument counts, the pairwise comparison test reveals that nearly all groups show significant mean differences between each other, which was the expected result. However, by calculation using the logit GLM model shown in equation~\ref{eq:logit_main} we found that there are two groups of items of five and six instruments (mean difference $0.04$, std. error = $0.019$, $df = 1$, $p = 0.055$) that did not show any significant difference. For both groups the error probability is close to 100\%.
+The results indicate that there is a significant difference in the error probability for groups of instrumentation counts but also for musicians versus non-musicians. A pairwise comparison test based on the mean differences reveals where these differences are located. Regarding the error probability of different instrument counts, the pairwise comparison test reveals that nearly all groups show significant mean differences between each other, which was the expected result. However, by calculation using the logit GLM model shown in equation~\ref{eq:logit_main} we found that there are two groups of items of five and six instruments (mean difference $0.04$, std. error = $0.019$, $df = 1$, $p = 0.055$) that did not show any significant difference. For both groups, the error probability is close to 100\%.
 \par
-To investigate the difference in performance between musicians and non-musicians a pairwise comparison between those two groups was run. Overall musicians perform about 20\% better throughout the test (mean difference = $0.18$, std. error = $ 0.0044$, $df = 1$, $p=0.000$). We do not know what caused these differences as the level of professionalism had not been surveyed. Also 37 \% of the musicians additionally had experience in audio engineering due to their profession.
+To investigate the difference in performance between musicians and non-musicians a pairwise comparison between those two groups was run. Overall musicians perform about 20\% better throughout the test (mean difference = $0.18$, std. error = $ 0.0044$, $df = 1$, $p=0.000$). We do not know what caused these differences as the level of professionalism had not been surveyed. Also, 37 \% of the musicians additionally had experience in audio engineering due to their profession.
 \par
 Further, to look at possible interaction effects between the number of instruments and the groups of musicians and non-musicians we adapted our logit equation to
 \begin{equation}
-	logit(E) =  \text{Intercept} + x_1 \text{I} + x_2 \text{M} + x_3 \text{M}\times\text{I} .
-	\label{eq:logit_interactions}
+    logit(E) =  \text{Intercept} + x_1 \text{I} + x_2 \text{M} + x_3 \text{M}\times\text{I} .
+    \label{eq:logit_interactions}
 \end{equation}
 We then reran the GLM analysis selecting only items of three and four instruments. This avoids quasi-complete separation in the logit regression model which is caused by low variances in the error probability for items of $I \in \{1,2,5,6\}$.
 The model effects of the subset can be found in~\cite{stoeter13}.
@@ -189,90 +189,90 @@ The model effects of the subset can be found in~\cite{stoeter13}.
 % \center
 % \scriptsize
 % \begin{minipage}[b]{0.45\textwidth}\centering
-% 	\begin{tabular}{rccc}
-% 	\toprule[1.5pt]
-% 	Source    & Wald $\chi^2$ & df & p \\
-% 	\midrule
-% 	Intercept & 22.643 & 1 & 0.000 \\
-% 	I & 185.359	& 5 & 0.000 \\
-% 	M & 17.977 & 1 & 0.000 \\
-% 	& & & \\
-% 	\bottomrule[1.5pt]
-% 	\end{tabular}
-% 	\caption{Tests of Model Effects of dependent variable $E$ }
+%     \begin{tabular}{rccc}
+%     \toprule[1.5pt]
+%     Source    & Wald $\chi^2$ & df & p \\
+%     \midrule
+%     Intercept & 22.643 & 1 & 0.000 \\
+%     I & 185.359    & 5 & 0.000 \\
+%     M & 17.977 & 1 & 0.000 \\
+%     & & & \\
+%     \bottomrule[1.5pt]
+%     \end{tabular}
+%     \caption{Tests of Model Effects of dependent variable $E$ }
 %     \label{tab:glm_logit}
 % \end{minipage}
 % \hfill
 % \begin{minipage}[b]{0.45\textwidth}
-% 	\begin{tabular}{rccc}
-% 	\toprule[1.5pt]
-% 	Source    & Wald $\chi^2$ & df & p \\
-% 	\midrule
-% 	Intercept & 12.434 & 1 & 0.000 \\
-% 	I & 22.742	& 1 & 0.000 \\
-% 	M & 22.742 & 1 & 0.000 \\
-% 	M$\times$I	& 0.184 & 1 & 0.668 \\
-% 	\bottomrule[1.5pt]
-% 	\end{tabular}
-% 	\caption{Tests of Model Effects of dependent variable $E$ for a subset of items with $I \in \{3,4\}$}
+%     \begin{tabular}{rccc}
+%     \toprule[1.5pt]
+%     Source    & Wald $\chi^2$ & df & p \\
+%     \midrule
+%     Intercept & 12.434 & 1 & 0.000 \\
+%     I & 22.742    & 1 & 0.000 \\
+%     M & 22.742 & 1 & 0.000 \\
+%     M$\times$I    & 0.184 & 1 & 0.668 \\
+%     \bottomrule[1.5pt]
+%     \end{tabular}
+%     \caption{Tests of Model Effects of dependent variable $E$ for a subset of items with $I \in \{3,4\}$}
 %     \label{tab:glm_logit_34}
 % \end{minipage}
 % \end{table}
 
 \begin{figure}[h]
-	\centering
-	\scriptsize
-	\begin{tikzpicture}[node distance=2cm]
-		\draw [-,thick] (0,5*1.25) node (yaxis) [left] {$ $}
-	        |- (7,0.75) node (xaxis) {$ $};
+    \centering
+    \scriptsize
+    \begin{tikzpicture}[node distance=2cm]
+        \draw [-,thick] (0,5*1.25) node (yaxis) [left] {$ $}
+            |- (7,0.75) node (xaxis) {$ $};
 
-		\draw (-1.1, 5) node[left,rotate=90] {Error~Probability};
+        \draw (-1.1, 5) node[left,rotate=90] {Error~Probability};
 
-		\draw (1,-0.2+0.75) -- (1,0+0.75) node[below=4pt] {musician};
-		\draw (5.5,-0.2+0.75) -- (5.5,0+0.75) node[below=4pt] {non-musician};
+        \draw (1,-0.2+0.75) -- (1,0+0.75) node[below=4pt] {musician};
+        \draw (5.5,-0.2+0.75) -- (5.5,0+0.75) node[below=4pt] {non-musician};
 
-	%	\draw (-0.1, 0) -- (0.1, 0) node[left=4pt] {$0\%$};
-		\draw (-0.1, 1.3710*1.25) -- (0.1, 1.3710*1.25) node[left=4pt] {$0.27$};
-		\draw (-0.1, 3.2258*1.25) -- (0.1, 3.2258*1.25) node[left=4pt] {$0.65$};
-		\draw (-0.1, 4.3548*1.25) -- (0.1, 4.3548*1.25) node[left=4pt] {$0.87$};
-	%	\draw (-0.1, 5*1.25) -- (0.1, 5*1.25) node[left=4pt] {$100\%$};
+    %    \draw (-0.1, 0) -- (0.1, 0) node[left=4pt] {$0\%$};
+        \draw (-0.1, 1.3710*1.25) -- (0.1, 1.3710*1.25) node[left=4pt] {$0.27$};
+        \draw (-0.1, 3.2258*1.25) -- (0.1, 3.2258*1.25) node[left=4pt] {$0.65$};
+        \draw (-0.1, 4.3548*1.25) -- (0.1, 4.3548*1.25) node[left=4pt] {$0.87$};
+    %    \draw (-0.1, 5*1.25) -- (0.1, 5*1.25) node[left=4pt] {$100\%$};
 
-		\draw[dashed,style={color=black!35}] (0, 1.3710*1.25) -- (1.5, 1.3710*1.25) node[left=4pt] {};
-		\draw[dashed,style={color=black!35}] (0, 3.2258*1.25) -- (1.5, 3.2258*1.25) node[left=4pt] {};
-		\draw[dashed,style={color=black!35}] (0, 4.3548*1.25) -- (5.5, 4.3548*1.25) node[left=4pt] {};
+        \draw[dashed,style={color=black!35}] (0, 1.3710*1.25) -- (1.5, 1.3710*1.25) node[left=4pt] {};
+        \draw[dashed,style={color=black!35}] (0, 3.2258*1.25) -- (1.5, 3.2258*1.25) node[left=4pt] {};
+        \draw[dashed,style={color=black!35}] (0, 4.3548*1.25) -- (5.5, 4.3548*1.25) node[left=4pt] {};
 
-		\GraphInit[vstyle=Normal]
-		\tikzset{EdgeStyle/.style={}}
-		\tikzset{colorstyle/.style={
-			shape= circle,
-			line width = 1pt,
-			draw = black,
-			fill = #1!30}
-		}
+        \GraphInit[vstyle=Normal]
+        \tikzset{EdgeStyle/.style={}}
+        \tikzset{colorstyle/.style={
+            shape= circle,
+            line width = 1pt,
+            draw = black,
+            fill = #1!30}
+        }
 
-		\Vertex[L=3,x=1,y=1.3710*1.25,style={colorstyle=red,line width = 4pt}] {3M}
-		\Vertex[L=4,x=1,y=3.2258*1.25,style={colorstyle=blue,line width = 2pt}] {4M}
-		\Vertex[L=3,x=5.5,y= 3.2258*1.25,style={line width = 4pt}] {3N}
-		\Vertex[L=4,x=5.5,y=4.3548*1.25,style={colorstyle=green, draw = black!0,line width = 0}] {4N}
+        \Vertex[L=3,x=1,y=1.3710*1.25,style={colorstyle=red,line width = 4pt}] {3M}
+        \Vertex[L=4,x=1,y=3.2258*1.25,style={colorstyle=blue,line width = 2pt}] {4M}
+        \Vertex[L=3,x=5.5,y= 3.2258*1.25,style={line width = 4pt}] {3N}
+        \Vertex[L=4,x=5.5,y=4.3548*1.25,style={colorstyle=green, draw = black!0,line width = 0}] {4N}
 
-		\Edge[label=$0.23$,style={color=black!50}](3N)(4N)
-		\Edge[label=$0.37$,style={color=black!50}](3N)(3M)
+        \Edge[label=$0.23$,style={color=black!50}](3N)(4N)
+        \Edge[label=$0.37$,style={color=black!50}](3N)(3M)
 
-		\Edge[label=$0.23$,style={color=black!50}](4N)(4M)
-		\Edge[label=$0.37$,style={color=black!50}](4M)(3M)
-		\Edge[label=$0.60$,style={color=black!50}](3M)(4N)
-		\Edge[label=$0.00$,style={color=red, line width = 2pt}](3N)(4M)
+        \Edge[label=$0.23$,style={color=black!50}](4N)(4M)
+        \Edge[label=$0.37$,style={color=black!50}](4M)(3M)
+        \Edge[label=$0.60$,style={color=black!50}](3M)(4N)
+        \Edge[label=$0.00$,style={color=red, line width = 2pt}](3N)(4M)
 
-		\end{tikzpicture}
-		\caption{Pairwise comparison between interaction of Musician/Non-Musician and the number of instruments (labeled in nodes). The costs between nodes indicates the mean differences between groups. The red/bold line indicates that is there is no significant difference at the $p=0.005$ level}
-		\label{fig:graph}
+        \end{tikzpicture}
+        \caption{Pairwise comparison between the interaction of Musician/Non-Musician and the number of instruments (labeled in nodes). The costs between nodes indicate the mean differences between groups. The red/bold line indicates that is there is no significant difference at the $p=0.005$ level}
+        \label{fig:graph}
 \end{figure}
-The results indicate that interaction of Musician$\times$Instruments is not significant on a $p=0.05$ level in general and a pairwise comparison test reveals two groups of equal probability. The pairwise comparisons are depicted in Figure~\ref{fig:graph}. The red vertex indicates there is no significant difference in the error probability for the group of musicians in items with four instruments compared to non-musicians in items of three instruments. Therefore a gap in the error probability of one instrument between those two groups becomes apparent.
+The results indicate that the interaction of Musician$\times$Instruments is not significant on a $p=0.05$ level in general and a pairwise comparison test reveals two groups of equal probability. The pairwise comparisons are depicted in Figure~\ref{fig:graph}. The red vertex indicates there is no significant difference in the error probability for the group of musicians in items with four instruments compared to non-musicians in items of three instruments. Therefore a gap in the error probability of one instrument between those two groups becomes apparent.
 
 \subsection{Large Internet Experiment}
 It has been becoming more and more popular to use the Internet for experiments in music or auditory perception. One of the first auditory experiments were conducted by Welch and Krantz\cite{Welch1996} in 1996. A web experiment related to MIREX tasks using \emph{Amazon Mechanical Turk} has been conducted by Lee \cite{lee2010}. An experiment with a large attendance was done by Salganik~\textit{et~al.}\cite{Salganik2006} in 2006. They had over 14.000 participants and examined the social influence on participants in an artificial music market. An overview of recent Internet experiments is given by Reips\cite{Reips2012}.
 \par
-For many types of music perception experiments such as estimating the number of instruments, it is essential that the selected participants represent a large population. As recent research in cross-cultural music perception and cognition reveals: The perception of music is dependent on the origin of people~\cite{stevens2012}. Besides the cultural background, other aspects like their profession might have an influence when estimating the number of instruments being played back, e.~g. musicians might recognize instruments much more easily since they are in touch with instruments in their everyday life. One of the advantages of Internet experiments (also called web-based experiments or web experiments) is that it is easier to gather participants with different backgrounds and from different regions than in laboratory experiments. For a summary of benefits and disadvantages of Internet experiments see \cite{Reips2002}. In music perception a major argument against Internet experiments is that there is no control about the environment. With the spreading of mobile devices with Internet connections this argument becomes more apparent, since the environment of the participants can range from a quiet place at home to a noisy place outside.
+For many types of music perception experiments such as estimating the number of instruments, it is essential that the selected participants represent a large population. As recent research in cross-cultural music perception and cognition reveals: The perception of music is dependent on the origin of people~\cite{stevens2012}. Besides the cultural background, other aspects like their profession might have an influence when estimating the number of instruments being played back, e.~g. musicians might recognize instruments much more easily since they are in touch with instruments in their everyday life. One of the advantages of Internet experiments (also called web-based experiments or web experiments) is that it is easier to gather participants with different backgrounds and from different regions than in laboratory experiments. For a summary of benefits and disadvantages of Internet experiments see \cite{Reips2002}. In music perception, a major argument against Internet experiments is that there is no control about the environment. With the spreading of mobile devices with Internet connections this argument becomes more apparent since the environment of the participants can range from a quiet place at home to a noisy place outside.
 \par
 By comparing the results of the Internet experiment to the results of the same experiment but previously conducted in a controlled environment as presented in the previous section, we contribute to answering the research question, whether the Internet can be used for experiments in music perception.
 Furthermore, subpopulations like headphones-users and loudspeaker-users are examined whether they lead to more reliable responses.
@@ -294,43 +294,43 @@ The participants were asked by a questionnaire whether they have a professional 
 % \toprule[1.5pt]
 % Total & \multicolumn{2}{c}{Age group} & \multicolumn{2}{c}{Musician} & \multicolumn{2}{c}{Professional} & \multicolumn{2}{c}{Headphones} \\
 % \midrule
-% 1168 &  0  & [0-12]  & -   &  	   & -   &       & -   &       \\
-%  	 \cline{2-9} \rule{0pt}{10pt}
+% 1168 &  0  & [0-12]  & -   &         & -   &       & -   &       \\
+%       \cline{2-9} \rule{0pt}{10pt}
 %      & 110 & [13-19] & 74  & [yes] & 12  & [yes] & 5   & [yes] \\
-%      &     &         &	   &       &     &       & 7   & [no]  \\
-%      &     &   		 &     &       & 62  & [no]  & 30  & [yes] \\
-%      &     &         &	   &       &     &       & 32  & [no]  \\
-%      &     &   		 & 36  & [no]  & 0   & [yes] & -   &       \\
-%      &     &         &	   &       &     &       & -   &       \\
-%      &     &   		 &     &       & 36  & [no]  & 17  & [yes] \\
-%      &     &         &	   &       &     &       & 19  & [no]  \\
+%      &     &         &       &       &     &       & 7   & [no]  \\
+%      &     &            &     &       & 62  & [no]  & 30  & [yes] \\
+%      &     &         &       &       &     &       & 32  & [no]  \\
+%      &     &            & 36  & [no]  & 0   & [yes] & -   &       \\
+%      &     &         &       &       &     &       & -   &       \\
+%      &     &            &     &       & 36  & [no]  & 17  & [yes] \\
+%      &     &         &       &       &     &       & 19  & [no]  \\
 %      \cline{2-9} \rule{0pt}{10pt}
 %      & 889 & [20-39] & 463 & [yes] & 128 & [yes] & 81   & [yes] \\
-%      &     &         &	   &       &     &       & 47   & [no]  \\
-%      &     &   		 &     &       & 335 & [no]  & 154  & [yes] \\
-%      &     &         &	   &       &     &       & 181  & [no]  \\
-%      &     &   		 & 426 & [no]  & 46  & [yes] & 31   & [yes] \\
-%      &     &         &	   &       &     &       & 15   & [no]  \\
-%      &     &   		 &     &       & 380 & [no]  & 164  & [yes] \\
-%      &     &         &	   &       &     &       & 216  & [no]  \\
+%      &     &         &       &       &     &       & 47   & [no]  \\
+%      &     &            &     &       & 335 & [no]  & 154  & [yes] \\
+%      &     &         &       &       &     &       & 181  & [no]  \\
+%      &     &            & 426 & [no]  & 46  & [yes] & 31   & [yes] \\
+%      &     &         &       &       &     &       & 15   & [no]  \\
+%      &     &            &     &       & 380 & [no]  & 164  & [yes] \\
+%      &     &         &       &       &     &       & 216  & [no]  \\
 %      \cline{2-9} \rule{0pt}{10pt}
 %      & 143 & [40-59] & 98 & [yes] & 32  & [yes] & 22   & [yes] \\
-%      &     &         &	  &       &     &       & 10   & [no]  \\
-%      &     &   		 &    &       & 66  & [no]  & 31   & [yes] \\
-%      &     &         &	  &       &     &       & 35   & [no]  \\
-%      &     &   		 & 45 & [no]  & 8   & [yes] & 5    & [yes] \\
-%      &     &         &	  &       &     &       & 3    & [no]  \\
-%      &     &   		 &    &       & 37  & [no]  & 17   & [yes] \\
-%      &     &         &	  &       &     &       & 20   & [no]  \\
+%      &     &         &      &       &     &       & 10   & [no]  \\
+%      &     &            &    &       & 66  & [no]  & 31   & [yes] \\
+%      &     &         &      &       &     &       & 35   & [no]  \\
+%      &     &            & 45 & [no]  & 8   & [yes] & 5    & [yes] \\
+%      &     &         &      &       &     &       & 3    & [no]  \\
+%      &     &            &    &       & 37  & [no]  & 17   & [yes] \\
+%      &     &         &      &       &     &       & 20   & [no]  \\
 %      \cline{2-9} \rule{0pt}{10pt}
 %      & 26  & [60+]   & 13 & [yes] & 6   & [yes] & 3    & [yes] \\
-%      &     &         &	  &       &     &       & 3    & [no]  \\
-%      &     &   		 &    &       & 7   & [no]  & 4    & [yes] \\
-%      &     &         &	  &       &     &       & 3    & [no]  \\
-%      &     &   		 & 13 & [no]  & 2   & [yes] & 2    & [yes] \\
-%      &     &         &	  &       &     &       & 0    & [no]  \\
-%      &     &   		 &    &       & 11  & [no]  & 5    & [yes] \\
-%      &     &         &	  &       &     &       & 6    & [no]  \\
+%      &     &         &      &       &     &       & 3    & [no]  \\
+%      &     &            &    &       & 7   & [no]  & 4    & [yes] \\
+%      &     &         &      &       &     &       & 3    & [no]  \\
+%      &     &            & 13 & [no]  & 2   & [yes] & 2    & [yes] \\
+%      &     &         &      &       &     &       & 0    & [no]  \\
+%      &     &            &    &       & 11  & [no]  & 5    & [yes] \\
+%      &     &         &      &       &     &       & 6    & [no]  \\
 % \bottomrule[1.5pt]
 % \end{tabular*}
 % \caption{Information about the participants.}
@@ -343,7 +343,7 @@ The main functionality of the experiment's website was written in HTML5 and Java
 The experiment started on February the 15th, 2013 and lasted until March the 15th, 2013.
 At first, participants filled out a short questionnaire. They were asked which audio setup they are using, whether they regularly play any musical instruments or do singing, have a background in professional audio, are familiar with listening tests and which age group they belong to.
 \par
-After filling out the questionnaire, the participants did a short training. The purpose of the training was to familiarize the participants with the user interface and to give them the option to adjust the volume. The training had one stimulus with three instruments being played. The instruments were piano, bass and trumpet. The participants were told on the training page how many and which instruments are played back. During the training it was possible to listen to the stimulus unlimited times.
+After filling out the questionnaire, the participants did a short training. The purpose of the training was to familiarize the participants with the user interface and to give them the option to adjust the volume. The training had one stimulus with three instruments being played. The instruments were piano, bass and trumpet. The participants were told on the training page how many and which instruments are played back. During the training, it was possible to listen to the stimulus unlimited times.
 
 \subsection{Results}\label{sec:results}
 
@@ -503,10 +503,10 @@ legend cell align=left
 
 \end{axis}
 \end{tikzpicture}
-\caption{Probability of $\textit{Resp}_{\mathrm{Correct}}$ grouped by Internet experiment (web) and laboratory experiment (lab). Solid lines represents the results of the Internet experiment and dashed lines represents the results of the laboratory experiment.}
+\caption{Probability of $\textit{Resp}_{\mathrm{Correct}}$ grouped by Internet experiment (web) and laboratory experiment (lab). Solid lines represent the results of the Internet experiment and dashed lines represents the results of the laboratory experiment.}
 \label{figure:error_probability_iis_vs_web}
 \end{figure}
-As the logit regression model indicated, the difference in the performance of the participants between the Internet experiment and the laboratory experiment are very low. The participants in the laboratory experiment were about 4.6\% better in average for all stimuli than the participants of the Internet experiment. When looking into the differences between musicians and non-musicians, the outcome for the Internet experiment and laboratory experiment differ slightly. In the laboratory experiment musicians performed about 31.6\% better than non-musicians and in the Internet experiment musicians performed about 20.85\% better.
+As the logit regression model indicated, the difference in the performance of the participants between the Internet experiment and the laboratory experiment is very low. The participants in the laboratory experiment were about 4.6\% better in average for all stimuli than the participants of the Internet experiment. When looking into the differences between musicians and non-musicians, the outcome for the Internet experiment and laboratory experiment differ slightly. In the laboratory experiment musicians performed about 31.6\% better than non-musicians and in the Internet experiment musicians performed about 20.85\% better.
 \par
 The probability of correctly estimating the number of instruments does not consider how close an estimation is to the actual number of instruments. This means that a participant who estimates wrong by one instrument for all items has the same $\textit{Resp}_{\mathrm{Correct}}$ like a participant who is always wrong by two instruments. Despite this work focuses on the correct estimation, the differences in the absolute deviation to the correct number of instruments was also analyzed. The absolute deviation is defined as
 \begin{equation}
@@ -579,7 +579,7 @@ legend cell align=left
 % $\textit{Environment} = \textrm{`}web\textrm{'}$ & 0.05481 & 0.02482 & 2.208  & 0.02724\\
 % \midrule
 % \multicolumn{5}{l}{Residual standard error: 0.6597 on 14753 degrees of freedom}\\
-% \multicolumn{5}{l}{Multiple R-squared: 0.6603,	Adjusted R-squared: 0.6602}\\
+% \multicolumn{5}{l}{Multiple R-squared: 0.6603,    Adjusted R-squared: 0.6602}\\
 % \multicolumn{5}{l}{F-statistic:  4779 on 6 and 14753 DF,  p-value: \textless~2.2e-16}\\
 % \bottomrule[1.5pt]
 % \end{tabular*}
@@ -620,14 +620,14 @@ legend cell align=left
 % \vspace{-0.1in}
 % \subsection{Discussion}\label{sec:discussion}
 % \par
-% In our previous result analysis of the laboratory experiment\cite{Stoter2013} we set the focus on the differences between musicians and non-musicians. Between the Internet experiment and the laboratory experiment, slightly different results were obtained when looking into how musicians and non-musicians performed (Figure~\ref{figure:error_probability_iis_vs_web}). In the laboratory experiment musicians performed much better compared to non-musicians than in the Internet Experiment. One reason seems to be that in the laboratory experiment 74.2\% of the musicians had also a professional background in audio. In the Internet experiment only 27.5\% of the musicians had a professional background in audio. Since audio professionals more often have to detect hardly audible differences in audio files they are more trained in this field. As mentioned before, being a musician in our context does just mean that the participant plays an instrument without any information about his expert level or the time he or she spends on practicing.
+% In our previous result analysis of the laboratory experiment\cite{Stoter2013} we set the focus on the differences between musicians and non-musicians. Between the Internet experiment and the laboratory experiment, slightly different results were obtained when looking into how musicians and non-musicians performed (Figure~\ref{figure:error_probability_iis_vs_web}). In the laboratory experiment musicians performed much better compared to non-musicians than in the Internet Experiment. One reason seems to be that in the laboratory experiment 74.2\% of the musicians had also a professional background in audio. In the Internet experiment, only 27.5\% of the musicians had a professional background in audio. Since audio professionals more often have to detect hardly audible differences in audio files they are more trained in this field. As mentioned before, being a musician in our context does just mean that the participant plays an instrument without any information about his expert level or the time he or she spends on practicing.
 % \par
 % When examining the responses for items with the same number of instruments being played back, noticeable differences between the genres were found. For the stimuli with $\textit{Num}_{\mathrm{Inst}} \le 4$ the mean of $\textit{Resp}_{\mathrm{Correct}}$ was $53.0\%$ and for non-classical items $62.5\%$. Since the experiment was not designed for testing classical versus non-classical items, we cannot make definitive statements about whether humans are better in estimating instruments for a specific music genre. Moreover, we did not address this issue in our result analysis.
 % \par
 % \par
-% It is often recommended to use headphones instead of loudspeakers for Internet experiments. From the relative low average marginal effect of $\textit{Setup}$ (Table~\ref{table:data_web_lm}), it can be derived that the type of the setup had only minor effects on the results of the Internet experiment.
+% It is often recommended to use headphones instead of loudspeakers for Internet experiments. From the relatively low average marginal effect of $\textit{Setup}$ (Table~\ref{table:data_web_lm}), it can be derived that the type of the setup had only minor effects on the results of the Internet experiment.
 
-% In our previous result analysis of the laboratory experiment, we set the focus on the differences between musicians and non-musicians. Between the Internet experiment and the laboratory experiment, slightly different results were obtained when looking into how musicians and non-musicians performed (Figure~\ref{figure:error_probability_iis_vs_web}). In the laboratory experiment musicians performed much better compared to non-musicians than in the Internet Experiment. One reason seems to be that in the laboratory experiment 74.2\% of the musicians had also a professional background in audio. In the Internet experiment only 27.5\% of the musicians had a professional background in audio. Since audio professionals more often have to detect hardly audible differences in audio files they are more trained in this field. As mentioned before, being a musician in our context does just mean that the participant plays an instrument without any information about his expert level or the time he or she spends on practicing.
+% In our previous result analysis of the laboratory experiment, we set the focus on the differences between musicians and non-musicians. Between the Internet experiment and the laboratory experiment, slightly different results were obtained when looking into how musicians and non-musicians performed (Figure~\ref{figure:error_probability_iis_vs_web}). In the laboratory experiment musicians performed much better compared to non-musicians than in the Internet Experiment. One reason seems to be that in the laboratory experiment 74.2\% of the musicians had also a professional background in audio. In the Internet experiment, only 27.5\% of the musicians had a professional background in audio. Since audio professionals more often have to detect hardly audible differences in audio files they are more trained in this field. As mentioned before, being a musician in our context does just mean that the participant plays an instrument without any information about his expert level or the time he or she spends on practicing.
 \par
 One of the stimuli in the experiments consisted of a unison mixture. The results showed that $76\%$ of the participants correctly identified two instruments. Only $18\%$ of the participants underestimated by one instrument, $6\%$ overestimated by one instrument.
 \par
@@ -636,11 +636,11 @@ Surprising was the small number of participants who had to be screened. We exclu
 \section{Speaker Count Estimation}%
 \label{sec:count_experiment}
 
-\marginpar{This chapter is based on the work that has been published in~\cite{stoeter19} together with Soumitro Chakrabarty and Emanuël Habets.}
+\marginpar{This chapter is based on the work that has been published in~\cite{stoeter19} together with Soumitro Chakrabarty and Emanuël Habets. The main contributions are from the author of this thesis.}
 
 Humans are excellent in segregating one source from a mixture~\cite{bregman90} and tend to use this skill to perceptually segregate speakers before they can estimate a count, as highlighted, e.g.\ in~\cite{kawashima15}.
 As shown in~\cite{kashino96, kawashima15} with extensive experiments using Japanese speech samples, humans are able to correctly estimate up to three simultaneously active speakers without using any spatial cues.
-In this experiment we reproduced the experiments conducted in~\cite{kawashima15, kashino96} using stimuli of English speakers.
+In this experiment, we reproduced the experiments conducted in~\cite{kawashima15, kashino96} using stimuli of English speakers.
 Designed to address source separation research, we also modified the question to ask participants for ``the maximum number of concurrent speakers'' in a short excerpt of speech.
 
 \subsection{Stimuli}
@@ -653,10 +653,10 @@ We selected \emph{LibriSpeech clean-360}~\cite{panayotov15} which includes 363 h
 \par
 To compute the maximum number concurrent speakers \(\cardinality\), annotation of the activity of each individual speaker is required.
 Even though many corpora come with word and phonemes annotation, they often are not consistent across different corpora.
-We therefore generated annotations based on a voice activity detection algorithm (VAD). As we rely on a robust VAD estimate, we found the implementation from the \emph{Chromium Web Browser} as part of the WebRTC Standard\footnote{WebRTC 1.0: Real-time Communication Between Browsers W3C Editor's Draft 05 June 2017} to yield good results.
+We, therefore, generated annotations based on a voice activity detection algorithm (VAD). As we rely on a robust VAD estimate, we found the implementation from the \emph{Chromium Web Browser} as part of the WebRTC Standard\footnote{WebRTC 1.0: Real-time Communication Between Browsers W3C Editor's Draft 05 June 2017} to yield good results.
 \par
 To generate a single example, a tuple of a speech mixture and its ground truth speaker count \(\cardinality \), we draw a unique set of \(\cardinality \) speakers from the corpus.
-For each of the speakers we then select a random utterance, resampled to 16 kHz sampling rate and apply VAD.\@
+For each of the speakers, we then select a random utterance, resampled to 16 kHz sampling rate and apply VAD.\@
 The VAD method was configured using default parameters using a hop size of 10~ms.
 Further, the VAD estimate was used to remove silence from the beginning and the end of an utterance recording.
 In the next step, more utterances from the same speaker are drawn from the corpus until the desired duration is reached.
@@ -673,10 +673,10 @@ The Dataset is available for download~\cite{oss_libricount}.
 \subsection{Experimental Setup}
 
 \begin{figure}[htb]
-	\centering
-		\fbox{\includegraphics[width=0.8\textwidth]{Chapters/07_Analysis_Experiment/figures/experiment_ui.png}}
-	\caption{Speaker count estimation experiment user interface.}
-	\label{fig:user_interface_speaker}
+    \centering
+        \fbox{\includegraphics[width=0.8\textwidth]{Chapters/07_Analysis_Experiment/figures/experiment_ui.png}}
+    \caption{Speaker count estimation experiment user interface.}
+    \label{fig:user_interface_speaker}
 \end{figure}
 
 We conducted a study using the simulated data from the \emph{LIBRI Count Dataset} as mentioned in the previous subsection.
@@ -694,7 +694,7 @@ A simplified version of the experiment is made available through a web applicati
 \subsection{Experiment Results}
 To reveal over and underestimation errors, we decided to report the average response for each group of \(k\).
 As a reference, we also included the average results from~\cite[Experiment 1, 5~seconds duration]{kawashima15} which shows similar (with slightly higher error probability) results compared to our blind experiment.
-Also in~\cite{kawashima15} the maximum number of speakers to test was six whereas we evaluated stimuli with up to ten speakers.
+Also, in~\cite{kawashima15} the maximum number of speakers to test was six whereas we evaluated stimuli with up to ten speakers.
 The results of our lab-based experiments are shown in Figure~\ref{fig:experimentA} and Figure~\ref{fig:experimentB}.
 Results indicate that underestimation becomes apparent for \(k > 3\).
 First and foremost, we can confirm the ``one-two-three-many'' paradigm on our experiment with English utterances.
@@ -728,7 +728,7 @@ This is especially obvious for six and more speakers where the informed group pe
 % [ ] Practical applications/implications
 % [X] Recommendations for further research
 
-In this chapter we presented two experiments that we conducted to get a better understanding of the human ability of estimating the number of sources in overlapped mixtures.
+In this chapter, we presented two experiments that we conducted to get a better understanding of the human ability to estimate the number of sources in overlapped mixtures.
 \par
 First, we showed that estimating the number of instruments in music mixtures is a challenging task for humans.
 We presented the results of a controlled experiment with 62 participants, listening to stimuli of inhomogeneous timbres.
@@ -741,16 +741,16 @@ Particularly, we found a that this gap is most prominent for stimuli of three an
 Furthermore, for all stimuli (ranging from one to six instruments) we revealed that musicians performed about 20\% better than non-musicians, hence revealing a ``gap of one instrument'' in mean absolute error.
 \par
 We then repeated this experiment in an open, uncontrolled environment with more than 1000 participants.
-To our knowledge this was the first larger crowd sourced auditory experiment within the Signal Processing or MIR community.
-Regarding the ability of estimating the number of instruments, the web experiment and the laboratory experiment share the same outcome: the probability to correctly estimate up to about three instruments is higher than 50\%.
+To our knowledge, this was the first larger crowdsourced auditory experiment within the Signal Processing or MIR community.
+Regarding the ability to estimate the number of instruments, the web experiment and the laboratory experiment share the same outcome: the probability to correctly estimate up to about three instruments is higher than 50\%.
 These results were surprising because many participants did not use professional audio equipment.
-In comparison to audio quality experiments like MUSHRA~\cite{recommendation2001MUSHRA}, we can therefore conclude that count estimation tasks are suitable for highly scalable crowd sourced listening experiments.
+In comparison to audio quality experiments like MUSHRA~\cite{recommendation2001MUSHRA}, we can, therefore, conclude that count estimation tasks are suitable for highly scalable crowd sourced listening experiments.
 \par
-In our second experiment we reproduced an earlier study presented in~\cite{kawashima15} to estimate the maximum number of concurrent speakers in short audio mixtures, simulating a ``cocktail-party'' environment.
+In our second experiment, we reproduced an earlier study presented in~\cite{kawashima15} to estimate the maximum number of concurrent speakers in short audio mixtures, simulating a ``cocktail-party'' environment.
 Our experiment went a step further with respect to the maximum amount of speakers to be estimated (up two \(k=10\)).
 The results indicated almost no person was able to correctly estimate up to ten speakers.
 However, we also observed that even for more than seven speakers the mean response did further (but not linearly) increase.
 This indicates that humans are possibly interpolating some sort of a speech density to make up their decision.
 \par
 We conclude that all of our count experiments share the same results: A) humans are unable to correctly estimate more than four sources and B), underestimation is the main cause of error.
-Also we revealed that source count estimation studies can be easily be participated by non-professional listeners.
+Also, we revealed that source count estimation studies can be easily be participated by non-professional listeners.
