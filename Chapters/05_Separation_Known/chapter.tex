@@ -4,18 +4,16 @@
 For many source separation methods it is common to assume that the spectral harmonics are not fully overlapped.
 In turn, this assumption is exploited in methods such as non-negative matrix factorization (NMF) to approximate the mixture from a lower-rank decomposition in an unsupervised way.
 Still, in order to improve separation quality, researchers imposed additional constraints based on prior information about the sources in their algorithms~\cite{ozerov12}.
-The extent of such meta information very often depends on 
-the availability of data.
-One example of an informed source separation systems is described by Ewert and M\"uller \cite{ewert12}.
+The extent of such meta information very often depends on the availability of data.
 They proposed to incorporate the note pitch and onset information of the musical score, encoded in a MIDI file, synchronized to the audio, to improve the separation result.
+One example of an informed source separation systems is described by Ewert and M\"uller \cite{ewert12}.
 % end converted from dafx
-\par
 In the case of highly overlapped signals such as unison mixtures, the score is less useful since unison mixtures share the same note pitch.
 Instead, in this chapter, we want to evaluate the use of fundamental frequency estimates of the source to be extracted.
-There has been extensive research on separation using the fundamental frequency in music separation.
-The first option is to re-synthesize the source using a sinusoidal model which was studied in a large number of methods\footnote{For a detailed overview, we refer the reader to Section III A of~\cite{rafii}.}.
-However, sinusoidal synthesis suffers from a typical \textit{metallic} sound. 
-We, therefore, decided to take an alternative approach which is to exploit harmonicity in another way, by filtering out everything from the mixture that is not located close to the detected harmonics.
+There has been extensive research on separation using the fundamental frequency.
+The first option is ``to re-synthesize the source using a sinusoidal model which was studied in a large number of methods''~\cite{rafii}.
+However, sinusoidal synthesis is known to suffer from ``a typical \textit{metallic} sound''. 
+Alternative approaches, instead, are ``filtering out everything from the mixture that is not located close to the detected harmonics'' in order to exploit harmonicity.
 In the past, many related works focused on this paradigm, a procedure as it turned out to be a common task in source separation systems. 
 Before we present our proposed method in the next section, the following gives an overview of existing methods in this field.
 
@@ -190,20 +188,7 @@ The results have also been evaluated and confirmed subjectively by informal list
 In the previous section, we showed the effectiveness of a \(F0\) variation informed separation system on our constrained unison source separation scenario.
 In the following section, we show how the method can be extended to the scenario of separating the vocals/lead from the accompaniment by using predominant melody estimation as depicted in Figure~\ref{fig:methods_harmonicity}.
 
-% The procedure 
-% from zafar
-% Hereby we make use of one particularity of harmonic lead sources like singing voice.
-% It is their ability to produce vibration using vocal folds, further filtered by the vocal tract.
-% As a consequence, sung melodies are \textit{mostly} harmonic and therefore have a fundamental frequency.
-% If one can track the pitch of the vocals, one can then estimate the energy at the harmonics of the fundamental frequency and reconstruct the voice.
-
-% Such method is summarized in .
-% In a first step, the objective is to get estimates of the time-varying fundamental frequency for the lead at each time frame.
-% This can done by a suitable pitch detection method like~\cite{decheveigne02}.
-% A second step then is respect is then to track this fundamental frequency over time, in other words, to find the best sequence of estimates, in order to identify the melody line.
-% Such algorithms typically assume that the lead corresponds to the harmonic signal with the strongest amplitude.
 In this extension, we want to show how the \(F0\) variation informed separation system can be used in combination with a predominant melody estimation algorithm to extract singing voice from music.
-% Predominant melody estimation is built upon \(F0\) estimates by applying ``a second step then is respect is then to track this fundamental frequency over time, in other words, to find the best sequence of estimates, in order to identify the melody line.''~\cite{rafii}.
 
 \par
 In a first step, the ``Melodia'' algorithm~\cite{salamon12} is used to obtain an estimate of the predominant melody from the mixture.
@@ -255,7 +240,7 @@ In the unison scenario, however, we were globally warping the signal using a con
 In the case of full-length tracks many parts are unvoiced and apply time warping on these segments would degrade the separation quality.
 Therefore, we only applied the warping on voiced parts and leave the non-vocal parts unaltered.
 In order to do this, we used the built-in voice activity detection from \emph{Melodia}.
-The full procedure is depicted in Figure~\ref{fig:warp_sisec_demoa} and igure~\ref{fig:warp_sisec_demob}.
+The full procedure is depicted in Figure~\ref{fig:warp_sisec_demoa} and Figure~\ref{fig:warp_sisec_demob}.
 For all continuously voiced segments, from the mixture (a), we compute the warp contour (c) from the melody segments (b).
 To reduce the complexity of the extraction, compared to the NMF mentioned in Section~\ref{sub:frequency_modulation}, we designed a comb filter that can extract the voice (f) in the warped time domain (d).
 Therefore, we used an IIR Filter with the frequency response
@@ -301,25 +286,10 @@ A stereo signal is produced by using a signal filtering both channels individual
 \label{fig:warp_sisec_demob}
 \end{figure}
 
-% \begin{figure}
-% \begin{tabular}{cc}
-%   \includegraphics[width=65mm]{Chapters/05_Separation_Known/warp-demo/Mixture.pdf} & \includegraphics[width=65mm]{Chapters/05_Separation_Known/warp-demo/reference.pdf} \\
-% (a) Mixture Magnitude STFT & (b) Ground Truth Vocals \\[6pt]
-% \includegraphics[width=65mm]{Chapters/05_Separation_Known/warp-demo/Melodia.pdf} & \includegraphics[width=65mm]{Chapters/05_Separation_Known/warp-demo/Contour.pdf} \\
-% (c) Melody Estimate & (d) Warp Contour \\[6pt]
-% \includegraphics[width=65mm]{Chapters/05_Separation_Known/warp-demo/warped.pdf} & \includegraphics[width=65mm]{Chapters/05_Separation_Known/warp-demo/warped_filtered.pdf} \\
-% (e) Warped Mixture & (f) Filtered and Warped Mixture \\[6pt]
-% \multicolumn{2}{c}{\includegraphics[width=65mm]{Chapters/05_Separation_Known/warp-demo/Estimate.pdf} }\\
-% \multicolumn{2}{c}{(g) Vocals Estimate}
-% \end{tabular}
-% \caption{Examples of a F0 variation informed separation of the audio track \emph{Tamy - Que Pena Tanto Fa} form the (MASS) dataset~\cite{MTGMASSdb}.}%
-% \label{fig:warp_sisec_demo}
-% \end{figure}
-
 \subsection{Results on SiSEC 2015}
 \label{ssec:performance_sisec15}
 
-The algorithm has been applied to the Mixing Secret Dataset 100 (MSD100) dataset,  consisting of a total of 100 songs of different styles.
+The algorithm has been applied to the Mixing Secret Dataset 100 (MSD100) dataset, consisting of a total of 100 songs of different styles.
 The separation results were evaluated using BSSeval~\cite{fevotte05} and submitted to the SiSEC 2015 evaluation challenge~\cite{ono15}.
 The system was ranked in the last third of the participants and scored only slightly better than RPCA based methods~\cite{huang12}.
 The reason for this is that our proposed system highly depends on the melody estimation algorithm which in turns is based on the assumption that there exists a predominant melody in the mixture.

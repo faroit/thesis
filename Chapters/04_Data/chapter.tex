@@ -30,7 +30,8 @@ As an exception compared to other music scenarios, when all instruments play~\em
 To create a dataset, we could use existing single note datasets such as the \emph{Univ. of Iowa Musical Instrument Sample Database}\footnote{\url{http://theremin.music.uiowa.edu/index.htm}}, created from acoustic recording sessions.
 However, to better study the influence of vibrato we require extended control over certain parameters such as note duration, vibrato duration, exact fundamental frequency, vibrato rate, vibrato extend, reproducibility, loudness or expression.
 \par
-Also, it is important to note that vibrato techniques differ between instruments: whereas the English horn and the flute only produce a very subtle modulation, the violin and tenor sax are capable of powerful frequency modulations~\cite{gilbert05}.
+As mentioned in previous chapters, vibrato techniques vary across instruments. Instruments such as violin and tenor sax are known for its distinct frequency modulations~\cite{gilbert05}.
+Other instruments such as the English horn and the flute are more close to amplitude modulations.
 \par
 We, therefore, generated the notes using a software sampler\footnote{\textsc{Vienna Symphonic Library}: \url{https://vsl.co.at}} which allows us to control the parameters such as the vibrato.
 All our test stimuli have a duration of three seconds.
@@ -161,8 +162,7 @@ By making this dataset public domain~\cite{oss_muserc} and including the raw rec
 
 \marginpar{This subsection is based on parts of the work that has been published in~\cite{liutkus17, rafii}. The parts that are cited here were co-authored by the author of this thesis.}
 
-Multitrack datasets are helpful, and often necessary to develop and evaluate methods on complex acoustic tasks such as source separation.
-The Signal Separation Evaluation Campaign (SiSEC) is a solid indicator of the progress in research within the field of source separation \cite{sisec13, ono15, liutkus17, stoeter18sisec}.
+The Signal Separation Evaluation Campaign (SiSEC) is a publicly organized benchmark to assess the performance of source separation systems~\cite{sisec13, ono15, liutkus17, stoeter18sisec}.
 To evaluate participating methods, multitrack data is required, containing the true sources.
 For professionally-produced or recorded music, the separated sources are often either unavailable or private. 
 Indeed, they are considered amongst the most precious assets of right holders, and it is challenging to find isolated vocals and accompaniment of professional bands that are freely available for the research community to work on without copyright infringements.

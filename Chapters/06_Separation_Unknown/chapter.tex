@@ -66,7 +66,7 @@ Each component is clustered into one of two sources to generate two estimates.
 \end{figure}
 
 It is this step that transforms the NMF into a supervised algorithm.
-As for other separation methods performed in the time-frequency domain, separation is achieved using Wiener filters or soft masks to extract the sources from the mixture~\cite{liutkus15c}.
+As for other separation methods, performed in the time-frequency domain, separation is achieved using Wiener filters or soft masks to extract the sources from the mixture~\cite{liutkus15c}.
 \par
 Since NMF first appeared to the source separation community in~\cite{smaragdis03} and in~\cite{vembu05}, a large variety of NMF ``flavors'' were introduced to improve certain aspects of the NMF in the application of music. 
 In~\cite[Chapter 16]{vincent} of that book the authors describe one of the main problems of NMF which is that ``standard NMF is shown to be effective when the notes of the analyzed music signal are nearly stationary''.
@@ -95,7 +95,7 @@ When we apply a factorization with $K=2$, one can see that NMF has difficulties 
 One way towards better separation is to increase the number of components per source, however, this introduces difficulties in the clustering.
 Another method is proposed in~\cite{smaragdis04, fitzgerald05s, jaiswal13, rodriguezserrano16} which use convolutions to model shifts in components.
 This lead to factorizations that are able to also model vibrato events.
-However as stated in~\cite{hennequin11}, it does ``not  permit  any variation  between  different  occurrences  of  the  same  event (atom), its duration and spectral content evolution being fixed''. 
+However as stated in~\cite{hennequin11}, it does ``not  permit  any variation  between  different  occurrences  of  the  same event (atom), its duration and spectral content evolution being fixed''. 
 Instead, they proposed a frequency-dependent activation matrices by using a source/filter-based model.
 The model is based on an Auto-Regressive Moving Average (ARMA) time-varying model that allows single spectral components to be modeled along with their spectral variations. 
 The model, as reported by the authors, however, does only allow for small frequency variations and fitting the ARMA model is a time-consuming process.
@@ -106,7 +106,7 @@ The model, as reported by the authors, however, does only allow for small freque
 \marginpar{Parts of this subsection is also based on the work published in~\cite{stoeter14}.}
 
 Another way to improve separation of modulated sources is the use of higher-dimensional tensor representations.
-A variety of models exist to factorize a tensor into three factors and apply a similar rank reduction as in the NMF case.
+A variety of models exist to factorize a tensor into three components and apply a similar rank reduction as in the NMF case.
 Tensor factorizations are useful for applications of data with more than two dimensions.
 In audio separation, tensor factorization were originally proposed to address multichannel separation as in~\cite{fitzgerald08, fevotte10, ozerov11}. 
 Barker and Virtanen~\cite{barker13} were the first to propose a modulation tensor representation for single-channel source separation. 
@@ -670,11 +670,6 @@ Clicking on one rectangle in the heatmap opens the interactive player that allow
 \end{figure}
 
 \section{Summary and Discussion}
-
-% [X] A summary of findings and limitations
-% [ ] Practical applications/implications
-% [X] Recommendations for further research
-% [X] Transition sentence that acts as a “teaser” for the next chapter
 
 In this chapter, we presented methods that exploit modulations for source separation without knowing them a priori. 
 In the first part of this chapter, we presented a study where we demonstrated the use of the modulation spectrogram tensors for separating unison instrument mixtures, comparing the results with those presented in the previous chapter.
