@@ -9,8 +9,6 @@ In the following sections, we present three datasets which we helped creating wi
 \section{Unison Mixtures}
 \label{sec:unison_dataset}
 
-\marginpar{This subsection is based on~\cite{stoeter14} together with Stefan Bayer. The first author mainly contributed to this work.}
-
 In speech, it is common to mix clean speech and noise~\cite{varga93} or different clean speech signals such as~\cite{garofolo93} to generate mixtures.
 By contrast, the conversational aspect of human-to-human communication is lost.
 Compared to speech, musical content usually does share familiar orchestration, can hardly be superimposed randomly and the summing of isolated random notes from musical instrument databases does not reflect musical performances.
@@ -115,7 +113,13 @@ In the case of two instruments playing in unison, the average WDO is \(0.65\), i
 
 \section{High Resolution Vibrato Recordings}%
 \label{sec:muserc}
-\marginpar{This subsection is based on the work that has been published in~\cite{stoeter15acm} together with my former student Michael Müller who helped with the recordings.}
+
+\begin{shaded}
+  % (entire section)
+  This subsection was previously published in~\cite{stoeter15acm} and was abbreviated to be included in this thesis.
+  My contribution in this work was the initial idea which was inspired by the gap in existing $F0$ estimation datasets not providing sufficient level of annotation to derive an accurate ground truth.
+  The work was done together with our student, Michael Müller, who greatly helped to design and manufacture the custom experiment hardware, organize the actual recording and provide an assistance in analyzing and converting the recorded data.
+\end{shaded}
 
 Fundamental frequency \(F0\) estimation of a signal is a common task in audio signal processing with many applications. 
 If the $F0$ varies over time, the complexity increases, and it is also more difficult to provide ground truth data for evaluation.
@@ -160,7 +164,11 @@ By making this dataset public domain~\cite{oss_muserc} and including the raw rec
 \section{Multitrack Data}%
 \label{sec:multitrack}
 
-\marginpar{This subsection is based on parts of the work that has been published in~\cite{liutkus17, rafii}. The parts that are cited here were co-authored by the author of this thesis.}
+\begin{shaded}
+  Parts of this subsection was previously published in~\cite{rafii} Section VI A. The publication is a result of an international collaboration with Zafar Rafii, Antoine Liutkus, Stylianos Mimilakos, Derry Fitzgerald and Bryan Pardo. 
+  My contributions to this article was the introduction of the multitrack datasets such as DSD100 and tools, the creation of figures and the compilation of deep learning based literature.
+  The main sections introducing the prior work were, in large parts, edited by Zafar Rafii and Antoine Liutkus. Stylianos Mimilakos created and revised several subsections and figures. Derry Fitzgerald and Bryan Pardo revised and edited the article.
+\end{shaded}
 
 The Signal Separation Evaluation Campaign (SiSEC) is a publicly organized benchmark to assess the performance of source separation systems~\cite{sisec13, ono15, liutkus17, stoeter18sisec}.
 To evaluate participating methods, multitrack data is required, containing the true sources.
