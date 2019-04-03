@@ -1,93 +1,4 @@
-### Dead or Alive
-
-## FR
-
-* [X] Aktuelle Version Stibie
-* [X] Aktuelle Version Thomas
-* [X] Introduction, Conclusion
-
-## Samstag
-
-* [X] Politur Intro, Conclusion
-* [X] Einmal kurz überfliegen
-
-## Sonntag
-
-* [X] Zu Bernd
-* [X] Abstract, Intro, Conclusions -> Antoine
-* [X] Christophe
-* [X] Abstract deutsch
-* [X] Abstract Annika
-* [X] Fehlende Plots machen
-* [X] Mail an Promotionsbüro
-
-## Montag
-
-* [X] TODOs killen
-* [X] Korrekturen einbauen
-* [X] Intro, Conclusion Patricio
-
-* [ ] Vollständig lesen
-* [ ] Korrekturen einbauen
-
-## Dienstag
-
-* [ ] Korrekturen einbauen
-* [ ] Layout und quirks
-* [ ] Vollständig lesen
-* [ ] Rohlinge kaufen
-* [ ] Zwei Einfache USB sticks (marke: kingston, sandisk)
-* [ ] Test-Druck und Bindung
-
-## Mittwoch
-
-* [ ] Vollständig lesen
-
-## Donnerstag
-
-* [ ] Drucken
-* [ ] Durchsehen
-* [ ] Abschicken
-
-## Druckliste
-
-* [ ] Lebenslauf MIT Foto
-* [ ] sämtliche Anträge
-* [ ] 5 Arbeiten!
-* [ ] 
-* [ ] Unterschrieben!!!!
-
-
-### If I have time...
-
-% TODO: without any overlap, count estimation would be useless... counting is a quantification of overlap
-
-% TODO: discuss that music signals lack a proper source definition. Therefore counting on music signals in ill defined. However, it may work on some specific cases. We tried on ... but it didn't work.
-
-# Bernd 19.10.2018
-
-* [X] noch mal den Titel checken, deutsche Variante, vielleicht doch mehr in Richtung Modulation?
-* [X] Dataset Kapitel ok oder überflüssig --appendix?
-
-* [X] Tables und Figures in Appendix?
-* [X] Common Fate interpretation mit plots (siehe fatimeh poster), aber future work
-* [X] Grafiken aus IEEE publikationen übernehmen? nur hinweis bei IEEE und AES?
-* [ ] Bei der vorstellung der Paper... alle Autoren inklusive Bernd?
-* [X] Citation Style numerisch oder alphanumerisch ok?
-* [X] Release WICE dataset
-* [X] Commonfate: parafac2 fast release von Jeremy?
-* [X] Fragen, ob Korrekturen später möglich sind und in welchem Umfang?
-* [X] Publikationsliste inklusive neuer Publikationen! Auch in Thesis?
-
 # General status
-
-* [ ] reference all datasets
-* [ ] appendix, filter plots from countnet
-* [ ] Figures durchgehen
-* [ ] Grafiken IEEE in Captions
-* [ ] Literatur durchgehen (PAPERS folder! und löschen)
-* [ ] Check website availability
-* [ ] add gap statistics and elbow method and other clustering shit from wolfgangs diplomarbeit
 
 # Fragen an Antoine
 
@@ -100,6 +11,12 @@ No, but From Chollet
 > The same is true of backprop in deep learning -- knowing how to code up backprop by hand gives you no useful knowledge wrt deep learning, and inversely, developing powerful mental models for deep learning does not in any way require knowing the algorithmic details of backprop
 
 # Defense
+
+* color coded formular https://rockt.github.io/2018/04/30/einsum
+
+##
+
+* understanding cross entropy: https://rdipietro.github.io/friendly-intro-to-cross-entropy-loss/#cross-entropy
 
 ## Questions
 
@@ -130,6 +47,9 @@ No, but From Chollet
 - how to derive the cost functions
 - Erklärung von Antoine/Vincent
 - understand HR-NMF, shift-invariant-nmf, hennquin10
+- warum kein WDO auf CFT? Siehe pardo journal oder response
+
+- READ: Towards music understanding without separation: Segmenting music with correlogram comodulation
 
 ### Separation
 

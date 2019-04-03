@@ -1,9 +1,7 @@
 \chapter[Data-Driven Speaker Count Estimation]{CountNet: Data-Driven Speaker Count Estimation}
 \label{cha:countnet}
 
-\marginpar{This chapter is based on the work that has been published in~\cite{stoeter18, stoeter19} in collaboration Soumitro Chakrabarty and Emanuël Habets. The main contribution are coming from the first author.}
-
-% TODO: add confusion matrix and chapter scatter plot
+\marginpar{This chapter is based on the work that has been published in~\cite{stoeter18, stoeter19} in collaboration Soumitro Chakrabarty and Emanuël Habets. The main contributions are from the first author.}
 
 % Introduce the task of estimating the maximum number of concurrent speakers in a single-channel mixture.
 % * Lets start right into the task
@@ -49,12 +47,12 @@ In this scenario, a method of estimating the maximum number of concurrent speake
 % * How do humans do count and why can't machines?
 \par
 When speaker overlap is as prevalent as in a ``cocktail-party'' scenario, developing an algorithm to detect the number of speakers is challenging.
-% This is in contrast to humans whom we know are excellent in segregating one source from a mixture~\cite{bregman} and tend to use this skill to perceptually segregate speakers before they can estimate a count, as highlighted, e.g.\ in~\cite{kawashima15}.
+% This is in contrast to humans whom we know are excellent in segregating one source from a mixture~\cite{bregman90} and tend to use this skill to perceptually segregate speakers before they can estimate a count, as highlighted, e.g.\ in~\cite{kawashima15}.
 % As shown in~\cite{kashino96, kawashima15}, humans are able to correctly estimate up to three simultaneously active speakers without using spatial information.
 % Similarly, in music, psycho-acoustic researchers came up with a ``one-two-three-many'' hypothesis~\cite{huron89, stoeter13, schoeffler13}.
 % %
 % \par
-% Identifying isolated sources in realistic mixtures is challenging~\cite{bregman} and psychology studies in vision~\cite{jevons1871} have shown that humans can instantly estimate the number of objects without actually counting and therefore identifying them.
+% Identifying isolated sources in realistic mixtures is challenging~\cite{bregman90} and psychology studies in vision~\cite{jevons1871} have shown that humans can instantly estimate the number of objects without actually counting and therefore identifying them.
 % This phenomenon is known as \textit{subitizing} and has been inspiring research in vision~\cite{chattopadhyay17}.
 Since there are indications that the auditory system is capable of subitizing sources~\cite{hoopen79}, we transfer this fact to the audio domain and directly attempt in this study to estimate the number of audio sources through ``direct count estimation'' (see also Chapter~\ref{cha:countanalysis}).
 The question if machines could outperform humans, or if they are subject to similar limitations, remains to be answered and is also part of this work.
@@ -88,7 +86,7 @@ The different strategies undertaken there rely on classical and grounded signal 
 However, our experience shows (see Section~\ref{sec:evaluation}) that they leave much room for improvement when applied to more diverse and challenging signals than those corresponding to their targeted applications, notably in the case of many different and constantly overlapping speakers.
 % * Existing single-channel methods require segments where only a single speaker is active.
 This is due to their main common weakness, which is to rely on the assumption that there are segments where only one speaker is active, in a way that is similar to the classical speaker diarization studies mentioned before.
-In~\cite{stoeter17} we presented a first data-driven approach based on a recurrent network, motivated by the recent and impressive successes of deep learning approaches in various audio tasks like speech separation~\cite{yu16, hershey16, grais17} and speaker diarization~\cite{yella14, hruz16, garciaromero17}.
+In~\cite{stoeter17} we presented a first data-driven approach based on a recurrent network, motivated by the recent and impressive successes of deep learning approaches in audio tasks such as speech separation~\cite{yu16, hershey16, grais17} and speaker diarization~\cite{yella14, hruz16, garciaromero17}.
 The methods proposed in~\cite{stoeter17} to address speaker count estimation were built upon recent methods to count objects in images, which is a popular application with many contributions from the deep learning community~\cite{wang15, chattopadhyay17, khan16, segui15, zhang15, arteta16, marsden16, boominathan16, zhang2015salient}.
 In~\cite{stoeter17} two main paradigms were evaluated: a) count estimation as regression problem, where the systems are directly trained to output the number of objects as a point estimate, and b) classification, where every possible number of objects is encoded as a different class and the output of a predicting system corresponds to a probability distribution over these classes.
 The results of the proposed method indicated that a classification based neural network performed better than one based on regression.
@@ -120,7 +118,7 @@ Finally, for the sake of reproducibility, the trained networks (models), as well
 % introduce the section
 We consider the task of estimating the maximum number of concurrent speakers \( \cardinality \in \mathbb{Z}^{+}_{0} \) in a single-channel audio mixture \(\mathbf{x}\).
 This is achieved by applying a mapping from \(\mathbf{x}\) to \(\cardinality \).
-We now provide details on the notations, the general structure of the method, and various ways to exploit the deep learning framework to estimate \(\cardinality \).
+We now provide details on the notations, the general structure of the method, and ways to exploit the deep learning framework to estimate \(\cardinality \).
 
 \subsection{Signal Model}%
 \label{ssec:signal_model}
@@ -183,26 +181,26 @@ For each sample, we consider that~$k_t$ is drawn from a probability distribution
 the distribution~$\mathcal{L}\left(\cdot\mid \mathbf{y}_{t}\right)$ is called the \textit{output distribution} in the following.
 We further assume that there is some deterministic mapping between~$\mathbf{X}_t$ and~$\mathbf{y}_t$, embodied as
 \begin{equation}
-\mathbf{y}_{t}=f_{\mathbf{\theta}}\left(\mathbf{X}_{t}\right),
+\mathbf{y}_{t}=f_{\boldsymbol{\theta}}\left(\mathbf{X}_{t}\right),
 \end{equation}
-where $\mathbf{\theta}$ are the parameters for this deterministic mapping, that is independent of the training item~$t$. This results in an output distribution given by
+where $\boldsymbol{\theta}$ are the parameters for this deterministic mapping, that is independent of the training item~$t$. This results in an output distribution given by
 \begin{equation}
-\mathbb{P}\left(k_{t}\mid\mathbf{X}_{t}\right)=\mathcal{L}\left(k_{t}\mid f_{\mathbf{\theta}}\left(\mathbf{X}_{t}\right)\right).\label{eq:output_distribution}
+\mathbb{P}\left(k_{t}\mid\mathbf{X}_{t}\right)=\mathcal{L}\left(k_{t}\mid f_{\boldsymbol{\theta}}\left(\mathbf{X}_{t}\right)\right).\label{eq:output_distribution}
 \end{equation}
-Assume for the rest of this section that these parameters~$\mathbf{\theta}$ are known.
+Assume for the rest of this section that these parameters~$\boldsymbol{\theta}$ are known.
 Given a previously unseen input~$\mathbf{X}$, expression~(\ref{eq:output_distribution}) means we can compute the distribution of the source count~$k$.
-% The advantage of that probabilistic formulation is to introduce some flexibility instead of enforcing a more classical deterministic mapping such as~$k_{t}=f_{\mathbf{\theta}}\left(\mathbf{X}_{t}\right)$.
+% The advantage of that probabilistic formulation is to introduce some flexibility instead of enforcing a more classical deterministic mapping such as~$k_{t}=f_{\boldsymbol{\theta}}\left(\mathbf{X}_{t}\right)$.
 
-The objective of our counting system is to produce a point estimate~$\hat{k}$ rather than a whole output distribution~$\mathbb{P}\left(k\mid\mathbf{X}\right)$.
+The objective of our count estimation system is to produce a point estimate~$\hat{k}$ rather than a whole output distribution~$\mathbb{P}\left(k\mid\mathbf{X}\right)$.
 A first option is to pick as an estimate the most likely outcome for the output distribution, thus resorting to Maximum A Posteriori (MAP) estimation:
 \begin{equation}
-\hat{k}=\underset{k}{\text{argmax}}\ \mathcal{L}\left(k\mid f_{\mathbf{\theta}}\left(\mathbf{X}\right)\right).
+\hat{k}=\underset{k}{\text{argmax}}\ \mathcal{L}\left(k\mid f_{\boldsymbol{\theta}}\left(\mathbf{X}\right)\right).
 \end{equation}
 
 However, MAP is not the only option and a broad range of point estimation techniques may be obtained when resorting to decision theory~\cite{berger1985}.
 We may for example also choose~$\hat{k}$ as the value that minimizes the marginal average cost of choosing an estimate $\hat{k}$ instead of the true value $k$, when $k$ is distributed with respect to the output distribution
 \begin{equation}
-\hat{k}=\underset{u}{\text{argmin}}\intop_{k}d\left(k,u\right)\mathcal{L}\left(k\mid f_{\mathbf{\theta}}\left(\boldsymbol{X}\right)\right) \mathrm{d} k,\label{eq:estimate_hatk}
+\hat{k}=\underset{u}{\text{argmin}}\intop_{k}d\left(k,u\right)\mathcal{L}\left(k\mid f_{\boldsymbol{\theta}}\left(\boldsymbol{X}\right)\right) \mathrm{d} k,\label{eq:estimate_hatk}
 \end{equation}
 where $d\left(k,u\right)$ is the cost of picking $u$ as an estimate when the true value is~$k$.
 It may be any function that seems appropriate, and does not necessarily need to be differentiable.
@@ -210,14 +208,14 @@ It may be any function that seems appropriate, and does not necessarily need to 
 However, we retain the more general formulation~(\ref{eq:estimate_hatk}) because other choices will sometimes prove more effective, as we show later.
 For notational convenience, we write~(\ref{eq:estimate_hatk}) as
 \begin{equation}
-\hat{k}=q\left(f_{\mathbf{\theta}}\left(\boldsymbol{X}\right)\right),
+\hat{k}=q\left(f_{\boldsymbol{\theta}}\left(\boldsymbol{X}\right)\right),
 \end{equation}
 and $q\left(\cdot\right)$ is called the~\textit{decision function}.
-Using this strategy, we have everything to produce a single source count estimate~$\hat{k}$ from input features~$\mathbf{X}$, provided the parametric family~$\mathcal{L}$ and the mapping $f_{\mathbf{\theta}}$ as well as its parameters $\mathbf{\theta}$ are known.
+Using this strategy, we have everything to produce a single source count estimate~$\hat{k}$ from input features~$\mathbf{X}$, provided the parametric family~$\mathcal{L}$ and the mapping $f_{\boldsymbol{\theta}}$ as well as its parameters $\boldsymbol{\theta}$ are known.
 
-In this study, we choose a deep neural network for the mapping $f_{\mathbf{\theta}}$, whose weights~$\mathbf{\theta}$ are trained in a supervised manner (compare Figure~\ref{fig:blockdiagram}).
+In this study, we choose a deep neural network for the mapping $f_{\boldsymbol{\theta}}$, whose weights~$\boldsymbol{\theta}$ are trained in a supervised manner (compare Figure~\ref{fig:blockdiagram}).
 Once a particular network architecture has been chosen, learning its parameters is achieved through classical stochastic gradient descent.
-If we assume that the particular family~$\mathcal{L}$ of output distributions has been chosen, it appears natural to learn the parameters~$\mathbf{\theta}$ that maximize the likelihood of the learning data.
+If we assume that the particular family~$\mathcal{L}$ of output distributions has been chosen, it appears natural to learn the parameters~$\boldsymbol{\theta}$ that maximize the likelihood of the learning data.
 More specifically, the total cost to be minimized becomes
 \begin{equation}
 C=\sum_{t=1}^{T}-\log\mathcal{L}\left(k_{t}\mid f_{\theta}\left(\boldsymbol{X}_{t}\right)\right).\label{eq:total_cost}
@@ -242,57 +240,57 @@ the true number of concurrent speakers \(k\). For inference the output \(y\) is 
 \subsubsection{Classification}
 In a classification setting, the output distribution is directly taken as \textit{discrete}, discarding any meaning concerning the ordering of the different possible values.
 % In other words, \(\cardinality \) may only take a finite set of values, whose actual labeling is not assumed to bear any particular information.
-% In that case, the output distribution~$\mathcal{L}\left(k\mid f_\mathbf{\theta}\left(\mathbf{X}\right)\right)$ is taken as multinomial with~\((k_{\max} + 1)\) (when we assume that \(k\) can be 0) classes.
+% In that case, the output distribution~$\mathcal{L}\left(k\mid f_\boldsymbol{\theta}\left(\mathbf{X}\right)\right)$ is taken as multinomial with~\((k_{\max} + 1)\) (when we assume that \(k\) can be 0) classes.
 Given some particular input~$\mathbf{X}$, the network generates the posterior output probability for \((k_{\max} + 1)\) classes (including \(k=0\)) and a maximum a posteriori (MAP) decision function is chosen that simply picks the most likely class \(q = \arg\max(\cdot)\).
 % \begin{equation}
-% \hat{k}=q\left(f_{\mathbf{\theta}}\left(\mathbf{X}\right)\right)=\arg\max\mathcal{L}(k\mid f_{\mathbf{\theta}}\left(\mathbf{X}\right)).
+% \hat{k}=q\left(f_{\boldsymbol{\theta}}\left(\mathbf{X}\right)\right)=\arg\max\mathcal{L}(k\mid f_{\boldsymbol{\theta}}\left(\mathbf{X}\right)).
 % \end{equation}
 
 % Notwithstanding its conceptual simplicity, classification has two drawbacks.
 % First, the intuitive ranking between different estimates is lost: e.g. \(p(\cardinality = 6) \) may not depend on \(p(\cardinality = 5) \).
 % Second, the largest possible count $L$ is given \textit{a priori}.
 % Despite these limitations,
-Classification based approaches have successfully been applied in deep neural networks for counting objects~\cite{segui15, zhang2015salient, khan16} in images.
+Classification based approaches have successfully been applied in deep neural networks for estimating counts in objects~\cite{segui15, zhang2015salient, khan16} in images.
 
 \subsubsection{Gaussian Regression}
 In regression, $k$ is derived from an output distribution defined on the real line.
 However, this comes with the additional difficulty of handling the fact that~$k$ is integer.
-% To circumvent it, we take $k$ as the rounding of a latent variable $f_{\mathbf{\theta}}\left(\mathbf{X}\right)\in\mathbb{R}$, and exploit the fact that rounding may be efficiently modeled as introducing white additive Gaussian noise, we may write:
+% To circumvent it, we take $k$ as the rounding of a latent variable $f_{\boldsymbol{\theta}}\left(\mathbf{X}\right)\in\mathbb{R}$, and exploit the fact that rounding may be efficiently modeled as introducing white additive Gaussian noise, we may write:
 % \begin{equation}
-% k\sim\mathcal{N}\left(f_{\mathbf{\mathbf{\theta}}}\left(\mathbf{X}\right),\Delta\right),\label{eq:AWGN_model}
+% k\sim\mathcal{N}\left(f_{\mathbf{\boldsymbol{\theta}}}\left(\mathbf{X}\right),\Delta\right),\label{eq:AWGN_model}
 % \end{equation}
-% where $\mathcal{N}$ is the Gaussian scalar distribution and $\Delta$ is the rounding noise variance, that is independent of any model parameters but only depends on the fact that $k$ is the integer closest to $f_{\mathbf{\mathbf{\theta}}}\left(\mathbf{X}\right)$.
+% where $\mathcal{N}$ is the Gaussian scalar distribution and $\Delta$ is the rounding noise variance, that is independent of any model parameters but only depends on the fact that $k$ is the integer closest to $f_{\mathbf{\boldsymbol{\theta}}}\left(\mathbf{X}\right)$.
 
 The output distribution in this setting is assumed to be Gaussian and the associated cost function is the classical squared error.
-During inference and given the output~$f_{\mathbf{\mathbf{\theta}}}\left(\mathbf{X}\right)$ of the network, the best discrete value that is consistent with the model is simply the rounding operator $q = \left[\cdot\right]$.
+During inference and given the output~$f_{\mathbf{\boldsymbol{\theta}}}\left(\mathbf{X}\right)$ of the network, the best discrete value that is consistent with the model is simply the rounding operator $q = \left[\cdot\right]$.
 
-Gaussian regression has achieved state-of-the-art counting performance in computer vision using deep learning frameworks~\cite{zhang15, marsden16, boominathan16}.
+Gaussian regression has achieved state-of-the-art count estimation performance in computer vision using deep learning frameworks~\cite{zhang15, marsden16, boominathan16}.
 
 \subsubsection{Discrete Poisson modeling}
 When it comes to modeling count data, it is often shown effective to adopt the Poisson distribution~\cite{fallah09}.
 First, this strategy retains the advantage of the classification approach to directly pick a probabilistic model over the actual discrete observations, avoiding the somewhat artificial trick of introducing a latent variable that would be rounded to yield the observation.
 Second, the model avoids the inconvenience of the classification approach to completely drop dependencies between classes.
 
-Due to these advantages, the Poisson distribution has been used in studies devising deep architectures for counting systems~\cite{Rezatofigh16}.
-For instance in~\cite{fallah09, chan09, Rezatofigh16}, it is shown that the number of objects in images can be well modeled by the Poisson distribution. Inspired by these previous works, we also consider the Poisson output distribution \(\mathcal{P}\left(k\mid f_{\mathbf{\mathbf{\theta}}}\left(\mathbf{X}\right)\right)\)
+Due to these advantages, the Poisson distribution has been used in studies devising deep architectures for count estimation systems~\cite{Rezatofigh16}.
+For instance in~\cite{fallah09, chan09, Rezatofigh16}, it is shown that the number of objects in images can be well modeled by the Poisson distribution. Inspired by these previous works, we also consider the Poisson output distribution \(\mathcal{P}\left(k\mid f_{\mathbf{\boldsymbol{\theta}}}\left(\mathbf{X}\right)\right)\)
 
 % \begin{equation}
-% p \left(k\mid f_{\mathbf{\theta}}\left(\mathbf{X}\right)\right)=\mathcal{P}\left(k\mid f_{\mathbf{\mathbf{\theta}}}\left(\mathbf{X}\right)\right),
+% p \left(k\mid f_{\boldsymbol{\theta}}\left(\mathbf{X}\right)\right)=\mathcal{P}\left(k\mid f_{\mathbf{\boldsymbol{\theta}}}\left(\mathbf{X}\right)\right),
 % \end{equation}
 
 where $\mathcal{P}\left(\cdot\mid\lambda\right)$ denotes the Poisson distribution with scale parameter~$\lambda$.
 
-In that setup, the cost function at learning time is the Poisson negative log-likelihood and the deep architecture at test time provides the predicted scale parameter $f_{\mathbf{\mathbf{\theta}}}\left(\mathbf{X}\right)\in\mathbb{R}_+$, which summarizes the whole output distribution.
+In that setup, the cost function at learning time is the Poisson negative log-likelihood and the deep architecture at test time provides the predicted scale parameter $f_{\mathbf{\boldsymbol{\theta}}}\left(\mathbf{X}\right)\in\mathbb{R}_+$, which summarizes the whole output distribution.
 
-As a decision function~$q$ in this setting, we considered several alternatives. A first option is to again resort to MAP estimation and pick the mode $\left[f_{\mathbf{\mathbf{\theta}}}\left(\mathbf{X}\right)\right]$ of the distribution as a point estimate. However, experiments showed that the posterior median yields better estimates, and is given by
+As a decision function~$q$ in this setting, we considered several alternatives. A first option is to again resort to MAP estimation and pick the mode $\left[f_{\mathbf{\boldsymbol{\theta}}}\left(\mathbf{X}\right)\right]$ of the distribution as a point estimate. However, experiments showed that the posterior median yields better estimates, and is given by
 \begin{subequations}
 \begin{align}
-q\left(f_{\mathbf{\mathbf{\theta}}}\left(\mathbf{X}\right)\right) & =\underset{\hat{k}}{\text{argmin}}\sum_{k=0}^{\infty}\left|\hat{k}-k\right|\mathcal{P}\left(k\mid f_{\mathbf{\mathbf{\theta}}}\left(\mathbf{X}\right)\right)\\
- & =\text{median}\left(k\sim\mathcal{P}\left(f_{\mathbf{\mathbf{\theta}}}\left(\mathbf{X}\right)\right)\right)\\
- & \approx\left\lfloor f_{\mathbf{\mathbf{\theta}}}\left(\mathbf{X}\right)+\frac{1}{3}-\frac{0.02}{f_{\mathbf{\mathbf{\theta}}}\left(\mathbf{X}\right)}\right\rfloor, \label{eq:decision_function_poisson}
+q\left(f_{\mathbf{\boldsymbol{\theta}}}\left(\mathbf{X}\right)\right) & =\underset{\hat{k}}{\text{argmin}}\sum_{k=0}^{\infty}\left|\hat{k}-k\right|\mathcal{P}\left(k\mid f_{\mathbf{\boldsymbol{\theta}}}\left(\mathbf{X}\right)\right)\\
+ & =\text{median}\left(k\sim\mathcal{P}\left(f_{\mathbf{\boldsymbol{\theta}}}\left(\mathbf{X}\right)\right)\right)\\
+ & \approx\left\lfloor f_{\mathbf{\boldsymbol{\theta}}}\left(\mathbf{X}\right)+\frac{1}{3}-\frac{0.02}{f_{\mathbf{\boldsymbol{\theta}}}\left(\mathbf{X}\right)}\right\rfloor, \label{eq:decision_function_poisson}
 \end{align}
 \end{subequations}
-where the last expression is an approximation of the median of a Poisson distributed random variable of scale parameter~$f_{\mathbf{\mathbf{\theta}}}\left(\mathbf{X}\right)$~\cite{Choi94}.
+where the last expression is an approximation of the median of a Poisson distributed random variable of scale parameter~$f_{\mathbf{\boldsymbol{\theta}}}\left(\mathbf{X}\right)$~\cite{Choi94}.
 
 
 %!TEX root = ../stoeter_sourcecount.tex
@@ -360,7 +358,7 @@ This makes it ideal to model time series, however, in practice, the temporal con
 
 To alleviate this problem, forgetting factors (also called gating) were proposed.
 One of the most popular gated recurrent cells is the Long Short-Term Memory (LSTM)~\cite{Hochreiter97} cell.
-Its effectiveness has been proven in various applications and LSTMs are the state-of-the-art approach for speech recognition~\cite{Graves13} and singing voice detection~\cite{Leglaive15}~\footnote{For a deeper mathematical background of LSTMs, due to space constraints, the reader is referred to the aforementioned papers.}.
+Its effectiveness has been proven in applications and LSTMs are the state-of-the-art approach for speech recognition~\cite{Graves13} and singing voice detection~\cite{Leglaive15}~\footnote{For a deeper mathematical background of LSTMs, due to space constraints, the reader is referred to the aforementioned papers.}.
 For a given input of dimensions \(D \times F \times C\), the output of a recurrent layer is either only the last step of dimension \(1 \times A\) or the full sequence \(D \times A\).
 The latter is useful to stack multiple LSTMs or to apply temporal max pooling of the sequence.
 In~\cite{stoeter17} such an architecture based on three bi-directional LSTM cells, was proposed. The architecture is similar to the one employed in~\cite{Leglaive15}.
@@ -373,14 +371,14 @@ The main motivation to stack these layers is to combine the benefits of convolut
 
 There are different ways to stack CNNs and RNNs to form a CRNN architecture.
 In our application the motivation is to aggregate local time-frequency features coming from the output convolutional neural network and use the LSTM layer to model long temporal structures.
-As the output of a CNN layer is a 3D volume \(D \times F \times C\) and the input of a recurrent layer only takes a 2D sequence, the dimension would need to be reduced. Naturally, the time dimension would need to be kept, therefore the channel dimension \(C\) is stacked with the frequency dimension \(F\) resulting in a \(D \times F \cdot C\) output (compare Figure~\ref{fig:crnn}).
+As the output of a CNN layer is a 3D volume \(D \times F \times C\) and the input of a recurrent layer only takes a 2D sequence, the dimension would need to be reduced. Naturally, the time dimension would need to be kept, therefore the channel dimension \(C\) is stacked with the frequency dimension \(F\) resulting in a \(D \times F \cdot C\) output.
 
-\begin{figure}[t]
-\centering
-\includegraphics[width=\columnwidth]{Chapters/08_Analysis_CountNet/figures/crnn.pdf}
-\caption{Illustrative diagram to show the stacking of the output of a convolution layer into a recurrent layer with \(A\) hidden nodes per memory cell.}%
-\label{fig:crnn}
-\end{figure}
+% \begin{figure}[t]
+% \centering
+% \includegraphics[width=\columnwidth]{Chapters/08_Analysis_CountNet/figures/crnn.pdf}
+% \caption{Illustrative diagram to show the stacking of the output of a convolution layer into a recurrent layer with \(A\) hidden nodes per memory cell.}%
+% \label{fig:crnn}
+% \end{figure}
 
 \subsubsection{Full-band Convolutional Neural Networks (F-CNN)}%
 % * using full frequency band filters.
@@ -393,9 +391,8 @@ To further optimize the performance of the network, we applied a hyper-parameter
 We used a search space of several hyper-parameters as shown in Table~\ref{tab:fcnnhyper} and set the maximum number of evaluations to 200.
 
 \begin{table}
-  \caption{Parameter Optimization of F-CNN Model through hyper-parameter search. Bold hyper-parameters were found optimal.}%
-  \label{tab:fcnnhyper}
   \centering
+  \scriptsize
 \begin{tabular}{lll}
   \toprule
   Layer               & Parameters        & Value Range \\
@@ -417,6 +414,8 @@ We used a search space of several hyper-parameters as shown in Table~\ref{tab:fc
   Dropout 2           & Dropout Percentage& \( [0.1, \mathbf{0.2}, 0.5] \) \\
   \bottomrule
   \end{tabular}
+    \caption{Parameter optimization of F-CNN model through hyper-parameter search. Bold hyper-parameters were found optimal.}%
+  \label{tab:fcnnhyper}
 \end{table}
 
 The results are in agreement with the findings in~\cite{schluter16} where small filter kernels of size 3 outperformed larger kernels. Also, it can be seen from the results, that increasing the number of feature maps of the convolutional layers does not necessarily increase the performance.
@@ -475,18 +474,12 @@ For the Poisson regression, the likelihood of parameter \(\lambda \) given the t
 \label{fig:networkoverview}%
 \end{figure*}
 
-\section{Training}%
-\label{sec:training}
-
-To successfully train and evaluate the proposed DNNs, due to the number of parameters, a large amount of training data is required.
-In this section, we introduce relevant speech corpora and describe how the training dataset was assembled.
-
 \subsection{Speech Corpora and Annotations}%
 \label{ssec:corpus}
 % * Libri Speech
 % * Describe the used VAD
 To date, many available speech datasets contain recordings where only a single speaker is active.
-Datasets that include overlapped speech segments, either lack accurate annotations because the annotation of speech onsets and offsets in mixtures is cumbersome for humans as shown in Section~\ref{sec:introduction} or lack a controlled auditory environment such as in TV/broadcasting scenarios~\cite{Gravier12}.
+Datasets that include overlapped speech segments, either lack accurate annotations because the annotation of speech onsets and offsets in mixtures is cumbersome for humans or lack a controlled auditory environment such as in TV/broadcasting scenarios~\cite{Gravier12}.
 Since a realistic dataset of fully overlapped speakers is not available, we chose to generate synthetic mixtures.
 We recognize that in a simulated ``cocktail-party'' environment, mixtures lack the conversational aspect of human communication but provide a controlled environment which helps to understand how a DNN solves the count estimation problem.
 As we aim for a speaker independent solution, we selected a speech corpus with preference to a high number of different speakers instead of the number of utterances, thus increasing the number of unique mixtures.
@@ -522,6 +515,7 @@ Furthermore, we included non-speech examples from the TUT Acoustic Scenes datase
   \centering
   \caption{Overview of speech corpora used in this work.}%
 \label{tab:corpora}
+\scriptsize
 \begin{tabular}{llrrr}
   \toprule
   & & \multicolumn{3}{c}{Number of Speakers} \\
@@ -616,9 +610,8 @@ performed evaluation of all models on \(T_{\textrm{test}} = 5720\) unique and un
 Several well-established input representations were evaluated in~\cite{stoeter17} such as (linear or logarithmically scaled) short-time Fourier transform (STFT), Mel filter bank outputs (MEL), Mel Frequency Cepstral Coefficients (MFCC) representations, typically chosen for speech applications (compare Table~\ref{tab:inputrep})
 
 \begin{table}
-\caption{Speech related input representations in related work.}
-\label{tab:inputrep}
   \centering
+  \scriptsize
 \begin{tabular}{rll}
 \toprule
 References & Task & Representation \\
@@ -629,6 +622,8 @@ References & Task & Representation \\
 \cite{schluter15, schluter16} & Singing Voice AD & \(\log(1 + \mathbf{X})\) \\
 \bottomrule
 \end{tabular}
+\caption{Speech related input representations in related work.}
+\label{tab:inputrep}
 \end{table}
 
 % As for the task of estimating the number of speakers, we assume that a fine frequency resolution is needed to discriminate time-frequency bins with overlapped speech segments from those that only belong to a single speaker.
@@ -749,8 +744,8 @@ It can be seen that the CRNN is not only the one that performs best but also has
 In contrast, the F-CRNN model does only have a fraction of the number of parameters of the other models, which makes it the most suitable model for mobile applications.
 
 \begin{table}[t]
-\caption{Mixed Effects Linear Model for \(k = \{1, 2\dots7\}\). Model: \(MAE \sim architecture + feature + objective + (1|k)\)}
 \begin{center}
+\scriptsize
 \begin{tabular}{lcccc}
 \toprule
 Factor                    & Coef.  & Std.Err. &   z    & \(P>|z|\) \\
@@ -768,6 +763,7 @@ Random Effect \(k\)            &  0.057 &    0.297 &        &             \\
 \bottomrule
 \end{tabular}
 \end{center}%
+\caption{Mixed Effects Linear Model for \(k = \{1, 2\dots7\}\). Model: \(MAE \sim architecture + feature + objective + (1|k)\).}
 \label{tab:mixedmodel1}
 \end{table}
 
@@ -799,7 +795,7 @@ Random Effect \(k\)            &  0.057 &    0.297 &        &             \\
 
 \begin{figure}[t]
   \centering
-    \begin{adjustbox}{width=0.8\columnwidth}
+    \begin{adjustbox}{width=0.7\columnwidth}
       \input{Chapters/08_Analysis_CountNet/figures/complexity}
     \end{adjustbox}
     \caption{Complexity in number of floating point multiplications and number of weight parameters (in brackets) over performance in MAE of our five proposed models.}%
@@ -846,8 +842,6 @@ Similarly to our proposed DNN based methods, we treat the output as either a cla
 \begin{table*}[t]
 \scriptsize
 
-\caption{Averaged MAE results of different methods on several datasets for \( k = [0 \ldots 10] \) with equal power and random gains (up to $\pm 6~\mbox{dB}$)) as well as reverberation (rev). Bold face indicates the best-performing method. Standard deviation values are listed in~\cite{stoeter19}.}
-
 \begin{center}
 \begin{tabular}{lcccccccc}
 \toprule
@@ -866,6 +860,7 @@ MEAN    &  $2.73$ & $2.73$ & $2.73$ & $2.73$ &  $2.73$ & $2.73$ & $2.73$ & $2.73
 \bottomrule
 \end{tabular}
 \end{center}
+\caption{Averaged MAE results of different methods on several datasets for \( k = [0 \ldots 10] \) with equal power and random gains (up to $\pm 6~\mbox{dB}$)) as well as reverberation (rev). Bold face indicates the best-performing method. Standard deviation values are listed in~\cite{stoeter19}.}
 \label{tab:expgainreverb}
 \end{table*}
 
@@ -904,7 +899,7 @@ These results suggest that the trained model is speaker and language independent
 % * --> Significant Performance Drop (diff 2.0 MAE)
 % * Retrained using train room: [3, 4, 2] and valid room: [4, 5, 3]
 % * Performance back to (0.6 MAE)
-Different acoustical conditions such as increased reverberation time were shown~\cite{Pasha17_reverb} to have a large effect in speaker counting.
+Different acoustical conditions such as increased reverberation time were shown~\cite{Pasha17_reverb} to have a large effect in speaker count estimation.
 To analyze this effect, different acoustic conditions were simulated by generating the room impulse responses using the image method~\cite{allen79, habets16}.
 For this experiment we set up an acoustical room with dimension ($3.5~\mbox{m} \times 4.5~\mbox{m} \times 2.5~\mbox{m}$)
 The microphone was positioned at (1m, 1m, 1m).
@@ -924,6 +919,17 @@ For robustness against different acoustic conditions, it is essential to include
 
 \subsection{Effect of Duration and Overlap Detection Error}%
 \label{ssec:exp_duration}
+
+\begin{figure}[h!]
+   \centering
+   \centering
+   \begin{adjustbox}{width=0.7\columnwidth}
+     \input{Chapters/08_Analysis_CountNet/figures/duration}
+   \end{adjustbox}
+   \caption{Evaluation of trained CRNN networks over different input duration length \(D\). Error bars show 95\% confidence intervals.}%
+   \label{fig:timesteps}
+\end{figure}
+
 % * Pick best: CRNN, STFT, Classification
 % * (Re) Trained and evaluated on (1s...9s)
 % * Longer context
@@ -938,17 +944,6 @@ If latency is critical, keeping \(D\) above 2 seconds is recommended for good re
 For segments as short as 1 second the MAE of around 0.6 is almost twice as high as for segments of 5 seconds duration.
 However, if instead of the count estimation MAE we compute the accuracy to detect overlap \(k > 1\) vs.\ non-overlap \(k \in {0, 1}\), we still achieve 98.7\% accuracy (precision: 99.7\%, recall: 98.7\%). This shows that our system can be effectively used to address overlap detection.
 
-\begin{figure}[h!]
-   \centering
-   \centering
-   \begin{adjustbox}{width=0.8\columnwidth}
-     \input{Chapters/08_Analysis_CountNet/figures/duration}
-   \end{adjustbox}
-   \caption{Evaluation of trained CRNN networks over different input duration length \(D\). Error bars show 95\% confidence intervals.}%
-   \label{fig:timesteps}
-\end{figure}
-
-\vspace*{-0.25cm}%
 \subsection{Listening Experiment}%
 \label{ssec:listening_experiment}
 % * Reference existing listening tests which report the same thing
@@ -994,7 +989,7 @@ To compare the results of our trained CRNN on our synthesized dataset to human p
 \label{fig:convoutputs}
 \end{figure}
 % Select best-performing system (CRNN, Classification, STFT) and analyse how it achieves the performance.
-In this section, we focus on the problem of interpreting the strategy undergone by this system for successful counting.
+In this section, we focus on the problem of interpreting the strategy undergone by this system for successful estimating counts.
 
 \subsection{Saliency Maps}
 We first conducted a visual analysis based on salience map representations~\cite{simonyan13}.
@@ -1040,7 +1035,7 @@ In turn we define a null hypothesis that there is no association between the spe
 
 To verify our hypothesis, we created another experiment based on the \emph{TIMIT} dataset.
 It comes with phoneme and word level annotations, from which the speaking rate (defined as syllables per second) can be computed for each input sample~\cite{Jiao16}.
-To reduce the influence of the different acoustical environment in TIMIT compared to Libri Speech, we retrained the CRNN classification model on the \emph{TIMIT} training dataset, using the same parameters as described in Section~\ref{sec:training}.
+To reduce the influence of the different acoustical environment in TIMIT compared to Libri Speech, we retrained the CRNN classification model on the \emph{TIMIT} training dataset, using the same parameters as described in Section~\ref{ssec:parameters}.
 At test time we randomly generated 5 seconds excerpts of \(k=6\) from the TIMIT test subset and predicted the error \(E(k) = \hat{k} - k\) for each CRNN output.
 We grouped the estimates into three classes: \(E(k) = 0\) (correct response), \(E(k) > 0\) (overestimation), \(E(k) < 0\) (underestimation).
 For \(k=6\) we ended up with two groups of results because overestimation did not take place.
@@ -1050,8 +1045,6 @@ For these samples we computed an average speaking rate of \(3.40\) syllables per
 We chose a Generalized Linear Model (GLM) for the statistical test, as described in~\cite{jaeger08}.
 This allows us model the results with a binary logit regression model that turns the mean of E into a binomial distributed probability modeled by log linear values: \(\mbox{logit}(E) \sim \mbox{Intercept} + \beta \cdot{\mbox{Speaking Rate}}\).
 \begin{table}[t]
-\caption{Results of a binary logit regression test for the dependent variable \emph{correct response} over the independent variable \emph{speaking rate}. The results are based on $n=2000$ randomly drawn results of the CRNN model trained and evaluated on the TIMIT dataset.}%
-\label{tab:logit}
 \begin{center}
 \begin{tabular}{lcccc}
 \toprule
@@ -1061,6 +1054,8 @@ This allows us model the results with a binary logit regression model that turns
 \textbf{intercept}          &      4.3213  &        0.790     &    5.468  &         0.000  \\
 \bottomrule
 \end{tabular}
+\caption{Results of a binary logit regression test for the dependent variable \emph{correct response} over the independent variable \emph{speaking rate}. The results are based on $n=2000$ randomly drawn results of the CRNN model trained and evaluated on the TIMIT dataset.}%
+\label{tab:logit}
 \end{center}
 \end{table}
 The results of our test are shown in Table~\ref{tab:logit} and indicate the speaking rate has statistically significant influence on the error \(p < 0.05, df=1, \textrm{Pseudo}\ R^2=0.0111\).
@@ -1088,4 +1083,3 @@ Lastly, in an ablation study, we found that the CRNN uses a strategy to segment 
 Hence, we hypothesize that a speaker count estimate is influenced by the average speaking rates of certain languages.
 To underpin this hypothesis, we showed that the speaking rate has a significant effect on the error of our model.
 Interestingly, the speaking rate is an important source of modulations in speech~\cite{plomp83} and this discovery establishes a link between speech analysis in humans and machines.
-% TODO: patricio nach geiler machen fragen
