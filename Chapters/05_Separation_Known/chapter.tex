@@ -11,22 +11,13 @@ One example of an informed source separation systems is described by Ewert and M
 In the case of highly overlapped signals such as unison mixtures, the score is less useful since unison mixtures share the same note pitch.
 Instead, in this chapter, we want to evaluate the use of fundamental frequency estimates of the source to be extracted.
 There has been extensive research on separation using the fundamental frequency.
-The first option is ``to re-synthesize the source using a sinusoidal model which was studied in a large number of methods''~\cite{rafii}.
-However, sinusoidal synthesis is known to suffer from ``a typical \textit{metallic} sound''. 
+The first option is to use a sinusoidal model which was studied in a large number of methods.
+However, sinusoidal synthesis is known to suffer from ``a typical \textit{metallic} sound'', according to~\cite{rafii}. 
 Alternative approaches, instead, are ``filtering out everything from the mixture that is not located close to the detected harmonics'' in order to exploit harmonicity.
 In the past, many related works focused on this paradigm, a procedure as it turned out to be a common task in source separation systems. 
-Before we present our proposed method in the next section, the following gives an overview of existing methods in this field.
+Before we present our proposed method in the next section, the following section, included verbatim from~\cite{rafii}, gives a short overview of existing methods in this field:
 
-\subsection*{Related Work}
-
-\begin{shaded}
-This subsection was previously published in~\cite{rafii} Section IV B and is included verbatim. The publication is a result of an international collaboration with Zafar Rafii, Antoine Liutkus, Stylianos Mimilakos, Derry Fitzgerald and Bryan Pardo. 
-My contributions to this article was the introduction of the SiSEC dataset and tools, the creation of figures and the compilation of deep learning based literature.
-The main sections introducing the prior work were, in large parts, edited by Zafar Rafii and Antoine Liutkus. Stylianos Mimilakos created and revised several subsections and figures. Derry Fitzgerald and Bryan Pardo revised and edited the article.
-\end{shaded}
-
-% from zafar
-E.g. Li and Wang proposed to use a vocal/non-vocal classifier and a predominant pitch detection algorithm \cite{li06, li07}. They first detected the singing voice by using a spectral change detector \cite{duxbury03} to partition the mixture into homogeneous portions, and GMMs on MFCCs to classify the portions as vocal or non-vocal. Then, they used the predominant pitch detection algorithm in~\cite{li05} to detect the pitch contours from the vocal portions, extending the multi-pitch tracking algorithm in~\cite{wu03}. Finally, they extracted the singing voice by decomposing the vocal portions into TF units and labeling them as singing or accompaniment dominant, extending the speech separation algorithm in \cite{hu02}.
+``E.g. Li and Wang proposed to use a vocal/non-vocal classifier and a predominant pitch detection algorithm \cite{li06, li07}. They first detected the singing voice by using a spectral change detector \cite{duxbury03} to partition the mixture into homogeneous portions, and GMMs on MFCCs to classify the portions as vocal or non-vocal. Then, they used the predominant pitch detection algorithm in~\cite{li05} to detect the pitch contours from the vocal portions, extending the multi-pitch tracking algorithm in~\cite{wu03}. Finally, they extracted the singing voice by decomposing the vocal portions into TF units and labeling them as singing or accompaniment dominant, extending the speech separation algorithm in \cite{hu02}.
 \par
 Han and Raphael proposed an approach for de-soloing a recording of a soloist with an accompaniment given a musical score and its time alignment with the recording \cite{han07}. They derived a mask \cite{roweis01} to remove the solo part after using an EM algorithm to estimate its melody, that exploits the score as side information.
 \par
@@ -38,7 +29,7 @@ Cano et al. proposed approaches for solo and accompaniment separation. In~\cite{
 \par
 Bosch et al. proposed to separate the lead instrument using a musical score \cite{bosch12}. After a preliminary alignment of the score to the mixture, they estimated a score confidence measure to deal with local misalignments and used it to guide the predominant pitch tracking. Finally, they performed low-latency separation based on the method in \cite{marxer12}, by combining harmonic masks derived from the estimated pitch.
 \par
-Vaneph et al. proposed a framework for vocal isolation to help spectral editing \cite{vaneph16}. They first used a voice activity detection process based on a deep learning technique \cite{Leglaive15}. Then, they used pitch tracking to detect the melodic line of the vocal and used it to separate the vocal and background, allowing a user to provide manual annotations when necessary.
+Vaneph et al. proposed a framework for vocal isolation to help spectral editing \cite{vaneph16}. They first used a voice activity detection process based on a deep learning technique \cite{Leglaive15}. Then, they used pitch tracking to detect the melodic line of the vocal and used it to separate the vocal and background, allowing a user to provide manual annotations when necessary.''
 
 \section{$F0$ Informed Separation}
 \label{sub:frequency_modulation}

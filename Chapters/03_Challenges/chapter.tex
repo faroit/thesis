@@ -137,7 +137,7 @@ Disch and Edler proposed in~\cite{disch09} to decompose an audio signal into ban
 
 \begin{shaded}
 This subsection was previously published in~\cite{rafii} Section IV B and is included verbatim. The publication is a result of an international collaboration with Zafar Rafii, Antoine Liutkus, Stylianos Mimilakos, Derry Fitzgerald and Bryan Pardo. 
-My contributions to this article was the introduction of the SiSEC dataset and tools, the creation of figures and the compilation of deep learning based literature.
+My contributions to this article was the creation of figures, compilation of deep learning based literature and  the writing of the introduction of the SiSEC dataset and tools.
 The main sections introducing the prior work were, in large parts, edited by Zafar Rafii and Antoine Liutkus. Stylianos Mimilakos created and revised several subsections and figures. Derry Fitzgerald and Bryan Pardo revised and edited the article.
 \end{shaded}
 
@@ -147,24 +147,24 @@ As described in the previous chapter, modulations are used by humans to group an
 ``harmonic relation, the common onset, offset, amplitude modulation (AM), and frequency modulation (FM). These are all important cues for grouping.''
 \end{quote}
 
-It is therefore not surprising that a number of methods exist, that utilize spectro-temporal modulations to separate mixtures.
+It is therefore not surprising that a number of methods exist, that utilize spectro-temporal modulations to separate mixtures. 
+These methods were summarized in~\cite{rafii} as followed:
 % from zafar!
-Wang proposed instantaneous and frequency-warped techniques for signal parameterization and source separation, with application to voice separation in music~\cite{wang94,wang95}.
+``Wang proposed instantaneous and frequency-warped techniques for signal parameterization and source separation, with application to voice separation in music~\cite{wang94,wang95}.
 He introduced a frequency-locked loop algorithm which uses multiple harmonically constrained trackers.
-He computed the estimated fundamental frequency from a maximum-likelihood weighting of the tracking estimates. He was then able to estimate harmonic signals such as voices from complex mixtures.\\
+He computed the estimated fundamental frequency from a maximum-likelihood weighting of the tracking estimates. He was then able to estimate harmonic signals such as voices from complex mixtures.''''\\
 % from zafar
 The concept of \emph{common amplitude modulation} by~\cite{bregman90, wang06} which exploits that amplitude envelopes of different harmonics of the same source tend to be similar.
-Modeling the common amplitude modulation to separate mixtures has already been done in~\cite{li07, li09} and \cite{cano14}, which additionally included common amplitude modulation characteristics in the separation scheme.
+Modeling the common amplitude modulation to separate mixtures has first been carried out in~\cite{li07, li09}. 
+Furthermore, as pointed out in~\cite{rafii}, common amplitude modulation characteristics was included in the separation scheme in works such as ~\cite{cano14}.
 % from zafar
-Wolf et al. proposed an approach using rigid motion segmentation, with application to singing voice separation \cite{wolf14, wolf16}. They introduced harmonic template models with amplitude and pitch modulations defined by a velocity vector. They applied a wavelet transform \cite{anden14} on the harmonic template models to build an audio image where the amplitude and pitch dynamics can be separated through the velocity vector. They then derived a velocity equation, similar to the optical flow velocity equation used in images \cite{bernard01}, to segment velocity components. Finally, they identified the harmonic templates which model different sources in the mixture and separated them by approximating the velocity field over the corresponding harmonic template models.\\
-% from zafar
-Yen et al. proposed an approach using spectro-temporal modulation features \cite{yen14,yen15}. They decomposed a mixture using a two-stage auditory model which consists of a cochlear module \cite{chi05} and cortical module \cite{chi99}. They then extracted spectro-temporal modulation features from the TF units and clustered the TF units into harmonic, percussive, and vocal components using the EM algorithm and re-synthesized the estimated signals.\\
+``Yen et al. proposed an approach using spectro-temporal modulation features \cite{yen14,yen15}. They decomposed a mixture using a two-stage auditory model which consists of a cochlear module \cite{chi05} and cortical module \cite{chi99}. They then extracted spectro-temporal modulation features from the TF units and clustered the TF units into harmonic, percussive, and vocal components using the EM algorithm and re-synthesized the estimated signals'' (from~\cite{rafii}.\\
 % from zafar
 % double check this!
 Virtanen made use of sinusoidal modeling \cite{virtanen00} to model and separate sources with tempo spectral modulation like vibrato.
 
 In another vein, the source-filter model was deployed to separation sources~\cite{hennequin10}.
-An advantage of the source-filter model approach is indeed that one can dissociate the pitched content of the signal, embodied by the position of its harmonics, from its TF envelope which describes where the energy of the sound lies. In the case of vocals, it yields the ability to distinguish between the actual note being sung (pitch content) and the phoneme being uttered (mouth and vocal tract configuration), respectively. 
+An advantage of the source-filter model, as pointed out in~\cite{rafii}is that ``\dots one can dissociate the pitched content of the signal, embodied by the position of its harmonics, from its TF envelope which describes where the energy of the sound lies. In the case of vocals, it yields the ability to distinguish between the actual note being sung (pitch content) and the phoneme being uttered (mouth and vocal tract configuration), respectively.''
 
 \section{Summary}
 
