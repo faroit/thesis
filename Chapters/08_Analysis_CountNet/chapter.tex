@@ -1,7 +1,9 @@
 \chapter[Data-Driven Speaker Count Estimation]{CountNet: Data-Driven Speaker Count Estimation}
 \label{cha:countnet}
 
-\marginpar{This chapter is based on the work that has been published in~\cite{stoeter18, stoeter19} in collaboration Soumitro Chakrabarty and Emanuël Habets. The main contributions are from the first author.}
+\begin{marginpar}
+This chapter was previously published in~\cite{stoeter18, stoeter19} and is reprinted, with minor modifications, with permission (\textsuperscript{\textregistered} 2019 IEEE).
+\end{marginpar}
 
 % Introduce the task of estimating the maximum number of concurrent speakers in a single-channel mixture.
 % * Lets start right into the task
@@ -232,7 +234,7 @@ Three different choices for the family of output distributions (classification, 
 \caption{%
 Block diagram of the proposes supervised learning model.
 Training is realised using tuples of spectro-temporal inputs \(\mathbf{X}\) and
-the true number of concurrent speakers \(k\). For inference the output \(y\) is post-processed using a decision function \(q\) to generate estimates \(\hat{k}\).
+the true number of concurrent speakers \(k\). For inference the output \(y\) is post-processed using a decision function \(q\) to generate estimates \(\hat{k}\). \textsuperscript{\textregistered} 2019 IEEE.
 }%
 \label{fig:blockdiagram}
 \end{figure}
@@ -470,7 +472,7 @@ For the Poisson regression, the likelihood of parameter \(\lambda \) given the t
 \begin{figure*}[!hp]
 \centering
 \includegraphics[width=0.9\textwidth]{Chapters/08_Analysis_CountNet/figures/networkoverview.pdf}
-\caption{Overview of the proposed Architectures.}%
+\caption{Overview of the proposed Architectures. \textsuperscript{\textregistered} 2019 IEEE.}%
 \label{fig:networkoverview}%
 \end{figure*}
 
@@ -685,7 +687,7 @@ which is then averaged across the classes, i.e.,
     \label{fig:ssec:exp_fixed_gains/C}%
 }
 [\textwidth]{\input{Chapters/08_Analysis_CountNet/figures/src-mae-architecture}}%
-\caption[Short Caption]{Figure shows results of average mean absolute error (MAE) on mixtures of speakers with equal power as described in \textsc{Section~\ref{ssec:model_comparsion}} per ground truth count \(k=[0\ldots10]\). Error bars show the 95\% confidence intervals. Results in (a) are averaged over factors shown in (b) and (c) and similarly for (b) and (c).}
+\caption[Short Caption]{Figure shows results of average mean absolute error (MAE) on mixtures of speakers with equal power as described in \textsc{Section~\ref{ssec:model_comparsion}} per ground truth count \(k=[0\ldots10]\). Error bars show the 95\% confidence intervals. Results in (a) are averaged over factors shown in (b) and (c) and similarly for (b) and (c). \textsuperscript{\textregistered} 2019 IEEE.}
 \label{fig:fixed-gain-results}
 \end{figure*}
 
@@ -798,7 +800,7 @@ Random Effect \(k\)            &  0.057 &    0.297 &        &             \\
     \begin{adjustbox}{width=0.7\columnwidth}
       \input{Chapters/08_Analysis_CountNet/figures/complexity}
     \end{adjustbox}
-    \caption{Complexity in number of floating point multiplications and number of weight parameters (in brackets) over performance in MAE of our five proposed models.}%
+    \caption{Complexity in number of floating point multiplications and number of weight parameters (in brackets) over performance in MAE of our five proposed models. \textsuperscript{\textregistered} 2019 IEEE.}%
   \label{fig:complexity}
 \end{figure}
 
@@ -926,7 +928,7 @@ For robustness against different acoustic conditions, it is essential to include
    \begin{adjustbox}{width=0.7\columnwidth}
      \input{Chapters/08_Analysis_CountNet/figures/duration}
    \end{adjustbox}
-   \caption{Evaluation of trained CRNN networks over different input duration length \(D\). Error bars show 95\% confidence intervals.}%
+   \caption{Evaluation of trained CRNN networks over different input duration length \(D\). Error bars show 95\% confidence intervals. \textsuperscript{\textregistered} 2019 IEEE.}%
    \label{fig:timesteps}
 \end{figure}
 
@@ -977,7 +979,7 @@ To compare the results of our trained CRNN on our synthesized dataset to human p
    \end{adjustbox}
    \caption{Average responses from humans (\
    {EXP} and \emph{Kawashima}
-~\cite{kawashima15}) compared to our proposed CRNN. Error bars show 95\% confidence intervals.}%
+~\cite{kawashima15}) compared to our proposed CRNN. Error bars show 95\% confidence intervals. \textsuperscript{\textregistered} 2019 IEEE.}%
    \label{fig:experiment}
 \end{figure}
 
@@ -985,7 +987,7 @@ To compare the results of our trained CRNN on our synthesized dataset to human p
 \label{sec:ablation}
 \begin{figure}[t]
   \includegraphics[width=\columnwidth, height=0.65\paperheight, keepaspectratio]{Chapters/08_Analysis_CountNet/figures/outputs.pdf}
-  \caption{Illustration of intermediate outputs from the proposed CRNN for each convolutional layer for a given input with \(k=3\) speakers. Saliency map shows positive saliency of guided backpropagation~\cite{Springenberg14}. For each convolutional layer the nine most relevant filters were selected based on their loss with respect to the input.}%
+  \caption{Illustration of intermediate outputs from the proposed CRNN for each convolutional layer for a given input with \(k=3\) speakers. Saliency map shows positive saliency of guided backpropagation~\cite{Springenberg14}. For each convolutional layer the nine most relevant filters were selected based on their loss with respect to the input. \textsuperscript{\textregistered} 2019 IEEE.}%
 \label{fig:convoutputs}
 \end{figure}
 % Select best-performing system (CRNN, Classification, STFT) and analyse how it achieves the performance.

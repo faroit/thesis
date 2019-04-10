@@ -3,13 +3,8 @@
 %*******************************************************
 \pdfbookmark[1]{Publications}{publications}
 \chapter*{Publications}
-Chapters 4-8 of this thesis is mainly build on the following publications that I published or submitted during my time as a doctoral student.
+Chapters 4-8 of this thesis is mainly build upon the following publications that I published as first author during my time as a doctoral student.
 
-Some section in this thesis are based on the work that has been published in~\cite{rafii} as a joint effort to review the state-of-the-art of lead/accompaniment separation. For some of these cited parts, my contribution was minor but I decided that including them, greatly contributes to a more self-contained thesis.
-
-%\noindent Put your publications from the thesis here. The packages \texttt{multibib} or \texttt{bibtopic} etc. can be used to handle multiple different bibliographies in your document.
-
-% \boldnames: etoolbox-list of names to typeset bold in \printbibiliography
 \newcommand*{\boldnames}{}
 
 \newbibmacro*{name:bold}[2]{%
@@ -53,17 +48,58 @@ Some section in this thesis are based on the work that has been published in~\ci
   {\item\hskip-\periodwidth}
 
 
-
 \newrefcontext[sorting=ynt]
 \section*{Main Publications}
-\begin{refsection}[ownref.bib]%
-\nocite{*}
-\forcsvlist{\listadd\boldnames}{{Stöter, Fabian-Robert}, {Stöter, F.R.}, {F.-R. St{\"o}ter}, {F.-R. Stöter}, {St{\"o}ter, F.-R.}}
-\printbibliography[env=numbered+bold, heading=none, sorting=ynt, resetnumbers=true]
-\end{refsection}
+
+\begin{itemize}
+  \item[\cite{stoeter19}] ~\fullcite{stoeter19}.
+  \item[\cite{stoeter18}] ~\fullcite{stoeter18}.
+\end{itemize}
+\noindent
+The publications were a result of collaboration with Soumitro Chakrabarty and Emanuël Habets. 
+My contribution to this work was the initial problem formulation and the core idea to address the problem using deep neural networks. Furthermore, I designed the dataset design experimental design, and evaluation.
+My college Soumitro Chakrabarty contributed to the development of the deep learning method; Emanuël Habets and Bernd Edler revised the articles.
+
+\begin{itemize}
+  \item[\cite{stoeter16}] ~\fullcite{stoeter16}.
+\end{itemize}
+\noindent
+My contribution to this work was the experimental design, implementation and evaluation.
+The original idea was developed by Antoine Liutkus, who also helped formulating the theory. Paul Magron provided code and results to compare with the HR-NMF method. Roland Badeau and Bernd Edler revised the article.
+
+\begin{itemize}
+  \item[\cite{stoeter15icassp}] ~\fullcite{stoeter15icassp}.
+\end{itemize}
+\noindent
+My contribution in this work was the initial idea, literature overview of $F0$ estimation algorithm and the evaluation of the algorithms.
+The work was done in close collaboration with my colleague Nils Werner who contributed to the efficient implementation of the $F0$ warping algorithm and the generation of appropriate warp contours to match mathematical constraints of time-warping. Bernd Edler revised this thesis.
+
+\begin{itemize}
+  \item[\cite{stoeter15acm}] ~\fullcite{stoeter15acm}.
+\end{itemize}
+\noindent
+My contribution in this work was the initial idea which was inspired by the gap in existing $F0$ estimation datasets not providing sufficient level of annotation to derive an accurate ground truth.
+The work was done together with our student, Michael Müller, who greatly helped to design and manufacture the custom experiment hardware, organize the actual recording and provide an assistance in analyzing and converting the recorded data.
+
+\begin{itemize}
+  \item[\cite{stoeter14}] ~\fullcite{stoeter14}.
+\end{itemize}
+\noindent
+My contribution to this work was the initial idea, as well as the experimental design, and evaluation.
+My college Stefan Bayer contributed important insights about the theory and implementation of time warping framework and formulated the mathematical notation therein. Bernd Edler revised the article.
+
+\begin{itemize}
+  \item[\cite{stoeter13}] ~\fullcite{stoeter13}.
+\end{itemize}
+\noindent
+The work was based on a collaboration with Michael Schöffler and Jürgen Herre.
+My contribution to this work was the initial idea, as well as the experimental prototype design, and evaluation.
+My college Michael Schöffler contributed to the development of the web based evaluation software that later led to a follow-up publication~\cite{schoeffler13} which I co-authored. The article was revised by Jürgen Herre and Bernd Edler.
+
+
 
 \section*{Additional Publications}
-The following publications were not directly used for building this thesis but are nonetheless related to audio based processing methods:
+The following publications were not reprinted in this thesis but are nonetheless very closely related to audio based methods presented in this thesis.
 \begin{refsection}[ownsideref.bib]
 \nocite{*}
 \printbibliography[env=numbered+bold, heading=none,resetnumbers=true, sorting=ynt]
