@@ -142,23 +142,15 @@ As described in the previous chapter, modulations are used by humans to group an
 \end{quote}
 
 It is therefore not surprising that a number of methods exist, that utilize spectro-temporal modulations to separate mixtures. 
-These methods were summarized in~\cite{rafii} as followed:
-% from zafar!
-``Wang proposed instantaneous and frequency-warped techniques for signal parameterization and source separation, with application to voice separation in music~\cite{wang94,wang95}.
-He introduced a frequency-locked loop algorithm which uses multiple harmonically constrained trackers.
-He computed the estimated fundamental frequency from a maximum-likelihood weighting of the tracking estimates. He was then able to estimate harmonic signals such as voices from complex mixtures.''''\\
-% from zafar
-The concept of \emph{common amplitude modulation} by~\cite{bregman90, wang06} which exploits that amplitude envelopes of different harmonics of the same source tend to be similar.
-Modeling the common amplitude modulation to separate mixtures has first been carried out in~\cite{li07, li09}. 
-Furthermore, as pointed out in~\cite{rafii}, common amplitude modulation characteristics was included in the separation scheme in works such as ~\cite{cano14}.
-% from zafar
-``Yen et al. proposed an approach using spectro-temporal modulation features \cite{yen14,yen15}. They decomposed a mixture using a two-stage auditory model which consists of a cochlear module \cite{chi05} and cortical module \cite{chi99}. They then extracted spectro-temporal modulation features from the TF units and clustered the TF units into harmonic, percussive, and vocal components using the EM algorithm and re-synthesized the estimated signals'' (from~\cite{rafii}.\\
-% from zafar
-% double check this!
+These methods were summarized in~\cite{rafii}, starting with one of the first concepts introduced by~\cite{bregman90} as the \emph{common amplitude modulation} ``which exploits that amplitude envelopes of different harmonics of the same source tend to be similar.''
+This was later used in models to separate mixtures such as in ~\cite{li07, li09}.\\
+Furthermore, common amplitude modulation characteristics was included in the separation scheme in works such as~\cite{cano14}.\\
+Wang proposed a technique in~\cite{wang94,wang95} of ``\dots instantaneous and frequency-warped techniques for signal parameterization and source separation, with application to voice separation in music.''\\
+Yen et al. proposed in \cite{yen14,yen15} to use spectro-temporal modulation features to decompose ``a mixture using a two-stage auditory model which consists of a cochlear module \cite{chi05} and cortical module \cite{chi99}.'' (from~\cite{rafii}.\\
 Virtanen made use of sinusoidal modeling \cite{virtanen00} to model and separate sources with tempo spectral modulation like vibrato.
 
 In another vein, the source-filter model was deployed to separation sources~\cite{hennequin10}.
-An advantage of the source-filter model, as pointed out in~\cite{rafii}is that ``\dots one can dissociate the pitched content of the signal, embodied by the position of its harmonics, from its TF envelope which describes where the energy of the sound lies. In the case of vocals, it yields the ability to distinguish between the actual note being sung (pitch content) and the phoneme being uttered (mouth and vocal tract configuration), respectively.''
+An advantage of the source-filter model, as pointed out in~\cite{rafii} is that ``\dots one can dissociate the pitched content of the signal, embodied by the position of its harmonics, from its TF envelope which describes where the energy of the sound lies.''
 
 \section{Summary}
 

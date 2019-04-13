@@ -3,7 +3,9 @@
 %*******************************************************
 \pdfbookmark[1]{Publications}{publications}
 \chapter*{Publications}
-Chapters 4-8 of this thesis is mainly build upon the following publications that I published as first author during my time as a doctoral student.
+\label{cha:publication}
+
+Parts of chapters 4-8 of this thesis are based on contributions that I published as first author during my time as a doctoral student.
 
 \newcommand*{\boldnames}{}
 
@@ -51,28 +53,9 @@ Chapters 4-8 of this thesis is mainly build upon the following publications that
 \newrefcontext[sorting=ynt]
 \section*{Main Publications}
 
-\begin{itemize}
-  \item[\cite{stoeter19}] ~\fullcite{stoeter19}.
-  \item[\cite{stoeter18}] ~\fullcite{stoeter18}.
-\end{itemize}
-\noindent
-The publications were a result of collaboration with Soumitro Chakrabarty and Emanuël Habets. 
-My contribution to this work was the initial problem formulation and the core idea to address the problem using deep neural networks. Furthermore, I designed the dataset design experimental design, and evaluation.
-My college Soumitro Chakrabarty contributed to the development of the deep learning method; Emanuël Habets and Bernd Edler revised the articles.
+The following lists my publications that were partly included in verbatim, ordered by first appearance in the chapters of this thesis.
 
-\begin{itemize}
-  \item[\cite{stoeter16}] ~\fullcite{stoeter16}.
-\end{itemize}
-\noindent
-My contribution to this work was the experimental design, implementation and evaluation.
-The original idea was developed by Antoine Liutkus, who also helped formulating the theory. Paul Magron provided code and results to compare with the HR-NMF method. Roland Badeau and Bernd Edler revised the article.
-
-\begin{itemize}
-  \item[\cite{stoeter15icassp}] ~\fullcite{stoeter15icassp}.
-\end{itemize}
-\noindent
-My contribution in this work was the initial idea, literature overview of $F0$ estimation algorithm and the evaluation of the algorithms.
-The work was done in close collaboration with my colleague Nils Werner who contributed to the efficient implementation of the $F0$ warping algorithm and the generation of appropriate warp contours to match mathematical constraints of time-warping. Bernd Edler revised this thesis.
+\subsection*{Chapter~\ref{cha:datasets}}
 
 \begin{itemize}
   \item[\cite{stoeter15acm}] ~\fullcite{stoeter15acm}.
@@ -80,6 +63,8 @@ The work was done in close collaboration with my colleague Nils Werner who contr
 \noindent
 My contribution in this work was the initial idea which was inspired by the gap in existing $F0$ estimation datasets not providing sufficient level of annotation to derive an accurate ground truth.
 The work was done together with our student, Michael Müller, who greatly helped to design and manufacture the custom experiment hardware, organize the actual recording and provide an assistance in analyzing and converting the recorded data.
+
+\subsection*{Chapter~\ref{cha:known}}
 
 \begin{itemize}
   \item[\cite{stoeter14}] ~\fullcite{stoeter14}.
@@ -89,6 +74,24 @@ My contribution to this work was the initial idea, as well as the experimental d
 My college Stefan Bayer contributed important insights about the theory and implementation of time warping framework and formulated the mathematical notation therein. Bernd Edler revised the article.
 
 \begin{itemize}
+  \item[\cite{stoeter15icassp}] ~\fullcite{stoeter15icassp}.
+\end{itemize}
+\noindent
+My contribution in this work was the initial idea, literature overview of $F0$ estimation algorithm and the evaluation of the algorithms.
+The work was done in close collaboration with my colleague Nils Werner who contributed to the efficient implementation of the $F0$ warping algorithm and the generation of appropriate warp contours to match mathematical constraints of time-warping. Bernd Edler revised this thesis.
+
+\subsection*{Chapter~\ref{cha:unknown}}
+
+\begin{itemize}
+  \item[\cite{stoeter16}] ~\fullcite{stoeter16}.
+\end{itemize}
+\noindent
+My contribution to this work was the experimental design, implementation and evaluation.
+The original idea was developed by Antoine Liutkus, who also helped formulating the theory. Paul Magron provided code and results to compare with the HR-NMF method. Roland Badeau and Bernd Edler revised the article.
+
+\subsection*{Chapter~\ref{cha:countanalysis}}
+
+\begin{itemize}
   \item[\cite{stoeter13}] ~\fullcite{stoeter13}.
 \end{itemize}
 \noindent
@@ -96,6 +99,16 @@ The work was based on a collaboration with Michael Schöffler and Jürgen Herre.
 My contribution to this work was the initial idea, as well as the experimental prototype design, and evaluation.
 My college Michael Schöffler contributed to the development of the web based evaluation software that later led to a follow-up publication~\cite{schoeffler13} which I co-authored. The article was revised by Jürgen Herre and Bernd Edler.
 
+\subsection*{Chapter~\ref{cha:countnet}}
+
+\begin{itemize}
+  \item[\cite{stoeter19}] ~\fullcite{stoeter19}.
+  \item[\cite{stoeter18}] ~\fullcite{stoeter18}.
+\end{itemize}
+\noindent
+The publications were a result of collaboration with Soumitro Chakrabarty and Emanuël Habets. 
+My contribution to this work was the initial problem formulation and the core idea to address the problem using deep neural networks. Furthermore, I designed the dataset design experimental design, and evaluation.
+My college Soumitro Chakrabarty contributed to the development of the deep learning method; Emanuël Habets and Bernd Edler revised the articles.
 
 
 \section*{Additional Publications}
@@ -107,6 +120,7 @@ The following publications were not reprinted in this thesis but are nonetheless
 \end{refsection}
 
 \section*{Open Datasets and Software}
+\label{sec:opendatasets}
 To foster reproducible research, the following datasets and code were contributed under open licenses:
 \begin{refsection}[owndata.bib]
 \nocite{*}

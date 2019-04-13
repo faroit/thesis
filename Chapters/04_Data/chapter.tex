@@ -1,13 +1,21 @@
 \chapter{Datasets}
 \label{cha:datasets}
 
-In the previous chapter, we presented the fundamentals of highly overlapped signals.
-To study these signals, suitable and controlled data is of paramount importance since many methods rely on audio datasets for development and evaluation.
-Often, suitable audio material is not publicly available which is when we created our own data.
-In the following sections, we present three datasets which we helped creating with the aim to fill this gap and which will be used in subsequent experiments.
+In the previous chapter, we presented the fundamentals of highly overlapped audio signals.
+To study these signals in a reproducible manner, suitable data is of paramount importance since many methods rely on audio datasets for development and evaluation.
+Often, suitable audio material is not publicly available, in the case of music, often because of restrictive copyright laws. 
+Therefore, in the past, many academic endeavors were focussed on getting access to such precious data. 
+In fact, major conferences within the audio community see the contribution of free-to-use datasets as necessary as the development of novel methods.
+In the following sections, we present three datasets which we helped creating. 
+Each of the datasets are released to be used in public domain and aim to fill specific needs.
+The three datasets (more data contributions can be found in Section~\ref{sec:opendatasets}) are used in subsequent experiments throughout this thesis.
 
 \section{Unison Mixtures}
 \label{sec:unison_dataset}
+
+\marginpar{
+  Parts of this this section were previously published in~\cite{stoter14}.
+}
 
 In speech, it is common to mix clean speech and noise~\cite{varga93} or different clean speech signals such as~\cite{garofolo93} to generate mixtures.
 By contrast, the conversational aspect of human-to-human communication is lost.
@@ -44,7 +52,7 @@ The dataset is available from~\cite{oss_unison}.
 \begin{center}
 \footnotesize
 \begin{tabular}{ l l l}
-  Instrument & Vibrato &  General MIDI \# \\
+  Instrument & Vibrato &  MIDI \# \\
   \hline
   Violin & yes & 40 \\
   Viola & yes & 41 \\
@@ -114,10 +122,9 @@ In the case of two instruments playing in unison, the average WDO is \(0.65\), i
 \section{High Resolution Vibrato Recordings}%
 \label{sec:muserc}
 
-\begin{marginpar}
-  % (entire section)
-  This subsection was previously published in~\cite{stoeter15acm} and was abbreviated to be included in this thesis.
-\end{marginpar}
+\marginpar{
+  Parts of this this section were previously published in~\cite{stoeter15acm}.
+}
 
 Fundamental frequency \(F0\) estimation of a signal is a common task in audio signal processing with many applications. 
 If the $F0$ varies over time, the complexity increases, and it is also more difficult to provide ground truth data for evaluation.
@@ -129,7 +136,7 @@ If the $F0$ varies over time, the complexity increases, and it is also more diff
 \label{fig:teaser_hdf0}
 \end{figure}
 
-% from 
+% from stoter acm
 For speech signals, an EGG device (also known as laryngograph) captures the excitation of the human vocal tract. 
 This signal is then processed by an $F0$ estimator to generate the ground truth. 
 Such a method is accepted in published research because the EGG signal is considered to be easier to process than speech. 
@@ -159,10 +166,11 @@ Further, it can be used for synthesizers to add a natural vibrato by using the s
 The resulting test set yields in $148$ recorded notes after removal of some notes due to errors in the sensor recordings.
 By making this dataset public domain~\cite{oss_muserc} and including the raw recordings, we believe other researchers can benefit from the data and possibly generate their own derived data.
 
-\section{Multitrack Data}%
+\section{Multitrack Music Recordings}%
 \label{sec:multitrack}
 
-The Signal Separation Evaluation Campaign (SiSEC) is a publicly organized benchmark to assess the performance of source separation systems~\cite{sisec13, ono15, liutkus17, stoeter18sisec}.
+For the evaluation source separation, it is important 
+ Signal Separation Evaluation Campaign (SiSEC) is a publicly organized benchmark to assess the performance of source separation systems~\cite{sisec13, ono15, liutkus17, stoeter18sisec}.
 To evaluate participating methods, multitrack data is required, containing the true sources.
 
 ``For professionally-produced or recorded music, the separated sources are often either unavailable or private. Indeed, they are considered amongst the most precious assets of right holders, and it is challenging to find isolated vocals and accompaniment of professional bands that are freely available for the research community to work on without copyright infringements.
@@ -182,12 +190,36 @@ We briefly describe the most relevant ones below:
     \item The MIR-1K~\cite{hsu10} and iKala~\cite{chan15} datasets were the first attempts to scale vocals separation up. They feature a higher number of samples (1000) than the previously available datasets. However, they consist of mono signals of very short and amateur karaoke recordings.
     \item The ccMixter~\cite{liutkus142} dataset was proposed as the first dataset to feature many full-length stereo tracks. Each one comes with vocals and an accompaniment source. Although it is stereo, it often suffers from simplistic mixing of sources, making it unrealistic in some aspects.
     \item MedleyDB~\cite{bittner14} has been developed as a dataset to serve many purposes in music information retrieval. It consists of more than 100 full-length recordings, with all their constitutive sources. It is the first dataset to provide such a large amount of data to be used for audio separation research (more than 7 hours). Among all the material present in that dataset, 63 tracks feature singing voice.
-    \item DSD100~\cite{liutkus17} was presented for SiSEC 2016. It features 100 full-length tracks originating from the 'Mixing Secret' Free Multitrack Download Library\footnote{\url{http://www.cambridge-mt.com/ms-mtk.htm}} of the Cambridge Music Technology, which is freely usable for research and educational purposes.''
-    The dataset consists of four predefined categories: \emph{bass, drums, vocals, and other}. An extended version, merging MedleyDB and DSD100 was recently released as MUSDB18~\cite{rafii17, stoeter18sisec}
+    \item DSD100~\cite{liutkus17} was presented for SiSEC 2016. It features 100 full-length tracks originating from the 'Mixing Secret' Free Multitrack Download Library of the Cambridge Music Technology, which is freely usable for research and educational purposes.''
+    The dataset consists of four predefined categories: \emph{bass, drums, vocals}, and \emph{other}. An extended version, merging MedleyDB and DSD100 was recently released as MUSDB18~\cite{rafii17, stoeter18sisec}
 \end{itemize}
 
+\begin{table*}[htbp]
+	\centering
+	\caption{Summary of datasets available for lead and accompaniment separation. Tracks without vocals were omitted in the statistics.}
+	\label{tab:datasets}
+		\begin{tabular}{|l l l l l l l|}
+			\hline
+			\textbf{Dataset} & \textbf{Year} & \textbf{Reference(s)} & \textbf{Tracks} & \textbf{Track duration (s)} & \textbf{Full/stereo?}\\
+			\hline
+			MASS & 2008 & \cite{MTGMASSdb} & 9 & $16 \pm 7$ & no / yes \\
+			MIR-1K & 2010 & \cite{hsu10} & 1,000 & $8 \pm 8$ & no / no \\
+			QUASI & 2011 & \cite{liutkus11,vincent12} & 5 & $206 \pm 21$ & yes / yes \\
+			ccMixter & 2014 & \cite{liutkus142} & 50 & $231 \pm 77 $ & yes / yes \\
+			MedleyDB & 2014 & \cite{bittner14} & 63 & $206 \pm 121$ & yes / yes \\
+			iKala & 2015 & \cite{chan15} & 206 & 30 & no / no \\
+			DSD100 & 2015 & \cite{ono15} & 100 & $251 \pm 60$ & yes / yes \\
+      MUSDB18 & 2017 & \cite{rafii17} & 150 & $236 \pm 95$ & yes / yes \\
+			\hline
+		\end{tabular}
+\end{table*}
+
+% from \cite{stoeter18sisec}
+All items are full-length tracks, enabling the handling of long-term musical structures, and the evaluation of quality over silent regions for sources. All signals are stereo and mixed using professional digital audio workstations, thus representative of real application scenarios. All signals are split  into four predefined targets: bass, drums, vocals and other. This promotes automation of the algorithms. Many musical genres are represented: jazz, electro, metal, etc. It is split into a training (100 tracks, 6.5 h) and a test set (50 tracks, 3.5 h), for the design of data-driven methods.
+
+
 Over the years, DSD100/MUSDB18 became one of the most used datasets for source separation. 
-The dataset is still tiny in comparison to machine learning sets from vision, but it proved to be large enough to help DNN-based methods to reach breakthrough results in source separation~\cite{stoeter18sisec}.
+The dataset is still small in comparison to machine learning sets from vision such as~\ref{}, but it proved to be large enough to help DNN-based methods to reach breakthrough results in source separation~\cite{stoeter18sisec}.
 \par
 Working with multitrack audio files can be cumbersome due to its hierarchical structure that needs to be parsed.
 For that purpose, we developed a software toolbox for Python that permits the straightforward processing of the DSD100 dataset. This software is open source and was publicly broadcasted so as to allow the participants to run the evaluation themselves\footnote{\url{github.com/faroit/dsdtools}}.

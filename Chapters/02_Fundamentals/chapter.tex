@@ -297,8 +297,6 @@ Many real-world source separation problems, however, are \emph{under-determined}
 In this thesis, we only focus on methods that perform separation on underdetermined mixtures.
 
 \subsubsection*{Single Channel vs. Multichannel Separation}
-% from zafar
-
 Today music recordings are mostly produced for stereo output. 
 In many music recordings certain assumptions can be made (and utilized) of how sources are balanced between the two stereo channels. 
 E.g., often in popular music, a fixed panning for the vocals is correctly assumed.
@@ -340,7 +338,7 @@ To evaluate separation systems for this scenario, the majority of publications u
   \label{fig:teaser}%
 \end{figure}
 
-The number of sources is a simple but yet important information to be used in source separation and many other related research fields.
+The number of sources is an important information to be used in source separation and many other related research fields.
 In real-world applications, information about the actual number of concurrent speakers is often not available.
 \par
 The \emph{number of sources} \( \cardinality \in \mathbb{Z}^{+}_{0} \) appears to be a clearly defined property of a mixture. 
@@ -358,9 +356,3 @@ At short time scales A) is equal to B) because the instrumentation usually does 
 In Fig.~\ref{fig:teaser}, we illustrate a setup featuring~$L=3$ unique sources.
 At any given time, one can see --- given definition B) --- that at most~$k=L=3$ sources are active at the same time and~$k=2$ could be the outcome if a smaller excerpt would be evaluated.
 In this thesis, we will pick definition B when concerned about developing methods to estimate the number of sources.
-% However, when dealing with the human ability to estimate the number of sources, such a clear definition cannot be made.
-% For instance, obtaining this number is even more challenging because the definition of a musical source cannot be given.
-% In some scenarios, like popular western music, the sources to be separated, are grouped clear melody, bass, drums and ``other'' (the remainder), in other scenarios, e.g., the ``drums'' would count as multiple instruments.
-
-
-
