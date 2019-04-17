@@ -377,7 +377,7 @@ We also experimented with other two and three-factor combinations but never got 
 \begin{figure}[!htbp]
 \centering
 \includegraphics[width=0.9\columnwidth]{Chapters/06_Separation_Unknown/figures/cfm.pdf}
-\caption{Visualization of the Common Fate factorization model (CFM). \textsuperscript{\textregistered} 2016 IEEE.}
+\caption{Visualization of the Common Fate factorization model (CFM).}
 \label{fig:cfm}
 \end{figure}
 
@@ -494,8 +494,9 @@ This scenario is significantly more complex than the separation of instrument mi
 With the recent success of machine learning models~\cite{HintonSpeech}, it became likely that an unsupervised model such as NTF or CFM may not be flexible enough to enforce the significant amount of domain knowledge that is present in this scenario to improve performance.
 % from zafar
 Rafii et. al describe the current machine learning situation in \cite{rafii}:
+
 \begin{quote}
-Taking advantage of the recent availability of sufficiently large databases of isolated vocals along with their accompaniment, several researchers investigated the use of machine learning methods to directly estimate a mapping between the mixture and the sources~\cite{huang14, uhlich15}.
+``Taking advantage of the recent availability of sufficiently large databases of isolated vocals along with their accompaniment, several researchers investigated the use of machine learning methods to directly estimate a mapping between the mixture and the sources~\cite{huang14, uhlich15}.
 However, most systems today still use classical time-frequency representations.
 
 The common structure of deep learning methods for lead and accompaniment separation usually corresponds to the one depicted in Figure~\ref{fig:methods_dnn}.
@@ -519,7 +520,7 @@ Training of such functions is achieved by stochastic gradient descent \cite{robb
 Huang et al. were the first to propose RNNs~\cite{hermans13,pascanu14} for singing voice separation in \cite{huang14,huang15}. They adapted their framework from \cite{huang142} to model all sources simultaneously through masking. Input and target functions were the mixture magnitude and a joint representation of the individual sources. The objective was to estimate jointly either singing voice and accompaniment music, or speech and background noise from the corresponding mixtures.
 \par
 %Exploiting context: FNN with context, LSTM
-Modeling the temporal structures of both the lead and the accompaniment is a considerable challenge. As an alternative to the RNN approach proposed by Huang et al. in \cite{huang14}, Uhlich et al. proposed the usage of ``simpler'' FNNs \cite{uhlich15} whose input consists of \textit{supervectors} stacked of few consecutive frames from the mixture.
+Modeling the temporal structures of both the lead and the accompaniment is a considerable challenge. As an alternative to the RNN approach proposed by Huang et al. in \cite{huang14}, Uhlich et al. proposed the usage of simpler FNNs \cite{uhlich15} whose input consists of \textit{supervectors} stacked of few consecutive frames from the mixture.''
 \end{quote}
 We decided to reimplement Uhlich's model~\cite{uhlich15} to evaluate the separation quality.
 The aim of this work was not to exactly reproduce the results, but instead, to evaluate one main research questions: does a DNN-based model benefit from the common fate representation being able to better capture the modulation texture?
