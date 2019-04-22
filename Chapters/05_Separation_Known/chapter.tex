@@ -246,7 +246,7 @@ Therefore, we used an IIR Filter with the frequency response
   H(z) = \frac{1}{1 - 0.75z^{-P}},
 \end{equation}
 
-where \(P\) is constant --- due to the time warping --- pitch period in samples.
+where \(P\) is refers to the constant (due to the time warping) pitch period in samples.
 In order to then extract the vocals, zero-phase filtering is applied.
 The extracted vocals were inverse warped to linear time (e) and the accompaniment signal is created by subtracting the estimated vocals from the mixture signals.
 Each excerpt is then linearly crossfaded into the unaltered, accompaniment/mixture using a 10ms window.
