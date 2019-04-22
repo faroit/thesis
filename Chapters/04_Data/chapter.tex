@@ -139,7 +139,7 @@ In the case of two instruments playing in unison, the average WDO is \(0.65\), i
 }
 
 Fundamental frequency \(F0\) estimation of a signal is a common task in audio signal processing with many applications. 
-If the $F0$ varies over time, the complexity increases, and it is also more difficult to provide ground truth data for evaluation.
+If the $F_0$ varies over time, the complexity increases, and it is also more difficult to provide ground truth data for evaluation.
 
 \begin{figure}[h]
   \centering
@@ -150,9 +150,9 @@ If the $F0$ varies over time, the complexity increases, and it is also more diff
 
 % from stoter acm
 For speech signals, an EGG device (also known as laryngograph) captures the excitation of the human vocal tract. 
-This signal is then processed by an $F0$ estimator to generate the ground truth. 
+This signal is then processed by an $F_0$ estimator to generate the ground truth. 
 Such a method is accepted in published research because the EGG signal is considered to be easier to process than speech. 
-The retrieved F0-trajectory based on the EGG signal is easier to process and the generated annotations are considered as a good ground truth~\cite{pirker11, babacan13}.
+The retrieved $F_0$-trajectory based on the EGG signal is easier to process and the generated annotations are considered as a good ground truth~\cite{pirker11, babacan13}.
 Motivated by this, we propose a new data set for musical instruments where we recorded a violin cello with extra sensors on the fretboard in addition to audio and video.
 We made use of multiple sensors to capture the most relevant processes involved in creating time-varying output signals as depicted in Figure~\ref{fig:teaser_hdf0}.
 We included sensor recordings capturing the finger position on the fingerboard which is converted into an instantaneous frequency estimate.
@@ -169,9 +169,9 @@ Due to the width of fingerboard sensors and the attached cables we were able to 
 \par
 The dataset includes time synchronous fingerboard positions and high-speed camera recordings. 
 The derived motion estimates show similarity to the EGG signals used in speech. 
-The slowest feature rate of the set is 750 Hz, which enables to evaluate $F0$ estimators with high temporal resolution. 
+The slowest feature rate of the set is 750 Hz, which enables to evaluate $F_0$ estimators with high temporal resolution. 
 \par
-In~\cite{stoeter15acm}, we also showed how to derive high resolution $F0$ contours from the data which can be used to improve $F0$ estimators or help to analyze playing styles in recordings, usually relying on conventional $F0$ estimators based on the audio signal~\cite{mellody2000time}. 
+In~\cite{stoeter15acm}, we also showed how to derive high resolution $F_0$ contours from the data which can be used to improve $F_0$ estimators or help to analyze playing styles in recordings, usually relying on conventional $F_0$ estimators based on the audio signal~\cite{mellody2000time}. 
 By using sensor data samples from our test set, researchers get more robust and detailed data to compute features like mean vibrato frequency. 
 Further, it can be used for synthesizers to add a natural vibrato by using the sensor data as a modulation source.
 \par

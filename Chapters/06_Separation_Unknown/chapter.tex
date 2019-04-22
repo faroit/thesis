@@ -55,7 +55,7 @@ However, \(K\) is usually selected to be larger or equal to the total number of 
 When it is larger than the number of sources, the components can be clustered into the number of desired sources.
 Often this can be achieved by some similarity metric that allows to calculate pairwise distances between the \(K\) components and the desired sources and apply \textit{k}-means clustering algorithm~\cite{spiertz09}.
 A separation example is depicted in Figure~\ref{fig:nmf_separation}. 
-Here the number of components \(K\) is six per sources, resulting in a total number of \(K=12\). 
+Here the number of components \(K\) is six per source, resulting in a total number of \(K=12\). 
 Each component is clustered into one of two sources to generate two estimates.
 
 \begin{figure}[h]
@@ -69,7 +69,7 @@ It is this step that transforms the NMF into a supervised algorithm.
 As for other separation methods, performed in the time-frequency domain, separation is achieved using Wiener filters or soft masks to extract the sources from the mixture~\cite{liutkus15c}.
 \par
 Since NMF first appeared to the source separation community in~\cite{smaragdis03} and in~\cite{vembu05}, a large variety of NMF ``flavors'' were introduced to improve certain aspects of the NMF in the application of music. 
-In~\cite[Chapter 16]{vincent} of that book the authors describe one of the main problems of NMF which is that ``standard NMF is shown to be effective when the notes of the analyzed music signal are nearly stationary''.
+In~\cite[Chapter 16]{vincent}, the authors describe one of the main problems of NMF which is that ``standard NMF is shown to be effective when the notes of the analyzed music signal are nearly stationary''.
 As we described in Chapter~\ref{cha:highly-overlapped-signals}, this is especially important for pitches that incorporate vibrato.
 Here, NMF-based processing suffers from its simplified model and its magnitude STFT representation makes it harder to model these time-varying sources.
 \par
@@ -445,7 +445,7 @@ Furthermore, if we now looking at a smaller excerpt of the same synthetic exampl
 \begin{figure}[!h]
 \centering
         \includegraphics[width=0.9\textwidth]{Chapters/06_Separation_Unknown/figures/gridplot.pdf}
-\caption{Examples of patches of size $(N_a, N_b) = (32, 48)$. The upper row shows the STFT output, the lower row the corresponding Common Fate Transform (CFT). \textsuperscript{\textregistered}2016 IEEE.}
+\caption{Examples of patches of size $(N_a, N_b) = (32, 48)$. The upper row shows the STFT output, the lower row the corresponding Common Fate Transform (CFT).}
 \label{fig:gridplot}
 \end{figure}
 
