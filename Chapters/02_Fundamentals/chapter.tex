@@ -87,7 +87,7 @@ In the following, we will present audio modulation categories and their cause, u
 % The transmission of an audio signal using a modulator/demodulator (modem) system may be one of the most essential applications for audio modulations. 
 % The principle is used the broadcasting of radio using a high-frequency carrier signal that is modulated by an audio signal to be transmitted, which is assumed to be of lower frequency than the carrier signal.
 % The modulator is targeted to vary the amplitude or the frequency of the carrier signal.
-If we imagine a sinusoidal carrier signal $x(t) = \cos \omega_c t$, \emph{amplitude modulation} (AM) is applying a modulation function $a(t)$ so that:
+If we imagine a sinusoidal carrier signal $x(t) = \cos \omega_c t$, \emph{amplitude modulation} (AM) is applying a time varying amplitude $a(t)$ so that:
 
 % We assume that we can separate overlapping partials of the sources based on differences in amplitude and/or frequency modulation, resulting in the following model for a signal with $P$ commonly modulated partials
 % \begin{equation}
@@ -110,7 +110,7 @@ In comparison to AM, Frequency modulation (FM) varies the frequency of the carri
     s_{FM}(t) = A e^{j\left(\omega_{0} t + m \sin \left(\omega_ { m } t \right)\right)}
 \end{equation*}
 
-where A is the amplitude, $\omega_0$ is the carrier frequency, $\omega_m(\theta)$ is the instantaneous modulation frequency, and $m$ is the modulation index $m = \frac{\Delta \omega_0} { \omega_{m} }$.
+where A is the amplitude, $\omega_0$ is the carrier frequency, $\omega_m$ is the instantaneous modulation frequency, and $m$ is the modulation index $m = \frac{\Delta \omega_0} { \omega_{m} }$.
 
 The Fourier spectrum of $s_{FM}(t)$, which depends, in theory, on Bessel functions that do not admit a closed-form expression, is intractable in practice~\cite{abramowitz64}.
 % For applications where the modulation frequencies are a lot smaller than the carrier frequency, the spectrum that results by frequency modulations is similar to those of amplitude modulations.
