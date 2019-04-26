@@ -77,17 +77,17 @@ For a detailed overview into the research field of pitch and \(F0\), the reader 
 Audio signals are considered to be stationary or time-invariant when their properties such as the amplitude of the fundamental frequency of the signal do not change over time.
 % A stationary sound can turn into time-invariant sound using modulations
 The signal becomes time-variant when an external function changes (modulates) the parameters of a signal over time.
-This simple idea was the basis for many break-through inventions such as radio transmission~\cite{shannon48}.
+This type of modulation was the basis for many break-through inventions such as radio transmission~\cite{shannon48}.
 In the case of audio signals, often both the modulating function (modulator or carrier) and the signal being modulated (input), are periodic.
 Signal modulations are often created intentionally but also occur naturally in many real-world audio signals such as speech.
 In the following, we will present audio modulation categories and their cause, underlining the importance of them.
 
 \subsubsection*{Audio Signal Communication}
 
-% The transmission of an audio signal using a modulator/demodulator (modem) system may be one of the most essential applications for audio modulations. 
-% The principle is used the broadcasting of radio using a high-frequency carrier signal that is modulated by an audio signal to be transmitted, which is assumed to be of lower frequency than the carrier signal.
-% The modulator is targeted to vary the amplitude or the frequency of the carrier signal.
-If we imagine a sinusoidal carrier signal $x(t) = \cos \omega_c t$, \emph{amplitude modulation} (AM) is applying a time varying amplitude $a(t)$ so that:
+Audio modulations play an essential role in the transmission of audio signals such as in radio broadcasting.
+It is based on the principle of a modulator/demodulator (modem) where a high-frequency carrier signal is modulated by a (lower frequency) audio signal to be transmitted.
+The modulator varies the amplitude or the frequency of the carrier signal.
+Let us imagine a sinusoidal carrier signal $x(t) = \sin \omega_c t$ where $\omega_c$ is the carrier frequency. Now, applying a time varying amplitude $a(t)$ results in \emph{amplitude modulation} (AM):
 
 % We assume that we can separate overlapping partials of the sources based on differences in amplitude and/or frequency modulation, resulting in the following model for a signal with $P$ commonly modulated partials
 % \begin{equation}
@@ -99,20 +99,19 @@ If we imagine a sinusoidal carrier signal $x(t) = \cos \omega_c t$, \emph{amplit
 % where effectively the amplitude modulation is $a(n)$ and the frequency modulation of the first partial is $f(n)$.
 
 \begin{equation*}
-    s_{AM}(t) = a(t) \cos \left( \omega_{c} t\right).    
+    s_{AM}(t) = a(t) \sin \left( \omega_{c} t\right).    
 \end{equation*}
 
 \vspace{1cm}
 
-In comparison to AM, Frequency modulation (FM) varies the frequency of the carrier, so that:
+In comparison to AM, frequency modulation (FM) varies the frequency of the carrier, so that:
 
 \begin{equation*}
-    s_{FM}(t) = A e^{j\left(\omega_{0} t + m \sin \left(\omega_ { m } t \right)\right)}
+    s_{FM}(t) = A \sin \left( \omega_{c} t + p_0 + M_f \int f(t) dt \right)
 \end{equation*}
 
-where A is the amplitude, $\omega_0$ is the carrier frequency, $\omega_m$ is the instantaneous modulation frequency, and $m$ is the modulation index $m = \frac{\Delta \omega_0} { \omega_{m} }$.
-
-The Fourier spectrum of $s_{FM}(t)$, which depends, in theory, on Bessel functions that do not admit a closed-form expression, is intractable in practice~\cite{abramowitz64}.
+where A is the amplitude, $\omega_{c}$ is the carrier frequency and $M_f$ is called modulation index.
+When the modulation function $f(t)$ is a single sine wave, $\cos \left(\omega_{m} t+p_{m}\right)$, of frequency $\omega_{m}$, the Fourier spectrum of $s_{FM}(t)$, in theory, depends on Bessel functions that do not admit a closed-form expression, being intractable in practice~\cite{abramowitz64}.
 % For applications where the modulation frequencies are a lot smaller than the carrier frequency, the spectrum that results by frequency modulations is similar to those of amplitude modulations.
 % This is the reason why algorithms that aim to capture the amplitude modulation will also observe frequency modulations.
 % The total bandwidth in this scenario is approximately $2\Delta \omega_0$, as found by Carson in~\cite{carson22}.\par
