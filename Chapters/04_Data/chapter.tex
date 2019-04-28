@@ -138,7 +138,7 @@ In the case of two instruments playing in unison, the average WDO is \(0.65\), i
   Parts of this this section were previously published in~\cite{stoeter15acm}.
 }
 
-Fundamental frequency \(F0\) estimation of a signal is a common task in audio signal processing with many applications. 
+Fundamental frequency \(F_0\) estimation of a signal is a common task in audio signal processing with many applications. 
 If the $F_0$ varies over time, the complexity increases, and it is also more difficult to provide ground truth data for evaluation.
 
 \begin{figure}[h]
@@ -153,7 +153,7 @@ For speech signals, an EGG device (also known as laryngograph) captures the exci
 This signal is then processed by an $F_0$ estimator to generate the ground truth. 
 Such a method is accepted in published research because the EGG signal is considered to be easier to process than speech. 
 The retrieved $F_0$-trajectory based on the EGG signal is easier to process and the generated annotations are considered as a good ground truth~\cite{pirker11, babacan13}.
-Motivated by this, we propose a new data set for musical instruments where we recorded a violin cello with extra sensors on the fretboard in addition to audio and video.
+Motivated by this, we proposed a new data set for musical instruments where we recorded a violin cello with extra sensors on the fretboard in addition to audio and video.
 We made use of multiple sensors to capture the most relevant processes involved in creating time-varying output signals as depicted in Figure~\ref{fig:teaser_hdf0}.
 We included sensor recordings capturing the finger position on the fingerboard which is converted into an instantaneous frequency estimate.
 We also included high-speed video camera data to capture excitations from the string at 2000 fps.
@@ -185,8 +185,8 @@ One of the core problems for the field of music processing is the lack of public
 Many researchers aim to develop methods that could be applied to professionally produced music. 
 However, at the same time access to professionally produced music recordings is difficult due to the complex copyright laws established by the music industry.
 When music is directly streamed to the user, such as on \emph{youtube}, researchers are to use this data for academic purposes such as in~\cite{balke17}.
-Unfortunately, the platforms only host the stereo mixes of produced recordings, whereas the stems or source tracks that are used to create the master mix are a carefully guarded secret.
-I the case of very old recordings, the recordings was down-mixed on tapes during recording sessions, thus making the original stems unavailable.
+Unfortunately, these platforms only host the stereo mixes of produced recordings, whereas the stems or source tracks that are used to create the master mix are a carefully guarded secret.
+I the case of very old recordings, the recordings were down-mixed (to tape) during the recording sessions, thus making the original stems unavailable.
 Now, the lack of available multitrack datasets prevents research on source separation to advance further.
 This is especially true for supervised methods but also affects objective evaluation where the true sources would need to be available.
 \par
@@ -200,7 +200,6 @@ Many musical genres are represented: jazz, electro, metal, etc. and it is split 
 
 \begin{table*}[htbp]
 	\centering
-	\label{tab:datasets}
   \begin{tabular}{l l l l l l l}
     \toprule
     \textbf{Dataset} & \textbf{Year} & \textbf{Tracks} & \textbf{Track duration (s)} & \textbf{Full/stereo?}\\
@@ -216,6 +215,7 @@ Many musical genres are represented: jazz, electro, metal, etc. and it is split 
     \bottomrule
   \end{tabular}
   \caption{Summary of datasets available music source separation datasets. Tracks without vocals were omitted in the statistics.}
+	\label{tab:datasets}
 \end{table*}
 
 Over the years, DSD100/MUSDB18 became one of the most used datasets for source separation. 

@@ -20,12 +20,12 @@ Signals}\label{digital-representations-of-audio-signals}}
 
 Today, digital representations are used to store, analyze or process audio signals conveniently.
 A digital audio signal can be obtained from an analog signal using analog-to-digital/digital-to-analog converters (ADC/DAC) which can be found in almost any every-day device such as laptops and smartphones.
-In short, this process includes two steps: first, the continuous time signal \(x(t)\) is converted to a discrete time series, so that one sample\footnote{Please note, that the use of the word \emph{sample} will have different meanings in the context of machine learning, where a sample is an instance of a full signal instead of a single time step.} \(x_n\) is \emph{sampled} with equidistant steps \(T\); second, the amplitude values can be \emph{quantized}, resulting in a vector \(\vx \in \sZ\), represented as a one dimensional time series of amplitudes.
+In short, this process includes two steps: first, the continuous time signal \(x(t)\) is converted to a discrete time series, so that one sample\footnote{Please note, that the use of the word \emph{sample} will have different meanings in the context of machine learning, where a sample is an instance of a full signal instead of a single time step.} \(x_n\) was \emph{sampled} with equidistant steps \(T\); second, the amplitude values can be \emph{quantized}, resulting in a vector \(\vx \in \sZ\), represented as a one dimensional time series of amplitudes.
 An important parameter in the process of digitization is the sample rate \(F_s = 1/T\) where \(T\) is the sampling period.
 % Often, \(F_s\) has a significant effect on the quality of audio signals.
 % And, it is the objective of a real-world audio system not to introduce perceivable degradation in audio quality when a digital signal is reproduced over headphones or loudspeakers.
 % Due to the Nyquist-Shannon sampling theorem, the sample rate needs to be at least twice the bandwidth of the analog signal.
-To facilitate the full human hearing range of 20~\si{\hertz} - 20~\si{\kilo\hertz}~\cite{fastl90, moore89}, due to the Nyquist-Shannon sampling theorem, often, sample rates of at least 40~\si{\kilo\hertz} are chose.
+To facilitate the full human hearing range of 20~\si{\hertz} - 20~\si{\kilo\hertz}~\cite{fastl90, moore89}, due to the Nyquist-Shannon sampling theorem, often, sample rates of at least 40~\si{\kilo\hertz} are chosen.
 However, for many applications, a lower sampling rate is sufficient, e.g., in speech communication where intelligibility often is more important than quality.
 For further details, we refer the reader to audio signal processing basics such as~Chapter 1 in~\cite{proakis96} or Chapter 2 in~\cite{Mueller15}.
 
@@ -50,7 +50,7 @@ However, analysis and processing is often focussed  on the \emph{magnitude} \(|\
 \begin{figure}[h!]
   \centering
   \includegraphics[width=0.8\columnwidth]{gfx/cello.pdf}
-  \caption{Spectrogram of single violoncello note (E3) of a fundamental frequency \(F0\) of about 164\si{\hertz}. The vibrato is clearly visible in the upper part of the harmonic spectrum. X-axis shows time (in seconds), y-axis depicts frequency (in Hertz). The audio signal is part of the MUSERC dataset~\cite{stoeter15acm}.}%
+  \caption{Spectrogram of single violoncello note (E3) of a fundamental frequency \(F_0\) of about 164\si{\hertz}. The vibrato is clearly visible in the upper part of the harmonic spectrum. X-axis shows time (in seconds), y-axis depicts frequency (in Hertz). The audio signal is part of the MUSERC dataset~\cite{stoeter15acm}.}%
   \label{fig:cello_example}%
 \end{figure}
 
@@ -63,14 +63,14 @@ And it is this property we perceive as \emph{pitched}.
 \end{quote}
 
 It is important to note that \emph{pitch} is a subjective measure.
-The objective equivalent is referred to as the \emph{fundamental frequency} (\(F0\))\footnote{Pitch and $F_0$ are often used synonymously in audio research. 
+The objective equivalent is referred to as the \emph{fundamental frequency} (\(F_0\))\footnote{Pitch and $F_0$ are often used synonymously in audio research. 
 Even though this is incorrect, we sometimes may refer to other work where pitch instead of $F_0$ is used.}.
 All frequencies together formed by the integer multiples of the fundamental frequency are named \textit{harmonics}~\cite{schenker54}.
-\(F0\) can be defined as the lowest frequency/partial of a harmonic signal.
+\(F_0\) can be defined as the lowest frequency/partial of a harmonic signal.
 An example of a harmonic signal can be seen in Figure~\ref{fig:cello_example} that depicts a single note (E3) played by violoncello.
 When the fundamental frequency changes, the frequencies of these harmonics change accordingly.
 This results in the typical comb-like structure of harmonic signals when analyzed in the time-frequency domain.
-For a detailed overview into the research field of pitch and \(F0\), the reader is referred to~\cite{klapuri06book}.
+For a detailed overview into the research field of pitch and \(F_0\), the reader is referred to~\cite{klapuri06book}.
 
 \subsection{Time-Variant Audio Signals}\label{sub:time-variant-audio-signals}
 
@@ -136,7 +136,7 @@ Many musicians use similar modulation rates to perform a vibrato, usually in the
 A detailed overview of the different musical instruments and their modulation characteristics is presented in~\cite{fletcher01}.
 \par
 Real instruments are not capable of purely amplitude modulated sounds (\emph{tremolo}). 
-Today, many instruments are electric or attached to electronic effects where such modulations can be applied using digital or analog signal processing.
+Today, however, many instruments are electric or attached to electronic effects where pure modulations can be applied using digital or analog signal processing.
 For example, popular electric pianos like the ``Fender Rhodes'' can include an optional tremolo effect\footnote{Even though it is labeled as \emph{vibrato}.}.
 In its most pure form, synthesizers like~\cite{pinch09, buchla05} allow modulating almost any parameters of a sound using low-frequency oscillators (LFOs) or envelopes that produce sinusoidal, square or triangle functions of any rate.
 One of the most important sound synthesis methods --- FM Synthesis --- became popular in the early days of digital signal processing. 
@@ -144,7 +144,8 @@ Chowning found in~\cite{chowning73} that the modulation of sinusoids using audio
 \par
 It turns out that instrumental vibrato has similar properties compared to vibrato produced in singing voice.
 Vocal vibrato mainly dependents on frequency modulation even though amplitude fluctuations are present~\cite{sundberg94}. 
-Vocal vibrato rates are similar to that of instrumental vibrato with its peak around 5~\si{\hertz}.
+Vocal vibrato rates are similar to that of instrumental vibrato rates with an average of 5~\si{\hertz}.
+However, analysis of exceptional voices such as from Freddie Mercury~\cite{herbst17}, shows peak rates of up to 7~\si{\hertz}.
 
 \subsubsection*{Modulations in Speech}
 
@@ -255,8 +256,8 @@ In today's digital mastering processes, professionally produced music consists o
   In this stage, a panning is added to position the source images spatially.
   \item[3) Mastered Source Image:] for each of the images, an additional mastering step is being applied.
   At this stage, effects such as artificial reverberation are added.
-  \item[4) Raw Mix:] the linear sum of all source images are mixed for the final output.
-  \item[5: Mastered Mix:] again, an additional mastering is applied.
+  \item[4) Raw Mix:] the linear sum of all source images are mixed.
+  \item[5: Mastered Mix:] Optionally, further mastering is applied.
   Often, this step involves non-linear processing such as dynamic range compression.
 \end{description}
 
@@ -311,7 +312,7 @@ This why many proposed methods rely on additional information such as the acoust
 The separation of music into two parts, the foreground lead (mostly the vocals) and the background accompaniment (drums, bass, other), is one of the most relevant scenarios in music separation with a large number of applications such as mixing karaoke or acapella tracks.
 Vocal Accompaniment separation has specific issues and assumptions when compared to other separation scenarios like speech.
 Many music separation methods often rely on knowledge about the mixing process as made in Table~\ref{tab:mixing_models}.
-While there exist many source separation methods that aim to extract the actual raw audio recording (Step 1 in  Table~\ref{tab:mixing_models}), often it is sufficient to extract the source images from the raw mixture.
+While there exist many source separation methods that aim to extract the actual raw audio recording, often it is sufficient to extract the source images from the raw mixture.
 In a live recording, this results in inverting the process of convolution as well.
 Separation of convoluted mixtures is a very active field in source separation described in~\cite{pedersen07}.
 In the context of music separation, however, this becomes less relevant as today's recording and studio mixing environment are mostly digital.

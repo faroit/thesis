@@ -147,9 +147,9 @@ Like in~\cite{barker13} we choose not to address the problem of clustering the c
 Instead of processing mixtures in a $A-B-AB$ or $A-AB-B$ paradigm we went for a supervised learning phase where we had access to the original source individually.
 In this \emph{oracle} supervised approach for each of the sources we then learned the spectral, temporal components and concatenated them. The learned coefficients were then used to initialize the final factorization process. This way we can achieve the upper bound separation result.
 
-The test set was processed by two algorithms: standard NMF and the proposed F0 variation informed NMF (PVI-NMF). The factorizations for NMF were computed by minimizing the $\beta = 1$ divergence (Kullback-Leibler divergence).
+The test set was processed by two algorithms: standard NMF and the proposed $F_0$ variation informed NMF (PVI-NMF). The factorizations for NMF were computed by minimizing the $\beta = 1$ divergence (Kullback-Leibler divergence).
 We choose to calculate results with $K=2$ and $K=4$.
-The F0 variation estimator is based on a method that was proposed by B\"ackstr\"om in 2009~\cite{backstrom09} with a subsequent post-processing to ensure the smoothness of the mapping. \\
+The $F_0$ variation estimator is based on a method that was proposed by B\"ackstr\"om in 2009~\cite{backstrom09} with a subsequent post-processing to ensure the smoothness of the mapping. \\
 
 Both algorithms did perform on the same filter bank output and with the same sample rate. The NMF approach did use a 2048 STFT with 512 samples hop size.
 All methods use soft masking/wiener filtering for the actual synthesis.
@@ -182,14 +182,14 @@ The results have also been evaluated and confirmed subjectively by informal list
 \section{Extending $F_0$ Informed Separation}%
 \label{sec:extendingf0}
 
-In the previous section, we showed the effectiveness of a \(F0\) variation informed separation system on our constrained unison source separation scenario.
+In the previous section, we showed the effectiveness of a \(F_0\) variation informed separation system on our constrained unison source separation scenario.
 In the following section, we show how the method can be extended to the scenario of separating the vocals/lead from the accompaniment by using predominant melody estimation as depicted in Figure~\ref{fig:methods_harmonicity}.
 
-In this extension, we want to show how the \(F0\) variation informed separation system can be used in combination with a predominant melody estimation algorithm to extract singing voice from music.
+In this extension, we want to show how the \(F_0\) variation informed separation system can be used in combination with a predominant melody estimation algorithm to extract singing voice from music.
 
 \par
 In a first step, the ``Melodia'' algorithm~\cite{salamon12} is used to obtain an estimate of the predominant melody from the mixture.
-The mixture is then time warped based on the fundamental frequency of the melody so that it’s predominant solo part is nearly constant in \(F0\). The extraction is then carried out in the time domain using efficient comb filtering.
+The mixture is then time warped based on the fundamental frequency of the melody so that it’s predominant solo part is nearly constant in \(F_0\). The extraction is then carried out in the time domain using efficient comb filtering.
 
 \begin{figure}[htbp]
     \centering
@@ -200,7 +200,7 @@ The mixture is then time warped based on the fundamental frequency of the melody
 
 \subsection{Predominant Melody Estimation}
 
-The first step to extend the F0 variation informed separation system is to obtain a warp contour that follows the predominant melody by means of extraction from the mixture (blind) or by human annotation (informed).
+The first step to extend the $F_0$ variation informed separation system is to obtain a warp contour that follows the predominant melody by means of extraction from the mixture (blind) or by human annotation (informed).
 In the following, we want to focus on how to obtain such a warp contour using a predominant melody algorithm.\par
 
 Estimating the fundamental frequency of one single source from a mixture of several sources is considered a very difficult task~\cite{klapuri08}.
@@ -279,7 +279,7 @@ A stereo signal is produced by using a signal filtering both channels individual
 \includegraphics[width=0.9\textwidth]{Chapters/05_Separation_Known/warp-demo/reference.pdf} \\
 (f) Ground Truth Vocals  \\[6pt]
 \end{tabular}
-\caption{Next steps of a F0 variation informed separation of the audio track \emph{Tamy - Que Pena Tanto Fa} from the (MASS) dataset~\cite{MTGMASSdb}. (d)  shows the mixtures, warped by (c) from Figure~\ref{fig:warp_sisec_demoa}, (e) the extracted vocal signal after comb filtering and inverse warping. For comparison, (e) shows the original vocal reference.}%
+\caption{Next steps of a $F_0$ variation informed separation of the audio track \emph{Tamy - Que Pena Tanto Fa} from the (MASS) dataset~\cite{MTGMASSdb}. (d)  shows the mixtures, warped by (c) from Figure~\ref{fig:warp_sisec_demoa}, (e) the extracted vocal signal after comb filtering and inverse warping. For comparison, (e) shows the original vocal reference.}%
 \label{fig:warp_sisec_demob}
 \end{figure}
 
@@ -369,7 +369,7 @@ Nevertheless, when using YIN or other block-based algorithms, a frame length and
 Especially when the signal is polyphonic, the robustness is the most crucial aspect of a pitch estimator. In work from Mauch et al.~\cite{mauch14}, the robustness of the \textsc{YIN} algorithm is improved by probabilistic post-processing. However, besides robustness, there is a variety of use cases requiring high accuracy as well as high temporal resolution. Application in parametric audio coding~\cite{purnhagen00} requires the parameterization of pitch bends and vibratos. Furthermore, source separation algorithms aiming at the extraction of harmonic sources from the mixture can make use of an instantaneous $F_0$ estimate~\cite{virtanen08, stoter14}. There are already contributions addressing the improvement of accuracy of $F_0$ estimates such as~\cite{medan91} which introduced a non-integer similarity model or~\cite{christensen07} which belongs to the group of parametric pitch estimators.
 \par
 We propose to improve the output of already existing algorithms in terms of temporal resolution as well as accuracy by iterative time warping. Two other contributions already make use of time warping in the context of pitch estimation. Resch et al.~\cite{resch07} proposed an instantaneous pitch estimation technique which optimizes a warping function that would lead to a constant pitch signal. Their optimization framework minimizes a cost function specifically targeted for speech signals. Azarov et al.\ have introduced an improved version of RAPT (called iRAPT1 and iRAPT2)~\cite{azarov12}.
-Our main contribution is a time warping based refinement method that is applicable to any F0 estimate. Our method emphasizes the strengths of different estimators and thus can even help to improve their robustness.
+Our main contribution is a time warping based refinement method that is applicable to any $F_0$ estimate. Our method emphasizes the strengths of different estimators and thus can even help to improve their robustness.
 
 Depending on the algorithm and application, there are several reasons why $F_0$ estimators deliver a less than ideal performance. When the signal tested is not tonal --- like in unvoiced parts of speech --- a proper estimation is impossible. If the estimator is optimized on purely harmonic signals, inharmonicity or frequency jitter of the input signal will increase the estimation error. Many of these reasons will lead to errors on the coarse level of the estimate (like octave jumps). The fine level accuracy is mostly influenced by parameters like time and/or frequency resolution of the estimator. A signal containing rapid changes of the frequency or modulations like ``vibrato'' is, therefore, more affected regarding fine level error. To obtain a more accurate estimate, we propose to time warp the signal by using the coarse level estimate towards a more constant pitch. The underlying assumption here is that pitch estimators generally perform better the more constant the pitch is.
 
@@ -440,7 +440,7 @@ For the evaluation of the proposed $F_0$ refinement, we test the refinement algo
 \textbf{YIN}~\cite{decheveigne02} is used as an FFT based implementation~\cite{bogdanov13}. The confidence measure is thresholded for values lower than 0.6 on the speech recordings. \textbf{iRAPT1,2}~\cite{azarov12} are improved versions of the RAPT framework. We use the author's MATLAB implementation of the iRAPT1 and iRAPT2 algorithms.\ iRAPT2 is a refinement method that is comparable to our proposed method. To evaluate the results, we apply our refinement to iRAPT1 and compare it with the refinement produced by iRAPT2. $c[n] < 0.7$ is used for thresholding speech recordings. \textbf{MELODIA}~\cite{salamon12} is not designed to be an $F_0$ estimator but is able to extract the \emph{predominant} melody in a polyphonic mixture. We increase the bin resolution to 0.5 semitones, to increase the accuracy. We used the \textsc{Essentia} implementation. For thresholding, we use the built-in voiced/unvoiced detection.
 For YIN and MELODIA, we evaluate on a frame length of 64~ms and a hop size of 16~ms. For iRAPT1 and iRAPT2  we use the fixed frame length parameters of the author's implementation.
 \par
-We use the established evaluation measures \textsc{Gross Pitch Error} (GPE) and \textsc{Mean Fine Pitch Error} (MFPE)~\cite{azarov12}. We focus on MFPE in our results, measuring the absolute deviation of $F0_{\mathrm{true}}$ and the $F_0$ estimate per sample.
+We use the established evaluation measures \textsc{Gross Pitch Error} (GPE) and \textsc{Mean Fine Pitch Error} (MFPE)~\cite{azarov12}. We focus on MFPE in our results, measuring the absolute deviation of $F_0{\mathrm{true}}$ and the $F_0$ estimate per sample.
 As mentioned in~\cite{resch07}, evaluating the accuracy of $F_0$ estimates is challenging because of the lack of ground truth datasets annotated on a time scale with such a high resolution. Most of the available audio test data sets are not suitable because the $F_0$ annotation is only available with low time resolutions. By using such a dataset there is a risk that the refined $F_0$ estimate is higher in MFPE. This is because the refined estimates show more of the fine structure deviating from the coarse annotation which then is considered as piecewise constant. To address this issue, we first present the evaluation results on synthetic data. To verify our synthetic results, we present the results of speech data annotated on 10~ms frames derived from laryngograph signals. We did only evaluate and process the voiced parts of the signals as indicated in the provided annotation labels. Also note that since we focus on the MFPE, all segments where one of the estimators results in a GPE $> 0$ are excluded from the results, hence the GPE for all of our results is 0. The proposed refinement has been processed with one iteration ($k=1$). Experiments showed that more iterations only marginally improve the results.
 
 Since the proposed refinement algorithm repeatedly applies pitch estimation, the performance of these estimators on the time-warped (nearly constant) signal is of interest. Therefore, we included the results of an oracle refinement where the first estimate is set to a ground truth pitch. Additionally, this also does reveal information about the quality of the ground truth annotation itself.
@@ -498,19 +498,19 @@ More specifically, the mixture is warped based on the fundamental frequency esti
 In the warped time domain the frequency modulation of the desired source is removed. 
 In our first study, we evaluated this method of separating single note from instruments playing in unison.
 For the actual separation, we used a standard NMF separation approach.
-The results of 45 mixtures have been evaluated by using the PEASS toolbox and the scores indicated an improvement in favor of the F0 variation informed NMF compared to the standard NMF.
+The results of 45 mixtures have been evaluated by using the PEASS toolbox and the scores indicated an improvement in favor of the $F_0$ variation informed NMF compared to the standard NMF.
 \par
 In order to evaluate if our method can be applied on a more realistic scenario, we proposed an extension of the method for the scenario of vocal/accompaniment separation.
-We used a state-of-the-art melody estimation technique to extract the \(F0\) variation of the vocal source to apply warping to the mixture.
+We used a state-of-the-art melody estimation technique to extract the \(F_0\) variation of the vocal source to apply warping to the mixture.
 We performed separation in the time domain using a comb filter to further reduce artifacts.
 The method relies on a robust and accurate estimate of the fundamental frequency as well as vocal activity estimate.
 \par
 To address the latter, the method was extended to include a deep neural network based vocal activity detector.
 This helped to exclude non-vocal parts from the warping and in turn, improved the vocal separation performance by 1.5~\si{\decibel} SDR.
 \par
-In order to improve the accuracy of \(F0\) estimates, we proposed a method, based on the same time warping principle, in the last section of this chapter. 
-The proposed method applies time warping iteratively based on an initial \(F0\) estimate, assuming that more iterations remove more variation, thus supports the \(F0\) estimation process in the next iteration.
-This idea can be applied to any \(F0\) estimator as a post-processing step.
+In order to improve the accuracy of \(F_0\) estimates, we proposed a method, based on the same time warping principle, in the last section of this chapter. 
+The proposed method applies time warping iteratively based on an initial \(F_0\) estimate, assuming that more iterations remove more variation, thus supports the \(F_0\) estimation process in the next iteration.
+This idea can be applied to any \(F_0\) estimator as a post-processing step.
 Future work could include an optimization criterion to control the number of iterations, however, we have to emphasize that improvements in accuracy are difficult to evaluate on real datasets~\cite{stoeter15acm}.
 \par
 To conclude, time warping based separation can work well on some signals but requires further handcrafted tuning to yield good results.

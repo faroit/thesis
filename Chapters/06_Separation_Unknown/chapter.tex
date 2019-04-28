@@ -1,8 +1,8 @@
 \chapter{Separation by Unknown Modulation}
 \label{cha:unknown}
 
-In the previous chapter, methods were proposed to separate highly overlapped signals, informed by an estimate of fundamental frequency \(F0\) variation of the source to be separated.
-Even though we showed that \(F0\)  variation could be estimated from the mixture, often, it is not easy to obtain in practice.
+In the previous chapter, methods were proposed to separate highly overlapped signals, informed by an estimate of fundamental frequency \(F_0\) variation of the source to be separated.
+Even though we showed that \(F_0\)  variation could be estimated from the mixture, often, it is not easy to obtain in practice.
 In contrast, in this chapter, we will introduce separation methods which do not incorporate prior knowledge about the modulation. 
 In fact, some of the methods operate blindly, meaning they do not require any further information about the sources except for the number of sources to be separated.
 \par
@@ -175,7 +175,7 @@ It gives a smoother activation matrix and is able to generate the output with th
 \label{fig:am_ntf}
 \end{figure}
 \par
-A comparison of the modulation tensor approach compared to the \(F0\) variation informed method on the unison separation scenario has been carried out in our work published in~\cite{stoeter14}.
+A comparison of the modulation tensor approach compared to the \(F_0\) variation informed method on the unison separation scenario has been carried out in our work published in~\cite{stoeter14}.
 Results indicated that the modulation tensor factorization generally performs worse than informed methods.
 This is because it only considers amplitude modulations even though frequency modulations are the
 the actual source of the modulation.
@@ -626,7 +626,7 @@ The objective scores for my proposed methods were obtained using BSSEval and are
 
 \begin{figure*}[htbp]
     \includegraphics[width=1.1\textwidth]{Chapters/06_Separation_Unknown/figures/evaluation.pdf}
-    \caption{BSSEval scores for the vocals and accompaniment estimates for SiSEC 2016 on the DSD100 dataset. Results are for both test set (Test) as well as the training dataset (Dev). Scores are sorted according the vocal median SDR and grouped by supervised and unsupervised methods. The proposed systems are \emph{STO1}, based on GFT-GFT and \emph{STO2}, based on CFT-CFT.}
+    \caption{BSSEval scores for the vocals and accompaniment estimates for SiSEC 2016 on the DSD100 dataset. Results are for both test set (Test) as well as the training dataset (Dev). Scores are sorted according the vocal median SDR and grouped by supervised and unsupervised methods. The proposed systems are \emph{STO1}, based on GFT-GFT and \emph{STO2}, based on CFT-CFT. Dashed lines indicate respective group medians.}
     \label{fig:eval}
 \end{figure*}
 
