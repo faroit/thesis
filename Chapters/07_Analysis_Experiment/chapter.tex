@@ -27,7 +27,7 @@ And surprisingly, as shown in~\cite{kashino96, kawashima15}, humans share the sa
 \par
 In this chapter, we present two experiments contributing to this interesting field of research.
 The first experiment (Section~\ref{sec:ismir}) addresses the question if the number of instruments in polyphonic music is subject to the same limitations.
-In the second contribution (Section~\ref{sec:ismir}) the aim is to verify the findings of an earlier experiment in~\cite{kawashima15} and increase the number of stimuli to be used for comparison of machine learning based count estimations methods
+In the second contribution (Section~\ref{sec:count_experiment}) the aim is to verify the findings of an earlier experiment in~\cite{kawashima15} and increase the number of stimuli to be used for comparison of machine learning based count estimations methods
 
 \section{Instrument Count Estimation}%
 \label{sec:ismir}
@@ -229,7 +229,7 @@ The model effects of the subset can be found in~\cite{stoeter13}.
         \Edge[label=$0.00$,style={color=red, line width = 2pt}](3N)(4M)
 
         \end{tikzpicture}
-        \caption{Pairwise comparison between the interaction of Musician/Non-Musician and the number of instruments (labeled in nodes). The costs between nodes indicate the mean differences between groups. The red/bold line indicates that is there is no significant difference at the $p=0.005$ level}
+        \caption{Pairwise comparison between the interaction of Musician/Non-Musician and the number of instruments (labeled in nodes). The costs between nodes indicate the mean differences between groups. The red/bold line indicates that is there is no significant difference at the $p=0.005$ level.}
         \label{fig:graph}
 \end{figure}
 The results indicate that the interaction of Musician$\times$Instruments is not significant on a $p=0.05$ level in general and a pairwise comparison test reveals two groups of equal probability. The pairwise comparisons are depicted in Figure~\ref{fig:graph}. The red vertex indicates there is no significant difference in the error probability for the group of musicians in items with four instruments compared to non-musicians in items of three instruments. Therefore a gap in the error probability of one instrument between those two groups becomes apparent.
@@ -409,9 +409,6 @@ Furthermore, for all stimuli (ranging from one to six instruments) we revealed t
 \par
 We then repeated this experiment in an open, uncontrolled environment with more than 1000 participants.
 To our knowledge, this was the first larger crowdsourced auditory experiment within the Signal Processing or MIR community.
-% TODO: ismir!
-Regarding the ability to estimate the number of instruments, the web experiment and the laboratory experiment share the same outcome: the probability to correctly estimate up to about three instruments is higher than 50\%.
-These results were surprising because many participants did not use professional audio equipment.
 In comparison to audio quality experiments like MUSHRA~\cite{recommendation2001MUSHRA}, we can, therefore, conclude that count estimation tasks are suitable for highly scalable crowd sourced listening experiments.
 \par
 In our second experiment, we reproduced an earlier study presented in~\cite{kawashima15} to estimate the maximum number of concurrent speakers in short audio mixtures, simulating a ``cocktail-party'' environment.

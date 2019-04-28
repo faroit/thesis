@@ -5,8 +5,8 @@ For many source separation methods it is common to assume that the spectral harm
 In turn, this assumption is exploited in methods such as non-negative matrix factorization (NMF) to approximate the mixture from a lower-rank decomposition in an unsupervised way.
 Still, in order to improve separation quality, researchers imposed additional constraints based on prior information about the sources in their algorithms~\cite{ozerov12}.
 The extent of such meta information very often depends on the availability of data.
-They proposed to incorporate the note pitch and onset information of the musical score, encoded in a MIDI file, synchronized to the audio, to improve the separation result.
 One example of an informed source separation systems is described by Ewert and M\"uller \cite{ewert12}.
+They proposed to incorporate the note pitch and onset information of the musical score, encoded in a MIDI file, synchronized to the audio, to improve the separation result.
 % end converted from dafx
 In the case of highly overlapped signals such as unison mixtures, the score is less useful since unison mixtures share the same note pitch.
 Instead, in this chapter, we want to evaluate the use of fundamental frequency estimates of the source to be extracted.
@@ -47,9 +47,9 @@ For example, vibrato rates vary across different instruments.
 In~\cite{macleod06} the vibrato width (frequency deviation) was found to be significantly different between violinists and violists performers.
 This can be exploited in source separation scenarios.
 \par
-However, in the case of a NMF, it lacks the ability to model time-varying frequencies (See details in Chapter~\ref{cha:unknown}).
+However, in the case of separation methods such as non-negative matrix factorization (NMF), it lacks the ability to model time-varying frequencies (See details in Chapter~\ref{cha:unknown}).
 Several extensions for NMF have been proposed to improve the decomposition quality.
-Hennequin et al. proposed in \cite{hennequin11} a frequency dependent activations matrices, whereas Smaragdis et al. developed a variant of the NMF in ~\cite{smaragdis08} which is invariant to frequency shifts.
+Hennequin et al. proposed in \cite{hennequin11} a frequency dependent activations matrices, whereas Smaragdis et al. developed a variant of the NMF in~\cite{smaragdis08} which is invariant to frequency shifts.
 Another approach is to model the spectral pattern changes by Markov chains \cite{nakano10}. All these approaches attempt to model the non-stationary effects within the decomposition model.
 In this work, instead, we propose a method that increases the stationarity of the signal in a preprocessing step and then use the standard separation like NMF for the decomposition.\\
 
@@ -223,7 +223,7 @@ In turn, we used the \emph{Melodia} algorithm, published by Salamon et al. in~\c
 \emph{Melodia} consists of four parts:
 \noindent\textbf{1)}: a time-frequency transformation is applied and spectral peaks are extracted.
 \textbf{2)}: these form the basis of a \emph{saliency} spectrogram that is computed using a weighted sum over all frequencies. This allows to emphasize the predominant/salient frequencies in the signal and is the core part of the \emph{Melodia} algorithm.
-\textbf{3)}: From the saliency map, again, peaks are extracted and then connected to a melody line. This already is a good starting point for the melody estimate but usually contains many false positives due to the noisiness of the saliency representation.
+\textbf{3)}: from the saliency map, again, peaks are extracted and then connected to a melody line. This already is a good starting point for the melody estimate but usually contains many false positives due to the noisiness of the saliency representation.
 \textbf{4)}: The melody line is post-processed using a Viterbi decoder.
 The purpose of it is to filter the contour by removing outliers, octave jumps and improves the smoothness of the contour using a number of heuristics.
 Usually, this step is sensitive to the overall length of the processed mixture and often, this step is computed in a semantically meaningful segment of the mixture like a full track or a refrain.
@@ -235,7 +235,7 @@ We applied \emph{Melodia} using the implementation in Essentia~\cite{bogdanov13}
 Once the predominant melody is obtained, the warp contour can be computed in the same way as described in Section~\ref{sub:time_warping} above.
 In the unison scenario, however, we were globally warping the signal using a continuous warp contour.
 In the case of full-length tracks many parts are unvoiced and apply time warping on these segments would degrade the separation quality.
-Therefore, we only applied the warping on voiced parts and leave the non-vocal parts unaltered.
+Therefore, we only applied the warping on voiced parts and left the non-vocal parts unaltered.
 In order to do this, we used the built-in voice activity detection from \emph{Melodia}.
 The full procedure is depicted in Figure~\ref{fig:warp_sisec_demoa} and Figure~\ref{fig:warp_sisec_demob}.
 For all continuously voiced segments, from the mixture (a), we compute the warp contour (c) from the melody segments (b).
@@ -289,7 +289,7 @@ A stereo signal is produced by using a signal filtering both channels individual
 The algorithm has been applied to the Mixing Secret Dataset 100 (MSD100) dataset, consisting of a total of 100 songs of different styles.
 The separation results were evaluated using BSSeval~\cite{fevotte05} and submitted to the SiSEC 2015 evaluation challenge~\cite{ono15}.
 The system was ranked in the last third of the participants and scored only slightly better than RPCA based methods~\cite{huang12}.
-The reason for this is that our proposed system highly depends on the melody estimation algorithm which in turns is based on the assumption that there exists a predominant melody in the mixture.
+The reason for this is that our proposed system highly depends on the melody estimation algorithm which, in turn, is based on the assumption that there exists a predominant melody in the mixture.
 Unfortunately, the newly created MSD100 dataset was not mixed using professional mastering, resulting in vocals that are below average in loudness.
 Due to their small energy, they were not detected as voiced by \emph{Melodia}, hence the warping was not applied. Also, in some cases the estimates were one octave off, producing severe artifacts due to extreme warping.\par
 On the positive side, the proposed method is of very low complexity.
