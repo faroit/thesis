@@ -257,12 +257,12 @@ In regression, $k$ is derived from an output distribution defined on the real li
 However, this comes with the additional difficulty of handling the fact that~$k$ is integer.
 % To circumvent it, we take $k$ as the rounding of a latent variable $f_{\boldsymbol{\theta}}\left(\mathbf{X}\right)\in\mathbb{R}$, and exploit the fact that rounding may be efficiently modeled as introducing white additive Gaussian noise, we may write:
 % \begin{equation}
-% k\sim\mathcal{N}\left(f_{\mathbf{\boldsymbol{\theta}}}\left(\mathbf{X}\right),\Delta\right),\label{eq:AWGN_model}
+% k\sim\mathcal{N}\left(f_{\boldsymbol{\theta}}\left(\mathbf{X}\right),\Delta\right),\label{eq:AWGN_model}
 % \end{equation}
-% where $\mathcal{N}$ is the Gaussian scalar distribution and $\Delta$ is the rounding noise variance, that is independent of any model parameters but only depends on the fact that $k$ is the integer closest to $f_{\mathbf{\boldsymbol{\theta}}}\left(\mathbf{X}\right)$.
+% where $\mathcal{N}$ is the Gaussian scalar distribution and $\Delta$ is the rounding noise variance, that is independent of any model parameters but only depends on the fact that $k$ is the integer closest to $f_{\boldsymbol{\theta}}\left(\mathbf{X}\right)$.
 
 The output distribution in this setting is assumed to be Gaussian and the associated cost function is the classical squared error.
-During inference and given the output~$f_{\mathbf{\boldsymbol{\theta}}}\left(\mathbf{X}\right)$ of the network, the best discrete value that is consistent with the model is simply the rounding operator $q = \left[\cdot\right]$.
+During inference and given the output~$f_{\boldsymbol{\theta}}\left(\mathbf{X}\right)$ of the network, the best discrete value that is consistent with the model is simply the rounding operator $q = \left[\cdot\right]$.
 
 Gaussian regression has achieved state-of-the-art count estimation performance in computer vision using deep learning frameworks~\cite{zhang15, marsden16, boominathan16}.
 
@@ -272,25 +272,25 @@ First, this strategy retains the advantage of the classification approach to dir
 Second, the model avoids the inconvenience of the classification approach to completely drop dependencies between classes.
 
 Due to these advantages, the Poisson distribution has been used in studies devising deep architectures for count estimation systems~\cite{Rezatofigh16}.
-For instance in~\cite{fallah09, chan09, Rezatofigh16}, it is shown that the number of objects in images can be well modeled by the Poisson distribution. Inspired by these previous works, we also consider the Poisson output distribution \(\mathcal{P}\left(k\mid f_{\mathbf{\boldsymbol{\theta}}}\left(\mathbf{X}\right)\right)\)
+For instance in~\cite{fallah09, chan09, Rezatofigh16}, it is shown that the number of objects in images can be well modeled by the Poisson distribution. Inspired by these previous works, we also consider the Poisson output distribution \(\mathcal{P}\left(k\mid f_{\boldsymbol{\theta}}\left(\mathbf{X}\right)\right)\)
 
 % \begin{equation}
-% p \left(k\mid f_{\boldsymbol{\theta}}\left(\mathbf{X}\right)\right)=\mathcal{P}\left(k\mid f_{\mathbf{\boldsymbol{\theta}}}\left(\mathbf{X}\right)\right),
+% p \left(k\mid f_{\boldsymbol{\theta}}\left(\mathbf{X}\right)\right)=\mathcal{P}\left(k\mid f_{\boldsymbol{\theta}}\left(\mathbf{X}\right)\right),
 % \end{equation}
 
 where $\mathcal{P}\left(\cdot\mid\lambda\right)$ denotes the Poisson distribution with scale parameter~$\lambda$.
 
-In that setup, the cost function at learning time is the Poisson negative log-likelihood and the deep architecture at test time provides the predicted scale parameter $f_{\mathbf{\boldsymbol{\theta}}}\left(\mathbf{X}\right)\in\mathbb{R}_+$, which summarizes the whole output distribution.
+In that setup, the cost function at learning time is the Poisson negative log-likelihood and the deep architecture at test time provides the predicted scale parameter $f_{\boldsymbol{\theta}}\left(\mathbf{X}\right)\in\mathbb{R}_+$, which summarizes the whole output distribution.
 
-As a decision function~$q$ in this setting, we considered several alternatives. A first option is to again resort to MAP estimation and pick the mode $\left[f_{\mathbf{\boldsymbol{\theta}}}\left(\mathbf{X}\right)\right]$ of the distribution as a point estimate. However, experiments showed that the posterior median yields better estimates, and is given by
+As a decision function~$q$ in this setting, we considered several alternatives. A first option is to again resort to MAP estimation and pick the mode $\left[f_{\boldsymbol{\theta}}\left(\mathbf{X}\right)\right]$ of the distribution as a point estimate. However, experiments showed that the posterior median yields better estimates, and is given by
 \begin{subequations}
 \begin{align}
-q\left(f_{\mathbf{\boldsymbol{\theta}}}\left(\mathbf{X}\right)\right) & =\underset{\hat{k}}{\text{argmin}}\sum_{k=0}^{\infty}\left|\hat{k}-k\right|\mathcal{P}\left(k\mid f_{\mathbf{\boldsymbol{\theta}}}\left(\mathbf{X}\right)\right)\\
- & =\text{median}\left(k\sim\mathcal{P}\left(f_{\mathbf{\boldsymbol{\theta}}}\left(\mathbf{X}\right)\right)\right)\\
- & \approx\left\lfloor f_{\mathbf{\boldsymbol{\theta}}}\left(\mathbf{X}\right)+\frac{1}{3}-\frac{0.02}{f_{\mathbf{\boldsymbol{\theta}}}\left(\mathbf{X}\right)}\right\rfloor, \label{eq:decision_function_poisson}
+q\left(f_{\boldsymbol{\theta}}\left(\mathbf{X}\right)\right) & =\underset{\hat{k}}{\text{argmin}}\sum_{k=0}^{\infty}\left|\hat{k}-k\right|\mathcal{P}\left(k\mid f_{\boldsymbol{\theta}}\left(\mathbf{X}\right)\right)\\
+ & =\text{median}\left(k\sim\mathcal{P}\left(f_{\boldsymbol{\theta}}\left(\mathbf{X}\right)\right)\right)\\
+ & \approx\left\lfloor f_{\boldsymbol{\theta}}\left(\mathbf{X}\right)+\frac{1}{3}-\frac{0.02}{f_{\boldsymbol{\theta}}\left(\mathbf{X}\right)}\right\rfloor, \label{eq:decision_function_poisson}
 \end{align}
 \end{subequations}
-where the last expression is an approximation of the median of a Poisson distributed random variable of scale parameter~$f_{\mathbf{\boldsymbol{\theta}}}\left(\mathbf{X}\right)$~\cite{Choi94}.
+where the last expression is an approximation of the median of a Poisson distributed random variable of scale parameter~$f_{\boldsymbol{\theta}}\left(\mathbf{X}\right)$~\cite{Choi94}.
 
 
 %!TEX root = ../stoeter_sourcecount.tex
