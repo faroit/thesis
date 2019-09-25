@@ -127,7 +127,7 @@ Instead of a slider UI-element, the interface only features plus and minus butto
 \label{fig:meanerror}
 \end{figure}
 
-The independent variable $I(i)$ is the number of instruments of one music item $i$ where in this case $I(i) \in \{1,2,...,6\}$. $R(i,s)$ is defined as the number of instruments that are perceived and counted by subject $s$ for music item $i$. The dependent variable is the derived from the main subject response as $\Delta(i,s) = I(i) - R(i,s)$ transformed into a binary scale:
+The independent variable $I(i)$ is the number of instruments of one music item $i$ where in this case $I(i) \in \{1,2,...,6\}$. $R(i,s)$ is defined as the number of instruments that are perceived and counted by subject $s$ for music item $i$. The dependent variable is then derived from the main subject response as $\Delta(i,s) = I(i) - R(i,s)$ transformed into a binary scale:
 \begin{align}%
 \label{eq:response}
     E(i,s)&=\begin{cases}
@@ -335,7 +335,7 @@ The ground truth output \(\cardinality \) for each sample is then computed from 
 \par
 In fact, our method to generate synthetic samples results in an average overlap for \(k=2\) of 85\% and for \(k=10\) of 55\% (based on 5s segments).
 This procedure is similar to~\cite{mesaros17} used to label the data.
-The Dataset is available for download~\cite{oss_libricount}.
+The dataset is available for download~\cite{oss_libricount}.
 
 \subsection{Experimental Setup}
 
@@ -412,7 +412,7 @@ To our knowledge, this was the first larger crowdsourced auditory experiment wit
 In comparison to audio quality experiments like MUSHRA~\cite{recommendation2001MUSHRA}, we can, therefore, conclude that count estimation tasks are suitable for highly scalable crowd sourced listening experiments.
 \par
 In our second experiment, we reproduced an earlier study presented in~\cite{kawashima15} to estimate the maximum number of concurrent speakers in short audio mixtures, simulating a ``cocktail-party'' environment.
-Our experiment went a step further with respect to the maximum amount of speakers to be estimated (up two \(k=10\)).
+Our experiment went a step further with respect to the maximum amount of speakers to be estimated (up to \(k=10\)).
 The results indicated almost no person was able to correctly estimate up to ten speakers.
 However, we also observed that even for more than seven speakers the mean response did further (but not linearly) increase.
 This indicates that humans are possibly interpolating some sort of a speech density to make up their decision.
