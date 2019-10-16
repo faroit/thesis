@@ -5,7 +5,7 @@ For many source separation methods it is common to assume that the spectral harm
 In turn, this assumption is exploited in methods such as non-negative matrix factorization (NMF) to approximate the mixture from a lower-rank decomposition in an unsupervised way.
 Still, in order to improve separation quality, researchers imposed additional constraints based on prior information about the sources in their algorithms~\cite{ozerov12}.
 The extent of such meta information very often depends on the availability of data.
-One example of an informed source separation systems is described by Ewert and M\"uller \cite{ewert12}.
+One example of an informed source separation system is described by Ewert and M\"uller \cite{ewert12}.
 They proposed to incorporate the note pitch and onset information of the musical score, encoded in a MIDI file, synchronized to the audio, to improve the separation result.
 % end converted from dafx
 In the case of highly overlapped signals such as unison mixtures, the score is less useful since unison mixtures share the same note pitch.
@@ -16,7 +16,6 @@ However, sinusoidal synthesis is known to suffer from ``a typical \textit{metall
 Alternative approaches, instead, are ``filtering out everything from the mixture that is not located close to the detected harmonics'' in order to exploit harmonicity.
 In the past, many related works focused on this paradigm, a procedure as it turned out to be a common task in source separation systems. 
 Before we present our proposed method in the next section, the following paragraphs from~\cite{rafii} (Section III~b), give a comprehensive overview of existing methods in this field:
-
 
 \begin{quote}
 ``E.g. Li and Wang proposed to use a vocal/non-vocal classifier and a predominant pitch detection algorithm \cite{li06, li07}. They first detected the singing voice by using a spectral change detector \cite{duxbury03} to partition the mixture into homogeneous portions, and GMMs on MFCCs to classify the portions as vocal or non-vocal. Then, they used the predominant pitch detection algorithm in~\cite{li05} to detect the pitch contours from the vocal portions, extending the multi-pitch tracking algorithm in~\cite{wu03}. Finally, they extracted the singing voice by decomposing the vocal portions into TF units and labeling them as singing or accompaniment dominant, extending the speech separation algorithm in \cite{hu02}.
@@ -49,7 +48,7 @@ This can be exploited in source separation scenarios.
 \par
 However, in the case of separation methods such as non-negative matrix factorization (NMF), it lacks the ability to model time-varying frequencies (See details in Chapter~\ref{cha:unknown}).
 Several extensions for NMF have been proposed to improve the decomposition quality.
-Hennequin et al. proposed in \cite{hennequin11} a frequency dependent activations matrices, whereas Smaragdis et al. developed a variant of the NMF in~\cite{smaragdis08} which is invariant to frequency shifts.
+Hennequin et al. proposed in \cite{hennequin11} a frequency dependent activation matrix, whereas Smaragdis et al. developed a variant of the NMF in~\cite{smaragdis08} which is invariant to frequency shifts.
 Another approach is to model the spectral pattern changes by Markov chains \cite{nakano10}. All these approaches attempt to model the non-stationary effects within the decomposition model.
 In this work, instead, we propose a method that increases the stationarity of the signal in a preprocessing step and then use the standard separation like NMF for the decomposition.\\
 
@@ -71,7 +70,7 @@ In this work, instead, we propose a method that increases the stationarity of th
     \path[draw,->, line width=0.4mm] ($(inputmeta.east) + (0.0 ,-0.6)$) -- ($(TW.west) + (-0.08 ,-0.2)$);
     \path[draw,->, line width=0.4mm] (TW) -- (output);
 \end{tikzpicture}
-\caption{Example of applying time warping to an input signal (bottom left) by using a frequency variation contour (top left) resulting in signal of constant fundamental frequency at the output (right).}
+\caption{Example of applying time warping to an input signal (bottom left) by using a frequency variation contour (top left) resulting in a signal of constant fundamental frequency at the output (right).}
 \label{fig:timewarptime}
 \end{figure}
 
@@ -149,15 +148,13 @@ In this \emph{oracle} supervised approach for each of the sources we then learne
 
 The test set was processed by two algorithms: standard NMF and the proposed $F_0$ variation informed NMF (PVI-NMF). The factorizations for NMF were computed by minimizing the $\beta = 1$ divergence (Kullback-Leibler divergence).
 We choose to calculate results with $K=2$ and $K=4$.
-The $F_0$ variation estimator is based on a method that was proposed by B\"ackstr\"om in 2009~\cite{backstrom09} with a subsequent post-processing to ensure the smoothness of the mapping. \\
+The $F_0$ variation estimator is based on a method that was proposed by B\"ackstr\"om in 2009~\cite{backstrom09} with a subsequent post-processing to ensure the smoothness of the mapping.\\
 
 Both algorithms did perform on the same filter bank output and with the same sample rate. The NMF approach did use a 2048 STFT with 512 samples hop size.
 All methods use soft masking/wiener filtering for the actual synthesis.
 
-The results were evaluated by using commonly used evaluation measures provided by the {PEASS} Toolbox~\cite{emiya11}. 
-
-The mean values of the PEASS evaluation are provided in Table~\ref{tab:results}. It can be seen that the SDR values give a different tendency than the OPS score, showing that the differences between both measures are substantial. Since unison mixtures are even very challenging for humans to segregate, we chose to focus on the psycho-acoustically weighted performance measures only. The results show a slightly better overall performance for the PVI-NMF.
-The results have also been evaluated and confirmed subjectively by informal listening. Additionally, we provide selected stimuli online on an accompanying webpage \footnote{\url{http://www.audiolabs-erlangen.de/resources/2014-DAFx-Unison/}}. In general, the PEASS scores give a good indication of quality. However, the artifacts that are introduced by the standard NMF synthesis seem to be not well reflected. One possible reason is that PEASS toolbox has not been tested on artifacts from unison mixtures. \\
+The results were evaluated by using commonly used evaluation measures provided by the {PEASS} Toolbox~\cite{emiya11} and mean values are provided in Table~\ref{tab:results}. It can be seen that the SDR values give a different tendency than the OPS score, showing that the differences between both measures are substantial. Since unison mixtures are even very challenging for humans to segregate, we chose to focus on the psycho-acoustically weighted performance measures only. The results show a slightly better overall performance for the PVI-NMF.
+The results have also been evaluated and confirmed subjectively by informal listening. Additionally, we provide selected stimuli online on an accompanying webpage \footnote{\url{http://www.audiolabs-erlangen.de/resources/2014-DAFx-Unison/}}. In general, the PEASS scores give a good indication of quality. However, the artifacts that are introduced by the standard NMF synthesis seem to be not well reflected. One possible reason is that the PEASS Toolbox has not been tested on artifacts from unison mixtures. \\
 
 \begin{table}
 \begin{center}
@@ -225,7 +222,7 @@ In turn, we used the \emph{Melodia} algorithm, published by Salamon et al. in~\c
 \textbf{2)}: these form the basis of a \emph{saliency} spectrogram that is computed using a weighted sum over all frequencies. This allows to emphasize the predominant/salient frequencies in the signal and is the core part of the \emph{Melodia} algorithm.
 \textbf{3)}: from the saliency map, again, peaks are extracted and then connected to a melody line. This already is a good starting point for the melody estimate but usually contains many false positives due to the noisiness of the saliency representation.
 \textbf{4)}: The melody line is post-processed using a Viterbi algorithm.
-The purpose of it is to filter the contour by removing outliers, octave jumps and improves the smoothness of the contour using a number of heuristics.
+The purpose of it is to filter the contour by removing outliers, octave jumps and to improve the smoothness of the contour using a number of heuristics.
 Usually, this step is sensitive to the overall length of the processed mixture and often, this step is computed in a semantically meaningful segment of the mixture like a full track or a refrain.
 \par
 We applied \emph{Melodia} using the implementation in \emph{Essentia}~\cite{bogdanov13} with the default parameters (sample rate 22050 Hz, hop size = 3 ms, window size=46 ms).
@@ -234,7 +231,7 @@ We applied \emph{Melodia} using the implementation in \emph{Essentia}~\cite{bogd
 
 Once the predominant melody is obtained, the warp contour can be computed in the same way as described in Section~\ref{sub:time_warping} above.
 In the unison scenario, however, we were globally warping the signal using a continuous warp contour.
-In the case of full-length tracks many parts are unvoiced and apply time warping on these segments would degrade the separation quality.
+In the case of full-length tracks many parts are unvoiced and applying time warping on these segments would degrade the separation quality.
 Therefore, we only applied the warping on voiced parts and left the non-vocal parts unaltered.
 In order to do this, we used the built-in voice activity detection from \emph{Melodia}.
 The full procedure is depicted in Figure~\ref{fig:warp_sisec_demoa} and Figure~\ref{fig:warp_sisec_demob}.
@@ -246,13 +243,13 @@ Therefore, we used an IIR Filter with the frequency response
   H(z) = \frac{1}{1 - 0.75z^{-P}},
 \end{equation}
 
-where \(P\) is refers to the constant (due to the time warping) pitch period in samples.
+where \(P\) refers to the constant (due to the time warping) pitch period in samples.
 In order to then extract the vocals, zero-phase filtering is applied.
 The extracted vocals were inverse warped to linear time (e) and the accompaniment signal is created by subtracting the estimated vocals from the mixture signals.
 Each excerpt is then linearly crossfaded into the unaltered, accompaniment/mixture using a 10ms window.
 To further reduce the complexity of the separation system, instead one comb filter for each excerpt, we modified the warping algorithm so that a user-defined target pitch, rounded to an integer, is used.
 Finally, the full signal is inverse warped and resampled to the same pitch, which then only requires a single comb filter to extract the signal.
-A stereo signal is produced by using a signal filtering both channels individually.
+A stereo signal is produced by filtering both channels individually.
 
 \begin{figure}
   \centering
@@ -321,7 +318,7 @@ In fact, the system reached a state-of-the-art accuracy of 91.5\% for classifyin
 %   \caption{Simpliefied Block diagram of a Long Short-Term Memory Network.}
 %   \label{fig:lstm_2}
 % \end{figure}
-The input of~\cite{Leglaive15} is a 80-dimensional feature vector consisting of harmonically and percussively enhanced STFT frames of the mixture as described in~\cite{ono08}.
+The input of~\cite{Leglaive15} is an 80-dimensional feature vector consisting of harmonically and percussively enhanced STFT frames of the mixture as described in~\cite{ono08}.
 The output of the network is a frame-wise integer, indicating the presence of \emph{voiced} or \emph{unvoiced} frames.
 We trained the network using a fixed number of frames from the DSD100 training dataset.
 The vocal activity labels were obtained from the dataset by analyzing the true vocals.
@@ -332,7 +329,7 @@ While the original network proposed in~\cite{Leglaive15} was framed as a classif
 This output gain is then multiplied with the mixture signal so that segments with less energy are reduced in volume instead of a boolean decision.
 In experiments, we found out that this helps the \emph{Melodia} algorithm to better detect vocal activity throughout an audio track and therefore yields in melody estimates with fewer errors.
 This DNN-optimized version of the algorithm was then compared (but not submitted) to the new the SiSEC 2016 dataset which was released in the meantime~\cite{liutkus17}.
-The results, depicted in Figure~\ref{fig:05_comparison_sto_stodnn} show that the DNN vocal activity detection improved the vocals SDR by 1.5~dB which is considered as a significant improvements.
+The results, depicted in Figure~\ref{fig:05_comparison_sto_stodnn} show that the DNN vocal activity detection improved the vocals SDR by 1.5~dB which is considered as a significant improvement.
 
 \begin{figure}
   \centering
@@ -350,7 +347,7 @@ The results, depicted in Figure~\ref{fig:05_comparison_sto_stodnn} show that the
 
 An informed system like the one we described in the previous section often has limitations due to the fact that the provided fundamental frequency variation estimate might not be accurate enough and therefore is subject to an upper limit.
 Further, it can be assumed that this upper bound is especially relevant for a warping based system that relies on an instantaneous estimation of the fundamental frequency.
-While we developed the framework of a $F_0$ variation informed separation, as presented in Section~\ref{sub:frequency_modulation} of this chapter, we found that we can utilize this to also optimize fundamental frequency estimators itself.
+While we developed the framework of a $F_0$ variation informed separation, as presented in Section~\ref{sub:frequency_modulation} of this chapter, we found that we can utilize this to also optimize fundamental frequency estimators themselves.
 \par
 An estimate of the fundamental frequency of a signal is required in applications of audio and speech signal processing.
 Some scenarios are targeted to extract the fundamental frequency of the predominant source~\cite{salamon12} in a mixture of other sources.
@@ -410,7 +407,7 @@ In our application, the warp map $w(t)$ is constructed in such a way that the in
 % where $N$ being the number of samples of the signal under consideration.
 % As stated above the full warp map $w(t)$ is then obtained by linearly interpolating $w[n]$. From the requirements for the mapping function it follows that $W[n]$ has to be greater than zero for all $n$. In the case of a perfect $F_0$ estimate, the signal warped with the resulting contour would have a constant $F_0$ equal to the average $\bar{W}$.
 
-In the scope of this work, the warping is applied globally over the full length of the signals under consideration. Here, in comparison to Section~\ref{sub:frequency_modulation}, we also consider an optional confidence measure $c[n]$ that can be incorporated for a processed version of the warping contour. This ensures that the warp contour has no discontinuities that result in additional artifacts after re-sampling. If the estimator does not provide such a measure, a separate voiced/unvoiced detection algorithm can be used. To obtain a warp contour $f[n]$ from an $F_0$ estimate we propose the following steps: \textbf{(A)} initialize the warp contour with $F_0$ estimate $f = \Pitch$, \textbf{(B)} find contour segments with high confidence, i.e. $c[n]$ exceeds a given threshold, \textbf{(C)} linearly connect the high confidence contour segments and \textbf{(D)} set start and end of warp contour to a constant value if confidence is below threshold. That way warping according to $F_0$ is applied in the regions of high confidence without significantly affecting the gaps in-between.
+In the scope of this work, the warping is applied globally over the full length of the signals under consideration. Here, in comparison to Section~\ref{sub:frequency_modulation}, we also consider an optional confidence measure $c[n]$ which can be incorporated for a processed version of the warping contour. This ensures that the warp contour has no discontinuities that result in additional artifacts after re-sampling. If the estimator does not provide such a measure, a separate voiced/unvoiced detection algorithm can be used. To obtain a warp contour $f[n]$ from an $F_0$ estimate we propose the following steps: \textbf{(A)} initialize the warp contour with $F_0$ estimate $f = \Pitch$, \textbf{(B)} find contour segments with high confidence, i.e. $c[n]$ exceeds a given threshold, \textbf{(C)} linearly connect the high confidence contour segments and \textbf{(D)} set start and end of warp contour to a constant value if confidence is below threshold. That way warping according to $F_0$ is applied in the regions of high confidence without significantly affecting the gaps in-between.
 \par
 To improve the accuracy of the $F_0$ estimate, time warping is applied to the input signal $x[n]$ based on $W$. The input signal is 128-times oversampled using sinc based interpolation filters.
 From $\breve{x}[n]$\footnote{Note, that $\breve{}$ indicates \emph{warped} time instead of \emph{linear} time.} a new $F_0$ estimate $\breve{\Pitch_1}[\nu]$ is being calculated as in step \textbf{(A)}. The first step therefore is similar to~\cite{resch07}. Additionally, a warped confidence measure $\breve{c}_1[\nu]$ can be used to convert $\breve{\Pitch_1}[\nu]$ into a warped \emph{warp contour} $\breve{W}_1[\nu]$. It is possible to linearly add $\breve{\Pitch_1}[\nu]$ to the first estimate for refinement, as it is done in~\cite{azarov12}. However for linear sweeps, the warped estimate is shifted in time. Thus an error is introduced which is even more distinct if the first $F_0$ estimate is error prone. We therefore propose a method to reduce this error:
@@ -441,7 +438,7 @@ For the evaluation of the proposed $F_0$ refinement, we test the refinement algo
 For YIN and MELODIA, we evaluate on a frame length of 64~ms and a hop size of 16~ms. For iRAPT1 and iRAPT2  we use the fixed frame length parameters of the author's implementation.
 \par
 We use the established evaluation measures \textsc{Gross Pitch Error} (GPE) and \textsc{Mean Fine Pitch Error} (MFPE)~\cite{azarov12}. We focus on MFPE in our results, measuring the absolute deviation of $F_0{\mathrm{true}}$ and the $F_0$ estimate per sample.
-As mentioned in~\cite{resch07}, evaluating the accuracy of $F_0$ estimates is challenging because of the lack of ground truth datasets annotated on a time scale with such a high resolution. Most of the available audio test data sets are not suitable because the $F_0$ annotation is only available with low time resolutions. By using such a dataset there is a risk that the refined $F_0$ estimate is higher in MFPE. This is because the refined estimates show more of the fine structure deviating from the coarse annotation which then is considered as piecewise constant. To address this issue, we first present the evaluation results on synthetic data. To verify our synthetic results, we present the results of speech data annotated on 10~ms frames derived from laryngograph signals. We did only evaluate and process the voiced parts of the signals as indicated in the provided annotation labels. Also note that since we focus on the MFPE, all segments where one of the estimators results in a GPE $> 0$ are excluded from the results, hence the GPE for all of our results is 0. The proposed refinement has been processed with one iteration ($k=1$). Experiments showed that more iterations only marginally improve the results.
+As mentioned in~\cite{resch07}, evaluating the accuracy of $F_0$ estimates is challenging because of the lack of ground truth datasets annotated on a time scale with such a high resolution. Most of the available audio test data sets are not suitable because the $F_0$ annotation is only available with low time resolutions. By using such a dataset there is a risk that the refined $F_0$ estimate is higher in MFPE. This is because the refined estimates show more of the fine structure deviating from the coarse annotation which then is considered as piecewise constant. To address this issue, we first present the evaluation results on synthetic data. To verify our synthetic results, we present the results of speech data annotated on 10~ms frames derived from laryngograph signals. We did only evaluate and process the voiced parts of the signals as indicated in the provided annotation labels. Also note that since we focus on the MFPE, all segments where one of the estimators results in a GPE $> 0$ are excluded from the results, hence the GPE for all of our results is $0$. The proposed refinement has been processed with one iteration ($k=1$). Experiments showed that more iterations only marginally improve the results.
 
 Since the proposed refinement algorithm repeatedly applies pitch estimation, the performance of these estimators on the time-warped (nearly constant) signal is of interest. Therefore, we included the results of an oracle refinement where the first estimate is set to a ground truth pitch. Additionally, this also does reveal information about the quality of the ground truth annotation itself.
 
@@ -450,7 +447,7 @@ Since the proposed refinement algorithm repeatedly applies pitch estimation, the
 
 To generate synthetic test data we use pitch label annotations of the PTDB-TUG speech data set~\cite{pirker11}. We synthesize the melody or voice using a simple sinusoidal signal model. To get accurate ground truth data, the pitch annotations were up-sampled to audio rate by using linear interpolation for the PTDB-TUG. Similar to~\cite{mauch14}, we then synthesized the data using cosine based oscillators adding 10 harmonics to each signal output.
 The test set has been rendered at 16 kHz. The complete PTDB-TUG set results in almost 10 hours of input signal data.
-We present the results of the synthetic data as box plots in Figure~\ref{fig:ptdbtug_synth} grouped by the estimator. It shows that all estimators benefit from the refinement in terms of MFPE. The iRAPT1 estimator shows the best improvement of \ptdbtugsynthiRAPTIMPROMFPE \% in MFPE. As expected, the Oracle Refinement is almost at 0 MFPE.
+We present the results of the synthetic data as box plots in Figure~\ref{fig:ptdbtug_synth} grouped by the estimator. It shows that all estimators benefit from the refinement in terms of MFPE. The iRAPT1 estimator shows the best improvement of \ptdbtugsynthiRAPTIMPROMFPE \% in MFPE. As expected, the Oracle Refinement is almost at $0$ MFPE.
 
 \begin{figure}[t!]
 \centering

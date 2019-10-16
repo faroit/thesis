@@ -127,7 +127,7 @@ The value observed at time instant~\(n\) for the mixture is given by~$x_n$ and f
 The mixture then results in
 %
 \begin{equation}
-  x_n = \sum_{l=1}^{L}{s_{nl}} \; \forall n \in \mathbb{Z}^N.
+  x_n = \sum_{l=1}^{L}{s_{nl}} \;  n \in \{ 1,\ldots, N \}.
   \label{eq:mixing_model}
 \end{equation}
 %
@@ -150,7 +150,7 @@ k=\underset{n}{\max}\left(\sum_{l = 1}^{L} v_{nl}\right) \; n \in \{ 1,\ldots, N
 As can be seen, our proposed task of estimating $k\leq L$, is more closely related to source separation whereas the estimation of \(L\) is more useful for tasks where speakers do not overlap (see Section~\ref{sub:count_problemstatement}).
 For instance, three non-overlapping speakers would result in \(L = 3\) and \(\cardinality = 1\).
 It should be noted that at short time scales both task definitions provide the same outcome because on such a time scale the speaker configuration usually does not change. The problem arises for long-term recordings (e.g. larger than ten seconds) which are not considered in this work.
-In any case, we want to emphasize that in all experiments presented in this Chapter, we made sure that for all audio segments $L = k$.
+In any case, we want to emphasize that in all experiments presented in this Chapter, we made sure that for all audio segments $k = L$.
 \par
 In the remainder of this chapter, we assume that no additional prior information about the speakers is given to the system except possibly the maximum number of concurrent speakers~$k_{\max}$, that is application-dependent and represents an upper bound for the estimation.
 
@@ -634,7 +634,7 @@ The remaining input representations are identical to those listed in~\cite{stoet
 \noindent\textbf{1) STFT}: magnitude of the short-time Fourier transform computed using Hann-windows.
 A frame length of 25~ms has been used.
 The resulting input is \(X \in \mathbb{R}^{500 \times 201}\).\\
-\textbf{2) LOGSTFT}: logarithmically scaled magnitudes from STFT representation using \(\log(1 + STFT)\).
+\textbf{2) STFTLOG}: logarithmically scaled magnitudes from STFT representation using \(\log(1 + STFT)\).
 The resulting input is \(X \in \mathbb{R}^{500 \times 201}\).\\
 \textbf{3) MEL}: compute mapping from the STFT output directly onto Mel basis using 40 triangular filters.
 The resulting input is \(X \in \mathbb{R}^{500 \times 40}\).
@@ -721,11 +721,11 @@ which is then averaged across the classes, i.e.,
 To find the best parameters we performed training and evaluation for different input representations and output distributions (c.f. \cite{stoeter17}) as well as all proposed architectures resulting in 135 models.
 On average each model was trained for 25 epochs before early stopping was engaged.
 We present the results filtered by the three factors (Architecture, Input and Output) in Fig.~\ref{fig:fixed-gain-results}.
-One can see that the overall trend of the count error in MAE is similar regardless of the parametrization: all models are able to reliably distinguish between \(k=0\) and \(k=1\), followed by a nearly linear increase in MAE between \(k=\{1, 2\dots7\}\).
+One can see that the overall trend of the count error in MAE is similar regardless of the parametrization: all models are able to reliably distinguish between \(k=0\) and \(k=1\), followed by a nearly linear increase in MAE for \(k=\{1, 2, \dots, 7\}\).
 For \(k > 7\) it can be seen that the classification type models have learned the maximum of \(k\) across the dataset, hence the prediction error decreases when \(k\) reaches its maximum.
 This is because classification based models intrinsically have access to the maximum number of sources determined by the output vector dimensionality.
 Furthermore, one can see that all three factors have only little effect on the overall performance of the model, which is especially the case for small \(k\).
-As indicated by Fig.~\ref{fig:ssec:exp_fixed_gains/A}, choosing linear STFT as input representation generally results in a better performance compared to MEL and even LOGSTFT.
+As indicated by Fig.~\ref{fig:ssec:exp_fixed_gains/A}, choosing linear STFT as input representation generally results in a better performance compared to MEL and even STFTLOG.
 Concerning the output distribution, a similar observation can be made about classification which outperforms Poisson regression and Gaussian regression, as indicated by Fig.~\ref{fig:ssec:exp_fixed_gains/B}.
 In Fig.~\ref{fig:ssec:exp_fixed_gains/C} the performance of our proposed architectures are compared:
 while CNN and CRNN are close, both of them perform better than full frequency band F-CNN and F-CRNN models as well as the recurrent based architecture, proposed in~\cite{stoeter17}.
@@ -869,7 +869,7 @@ In a more realistic scenario, speakers often differ in volume between utterances
 We simulate this by introducing gain factors between 0.5 and 2.0, randomly applied to the sources, hence resulting in a deviation of $6~dB$ compared to the reference where all speakers are mixed to have equal power.
 We applied this variation only to the test data to evaluate how models generalize to this updated condition.
 The results of this experiment are presented in Table~\ref{tab:expgainreverb}.
-\textbf{MEAN} corresponds to the case when \(\cardinality = 5\) is predicted for all test samples.
+\textbf{MEAN} corresponds to a ``dummy'' estimator always predicting \(\cardinality = 5\) for all test samples.
 Our results indicate that augmenting the mixture gains does have an impact on performance, for both, our proposed CRNN model as well as the baseline methods.
 For example, for the CRNN model the performance drops by 60\% from 0.27 MAE to 0.43 MAE on the \emph{LIBRI Speech} test set, which is still about 40\% better than the second best-performing method \emph{SVR} which drops from 0.58 MAE to 0.61 MAE.\@
 
@@ -899,7 +899,7 @@ These results suggest that the trained model is speaker and language independent
 % * --> Significant Performance Drop (diff 2.0 MAE)
 % * Retrained using train room: [3, 4, 2] and valid room: [4, 5, 3]
 % * Performance back to (0.6 MAE)
-Different acoustical conditions such as increased reverberation time were shown~\cite{Pasha17_reverb} to have a large effect in speaker count estimation.
+Different acoustical conditions such as increased reverberation time were shown to have a large effect in speaker count estimation~\cite{Pasha17_reverb}.
 To analyze this effect, different acoustic conditions were simulated by generating the room impulse responses using the image method~\cite{allen79, habets16}.
 For this experiment we set up an acoustical room with dimension ($3.5~\mbox{m} \times 4.5~\mbox{m} \times 2.5~\mbox{m}$)
 The microphone was positioned at (1m, 1m, 1m).
@@ -948,9 +948,8 @@ However, if instead of the count estimation MAE we compute the accuracy to detec
 \label{ssec:listening_experiment}
 % * Reference existing listening tests which report the same thing
 % * Are we really doing it? We can decide on this once the first full draft is ready.
-To compare the results of our trained CRNN on our synthesized dataset to human performance, we chose to compare the machine model against the experiments made in~\cite{kawashima15, kashino96} and our own as described in Section~\ref{sec:count_experiment}.
-% The results of our lab-based experiments are shown in Figure~\ref{fig:experiment}.
-
+We chose to compare our trained CRNN against human performance using the experiments made in~\cite{kawashima15, kashino96} and our own as described in Section~\ref{sec:count_experiment}.
+The results are shown in Figure~\ref{fig:experiment}.
  % Kawashima et al.\ found in extensive experiments using Japanese speech samples, that participants were able to correctly estimate up to three simultaneously active speakers without using any spatial cues.
  % We conducted our own study using the simulated data from the \emph{LIBRI Speech} (power normalized) set mentioned earlier in Section~\ref{ssec:corpus}.
  % We therefore randomly selected 10 samples for each \(\cardinality \in [0, \ldots, 10]\), resulting in 100 mixtures of 5~seconds duration each.
@@ -990,12 +989,12 @@ To compare the results of our trained CRNN on our synthesized dataset to human p
 \label{fig:convoutputs}
 \end{figure}
 % Select best-performing system (CRNN, Classification, STFT) and analyse how it achieves the performance.
-In this section, we focus on the problem of interpreting the strategy undergone by this system for successful estimating counts.
+In this section, we focus on the problem of interpreting the strategy undergone by this system for successfully estimating counts.
 
 \subsection{Saliency Maps}
 We first conducted a visual analysis based on salience map representations~\cite{simonyan13}.
-% taken from https://github.com/Lasagne/Recipes/blob/master/examples/Saliency%20Maps%20and%20Guided%20Backpropagation.ipynb
-In the deep learning context, saliency maps are visualizations that are able to show which specific input elements a neural network used for a particular prediction. This allows an object classifier to be used for object localization or in the case of audio, spectrograms, which time-frequency bins are most relevant.
+In the deep learning context, saliency maps are visualizations that are able to show which specific input elements are important given a specific output prediction. In vision, this allows to show which pixels were most relevant to make up the decision to activate a specific output class. 
+In the case of audio it can highlight which time-frequency bins in a spectrogram are most relevant.
 The common idea is to compute the gradient of the model's prediction with respect to the input, holding the weights fixed. This determines which input elements need to be changed the least to affect the prediction the most.
 \par
 In this work, we used guided backpropagation, first introduced in~\cite{Springenberg14} and successfully deployed in~\cite{schluter16} to compute a saliency map for singing voice detection.
@@ -1044,7 +1043,7 @@ From the remaining two groups \emph{underestimation} and \emph{correct} response
 For these samples we computed an average speaking rate of \(3.40\) syllables per second and a standard deviation of \(0.2\).\par
 
 We chose a Generalized Linear Model (GLM) for the statistical test, as described in~\cite{jaeger08}.
-This allows us model the results with a binary logit regression model that turns the mean of E into a binomial distributed probability modeled by log linear values: \(\mbox{logit}(E) \sim \mbox{Intercept} + \beta \cdot{\mbox{Speaking Rate}}\).
+This allows us model the results with a binary logit regression model that turns the mean of E into a binomially distributed probability modeled by log linear values: \(\mbox{logit}(E) \sim \mbox{Intercept} + \beta \cdot{\mbox{Speaking Rate}}\).
 \begin{table}[t]
 \begin{center}
 \begin{tabular}{lcccc}
@@ -1063,7 +1062,7 @@ The results of our test are shown in Table~\ref{tab:logit} and indicate the spea
 To better understand the effect of our predictor, we computed an odds ratio \(\exp(\mbox{speaking rate}) = 0.28\).\par
 This indicates that a decrease in speaking rate of 1 syllable per second will increase the likeliness of an underestimation error by 28 percent.
 Even though this is considered as a small effect size, it gives an interesting hint for the strategy taken of our proposed model and also suggests that for improved robustness, training would benefit from a large variety of speaking rates.
-Furthermore, it still remains unclear the model would suffer from languages with a speaking rate which is naturally higher or lower than English or Chinese (see~\cite{Osser64}).
+Furthermore, it still remains unclear if the model would suffer from languages with a speaking rate which is naturally higher or lower than English or Chinese (see~\cite{Osser64}).
 
 \section{Summary and Discussion}%
 \label{sec:conclusion}

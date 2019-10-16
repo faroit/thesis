@@ -10,7 +10,7 @@ In blind source separation research, many contributions were based on non-negati
 NMF quickly became one of the main scientific frameworks in the field of audio source separation with a large number of contributions.
 The popularity of NMF algorithms can be explained by the intuitive way in which they work on (non-negative) time-frequency representations of the mixture signal.
 Let us consider the magnitude STFT \(\mX \in \sR_{+}^{F \times T}\) with \(F\) being the number of frequency bins and \(T\) the number of time frames.
-Now, the NMF incorporates non-negative constraints to perform the separation into the sum of \(K\) latent components which are each factored into two matrices (referred to as frequency \emph{basis} \(\mW \in \sR_{+}^ { F \times K }\) and temporal \emph{activations} \(\mH \in \sR_{+}^ { T \times K }\)):
+Now, the NMF incorporates non-negative constraints to perform the separation into the sum of \(K\) latent components which are all factored into two matrices (referred to as frequency \emph{basis} \(\mW \in \sR_{+}^ { F \times K }\) and temporal \emph{activations} \(\mH \in \sR_{+}^ { T \times K }\)):
 
 \begin{equation}
    \mathbf{X} \approx \mW \mH^{T} = \sum\limits_{k=1}^{K} \vw_{k} \circ \vh_{k}
@@ -46,7 +46,7 @@ In most source separation methods the beta-divergence cost function
 \end{equation}
 
 is being used~\cite{fitzgerald08a}. 
-For the special cases of \(\beta = 0\) and \(\beta = 1\), \(\mathrm{D}\) correspond to the Itakura-Saito (IS) and Kullback-Leibler (KL) divergence and the euclidean distance equals to (\(\beta = 2\)).
+For the special cases of \(\beta = 0\) and \(\beta = 1\), \(\mathrm{D}\) correspond to the Itakura-Saito (IS) and Kullback-Leibler (KL) divergence and the euclidean distance equals to \(\beta = 2\).
 To efficiently compute the optimization, an algorithm was proposed in~\cite{lee01} which makes use of simple to use multiplicative update rules, derived from the cost function.
 For further details, we refer to~\cite{cichoki09}.
 \par
@@ -70,7 +70,7 @@ As for other separation methods, performed in the time-frequency domain, separat
 \par
 Since NMF first appeared to the source separation community in~\cite{smaragdis03} and in~\cite{vembu05}, a large variety of NMF ``flavors'' were introduced to improve certain aspects of the NMF in the application of music. 
 In~\cite[Chapter 16]{vincent}, the authors describe one of the main problems of NMF which is that ``standard NMF is shown to be effective when the notes of the analyzed music signal are nearly stationary''.
-As we described in Chapter~\ref{cha:highly-overlapped-signals}, this is especially important for pitches that incorporate vibrato.
+As we described in Chapter~\ref{cha:highly-overlapped-signals}, this is especially problematic for pitches that incorporate vibrato.
 Here, NMF-based processing suffers from its simplified model and its magnitude STFT representation makes it harder to model these time-varying sources.
 \par
 To underpin this issue, we depict this problem in Figure~\ref{fig:am_tensor_nmf} which shows the factorization of a simple amplitude modulated input signal. 
@@ -81,7 +81,7 @@ When we apply a factorization with $K=2$, one can see that NMF has difficulties 
 \begin{figure}[H]
 \centering
 \subcaptionbox{Time Domain}%
-[1\textwidth]{\includegraphics[width=0.7\textwidth]{Chapters/05_Separation_Known/figures/Timepdf-crop.pdf}}%
+[1\textwidth]{\includegraphics[width=0.84\textwidth]{Chapters/05_Separation_Known/figures/Timepdf-crop.pdf}}%
 \hspace{0.2\textwidth} % separation
 \subcaptionbox{Magnitude STFT}
 [1\textwidth]{\input{Chapters/05_Separation_Known/figures/AMPlots/STFT.tex}}%
@@ -94,7 +94,7 @@ When we apply a factorization with $K=2$, one can see that NMF has difficulties 
 
 One way towards better separation is to increase the number of components per source, however, this introduces difficulties in the clustering.
 Another method is proposed in~\cite{smaragdis04, fitzgerald05s, jaiswal13, rodriguezserrano16} which use convolutions to model shifts in components.
-This lead to factorizations that are able to also model vibrato events.
+This leads to factorizations that are able to also model vibrato events.
 However as stated in~\cite{hennequin11}, it does ``not  permit  any variation  between  different  occurrences  of  the  same event (atom), its duration and spectral content evolution being fixed''. 
 Instead, they proposed a frequency-dependent activation matrices by using a source/filter-based model.
 The model is based on an Auto-Regressive Moving Average (ARMA) time-varying model that allows single spectral components to be modeled along with their spectral variations. 
@@ -438,8 +438,8 @@ In this section, we present separation experiments utilizing CFM and compare it 
 \subsubsection{Synthetic Example}
 \label{sub:Synthentic_Examples}
 
-To illustrate the CFT representation, we processed a mixture consisting of two sinusoidal sources. One source is a pure sine wave of fundamental frequency 440~Hz whereas the other is frequency modulated by a sinusoid of 6.3~Hz. In the first step, an STFT with a DFT-length of 1024 samples and a hop-size of 256 samples were processed at a sample rate of 22.05~kHz. Patches of size $(N_a, N_b) = (32, 48)$ (not respecting overlaps) were then taken from the STFT output. Figure~\ref{fig:CFT} in Section~\ref{sub:CFT} then shows the Common Fate Transform for the mixture. One can see that the CFT representation shows distinct patterns across time, suggesting that the factorization is able to separate the sources. 
-Furthermore, if we now looking at a smaller excerpt of the same synthetic example, depicted in Figure~\ref{fig:gridplot}, we can also observe the additivity property of the common fate representations.
+To illustrate the CFT representation, we processed a mixture consisting of two sinusoidal sources. One source is a pure sine wave of fundamental frequency 440~Hz whereas the other is frequency modulated by a sinusoid of 6.3~Hz. In the first step, a STFT with a DFT-length of 1024 samples and a hop-size of 256 samples was processed at a sample rate of 22.05~kHz. Patches of size $(N_a, N_b) = (32, 48)$ (not respecting overlaps) were then taken from the STFT output. Figure~\ref{fig:CFT} in Section~\ref{sub:CFT} then shows the Common Fate Transform for the mixture. One can see that the CFT representation shows distinct patterns across time, suggesting that the factorization is able to separate the sources. 
+Furthermore, if we now look at a smaller excerpt of the same synthetic example, depicted in Figure~\ref{fig:gridplot}, we can also observe the additivity property of the common fate representations.
 
 \begin{figure}[!h]
 \centering
@@ -468,7 +468,7 @@ We ran the performance evaluation by using BSSeval~\cite{vincent06}. The results
 Ratio (SDR), Signal to Interference Ratio (SIR), and Signal to Artifacts Ration (SAR) are depicted in Figure~\ref{fig:boxplot_overall}. 
 Results indicate that the CFM model performs well in all measures. 
 However, in terms of SIR, the results of HR-NMF are better than CFM method. The results for CFMMOD and CFMM indicate the positive influence of the CFM factorization compared to~\cite{barker13}.
-The results of CFMM indicate that the complex CFT lead to better results. NMF did perform surprisingly well, which may only hold for our test set, where each source is active for a long period. This results in a cyclic stationary vibrato, revealing spectral side lobes at such a high resolution. With more than one component per source, the results of CFM do improve, but it can be seen that more than two components ($k=4$) will not increase the SDR values. The separation results and a full Python implementation of the CFM algorithm can be found on the companion website~\footnote{\url{github.com/aliutkus/commonfate}}.
+The results of CFMM indicate that the complex CFT lead to better results. NMF did perform surprisingly well, which may only hold for our test set, where each source is active for a long period. This results in a cyclic stationary vibrato, revealing spectral side lobes at such a high resolution. With more than one component per source, the results of CFM do improve, but it can be seen that more than two components ($k=4$) will not increase the SDR values as indicated in Figure~\ref{fig:iterations}. The separation results and a full Python implementation of the CFM algorithm can be found on the companion website~\footnote{\url{github.com/aliutkus/commonfate}}.
 
 \begin{figure}[ht!]
 \centering
@@ -547,7 +547,7 @@ However, this drawback is compensated by a large number of parameters in an FNN 
 Since the STFT, GFT and CFT are lapped transforms, different scenarios for the input and output representation of the FNN can be envisioned:
 
 \begin{description}[style=unboxed,leftmargin=0cm]
-\item[STFT-STFT]: for the \emph{input}, we computed the STFT (\(N=1024, Hop=512\) of each the audio track and select excerpts of size, \(\mathbf{X} \in \mathcal{R}^{2C + 1}_{+} \), where \(C\) is the number of preceding and succeeding frames around the central frame \(\mathbf{X}_{i+C}\). For the \emph{output}, only a single central frame \(\mathbf{Y}_{i+C}\) is selected.
+\item[STFT-STFT]: for the \emph{input}, we computed the STFT (\(N=1024, Hop=512\)) of each the audio track and selected excerpts of size, \(\mathbf{X} \in \mathcal{R}^{2C + 1}_{+} \), where \(C\) is the number of preceding and succeeding frames around the central frame \(\mathbf{X}_{i+C}\). For the \emph{output}, only a single central frame \(\mathbf{Y}_{i+C}\) is selected.
 We used \(C=2\), reflecting the setting in~\cite{uhlich15}. This results in an input sample size of \(\mathbf{X} \in \mathcal{R}_{+}^{5 \times 513}\) and  \(\mathbf{Y} \in \mathcal{R}_{+}^{1 \times 513}\).
 
 \item[GFT-GFT/GFT-STFT]: instead of taking excerpts from the STFT, like in \emph{STFT-STFT}, we computed overlapping patches, as described in Section~\ref{sub:CFT}. Each patch is of size \((5, 8)\), which means that the same number of time frames are used compared to \emph{STFT-STFT} but additional redundancy has been added because of the overlap between neighboring patches.
@@ -556,7 +556,7 @@ This results in an input sample size of \(\mathbf{X} \in \mathcal{R}_{+}^{128 \t
 Furthermore, to reduce the number of parameters, we also evaluated a setting where just the \emph{output} is the central frame of the STFT.
 
 \item[CFT-CFT/CFT-STFT]: in the first step, a processing as in \emph{GFT-GFT} was applied and then the 2D-DFT transform was applied (see Section~\ref{sub:CFT}).
-The results in identical shapes as in the \emph{GFT-GFT} but with added benefits of this representation that can model neighboring phase dependencies.
+This results in identical shapes as in the \emph{GFT-GFT} but with added benefits of this representation that can model neighboring phase dependencies.
 \end{description}
 
 We used the DSD100 dataset~\cite{ono15} for training and test. 
@@ -582,7 +582,7 @@ For evaluation, the BSSEval metrics of all representations for the DSD100 test s
 The results are depicted in Figure~\ref{fig:deep_cft_boxplots}.
 They indicate that the common fate representation is indeed improving the baseline \emph{STFT-STFT} results.
 Overall, we can report a mean difference of 0.4~dB for CFT-CFT and 0.5dB for GFT-GFT, compared to the \emph{STFT-STFT} representation.
-However, it is worth mentioning that both, the GFT and the CFT representation lead to a significant increase in redundancy in the representation, thus increasing the number of trainable parameters per network layer (26 million for CFT vs 0.26 million for STFT). Since we could not observe a large increase in difference of training (Dev) vs. test (Test) performance, we assume that the increasing number of parameters do not lead to large overfitting.
+However, it is worth mentioning that both, the GFT and the CFT representation lead to a significant increase in redundancy in the representation, thus increasing the number of trainable parameters per network layer (26 million for CFT vs 0.26 million for STFT). Since we could not observe a large increase in difference of training (Dev) vs. test (Test) performance, we assume that the increasing number of parameters does not lead to large overfitting.
 
 \subsection{Submission to SiSEC 2016}
 \label{ssec:performance}
@@ -625,7 +625,7 @@ The objective scores for my proposed methods were obtained using BSSEval and are
 
 \begin{figure*}[htbp]
     \includegraphics[width=1.1\textwidth]{Chapters/06_Separation_Unknown/figures/evaluation.pdf}
-    \caption{BSSEval scores for the vocals and accompaniment estimates for SiSEC 2016 on the DSD100 dataset. Results are for both test set (Test) as well as the training dataset (Dev). Scores are sorted according the vocal median SDR and grouped by supervised and unsupervised methods. The proposed systems are \emph{STO1}, based on GFT-GFT and \emph{STO2}, based on CFT-CFT. Dashed lines indicate respective group medians.}
+    \caption{BSSEval scores for the vocals and accompaniment estimates for SiSEC 2016 on the DSD100 test dataset. Scores are sorted according the vocal median SDR and grouped by supervised and unsupervised methods. The proposed systems are \emph{STO1}, based on GFT-GFT and \emph{STO2}, based on CFT-CFT. Dashed lines indicate respective group medians.}
     \label{fig:eval}
 \end{figure*}
 
@@ -634,9 +634,9 @@ An obvious observation in Figure~\ref{fig:eval} is the difference in performance
 Further, it shows that exploiting learning data does help separation compared to only relying on \textit{a priori} assumptions such as the harmonicity or redundancy. Additionally, dynamic models such as LSTM from UHL2-3 appear more adapted to music than FNN. 
 These good performances in audio source separation go in line with the success of DNNs in fields as varied as computer vision, speech recognition, and natural language processing \cite{lecun15}.
 \par
-Relating our results of STO1 and STO2 to the other methods, we observe that the performance was only slightly below the two state-of-the-art performance of UHL and NUG.
-Furthermore, the difference between test and validation dataset indicate, that our CFT DNN model even has better generalization as the one in NUG. 
-While our STO model share the same network architecture as UHL1, we were unable to reproduce the results, as we are approximately 1~dB below UHL1.
+Relating our results of STO1 and STO2 to the other methods, we observe that the performance was only slightly below the two state-of-the-art performances of UHL and NUG.
+Furthermore, the difference between test and validation dataset indicates, that our CFT DNN model even has better generalization as the one in NUG. 
+While our STO model shares the same network architecture with UHL1, we were unable to reproduce the results, as we are approximately 1~dB below UHL1.
 One reason is in the difference in initialization of the model as well as the fact that NUG and UHL models exploit multichannel information. 
 
 \subsection{Evaluation Website}

@@ -8,7 +8,7 @@ Therefore, in the past, many academic endeavors were focussed on assembling such
 In fact, in the audio community, datasets contributions now are essential to  accelerate many research directions.
 \par
 In the following sections, we present three datasets which we helped creating.
-Each of the three datasets is released in public domain and aim to fill specific needs and are used in subsequent experiments throughout this thesis.
+Each of the three datasets is released in public domain and aims to fill specific needs and is used in subsequent experiments throughout this thesis.
 
 \section{Unison Mixtures}
 \label{sec:unison_dataset}
@@ -36,8 +36,8 @@ As an exception compared to other music scenarios, when all instruments play~\em
 One way to assemble a dataset is to create random mixtures of single notes compiled from existing datasets such as the \emph{Univ. of Iowa Musical Instrument Sample Database}\footnote{\url{http://theremin.music.uiowa.edu/index.htm}}.
 However, to better study the influence of vibrato we require extended control over certain parameters such as note duration, vibrato duration, exact fundamental frequency, vibrato rate, vibrato extend, reproducibility, loudness or expression.
 \par
-As mentioned in previous chapter, vibrato techniques vary across instruments. 
-Instruments such as violin and tenor sax are known for its distinct frequency modulations~\cite{gilbert05}.
+As mentioned in the previous chapter, vibrato techniques vary across instruments. 
+Instruments such as violin and tenor sax are known for their distinct frequency modulations~\cite{gilbert05}.
 Other instruments such as the English horn and the flute are more close to amplitude modulations.
 \par
 We, therefore, generated the notes using a software sampler\footnote{\textsc{Vienna Symphonic Library}: \url{https://vsl.co.at}} which allows us to control the parameters such as the vibrato.
@@ -192,10 +192,10 @@ This is especially true for supervised methods but also affects objective evalua
 \par
 The Signal Separation Evaluation Campaign (SiSEC) is a publicly organized benchmark to assess the performance of source separation systems~\cite{sisec13, ono15, liutkus17, stoeter18sisec}. 
 Through this campaign, a multitrack dataset was compiled starting with the MASS dataset~\cite{MTGMASSdb} that was used in one of the first campaigns in 2009~\cite{vincent09}.
-Up until the release of MedleyDB~\cite{bittner14} in 2014, researchers did not have had access to a large number of full-length multitrack recordings.
+Up until the release of MedleyDB~\cite{bittner14} in 2014, researchers did not have access to a large number of full-length multitrack recordings.
 Since then we helped to aggregate such data from multiple sources to compile the DSD100 dataset~\cite{liutkus17} which was the first dataset that could successfully be used for data-driven separation methods (See Table~\ref{tab:datasets} for a comparison to other datasets).
 We compiled DSD100 to include four predefined targets: bass, drums, vocals and other.
-The full-length tracks enable to exploit long-term musical structures and also evaluate of silent tracks can be used. 
+The full-length tracks enable to exploit long-term musical structures and also allow to focus on evaluation of silent parts.
 Many musical genres are represented: jazz, electro, metal, etc. and it is split into a training and a test set for the design of data-driven methods.
 
 \begin{table*}[htbp]
@@ -218,31 +218,12 @@ Many musical genres are represented: jazz, electro, metal, etc. and it is split 
 	\label{tab:datasets}
 \end{table*}
 
-Over the years, DSD100/MUSDB18 became one of the most used datasets for source separation. 
+Over the years, DSD100 and its successor MUSDB18~\cite{oss_musdb} became one of the most used datasets for source separation.
 The dataset is still small in comparison to machine learning sets from vision such as~\cite{imagenet09}, but it proved to be large enough to help DNN-based methods to reach breakthrough results in source separation~\cite{stoeter18sisec}.
 \par
 Working with multitrack audio files can be cumbersome due to its hierarchical structure that needs to be parsed.
-For that purpose, we developed a software toolbox for Python that permits the straightforward processing of the DSD100 dataset. This software is open source and was publicly broadcasted so as to allow the participants to run the evaluation themselves\footnote{\url{github.com/faroit/dsdtools}}.
+For that purpose, we developed a software toolbox for Python that permits the straightforward processing of the DSD100/MUSDB18 dataset. This software is open source and was publicly broadcasted so as to allow the participants to run the evaluation themselves\footnote{\url{github.com/faroit/dsdtools} / \url{github.com/sigsep/sigsep-mus-db}}.
 \par
-This package integrates with existing Python code, thus makes it easy to participate in the SISEC MUS tasks. The core of this package is calling a user-provided function that separates the mixtures from the DSD into several estimated target sources.
-
-% TODO: add musdb example
-% \begin{code}
-% \captionof{listing}{Full working code example to parse the full DSD100~\cite{liutkus17} dataset as \emph{NumPy} arrays and write out estimates (here: the mixture) into a predefined estimates directory.}
-% \begin{minted}{python}
-% import dsdtools
-
-% def my_function(track):
-%     estimates = {
-%         'vocals': track.audio,
-%         'accompaniment': track.audio,
-%     }
-%     return estimates
-
-% dsd = dsdtools.DB(root_dir="./Volumes/Data/dsdtools")
-% dsd.run(my_function, estimates_dir="path/to/estimates")
-% \end{minted}
-% \label{code:c-code}
-% \end{code}
+This package integrates with existing Python code, thus makes it easy to participate in SiSEC. The core of this package is calling a user-provided function that separates the mixtures from the dataset into several estimated target sources.
 
 All details of this accompanying software tools may be found on its dedicated website\footnote{\url{https://sigsep.github.io}}.

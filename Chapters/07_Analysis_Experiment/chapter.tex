@@ -34,20 +34,27 @@ In the second contribution (Section~\ref{sec:count_experiment}) the aim is to ve
 
 \marginpar{This chapter was previously published in~\cite{stoeter13} and has been revised for this thesis.}
 
-Decomposing music into its original audio sources can be a challenging task. Source separation methods can be analyzed how well they perform mathematically, but a human versus machine comparison is cumbersome because measurement of the human separation performance is problematic. One can easily evaluate if humans can detect the number of sources in a mixture of several sources. However, there are indications that even for this task, humans tend to fail if more than three sources are present at the same time \cite{huron89}. Therefore, we want to take a first step by designing an experiment where we focus on polyphonic music of inhomogeneous timbre, where the question is: What is the number of instruments humans can estimate correctly? Several results are addressed in this paper including a possible upper limit of the number of perceived instruments, but also if one can see significant differences in performance of musicians compared to non-musicians. Such results can be used in auditory modeling or as a pre-processing step for source separation algorithms.
-This paper presents the results of an experiment, a detailed description of the stimuli and the statistical methods that were used.
+While source separation methods can be objectively evaluated given a true reference, a human versus machine comparison is cumbersome because measuring the human's ability to perform separation is difficult. However, one can easily evaluate if humans can detect the number of sources in a mixture of several sources.
+In this Section, we take a first step towards designing an experiment where we focus on polyphonic music of inhomogeneous timbre, where the question is: What is the number of instruments humans can estimate correctly?
+Such knowledge can be used in auditory modeling or as a pre-processing step for source separation algorithms.
 \par
-% from ICA!
-The perception of concurrent sound sources has been analyzed on different scales so far. Bregman's and McAdams'~\cite{mcadams89} auditory stream theory can be seen as an analytical way of describing how sound events are perceived by the human auditory system. Unfortunately, it is difficult to model professionally produced music by auditory stream models because of its high complexity.
-However, none of them is motivated to model the perceived number of musical sources. Kashino et. al \cite{kashino96} addresses the questions for concurrent speakers in a ``cocktail party'' like the environment and found an upper limit of three voices humans can perceive. When the focus shifts to musical instruments as sources, research has to take concepts from musicology into account. Huron \cite{huron89} was the first who addressed this question in 1989 at a musically meaningful level. Huron asked for the number of voices within a piece of music, whereby voices in musicology one can define it as a line of sound or note events (See~\cite{Cambouropoulos2008} for further definitions). Huron determined by experimental results that the number of correctly identified voices is up to three.
-We wanted to take a first step by designing an experiment where we focus on polyphonic music of inhomogeneous timbre, where the question is: What is the number of instruments humans can estimate correctly?
-Several results are addressed in this work include a possible upper limit of the number of perceived instruments, but also if one can see significant differences in performance of musicians compared to non-musicians.
+In previous work, the perception of concurrent sound sources has been analyzed on different scales so far. 
+Bregman's and McAdams'~\cite{mcadams89} auditory stream theory can be seen as an analytical way of describing how sound events are perceived by the human auditory system. 
+Unfortunately, it is difficult to model professionally produced music by auditory stream models because of its high complexity.
+Also, none of these models is motivated to predict the perceived number of musical sources. 
+There are indications that for this task, humans tend to fail if more than three sources are present at the same time~\cite{huron89}.
+Kashino et. al~\cite{kashino96} addresses the questions for concurrent speakers in a ``cocktail party'' like the environment and found an upper limit of three voices humans can perceive. 
+When the focus shifts to musical instruments as sources, research has to take concepts from musicology into account. 
+Huron~\cite{huron89} was the first who addressed this question in 1989 at a musically meaningful level.
+Huron asked for the number of voices within a piece of music, whereby voices in musicology one can define it as a line of sound or note events (See~\cite{Cambouropoulos2008} for further definitions).
+Huron determined by experimental results that the number of correctly identified voices is up to three.
+\par
+Several results are addressed in this section, including a possible upper limit of the number of perceived instruments but also if one can see significant differences in the performance of musicians compared to non-musicians.
 
 \subsection{Experiment}
 % ica
 For the purpose of gaining more knowledge in understanding the human perception of multiple present instruments, an experiment was conducted. Huron selected voices from organ pieces only. We wanted to address the more general case where voices are played by different instruments.
-As we set our focus on comparison between musicians and non-musician.
-Our experiment was designed so that it respects the fact that the latter has an only limited musical background.
+As we set our focus on comparison between musicians and non-musicians, our experiment was designed so that it respects the fact that the latter have an only limited musical background.
 \par
 % ica
 Although it might be interesting to have direct comparison with Huron's experiment, we agree that expanding the methods to an inhomogeneous timbre case is error prone. One reason is that there is reasonable doubt about the non-musicians understandings in terms of how a voice is defined. This is why we choose a trade-off with a more simplified experiment where we asked for the number of instruments instead of voices. Also whereas Huron \cite{huron89}  excluded subjects from his experiment because of their lower performance, we compared the results of both groups.
@@ -58,13 +65,13 @@ The selection of music items is crucial for our experimental setup. Usually musi
 % ica
 To make the count estimation task less ambiguous for the subjects, the instrumentation was chosen to be mostly constant during the music piece.
 Therefore we calculated an ``instrumental stationarity'' metric.
-The annotated MIDI files from \cite{rwc} were converted into piano roll representations for each instrument channel. This representation was then converted into a binary \emph{instrumentation activity matrix} $\mathbf{I}_{AM}\lbrack \mathbf{\underline{k}}_1 \vert \mathbf{\underline{k}}_2 \vert  ... \vert \mathbf{\underline{k}}_N \rbrack \in \{0,1\}$, where at each discrete time instant $i$ a vector $\mathbf{\underline{k}}_i$ indicates which instruments are active. The aim is then to select frames of length $N$ which are stationary by means of changes in instrumentation and activity. To get many items with a high instruments count, the maximum number of instruments within a frame was stored in a binary mask $\mathbf{\underline{k}}_{max}$ which was compared with all $\mathbf{\underline{k}}_{i=1...N}$ so that $(\vert\mathbf{\underline{k}}_{i} \oplus \mathbf{\underline{k}}_{max}\vert \leq 1) \lor (\mathbf{\underline{k}}_{i} = \underline{0})$. The resulting binary vector was smoothed with an averaging kernel of size $N$. By peak picking we got a list of possible candidates which contained a high stationarity in instrumentation.
+The annotated MIDI files from \cite{rwc} were converted into piano roll representations for each instrument channel. This representation was then converted into a binary \emph{instrumentation activity matrix} $\mathbf{I}_{AM}\lbrack \mathbf{\underline{k}}_1 \vert \mathbf{\underline{k}}_2 \vert  ... \vert \mathbf{\underline{k}}_N \rbrack \in \{0,1\}$, where at each discrete time instance $i$ a vector $\mathbf{\underline{k}}_i$ indicates which instruments are active. The aim is then to select frames of length $N$ which are stationary by means of changes in instrumentation and activity. To get many items with a high instruments count, the maximum number of instruments within a frame was stored in a binary mask $\mathbf{\underline{k}}_{max}$ which was compared with all $\mathbf{\underline{k}}_{i=1...N}$ so that $(\vert\mathbf{\underline{k}}_{i} \oplus \mathbf{\underline{k}}_{max}\vert \leq 1) \lor (\mathbf{\underline{k}}_{i} = \underline{0})$. The resulting binary vector was smoothed with an averaging kernel of size $N$. By peak picking we got a list of possible candidates which contained a high stationarity in instrumentation.
 Further the RWC files were filtered a priori to exclude items dominated by electronic instruments or singing voice. Table~\ref{tab:items} presents the selected 12 items representing pairs of one to six simultaneously present instruments. Each item is around seven seconds long. By cutting at note offsets we varied the lengths of the items to make it semantically more meaningful. Six items (notated as RM-C***) belong to the classical western music genre whereas the other items are of mixed genre.
 \par
 The MIDI files were humanized randomly and rendered in a professional sequencer software utilizing state-of-the-art commercial sampling products.
 The process is similar to the dataset creation mentioned in Section~\ref{sec:unison_dataset}.
 The rendered files were processed with convolutive reverb to match the original recordings. 
-Additionally a loudness normalization was applied according to EBU-R128\cite{EBU2011}. To avoid spatial cues every item were rendered to mono at 16 bit/44.1 kHz.
+Additionally a loudness normalization was applied according to EBU-R128\cite{EBU2011}. To avoid spatial cues every item was rendered to mono at 16 bit/44.1 kHz.
 
 \begin{table}[htb]
 \center
@@ -139,11 +146,11 @@ The independent variable $I(i)$ is the number of instruments of one music item $
 The primary statistical null hypothesis ($H_1$) is stated in that the means of $\Delta$ and $E$\footnote{The fact that $E$ is dichotomous will lead to a mean value that equals to a probability of a binary distribution.}, grouped by the number of instruments, do not differ significantly. As we also want to test the between-groups performance of musicians versus non-musicians, we introduce another dependent variable $M(s) \in \{0,1\}$ of binary scale. This is stated in a secondary null hypothesis ($H_2$) where the means of $\Delta$ and $E$ are not significantly different between musicians and non-musicians.
 No subjects were screened from the results, although there are two cases where no valid response had been made. Results are grouped by items of $I$ instruments.
 \par
-In general, participants tended to perform worse for items with more than two instruments. The probability of correctly estimating one instrument was 90.0\% whereas only one person out of 62 gave a correct response for an item with six instruments. In some cases, the number of instruments does not correspond to the number of voices for every item. Items where an instrument plays more than one voice and voices which are played by more than one instrument. However, most of the chosen instruments are monophonic so in our case, this occurred only for items where piano or guitar is present. Also, we made sure that the number of total voices did not exceed the maximum number of instruments in that item. Voices being played by more than one instrument (unison), which is present in G068, that showed surprisingly good results.
+In general, participants tended to perform worse for items with more than two instruments. The probability of correctly estimating one instrument was 90.0\% whereas only one person out of 62 gave a correct response for an item with six instruments. In some cases, the number of instruments does not correspond to the number of voices for every item. Items where an instrument plays more than one voice and voices which are played by more than one instrument. However, most of the chosen instruments are monophonic so in our case, this occurred only for items where piano or guitar is present. Also, we made sure that the number of total voices did not exceed the maximum number of instruments in that item. Voices being played by more than one instrument (unison), present in G068, that showed surprisingly good results.
 
 \subsubsection*{Underestimation}
 
-We confirmed the results in~\cite{huron89} that the most common error is the underestimation of one instrument, although this accounts only for 43 \% of the responses in our experiment. Only in one case $\Delta$ is negative (overestimation) which is item C016, a ``Clarinet Quintet in A major by Wolfgang Amadeus Mozart (K.581. 1st mvmt)'' where we have excluded the solo clarinet part and two strings. Still, the remaining sound seems to be so similar to that of a quartet that musicians tended to hear ``phantom'' instruments.
+We confirmed the results in~\cite{huron89} that the most common error is the underestimation of one instrument, although this accounts only for 43 \% of the responses in our experiment. Only in one case $\Delta$ is negative (overestimation) which is item C016, a ``Clarinet Quintet in A major by Wolfgang Amadeus Mozart (K.581. 1st movement)'' where we have excluded the solo clarinet part and two strings. Still, the remaining sound seems to be so similar to that of a quartet that musicians tended to hear ``phantom'' instruments.
 
 \subsubsection*{Self-Evaluation}
 
@@ -159,7 +166,7 @@ Figure~\ref{fig:certainty} shows the results of the subjects certainty grouped b
 \subsubsection*{Main Effects}
 
 To test the null hypotheses ($H_1$ and $H_2$), statistical tools are required.
-The first tests focus on $\Delta$ which is an interval-scaled variable. To show differences between means of two or more groups, usually, One-Way-ANOVA tests are applied. ANOVA tests expect independent normally distributed variables and homogeneity of the variances in each group. However both the Kolmogorov--Smirnov test of normal distribution and Levene's test to determine the homogeneity of group variances fail. In such cases variables scaled like $\Delta$ could be transformed so that the boundaries are straightened out. A typically used $arcsin(\sqrt{\Delta})$ transformation was applied to $\Delta$ resulting in slightly higher $p$ values but still not statistically significant. Although ANOVA is known to be robust enough to run the tests against non-normal distributed cases and unequal variances, the significance levels of the results are doubtful. Therefore we choose to run a non-parametric test. The Kruskal--Wallis test can be applied even if the data is not normally distributed. However, it has to be run on a slightly modified hypothesis which compares the medians of groups instead of the means. The Kruskal--Wallis test allows to reject both modified hypotheses (asymptotic $p = 0.000$, $\chi^2 = 499636$, $df=5$).
+The first tests focuses on $\Delta$ which is an interval-scaled variable. To show differences between means of two or more groups, usually, One-Way-ANOVA tests are applied. ANOVA tests expect independent normally distributed variables and homogeneity of the variances in each group. However both the Kolmogorov--Smirnov test of normal distribution and Levene's test to determine the homogeneity of group variances fail. In such cases variables scaled like $\Delta$ could be transformed so that the boundaries are straightened out. A typically used $arcsin(\sqrt{\Delta})$ transformation was applied to $\Delta$ resulting in slightly higher $p$ values but still not statistically significant. Although ANOVA is known to be robust enough to run the tests against non-normal distributed cases and unequal variances, the significance levels of the results are doubtful. Therefore we choose to run a non-parametric test. The Kruskal--Wallis test can be applied even if the data is not normally distributed. However, it has to be run on a slightly modified hypothesis which compares the medians of groups instead of the means. The Kruskal--Wallis test allows to reject both modified hypotheses (asymptotic $p = 0.000$, $\chi^2 = 499636$, $df=5$).
 \par
 Concerning $E$ which is a categorical variable, linear models such as ANOVA cannot be used.
 As described in~\cite{jaeger08}, instead, a binary regression model that turns the mean of $E$ into a binomial distributed probability can be used.
@@ -170,7 +177,7 @@ By including the main factors $I$ and $M$ we set up a \emph{Generalized Linear M
     logit(E) =  \text{Intercept} + x_1 \text{I} + x_2 \text{M} .
     \label{eq:logit_main}
 \end{equation}
-A test of the main effects is statistically significant ($\chi^2$ = $437418$, $p < 0.000$, $df = 6$) so that both null hypotheses ($H_1$ and $H_2$) can be rejected. The significance of both effects as well as parameter estimates and Wald values of the calculated model are shown is shown in~\cite{stoeter13}.
+A test of the main effects is statistically significant ($\chi^2$ = $437418$, $p < 0.000$, $df = 6$) so that both null hypotheses ($H_1$ and $H_2$) can be rejected. The significance of both effects as well as parameter estimates and Wald values of the calculated model are shown in~\cite{stoeter13}.
 \par
 The results indicate that there is a significant difference in the error probability for groups of instrumentation counts but also for musicians versus non-musicians. A pairwise comparison test based on the mean differences reveals where these differences are located. Regarding the error probability of different instrument counts, the pairwise comparison test reveals that nearly all groups show significant mean differences between each other, which was the expected result. However, by calculation using the logit GLM model shown in equation~\ref{eq:logit_main} we found that there are two groups of items of five and six instruments (mean difference $0.04$, std. error = $0.019$, $df = 1$, $p = 0.055$) that did not show any significant difference. For both groups, the error probability is close to 100\%.
 \par
@@ -318,7 +325,7 @@ We recognize that in a simulated ``cocktail-party'' environment, mixtures lack t
 As we aim for a speaker independent solution, we selected a speech corpus with preference to a high number of different speakers instead of the number of utterances, thus increasing the number of unique mixtures.
 We selected \emph{LibriSpeech clean-360}~\cite{panayotov15} which includes 363 hours of clean speech of English utterances from 921 speakers (439 female and 482 male speakers) sampled at 16 kHz.
 \par
-To compute the maximum number concurrent speakers \(\cardinality\), annotation of the activity of each individual speaker is required.
+To compute the maximum number of concurrent speakers \(\cardinality\), annotation of the activity of each individual speaker is required.
 Even though many corpora come with word and phonemes annotation, they often are not consistent across different corpora.
 We, therefore, generated annotations based on a voice activity detection algorithm (VAD). As we rely on a robust VAD estimate, we found the implementation from the \emph{Chromium Web Browser} as part of the WebRTC Standard\footnote{WebRTC 1.0: Real-time Communication Between Browsers W3C Editor's Draft 05 June 2017} to yield good results.
 \par
@@ -333,7 +340,7 @@ The procedure is repeated for all speakers such that \(\cardinality \) time doma
 Signals are linearly mixed and peak normalized to avoid clipping.
 The ground truth output \(\cardinality \) for each sample is then computed from the VAD matrix using the maximum of the sum over all speakers.
 \par
-In fact, our method to generate synthetic samples results in an average overlap for \(k=2\) of 85\% and for \(k=10\) of 55\% (based on 5s segments).
+In fact, our method to generate synthetic samples results in an average overlap of 85\% for \(k=2\) and of 55\% for \(k=10\) (based on 5s segments).
 This procedure is similar to~\cite{mesaros17} used to label the data.
 The dataset is available for download~\cite{oss_libricount}.
 
@@ -359,7 +366,7 @@ The experiment and its results from all participants is made available through~\
 A simplified version of the experiment is made available through a web application\footnote{\url{https://denumerate.app}}.
 
 \subsection{Experiment Results}
-To reveal over and underestimation errors, we decided to report the average response for each group of \(k\).
+To reveal over- and underestimation errors, we decided to report the average response for each group of \(k\).
 As a reference, we also included the average results from~\cite[Experiment 1, 5~seconds duration]{kawashima15} which shows similar (with slightly higher error probability) results compared to our blind experiment.
 Also, in~\cite{kawashima15} the maximum number of speakers to test was six whereas we evaluated stimuli with up to ten speakers.
 The results of our lab-based experiments are shown in Figure~\ref{fig:experimentA} and Figure~\ref{fig:experimentB}.
@@ -404,7 +411,7 @@ In Chapter~\ref{cha:fundamentals}, two different questions were introduced how t
 In this experiment, we explicitly used an open question of ``How many instruments can you hear'' to gather more knowledge into the strategies being applied by the participants.
 Another reason was that the stimuli durations were too long to ask for the maximum number of concurrent stimuli, thus promoting ``counting by detection'' as a good strategy to approach the problem.\par
 By comparing musicians to non-musicians, we showed that there is a significant difference in performance for count estimation, confirming similar findings in other auditory tasks~\cite{kishon01}.
-Particularly, we found a that this gap is most prominent for stimuli of three and four instruments.
+Particularly, we found out that this gap is most prominent for stimuli of three and four instruments.
 Furthermore, for all stimuli (ranging from one to six instruments) we revealed that musicians performed about 20\% better than non-musicians, hence revealing a ``gap of one instrument'' in mean absolute error.
 \par
 We then repeated this experiment in an open, uncontrolled environment with more than 1000 participants.

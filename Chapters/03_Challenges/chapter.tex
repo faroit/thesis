@@ -23,7 +23,7 @@ A metric that is often used for evaluation is called \emph{separability} and was
 \par
 In linear mixtures, separability is defined as \emph{a measure that indicates the percentage of time-frequency bins of a source is disjoint from those of interfering sources} and calculated through the W-disjoint orthogonality metric \(WDO\) in \cite{rickard02}.
 
-If \(\mM \in \{0, 1\}^{m\times n}\) is a ideal binary mask~\cite{wang05} for a given target \(\mS\) and its interfering magnitude \(\mY\) of same dimensions as \(\mM\), the W-disjoint orthogonality metric \(WDO\) is defined as:
+If \(\mM \in \{0, 1\}^{m\times n}\) is an ideal binary mask~\cite{wang05} for a given target \(\mS\) and its interfering magnitude \(\mY\) of same dimensions as \(\mM\), the W-disjoint orthogonality metric \(WDO\) is defined as:
 
 \begin{equation}
     PSR_{M} = \frac{\|\mM \otimes \mS_{k}\|^{2}}{\|\mS_{k}\|^{2}}
@@ -118,7 +118,7 @@ In the following, we give an overview of existing work focussed on analysis and 
 %lets start with speech
 In speech, techniques using modulation patterns improved applications such as speech  discrimination~\cite{mesgarani04} or extract spatial acoustic signatures from mixtures~\cite{sukittanon06}.
 One way of analyzing amplitude modulations is to use a modulation spectrogram~\cite{greenberg97} which is a frequency-frequency representation of a time domain input signal.
-A complete signal representation can be archived by a modulation tensor which holds the modulation spectrograms for each time frame.
+A complete signal representation can be achieved by a modulation tensor which holds the modulation spectrograms for each time frame.
 Interestingly, Greenberg in~\cite{greenberg97} assumed that ``the energy in the modulation spectrum may be derived from syllabic segmentation'' and from ``the preservation of the portion of the modulation spectrum between 2 and 10 Hz''.
 Following this, it was later proved that the detection of modulations improves speech intelligibility~\cite{elhilali03} or automatic speech recognition~\cite{kingsbury98}.
 \par
@@ -147,9 +147,9 @@ This was later used in models to separate mixtures such as in ~\cite{li07, li09}
 Furthermore, common amplitude modulation characteristics was included in the separation scheme in works such as~\cite{cano14}.\\
 Wang proposed a technique in~\cite{wang94,wang95} of ``\dots instantaneous and frequency-warped techniques for signal parameterization and source separation, with application to voice separation in music.''\\
 Yen et al. proposed in \cite{yen14,yen15} to use spectro-temporal modulation features to decompose ``a mixture using a two-stage auditory model which consists of a cochlear module \cite{chi05} and cortical module \cite{chi99}.'' (from~\cite{rafii}).\\
-Virtanen made use of sinusoidal modeling \cite{virtanen00} to model and separate sources with tempo spectral modulation like vibrato.
+Virtanen made use of sinusoidal modeling \cite{virtanen00} to model and separate sources with spectro-temporal modulation-like vibrato.
 
-In another vein, the source-filter model was deployed to separation sources~\cite{hennequin10}.
+In another vein, the source-filter model was deployed to separation of sources~\cite{hennequin10}.
 An advantage of the source-filter model, as pointed out in~\cite{rafii} is that ``\dots one can dissociate the pitched content of the signal, embodied by the position of its harmonics, from its TF envelope which describes where the energy of the sound lies.''
 
 \section{Summary}
