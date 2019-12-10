@@ -8,7 +8,7 @@ In this chapter, we introduce basic concepts of digital audio signals which are 
 \section{Audio Signals}\label{sec:specifics-of-audio-signals}}
 
 When a sound wave travels through a medium like air, a signal can be captured using a microphone by measuring the local pressure deviation over time.
-Such a signal can be written as a function \(x(t)\), continuous in both time \(t \in \sR\) and the amplitude \(x(t) \in \sR\).
+Such a signal can be written as a function \(x(t)\), continuous in both time \(t \in \sR\) and the amplitude \(x(t_0) \in \sR\).
 An \emph{audio signal} is meant to be perceived by the human auditory system --- through our ears.
 Therefore, we can observe specific properties, consistent with the limitations of the human hearing, for example in dynamics as well as in limited signal bandwidth.
 Many other signals exist with similar characteristics such as signals from finance, geophysics, meteorology or medical data.
@@ -20,7 +20,7 @@ Signals}\label{digital-representations-of-audio-signals}}
 
 Today, digital representations are used to store, analyze or process audio signals conveniently.
 A digital audio signal can be obtained from an analog signal using analog-to-digital/digital-to-analog converters (ADC/DAC) which can be found in almost any every-day device such as laptops and smartphones.
-In short, this process includes two steps: first, the continuous time signal \(x(t)\) is converted to a discrete time series, so that one sample\footnote{Please note, that the use of the word \emph{sample} will have different meanings in the context of machine learning, where a sample is an instance of a full signal instead of a single time step.} \(x_n\) was \emph{sampled} with equidistant steps \(T\); second, the amplitude values can be \emph{quantized}, resulting in a vector \(\vx \in \sZ\), represented as a one dimensional time series of amplitudes.
+In short, this process includes two steps: first, the continuous time signal \(x(t)\) is converted to a discrete time series, so that one sample\footnote{Please note, that the use of the word \emph{sample} will have different meanings in the context of machine learning, where a sample is an instance of a full signal instead of a single time step.} \(x_n\) was \emph{sampled} with equidistant steps \(T\); second, the amplitude values can be \emph{quantized}, resulting in a vector where each element \(x_i \in \sZ\), thus \(\vx\) represents a one dimensional time series of amplitudes.
 An important parameter in the process of digitization is the sample rate \(F_s = 1/T\) where \(T\) is the sampling period.
 % Often, \(F_s\) has a significant effect on the quality of audio signals.
 % And, it is the objective of a real-world audio system not to introduce perceivable degradation in audio quality when a digital signal is reproduced over headphones or loudspeakers.
@@ -41,7 +41,7 @@ We analyze and process short-time spectra, computed in an overlapped fashion, re
 The short-time Fourier transform (STFT) is the most commonly used TF representation~\cite{mcaulay86}.
 It encodes the time-varying spectra into a matrix \(\mX\) with frequencies \(k\) and time frames \(n\).
 \par
-STFT matrices \(\mX \in \sC^{n \times k}\) are complex and include phase information.
+STFT matrices \(\mX \in \sC^{N \times K}\) are complex and include phase information.
 When sounds are processed in the time-frequency domain, the transformation greatly benefits from being invertible to reconstruct a time domain signal.
 However, analysis and processing is often focussed  on the \emph{magnitude} \(|\mX|\) or the \emph{spectrogram} \(|\mX|^2\).
 
