@@ -77,46 +77,35 @@ In this work, instead, we propose a method that increases the stationarity of th
 The idea is to make use of \emph{time-warping} which refers to a mapping of the linear time scale $t$ to a warped time scale $\tau$ via a mapping function $\tau=w(t)$.
 To ensure a unique mapping, the mapping function needs to be strictly increasing.
 For the discrete time case the mapping can be achieved by a time-varying re-sampling of the linear (i.e. regularly sampled) time signal under consideration.
-The instantaneous sampling frequency then corresponds to the first derivative of
-the mapping function. Although the mapping can be done from any time-span
-$I$ on the linear time scale to any time span $J$ on the warped timescale, in
-the discrete time case it is advantageous to have the same number of samples
-in the linear and warped time domain. This ensures that the average sampling
-frequency is the same in both domains. Such time-warping approaches have already
-been proposed for different purposes such as transform-based audio coding
-\cite{edler09}. As in these applications, we derive the mapping function from
-the varying instantaneous fundamental frequency in such a manner that the variation of the frequency is
-reduced or removed. To be more precise the actual information needed is not
-the absolute instantaneous fundamental frequency but only its change over time.
-The discrete time warp map $w[n]$ is then simply the scaled sum of the relative
-frequencies (warp contour) $W[n]$:
+The instantaneous sampling frequency then corresponds to the first derivative of the mapping function. 
+Although the mapping can be done from any time-span $I$ on the linear time scale to any time span $J$ on the warped timescale, in the discrete time case it is advantageous to have the same number of samples in the linear and warped time domain. 
+This ensures that the average sampling frequency is the same in both domains. 
+Such time-warping approaches have already been proposed for different purposes such as transform-based audio coding \cite{edler09}. 
+As in these applications, we derive the mapping function from the varying instantaneous fundamental frequency in such a manner that the variation of the frequency is reduced or removed. 
+To be more precise the actual information needed is not the absolute instantaneous fundamental frequency but only its change over time.
+The discrete time warp map $w[n]$ is then simply the scaled sum of the relative frequencies (warp contour) $W[n]$:
 \begin{equation}\label{eq:time_warp}
 w[n]=N \frac{\sum^n_{l=0}{W[l]}}{\sum^N_{k=0}{W[k]}}  \qquad 0\leq n<N,
 \end{equation}
 where $N$ being the number of samples of the signal under consideration.
-From the requirements for the mapping function it follows that the relative
-frequency $W[n]$ has to be positive at all instants and preferably should not
-exhibit large jumps.
-For the mapping from linear to warped time, now the linear domain sample points
-$s[\nu]$ for the regularly spaced samples $x[\nu]$ in the warped domain are
-found by inverting $w[n]$. These sample points are then used to re-sample the linear time
-domain samples $x[n]$ to the warped time domain samples $x[\nu]$, in our case
-by employing 128 times oversampled FIR low-pass filter. This processing leads to a sampling rate contour which is proportional to the $F_0$ contour. Or in other words, a fixed number of samples are obtained in each period of the signal with the varying fundamental frequency. Mutatis mutandis the sample points $s[\nu]$ can be used for the re-sampling from the warped time domain to linear time domain. \\
+From the requirements for the mapping function it follows that the relative frequency $W[n]$ has to be positive at all instants and preferably should not exhibit large jumps.
+For the mapping from linear to warped time, now the linear domain sample points $s[\nu]$ for the regularly spaced samples $x[\nu]$ in the warped domain are found by inverting $w[n]$. 
+These sample points are then used to re-sample the linear time domain samples $x[n]$ to the warped time domain samples $x[\nu]$, in our case by employing 128 times oversampled FIR low-pass filter. 
+This processing leads to a sampling rate contour which is proportional to the $F_0$ contour. 
+Or in other words, a fixed number of samples are obtained in each period of the signal with the varying fundamental frequency. 
+Mutatis mutandis the sample points $s[\nu]$ can be used for the re-sampling from the warped time domain to linear time domain. \\
 
-In this work, the time-warping was done globally over the full lengths of the
-signals under consideration. The globally time-warped sample sequence
-was then used in the further processing steps. In Figure~\ref{fig:timewarptime} we show the results of the warping process in the time domain. \\
+In this work, the time-warping was done globally over the full lengths of the signals under consideration. 
+The globally time-warped sample sequence was then used in the further processing steps. 
+In Figure~\ref{fig:timewarptime} we show the results of the warping process in the time domain. \\
 
 The use of time variable rate sampling was first proposed by~\cite{wulich92} which used this method to analyze FM signals.
 
-A similar approach using frequency modulation to separate a harmonic
-source from a mixture was proposed in \cite{wang95}. Here the
-individual lines are demodulated to the baseband using a combined frequency
-tracking/demodulation approach. The difference to our approach is that first
-the absolute instantaneous frequency for every harmonic line has to be known
-instead of a relative frequency that is common to all harmonic lines of a single
-source. This relative frequency might be obtained easier than its
-absolute value for a mixed signal. Secondly every harmonic line has to be individually frequency demodulated while in our approach the full signal is frequency demodulated in one algorithmic step.\\
+A similar approach using frequency modulation to separate a harmonic source from a mixture was proposed in \cite{wang95}. 
+Here the individual lines are demodulated to the baseband using a combined frequency tracking/demodulation approach. 
+The difference to our approach is that first the absolute instantaneous frequency for every harmonic line has to be known instead of a relative frequency that is common to all harmonic lines of a single source. 
+This relative frequency might be obtained easier than its absolute value for a mixed signal. 
+Secondly every harmonic line has to be individually frequency demodulated while in our approach the full signal is frequency demodulated in one algorithmic step.\\
 
 \subsection{Separation} % (fold)
 \label{sub:pitch_variation_informed_source_separation}
@@ -213,8 +202,6 @@ A widely used definition is the one from Poliner et al. in~\cite{poliner07}:
 \end{quote}
 
 For a more comprehensive overview of melody extraction methods, the reader is referred to~\cite{salamon14}.
-% In this work, we follow the ``Understanding without Separation'' paradigm, which is seen as an advantage of a melody extraction method without applying a source separation system first (also see Chapter 1, Section 1.4.5~\cite{salamon14}).\par
-
 In turn, we used the \emph{Melodia} algorithm, published by Salamon et al. in~\cite{salamon12}, as the basis to extract the predominant melody from the mixture.\par
 
 \emph{Melodia} consists of four parts:
@@ -298,26 +285,10 @@ Therefore, we decided to evaluate if the performance of the system can be improv
 Shortly after we submitted the separation results to the SiSEC 2015 evaluation campaign, the whole audio community was shaken up by the recent success of deep learning throughout several audio related tasks that go beyond automatic speech recognition.
 Among them are several tasks related to music information retrieval (MIR) such as singing voice detection which received major breakthroughs in 2014 and 2015~\cite{lehner14, lehner15, Leglaive15, schlueter15}.
 \par
-% Locking back, at that time, we did not have enough knowledge to understand how and why deep learning method are so successful~\footnote{And even today, very few people would say that the deep learning community made significant progress regarding the understanding of DNNs.}.
 Therefore, we decided to integrate a state-of-the-art singing voice detection system into the separation pipeline and evaluate the end-to-end performance.
 We chose to reimplement the system by Leglaive~\cite{Leglaive15}, since it was a good compromise between complexity (its use of hand-crafted features instead of large STFT frames) and performance.
 In fact, the system reached a state-of-the-art accuracy of 91.5\% for classifying frames of singing voice for the annotated \emph{Jamendo} singing voice detection dataset~\cite{ramona08}, which is an improvement of more than 10\% compared to the best performing non-DNN system.
-% We want to briefly describe the system published in in~\cite{Leglaive15}, for more details, the reader is referred to the original author's publications.
-% Also in the course of this thesis, more of my work is based on the deep learning framework and will be explained in further details in Chapter~\ref{cha:countnet}.
-% \par
-% The method proposed in~\cite{Leglaive15} is based on a recurrent neural network (RNN) layer is very similar to a classical fully connected neural network, except that RNN applies the same set of weights recursively over an input sequence.
-% RNNs excel at detecting structure in sequential data of arbitrary length.
-% This makes it ideal to model time series, however, in practice, the temporal context learned is limited to only a few time instances, because of the vanishing gradient problem~\cite{Hochreiter98}.
-% To alleviate this problem, forgetting factors were proposed.
-% One of the most popular gated recurrent cells is the Long Short-Term Memory (LSTM)~\cite{Hochreiter97} cell.
-% Its effectiveness has been proven in various applications and LSTMs are the state-of-the-art approach to speech recognition~\cite{Graves13}.
-% The basic structure of such a sequential network is depicted in Figure~\ref{fig:lstm_2}.
-% \begin{figure}
-%   \centering
-%   \includegraphics[width=0.8\textwidth]{Chapters/05_Separation_Known/figures/lstm_2.pdf}
-%   \caption{Simpliefied Block diagram of a Long Short-Term Memory Network.}
-%   \label{fig:lstm_2}
-% \end{figure}
+
 The input of~\cite{Leglaive15} is an 80-dimensional feature vector consisting of harmonically and percussively enhanced STFT frames of the mixture as described in~\cite{ono08}.
 The output of the network is a frame-wise integer, indicating the presence of \emph{voiced} or \emph{unvoiced} frames.
 We trained the network using a fixed number of frames from the DSD100 training dataset.
@@ -375,37 +346,7 @@ Depending on the algorithm and application, there are several reasons why $F_0$ 
 
 The first step is to calculate an initial $F_0$ estimate by using an existing pitch estimator. Note that we later require the estimate to be defined for every input sample, thus $\Pitch[n]$ may require interpolation. In our pipeline, we use linear interpolation for all estimators. $F_0$ estimators, like YIN~\cite{decheveigne02}, also provide a measure of confidence $c[n]$.
 \par
-% In the first step, we apply \emph{time warping} which refers to a strictly monotonous mapping
-% of the natural or linear time scale $t$ to a warped time scale $\tau$ via a
-% mapping function $\tau=w(t)$.
-% The mapping between the two domains for the continuous time case then is:
-% \begin{equation}\label{eq:contWarpedTime}
-% \breve{x}(\tau)=x(w^{-1}(\tau)), \quad x(t)=\breve{x}(w(t))
-% \end{equation}
-% where $x(t)$ is the linear-time signal and $\breve{x}(\tau)$ is the warped-time signal.
-% For the discrete time case, the signals in both linear-time and warped-time domains are sampled
-% using a constant sample interval $T$. With sample indices $\nu$ and $n$ for the warped-time domain and linear time-domain respectively, the warping is performed by
-%
-% \begin{align}
-% \breve{x}[\nu] &= x(\sigma[\nu]) & \textrm{ with } & \sigma[\nu] = w^{-1}(\nu T), \\
-% \intertext{and the inverse warping by}
-% x{}[n] &= \breve{x}(s[n]) & \textrm{ with } & s{}[n] = w(nT).
-% \end{align}
-%
-% \subsubsection{Warp contour}
-% \label{subs:warp_contour}
-
 In our application, the warp map $w(t)$ is constructed in such a way that the instantaneous changes in frequency of the signal in the linear time domain are minimized in the warped time domain. For this, we derive the map from an estimate of the fundamental frequency $F_0$ using Equation~\ref{eq:time_warp} from Section~\ref{sub:frequency_modulation}.
-
-% For processing, the actual information needed is not the absolute instantaneous fundamental frequency but only its change over time. This means that the warping contour can be derived from an algorithm which may differ from the actual $F_0$ estimator.
-
-% The discrete time warp map $w[n]$ is the scaled sum of the relative
-% frequency contour (the \emph{warp contour}) $W[n]$:
-% \begin{equation}
-% w[n]=N \frac{\sum^n_{l=0}{W[l]}}{\sum^{N-1}_{k=0}{W[k]}}  \qquad 0\leq n<N,
-% \end{equation}
-% where $N$ being the number of samples of the signal under consideration.
-% As stated above the full warp map $w(t)$ is then obtained by linearly interpolating $w[n]$. From the requirements for the mapping function it follows that $W[n]$ has to be greater than zero for all $n$. In the case of a perfect $F_0$ estimate, the signal warped with the resulting contour would have a constant $F_0$ equal to the average $\bar{W}$.
 
 In the scope of this work, the warping is applied globally over the full length of the signals under consideration. Here, in comparison to Section~\ref{sub:frequency_modulation}, we also consider an optional confidence measure $c[n]$ which can be incorporated for a processed version of the warping contour. This ensures that the warp contour has no discontinuities that result in additional artifacts after re-sampling. If the estimator does not provide such a measure, a separate voiced/unvoiced detection algorithm can be used. To obtain a warp contour $f[n]$ from an $F_0$ estimate we propose the following steps: \textbf{(A)} initialize the warp contour with $F_0$ estimate $f = \Pitch$, \textbf{(B)} find contour segments with high confidence, i.e. $c[n]$ exceeds a given threshold, \textbf{(C)} linearly connect the high confidence contour segments and \textbf{(D)} set start and end of warp contour to a constant value if confidence is below threshold. That way warping according to $F_0$ is applied in the regions of high confidence without significantly affecting the gaps in-between.
 \par
@@ -451,7 +392,7 @@ We present the results of the synthetic data as box plots in Figure~\ref{fig:ptd
 
 \begin{figure}[t!]
 \centering
-        \includegraphics[width=0.90\columnwidth]{Chapters/05_Separation_Known/figures/stats_boxplot_ptdb_synth.pdf}
+  \includegraphics[width=0.90\columnwidth]{Chapters/05_Separation_Known/figures/stats_boxplot_ptdb_synth.pdf}
 \caption{Results from the synthesized PTDB-TUG dataset. MFPE grouped by estimator. Solid/dotted lines represent medians/means. Outliers are not shown.}
 \label{fig:ptdbtug_synth}
 \end{figure}
@@ -469,25 +410,19 @@ Pitch estimation of polyphonic mixture input signals, in general, is known to be
 
 \begin{figure}[t!]
 \centering
-        \includegraphics[width=0.90\columnwidth]{Chapters/05_Separation_Known/figures/stats_boxplot_ptdb_real.pdf}
+  \includegraphics[width=0.90\columnwidth]{Chapters/05_Separation_Known/figures/stats_boxplot_ptdb_real.pdf}
 \caption{Results from the real recordings PTDB-TUG dataset. MFPE grouped by estimator. Solid/dotted lines represent medians/means. Outliers are not shown.}
 \label{fig:ptdbtug_real}
 \end{figure}
 
 \begin{figure}[t]
 \centering
-        \includegraphics[width=0.90\columnwidth]{Chapters/05_Separation_Known/figures/stats_boxplot_medley.pdf}
+  \includegraphics[width=0.90\columnwidth]{Chapters/05_Separation_Known/figures/stats_boxplot_medley.pdf}
 \caption{Results from the real recordings MedleyDB dataset. MFPE and Correlation Coefficient grouped by estimator. Solid/dotted lines represent medians/means. Outliers are not shown.}
 \label{fig:medley}
 \end{figure}
 
 \section{Summary and Discussion}
-
-% [X] A summary of findings and limitations
-% [X] Practical applications/implications
-% [X] Recommendations for further research
-% [X] Repeat the highlights of the chapter
-% [X] Transition sentence that acts as a “teaser” for the next chapter
 
 In this chapter, we highlighted the time-varying aspects of musical sources such as vibrato to be utilized for the application of source separation.
 To address this task, we developed a method that utilizes time warping to extract a source from the mixture.
