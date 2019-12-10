@@ -114,11 +114,14 @@ Previously, research has addressed a variety of tasks of processing and analysis
 In the following, we give an overview of existing work focussed on analysis and separation of modulated sounds.
 
 \subsection{Analysis}
-
+\label{sub:modulation-analysis}}
 %lets start with speech
 In speech, techniques using modulation patterns improved applications such as speech  discrimination~\cite{mesgarani04} or extract spatial acoustic signatures from mixtures~\cite{sukittanon06}.
 One way of analyzing amplitude modulations is to use a modulation spectrogram~\cite{greenberg97} which is a frequency-frequency representation of a time domain input signal.
-A complete signal representation can be achieved by a modulation tensor which holds the modulation spectrograms for each time frame.
+In practice, the modulation spectrogram can be represented by a tensor \(\mathbf{V}_{f, b, t}\) , where \(b\) represents the modulation index, can be computed from the (magnitude) time frequency matrix \(\mathbf{X}_{f, t}\) by computing \(f\) time frequency transforms over each frequency band of \(\mathbf{X}\).
+The use of modulation spectra helps to identify amplitude modulations such as the one (indirectly) caused by vibrato. 
+The modulation spectrogram has already gathered much attention in speech recognition~\cite{greenberg97, kingsbury98} and classification~\cite{kinnunen08, markaki09}.
+\par
 Interestingly, Greenberg in~\cite{greenberg97} assumed that ``the energy in the modulation spectrum may be derived from syllabic segmentation'' and from ``the preservation of the portion of the modulation spectrum between 2 and 10 Hz''.
 Following this, it was later proved that the detection of modulations improves speech intelligibility~\cite{elhilali03} or automatic speech recognition~\cite{kingsbury98}.
 \par
