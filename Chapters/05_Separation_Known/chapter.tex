@@ -447,7 +447,7 @@ Since the proposed refinement algorithm repeatedly applies pitch estimation, the
 
 To generate synthetic test data we use pitch label annotations of the PTDB-TUG speech data set~\cite{pirker11}. We synthesize the melody or voice using a simple sinusoidal signal model. To get accurate ground truth data, the pitch annotations were up-sampled to audio rate by using linear interpolation for the PTDB-TUG. Similar to~\cite{mauch14}, we then synthesized the data using cosine based oscillators adding 10 harmonics to each signal output.
 The test set has been rendered at 16 kHz. The complete PTDB-TUG set results in almost 10 hours of input signal data.
-We present the results of the synthetic data as box plots in Figure~\ref{fig:ptdbtug_synth} grouped by the estimator. It shows that all estimators benefit from the refinement in terms of MFPE. The iRAPT1 estimator shows the best improvement of \ptdbtugsynthiRAPTIMPROMFPE \% in MFPE. As expected, the Oracle Refinement is almost at $0$ MFPE.
+We present the results of the synthetic data as box plots in Figure~\ref{fig:ptdbtug_synth} grouped by the estimator. It shows that all estimators benefit from the refinement in terms of MFPE. The iRAPT1 estimator shows the best improvement of \ptdbtugsynthiRAPTIMPROMFPE \% in MFPE. As expected, oracle refinement yields almost perfect results in terms of MFPE.
 
 \begin{figure}[t!]
 \centering

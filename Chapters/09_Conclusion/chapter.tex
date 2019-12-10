@@ -65,7 +65,7 @@ With such a model one may further improve lossy compression for object-based mus
 \subsection*{Count Estimation as an Evaluation Measure for Separation}
 
 The recent results on SiSEC 2018~\cite{stoeter18sisec}\footnote{See \url{https://sisec18.unmix.app}} indicated that for the first time since the advent of source separation, methods were proposed that perform comparably to the oracle separation methods.
-This success was made possible with better deep learning models such as as~\cite{takahashi17} and the availability of data.
+This success was made possible with better deep learning models such as~\cite{takahashi17} and the availability of data.
 The future of how to improve music source separation is unclear. Possible directions are to enhance the efficiency of the learning architectures or to develop new cost functions which better reflect human perception.
 Furthermore, improving the evaluation metrics is another driving force for better separation algorithms. Unfortunately for separation, humans cannot easily evaluate the audio quality without a reference, which makes annotations cumbersome and expensive.
 Therefore a simpler task such as count estimation could serve as an intermediate evaluation metric to quantify overlap, which is easier to annotate and does not require a reference. Then, a model such as CountNet could approximate the human results and in turn, be used (hence differentiable) inside the cost function of other separation models.
