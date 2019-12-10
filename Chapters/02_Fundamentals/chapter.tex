@@ -20,11 +20,11 @@ Signals}\label{digital-representations-of-audio-signals}}
 
 Today, digital representations are used to store, analyze or process audio signals conveniently.
 A digital audio signal can be obtained from an analog signal using analog-to-digital/digital-to-analog converters (ADC/DAC) which can be found in almost any every-day device such as laptops and smartphones.
-In short, this process includes two steps: first, the continuous time signal \(x(t)\) is converted to a discrete time series, so that one sample\footnote{Please note, that the use of the word \emph{sample} will have different meanings in the context of machine learning, where a sample is an instance of a full signal instead of a single time step.} \(x_n\) was \emph{sampled} with equidistant steps \(T\); second, the amplitude values can be \emph{quantized}, resulting in a vector where each element \(x_i \in \sZ\), thus \(\vx\) represents a one dimensional time series of amplitudes.
+In short, this process includes two steps: 
+first, the continuous time signal \(x(t)\) is converted to a discrete time series, so that one sample\footnote{Please note, that the use of the word \emph{sample} will have different meanings in the context of machine learning, where a sample is an instance of a full signal instead of a single time step.} \(x_n\) is \emph{sampled} with equidistant steps \(T\); 
+second, the amplitude values can be \emph{quantized}, resulting in a vector where each element \(x_i \in \sZ\), thus \(\vx\) represents a one dimensional time series of amplitudes.
 An important parameter in the process of digitization is the sample rate \(F_s = 1/T\) where \(T\) is the sampling period.
-% Often, \(F_s\) has a significant effect on the quality of audio signals.
-% And, it is the objective of a real-world audio system not to introduce perceivable degradation in audio quality when a digital signal is reproduced over headphones or loudspeakers.
-% Due to the Nyquist-Shannon sampling theorem, the sample rate needs to be at least twice the bandwidth of the analog signal.
+
 To facilitate the full human hearing range of 20~\si{\hertz} - 20~\si{\kilo\hertz}~\cite{fastl90, moore89}, due to the Nyquist-Shannon sampling theorem, often, sample rates of at least 40~\si{\kilo\hertz} are chosen.
 However, for many applications, a lower sampling rate is sufficient, e.g., in speech communication where intelligibility often is more important than quality.
 For further details, we refer the reader to audio signal processing basics such as~Chapter 1 in~\cite{proakis96} or Chapter 2 in~\cite{Mueller15}.
@@ -75,7 +75,6 @@ For a detailed overview into the research field of pitch and \(F_0\), the reader
 \subsection{Time-Variant Audio Signals}\label{sub:time-variant-audio-signals}
 
 Audio signals are considered to be stationary or time-invariant when their properties such as the amplitude of the fundamental frequency of the signal do not change over time.
-% A stationary sound can turn into time-invariant sound using modulations
 The signal becomes time-variant when an external function changes (modulates) the parameters of a signal over time.
 This type of modulation was the basis for many break-through inventions such as radio transmission~\cite{shannon48}.
 In the case of audio signals, often both the modulating function (modulator or carrier) and the signal being modulated (input), are periodic.
@@ -89,17 +88,8 @@ It is based on the principle of a modulator/demodulator (modem) where a high-fre
 The modulator varies the amplitude or the frequency of the carrier signal.
 Let us imagine a sinusoidal carrier signal $x(t) = \sin \omega_c t$ where $\omega_c$ is the carrier frequency. Now, applying a time varying amplitude $a(t)$ results in \emph{amplitude modulation} (AM):
 
-% We assume that we can separate overlapping partials of the sources based on differences in amplitude and/or frequency modulation, resulting in the following model for a signal with $P$ commonly modulated partials
-% \begin{equation}
-%   \begin{array}{l}
-%    x(n) = \displaystyle \sum_{p=1}^{P} \Big[\big(1 + a(n)\big) \\
-%    \hspace{3.5em}\displaystyle \cdot\sin \Big(2\pwe f_{p,0}\big(n + \frac{1}{f_{1,0}} \sum_{m=m_0}^{n}{f(m)} \big) + \phi_{p,0} \Big)\Big] ,
-%   \end{array}
-% \end{equation}
-% where effectively the amplitude modulation is $a(n)$ and the frequency modulation of the first partial is $f(n)$.
-
 \begin{equation*}
-    s_{AM}(t) = a(t) \sin \left( \omega_{c} t\right).    
+    s_{AM}(t) = a(t) \sin \left( \omega_{c} t\right).
 \end{equation*}
 
 In comparison to AM, frequency modulation (FM) varies the frequency of the carrier, so that:
@@ -110,9 +100,6 @@ In comparison to AM, frequency modulation (FM) varies the frequency of the carri
 
 where A is the amplitude, $\omega_{c}$ is the carrier frequency and $M_f$ is called modulation index.
 When the modulation function $f(t)$ is a single sine wave, $\cos \left(\omega_{m} t+p_{m}\right)$, of frequency $\omega_{m}$, the Fourier spectrum of $s_{FM}(t)$, in theory, depends on Bessel functions that do not admit a closed-form expression, being intractable in practice~\cite{abramowitz64}.
-% For applications where the modulation frequencies are a lot smaller than the carrier frequency, the spectrum that results by frequency modulations is similar to those of amplitude modulations.
-% This is the reason why algorithms that aim to capture the amplitude modulation will also observe frequency modulations.
-% The total bandwidth in this scenario is approximately $2\Delta \omega_0$, as found by Carson in~\cite{carson22}.\par
 For audio communication such as FM radio, the modulation frequency or rate is the same as the audio signal being transmitted (audio rate modulations).
 In music signals, the carrier could be a single note, played by a violin and the modulation signal is the movement of the finger on the fretboard, producing a vibrato effect.
 In music or speech, these modulations are much slower --- typically up to 10~\si{\hertz} (slow) or up to 100~\si{\hertz} (medium/fast).
@@ -158,30 +145,6 @@ In fact, it was found in~\cite{joris04} that speech is the reason why our human 
 It is interesting to observe that many modulations have a rate of around 5~\si{\hertz}. 
 Zwicker found in~\cite{zwicker52} that humans are very sensitive at detecting amplitude modulations at such a low modulation frequency.
 This observation can be confirmed when looking at physical modulations that occur when humans suffer from vocal tremor~\cite{ramig87} or Parkinson~\cite{botzel14}: in both cases, muscle contractions are actuated with the same frequency, indicating that these modulations are natural for humans.
-
-% \begin{table}[]
-% \scriptsize
-% \centering
-% \begin{adjustbox}{angle=90}
-% \begin{tabular}{@{}lllp{3.5cm}ll@{}}
-% \toprule
-%                           & Carrier Signal    & Modulation Function & Modulated Parameters        & Modulation rate & References\\ 
-% \midrule
-% AM/FM/PM                  & HF Sinusoid       & any audio signal    & amplitude, frequency, phase & up to 20~\si{\kilo\hertz}     & \cite{shannon48}        \\
-% String Vibrato & String Excitation & sinusoidal-like     & string length   & 5-7~\si{\hertz}          & \cite{fletcher01, macleod06}\\
-% Woodwind and Brass Vibrato & Resonator & sinusoidal-like & amplitude, timbre               & 4-8~\si{\hertz}          & \cite{fletcher01, gilbert05}\\
-% Modular Synthesizer       & any audio signal  & LFO                 & any parameter               & not limited     & \cite{buchla05, pinch09}\\ 
-% Electronic Organ with Tremolo  & instrument sound & doppler effect      & amplitude and frequency & 1~\si{\hertz}/7~\si{\hertz} & \cite{leslie49} \\
-% Singing Voice  & vocal &  sinusoidal/triangular &  amplitude and frequency & 5-8~\si{\hertz} & \cite{sundberg94} \\
-% Speech  & glottal pulse, language & not defined & amplitude, frequency, \newline phoneme duration, timbre& 4-10~\si{\hertz} & \cite{plomp83, fuellgrabe09}\\
-% Parkinsonian tremor  & muscle activity &  sinusoidal-like & amplitude & 5~\si{\hertz} & \cite{botzel14}\\
-% Auditory cortex  & nerve activity &  sinusoidal-like & amplitude & up to 20~\si{\hertz} & \cite{schreiner88}\\
-% \bottomrule
-% \end{tabular}
-% \end{adjustbox}
-% \caption{Overview of modulations in audio signals and a selection of their respective properties.}%
-% \label{tab:modulations}
-% \end{table}
 
 \hypertarget{sources-and-mixtures}{%
 \section{Sources and Mixtures}\label{sources-and-mixtures}}
