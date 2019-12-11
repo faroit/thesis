@@ -86,7 +86,7 @@ When we apply a factorization with $K=2$, one can see that NMF has difficulties 
 \hspace{0.3\textwidth} % separation
 \subcaptionbox{Factorization}
 [1\textwidth]{\input{Chapters/05_Separation_Known/figures/AMPlots/WH.tex}}%
-\caption{Example of separating a mixture of two amplitude modulated (AM) sinusoids using non-negative matrix factorization (NMF)\\ \textbf{(a)} Mixture of two sinusoids at $440$ Hz with AM of $4.7$ Hz and $12.6$ Hz (sample rate=$8$ kHz), \textbf{(b)} STFT (FFT length = 256), \textbf{(c)} Non-negative matrix factorization results in $\mW$ and $\mH$, after 100 iterations ($\beta = 1$).}
+\caption{Example of separating a mixture of two amplitude modulated (AM) sinusoids using non-negative matrix factorization (NMF)\\ \textbf{(a)} Mixture of two sinusoids at \SI{440}{\hertz} with AM of \SI{4.7}{\hertz} and \SI{12.6}{\hertz}, \textbf{(b)} STFT ($FFT length = 256$), \textbf{(c)} Non-negative matrix factorization results in $\mW$ and $\mH$, after 100 iterations ($\beta = 1$).}
 \label{fig:am_tensor_nmf}
 \end{figure}
 
@@ -154,7 +154,7 @@ It gives a smoother activation matrix and is able to generate the output with th
 \hspace{0.3\textwidth} % separation
 \subcaptionbox{Tensor Factorization}
 [1\textwidth]{\input{Chapters/05_Separation_Known/figures/AMPlots/GAS.tex}}%
-\caption{\textbf{(a)} Modulation tensor slice of a mixture of two sinusoids at $440$ Hz with AM of $4.7$ Hz and $12.6$ Hz (sample rate=$8$ kHz)  (FFT length = 256), \textbf{(b)}  $\mV \approx \mW \mM \mH$ Result of Non-Negative Tensor Factorization ($\beta = 1$) after 100 iterations.}
+\caption{\textbf{(a)} Modulation tensor slice of a mixture of two sinusoids at \SI{440}{\hertz} with AM of \SI{4.7}{\hertz} and \SI{12.6}{\hertz} ($FFT length = 256$), \textbf{(b)}  $\mV \approx \mW \mM \mH$ Result of Non-Negative Tensor Factorization ($\beta = 1$) after 100 iterations.}
 \label{fig:am_ntf}
 \end{figure}
 \par
@@ -184,7 +184,7 @@ We call this the \emph{Common Fate Model} (CFM), borrowing from the Gestalt theo
 
 Bregman introduced the Common Fate theory for auditory scene analysis as the ability to group sound objects based on their common motion over time, as occurs with frequency modulations of harmonic partials.
 As outlined by Bregman, the human ability to detect and group sound sources by small differences in FM and AM is outstanding.
-Also, it turns out, as mentioned in Section~\ref{exploiting-slow-modulations}, that humans are especially sensitive to modulation frequencies around 5~Hz, which is the typical vibrato frequency that many musicians produce naturally.
+Also, it turns out, as mentioned in Section~\ref{exploiting-slow-modulations}, that humans are especially sensitive to modulation frequencies around \SI{5}{\hertz}, which is the typical vibrato frequency that many musicians produce naturally.
 
 \subsection{The Common Fate Transform}
 \label{sub:CFT}
@@ -351,7 +351,7 @@ In this section, we present separation experiments utilizing CFM and compare it 
 \label{sub:Synthentic_Examples}
 
 To illustrate the CFT representation, we processed a mixture consisting of two sinusoidal sources. 
-One source is a pure sine wave of fundamental frequency 440~Hz whereas the other is frequency modulated by a sinusoid of 6.3~Hz. 
+One source is a pure sine wave of fundamental frequency \SI{440}{\hertz} whereas the other is frequency modulated by a sinusoid of \SI{6.3}{\hertz}. 
 In the first step, a STFT with a DFT-length of 1024 samples and a hop-size of 256 samples was processed at a sample rate of 22.05~kHz. 
 Patches of size $(N_a, N_b) = (32, 48)$ (not respecting overlaps) were then taken from the STFT output. 
 Figure~\ref{fig:CFT} in Section~\ref{sub:CFT} then shows the Common Fate Transform for the mixture. 

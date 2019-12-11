@@ -331,7 +331,7 @@ We, therefore, generated annotations based on a voice activity detection algorit
 \par
 To generate a single example, a tuple of a speech mixture and its ground truth speaker count \(\cardinality \), we draw a unique set of \(\cardinality \) speakers from the corpus.
 For each of the speakers, we then select a random utterance, resampled to 16 kHz sampling rate and apply VAD.\@
-The VAD method was configured using default parameters using a hop size of 10~ms.
+The VAD method was configured using default parameters using a hop size of \SI{10}{\milli\second}.
 Further, the VAD estimate was used to remove silence from the beginning and the end of an utterance recording.
 In the next step, more utterances from the same speaker are drawn from the corpus until the desired duration is reached.
 We removed silence in the beginning and end of each utterance to increase the overlap within one segment.
