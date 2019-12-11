@@ -33,14 +33,14 @@ As an exception compared to other music scenarios, when all instruments play~\em
 \end{itemize}
 
 \par
-One way to assemble a dataset is to create random mixtures of single notes compiled from existing datasets such as the \emph{Univ. of Iowa Musical Instrument Sample Database}\footnote{\url{http://theremin.music.uiowa.edu/index.htm}}.
+One way to assemble a dataset is to create random mixtures of single notes compiled from existing datasets such as the \emph{Univ. of Iowa Musical Instrument Sample Database}\footnote{\url{https://web.archive.org/web/20191211134945/http://theremin.music.uiowa.edu/}}.
 However, to better study the influence of vibrato we require extended control over certain parameters such as note duration, vibrato duration, exact fundamental frequency, vibrato rate, vibrato extend, reproducibility, loudness or expression.
 \par
 As mentioned in the previous chapter, vibrato techniques vary across instruments. 
 Instruments such as violin and tenor sax are known for their distinct frequency modulations~\cite{gilbert05}.
 Other instruments such as the English horn and the flute are more close to amplitude modulations.
 \par
-We, therefore, generated the notes using a software sampler\footnote{\textsc{Vienna Symphonic Library}: \url{https://vsl.co.at}} which allows us to control the parameters such as the vibrato.
+We, therefore, generated the notes using a software sampler\footnote{\textsc{Vienna Symphonic Library}: \url{https://web.archive.org/web/20191029200706/https://www.vsl.co.at/en}} which allows us to control the parameters such as the vibrato.
 All our test stimuli have a duration of three seconds.
 Items were equalized in loudness by using an iterative calculation of the loudness algorithm of the time-varying Zwicker model~\cite{zwicker13}. 
 We used an implementation released in~\cite{genesis12}. 
@@ -78,59 +78,6 @@ It turned out that for two sources, in speech we observe \(WDO=0.9\) and for the
 These numbers are surprisingly similar even though both scenarios are so fundamentally different.
 In the case of two instruments playing in unison, the average WDO is \(0.65\), indicating that a good separation in the time-frequency domain is more challenging, thus making the dataset a useful addition compared to existing scenarios.
 
-
-% \begin{figure}
-% \begin{tikzpicture}
-%     \definecolor{color1}{rgb}{0.298039215686275,0.447058823529412,0.690196078431373}
-%     \definecolor{color0}{rgb}{0.917647058823529,0.917647058823529,0.949019607843137}
-%     \definecolor{color4}{rgb}{0.768627450980392,0.305882352941176,0.32156862745098}
-%     \definecolor{color2}{rgb}{0.333333333333333,0.658823529411765,0.407843137254902}
-%     \definecolor{color5}{rgb}{0.8,0.725490196078431,0.454901960784314}
-%     \definecolor{color3}{rgb}{0.505882352941176,0.447058823529412,0.698039215686274}
-%     \begin{axis}[
-%       xlabel=Number of Sources,
-%       ylabel=Separability/WDO,
-%     ]
-%     % speakers
-%     \addplot[color=color0,mark=x, line width=1pt] coordinates {
-%         (2,0.9)
-%         (3,0.79)
-%         (4,0.69)
-%         (5,0.6)
-%         (6,0.536)
-%         (7,0.462)
-%         (8,0.4197)
-%         (9,0.352199)
-%         (10,0.32)
-%   };
-%   % single note
-%       \addplot[color=color1,mark=x] coordinates {
-%         (2,0.928)
-%         (3,0.864)
-%         (4,0.8)
-%         (5,0.77)
-%         (6,0.682)
-%         (7,0.637)
-%         (8,0.592)
-%         (9,0.5647)
-%         (10,0.5434)
-%   };
-%   % unison
-%     \addplot[color=color2,mark=x] coordinates {
-%         (2,0.626)
-%         (3,0.32)
-%         (4,0.2)
-%         (5,0.13)
-%         (6,0.083)
-%         (7,0.038)
-%         (8,0.025)
-%         (9,0.017)
-%         (10,0.01)
-%     };
-%     \end{axis}
-% \end{tikzpicture}
-% \end{figure}
-
 \section{High Resolution Vibrato Recordings}%
 \label{sec:muserc}
 
@@ -162,7 +109,7 @@ Recording video data was inspired by the work of Davis et.\ al.\ in~\cite{Davis2
 In the proposed dataset we chose the violin cello for the following reasons: (1) vibrato is used as a common style for expression, (2) there is an observable physical relationship between frequency modulation and vibrato, and (3) the instrument is large enough to embed sensors to capture the vibrato. The properties of the cello are studied by research in acoustics~\cite{woodhouse04, woodhouse99}.
 \par
 To capture significant aspects of the cello while being played by a musician, we focus on three main observations: (1) Excitation caused by the moving bow; (2) the vibrating string, and (3) the finger, controlling the string length by rolling it on the fingerboard.
-The main focus of the recordings is to analyze vibrato playing style. Since it is common that vibrato characteristics differ from musician to musician, all recordings were performed by two musicians. One is a professional cellist with 30 years of experience in a symphonic orchestra\footnote{\url{http://www.bambergerstreichquartett.de/de/Das_Quartett/Karlheinz_Busch}}.
+The main focus of the recordings is to analyze vibrato playing style. Since it is common that vibrato characteristics differ from musician to musician, all recordings were performed by two musicians. One is a professional cellist with 30 years of experience in a symphonic orchestra\footnote{\url{https://web.archive.org/web/20170317054701/http://bambergerstreichquartett.de/de/Das_Quartett/Karlheinz_Busch}}.
 The other recording was done by the author of this thesis, who has less than 1 hour per week of practice.
 \par
 Due to the width of fingerboard sensors and the attached cables we were able to equip two strings (G and A) allowing to record pitches ${G2, D3, D^\sharp3, E3, A3, B3, C4, C^\sharp4}$ from both musicians (see the middle part of Figure~\ref{fig:teaser_hdf0}).
