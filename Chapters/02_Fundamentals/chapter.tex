@@ -38,10 +38,10 @@ Spectral representations also relate to our human auditory system~\cite{zwicker1
 \par
 The periodicity of real-world sounds, usually only holds for short durations of several milliseconds, often referred to as \emph{quasi-stationarity}.
 We analyze and process short-time spectra, computed in an overlapped fashion, resulting in a \emph{time-frequency} (TF) representation.
-The short-time Fourier transform (STFT) is the most commonly used TF representation~\cite{mcaulay86}.
+The \ac{STFT} is the most commonly used TF representation~\cite{mcaulay86}.
 It encodes the time-varying spectra into a matrix \(\mX\) with frequencies \(f\) and time frames \(t\).
 \par
-STFT matrices \(\mX \in \sC^{T \times F}\) are complex and include phase information.
+\acs{STFT} matrices \(\mX \in \sC^{T \times F}\) are complex and include phase information.
 When sounds are processed in the time-frequency domain, the transformation greatly benefits from being invertible to reconstruct a time domain signal.
 However, analysis and processing is often focussed  on the \emph{magnitude} \(|\mX|\) or the \emph{spectrogram} \(|\mX|^2\).
 

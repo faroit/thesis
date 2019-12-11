@@ -567,7 +567,7 @@ performed evaluation of all models on \(T_{\textrm{test}} = 5720\) unique and un
 % \subsection{Input Representations}
 % Up to date, most discriminative models for speech applications rely on  time-frequency (TF) magnitude representations.
 % This is because, compared to raw time-domain models, TF models allow for faster training due to less data redundancy leading to generally fewer trainable parameters or shorter training duration.
-Several well-established input representations were evaluated in~\cite{stoeter17} such as (linear or logarithmically scaled) short-time Fourier transform (STFT), Mel filter bank outputs (MEL), Mel Frequency Cepstral Coefficients (MFCC) representations, typically chosen for speech applications (compare Table~\ref{tab:inputrep})
+Several well-established input representations were evaluated in~\cite{stoeter17} such as (linear or logarithmically scaled) \ac{STFT}, Mel filter bank outputs (MEL), Mel Frequency Cepstral Coefficients (MFCC) representations, typically chosen for speech applications (compare Table~\ref{tab:inputrep})
 
 \begin{table}
   \centering
@@ -578,7 +578,7 @@ References & Task & Representation \\
 \midrule
 \cite{geiger13, hagerer17} & Overlap Detection/VAD & MFCC \\
 \cite{Graves13, sainath15, marchi17} & ASR & MEL \\
-\cite{amodei16} & ASR & STFT \\
+\cite{amodei16} & ASR & \acs{STFT} \\
 \cite{schluter15, schluter16} & Singing Voice AD & \(\log(1 + \mathbf{X})\) \\
 \bottomrule
 \end{tabular}
@@ -593,9 +593,9 @@ The remaining input representations are identical to those listed in~\cite{stoet
 \noindent\textbf{1) STFT}: magnitude of the short-time Fourier transform computed using Hann-windows.
 A frame length of \SI{25}{\milli\second} has been used.
 The resulting input is \(X \in \mathbb{R}^{500 \times 201}\).\\
-\textbf{2) STFTLOG}: logarithmically scaled magnitudes from STFT representation using \(\log(1 + STFT)\).
+\textbf{2) STFTLOG}: logarithmically scaled magnitudes from \acs{STFT} representation using \(\log(1 + STFT)\).
 The resulting input is \(X \in \mathbb{R}^{500 \times 201}\).\\
-\textbf{3) MEL}: compute mapping from the STFT output directly onto Mel basis using 40 triangular filters.
+\textbf{3) MEL}: compute mapping from the \acs{STFT} output directly onto Mel basis using 40 triangular filters.
 The resulting input is \(X \in \mathbb{R}^{500 \times 40}\).
 \par
 Before feature transformation, all input files were re-sampled to 16 kHz sampling rate. All features are computed using a hop size of \SI{10}{\milli\second}.
@@ -684,7 +684,7 @@ One can see that the overall trend of the count error in MAE is similar regardle
 For \(k > 7\) it can be seen that the classification type models have learned the maximum of \(k\) across the dataset, hence the prediction error decreases when \(k\) reaches its maximum.
 This is because classification based models intrinsically have access to the maximum number of sources determined by the output vector dimensionality.
 Furthermore, one can see that all three factors have only little effect on the overall performance of the model, which is especially the case for small \(k\).
-As indicated by Fig.~\ref{fig:ssec:exp_fixed_gains/A}, choosing linear STFT as input representation generally results in a better performance compared to MEL and even STFTLOG.
+As indicated by Fig.~\ref{fig:ssec:exp_fixed_gains/A}, choosing linear \acs{STFT} as input representation generally results in a better performance compared to MEL and even STFTLOG.
 Concerning the output distribution, a similar observation can be made about classification which outperforms Poisson regression and Gaussian regression, as indicated by Fig.~\ref{fig:ssec:exp_fixed_gains/B}.
 In Fig.~\ref{fig:ssec:exp_fixed_gains/C} the performance of our proposed architectures are compared:
 while CNN and CRNN are close, both of them perform better than full frequency band F-CNN and F-CRNN models as well as the recurrent based architecture, proposed in~\cite{stoeter17}.
@@ -693,10 +693,10 @@ However, it is interesting that, despite its simplicity, the F-CNN and F-CRNN, p
 The results are supported by a statistical evaluation based on mixed effect linear model (see Table~\ref{tab:mixedmodel1}) where \(k\) is modeled as a random effect (for further details we refer to~\cite{Mcculloch06}).
 For a fair comparison (i.e. reducing the bias towards classification type network) of all models we only evaluate results for \(k = \{1, 2\dots7\}\); however, all networks were trained on \(k = \{0, \dots, 10\}\).
 These results indicate that CRNN performs statistically significantly better than the CNN.\@
-Concerning the input representation, we can report that using STFT representation outperforms the log-scaled STFT as well as the MEL representation.
+Concerning the input representation, we can report that using \acs{STFT} representation outperforms the log-scaled S\acs{STFT}TFT as well as the MEL representation.
 Interestingly, we did not find any significant differences between MEL and STFTLOG in MAE performance.
 With respect to the output distributions, we can report that Classification outperforms the other two distributions while Poisson regression performs better than Gaussian regression which confirms the findings made in~\cite{stoeter17} based on the RNN model.
-Therefore, we select the CRNN classification model with STFT features for subsequent experiments.
+Therefore, we select the CRNN classification model with \acs{STFT} features for subsequent experiments.
 \par
 Figure~\ref{fig:complexity} gives an indication of the efficiency of each model and the trade-off between performance and complexity in terms of parameters and floating point multiplications.
 It can be seen that the CRNN is not only the one that performs best but also has significantly fewer parameters than the CNN model.

@@ -22,9 +22,9 @@ Before we present our proposed method in the next section, the following paragra
 \par
 Han and Raphael proposed an approach for de-soloing a recording of a soloist with an accompaniment given a musical score and its time alignment with the recording \cite{han07}. They derived a mask \cite{roweis01} to remove the solo part after using an EM algorithm to estimate its melody, that exploits the score as side information.
 \par
-Hsu et al. proposed an approach which also identifies and separates the unvoiced singing voice \cite{hsu08,hsu10}. Instead of processing in the STFT domain, they use the perceptually motivated Gammatone filter-bank as in~\cite{hu02,li07}. They first detected accompaniment, unvoiced, and voiced segments using an HMM and identified voice-dominant TF units in the voiced frames by using the singing voice separation method in \cite{li07}, using the predominant pitch detection algorithm in \cite{dressler062}. Unvoiced-dominant TF units were identified using a GMM classifier with MFCC features learned from training data. Finally, filtering was achieved with spectral subtraction~\cite{scalart96}.
+Hsu et al. proposed an approach which also identifies and separates the unvoiced singing voice \cite{hsu08,hsu10}. Instead of processing in the \acs{STFT} domain, they use the perceptually motivated Gammatone filter-bank as in~\cite{hu02,li07}. They first detected accompaniment, unvoiced, and voiced segments using an HMM and identified voice-dominant TF units in the voiced frames by using the singing voice separation method in \cite{li07}, using the predominant pitch detection algorithm in \cite{dressler062}. Unvoiced-dominant TF units were identified using a GMM classifier with MFCC features learned from training data. Finally, filtering was achieved with spectral subtraction~\cite{scalart96}.
 \par
-Raphael and Han then proposed a classifier-based approach to separate a soloist from accompanying instruments using a time-aligned symbolic musical score \cite{raphael08}. They built a tree-structured classifier \cite{breiman84} learned from labeled training data to classify TF points in the STFT as belonging to solo or accompaniment. They additionally constrained their classifier to estimate masks having a connected structure.
+Raphael and Han then proposed a classifier-based approach to separate a soloist from accompanying instruments using a time-aligned symbolic musical score \cite{raphael08}. They built a tree-structured classifier \cite{breiman84} learned from labeled training data to classify TF points in the \acs{STFT} as belonging to solo or accompaniment. They additionally constrained their classifier to estimate masks having a connected structure.
 \par
 Cano et al. proposed approaches for solo and accompaniment separation. In~\cite{cano09}, they separated saxophone melodies from mixtures with piano or orchestra by using a melody line detection algorithm, incorporating information about typical saxophone melody lines. In~\cite{grollmisch11,dittmar12,cano12}, they proposed to use the pitch detection algorithm in~\cite{dressler11}. Then, they refined the fundamental frequency and the harmonics and created a binary mask for the solo and accompaniment. They finally used a post-processing stage to refine the separation. In \cite{cano13}, they included a noise spectrum in the harmonic refinement stage to also capture noise-like sounds in vocals. In \cite{cano14}, they additionally included common amplitude modulation characteristics in the separation scheme.
 \par
@@ -122,7 +122,7 @@ Plots (a) and (b) show the two input signals which are linearly mixed (c).
 For each source, the warp contour needs to be calculated. 
 The mixture is then warped with $F_0$ variation estimates of source 1 (d) and source 2 (e). 
 The actual separation/filtering of the sources is then done by using NMF which is not shown here. 
-To separate the components from the warped mixture we used NMF on a STFT computed with a long DFT (about 0.5 s). 
+To separate the components from the warped mixture we used NMF on a \acs{STFT} computed with a long DFT (about 0.5 s). 
 We applied NMF fully unsupervised clustering components based on tonality of $\textbf{W}$ by using a spectral flatness measure~\cite{gray74}. The separated signals (f) and (g) then need to be warped back into the original time domain resulting in (h) and (i).
 
 It is important to clarify that this approach would not be able to separate two modulating instruments playing in unison without having prior knowledge about the individual modulation functions. Although a $F_0$ variation estimate might be difficult to achieve in a mixture, our approach shows that such a system works if that estimate is accurate.
@@ -139,7 +139,7 @@ The test set was processed by two algorithms: standard NMF and the proposed $F_0
 We choose to calculate results with $K=2$ and $K=4$.
 The $F_0$ variation estimator is based on a method that was proposed by B\"ackstr\"om in 2009~\cite{backstrom09} with a subsequent post-processing to ensure the smoothness of the mapping.\\
 
-Both algorithms did perform on the same filter bank output and with the same sample rate. The NMF approach did use a 2048 STFT with 512 samples hop size.
+Both algorithms did perform on the same filter bank output and with the same sample rate. The NMF approach did use a 2048 \acs{STFT} with 512 samples hop size.
 All methods use soft masking/wiener filtering for the actual synthesis.
 
 The results were evaluated by using commonly used evaluation measures provided by the {PEASS} Toolbox~\cite{emiya11} and mean values are provided in Table~\ref{tab:results}. It can be seen that the SDR values give a different tendency than the OPS score, showing that the differences between both measures are substantial. Since unison mixtures are even very challenging for humans to segregate, we chose to focus on the psycho-acoustically weighted performance measures only. The results show a slightly better overall performance for the PVI-NMF.
@@ -242,7 +242,7 @@ A stereo signal is produced by filtering both channels individually.
   \centering
 \begin{tabular}{c}
   \includegraphics[width=0.9\textwidth]{Chapters/05_Separation_Known/warp-demo/Mixture.pdf} \\
-(a) Mixture Magnitude STFT \\[6pt]
+(a) Mixture Magnitude \acs{STFT} \\[6pt]
 \includegraphics[width=0.9\textwidth]{Chapters/05_Separation_Known/warp-demo/Melodia.pdf} \\
 (b) Melody Estimate \\[6pt]
 \includegraphics[width=0.9\textwidth]{Chapters/05_Separation_Known/warp-demo/Contour.pdf} \\
@@ -271,7 +271,7 @@ A stereo signal is produced by filtering both channels individually.
 \label{ssec:performance_sisec15}
 
 The algorithm has been applied to the Mixing Secret Dataset 100 (MSD100) dataset, consisting of a total of 100 songs of different styles.
-The separation results were evaluated using BSSeval~\cite{fevotte05} and submitted to the SiSEC 2015 evaluation challenge~\cite{ono15}.
+The separation results were evaluated using BSSeval~\cite{fevotte05} and submitted to the \acs{SiSEC} 2015 challenge~\cite{ono15}.
 The system was ranked in the last third of the participants and scored only slightly better than RPCA based methods~\cite{huang12}.
 The reason for this is that our proposed system highly depends on the melody estimation algorithm which, in turn, is based on the assumption that there exists a predominant melody in the mixture.
 Unfortunately, the newly created MSD100 dataset was not mixed using professional mastering, resulting in vocals that are below average in loudness.
@@ -282,14 +282,14 @@ On the positive side, the proposed method is of very low complexity.
 
 As mentioned in the previous section, voice activity detection is of paramount importance in the proposed music separation system.
 Therefore, we decided to evaluate if the performance of the system can be improved by using a more robust voice activity detection method as a separate preprocessing step.
-Shortly after we submitted the separation results to the SiSEC 2015 evaluation campaign, the whole audio community was shaken up by the recent success of deep learning throughout several audio related tasks that go beyond automatic speech recognition.
+Shortly after we submitted the separation results to the \acs{SiSEC} 2015 evaluation campaign, the whole audio community was shaken up by the recent success of deep learning throughout several audio related tasks that go beyond automatic speech recognition.
 Among them are several tasks related to music information retrieval (MIR) such as singing voice detection which received major breakthroughs in 2014 and 2015~\cite{lehner14, lehner15, Leglaive15, schlueter15}.
 \par
 Therefore, we decided to integrate a state-of-the-art singing voice detection system into the separation pipeline and evaluate the end-to-end performance.
-We chose to reimplement the system by Leglaive~\cite{Leglaive15}, since it was a good compromise between complexity (its use of hand-crafted features instead of large STFT frames) and performance.
+We chose to reimplement the system by Leglaive~\cite{Leglaive15}, since it was a good compromise between complexity (its use of hand-crafted features instead of large \acs{STFT} frames) and performance.
 In fact, the system reached a state-of-the-art accuracy of 91.5\% for classifying frames of singing voice for the annotated \emph{Jamendo} singing voice detection dataset~\cite{ramona08}, which is an improvement of more than 10\% compared to the best performing non-DNN system.
 
-The input of~\cite{Leglaive15} is an 80-dimensional feature vector consisting of harmonically and percussively enhanced STFT frames of the mixture as described in~\cite{ono08}.
+The input of~\cite{Leglaive15} is an 80-dimensional feature vector consisting of harmonically and percussively enhanced \acs{STFT} frames of the mixture as described in~\cite{ono08}.
 The output of the network is a frame-wise integer, indicating the presence of \emph{voiced} or \emph{unvoiced} frames.
 We trained the network using a fixed number of frames from the DSD100 training dataset.
 The vocal activity labels were obtained from the dataset by analyzing the true vocals.
@@ -299,7 +299,7 @@ The trained network achieves an accuracy of 85\% on the test set.
 While the original network proposed in~\cite{Leglaive15} was framed as a classification task, we modified the sigmoid output activation and replaced it with a linear activation, then trained using the mean squared error cost function.
 This output gain is then multiplied with the mixture signal so that segments with less energy are reduced in volume instead of a boolean decision.
 In experiments, we found out that this helps the \emph{Melodia} algorithm to better detect vocal activity throughout an audio track and therefore yields in melody estimates with fewer errors.
-This DNN-optimized version of the algorithm was then compared (but not submitted) to the new the SiSEC 2016 dataset which was released in the meantime~\cite{liutkus17}.
+This DNN-optimized version of the algorithm was then compared (but not submitted) to the new the \acs{SiSEC} 2016 dataset which was released in the meantime~\cite{liutkus17}.
 The results, depicted in Figure~\ref{fig:05_comparison_sto_stodnn} show that the DNN vocal activity detection improved the vocals SDR by 1.5~dB which is considered as a significant improvement.
 
 \begin{figure}

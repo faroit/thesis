@@ -6,14 +6,14 @@ In the previous chapter, I introduced signal processing fundamentals in the cont
 \hypertarget{separability-of-mixtures}{%
 \section{Separability of Mixtures}\label{separability-of-mixtures}}
 
-Time-frequency representations such as the short-time Fourier transform (STFT) have clear benefits such as the improved interpretability due to its ``image-like'' two-dimensional properties.
+Time-frequency representations such as the \ac{STFT} have clear benefits such as the improved interpretability due to its ``image-like'' two-dimensional properties.
 More importantly, however, such a representation allows to separate mixtures of speech and musical instruments.
 The reason for this is that these mixtures may be fully overlapped in the time domain but are less overlapped in the frequency domain~\cite{rickard02, giannoulis11, rafii}.
 In turn, a time-frequency representation allows applying to filter in a way that sufficiently extracts all targets from the mixture.
 Furthermore, it allows for the reconstruction of the original waveform and provides a good trade-off between computational complexity and separation quality.
 \par
 Due to these reasons, many source separation methods focus on extracting individual sources by modeling their respective target in the time-frequency domain.
-Further, it is assumed that the STFT provides a sufficient level of separability.
+Further, it is assumed that the \acs{STFT} provides a sufficient level of separability.
 The actual extraction or filtering is done by synthesizing the magnitude estimate of the model and applying the originals mixture phase.
 \par
 In practice, the ability to extract a source from a mixture depends on the amount of overlap between sources.
@@ -91,7 +91,7 @@ If we now compare this to the scenario where sources are fully overlapped as in 
 \par
 While this is an extreme scenario, it still provides a useful example where common assumptions are violated, and it would facilitate the demand to develop new methods that do not rely so much on these assumptions.
 By naïvely observing the time-frequency representation in Figure~\ref{fig:count} closely, we see that the slow spectro-temporal modulations caused by the vibrato are one of the aspects where the two sources differ.
-Here, the classical STFT does not provide sufficient separability and representations as in the \emph{modulation spectrogram}, presented by~\cite{greenberg96} may be preferable.
+Here, the classical \acs{STFT} does not provide sufficient separability and representations as in the \emph{modulation spectrogram}, presented by~\cite{greenberg96} may be preferable.
 Details about this approach are discussed in Chapter~\ref{cha:unknown}.
 
 \hypertarget{exploiting-slow-modulations}{%

@@ -137,7 +137,7 @@ In the case of very old recordings, the recordings were down-mixed (to tape) dur
 Now, the lack of available multitrack datasets prevents research on source separation to advance further.
 This is especially true for supervised methods but also affects objective evaluation where the true sources would need to be available.
 \par
-The Signal Separation Evaluation Campaign (SiSEC) is a publicly organized benchmark to assess the performance of source separation systems~\cite{sisec13, ono15, liutkus17, stoeter18sisec}. 
+The \ac{SiSEC} is a publicly organized benchmark to assess the performance of source separation systems~\cite{sisec13, ono15, liutkus17, stoeter18sisec}. 
 Through this campaign, a multitrack dataset was compiled starting with the MASS dataset~\cite{MTGMASSdb} that was used in one of the first campaigns in 2009~\cite{vincent09}.
 Up until the release of MedleyDB~\cite{bittner14} in 2014, researchers did not have access to a large number of full-length multitrack recordings.
 Since then we helped to aggregate such data from multiple sources to compile the DSD100 dataset~\cite{liutkus17} which was the first dataset that could successfully be used for data-driven separation methods (See Table~\ref{tab:datasets} for a comparison to other datasets).
@@ -171,6 +171,6 @@ The dataset is still small in comparison to machine learning sets from vision su
 Working with multitrack audio files can be cumbersome due to its hierarchical structure that needs to be parsed.
 For that purpose, we developed a software toolbox for Python that permits the straightforward processing of the DSD100/MUSDB18 dataset. This software is open source and was publicly broadcasted so as to allow the participants to run the evaluation themselves\footnote{\url{github.com/faroit/dsdtools} / \url{github.com/sigsep/sigsep-mus-db}}.
 \par
-This package integrates with existing Python code, thus makes it easy to participate in SiSEC. The core of this package is calling a user-provided function that separates the mixtures from the dataset into several estimated target sources.
+This package integrates with existing Python code, thus makes it easy to participate in \acs{SiSEC}. The core of this package is calling a user-provided function that separates the mixtures from the dataset into several estimated target sources.
 
 All details of this accompanying software tools may be found on its dedicated website\footnote{\url{https://sigsep.github.io}}.
