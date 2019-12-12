@@ -382,17 +382,17 @@ We compared the separation performance of six different methods, summarized in T
 \item[NMF] We took a ``standard'' \acs{NMF} based method~\cite{virtanen07}. We highlight that taking a \acs{STFT} with frames of length 1024 would not make a fair comparison, because the CFM model actually results in a larger frequency resolution. Therefore a comparable \acs{NMF} is based on an \acs{STFT} of DFT-length 32768.
 \item[HR-NMF] See description in~\cite{magron15a}.
 \end{description}
-All factorizations ran for 100 iterations and were repeated five times. We chose $k=(2,\ldots,6)$ components for each factorization. For $k > 2$ we used oracle clustering to show the upper limit of SDR which can be achieved.
+All factorizations ran for 100 iterations and were repeated five times. We chose $k=(2,\ldots,6)$ components for each factorization. For $k > 2$ we used oracle clustering to show the upper limit of \ac{SDR} which can be achieved.
 
 We ran the performance evaluation by using BSSeval~\cite{vincent06}. 
-The results of Signal to Distortion Ratio (SDR), Signal to Interference Ratio (SIR), and Signal to Artifacts Ration (SAR) are depicted in Figure~\ref{fig:boxplot_overall}. 
+The results of \acs{SDR}, \ac{SIR}, and \ac{SAR} are depicted in Figure~\ref{fig:boxplot_overall}. 
 Results indicate that the CFM model performs well in all measures. 
-However, in terms of SIR, the results of HR-NMF are better than CFM method. 
+However, in terms of \acs{SIR}, the results of HR-NMF are better than CFM method. 
 The results for CFMMOD and CFMM indicate the positive influence of the CFM factorization compared to~\cite{barker13}.
 The results of CFMM indicate that the complex CFT lead to better results. 
 \acs{NMF} did perform surprisingly well, which may only hold for our test set, where each source is active for a long period. 
 This results in a cyclic stationary vibrato, revealing spectral side lobes at such a high resolution. 
-With more than one component per source, the results of CFM do improve, but it can be seen that more than two components ($k=4$) will not increase the SDR values as indicated in Figure~\ref{fig:iterations}. 
+With more than one component per source, the results of CFM do improve, but it can be seen that more than two components ($k=4$) will not increase the \acs{SDR} values as indicated in Figure~\ref{fig:iterations}. 
 The separation results and a full Python implementation of the CFM algorithm can be found on the companion website~\footnote{\url{github.com/aliutkus/commonfate}}.
 
 \begin{figure}[ht!]
@@ -405,7 +405,7 @@ The separation results and a full Python implementation of the CFM algorithm can
 \begin{figure}[ht!]
 \centering
         \includegraphics[width=0.8\textwidth]{Chapters/06_Separation_Unknown/figures/iterations.pdf}
-\caption{Boxplots of SDR values of the unison dataset over the number of components $k$. For $k>2$ oracle clustering was applied. \textsuperscript{\textregistered}2016 IEEE.}
+\caption{Boxplots of \acs{SDR} values of the unison dataset over the number of components $k$. For $k>2$ oracle clustering was applied. \textsuperscript{\textregistered}2016 IEEE.}
 \label{fig:iterations}
 \end{figure}
 
@@ -546,7 +546,7 @@ The objective scores for my proposed methods were obtained using BSSEval and are
 
 \begin{figure*}[htbp]
     \includegraphics[width=1.1\textwidth]{Chapters/06_Separation_Unknown/figures/evaluation.pdf}
-    \caption{BSSEval scores for the vocals and accompaniment estimates for \acs{SiSEC} 2016 on the DSD100 test dataset. Scores are sorted according the vocal median SDR and grouped by supervised and unsupervised methods. The proposed systems are \emph{STO1}, based on GFT-GFT and \emph{STO2}, based on CFT-CFT. Dashed lines indicate respective group medians.}
+    \caption{BSSEval scores for the vocals and accompaniment estimates for \acs{SiSEC} 2016 on the DSD100 test dataset. Scores are sorted according the vocal median \acs{SDR} and grouped by supervised and unsupervised methods. The proposed systems are \emph{STO1}, based on GFT-GFT and \emph{STO2}, based on CFT-CFT. Dashed lines indicate respective group medians.}
     \label{fig:eval}
 \end{figure*}
 
