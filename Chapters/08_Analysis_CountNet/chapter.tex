@@ -27,7 +27,7 @@ Overlap detection has since evolved into its own line of research with many rece
 Overlap detection can be seen as a binarized version of the count estimation problem where the number of speakers equals to one (\emph{no overlap}) or more than one (\emph{overlap}).
 It is, therefore, possible to apply a count estimation system for the overlap detection problem but not vice versa.
 Also, an overlap detection system cannot be easily utilized in a source separation system.
-In fact, it should be noted that before the arrival of deep learning based separation systems, models required long context and in such a case, for methods like NMF, the number of concurrent speakers could be introduced as a regularization term~\cite{lefevre11}.
+In fact, it should be noted that before the arrival of deep learning based separation systems, models required long context and in such a case, for methods like \acs{NMF}, the number of concurrent speakers could be introduced as a regularization term~\cite{lefevre11}.
 In recent years, however, large improvements were achieved by deep learning based methods~\cite{yu16, hershey16} at shorter segment duration (often 1-5 seconds).
 In such approaches, it becomes possible to apply separation only when its ``needed''.
 In this scenario, a method of estimating the maximum number of concurrent speakers becomes useful and in some cases essential.

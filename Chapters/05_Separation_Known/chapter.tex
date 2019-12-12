@@ -2,7 +2,7 @@
 \label{cha:known}
 
 For many source separation methods it is common to assume that the spectral harmonics are not fully overlapped.
-In turn, this assumption is exploited in methods such as non-negative matrix factorization (NMF) to approximate the mixture from a lower-rank decomposition in an unsupervised way.
+In turn, this assumption is exploited in methods such as \ac{NMF} to approximate the mixture from a lower-rank decomposition in an unsupervised way.
 Still, in order to improve separation quality, researchers imposed additional constraints based on prior information about the sources in their algorithms~\cite{ozerov12}.
 The extent of such meta information very often depends on the availability of data.
 One example of an informed source separation system is described by Ewert and M\"uller \cite{ewert12}.
@@ -46,11 +46,11 @@ For example, vibrato rates vary across different instruments.
 In~\cite{macleod06} the vibrato width (frequency deviation) was found to be significantly different between violinists and violists performers.
 This can be exploited in source separation scenarios.
 \par
-However, in the case of separation methods such as non-negative matrix factorization (NMF), it lacks the ability to model time-varying frequencies (See details in Chapter~\ref{cha:unknown}).
-Several extensions for NMF have been proposed to improve the decomposition quality.
-Hennequin et al. proposed in \cite{hennequin11} a frequency dependent activation matrix, whereas Smaragdis et al. developed a variant of the NMF in~\cite{smaragdis08} which is invariant to frequency shifts.
+However, in the case of \acs{NMF}, it lacks the ability to model time-varying frequencies (See details in Chapter~\ref{cha:unknown}).
+Several extensions for \acs{NMF} have been proposed to improve the decomposition quality.
+Hennequin et al. proposed in \cite{hennequin11} a frequency dependent activation matrix, whereas Smaragdis et al. developed a variant of the \acs{NMF} in~\cite{smaragdis08} which is invariant to frequency shifts.
 Another approach is to model the spectral pattern changes by Markov chains \cite{nakano10}. All these approaches attempt to model the non-stationary effects within the decomposition model.
-In this work, instead, we propose a method that increases the stationarity of the signal in a preprocessing step and then use the standard separation like NMF for the decomposition.\\
+In this work, instead, we propose a method that increases the stationarity of the signal in a preprocessing step and then use the standard separation like \acs{NMF} for the decomposition.\\
 
 \subsection{Time Warping}
 \label{sub:time_warping}
@@ -112,18 +112,18 @@ Secondly every harmonic line has to be individually frequency demodulated while 
 
 \begin{figure}
   \includegraphics[width=\textwidth]{Chapters/05_Separation_Known/figures/toy.pdf}
-\caption{Example of $F_0$ variation informed NMF in the warped domain. \textit{Time} is shown on horizontal axes. \textit{Frequency} is shown on vertical axes.}%
+\caption{Example of $F_0$ variation informed \acs{NMF} in the warped domain. \textit{Time} is shown on horizontal axes. \textit{Frequency} is shown on vertical axes.}%
 \label{fig:warpingdemo}
 \end{figure}
 
-With the ability to remove the frequency modulation from a signal, we included time warping in a source separation system to address the non-stationarity issues of NMF based approaches. 
+With the ability to remove the frequency modulation from a signal, we included time warping in a source separation system to address the non-stationarity issues of \acs{NMF} based approaches. 
 Figure~\ref{fig:warpingdemo} shows how this system works on a purely harmonic FM signal mixture. 
 Plots (a) and (b) show the two input signals which are linearly mixed (c). 
 For each source, the warp contour needs to be calculated. 
 The mixture is then warped with $F_0$ variation estimates of source 1 (d) and source 2 (e). 
-The actual separation/filtering of the sources is then done by using NMF which is not shown here. 
-To separate the components from the warped mixture we used NMF on a \acs{STFT} computed with a long DFT (about 0.5 s). 
-We applied NMF fully unsupervised clustering components based on tonality of $\textbf{W}$ by using a spectral flatness measure~\cite{gray74}. The separated signals (f) and (g) then need to be warped back into the original time domain resulting in (h) and (i).
+The actual separation/filtering of the sources is then done by using \acs{NMF} which is not shown here. 
+To separate the components from the warped mixture we used \acs{NMF} on a \acs{STFT} computed with a long DFT (about 0.5 s). 
+We applied \acs{NMF} fully unsupervised clustering components based on tonality of $\textbf{W}$ by using a spectral flatness measure~\cite{gray74}. The separated signals (f) and (g) then need to be warped back into the original time domain resulting in (h) and (i).
 
 It is important to clarify that this approach would not be able to separate two modulating instruments playing in unison without having prior knowledge about the individual modulation functions. Although a $F_0$ variation estimate might be difficult to achieve in a mixture, our approach shows that such a system works if that estimate is accurate.
 
@@ -135,15 +135,17 @@ Like in~\cite{barker13} we choose not to address the problem of clustering the c
 Instead of processing mixtures in a $A-B-AB$ or $A-AB-B$ paradigm we went for a supervised learning phase where we had access to the original source individually.
 In this \emph{oracle} supervised approach for each of the sources we then learned the spectral, temporal components and concatenated them. The learned coefficients were then used to initialize the final factorization process. This way we can achieve the upper bound separation result.
 
-The test set was processed by two algorithms: standard NMF and the proposed $F_0$ variation informed NMF (PVI-NMF). The factorizations for NMF were computed by minimizing the $\beta = 1$ divergence (Kullback-Leibler divergence).
+The test set was processed by two algorithms: standard \acs{NMF} and the proposed $F_0$ variation informed \acs{NMF} (PVI-NMF). The factorizations for \acs{NMF} were computed by minimizing the $\beta = 1$ divergence (Kullback-Leibler divergence).
 We choose to calculate results with $K=2$ and $K=4$.
 The $F_0$ variation estimator is based on a method that was proposed by B\"ackstr\"om in 2009~\cite{backstrom09} with a subsequent post-processing to ensure the smoothness of the mapping.\\
 
-Both algorithms did perform on the same filter bank output and with the same sample rate. The NMF approach did use a 2048 \acs{STFT} with 512 samples hop size.
+Both algorithms did perform on the same filter bank output and with the same sample rate. The \acs{NMF} approach did use a 2048 \acs{STFT} with 512 samples hop size.
 All methods use soft masking/wiener filtering for the actual synthesis.
 
-The results were evaluated by using commonly used evaluation measures provided by the {PEASS} Toolbox~\cite{emiya11} and mean values are provided in Table~\ref{tab:results}. It can be seen that the SDR values give a different tendency than the OPS score, showing that the differences between both measures are substantial. Since unison mixtures are even very challenging for humans to segregate, we chose to focus on the psycho-acoustically weighted performance measures only. The results show a slightly better overall performance for the PVI-NMF.
-The results have also been evaluated and confirmed subjectively by informal listening. Additionally, we provide selected stimuli online on an accompanying webpage \footnote{\url{https://web.archive.org/web/20191211135506/https://www.audiolabs-erlangen.de/resources/2014-DAFx-Unison/}}. In general, the PEASS scores give a good indication of quality. However, the artifacts that are introduced by the standard NMF synthesis seem to be not well reflected. One possible reason is that the PEASS Toolbox has not been tested on artifacts from unison mixtures. \\
+The results were evaluated by using commonly used evaluation measures provided by the {PEASS} Toolbox~\cite{emiya11} and mean values are provided in Table~\ref{tab:results}. 
+It can be seen that the SDR values give a different tendency than the OPS score, showing that the differences between both measures are substantial. Since unison mixtures are even very challenging for humans to segregate, we chose to focus on the psycho-acoustically weighted performance measures only. The results show a slightly better overall performance for the PVI-NMF.
+The results have also been evaluated and confirmed subjectively by informal listening. Additionally, we provide selected stimuli online on an accompanying webpage \footnote{\url{https://web.archive.org/web/20191211135506/https://www.audiolabs-erlangen.de/resources/2014-DAFx-Unison/}}. 
+In general, the PEASS scores give a good indication of quality. However, the artifacts that are introduced by the standard \acs{NMF} synthesis seem to be not well reflected. One possible reason is that the PEASS Toolbox has not been tested on artifacts from unison mixtures. \\
 
 \begin{table}
 \begin{center}
@@ -223,7 +225,7 @@ Therefore, we only applied the warping on voiced parts and left the non-vocal pa
 In order to do this, we used the built-in voice activity detection from \emph{Melodia}.
 The full procedure is depicted in Figure~\ref{fig:warp_sisec_demoa} and Figure~\ref{fig:warp_sisec_demob}.
 For all continuously voiced segments, from the mixture (a), we compute the warp contour (c) from the melody segments (b).
-To reduce the complexity of the extraction, compared to the NMF mentioned in Section~\ref{sub:frequency_modulation}, we designed a comb filter that can extract the voice (f) in the warped time domain (d).
+To reduce the complexity of the extraction, compared to the \acs{NMF} mentioned in Section~\ref{sub:frequency_modulation}, we designed a comb filter that can extract the voice (f) in the warped time domain (d).
 Therefore, we used an IIR Filter with the frequency response
 
 \begin{equation}
@@ -429,8 +431,8 @@ To address this task, we developed a method that utilizes time warping to extrac
 More specifically, the mixture is warped based on the fundamental frequency estimate of the source to be extracted. 
 In the warped time domain the frequency modulation of the desired source is removed. 
 In our first study, we evaluated this method of separating single note from instruments playing in unison.
-For the actual separation, we used a standard NMF separation approach.
-The results of 45 mixtures have been evaluated by using the PEASS toolbox and the scores indicated an improvement in favor of the $F_0$ variation informed NMF compared to the standard NMF.
+For the actual separation, we used a ``standard'' \acs{NMF} separation approach.
+The results of 45 mixtures have been evaluated by using the PEASS toolbox and the scores indicated an improvement in favor of the $F_0$ variation informed \acs{NMF} compared to the ``standard'' \acs{NMF}.
 \par
 In order to evaluate if our method can be applied on a more realistic scenario, we proposed an extension of the method for the scenario of vocal/accompaniment separation.
 We used a state-of-the-art melody estimation technique to extract the \(F_0\) variation of the vocal source to apply warping to the mixture.
