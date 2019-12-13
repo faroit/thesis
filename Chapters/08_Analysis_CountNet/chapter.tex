@@ -527,7 +527,7 @@ However, it is interesting that, despite its simplicity, the F-CNN and F-CRNN, p
 The results are supported by a statistical evaluation based on mixed effect linear model (see Table~\ref{tab:mixedmodel1}) where \(k\) is modeled as a random effect (for further details we refer to~\cite{Mcculloch06}).
 For a fair comparison (i.e. reducing the bias towards classification type network) of all models we only evaluate results for \(k = \{1, 2\dots7\}\); however, all networks were trained on \(k = \{0, \dots, 10\}\).
 These results indicate that CRNN performs statistically significantly better than the CNN.\@
-Concerning the input representation, we can report that using \acs{STFT} representation outperforms the log-scaled S\acs{STFT}TFT as well as the MEL representation.
+Concerning the input representation, we can report that using \acs{STFT} representation outperforms the log-scaled \acs{STFT} as well as the MEL representation.
 Interestingly, we did not find any significant differences between MEL and STFTLOG in MAE performance.
 With respect to the output distributions, we can report that Classification outperforms the other two distributions while Poisson regression performs better than Gaussian regression which confirms the findings made in~\cite{stoeter17} based on the RNN model.
 Therefore, we select the CRNN classification model with \acs{STFT} features for subsequent experiments.
