@@ -1,9 +1,7 @@
 thesis.pdf: revision references.bib ClassicThesis.tex classicthesis-config.tex Chapters/**/*.tex FrontBackmatter/*.tex
 	latexmk -recorder -pdf -pdflatex="pdflatex -shell-escape" --synctex=1 -use-make ClassicThesis
 
-flatten: python latex-flatten.py ClassicThesis.tex thesis_original.tex
-
-diff.pdf: flatten references.bib diff.tex 
+diff.pdf: references.bib diff.tex 
 	latexmk -recorder -pdf -pdflatex="pdflatex -shell-escape" --synctex=1 -use-make diff
 
 clean:
