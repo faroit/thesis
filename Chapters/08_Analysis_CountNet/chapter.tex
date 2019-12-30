@@ -254,7 +254,7 @@ In preliminary experiments we found that by using max-pooling we received signif
 
 \subsubsection{Recurrent Neural Networks (RNN)}%
 A recurrent neural network (RNN) layer is very similar to a fully connected network, except that RNN applies the same set of weights \(\mathbf{A}\) recursively over an input sequence.
-While convolutional layers excel in capturing local structures, RNNs can detect structure in sequential data of arbitrary length. %have an internal memory of infinite length of the past input sequence history.
+While convolutional layers excel in capturing local structures, RNNs can detect structure in sequential data of arbitrary length. 
 This makes it ideal to model time series, however, in practice, the temporal context learnt is limited to only a few time instances, because of the vanishing gradient problem~\cite{Hochreiter98}.
 
 To alleviate this problem, forgetting factors (also called gating) were proposed.
@@ -313,20 +313,14 @@ We used a search space of several hyper-parameters as shown in Table~\ref{tab:fc
 The results are in agreement with the findings in~\cite{schluter16} where small filter kernels of size 3 outperformed larger kernels. Also, it can be seen from the results, that increasing the number of feature maps of the convolutional layers does not necessarily increase the performance.
 
 \subsubsection{Full-Band Convolutional Recurrent Neural Networks (F-CRNN)}%
-% * Also add recurrent.
 Similarly to \emph{CRNN} and to the Deep Speech 2 implementation~\cite{amodei16}, we added an LSTM recurrent layer to the output of the last convolutional layer.
 Since each filter output is only of dimension one, an additional flattening as in \emph{CRNN} is not required.
 
 \subsection{Output Activation Functions for Count Estimation}%
 \label{ssec:objectives}
-% The count estimation problem can be addressed using three different strategies.
+
 For each of the decision functions a suitable output activation and loss is used.
 
-% Reference image object counting networks.
-% * Describe matching loss functions in detail.
-% Describe the DNN networks output layers very shortly
-
-% * Classification+Softmax
 \subsubsection{Classification}
 For \emph{classification}, the output is required to be one-hot-encoded so that the output is of dimension \(y \in \mathbb{B}^{L + 1}\), where \(L\) is the maximum number of concurrent speakers to be expected.
 In the final layer of the network, a softmax activation function is used with the cross-entropy function as the loss.
@@ -347,19 +341,14 @@ For the Poisson regression, the likelihood of parameter \(\lambda \) given the t
 
 \subsection{Speech Corpora and Annotations}%
 \label{ssec:corpus}
-% * Libri Speech
-% * Describe the used VAD
+
 To date, many available speech datasets contain recordings where only a single speaker is active.
 Datasets that include overlapped speech segments, either lack accurate annotations because the annotation of speech onsets and offsets in mixtures is cumbersome for humans or lack a controlled auditory environment such as in TV/broadcasting scenarios~\cite{Gravier12}.
 Since a realistic dataset of fully overlapped speakers is not available, we chose to generate synthetic mixtures.
 We recognize that in a simulated ``cocktail-party'' environment, mixtures lack the conversational aspect of human communication but provide a controlled environment which helps to understand how a DNN solves the count estimation problem.
 As we aim for a speaker independent solution, we selected a speech corpus with preference to a high number of different speakers instead of the number of utterances, thus increasing the number of unique mixtures.
 We selected \emph{LibriSpeech clean-360}\ \cite{panayotov15} which includes 363 hours of clean speech of English utterances from 921 speakers (439 female and 482 male speakers) sampled at 16 kHz.
-% Compared to \emph{LibriSpeech}, \emph{TIMIT} is of lower recording quality and \emph{THCHS} represents mandarin speech.
-% \par
-% As revealed in Equation~\ref{eq:definition_k}, the maximum number of concurrent speakers \(cardinality\) requires annotation of the activity of each individual speaker.
-% Even though many corpora come with word and phonemes annotation, they often are not consistent across different corpora.
-% We therefore generated annotations based on a voice activity detection algorithm (VAD). As we rely on a robust VAD estimate, we found the implementation from the \emph{Chromium Web Browser} as part of the WebRTC Standard~\footnote{WebRTC 1.0: Real-time Communication Between Browsers W3C Editor's Draft 05 June 2017} to yield good results.
+
 In the further course of this work (see Section~\ref{sec:evaluation}), we also present the results from test sets of two other datasets as listed in Table~\ref{tab:corpora}.
 Furthermore, we included non-speech examples from the TUT Acoustic Scenes dataset~\cite{Mesaros16} in our training data to avoid using zero input samples for \(\cardinality = 0\) to increase the robustness against noise.
 
@@ -393,21 +382,9 @@ Furthermore, the data was scaled to zero mean and unit standard deviation across
 Scaling parameters were saved for validation and test.
 For a more detailed description of the data set, the reader is referred to~\cite{stoeter17}.
 
-% \subsubsection{Standardization, Normalization}%
-% \label{ssec:norm}
-%
-% As our application more closely relates to source separation we want our trained DNN system to be robust against gain variations.
-% We therefore find it important that the DNN can not leverage the gain factors of the mixture.
-% We found that the averaged energy of one bin across \(duration\) already is a solid indicator for the number of speakers.
-% In fact, in early experiments of the methods described in~\cite{sayoud10, andrei15} we were only able to reproduce their results when no normalization was applied.
-% To accommodate these findings, we normalize \(\mathbf{X}\) to the average Euclidean norm of \(duration\) frames as proposed by~\cite{uhlich15}.
-% Additionally, as common in machine learning, we scale the normalised input representation so that the feature dimension \(F\) have zero mean and unit variance/standard deviation across the whole training dataset (Standardization).
-
 \subsection{Training Procedure}%
 \label{ssec:parameters}
-% * Optimizer
-% other things
-% To train each network we use Poisson sampling to balance the number of samples \(T_{ \cardinality}\) for each \(\cardinality \).
+
 For all experiments we chose a medium sized training dataset of \(\cardinality \in \textrm{\{0, \ldots, 10\}}\) forming a total of \(T_{\textrm{train}} = 20.020\) mixtures  (1820 per \(k\)), each containing 10 seconds of audio, resulting in 55.55 hours of training material.
 For each sample fed into the network, we select a random excerpt of duration \(D\) from each mixture. If not stated otherwise, \(D=5\)~seconds.
 That way, for each epoch, the network is seeing slightly different samples, reducing the number of redundant samples and thus helping to speed up the stochastic gradient based training process.

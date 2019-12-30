@@ -13,8 +13,8 @@ Let us consider the magnitude \acs{STFT} \(\mX \in \sR_{+}^{F \times T}\) with \
 Now, the \acs{NMF} incorporates non-negative constraints to perform the separation into the sum of \(K\) latent components which are all factored into two matrices (referred to as frequency \emph{basis} \(\mW \in \sR_{+}^ { F \times K }\) and temporal \emph{activations} \(\mH \in \sR_{+}^ { T \times K }\)):
 
 \begin{equation}
-   \mathbf{X} \approx \mW \mH^{T} = \sum\limits_{k=1}^{K} \vw_{k} \circ \vh_{k}
-   \label{eq:vanilla_nmf}
+  \mathbf{X} \approx \mW \mH^{T} = \sum\limits_{k=1}^{K} \vw_{k} \circ \vh_{k}
+  \label{eq:vanilla_nmf}
 \end{equation}
 
 As it can also be seen in Figure~\ref{fig:nmf}, the factorization can also be written as the sum of \(K\) outer products between two rank-one matrices \(\vw_k \in \sR^F\) and \(\vh_k \in \sR^T\).
@@ -145,7 +145,8 @@ Motivated by these results, we wondered if the modulation \acs{NTF} can be used 
 Thus, let us return to the example from Figure~\ref{fig:am_tensor_nmf} of two harmonic signals having the same fundamental frequency of 440~\si{\hertz}, with a stationary amplitude of 4~\si{\hertz} and 10~\si{\hertz} respectively. 
 These differences now turn out to be latent in a non-negative modulation tensor representation.
 In contrast to \acs{NMF}, Figure~\ref{fig:am_ntf} shows valid factorizations of a unison signal using \acs{NTF}.
-It gives a smoother activation matrix and is able to generate the output with the separated amplitude modulations on each sinusoid. The modulation frequency gain matrix shows the two modulation frequency templates and the DC-component.
+It gives a smoother activation matrix and is able to generate the output with the separated amplitude modulations on each sinusoid. 
+The modulation frequency gain matrix shows the two modulation frequency templates and the DC-component.
 
 \begin{figure}[!h]
 \centering
@@ -303,7 +304,6 @@ We also experimented with other two and three-factor combinations but never got 
 \end{figure}
 
 Learning those parameters can be achieved using the non-negative tensor factorization (see e.g.~\cite{cichoki09,ozerov12,smaragdis14} for an overview), except that it is applied to the CFT instead of the \acs{STFT}, and that the particular factorization to be used is~\eqref{eq:NTF_model}.
-
 In essence, it amounts to estimating the parameters~$\{ A_{k},H_{k}\}$ so that the modulus of the CFT is as close as possible to~$\sum_{k}P_{k}$, with some particular cost function as a data-fit criterion called a $\beta$-divergence and which includes Euclidean, Kullback-Leibler and Itakura-Saito as special cases~\cite{fitzgerald08a}. 
 As usual in non-negative models, each parameter is updated in turn, while the others are kept fixed.
 We provide the multiplicative updates in Algorithm~\ref{alg:Fitting-NTF}.
@@ -419,7 +419,6 @@ With the recent success of machine learning models~\cite{HintonSpeech}, it becam
 Rafii et. al describe the current machine learning situation in \cite{rafii}:
 
 \begin{quote}
-  % TODO: make this look nicer
   ``Taking advantage of the recent availability of sufficiently large databases of isolated vocals along with their accompaniment, several researchers investigated the use of machine learning methods to directly estimate a mapping between the mixture and the sources~\cite{huang14, uhlich15}.
   However, most systems today still use classical time-frequency representations.
 
@@ -453,7 +452,7 @@ The architecture is depicted in Figure~\ref{fig:cft_dnn}.
 
 \begin{figure}[ht!]
 \centering
-        \includegraphics[width=\textwidth]{Chapters/06_Separation_Unknown/figures/uhlich_dnn.pdf}
+  \includegraphics[width=\textwidth]{Chapters/06_Separation_Unknown/figures/uhlich_dnn.pdf}
 \caption{Simplified block diagram of fully connected denoising autoencoder network as proposed by~\cite{uhlich15} for time-frequency based separation.}
 \label{fig:cft_dnn}
 \end{figure}
@@ -541,7 +540,6 @@ Table~\ref{tab:sisec_systems} lists the participating systems.
 
 \end{table*}
 
-%announcing the results and the webpage
 The objective scores for my proposed methods were obtained using BSSEval and are given in Figure~\ref{fig:eval}.
 
 \begin{figure*}[htbp]
@@ -550,7 +548,6 @@ The objective scores for my proposed methods were obtained using BSSEval and are
     \label{fig:eval}
 \end{figure*}
 
-% Maybe want to rewrite as it has been stolen from zafar
 An obvious observation in Figure~\ref{fig:eval} is the difference in performance between data-driven methods and ``classical'' unsupervised methods. 
 Further, it shows that exploiting learning data does help separation compared to only relying on \textit{a priori} assumptions such as the harmonicity or redundancy. 
 Additionally, dynamic models such as LSTM from UHL2-3 appear more adapted to music than \acs{FNN}. 
