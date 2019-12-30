@@ -1,5 +1,5 @@
-thesis.pdf: revision references.bib ClassicThesis.tex classicthesis-config.tex Chapters/**/*.tex FrontBackmatter/*.tex
-	latexmk -recorder -pdf -pdflatex="pdflatex -shell-escape" --synctex=1 -use-make ClassicThesis
+thesis.pdf: revision references.bib thesis.tex classicthesis-config.tex Chapters/**/*.tex FrontBackmatter/*.tex
+	latexmk -recorder -pdf -pdflatex="pdflatex -shell-escape" --synctex=1 -use-make thesis
 
 diff.pdf: references.bib diff.tex 
 	latexmk -recorder -pdf -pdflatex="pdflatex -shell-escape" --synctex=1 -use-make diff
