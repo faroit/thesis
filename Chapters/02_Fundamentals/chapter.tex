@@ -77,7 +77,7 @@ For a detailed overview into the research field of pitch and \(F_0\), the reader
 Audio signals are considered to be stationary or time-invariant when their properties such as the amplitude of the fundamental frequency of the signal do not change over time.
 The signal becomes time-variant when an external function changes (modulates) the parameters of a signal over time.
 This type of modulation was the basis for many break-through inventions such as radio transmission~\cite{shannon48}.
-In the case of audio signals, often both the modulating function (modulator or carrier) and the signal being modulated (input), are periodic.
+In the case of audio signals, often, both the modulating function (modulator or carrier) and the signal being modulated (input) are periodic.
 Signal modulations are often created intentionally but also occur naturally in many real-world audio signals such as speech.
 In the following, we will present audio modulation categories and their cause, underlining the importance of them.
 
@@ -123,14 +123,14 @@ A detailed overview of the different musical instruments and their modulation ch
 Real instruments are not capable of purely amplitude modulated sounds (\emph{tremolo}). 
 Today, however, many instruments are electric or attached to electronic effects where pure modulations can be applied using digital or analog signal processing.
 For example, popular electric pianos like the ``Fender Rhodes'' can include an optional tremolo effect\footnote{Even though it is labeled as \emph{vibrato}.}.
-In its most pure form, synthesizers like~\cite{pinch09, buchla05} allow modulating almost any parameters of a sound using low-frequency oscillators (LFOs) or envelopes that produce sinusoidal, square or triangle functions of any rate.
+In its most pure form, synthesizers like~\cite{pinch09, buchla05} allow modulating almost any parameter of a sound using low-frequency oscillators (LFOs) or envelopes that produce sinusoidal, square or triangle functions.
 One of the most important sound synthesis methods --- FM Synthesis --- became popular in the early days of digital signal processing. 
 Chowning found in~\cite{chowning73} that the modulation of sinusoids using audio rate modulators provides a computationally efficient way of producing fairly complex sounds which mimic, e.g. piano sounds using just four sinusoidal modulators.
 \par
 It turns out that instrumental vibrato has similar properties compared to vibrato produced in singing voice.
 Vocal vibrato mainly depends on frequency modulation even though amplitude fluctuations are present~\cite{sundberg94}. 
 Vocal vibrato rates are similar to that of instrumental vibrato rates with an average of 5~\si{\hertz}.
-However, analysis of exceptional voices such as from Freddie Mercury~\cite{herbst17}, shows peak rates of up to 7~\si{\hertz}.
+However, analysis of exceptional voices such as from Freddie Mercury, shows peak rates of up to 7~\si{\hertz}~\cite{herbst17}.
 
 \subsubsection*{Modulations in Speech}
 
@@ -204,11 +204,11 @@ Time-Variant\strut
 \label{par:specifics_of_music_mixtures}
 
 In music, the process of mixing is an essential step in the process of music creation.
-Mixing sources are a creative task that involves recording engineers and tonmeisters, and often the artists itself.
+Mixing sources is a creative task that involves recording engineers and tonmeisters, and often the artists itself.
 In today's digital mastering processes, professionally produced music consists of several intermediate mixing steps before the final mixture is produced:
 
 \begin{description}
-  \item[1) Microphone Recording:] in this step, the analog sources are captured and A/D converted. 
+  \item[1) Microphone Recording:] in this step, the analog sources are captured and analog-to-digital converted. 
   Vocals and other acoustic instruments are recorded using one or multiple microphones.
   Electric instruments such as electric guitars, keyboards or synthesizers may be amplified and then directly digitized.
   \item[2) Raw Source Image:] the digital raw source signals are grouped and mixed into a \emph{source image} (also \emph{stem}).
@@ -222,7 +222,7 @@ In today's digital mastering processes, professionally produced music consists o
   Often, this step involves non-linear processing such as dynamic range compression.
 \end{description}
 
-This emphasizes that the definition of a source is subjective and depends on the application and its context. In this thesis, we mainly deal with tasks where we observe 4) and want to obtain 3) which is a common restriction made in tasks that are concerned with professionally produced music~\cite{sisec16}.
+This emphasizes that the definition of a source is subjective and depends on the application and its context. In this thesis, we mainly deal with tasks where we observe 4) and want to obtain 3) which is a common restriction made in tasks that are concerned with professionally produced music~\cite{sturmel12}.
 
 \hypertarget{processing-and-analysis-of-mixtures}{%
 \section{Processing and Analysis of Mixtures}\label{sec:processing-and-analysis-of-mixtures}}
@@ -230,8 +230,8 @@ This emphasizes that the definition of a source is subjective and depends on the
 While in many ways, mixtures are not different to any other audio signal, two research questions stand out prominently:
 
 \begin{itemize}
-    \item Can we obtain \(\vs_j\) from \(\vx\)? 
-    \item Can we find \(J\) from \(\vx\)?
+    \item Can we obtain the sources \(\vs_j\) from the mixture \(\vx\)? 
+    \item Can we find the number of sources \(J\) from \(\vx\)?
 \end{itemize}
 
 These two questions are addressed in the scientific fields of \emph{sound source separation} and \emph{source count estimation}.
@@ -240,16 +240,16 @@ These two questions are addressed in the scientific fields of \emph{sound source
 
 One of the earliest work on audio source separation started in the mid 70s~\cite{miller73}.
 Since then a large number of contributions were made in this field, both, targeted at speech and music separation.
-Due to this large number of contributions, it is hardly feasible to give an extensive overview of all existing methods in the context, and the reader is referred to~\cite{vincent18, comon10, rafii}.
+Due to this, it is hardly feasible to give an extensive overview of all existing methods in the context, and the reader is referred to~\cite{vincent18, comon10, rafii}.
 \par
-Source separation methods have relevant applications for music and speech mixtures such as attenuation of hearing aids, karaoke or music creation due to isolated sample composition.
+Source separation methods have relevant applications for music and speech mixtures such as attenuation in hearing aids, karaoke or music creation due to isolated sample composition.
 It also indirectly helps for related tasks such as upmixing/remixing, improved music transcription or automatic speech recognition (ASR). 
 \par
 In the following, we present three ways to group separation scenarios:
 
 \subsubsection*{Underdetermined vs. Overdetermined Separation}
 As mentioned in Section~\ref{sources-and-mixtures}, generating sound mixtures is closely related to the process of mixing taken place during recording (speech) or with the help of professional recording engineers (music).
-One assumption that was not mentioned before, is the importance of the number of sensors or microphones used to create the mixture.
+One assumption which was not mentioned before, is the importance of the number of sensors or microphones used to create the mixture.
 A source separation problem is \emph{over-determined} when the number of sources is smaller than the number of sensors; \emph{determined} when they are equal.
 For these two cases, a large number of methods exist and in a closed form solution is possible.
 The reader is referred to~\cite{common10}, which gives a detailed overview of these methods.\\
@@ -258,11 +258,11 @@ Many real-world source separation problems, however, are \emph{under-determined}
 In this thesis, we only focus on methods that perform separation on underdetermined mixtures.
 
 \subsubsection*{Single Channel vs. Multichannel Separation}
-Today music recordings are mostly produced for stereo output. 
-In many music recordings certain assumptions can be made (and utilized) of how sources are balanced between the two stereo channels. 
+Today music recordings are mostly produced in stereo. 
+In many music recordings certain assumptions can be made (and utilized) of how sources are balanced between the two channels. 
 E.g., often in popular music, a fixed panning for the vocals is correctly assumed.
 \par
-As a large number of recording nowadays is still stored as single channel, in this thesis we want to focus on this single channel separation.
+As a large number of recording nowadays is still stored in mono, in this thesis, we want to focus on single channel separation.
 
 \subsubsection*{Blind vs. Supervised Separation}
 A blind source separation system does not require additional information about the source signals, the location or acoustical environment to perform separation~\cite{makino07}.
@@ -270,8 +270,8 @@ In practice, blind source separation is ill-posed and it is not generally possib
 This is why many proposed methods rely on additional information such as the acoustic environment, the musical score or the fundamental frequency~\cite{liutkus13, ewert14}.
 
 \subsection{Vocal Accompaniment Separation}
-The separation of music into two parts, the foreground lead (mostly the vocals) and the background accompaniment (drums, bass, other), is one of the most relevant scenarios in music separation with a large number of applications such as creating karaoke or a capella tracks.
-Vocal Accompaniment separation has specific issues and assumptions when compared to other separation scenarios like speech.
+The separation of music into two parts, the foreground lead (e.g. vocals or solo guitar) and the background accompaniment (drums, bass, other), is one of the most relevant scenarios in music separation with a large number of applications such as creating karaoke or a capella tracks.
+Lead and accompaniment separation has specific issues and assumptions when compared to other separation scenarios like speech.
 Many music separation methods often rely on knowledge about the mixing process as made in Table~\ref{tab:mixing_models}.
 While there exist many source separation methods that aim to extract the actual raw audio recording, often it is sufficient to extract the source images from the raw mixture.
 In a live recording, this results in inverting the process of convolution as well.
@@ -281,7 +281,7 @@ Here, the last step in creating music mixtures, as described earlier, is a linea
 While the source images can yield from a mixing process undergoing the various assumptions, for the case of a mixture of source images, we consider only linear mixing in this thesis.
 For a more detailed description of this scenario and applications of source image extraction, see~\cite{sturmel12}.
 \par
-Another specific about music separation is that it is typically restricted to a well-defined set of musical sources.
+Another characteristic about music separation is that it is typically restricted to a well-defined set of musical sources.
 Often these restrictions need to be made because not for all kind of music separation scenarios, datasets are available.
 Thus, the most popular task is to extract the vocals and the background of the music.
 An extensive overview of music separation methods can be found in~\cite{rafii18}.
@@ -315,5 +315,5 @@ Now, concerning the number of sources, two definitions of \(k\) can be imagined:
 
 At short time scales A) is equal to B) because the instrumentation usually does not change. 
 In Fig.~\ref{fig:teaser}, we illustrate a setup featuring~$L=3$ unique sources.
-At any given time, one can see --- given definition B) --- that at most~$k=L=3$ sources are active at the same time and~$k=2$ could be the outcome if a smaller excerpt would be evaluated.
+At any given time, one can see --- given definition B) --- that at most~$k=L=3$ sources are active at the same time but~$k=2$ could be the outcome if a smaller excerpt would be evaluated.
 In this thesis, we will pick definition B when concerned about developing methods to estimate the number of sources.

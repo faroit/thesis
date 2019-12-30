@@ -194,7 +194,7 @@ The first step to extend the $F_0$ variation informed separation system is to ob
 In the following, we want to focus on how to obtain such a warp contour using a predominant melody algorithm.\par
 
 Estimating the fundamental frequency of one single source from a mixture of several sources is considered a very difficult task~\cite{klapuri08}.
-However, in the case of vocal/accompaniment separation, we only consider one single source as the lead source - usually the vocals.
+However, in the case of vocal and accompaniment separation, we only consider one single source as the lead source - usually the vocals.
 This assumption holds true for many pieces in modern, popular music where usually the predominant voice is mixed slightly louder than accompaniment.
 \par
 Now, extracting the predominant melody is an ongoing field of research named ``melody estimation''.
@@ -436,7 +436,7 @@ In our first study, we evaluated this method of separating single note from inst
 For the actual separation, we used a ``standard'' \acs{NMF} separation approach.
 The results of 45 mixtures have been evaluated by using the PEASS toolbox and the scores indicated an improvement in favor of the $F_0$ variation informed \acs{NMF} compared to the ``standard'' \acs{NMF}.
 \par
-In order to evaluate if our method can be applied on a more realistic scenario, we proposed an extension of the method for the scenario of vocal/accompaniment separation.
+In order to evaluate if our method can be applied on a more realistic scenario, we proposed an extension of the method for the scenario of vocal and accompaniment separation.
 We used a state-of-the-art melody estimation technique to extract the \(F_0\) variation of the vocal source to apply warping to the mixture.
 We performed separation in the time domain using a comb filter to further reduce artifacts.
 The method relies on a robust and accurate estimate of the fundamental frequency as well as vocal activity estimate.
