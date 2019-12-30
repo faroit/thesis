@@ -7,7 +7,7 @@
 %
 The separation of mixtures into its original audio sources, as presented in the previous chapters, is a challenging task.
 Furthermore, source separation is difficult to evaluate, and researchers compare to a known reference even though this does not reflect how humans separate mixtures.
-It has long been a research topic to answer the question \emph{if} humans can separate, by fully extracting the desired source or if we can focus our attention on one source --- segregate them~\cite{bregman90}.
+It has long been a research topic to answer the question \emph{if} humans can separate by fully extracting the desired source or if we can focus our attention on one source --- segregate them~\cite{bregman90}.
 Moreover, despite recent progress in auditory science~\cite{carlyon04, koelsch05, rabinowitz13}, research still is investigating how separation takes place in the auditory cortex or other parts of the human brain.
 One thing, however, we can assess directly is if humans can reliably detect the number of sources in a mixture of several sources.
 \par
@@ -27,7 +27,7 @@ And surprisingly, as shown in~\cite{kashino96, kawashima15}, humans share the sa
 \par
 In this chapter, we present two experiments contributing to this interesting field of research.
 The first experiment (Section~\ref{sec:ismir}) addresses the question if the number of instruments in polyphonic music is subject to the same limitations.
-In the second contribution (Section~\ref{sec:count_experiment}) the aim is to verify the findings of an earlier experiment in~\cite{kawashima15} and increase the number of stimuli to be used for comparison of machine learning based count estimations methods
+In the second contribution (Section~\ref{sec:count_experiment}) the aim is to verify the findings of an earlier experiment focussed on speech and increase the number of stimuli to be used for comparison of machine learning based count estimations methods
 
 \section{Instrument Count Estimation}%
 \label{sec:ismir}
@@ -39,12 +39,12 @@ In this Section, we take a first step towards designing an experiment where we f
 Such knowledge can be used in auditory modeling or as a pre-processing step for source separation algorithms.
 \par
 In previous work, the perception of concurrent sound sources has been analyzed on different scales so far. 
-Bregman's and McAdams'~\cite{mcadams89} auditory stream theory can be seen as an analytical way of describing how sound events are perceived by the human auditory system. 
+Bregman's and McAdams' auditory stream theory~\cite{mcadams89} can be seen as an analytical way of describing how sound events are perceived by the human auditory system. 
 Unfortunately, it is difficult to model professionally produced music by auditory stream models because of its high complexity.
 Also, none of these models is motivated to predict the perceived number of musical sources. 
 There are indications that for this task, humans tend to fail if more than three sources are present at the same time~\cite{huron89}.
-Kashino et. al~\cite{kashino96} addresses the questions for concurrent speakers in a ``cocktail party'' like the environment and found an upper limit of three voices humans can perceive. 
-When the focus shifts to musical instruments as sources, research has to take concepts from musicology into account. 
+Kashino et. al~\cite{kashino96} addresses the questions for concurrent speakers in a ``cocktail party'' like  environment and found an upper limit of three voices humans can perceive. 
+When the focus shifted to musical instruments as sources, research took concepts from musicology into account. 
 Huron~\cite{huron89} was the first who addressed this question in 1989 at a musically meaningful level.
 Huron asked for the number of voices within a piece of music, whereby voices in musicology one can define it as a line of sound or note events (See~\cite{Cambouropoulos2008} for further definitions).
 Huron determined by experimental results that the number of correctly identified voices is up to three.
@@ -54,7 +54,7 @@ Several results are addressed in this section, including a possible upper limit 
 \subsection{Experiment}
 % ica
 For the purpose of gaining more knowledge in understanding the human perception of multiple present instruments, an experiment was conducted. Huron selected voices from organ pieces only. We wanted to address the more general case where voices are played by different instruments.
-As we set our focus on comparison between musicians and non-musicians, our experiment was designed so that it respects the fact that the latter have an only limited musical background.
+As we set our focus on comparison between musicians and non-musicians, our experiment was designed so that it respects the fact that the latter have only limited musical background.
 \par
 % ica
 Although it might be interesting to have direct comparison with Huron's experiment, we agree that expanding the methods to an inhomogeneous timbre case is error prone. One reason is that there is reasonable doubt about the non-musicians understandings in terms of how a voice is defined. This is why we choose a trade-off with a more simplified experiment where we asked for the number of instruments instead of voices. Also whereas Huron \cite{huron89}  excluded subjects from his experiment because of their lower performance, we compared the results of both groups.
@@ -146,11 +146,11 @@ The independent variable $I(i)$ is the number of instruments of one music item $
 The primary statistical null hypothesis ($H_1$) is stated in that the means of $\Delta$ and $E$\footnote{The fact that $E$ is dichotomous will lead to a mean value that equals to a probability of a binary distribution.}, grouped by the number of instruments, do not differ significantly. As we also want to test the between-groups performance of musicians versus non-musicians, we introduce another dependent variable $M(s) \in \{0,1\}$ of binary scale. This is stated in a secondary null hypothesis ($H_2$) where the means of $\Delta$ and $E$ are not significantly different between musicians and non-musicians.
 No subjects were screened from the results, although there are two cases where no valid response had been made. Results are grouped by items of $I$ instruments.
 \par
-In general, participants tended to perform worse for items with more than two instruments. The probability of correctly estimating one instrument was 90.0\% whereas only one person out of 62 gave a correct response for an item with six instruments. In some cases, the number of instruments does not correspond to the number of voices for every item. Items where an instrument plays more than one voice and voices which are played by more than one instrument. However, most of the chosen instruments are monophonic so in our case, this occurred only for items where piano or guitar is present. Also, we made sure that the number of total voices did not exceed the maximum number of instruments in that item. Voices being played by more than one instrument (unison), present in G068, that showed surprisingly good results.
+In general, participants tended to perform worse for items with more than two instruments. The probability of correctly estimating one instrument was 90.0\% whereas only one person out of 62 gave a correct response for an item with six instruments. In some cases, the number of instruments does not correspond to the number of voices for every item. Items where an instrument plays more than one voice and voices which are played by more than one instrument. However, most of the chosen instruments are monophonic so in our case, this occurred only for items where piano or guitar is present. Also, we made sure that the number of total voices did not exceed the maximum number of instruments in that item. Voices being played by more than one instrument (unison), present in G068, showed surprisingly good results.
 
 \subsubsection*{Underestimation}
 
-We confirmed the results in~\cite{huron89} that the most common error is the underestimation of one instrument, although this accounts only for 43 \% of the responses in our experiment. Only in one case $\Delta$ is negative (overestimation) which is item C016, a ``Clarinet Quintet in A major by Wolfgang Amadeus Mozart (K.581. 1st movement)'' where we have excluded the solo clarinet part and two strings. Still, the remaining sound seems to be so similar to that of a quartet that musicians tended to hear ``phantom'' instruments.
+We confirmed the results in~\cite{huron89} that the most common error is underestimation of one instrument, although this accounts only for 43 \% of the responses in our experiment. Only in one case $\Delta$ is negative (overestimation) which is item C016, a ``Clarinet Quintet in A major by Wolfgang Amadeus Mozart (K.581. 1st movement)'' where we have excluded the solo clarinet part and two strings. Still, the remaining sound seems to be so similar to that of a quartet that musicians tended to hear ``phantom'' instruments.
 
 \subsubsection*{Self-Evaluation}
 
@@ -166,7 +166,7 @@ Figure~\ref{fig:certainty} shows the results of the subjects certainty grouped b
 \subsubsection*{Main Effects}
 
 To test the null hypotheses ($H_1$ and $H_2$), statistical tools are required.
-The first tests focus on $\Delta$ which is an interval-scaled variable. To show differences between means of two or more groups, usually, One-Way-ANOVA tests are applied. ANOVA tests expect independent normally distributed variables and homogeneity of the variances in each group. However both the Kolmogorov--Smirnov test of normal distribution and Levene's test to determine the homogeneity of group variances fail. In such cases variables scaled like $\Delta$ could be transformed so that the boundaries are straightened out. A typically used $arcsin(\sqrt{\Delta})$ transformation was applied to $\Delta$ resulting in slightly higher $p$ values but still not statistically significant. Although ANOVA is known to be robust enough to run the tests against non-normal distributed cases and unequal variances, the significance levels of the results are doubtful. Therefore we choose to run a non-parametric test. The Kruskal--Wallis test can be applied even if the data is not normally distributed. However, it has to be run on a slightly modified hypothesis which compares the medians of groups instead of the means. The Kruskal--Wallis test allows to reject both modified hypotheses (asymptotic $p = 0.000$, $\chi^2 = 499636$, $df=5$).
+The first tests focus on $\Delta$ which is an interval-scaled variable. To show differences between means of two or more groups, usually, One-Way-ANOVA tests are applied. ANOVA tests expect independent normally distributed variables and homogeneity of the variances in each group. However both the Kolmogorov--Smirnov test of normal distribution and Levene's test to determine the homogeneity of group variances fail. Although ANOVA is known to be robust enough to run the tests against non-normal distributed cases and unequal variances, the significance levels of the results are doubtful. Therefore we choose to run a non-parametric test. The Kruskal--Wallis test can be applied even if the data is not normally distributed. However, it has to be run on a slightly modified hypothesis which compares the medians of groups instead of the means. The Kruskal--Wallis test allows to reject both modified hypotheses (asymptotic $p = 0.000$, $\chi^2 = 499636$, $df=5$).
 \par
 Concerning $E$ which is a categorical variable, linear models such as ANOVA cannot be used.
 As described in~\cite{jaeger08}, instead, a binary regression model that turns the mean of $E$ into a binomial distributed probability can be used.
@@ -308,14 +308,15 @@ This surprising outcome then triggered the idea to deepen research on  unison in
 \section{Speaker Count Estimation}%
 \label{sec:count_experiment}
 
-\marginpar{This section was previously published in~\cite{stoeter19} and is reprinted, with minor modifications, with permission.}
+\marginpar{This section was previously published in~\cite{stoeter18, stoeter19} and is reprinted, with minor modifications, with permission.}
 
 Humans are excellent in segregating one source from a mixture~\cite{bregman90} and tend to use this skill to perceptually segregate speakers before they can estimate a count, as highlighted, e.g.\ in~\cite{kawashima15}.
 As shown in~\cite{kashino96, kawashima15} with extensive experiments using Japanese speech samples, humans are able to correctly estimate up to three simultaneously active speakers without using any spatial cues.
 In this experiment, we reproduced the experiments conducted in~\cite{kawashima15, kashino96} using stimuli of English speakers.
 Designed to address source separation research, we also modified the question to ask participants for ``the maximum number of concurrent speakers'' in a short excerpt of speech.
 
-\subsection{Stimuli}
+\subsection{Stimuli}%
+\label{ssec:stimuli}
 To date, many available speech datasets contain recordings where only a single speaker is active.
 Datasets that include overlapped speech segments either lack accurate annotations because the annotation of speech onsets and offsets in mixtures is cumbersome for humans or lack a controlled auditory environment such as in TV/broadcasting scenarios~\cite{Gravier12}.
 Since a realistic dataset of fully overlapped speakers is not available, we chose to generate synthetic mixtures.
@@ -364,7 +365,7 @@ The experiment and its results from all participants is made available through~\
 A simplified version of the experiment is made available through a web application\footnote{\url{https://denumerate.app}}.
 
 \subsection{Experiment Results}
-To reveal over- and underestimation errors, we decided to report the average response for each group of \(k\).
+To reveal over- and underestimation errors, we decided to report the average response for each \(k\).
 As a reference, we also included the average results from~\cite[Experiment 1, 5~seconds duration]{kawashima15} which shows similar (with slightly higher error probability) results compared to our blind experiment.
 Also, in~\cite{kawashima15} the maximum number of speakers to test was six whereas we evaluated stimuli with up to ten speakers.
 The results of our lab-based experiments are shown in Figure~\ref{fig:experimentA} and Figure~\ref{fig:experimentB}.
@@ -399,10 +400,10 @@ This is especially obvious for six and more speakers where the informed group pe
 In this chapter, we presented two experiments that we conducted to get a better understanding of the human ability to estimate the number of sources in overlapped mixtures.
 \par
 First, we showed that estimating the number of instruments in music mixtures is a challenging task for humans.
-We presented the results of a controlled experiment with 62 participants, listening to stimuli of inhomogeneous timbres.
+We presented the results of a controlled experiment with 62 participants.
 Our experiment indicated that the upper limit is reached with more than three instruments, related to an earlier experiment~\cite{huron89} focused on voices instead of instruments.
 In Chapter~\ref{cha:fundamentals}, two different questions were introduced how to frame the count estimation problem.
-In this experiment, we explicitly used an open question of ``How many instruments can you hear'' to gather more knowledge into the strategies being applied by the participants.
+In an experiment, we explicitly used an open question of ``How many instruments can you hear'' to gather more knowledge into the strategies being applied by the participants.
 Another reason was that the stimuli durations were too long to ask for the maximum number of concurrent stimuli, thus promoting ``counting by detection'' as a good strategy to approach the problem.\par
 By comparing musicians to non-musicians, we showed that there is a significant difference in performance for count estimation, confirming similar findings in other auditory tasks~\cite{kishon01}.
 Particularly, we found out that this gap is most prominent for stimuli of three and four instruments.
@@ -418,5 +419,4 @@ The results indicated almost no person was able to correctly estimate up to ten 
 However, we also observed that even for more than seven speakers the mean response did further (but not linearly) increase.
 This indicates that humans are possibly interpolating some sort of a speech density to make up their decision.
 \par
-We conclude that all of our count experiments share the same results: A) humans are unable to correctly estimate more than four sources and B), underestimation is the main cause of error.
-Also, we revealed that source count estimation studies can be easily be participated by non-professional listeners.
+We conclude that all of our count experiments share a common outcome: A) humans are unable to correctly estimate more than four sources and B), underestimation is the main cause of error.

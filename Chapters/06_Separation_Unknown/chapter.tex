@@ -428,7 +428,7 @@ Rafii et. al describe the current machine learning situation in \cite{rafii}:
   \begin{figure}
     \centering
     \includegraphics[width=0.6\textwidth]{Chapters/06_Separation_Unknown/figures/methods_dnn.pdf}
-    \caption{General architecture for methods exploiting deep learning. The network inputs the mixture and outputs either the sources magnitude \acs{STFT} or a TF mask. Methods usually differ in their network architecture and the way use the training data for learning (a different version of this Figure was published in~\cite{rafii}). \textsuperscript{\textregistered}2018 IEEE.}
+    \caption{General architecture for methods exploiting deep learning. The network inputs the mixture and outputs either the sources magnitude \acs{STFT} or a TF mask. Methods usually differ in their network architecture and the way use the training data for learning (a modified version of this Figure was published in~\cite{rafii}). \textsuperscript{\textregistered}2018 IEEE.}
     \label{fig:methods_dnn}
   \end{figure}
 
@@ -446,7 +446,7 @@ We decided to reimplement Uhlich's model~\cite{uhlich15} to evaluate the separat
 The aim of this work was not to exactly reproduce the results, but instead, to evaluate one main research questions: does a DNN-based model benefit from the common fate representation being able to better capture the modulation texture?
 For the implementation of the model, we used the Keras~\cite{chollet15} deep learning framework to systematically assess different combinations of input-and-output representation of the system.
 \par
-The network, as proposed in~\cite{uhlich15} consists of a three-layer fully connected network, where each of the hidden layers has the same number of hidden nodes as the targeted output representation.
+The network, as proposed in~\cite{uhlich15} consists of three fully connected layers, where each of the hidden layers has the same number of hidden nodes as the targeted output representation.
 This method can be described as a variant of a stacked denoising autoencoder~\cite{pvincent08}, where the noisy input is mapped to a clean output of the same dimensionality.
 The architecture is depicted in Figure~\ref{fig:cft_dnn}. 
 
@@ -486,7 +486,7 @@ For each sample fed into the network, we randomly selected mixtures (without rep
 We then sample from the DSD100 tracks and form single samples as input for the \acs{FNN}.
 Therefore, we first compute the input representation of an audio track from the DSD100 set and then randomly sampling without replacement from these tracks.
 The actual training has been done using mini-batches of size 32.
-Each architecture is trained using the ADAM optimizer~\cite{kingma14} (learning rate: \(1 \cdot 10^{-3}\), \(\beta_1=0.9\), \(\beta_2=0.999\), \(\epsilon=1 \cdot 10^{-8}\))
+Each architecture is trained using the ADAM optimizer~\cite{kingma14} (learning rate: \(1 \cdot 10^{-3}\), \(\beta_1=0.9\), \(\beta_2=0.999\), \(\epsilon=1 \cdot 10^{-8}\)).
 The model was trained for a fixed number of 30 epochs and, in contrast to~\cite{uhlich15}, greedy layerwise pre-training was not applied.
 
 \subsection{Results}
@@ -540,7 +540,7 @@ Table~\ref{tab:sisec_systems} lists the participating systems.
 
 \end{table*}
 
-The objective scores for my proposed methods were obtained using BSSEval and are given in Figure~\ref{fig:eval}.
+The objective scores for our proposed methods were obtained using BSSEval and are given in Figure~\ref{fig:eval}.
 
 \begin{figure*}[htbp]
     \includegraphics[width=1.1\textwidth]{Chapters/06_Separation_Unknown/figures/evaluation.pdf}
