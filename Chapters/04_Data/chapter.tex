@@ -130,7 +130,7 @@ By making this dataset public domain~\cite{oss_muserc} and including the raw rec
 One of the core problems for the field of music processing is the lack of publicly available datasets.
 Many researchers aim to develop methods that could be applied to professionally produced music. 
 However, at the same time access to professionally produced music recordings is difficult due to the complex copyright laws established by the music industry.
-When music is directly streamed to the user, such as on \emph{youtube}, researchers can use this data for academic purposes such as in~\cite{balke17}.
+When music digitially stored and publicly available, such as on \emph{youtube}, researchers can more easily use this data for academic purposes such as in~\cite{balke17}.
 Unfortunately, these platforms only host the stereo mixes of produced recordings, whereas the stems or source tracks that are used to create the master mix are a carefully guarded secret.
 In the case of very old recordings, the recordings were down-mixed (to tape) during the recording sessions, thus making the original stems unavailable.
 Now, the lack of available multitrack datasets prevents research on source separation to advance further.
@@ -165,7 +165,7 @@ Many musical genres are represented: jazz, electro, metal, etc. and it is split 
 \end{table*}
 
 Over the years, DSD100 and its successor MUSDB18~\cite{oss_musdb} became one of the most used datasets for source separation.
-The dataset is still small in comparison to machine learning sets from vision such as~\cite{imagenet09}, but it proved to be large enough to help DNN-based methods to reach breakthrough results in source separation~\cite{stoeter18sisec}.
+The dataset is still small in comparison to machine learning sets from vision such as~\cite{imagenet09} but it proved to be large enough to help DNN-based methods to reach breakthrough results in source separation~\cite{stoeter18sisec}.
 \par
 Working with multitrack audio files can be cumbersome due to its hierarchical structure that needs to be parsed.
 For that purpose, we developed a software toolbox for Python that permits the straightforward processing of the DSD100/MUSDB18 dataset. This software is open source and was publicly broadcasted so as to allow the participants to run the evaluation themselves\footnote{\url{github.com/faroit/dsdtools} / \url{github.com/sigsep/sigsep-mus-db}}.
