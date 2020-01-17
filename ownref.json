@@ -1,0 +1,224 @@
+[
+  {
+    "author": [
+      {
+        "family": "Stöter",
+        "given": "F.-R."
+      },
+      {
+        "family": "Chakrabarty",
+        "given": "S."
+      },
+      {
+        "family": "Edler",
+        "given": "B."
+      },
+      {
+        "family": "Habets",
+        "given": "E. A. P."
+      }
+    ],
+    "container-title": "IEEE/ACM Transactions on Audio, Speech, and Language Processing",
+    "id": "stoeter19",
+    "issued": {
+      "date-parts": [
+        [
+          2019
+        ]
+      ]
+    },
+    "page": "1-1",
+    "title": "CountNet: Estimating the number of concurrent speakers using supervised learning",
+    "title-short": "CountNet",
+    "type": "article-journal"
+  },
+  {
+    "author": [
+      {
+        "family": "Stöter",
+        "given": "F.-R."
+      },
+      {
+        "family": "Chakrabarty",
+        "given": "S"
+      },
+      {
+        "family": "Edler",
+        "given": "B."
+      },
+      {
+        "family": "Habets",
+        "given": "E.A.P."
+      }
+    ],
+    "container-title": "International conference on acoustics, speech and signal processing (icassp)",
+    "id": "stoeter18",
+    "issued": {
+      "date-parts": [
+        [
+          2018
+        ]
+      ]
+    },
+    "title": "Classification vs. Regression in supervised learning for single channel speaker count estimation",
+    "type": "paper-conference"
+  },
+  {
+    "author": [
+      {
+        "family": "Stöter",
+        "given": "F.-R."
+      },
+      {
+        "family": "Liutkus",
+        "given": "A."
+      },
+      {
+        "family": "Badeau",
+        "given": "R."
+      },
+      {
+        "family": "Edler",
+        "given": "B."
+      },
+      {
+        "family": "Magron",
+        "given": "P."
+      }
+    ],
+    "container-title": "International conference on acoustics, speech and signal processing (icassp)",
+    "id": "stoeter16",
+    "issued": {
+      "date-parts": [
+        [
+          2016
+        ]
+      ]
+    },
+    "publisher-place": "Shanghai, China",
+    "title": "Common fate model for unison source separation",
+    "type": "paper-conference"
+  },
+  {
+    "author": [
+      {
+        "family": "Stöter",
+        "given": "F.-R."
+      },
+      {
+        "family": "Werner",
+        "given": "N."
+      },
+      {
+        "family": "Bayer",
+        "given": "S."
+      },
+      {
+        "family": "Edler",
+        "given": "B."
+      }
+    ],
+    "container-title": "Proceedings of eusipco 2015",
+    "id": "stoeter15icassp",
+    "issued": {
+      "date-parts": [
+        [
+          2015,
+          9
+        ]
+      ]
+    },
+    "publisher-place": "Nice, France",
+    "title": "Refining fundamental frequency estimates using time warping",
+    "type": "paper-conference"
+  },
+  {
+    "author": [
+      {
+        "family": "Stöter",
+        "given": "F.-R."
+      },
+      {
+        "family": "Müller",
+        "given": "M."
+      },
+      {
+        "family": "Edler",
+        "given": "B."
+      }
+    ],
+    "container-title": "Proceedings of the 23rd annual acm conference on multimedia conference",
+    "id": "stoeter15acm",
+    "issued": {
+      "date-parts": [
+        [
+          2015
+        ]
+      ]
+    },
+    "page": "995-998",
+    "publisher-place": "New York, NY, USA",
+    "title": "Multi-sensor cello recordings for instantaneous frequency estimation",
+    "type": "paper-conference"
+  },
+  {
+    "author": [
+      {
+        "family": "Stöter",
+        "given": "F.-R."
+      },
+      {
+        "family": "Bayer",
+        "given": "S."
+      },
+      {
+        "family": "Edler",
+        "given": "B."
+      }
+    ],
+    "container-title": "17th international conference on digital audio effects (dafx-14)",
+    "id": "stoeter14",
+    "issued": {
+      "date-parts": [
+        [
+          2014
+        ]
+      ]
+    },
+    "title": "Unison source separation",
+    "type": "paper-conference"
+  },
+  {
+    "author": [
+      {
+        "family": "Stöter",
+        "given": "F.-R."
+      },
+      {
+        "family": "Schoeffler",
+        "given": "M."
+      },
+      {
+        "family": "Edler",
+        "given": "B."
+      },
+      {
+        "family": "Herre",
+        "given": "J."
+      }
+    ],
+    "collection-number": "1",
+    "container-title": "Proceedings of meetings on acoustics",
+    "id": "stoeter13",
+    "issued": {
+      "date-parts": [
+        [
+          2013
+        ]
+      ]
+    },
+    "title": "Human ability of counting the number of instruments in polyphonic music",
+    "type": "paper-conference",
+    "volume": "19"
+  }
+]
