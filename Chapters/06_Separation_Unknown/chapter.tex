@@ -1,8 +1,8 @@
 \chapter{Separation by Unknown Modulation}
 \label{cha:unknown}
 
-In the previous chapter, methods were proposed to separate highly overlapped signals, informed by an estimate of fundamental frequency \(F_0\) variation of the source to be separated.
-Even though we showed that \(F_0\)  variation could be estimated from the mixture, often, it is not easy to obtain in practice.
+In the previous chapter, methods were proposed to separate highly overlapped signals, informed by an estimate of fundamental frequency (\(F_0\)) variation of the source to be separated.
+Even though we showed that \(F_0\) variation could be estimated from the mixture, often, it is not easy to obtain in practice.
 In contrast, in this chapter, we will introduce separation methods which do not incorporate prior knowledge about the modulation. 
 In fact, some of the methods operate blindly, meaning they do not require any further information about the sources except for the number of sources to be separated.
 \par
@@ -64,10 +64,10 @@ Each component is clustered into one of two sources to generate two estimates.
 \end{figure}
 
 It is this step that transforms the \acs{NMF} into a supervised algorithm.
-As for other separation methods, performed in the time-frequency domain, separation is achieved using Wiener filters or soft masks to extract the sources from the mixture~\cite{liutkus15c}.
+As for other separation methods, performed in the time-frequency domain, separation is achieved using Wiener filters or ratio masks to extract the sources from the mixture~\cite{liutkus15c}.
 \par
 Since \acs{NMF} first appeared to the source separation community in~\cite{smaragdis03} and in~\cite{vembu05}, a large variety of NMF ``flavors'' were introduced to improve certain aspects of the \acs{NMF} in the application of music. 
-In~\cite[Chapter 16]{vincent}, the authors describe one of the main problems of \acs{NMF} which is that ``standard \acs{NMF} is shown to be effective when the notes of the analyzed music signal are nearly stationary''.
+In~\cite[Chapter 16]{vincent18}, the authors describe one of the main problems of \acs{NMF} which is that ``standard \acs{NMF} is shown to be effective when the notes of the analyzed music signal are nearly stationary''.
 As we described in Chapter~\ref{cha:highly-overlapped-signals}, this is especially problematic for pitches that incorporate vibrato.
 Here, \acs{NMF}-based processing suffers from its simplified model and its magnitude \acs{STFT} representation makes it harder to model these time-varying sources.
 \par
@@ -86,7 +86,7 @@ When we apply a factorization with $K=2$, one can see that \acs{NMF} has difficu
 \hspace{0.3\textwidth} % separation
 \subcaptionbox{Factorization}
 [1\textwidth]{\input{Chapters/05_Separation_Known/figures/AMPlots/WH.tex}}%
-\caption{Example of separating a mixture of two amplitude modulated (AM) sinusoids using \acs{NMF}\\ \textbf{(a)} Mixture of two sinusoids at \SI{440}{\hertz} with AM of \SI{4.7}{\hertz} and \SI{12.6}{\hertz}, \textbf{(b)} \acs{STFT} ($FFT length = 256$), \textbf{(c)} Non-negative matrix factorization results in $\mW$ and $\mH$, after 100 iterations ($\beta = 1$).}
+\caption{Example of separating a mixture of two amplitude modulated sinusoids using \acs{NMF}\\ \textbf{(a)} Mixture of two sinusoids at \SI{440}{\hertz} with AM of \SI{4.7}{\hertz} and \SI{12.6}{\hertz}, \textbf{(b)} \acs{STFT} ($FFT length = 256$), \textbf{(c)} Non-negative matrix factorization results in $\mW$ and $\mH$, after 100 iterations ($\beta = 1$).}
 \label{fig:am_tensor_nmf}
 \end{figure}
 
@@ -184,7 +184,7 @@ We call this the \emph{Common Fate Model} (CFM), borrowing from the Gestalt theo
 \end{quote}
 
 Bregman introduced the Common Fate theory for auditory scene analysis as the ability to group sound objects based on their common motion over time, as occurs with frequency modulations of harmonic partials.
-As outlined by Bregman, the human ability to detect and group sound sources by small differences in FM and AM is outstanding.
+As outlined by Bregman, the human ability to detect and group sound sources by small differences in \acs{FM} and \acs{AM} is outstanding.
 Also, it turns out, as mentioned in Section~\ref{exploiting-slow-modulations}, that humans are especially sensitive to modulation frequencies around \SI{5}{\hertz}, which is the typical vibrato frequency that many musicians produce naturally.
 
 \subsection{The Common Fate Transform}
@@ -428,7 +428,7 @@ Rafii et. al describe the current machine learning situation in \cite{rafii}:
   \begin{figure}
     \centering
     \includegraphics[width=0.6\textwidth]{Chapters/06_Separation_Unknown/figures/methods_dnn.pdf}
-    \caption{General architecture for methods exploiting deep learning. The network inputs the mixture and outputs either the sources magnitude \acs{STFT} or a TF mask. Methods usually differ in their network architecture and the way use the training data for learning (a different version of this Figure was published in~\cite{rafii}). \textsuperscript{\textregistered}2018 IEEE.}
+    \caption{General architecture for methods exploiting deep learning. The network inputs the mixture and outputs either the sources magnitude \acs{STFT} or a TF mask. Methods usually differ in their network architecture and the way use the training data for learning (a modified version of this Figure was published in~\cite{rafii}). \textsuperscript{\textregistered}2018 IEEE.}
     \label{fig:methods_dnn}
   \end{figure}
 
@@ -446,7 +446,7 @@ We decided to reimplement Uhlich's model~\cite{uhlich15} to evaluate the separat
 The aim of this work was not to exactly reproduce the results, but instead, to evaluate one main research questions: does a DNN-based model benefit from the common fate representation being able to better capture the modulation texture?
 For the implementation of the model, we used the Keras~\cite{chollet15} deep learning framework to systematically assess different combinations of input-and-output representation of the system.
 \par
-The network, as proposed in~\cite{uhlich15} consists of a three-layer fully connected network, where each of the hidden layers has the same number of hidden nodes as the targeted output representation.
+The network, as proposed in~\cite{uhlich15} consists of three fully connected layers, where each of the hidden layers has the same number of hidden nodes as the targeted output representation.
 This method can be described as a variant of a stacked denoising autoencoder~\cite{pvincent08}, where the noisy input is mapped to a clean output of the same dimensionality.
 The architecture is depicted in Figure~\ref{fig:cft_dnn}. 
 
@@ -486,7 +486,7 @@ For each sample fed into the network, we randomly selected mixtures (without rep
 We then sample from the DSD100 tracks and form single samples as input for the \acs{FNN}.
 Therefore, we first compute the input representation of an audio track from the DSD100 set and then randomly sampling without replacement from these tracks.
 The actual training has been done using mini-batches of size 32.
-Each architecture is trained using the ADAM optimizer~\cite{kingma14} (learning rate: \(1 \cdot 10^{-3}\), \(\beta_1=0.9\), \(\beta_2=0.999\), \(\epsilon=1 \cdot 10^{-8}\))
+Each architecture is trained using the ADAM optimizer~\cite{kingma14} (learning rate: \(1 \cdot 10^{-3}\), \(\beta_1=0.9\), \(\beta_2=0.999\), \(\epsilon=1 \cdot 10^{-8}\)).
 The model was trained for a fixed number of 30 epochs and, in contrast to~\cite{uhlich15}, greedy layerwise pre-training was not applied.
 
 \subsection{Results}
@@ -540,7 +540,7 @@ Table~\ref{tab:sisec_systems} lists the participating systems.
 
 \end{table*}
 
-The objective scores for my proposed methods were obtained using BSSEval and are given in Figure~\ref{fig:eval}.
+The objective scores for our proposed methods were obtained using BSSEval and are given in Figure~\ref{fig:eval}.
 
 \begin{figure*}[htbp]
     \includegraphics[width=1.1\textwidth]{Chapters/06_Separation_Unknown/figures/evaluation.pdf}

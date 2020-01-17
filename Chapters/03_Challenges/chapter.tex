@@ -8,8 +8,8 @@ In the previous chapter, I introduced signal processing fundamentals in the cont
 
 Time-frequency representations such as the \ac{STFT} have clear benefits such as the improved interpretability due to its ``image-like'' two-dimensional properties.
 More importantly, however, such a representation allows to separate mixtures of speech and musical instruments.
-The reason for this is that these mixtures may be fully overlapped in the time domain but are less overlapped in the frequency domain~\cite{rickard02, giannoulis11, rafii}.
-In turn, a time-frequency representation allows applying to filter in a way that sufficiently extracts all targets from the mixture.
+The reason for this is that these mixtures may be fully overlapped in the time domain but are less overlapped in the frequency domain.
+In turn, a time-frequency representation allows to apply a filter in a way that it sufficiently extracts all targets from the mixture.
 Furthermore, it allows for the reconstruction of the original waveform and provides a good trade-off between computational complexity and separation quality.
 \par
 Due to these reasons, many source separation methods focus on extracting individual sources by modeling their respective target in the time-frequency domain.
@@ -51,8 +51,8 @@ Let us consider the following scenarios:
 \end{description}
 
 Now, for these scenarios, the actual overlap depends on additional parameters like the number of sources, the class of source or the fundamental frequency.
-For instance, the overlap in a cocktail party of two speakers is smaller than with ten concurrent speakers speaking.
-Also, the overlap between male and female or brass and string instruments is smaller than with two instruments of the same class. 
+For instance, the overlap in a cocktail party of two speakers is smaller than ten concurrent speakers speaking.
+Also, the overlap between male and female or brass and string instruments is smaller than two instruments of the same class. 
 And if two instrumental notes share the same fundamental frequency (playing in \emph{unison}), the sources are almost entirely overlapped.
 \par
 \begin{figure*}[hb]
@@ -84,14 +84,14 @@ And if two instrumental notes share the same fundamental frequency (playing in \
 \end{figure*}
 
 To illustrate this, we depict the different scenarios in two complementary figures.
-Figure~\ref{fig:dominance} assigns each time-frequency entry to its predominant source.
+Figure~\ref{fig:dominance} assigns each time-frequency (TF) entry to its predominant source.
 Figure~\ref{fig:count} depicts the number of active sources (thresholded) of each TF entry.
 From these figures, one can see that the overlap of a typical speech mixture is comparable to a music recording where the task is to separate vocals and accompaniment.
 If we now compare this to the scenario where sources are fully overlapped as in the unison scenario, almost all TF bins are overlapped, and separation would hardly be possible.
 \par
 While this is an extreme scenario, it still provides a useful example where common assumptions are violated, and it would facilitate the demand to develop new methods that do not rely so much on these assumptions.
 By naïvely observing the time-frequency representation in Figure~\ref{fig:count} closely, we see that the slow spectro-temporal modulations caused by the vibrato are one of the aspects where the two sources differ.
-Here, the classical \acs{STFT} does not provide sufficient separability and representations as in the \emph{modulation spectrogram}, presented by~\cite{greenberg96} may be preferable.
+Here, the classical \acs{STFT} does not provide sufficient separability and representations as in the \emph{modulation spectrogram}, presented in~\cite{greenberg96} may be preferable.
 Details about this approach are discussed in Chapter~\ref{cha:unknown}.
 
 \hypertarget{exploiting-slow-modulations}{%
@@ -99,7 +99,7 @@ Details about this approach are discussed in Chapter~\ref{cha:unknown}.
 
 Tempo-spectral modulations occur both in speech and music signals as detailed in Section~\ref{sub:time-variant-audio-signals}.
 Exploiting modulations is natural for humans: early research from Zwicker in 1952 focused on the human ability to detect amplitude modulations~\cite{zwicker52}. 
-Later, it was shown by Bregman, McAdams, and Fastl in~\cite{mcadams89, bregman90, fastl90} that humans use amplitude modulations to group sources; this concept was called \emph{Common Amplitude Modulation} (CAM).
+Later, it was shown by Bregman, McAdams, and Fastl in~\cite{mcadams89, bregman90, zwicker13} that humans use amplitude modulations to group sources; this concept was called \emph{Common Amplitude Modulation} (CAM).
 CAM exploits the fact that harmonics that share the same amplitude modulation across frequency bins are perceived \emph{integrated} as opposed to~\emph{segregated}.
 Further, it was shown in~\cite{bacon89} that the ability to detect amplitude modulations can be incorporated into auditory models.
 It was then found by Dau in~\cite{dau99} that humans are especially sensitive at low-frequency modulations:
@@ -117,7 +117,7 @@ In the following, we give an overview of existing work focussed on analysis and 
 
 In speech, techniques using modulation patterns improved applications such as speech  discrimination~\cite{mesgarani04} or extract spatial acoustic signatures from mixtures~\cite{sukittanon06}.
 One way of analyzing amplitude modulations is to use a modulation spectrogram~\cite{greenberg97} which is a frequency-frequency representation of a time domain input signal.
-In practice, the modulation spectrogram can be represented by a tensor \(\mathbf{V}_{f, b, t}\) , where \(b\) represents the modulation index, can be computed from the (magnitude) time frequency matrix \(\mathbf{X}_{f, t}\) by computing \(f\) time frequency transforms over each frequency band of \(\mathbf{X}\).
+In practice, the modulation spectrogram can be computed from a (magnitude) time-frequency matrix \(\mathbf{X}_{f, t}\) by computing \(f\) time frequency transforms over each frequency band of \(\mathbf{X}\) resulting in a tensor \(\mathbf{V}_{f, b, t}\) where \(b\) represents the modulation index.
 The use of modulation spectra helps to identify amplitude modulations such as the one (indirectly) caused by vibrato. 
 The modulation spectrogram has already gathered much attention in speech recognition~\cite{greenberg97, kingsbury98} and classification~\cite{kinnunen08, markaki09}.
 \par
@@ -139,7 +139,7 @@ Disch and Edler proposed in~\cite{disch09} to decompose an audio signal into ban
 As described in the previous chapter, modulations are used by humans to group and segregate sounds. Viste et al. describes the impact of modulation in~\cite{viste03} as:
 
 \begin{quote}
-``harmonic relation, the common onset, offset, amplitude modulation (AM), and frequency modulation (FM). These are all important cues for grouping.''
+``harmonic relation, the common onset, offset, \acs{AM}, and \acs{FM}. These are all important cues for grouping.''
 \end{quote}
 
 It is therefore not surprising that a number of methods exist, that utilize spectro-temporal modulations to separate mixtures. 
@@ -161,6 +161,6 @@ It is, therefore, to be investigated if scenarios with severe overlap can utiliz
 It is known~\cite{salamon13} that the extraction of the fundamental frequency in a mixture is challenging. 
 The reason is that crossing partials are a challenging problem for sinusoidal modeling~\cite{viste03}. 
 Also if tracking of them would work correctly, evaluation of robustness and accuracy is hardly possible when the reference data is annotated with human precision.
-Furthermore, representations like modulation spectrograms only cover amplitude modulations, whereas general modulation patterns (AM/FM, timbre modulation) cannot be covered.
+Furthermore, representations like modulation spectrograms only cover amplitude modulations, whereas general modulation patterns (\acs{AM}/\acs{FM}, timbre modulation) cannot be covered.
 \par
 In the next two chapters, we address utilizing the modulations of sources for separation tasks; either via prior knowledge (known) or by operating blindly (unknown).

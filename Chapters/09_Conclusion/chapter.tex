@@ -23,14 +23,14 @@ By 2016, other researchers showed in~\cite{uhlich15, nugraha162} that supervised
 It shows that such specialized representation, designed to capture general modulation patterns, is still useful in data-driven methods.
 Our research marks a step towards multidimensional representations, inspired by human perception, when it comes to highly overlapped, modulated mixtures. Work by other researchers built upon our first findings and further increased the perceptual aspect of the representation by introducing a multi-resolution version of the CFT~\cite{seetharaman17, pishdadian18}.
 \par
-In our count estimation studies on speech and music (Chapter~\ref{cha:countanalysis}), we showed that humans follow a `one-two-three-many` strategy: we can correctly infer small quantities up to three, but we have problems to extrapolate to higher numbers.
+In our count estimation studies on speech and music (Chapter~\ref{cha:countanalysis}), we showed that humans follow a ``one-two-three-many'' strategy: we can correctly infer small quantities up to three, but we have problems to extrapolate to higher numbers.
 We showed that our proposed CountNet model (Chapter~\ref{cha:countnet}) improved state-of-the-art and even reached super-human performance by shifting the performance boundary beyond four sources. In the ablations studies (Section~\ref{sec:ablation}), we revealed that modulations also played an essential role in CountNet when estimating the number of speakers.
 The network showed a significant dependency on variations of syllable rates. This indicates that CountNet may not have learned the actual difference between two and three speakers but instead took a ``shortcut'' and learned the distinct modulation patterns of our language.
 This achievement, however, does not mean that CountNet can generalize to examples outside of the used datasets or languages. Such generalization properties should be properly investigated further.
 \par
 This work covers many different techniques ranging from advanced audio signal processing, tensor factorization, up to recent supervised machine learning methods such as deep learning.
 When I started this thesis, the research landscape for source separation methods was built upon the expertise from a decade of signal processing.
-With the success of deep learning, a paradigm shift took place that enabled many improvements with respect to the state-of-the-art in the audio domain. However, adapting deep learning techniques to work in the audio domain is far from trivial. First, it requires a significant amount of work in creating suitable data sets. Second, it still takes expertise in so-called ``classical'' signal processing for such models to work correctly.
+With the success of deep learning, a paradigm shift took place that enabled many improvements with respect to the state-of-the-art in the audio domain. However, adapting deep learning techniques to work in the audio domain is far from trivial. First, it requires a significant amount of work in creating suitable datasets. Second, it still takes expertise in so-called ``classical'' signal processing for such models to work correctly.
 
 \section{Perspectives}
 
@@ -45,7 +45,7 @@ We can imagine that generative models could explore a modulation space, e.g. to 
 
 Recall that the Common Fate Transform proposed in Section~\ref{sub:CFT}, led to increased redundancy, introduced by its aliasing components, which in turn, increases the complexity of the training.
 Interestingly, preliminary studies suggested that removal of the (redundant) components did not improve the performance.
-Future work could lessen this redundancy of the CFT, making it more compact, while at the same time yielding similar separation results.
+Future work could reduce the redundancy of the transform, making it more compact, while at the same time yielding similar separation results.
 In the context of deep learning, it remains unclear if redundancy helps or hinders supervised learning based separation systems.
 Taking the raw waveform as input features~\cite{Dieleman14, oord16} is a promising direction of research (as opposed to phase aware representations) but it requires large amounts of data since the DNN needs first to learn a filterbank representation.
 Such large amounts are not yet publicly available for music processing.
@@ -77,4 +77,4 @@ However, counts are often not bounded to a maximum number, which would require t
 CountNet, as it was proposed, is unable to estimate more than ten speakers when trained using the same maximum number.
 This is related to learning the summation of two random numbers, known as the ``adding problem''~\cite{Hochreiter97} which is a challenging benchmark in machine learning.
 Only very recently, the machine learning community proposed a solution to this problem (See \cite{trask18}).
-With these advances, extrapolating counts there seems like a natural follow-up to the work presented here.
+With these advances, extrapolating counts seems like a natural follow-up to the work presented here.
