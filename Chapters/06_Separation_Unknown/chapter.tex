@@ -47,7 +47,14 @@ is being used~\cite{fitzgerald08a}.
 For the special cases of \(\beta = 0\) and \(\beta = 1\), \(\mathrm{D}\) correspond to the Itakura-Saito (IS) and Kullback-Leibler (KL) divergence and the euclidean distance equals to \(\beta = 2\). 
 To efficiently compute the optimization, an algorithm was proposed in~\cite{lee01} which makes use of simple to use multiplicative update rules, derived from the cost function. 
 For further details, we refer to~\cite{cichoki09}.
-\par
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.9\textwidth]{Chapters/06_Separation_Unknown/figures/nmf_separation.pdf}
+  \caption{Example of spectrogram based source separation using \ac{NMF}.}
+  \label{fig:nmf_separation}
+\end{figure}
+
 After factorizing \(\mX\) into \(K\) components, one can obtain \(K\) magnitude spectra.
 However, \(K\) is usually selected to be larger or equal to the total number of sources.
 When it is larger than the number of sources, the components can be clustered into the number of desired sources.
@@ -56,13 +63,6 @@ A separation example is depicted in Figure~\ref{fig:nmf_separation}.
 Here the number of components \(K\) is six per source, resulting in a total number of \(K=12\). 
 Each component is clustered into one of two sources to generate two estimates.
 
-\begin{figure}[h]
-  \centering
-  \includegraphics[width=0.8\textwidth]{Chapters/06_Separation_Unknown/figures/nmf_separation.pdf}
-  \caption{Example of spectrogram based source separation using \ac{NMF}.}
-  \label{fig:nmf_separation}
-\end{figure}
-
 It is this step that transforms the \acs{NMF} into a supervised algorithm.
 As for other separation methods, performed in the time-frequency domain, separation is achieved using Wiener filters or ratio masks to extract the sources from the mixture~\cite{liutkus15c}.
 \par
@@ -70,26 +70,11 @@ Since \acs{NMF} first appeared to the source separation community in~\cite{smara
 In~\cite[Chapter 16]{vincent18}, the authors describe one of the main problems of \acs{NMF} which is that ``standard \acs{NMF} is shown to be effective when the notes of the analyzed music signal are nearly stationary''.
 As we described in Chapter~\ref{cha:highly-overlapped-signals}, this is especially problematic for pitches that incorporate vibrato.
 Here, \acs{NMF}-based processing suffers from its simplified model and its magnitude \acs{STFT} representation makes it harder to model these time-varying sources.
-\par
+
 To underpin this issue, we depict this problem in Figure~\ref{fig:am_tensor_nmf} which shows the factorization of a simple amplitude modulated input signal. 
 The signal consists of two sinusoids which are linearly mixed. 
 Both share the same carrier frequency but have different amplitude modulation rates. 
 When we apply a factorization with $K=2$, one can see that \acs{NMF} has difficulties to separate the two signals sufficiently and instead activates both sources in an alternating pattern.
-
-\begin{figure}[H]
-\centering
-\subcaptionbox{Time Domain}%
-[1\textwidth]{\includegraphics[width=0.84\textwidth]{Chapters/05_Separation_Known/figures/Timepdf-crop.pdf}}%
-\hspace{0.2\textwidth} % separation
-\subcaptionbox{Magnitude \acs{STFT}}
-[1\textwidth]{\input{Chapters/05_Separation_Known/figures/AMPlots/STFT.tex}}%
-\hspace{0.3\textwidth} % separation
-\subcaptionbox{Factorization}
-[1\textwidth]{\input{Chapters/05_Separation_Known/figures/AMPlots/WH.tex}}%
-\caption{Example of separating a mixture of two amplitude modulated sinusoids using \acs{NMF}\\ \textbf{(a)} Mixture of two sinusoids at \SI{440}{\hertz} with AM of \SI{4.7}{\hertz} and \SI{12.6}{\hertz}, \textbf{(b)} \acs{STFT} ($FFT length = 256$), \textbf{(c)} Non-negative matrix factorization results in $\mW$ and $\mH$, after 100 iterations ($\beta = 1$).}
-\label{fig:am_tensor_nmf}
-\end{figure}
-
 One way towards better separation is to increase the number of components per source, however, this introduces difficulties in the clustering.
 Another method is proposed in~\cite{smaragdis04, fitzgerald05s, jaiswal13, rodriguezserrano16} which use convolutions to model shifts in components.
 This leads to factorizations that are able to also model vibrato events.
@@ -97,6 +82,20 @@ However as stated in~\cite{hennequin11}, it does ``not  permit  any variation  b
 Instead, they proposed a frequency-dependent activation matrices by using a source/filter-based model.
 The model is based on an Auto-Regressive Moving Average (ARMA) time-varying model that allows single spectral components to be modeled along with their spectral variations. 
 The model, as reported by the authors, however, does only allow for small frequency variations and fitting the ARMA model is a time-consuming process.
+
+\begin{figure}[H]
+  \centering
+  \subcaptionbox{Time Domain}%
+  [1\textwidth]{\includegraphics[width=0.84\textwidth]{Chapters/05_Separation_Known/figures/Timepdf-crop.pdf}}%
+  \hspace{0.2\textwidth} % separation
+  \subcaptionbox{Magnitude \acs{STFT}}
+  [1\textwidth]{\input{Chapters/05_Separation_Known/figures/AMPlots/STFT.tex}}%
+  \hspace{0.3\textwidth} % separation
+  \subcaptionbox{Factorization}
+  [1\textwidth]{\input{Chapters/05_Separation_Known/figures/AMPlots/WH.tex}}%
+  \caption{Example of separating a mixture of two amplitude modulated sinusoids using \acs{NMF}\\ \textbf{(a)} Mixture of two sinusoids at \SI{440}{\hertz} with AM of \SI{4.7}{\hertz} and \SI{12.6}{\hertz}, \textbf{(b)} \acs{STFT} ($FFT length = 256$), \textbf{(c)} Non-negative matrix factorization results in $\mW$ and $\mH$, after 100 iterations ($\beta = 1$).}
+  \label{fig:am_tensor_nmf}
+\end{figure}
 
 \section{Tensor Factorizations for Modulation Spectrograms}
 \label{sub:am}
